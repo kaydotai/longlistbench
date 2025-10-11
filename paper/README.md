@@ -17,6 +17,11 @@ To compile the paper, you need a LaTeX distribution installed:
 brew install --cask mactex
 ```
 
+## VSCode Extension
+
+LaTeX Workshop  
+https://marketplace.cursorapi.com/items/?itemName=James-Yu.latex-workshop
+
 ## Compilation
 
 ### Using Make (Recommended)
