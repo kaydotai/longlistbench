@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Pre-commit hook to ensure the paper compiles successfully
+
+echo "Running pre-commit hook: Compiling paper..."
+
+# Source shell configuration to get proper PATH
+if [ -f "$HOME/.zshrc" ]; then
+    source "$HOME/.zshrc"
+elif [ -f "$HOME/.bash_profile" ]; then
+    source "$HOME/.bash_profile"
+elif [ -f "$HOME/.bashrc" ]; then
+    source "$HOME/.bashrc"
+fi
+
+# Add common LaTeX paths on macOS (in case not in shell config)
+export PATH="/Library/TeX/texbin:/usr/local/texlive/2023/bin/universal-darwin:/usr/local/texlive/2024/bin/universal-darwin:/usr/local/texlive/2025/bin/universal-darwin:$PATH"
+
+# Change to the paper directory
+cd "$(git rev-parse --show-toplevel)/paper" || exit 1
+
+# Run make to compile the paper
+if make; then
+    echo "✓ Paper compiled successfully!"
+    exit 0
+else
+    echo "✗ Paper compilation failed!"
+    echo "Please fix the compilation errors before committing."
+    echo "You can skip this hook with: git commit --no-verify"
+    exit 1
+fi
+
