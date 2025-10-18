@@ -23,12 +23,18 @@ fake = Faker()
 
 
 class LossRunHTMLGenerator:
-    """Generate realistic loss run HTML documents."""
+    """Generate realistic loss run HTML documents.
+    
+    Supports two formats:
+    - 'detailed': Detailed incident sections with line items (default)
+    - 'table': Compact tabular format
+    """
 
-    def __init__(self, seed: int | None = None):
+    def __init__(self, seed: int | None = None, format: str = "detailed"):
         if seed is not None:
             random.seed(seed)
             Faker.seed(seed)
+        self.format = format
 
     @staticmethod
     def _generate_header_info(incidents: list[dict]) -> dict:
@@ -340,6 +346,130 @@ class LossRunHTMLGenerator:
         
         return html
 
+    def _generate_table_row(self, incident: dict, row_num: int, problems: dict, use_merged: bool = False) -> str:
+        """Generate a single table row for table format."""
+        inc_num = incident.get("incident_number", f"#{row_num}")
+        ref_num = incident.get("reference_number", "")
+        company = incident.get("company_name", "")
+        coverage = incident.get("coverage_type", "")
+        status = incident.get("status", "")
+        policy = incident.get("policy_number", "")
+        loss_date = incident.get("date_of_loss", "")
+        loss_state = incident.get("loss_state", "")
+        driver = incident.get("driver_name") or "—"
+        description = incident.get("description", "")
+        
+        # Problem 2: Multi-row entities
+        if problems.get("multi_row", False):
+            description = description.replace(". ", ".<br>")
+        
+        # Get financial totals
+        bi = incident.get("bi", {})
+        pd = incident.get("pd", {})
+        lae = incident.get("lae", {})
+        ded = incident.get("ded", {})
+        
+        total_reserve = bi.get("reserve", 0) + pd.get("reserve", 0) + lae.get("reserve", 0) + ded.get("reserve", 0)
+        total_paid = bi.get("paid", 0) + pd.get("paid", 0) + lae.get("paid", 0) + ded.get("paid", 0)
+        total_incurred = bi.get("total_incurred", 0) + pd.get("total_incurred", 0) + lae.get("total_incurred", 0) + ded.get("total_incurred", 0)
+        
+        # Problem 7: Merged cells - randomly merge some cells
+        rowspan = ""
+        if use_merged and random.random() < 0.15:  # 15% chance of merged cell
+            rowspan = ' rowspan="2"'
+        
+        return f"""
+        <tr>
+            <td{rowspan}>{inc_num}</td>
+            <td>{ref_num}</td>
+            <td>{company}</td>
+            <td{rowspan}>{coverage}</td>
+            <td>{status}</td>
+            <td>{policy}</td>
+            <td>{loss_date}</td>
+            <td>{loss_state}</td>
+            <td>{driver}</td>
+            <td style="max-width: 200px; white-space: pre-line;">{description}</td>
+            <td style="text-align: right;">{self._format_currency(total_reserve)}</td>
+            <td style="text-align: right;">{self._format_currency(total_paid)}</td>
+            <td style="text-align: right;">{self._format_currency(total_incurred)}</td>
+        </tr>"""
+    
+    def _generate_table_format(self, incidents: list[dict], header_info: dict, problems: dict) -> str:
+        """Generate compact table format for loss run."""
+        html = f"""
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>"""
+        
+        use_merged = problems.get("merged_cells", False)
+        skip_next = False
+        
+        for idx, incident in enumerate(incidents):
+            # Problem 1: Page breaks
+            if problems.get("page_breaks", False) and idx > 0 and idx % 15 == 0:
+                html += """
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>"""
+            
+            if skip_next:
+                skip_next = False
+                continue
+            
+            row_html = self._generate_table_row(incident, idx + 1, problems, use_merged)
+            
+            # Check if this row has merged cells
+            if use_merged and 'rowspan="2"' in row_html and idx < len(incidents) - 1:
+                skip_next = True
+            
+            html += row_html
+        
+        html += """
+        </tbody>
+    </table>
+</div>"""
+        
+        return html
+
     def generate(self, incidents: list[dict], problems: dict[str, bool] | None = None) -> str:
         """Generate complete loss run HTML document."""
         if problems is None:
@@ -375,13 +505,17 @@ class LossRunHTMLGenerator:
         if problems.get("multiple_tables", False):
             html += self._generate_irrelevant_section()
         
-        # Generate each incident
-        for idx, incident in enumerate(incidents, 1):
-            # Problem 1: Page breaks
-            if problems.get("page_breaks", False) and idx > 1 and idx % 10 == 0:
-                html += '<div class="page-break"></div>\n'
-            
-            html += self._generate_incident_section(incident, idx, problems)
+        # Generate content based on format
+        if self.format == "table":
+            html += self._generate_table_format(incidents, header_info, problems)
+        else:
+            # Generate each incident in detailed format
+            for idx, incident in enumerate(incidents, 1):
+                # Problem 1: Page breaks
+                if problems.get("page_breaks", False) and idx > 1 and idx % 10 == 0:
+                    html += '<div class="page-break"></div>\n'
+                
+                html += self._generate_incident_section(incident, idx, problems)
         
         # Problem 5: More irrelevant content
         if problems.get("multiple_tables", False):
@@ -495,6 +629,8 @@ def main() -> None:
     parser.add_argument("--merged-cells", action="store_true", help="Problem 7: Use merged cells")
     parser.add_argument("--all-problems", action="store_true", help="Enable all problems")
     parser.add_argument("-s", "--seed", type=int, default=42, help="Random seed")
+    parser.add_argument("--format", choices=["detailed", "table"], default="detailed", 
+                        help="Output format: 'detailed' (default) or 'table'")
 
     args = parser.parse_args()
 
@@ -514,7 +650,7 @@ def main() -> None:
     }
 
     # Generate HTML
-    generator = LossRunHTMLGenerator(seed=args.seed)
+    generator = LossRunHTMLGenerator(seed=args.seed, format=args.format)
     html = generator.generate(incidents, problems=problems)
 
     # Write output
