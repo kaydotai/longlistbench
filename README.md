@@ -1,4 +1,20 @@
-# lost-and-found-entities
+# Lost and Found Entities
+
+Benchmark for entity extraction from semi-structured insurance claims data with intentionally introduced complexity.
+
+## Quick Start
+
+```bash
+# Install dependencies
+pip install -r benchmarks/requirements.txt
+playwright install chromium
+
+# Generate a benchmark dataset
+cd benchmarks/synthetic
+python generate_benchmark.py -n 100 -o data/medium --all-problems
+```
+
+See [`benchmarks/synthetic/README.md`](benchmarks/synthetic/README.md) for detailed usage.
 
 ## Development Setup
 
