@@ -64,11 +64,17 @@ class LossRunHTMLGenerator:
     def _html_header(self, title: str, use_columns: bool = False) -> str:
         """Generate HTML header with CSS for loss run format."""
         column_css = """
-            .content-wrapper {
+            .content-wrapper {{
                 column-count: 2;
-                column-gap: 30px;
+                column-gap: 40px;
                 column-rule: 1px solid #ccc;
-            }
+                column-fill: auto;
+            }}
+            .content-wrapper .incident-section {{
+                break-inside: avoid;
+                page-break-inside: avoid;
+                -webkit-column-break-inside: avoid;
+            }}
         """ if use_columns else ""
 
         return f"""<!DOCTYPE html>
@@ -80,6 +86,16 @@ class LossRunHTMLGenerator:
         @page {{
             size: A4 landscape;
             margin: 1.5cm;
+        }}
+        @media print {{
+            .incident-section {{
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }}
+            .page-break {{
+                page-break-after: always;
+                break-after: page;
+            }}
         }}
         body {{
             font-family: 'Courier New', monospace;
@@ -108,6 +124,8 @@ class LossRunHTMLGenerator:
         .incident-section {{
             margin-bottom: 20px;
             page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
         }}
         .incident-header {{
             background-color: #e8e8e8;
@@ -170,6 +188,10 @@ class LossRunHTMLGenerator:
         }}
         .page-break {{
             page-break-before: always;
+            break-before: page;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
         }}
         .claimants-list {{
             margin-left: 20px;
