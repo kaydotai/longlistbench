@@ -1,0 +1,3092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Brian Hauling - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+            .content-wrapper {
+                column-count: 2;
+                column-gap: 30px;
+                column-rule: 1px solid #ccc;
+            }
+        
+    </style>
+</head>
+<body>
+<div class="content-wrapper">
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">Great West Casualty</div>
+            <div class="header-line">3521 Christopher Garden, New Connorfort, IL 24254</div>
+            <div class="header-line">Phone: +1-528-581-1296</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> New Brian Hauling, Acct. # A0290024</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 10/18/2025, 07:46 PM</div>
+    </div>
+</div>
+<div style="margin: 30px 0; padding: 15px; background-color: #f5f5f5; border: 1px solid #ccc;">
+    <h3>Company Directory (Reference Only)</h3>
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Employee</th>
+                <th style="text-align: left;">Department</th>
+                <th style="text-align: left;">Email</th>
+                <th style="text-align: left;">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Whitney Burnett</td><td>Camera operator</td><td>maryblackwell@example.net</td><td>3245785471</td></tr>
+            <tr><td>Jerry Holden</td><td>Chief Technology Off</td><td>christopher28@example.org</td><td>(593)872-6783x980</td></tr>
+            <tr><td>Johnny Dennis</td><td>Automotive engineer</td><td>jodi81@example.org</td><td>(936)266-8816x5737</td></tr>
+            <tr><td>Jennifer Hooper</td><td>Gaffer</td><td>lbrown@example.com</td><td>(823)244-9363x0852</td></tr>
+            <tr><td>Patricia Lewis</td><td>Pharmacist, communit</td><td>brightanita@example.net</td><td>(451)640-7611x1728</td></tr>
+            <tr><td>Sylvia Colon</td><td>Designer, ceramics/p</td><td>gbrock@example.com</td><td>001-616-389-6228x82437</td></tr>
+            <tr><td>James Leonard</td><td>Accountant, chartere</td><td>romanandrew@example.com</td><td>464-521-0167</td></tr>
+            <tr><td>Vicki Marquez</td><td>Museum/gallery exhib</td><td>hardintracey@example.com</td><td>+1-706-238-8978x860</td></tr>
+            <tr><td>Emma Spears</td><td>Geologist, engineeri</td><td>andrewmartinez@example.net</td><td>+1-898-538-5189x276</td></tr>
+            <tr><td>Courtney Dunlap</td><td>Telecommunications r</td><td>gomezkevin@example.net</td><td>+1-473-496-6795x4952</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30001 (Ref #L230001)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A6507 (NC)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/21/2023 (MO)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>05/31/2023</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Engine fire while parked at truck stop</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Davis, Tim<br></div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Nearly quickly million protect capital note impact east town yet speech baby.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$28,464.57</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$28,464.57</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$28,464.57</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$28,464.57</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30002 (Ref #L240002)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A9458 (MO)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>10/09/2024 (NY)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>11/02/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Benson, Nicholas</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing, struck parked parked OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Turner, Julie<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$27,718.74</td>
+                <td>$0.00</td>
+                <td>$27,718.74</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$23,616.64</td>
+                <td>($23,616.64)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$27,718.74</td>
+                <td>$23,616.64</td>
+                <td>$4,102.10</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30003 (Ref #L240003)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A5264 (NY)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>12/20/2024 (MI)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>12/25/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Shelton, Denise</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes into IV, causing collision</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Mckenzie, Kelly<br>Wolfe, Shari<br>Fox, Michael<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$18,008.01</td>
+                <td>$0.00</td>
+                <td>$18,008.01</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$28,044.89</td>
+                <td>($28,044.89)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$18,008.01</td>
+                <td>$28,044.89</td>
+                <td>($10,036.88)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30012 (Ref #L230012)
+        <span style="float: right;">Inland Marine - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A2389 (NC)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/09/2023 (GA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>11/11/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Porter, Jack</div>
+        <div class="detail-line"><span class="label">Agency:</span>Mcdonald Inc</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Load shift caused cargo damage</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Wonder alone arrive small agent tough hot time experience item.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30004 (Ref #L240004)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A7456 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>04/26/2024 (IL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>05/02/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Perry, Timothy</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 FR 801463</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes into IV, causing collision</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Clark, Alexandra<br>Sanchez, Vincent<br>Henderson, Troy<br>Dennis, Brian<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$3,838.18</td>
+                <td>$0.00</td>
+                <td>$3,838.18</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$3,838.18</td>
+                <td>$0.00</td>
+                <td>$3,838.18</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30005 (Ref #L240005)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A4059 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>07/28/2024 (FL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/01/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Garrison, Peter</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Pruitt, Brown and Ellison<br>Alexander, Sean<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$26,243.43</td>
+                <td>$0.00</td>
+                <td>$26,243.43</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$31,077.26</td>
+                <td>($31,077.26)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$26,243.43</td>
+                <td>$31,077.26</td>
+                <td>($4,833.83)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30013 (Ref #L240013)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A6211 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/29/2024 (PA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>08/25/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Garza, Stephanie</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Windshield shattered by road debris</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$11,364.63</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$11,364.63</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$3,144.34</td>
+                <td>($3,144.34)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$11,364.63</td>
+                <td>$0.00</td>
+                <td>$3,144.34</td>
+                <td>$8,220.29</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30006 (Ref #L230006)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A7245 (CA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>12/27/2023 (MI)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>01/01/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Green, Dawn</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 IN 847632</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV making wide turn, clipped OV on passenger side</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Franklin, Tony<br>Thompson-James<br>Perez, Connie<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$34,157.46</td>
+                <td>$0.00</td>
+                <td>$34,157.46</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$6,493.87</td>
+                <td>($6,493.87)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$34,157.46</td>
+                <td>$6,493.87</td>
+                <td>$27,663.59</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30007 (Ref #L230007)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A4704 (PA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>08/17/2023 (MI)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>08/18/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Morton, Nichole</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 VO 801613</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rear-ended OV at traffic light</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$0.00</td>
+                <td>$65,885.13</td>
+                <td>$0.00</td>
+                <td>$65,885.13</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$31,944.54</td>
+                <td>$0.00</td>
+                <td>$31,944.54</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$1,183.12</td>
+                <td>$0.00</td>
+                <td>$1,183.12</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$99,012.79</td>
+                <td>$0.00</td>
+                <td>$99,012.79</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30008 (Ref #L240008)
+        <span style="float: right;">Physical Damage - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A5121 (MI)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/29/2024 (FL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>06/03/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Williams, Erika</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV struck by falling tree branch during storm</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$70,143.10</td>
+                <td>$0.00</td>
+                <td>$70,143.10</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$491.97</td>
+                <td>$0.00</td>
+                <td>$491.97</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$1,543.55</td>
+                <td>($1,543.55)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$70,635.07</td>
+                <td>$1,543.55</td>
+                <td>$69,091.52</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30009 (Ref #L240009)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A6089 (OK)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>09/13/2024 (MI)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/20/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Russo, Logan</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 FR 822496</div>
+        <div class="detail-line"><span class="label">Agency:</span>Martinez-Hale</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes into IV, causing collision</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Carter, Vicki<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$8,205.91</td>
+                <td>$482.34</td>
+                <td>$0.00</td>
+                <td>$8,688.25</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$28,430.88</td>
+                <td>($28,430.88)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$8,205.91</td>
+                <td>$482.34</td>
+                <td>$28,430.88</td>
+                <td>($19,742.63)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30010 (Ref #L230010)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A2835 (GA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>03/10/2023 (NY)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>04/02/2023</div>
+        <div class="detail-line"><span class="label">Agency:</span>Craig Ltd</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Collision with deer caused front-end damage</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$79,510.35</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$79,510.35</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$79,510.35</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$79,510.35</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30011 (Ref #L240011)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A4869 (TN)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>12/13/2024 (GA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>01/12/2025</div>
+        <div class="detail-line"><span class="label">Driver:</span>Simpson, Ronnie</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 VO 863313</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV brakes failed, rear-ended OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Booth, Teresa<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$56,301.14</td>
+                <td>$10,062.51</td>
+                <td>$0.00</td>
+                <td>$66,363.65</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$56,301.14</td>
+                <td>$10,062.51</td>
+                <td>$0.00</td>
+                <td>$66,363.65</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30033 (Ref #L230033)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A8579 (OH)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/28/2023 (PA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>12/07/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Marshall, Lori</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rear-ended OV at traffic light</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Moore, James<br>Gibbs, Karen<br>Gonzalez, Michelle<br></div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Member serious direction night age value school these recognize.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$43,409.39</td>
+                <td>$0.00</td>
+                <td>$43,409.39</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$31,817.57</td>
+                <td>($31,817.57)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$43,409.39</td>
+                <td>$31,817.57</td>
+                <td>$11,591.82</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30012 (Ref #L230012)
+        <span style="float: right;">Inland Marine - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A2389 (NC)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/09/2023 (GA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>11/11/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Porter, Jack</div>
+        <div class="detail-line"><span class="label">Agency:</span>Mcdonald Inc</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Load shift caused cargo damage</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Wonder alone arrive small agent tough hot time experience item.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+                <td>$0.00</td>
+                <td>$15,771.32</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30013 (Ref #L240013)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A6211 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/29/2024 (PA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>08/25/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Garza, Stephanie</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Windshield shattered by road debris</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$11,364.63</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$11,364.63</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$3,144.34</td>
+                <td>($3,144.34)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$11,364.63</td>
+                <td>$0.00</td>
+                <td>$3,144.34</td>
+                <td>$8,220.29</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30014 (Ref #L240014)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A1693 (PA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>09/17/2024 (IL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>10/02/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Jacobs, Stephanie</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 MA 706215</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Young, Alexa<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$30,900.46</td>
+                <td>$0.00</td>
+                <td>$30,900.46</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$1,880.97</td>
+                <td>$0.00</td>
+                <td>$1,880.97</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$27,464.57</td>
+                <td>($27,464.57)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$32,781.43</td>
+                <td>$27,464.57</td>
+                <td>$5,316.86</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30015 (Ref #L240015)
+        <span style="float: right;">Physical Damage - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A9180 (TX)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>09/02/2024 (MI)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/08/2024</div>
+        <div class="detail-line"><span class="label">Agency:</span>Miller-Gutierrez</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Windshield shattered by road debris</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$4,441.98</td>
+                <td>$0.00</td>
+                <td>$4,441.98</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$2,646.71</td>
+                <td>($2,646.71)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$4,441.98</td>
+                <td>$2,646.71</td>
+                <td>$1,795.27</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30016 (Ref #L230016)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A9876 (OH)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/10/2023 (AR)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>05/14/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Oliver, Sandra</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 KE 928899</div>
+        <div class="detail-line"><span class="label">Agency:</span>Montoya, Jacobs and Watkins</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on wet pavement, struck parked OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Bass LLC<br>Miller, Allison<br>Jackson, Timothy<br>Salas, Randy<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$14,327.70</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$14,327.70</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$14,327.70</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$14,327.70</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30017 (Ref #L230017)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A9636 (IL)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>04/04/2023 (TN)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>04/07/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Mullins, John</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Lynch, Foster and Cunningham<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$77,268.22</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$77,268.22</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$18,166.10</td>
+                <td>$390.15</td>
+                <td>$0.00</td>
+                <td>$18,556.25</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$14,251.95</td>
+                <td>($14,251.95)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$95,434.32</td>
+                <td>$390.15</td>
+                <td>$14,251.95</td>
+                <td>$81,572.52</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30018 (Ref #L230018)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A2585 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>08/01/2023 (OH)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>08/05/2023</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Transmission failure during transport</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Far can message break another common after big agreement plant arrive manager.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$60,928.39</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$60,928.39</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$1,845.80</td>
+                <td>($1,845.80)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$60,928.39</td>
+                <td>$0.00</td>
+                <td>$1,845.80</td>
+                <td>$59,082.59</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30019 (Ref #L230019)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A1725 (NC)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>12/27/2023 (FL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>01/02/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Morales, James</div>
+        <div class="detail-line"><span class="label">Agency:</span>Sanchez Inc</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV making wide turn, clipped OV on passenger side</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Mills, Christine<br>Miller, Jason<br>Aguilar, Joseph<br>Perez, Charles<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$46,800.63</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$46,800.63</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$15,465.64</td>
+                <td>($15,465.64)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$46,800.63</td>
+                <td>$0.00</td>
+                <td>$15,465.64</td>
+                <td>$31,334.99</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30020 (Ref #L230020)
+        <span style="float: right;">Inland Marine - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A4676 (MI)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>08/30/2023 (AZ)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/06/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Miller, Janice</div>
+        <div class="detail-line"><span class="label">Agency:</span>Armstrong, Bradley and Newton</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Load shift caused cargo damage</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$1,173.73</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$1,173.73</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$1,173.73</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$1,173.73</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30021 (Ref #L230021)
+        <span style="float: right;">Physical Damage - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A5437 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>03/22/2023 (OH)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>03/26/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Zhang, Paul</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Engine fire while parked at truck stop</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$13,565.29</td>
+                <td>$0.00</td>
+                <td>$13,565.29</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$4,327.62</td>
+                <td>($4,327.62)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$13,565.29</td>
+                <td>$4,327.62</td>
+                <td>$9,237.67</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30022 (Ref #L240022)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A4745 (FL)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>09/01/2024 (TX)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/03/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Carter, David</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 FR 129554</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rear-ended OV at traffic light</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Hall, Haley<br>Hodge, Erica<br>Walker, Mark<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$107,830.86</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$107,830.86</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$18,490.74</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$18,490.74</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$19,817.43</td>
+                <td>($19,817.43)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$126,321.60</td>
+                <td>$0.00</td>
+                <td>$19,817.43</td>
+                <td>$106,504.17</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30023 (Ref #L240023)
+        <span style="float: right;">Inland Marine - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A3493 (NY)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/09/2024 (OH)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>05/11/2024</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 FR 354631</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo crushed due to improper securing</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$42,165.62</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$42,165.62</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$2,785.59</td>
+                <td>($2,785.59)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$42,165.62</td>
+                <td>$0.00</td>
+                <td>$2,785.59</td>
+                <td>$39,380.03</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30024 (Ref #L240024)
+        <span style="float: right;">Inland Marine - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A4792 (MI)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/14/2024 (AZ)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>05/30/2024</div>
+        <div class="detail-line"><span class="label">Agency:</span>Jones Ltd</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo crushed due to improper securing</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Morton, Kristie<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$2,437.24</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$2,437.24</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$8,693.06</td>
+                <td>($8,693.06)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$2,437.24</td>
+                <td>$0.00</td>
+                <td>$8,693.06</td>
+                <td>($6,255.82)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30025 (Ref #L230025)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A2480 (GA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/25/2023 (PA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>06/01/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Young, Jeffrey</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Stone, Johnny<br>Salazar, Anita<br>Hodges Ltd<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$16,043.02</td>
+                <td>$0.00</td>
+                <td>$16,043.02</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$16,043.02</td>
+                <td>$0.00</td>
+                <td>$16,043.02</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30026 (Ref #L230026)
+        <span style="float: right;">Physical Damage - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A7567 (OK)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>12/22/2023 (IL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>12/28/2023</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 PE 870198</div>
+        <div class="detail-line"><span class="label">Agency:</span>Long-Chavez</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer damaged in loading dock collision</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Possible claim know contain without spring learn visit safe work anything data doctor quality.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$53,819.16</td>
+                <td>$0.00</td>
+                <td>$53,819.16</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$1,676.25</td>
+                <td>$0.00</td>
+                <td>$1,676.25</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$2,662.21</td>
+                <td>($2,662.21)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$55,495.41</td>
+                <td>$2,662.21</td>
+                <td>$52,833.20</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30027 (Ref #L230027)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A1278 (MO)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/27/2023 (OK)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>12/16/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Hutchinson, Brandon</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 IN 651379</div>
+        <div class="detail-line"><span class="label">Agency:</span>Rhodes Group</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes into IV, causing collision</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Taylor, Macias and Washington<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$48,318.61</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$48,318.61</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$48,318.61</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$48,318.61</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30028 (Ref #L230028)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A7537 (FL)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>08/22/2023 (GA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>08/27/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Shannon, Mark</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on wet pavement, struck dock equipment</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Alvarez, Chad<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$0.00</td>
+                <td>$98,160.16</td>
+                <td>$0.00</td>
+                <td>$98,160.16</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$29,000.53</td>
+                <td>$0.00</td>
+                <td>$29,000.53</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$24,557.84</td>
+                <td>($24,557.84)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$127,160.69</td>
+                <td>$24,557.84</td>
+                <td>$102,602.85</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30014 (Ref #L240014)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A1693 (PA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>09/17/2024 (IL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>10/02/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Jacobs, Stephanie</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 MA 706215</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Young, Alexa<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$30,900.46</td>
+                <td>$0.00</td>
+                <td>$30,900.46</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$1,880.97</td>
+                <td>$0.00</td>
+                <td>$1,880.97</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$27,464.57</td>
+                <td>($27,464.57)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$32,781.43</td>
+                <td>$27,464.57</td>
+                <td>$5,316.86</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30029 (Ref #L240029)
+        <span style="float: right;">Physical Damage - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A8007 (PA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>02/08/2024 (TX)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>02/22/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>James, Crystal</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 IN 318922</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Engine fire while parked at truck stop</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Mcclure, Brittney<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$28,865.97</td>
+                <td>$0.00</td>
+                <td>$28,865.97</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$3,002.05</td>
+                <td>($3,002.05)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$28,865.97</td>
+                <td>$3,002.05</td>
+                <td>$25,863.92</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30030 (Ref #L230030)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A6747 (TN)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/23/2023 (TX)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>11/26/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Walker, Samuel</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV changing lanes, sideswiped OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Lane, Anna<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$37,384.99</td>
+                <td>$0.00</td>
+                <td>$37,384.99</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$37,384.99</td>
+                <td>$0.00</td>
+                <td>$37,384.99</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30031 (Ref #L230031)
+        <span style="float: right;">Inland Marine - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A3309 (GA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>06/06/2023 (TX)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>06/08/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Campos, Cynthia</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo damaged during transport - water intrusion</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$28,659.32</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$28,659.32</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$5,977.76</td>
+                <td>($5,977.76)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$28,659.32</td>
+                <td>$0.00</td>
+                <td>$5,977.76</td>
+                <td>$22,681.56</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30032 (Ref #L230032)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A6869 (GA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/04/2023 (NC)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>11/10/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Brown, Jeffrey</div>
+        <div class="detail-line"><span class="label">Agency:</span>Grant-Flores</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV brakes failed, rear-ended OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Johnson, Sara<br>Potter, Fred<br>Davidson, Selena<br></div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Option involve course run court successful pattern again artist see military spend tonight whose himself ahead ok financial.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$0.00</td>
+                <td>$85,886.14</td>
+                <td>$0.00</td>
+                <td>$85,886.14</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$27,929.15</td>
+                <td>$0.00</td>
+                <td>$27,929.15</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$796.32</td>
+                <td>$0.00</td>
+                <td>$796.32</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$114,611.61</td>
+                <td>$0.00</td>
+                <td>$114,611.61</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30033 (Ref #L230033)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A8579 (OH)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/28/2023 (PA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>12/07/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Marshall, Lori</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rear-ended OV at traffic light</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Moore, James<br>Gibbs, Karen<br>Gonzalez, Michelle<br></div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Member serious direction night age value school these recognize.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$43,409.39</td>
+                <td>$0.00</td>
+                <td>$43,409.39</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$31,817.57</td>
+                <td>($31,817.57)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$43,409.39</td>
+                <td>$31,817.57</td>
+                <td>$11,591.82</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30034 (Ref #L230034)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A8652 (AR)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>12/20/2023 (GA)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>01/07/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>White, John</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes into IV, causing collision</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Rodriguez, Charles<br>Alexander, David<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$0.00</td>
+                <td>$54,084.25</td>
+                <td>$0.00</td>
+                <td>$54,084.25</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$47,462.25</td>
+                <td>$0.00</td>
+                <td>$47,462.25</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$101,546.50</td>
+                <td>$0.00</td>
+                <td>$101,546.50</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30035 (Ref #L230035)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A5159 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>08/28/2023 (TN)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/05/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Moss, Kevin</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 VO 439554</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing, struck parked concrete barrier</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Rivera, Charles<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$53,188.53</td>
+                <td>$1,737.57</td>
+                <td>$0.00</td>
+                <td>$54,926.10</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$32,072.44</td>
+                <td>($32,072.44)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$53,188.53</td>
+                <td>$1,737.57</td>
+                <td>$32,072.44</td>
+                <td>$22,853.66</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30036 (Ref #L230036)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A7604 (AR)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>04/07/2023 (AR)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>07/22/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Wood, Julie</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes into IV, causing collision</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$0.00</td>
+                <td>$81,152.73</td>
+                <td>$0.00</td>
+                <td>$81,152.73</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$17,632.35</td>
+                <td>$0.00</td>
+                <td>$17,632.35</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$21,634.35</td>
+                <td>($21,634.35)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$98,785.08</td>
+                <td>$21,634.35</td>
+                <td>$77,150.73</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30037 (Ref #L240037)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A1920 (TN)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/06/2024 (NC)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>05/09/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>French, Diana</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 VO 942333</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV changing lanes, sideswiped OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">King, Michael<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$34,541.83</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$34,541.83</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$24,841.21</td>
+                <td>($24,841.21)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$34,541.83</td>
+                <td>$0.00</td>
+                <td>$24,841.21</td>
+                <td>$9,700.62</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30005 (Ref #L240005)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A4059 (AZ)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>07/28/2024 (FL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/01/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Garrison, Peter</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Pruitt, Brown and Ellison<br>Alexander, Sean<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$26,243.43</td>
+                <td>$0.00</td>
+                <td>$26,243.43</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$31,077.26</td>
+                <td>($31,077.26)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$26,243.43</td>
+                <td>$31,077.26</td>
+                <td>($4,833.83)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30038 (Ref #L240038)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A8531 (MI)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>10/06/2024 (MO)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>01/17/2025</div>
+        <div class="detail-line"><span class="label">Driver:</span>Dunn, William</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Wright, Benjamin<br></div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Respond become both bad fight size society value perhaps sell student entire soldier.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$50,497.86</td>
+                <td>$8,346.47</td>
+                <td>$0.00</td>
+                <td>$58,844.33</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$24,700.97</td>
+                <td>($24,700.97)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$50,497.86</td>
+                <td>$8,346.47</td>
+                <td>$24,700.97</td>
+                <td>$34,143.36</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30039 (Ref #L230039)
+        <span style="float: right;">Inland Marine - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A7722 (NC)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>10/14/2023 (FL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>10/16/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Lee, John</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 IN 309263</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Theft of cargo from trailer at rest stop</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Mckinney, Bradley<br>Flowers, Kelly<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$23,381.59</td>
+                <td>$0.00</td>
+                <td>$23,381.59</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$647.12</td>
+                <td>$0.00</td>
+                <td>$647.12</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$24,028.71</td>
+                <td>$0.00</td>
+                <td>$24,028.71</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30040 (Ref #L240040)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A5081 (TN)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>06/24/2024 (AR)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>07/01/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Mckinney, Christina</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 KE 267553</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Willis, White and Frederick<br>Harvey, Jonathan<br>White, Jarvis and Leonard<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$45,825.00</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$45,825.00</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$33,865.81</td>
+                <td>($33,865.81)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$45,825.00</td>
+                <td>$0.00</td>
+                <td>$33,865.81</td>
+                <td>$11,959.19</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30041 (Ref #L240041)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A3320 (IL)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>09/26/2024 (IL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>09/28/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Arias, Stephen</div>
+        <div class="detail-line"><span class="label">Agency:</span>Goodman-Atkins</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rear-ended OV at traffic light</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Johnson, Robin<br></div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
+        <div style="margin-left: 20px; font-style: italic;">Citizen home fight nearly still like within challenge me story join through vote our.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$9,379.71</td>
+                <td>$0.00</td>
+                <td>$9,379.71</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$9,379.71</td>
+                <td>$0.00</td>
+                <td>$9,379.71</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30042 (Ref #L240042)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A9242 (MI)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>08/10/2024 (AR)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>08/22/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Obrien, Michelle</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 KE 296926</div>
+        <div class="detail-line"><span class="label">Agency:</span>Roberts Ltd</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop sign, struck IV broadside</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Morrison, Jeremiah<br>Taylor, Dustin<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$24,455.68</td>
+                <td>$0.00</td>
+                <td>$24,455.68</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$7,345.62</td>
+                <td>($7,345.62)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$24,455.68</td>
+                <td>$7,345.62</td>
+                <td>$17,110.06</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30043 (Ref #L230043)
+        <span style="float: right;">Liability - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A5982 (MO)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>02/28/2023 (TX)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>03/02/2023</div>
+        <div class="detail-line"><span class="label">Driver:</span>Bell, Alyssa</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV brakes failed, rear-ended OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Swanson, Anne<br>Cox, Jeremy<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$0.00</td>
+                <td>$98,652.01</td>
+                <td>$0.00</td>
+                <td>$98,652.01</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$49,541.89</td>
+                <td>$0.00</td>
+                <td>$49,541.89</td>
+            </tr>
+            <tr>
+                <td class="category">LAE</td>
+                <td>$0.00</td>
+                <td>$1,223.16</td>
+                <td>$0.00</td>
+                <td>$1,223.16</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$23,568.88</td>
+                <td>($23,568.88)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$149,417.06</td>
+                <td>$23,568.88</td>
+                <td>$125,848.18</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30044 (Ref #L240044)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A2177 (AR)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>10/20/2024 (MI)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>10/25/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Garcia, Wendy</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rear-ended OV at traffic light</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$46,852.74</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$46,852.74</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$37,241.27</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$37,241.27</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$17,160.92</td>
+                <td>($17,160.92)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$84,094.01</td>
+                <td>$0.00</td>
+                <td>$17,160.92</td>
+                <td>$66,933.09</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30045 (Ref #L240045)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A4028 (MI)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>03/01/2024 (TX)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>03/25/2024</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2024 VO 470626</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Engine fire while parked at truck stop</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$5,965.63</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$5,965.63</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$4,528.49</td>
+                <td>($4,528.49)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$5,965.63</td>
+                <td>$0.00</td>
+                <td>$4,528.49</td>
+                <td>$1,437.14</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30046 (Ref #L230046)
+        <span style="float: right;">Inland Marine - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A8500 (CA)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>11/15/2023 (NY)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>11/21/2023</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 IN 568719</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo stolen from locked trailer overnight</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$24,716.94</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$24,716.94</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$5,770.83</td>
+                <td>($5,770.83)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$24,716.94</td>
+                <td>$0.00</td>
+                <td>$5,770.83</td>
+                <td>$18,946.11</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30047 (Ref #L230047)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L23A8537 (NC)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>08/28/2023 (MO)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>08/31/2023</div>
+        <div class="detail-line"><span class="label">Unit #:</span>2023 PE 149926</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Engine fire while parked at truck stop</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$78,846.50</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$78,846.50</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$3,720.21</td>
+                <td>($3,720.21)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$78,846.50</td>
+                <td>$0.00</td>
+                <td>$3,720.21</td>
+                <td>$75,126.29</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30048 (Ref #L240048)
+        <span style="float: right;">Physical Damage - Closed</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A8199 (AR)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/13/2024 (IL)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>05/14/2024</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rollover on icy highway.
+Total loss.</div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$0.00</td>
+                <td>$36,032.14</td>
+                <td>$0.00</td>
+                <td>$36,032.14</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$3,458.80</td>
+                <td>($3,458.80)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$0.00</td>
+                <td>$36,032.14</td>
+                <td>$3,458.80</td>
+                <td>$32,573.34</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30049 (Ref #L240049)
+        <span style="float: right;">Liability - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A7381 (MO)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>07/17/2024 (OH)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>07/18/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Castro, Pamela</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV brakes failed, rear-ended OV</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Graham, Jonathan<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">BI</td>
+                <td>$35,439.24</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$35,439.24</td>
+            </tr>
+            <tr>
+                <td class="category">PD</td>
+                <td>$25,970.26</td>
+                <td>$6,457.97</td>
+                <td>$0.00</td>
+                <td>$32,428.23</td>
+            </tr>
+            <tr>
+                <td class="category">DED</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$34,135.35</td>
+                <td>($34,135.35)</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$61,409.50</td>
+                <td>$6,457.97</td>
+                <td>$34,135.35</td>
+                <td>$33,732.12</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="incident-section">
+    <div class="incident-header">
+        Incident #30050 (Ref #L240050)
+        <span style="float: right;">Physical Damage - Open</span>
+    </div>
+    <div class="incident-details">
+        <div class="detail-line"><span class="label">Policy #:</span>L24A8925 (IL)</div>
+        <div class="detail-line"><span class="label">Date of Loss:</span>05/27/2024 (MI)</div>
+        <div class="detail-line"><span class="label">Date Reported:</span>06/02/2024</div>
+        <div class="detail-line"><span class="label">Driver:</span>Juarez, Paul</div>
+        <div class="detail-line"><span class="label">Agency:</span>Weber Ltd</div>
+        <div class="detail-line"><span class="label">Description:</span></div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Fuel tank punctured by road debris</div>
+        <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
+        <div class="claimants-list">Jordan, Thomas<br></div>
+    </div>
+
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Category</th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="category">PD</td>
+                <td>$84,413.29</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$84,413.29</td>
+            </tr>
+            <tr class="total-row">
+                <td class="category">Incident Total</td>
+                <td>$84,413.29</td>
+                <td>$0.00</td>
+                <td>$0.00</td>
+                <td>$84,413.29</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div style="margin: 30px 0; padding: 15px; background-color: #f5f5f5; border: 1px solid #ccc;">
+    <h3>Company Directory (Reference Only)</h3>
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Employee</th>
+                <th style="text-align: left;">Department</th>
+                <th style="text-align: left;">Email</th>
+                <th style="text-align: left;">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Carl Palmer</td><td>Commercial art galle</td><td>kinglisa@example.net</td><td>809-900-7577</td></tr>
+            <tr><td>Cory Mills</td><td>Wellsite geologist</td><td>christianlewis@example.net</td><td>001-340-932-1034x14970</td></tr>
+            <tr><td>Natalie Cisneros</td><td>Engineer, manufactur</td><td>nford@example.org</td><td>264-516-6342x1365</td></tr>
+            <tr><td>Amanda Hernandez</td><td>Social worker</td><td>brownjennifer@example.org</td><td>+1-685-342-9011x2775</td></tr>
+            <tr><td>Danny Stone</td><td>Forensic psychologis</td><td>sheryl09@example.net</td><td>975.468.8467x842</td></tr>
+            <tr><td>Andrew Miller</td><td>Quantity surveyor</td><td>dlucero@example.net</td><td>233.906.4233</td></tr>
+            <tr><td>Andrea Johnson</td><td>Social worker</td><td>ericawang@example.com</td><td>354-753-3555x7818</td></tr>
+            <tr><td>Joshua Delgado</td><td>Civil engineer, cont</td><td>brittneyfisher@example.net</td><td>732-536-6996x830</td></tr>
+            <tr><td>Judy Howard</td><td>Occupational hygieni</td><td>zbarnett@example.com</td><td>6139070267</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$1,185,277.48</td>
+                <td>$1,358,472.24</td>
+                <td>$617,974.85</td>
+                <td>$1,925,774.87</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 55</div>
+</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>
