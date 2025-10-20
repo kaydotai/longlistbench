@@ -33,3 +33,10 @@ __pycache__/
 *$py.class
 *.so
 .Python
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+.idea
