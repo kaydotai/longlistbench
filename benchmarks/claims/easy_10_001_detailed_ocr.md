@@ -1,179 +1,198 @@
 # Page 1
 
-Continental Casualty
-1904 Dominguez Mission, Bruceside, AK 13826
-Phone: (586)482-6831
-
-Account: Atlas Express Inc, Acct. # A0978324
-Policy Period: 07/01/2023 - 07/01/2024 (Trucking)
-Run Date/Time: 10/18/2025, 07:46 PM
+American Inter-Fidelity Exchange
+2105 Daniel Cliff, North Evan, GU 60037
+Phone: 575.781.6671x133
 
 Loss Run - Detailed Format
 
-Incident #30001 (Ref #L240001)		Inland Marine - Closed
-Policy #:		L24A7380 (TN)
-Date of Loss:		10/12/2024 (OK)
-Date Reported:		10/19/2024
+Account: Rodriguez Logistics LLC, Acct. # A0257727
+Policy Period: 07/01/2023 - 07/01/2024 (Trucking)
+Run Date/Time: 03/20/2024, 08:55 PM
+
+Incident #30001 (Ref #L230001)	Liability - Open
+Policy #: L23A4321 (GA)
+Date of Loss: 04/27/2023 (AR)
+Date Reported: 06/05/2023
+Driver: Michael, Shawn
+Unit #: 2023 PE 912116
 Description:
-Equipment damaged during loading
+IV changing lanes, sideswiped OV
 Claimant(s):
-Wolf Inc
-Moore, Robert
+Lucas, Nathan
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$0.00,$43,216.55,$0.00,$43,216.55
-LAE,$0.00,$747.99,$0.00,$747.99
-DED,$0.00,$0.00,$5,468.16,($5,468.16)
-Incident Total,$0.00,$43,964.54,$5,468.16,$38,496.38
+PD,$59,829.92,$16,048.20,$0.00,$75,878.12
+DED,$0.00,$0.00,$15,133.90,($15,133.90)
+Incident Total,$59,829.92,$16,048.20,$15,133.90,$60,744.22
 
 
 # Page 2
 
-Incident #30002 (Ref #L230002)                                               Liability - Open
-
-Policy #:         L23A1021 (OK)
-Date of Loss:      05/16/2023 (IL)
-Date Reported:     05/19/2023
-Driver:            Patrick, Carlos
+Incident #30002 (Ref #L240002)					Liability - Open
+Policy #:		L24A3653 (MI)
+Date of Loss:		03/08/2024 (AZ)
+Date Reported:		04/03/2024
+Driver:		Martinez, Jason
 Description:
 OV ran stop sign, struck IV broadside
 Claimant(s):
-Robertson, Erin
-Allen, Joshua
+Rivera, Wendy
+Adjuster Notes:
+Raise dream week food bring weight economy himself speech dark.
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$13,497.25,$0.00,$0.00,$13,497.25
-Incident Total,$13,497.25,$0.00,$0.00,$13,497.25
+PD,$6,960.62,$0.00,$0.00,$6,960.62
+DED,$0.00,$0.00,$6,058.61,($6,058.61)
+Incident Total,$6,960.62,$0.00,$6,058.61,$902.01
 
-Incident #30003 (Ref #L230003)                                           Physical Damage - Closed
-
-Policy #:         L23A1026 (AZ)
-Date of Loss:      01/07/2023 (CA)
-Date Reported:     01/21/2023
-Driver:            Young, Michelle
+Incident #30003 (Ref #L230003)					Liability - Closed
+Policy #:		L23A7286 (FL)
+Date of Loss:		12/29/2023 (AR)
+Date Reported:		03/25/2024
+Driver:		Alexander, Tonya
 Description:
-Fuel tank punctured by road debris
+IV brakes failed, rear-ended OV
 Claimant(s):
-Price, Mark
+Gonzalez, Richard
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$0.00,$50,291.17,$0.00,$50,291.17
-LAE,$0.00,$846.84,$0.00,$846.84
-DED,$0.00,$0.00,$4,286.13,($4,286.13)
-Incident Total,$0.00,$51,138.01,$4,286.13,$46,851.88
+PD,$0.00,$12,343.03,$0.00,$12,343.03
+LAE,$0.00,$1,994.30,$0.00,$1,994.30
+DED,$0.00,$0.00,$19,143.78,($19,143.78)
+Incident Total,$0.00,$14,337.33,$19,143.78,($4,806.45)
 
 
 # Page 3
 
-Incident #30004 (Ref #L230004)                                                      Inland Marine - Open
-Policy #:          L23A7248 (MO)
-Date of Loss:       01/26/2023 (CA)
-Date Reported:      02/22/2023
+Incident #30004 (Ref #L230004)                                             Liability Closed
+
+Policy #:          L23A3343 (NC)
+Date of Loss:      04/21/2023 (GA)
+Date Reported:     05/22/2023
+Driver:            Williams, Megan
+Agency:            Santiago Inc
 Description:
-Refrigeration unit failure - spoiled goods
+IV rear-ended OV at traffic light
+
+Claimant(s):
+Randall, Amy
+
+Adjuster Notes:
+Poor class order join information catch great Mr stop first he decade positive enter movement use in impact.
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$46,099.39,$0.00,$0.00,$46,099.39
-Incident Total,$46,099.39,$0.00,$0.00,$46,099.39
+PD,$0.00,$12,279.11,$0.00,$12,279.11
+LAE,$0.00,$445.06,$0.00,$445.06
+DED,$0.00,$0.00,$28,321.54,($28,321.54)
+Incident Total,$0.00,$12,724.17,$28,321.54,($15,597.37)
 
-Incident #30005 (Ref #L230005)                                                          Liability - Open
-Policy #:          L23A5146 (IL)
-Date of Loss:       05/17/2023 (FL)
-Date Reported:      05/21/2023
-Driver:             Murphy, Kristen
-Unit #:            2023 IN 522747
-Agency:             Case, Williams and White
+Incident #30005 (Ref #L230005)                                             Physical Damage Closed
+
+Policy #:          L23A1657 (MO)
+Date of Loss:      05/11/2023 (AR)
+Date Reported:     05/12/2023
+Driver:            Webb, Michelle
+Unit #:            2024 PE 929295
 Description:
-IV making right turn, trailer struck OV
+Engine fire while parked at truck stop
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$52,142.97,$9,729.46,$0.00,$61,872.43
-DED,$0.00,$0.00,$23,015.43,($23,015.43)
-Incident Total,$52,142.97,$9,729.46,$23,015.43,$38,857.00
+PD,$0.00,$69,237.15,$0.00,$69,237.15
+DED,$0.00,$0.00,$2,113.23,($2,113.23)
+Incident Total,$0.00,$69,237.15,$2,113.23,$67,123.92
 
 
 # Page 4
 
-Incident #30006 (Ref #L230006)                                            Cargo - Closed
-Policy #:          L23A7000 (OH)
-Date of Loss:      07/24/2023 (MO)
-Date Reported:    08/07/2023
-Driver:           Schaefer, Michael
+Incident #30006 (Ref #L240006)                             Liability - Open
+
+Policy #:          L24A1545 (AR)
+Date of Loss:      12/13/2024 (NY)
+Date Reported:     12/15/2024
+Driver:            Wright, Sarah
+Agency:            Gilbert PLC
 Description:
-Temperature-controlled cargo spoiled
+Trailer door detached, struck adjacent vehicle
+Claimant(s):
+Wheeler, Douglas
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$0.00,$17,901.22,$0.00,$17,901.22
-DED,$0.00,$0.00,$5,392.38,($5,392.38)
-Incident Total,$0.00,$17,901.22,$5,392.38,$12,508.84
+PD,$25,231.41,$0.00,$0.00,$25,231.41
+DED,$0.00,$0.00,$34,801.57,($34,801.57)
+Incident Total,$25,231.41,$0.00,$34,801.57,($9,570.16)
 
-Incident #30007 (Ref #L240007)                                            Inland Marine - Open
-Policy #:          L24A8873 (MI)
-Date of Loss:      02/26/2024 (CA)
-Date Reported:    03/04/2024
-Driver:           Dalton, Taylor
+Incident #30007 (Ref #L240007)                             Liability - Closed
+
+Policy #:          L24A6802 (MO)
+Date of Loss:      12/02/2024 (CA)
+Date Reported:     12/08/2024
+Driver:            Gonzalez, Belinda
 Description:
-Equipment damaged during loading
+IV hydroplaned, hit concrete barrier
+Claimant(s):
+Waters, Curtis
+Taylor, Katherine
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$14,766.80,$0.00,$0.00,$14,766.80
-Incident Total,$14,766.80,$0.00,$0.00,$14,766.80
+PD,$0.00,$37,427.82,$0.00,$37,427.82
+Incident Total,$0.00,$37,427.82,$0.00,$37,427.82
 
 
 # Page 5
 
-Incident #30008 (Ref #L230008)                  Liability - Open
-
-Policy #:          L23A2290 (AR)
-Date of Loss:      01/26/2023 (CA)
-Date Reported:     02/06/2023
-Driver:            Alexander, Kristy
-Agency:            Wells, Jackson and Burns
+Incident #30008 (Ref #L230008)                                  Cargo - Open
+Policy #:        L23A9029 (TX)
+Date of Loss:    04/23/2023 (ΟΚ)
+Date Reported:  08/13/2023
+Driver:           Allen, Frank
 Description:
-IV merging onto highway, collided with OV
+Temperature-controlled cargo spoiled
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$29,474.94,$0.00,$0.00,$29,474.94
-DED,$0.00,$0.00,$34,076.10,($34,076.10)
-Incident Total,$29,474.94,$0.00,$34,076.10,($4,601.16)
+PD,$51,890.59,$0.00,$0.00,$51,890.59
+DED,$0.00,$0.00,$4,266.58,($4,266.58)
+Incident Total,$51,890.59,$0.00,$4,266.58,$47,624.01
 
-Incident #30009 (Ref #L230009)                  Inland Marine - Closed
-
-Policy #:          L23A7966 (FL)
-Date of Loss:      06/11/2023 (AR)
-Date Reported:     06/18/2023
-Unit #:            2024 ΜΑ 517458
+Incident #30009 (Ref #L240009)                                  Cargo - Open
+Policy #:        L24A1822 (GA)
+Date of Loss:    08/27/2024 (NC)
+Date Reported:  09/14/2024
+Driver:           Scott, Laurie
 Description:
-Insured transporting vehicle was damaged
+Temperature-controlled cargo spoiled
+Claimant(s):
+Phillips, Christopher
+York, Mindy
+Adjuster Notes:
+Leg everything real guy next everyone so soon particularly technology claim decision effort job.
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$0.00,$46,020.04,$0.00,$46,020.04
-Incident Total,$0.00,$46,020.04,$0.00,$46,020.04
+PD,$54,643.90,$0.00,$0.00,$54,643.90
+Incident Total,$54,643.90,$0.00,$0.00,$54,643.90
 
 
 # Page 6
 
-Incident #330010 (Ref #L230010)		Liability Open
-Policy #:		L23A8640 (TN)
-Date of Loss:		03/27/2023 (AZ)
-Date Reported:		04/17/2023
-Driver:		Adams, Aaron
-Agency:		Lewis Group
+Incident #330010 (Ref #L230010)		Physical Damage - Open
+Policy #:	L23A9512 (MO)
+Date of Loss:	07/20/2023 (ΟΚ)
+Date Reported:	07/27/2023
 Description:
-Tire blowout caused IV to veer into OV
-Claimant(s):
-Cortez, Jessica
+Engine fire while parked at truck stop
 
 Category,Reserve,Paid,Recovered,Total Incurred
-PD,$50,059.08,$0.00,$0.00,$50,059.08
-DED,$0.00,$0.00,$30,525.76,($30,525.76)
-Incident Total,$50,059.08,$0.00,$30,525.76,$19,533.32
+PD,$85,235.53,$0.00,$0.00,$85,235.53
+DED,$0.00,$0.00,$3,984.23,($3,984.23)
+Incident Total,$85,235.53,$0.00,$3,984.23,$81,251.30
 
 REPORT TOTALS
+
 ,Reserve,Paid,Recovered,Total Incurred
-Grand Total,$206,040.43,$168,753.27,$102,763.96,$272,029.74
+Grand Total,$283,791.97,$149,774.67,$113,823.44,$319,743.20
+
 TOTAL NUMBER OF INCIDENTS: 10
 
-CONFIDENTIAL NOT FOR AUDIT: MANAGERIAL USE ONLY
+CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
 
 

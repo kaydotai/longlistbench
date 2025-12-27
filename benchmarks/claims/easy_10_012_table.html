@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Titan Freight LLC - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .page-break {
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">Great West Casualty</div>
+            <div class="header-line">6938 Schwartz Crescent, Sherrichester, FL 69173</div>
+            <div class="header-line">Phone: 001-803-645-1227</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> Titan Freight LLC, Acct. # A0384729</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 03/25/2024, 06:38 PM</div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30001</td>
+            <td>L230001</td>
+            <td>Titan Freight LLC</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L23A3259</td>
+            <td>07/30/2023</td>
+            <td>NC</td>
+            <td>Coleman, Alexandria</td>
+            <td style="max-width: 200px; white-space: pre-line;">Theft of cargo from trailer at rest stop</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$27,685.78</td>
+            <td style="text-align: right;">$27,685.78</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L230002</td>
+            <td>Christianberg Transport</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A7991</td>
+            <td>02/01/2023</td>
+            <td>TN</td>
+            <td>Burns, Barbara</td>
+            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV to veer into OV</td>
+            <td style="text-align: right;">$34,238.60</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$3,410.02</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L240003</td>
+            <td>Pioneer Express Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A7548</td>
+            <td>06/20/2024</td>
+            <td>OH</td>
+            <td>Meyer, Alan</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV brakes failed, rear-ended OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$68,593.82</td>
+            <td style="text-align: right;">$49,019.56</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L230004</td>
+            <td>Jones Cargo Group</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A4908</td>
+            <td>02/05/2023</td>
+            <td>GA</td>
+            <td>Leblanc, Matthew</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="text-align: right;">$55,553.24</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$55,553.24</td>
+        </tr>
+        <tr>
+            <td>#30005</td>
+            <td>L230005</td>
+            <td>North Ronald Logistics</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A2170</td>
+            <td>10/26/2023</td>
+            <td>CA</td>
+            <td>Park, Alejandra</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing into loading dock, hit concrete barrier</td>
+            <td style="text-align: right;">$16,326.59</td>
+            <td style="text-align: right;">$2,854.12</td>
+            <td style="text-align: right;">($11,104.06)</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L230006</td>
+            <td>Smith Transport LLC</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A3099</td>
+            <td>08/15/2023</td>
+            <td>CA</td>
+            <td>Stein, Jamie</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV at traffic light</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$52,119.86</td>
+            <td style="text-align: right;">$52,119.86</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L240007</td>
+            <td>Atlas Transport LLC</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A1057</td>
+            <td>07/08/2024</td>
+            <td>TX</td>
+            <td>Mcdaniel, Ricardo</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$115,966.99</td>
+            <td style="text-align: right;">$105,998.81</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L230008</td>
+            <td>New Suzanne Cargo</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A5716</td>
+            <td>10/30/2023</td>
+            <td>TN</td>
+            <td>Montgomery, Timothy</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making wide turn, clipped OV on passenger side</td>
+            <td style="text-align: right;">$59,523.28</td>
+            <td style="text-align: right;">$5,097.73</td>
+            <td style="text-align: right;">$36,671.51</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L230009</td>
+            <td>Cookmouth Hauling</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A8422</td>
+            <td>02/04/2023</td>
+            <td>AZ</td>
+            <td>Munoz, Tonya</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$43,612.03</td>
+            <td style="text-align: right;">$31,844.60</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L240010</td>
+            <td>Bell Logistics LLC</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A1150</td>
+            <td>11/06/2024</td>
+            <td>TX</td>
+            <td>Thomas, Jason</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rollover on icy highway. Total loss.</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$41,453.84</td>
+            <td style="text-align: right;">$38,638.50</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$165,641.71</td>
+                <td>$357,384.17</td>
+                <td>$133,188.06</td>
+                <td>$389,837.82</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 10</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>

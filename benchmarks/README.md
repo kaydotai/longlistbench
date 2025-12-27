@@ -18,9 +18,11 @@ This directory contains benchmark generation and processing tools for the Lost a
    apt-get install poppler-utils
    ```
 
-3. Set up your Gemini API key in `.env`:
+3. Set up API keys in `.env`:
    ```
-   GEMINI_API_KEY=your-actual-api-key-here
+   GEMINI_API_KEY=your-gemini-api-key
+   OPENAI_API_KEY=your-openai-api-key
+   ANTHROPIC_API_KEY=your-anthropic-api-key
    ```
 
 ## Generate Claims Benchmark
@@ -48,9 +50,33 @@ This will:
 
 The script will show progress for each file and provide a summary at the end.
 
+## Multi-Model Evaluation
+
+Run extraction evaluation across Gemini, GPT-4, and Claude:
+
+```bash
+# Full evaluation (all models, all samples)
+python evaluate_models.py
+
+# Quick test (one sample per tier)
+python evaluate_models.py --quick
+
+# Specific models only
+python evaluate_models.py --models gemini gpt4
+
+# Specific tiers/formats
+python evaluate_models.py --tiers easy medium --formats detailed
+```
+
+Results are saved to `results/`:
+- `evaluation_report.json` - Full metrics data
+- `evaluation_report.md` - Human-readable summary
+
 ## Directory Structure
 
 - `claims/` - Generated benchmark claims (PDFs, JSONs, and OCR results)
+- `results/` - Evaluation results and reports
 - `synthetic/` - Synthetic data generation tools
 - `generate_claims_benchmark.py` - Main benchmark generation script
 - `ocr_claims_pdfs.py` - OCR processing script for PDFs
+- `evaluate_models.py` - Multi-model evaluation script

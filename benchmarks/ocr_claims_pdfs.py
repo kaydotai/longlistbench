@@ -4,21 +4,30 @@ OCR all PDF files in the claims benchmark directory using Google Gemini.
 Saves OCR results as Markdown files alongside the PDFs.
 """
 
+import asyncio
+import io
 import os
 import sys
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 try:
-    import google.generativeai as genai
+    from google import genai
+    from google.genai import types
     from PIL import Image
     import pdf2image
     from pdf2image import pdfinfo_from_path
     from dotenv import load_dotenv
-except ImportError:
-    print("Error: Required packages not installed.")
+    from tenacity import (
+        retry,
+        retry_if_exception_type,
+        stop_after_attempt,
+        wait_exponential,
+        wait_fixed,
+    )
+except ImportError as e:
+    print(f"Error: Required packages not installed: {e}")
     print("Please install them with:")
-    print("  pip install -r requirements.txt")
+    print("  pip install google-genai tenacity pillow pdf2image python-dotenv")
     print("\nYou may also need to install poppler:")
     print("  macOS: brew install poppler")
     print("  Linux: apt-get install poppler-utils")
@@ -26,6 +35,12 @@ except ImportError:
 
 # Load environment variables from .env file
 load_dotenv()
+
+# Try to import Google API error for retry handling
+try:
+    from google.genai.errors import APIError as GoogleApiError
+except ImportError:
+    GoogleApiError = None
 
 SYSTEM_PROMPT = """
 You are a document conversion assistant specialized in converting images into structured text while preserving layout and form elements. Follow these specific instructions:
@@ -47,19 +62,44 @@ Remember: Convert ONLY what is visible in the document - do not add, assume, or 
 """
 
 
+# Build retriable exceptions tuple
+_RETRIABLE_EXCEPTIONS = (Exception,)  # Base case
+if GoogleApiError is not None:
+    _RETRIABLE_EXCEPTIONS = (GoogleApiError,)
+
+
+def log_retry(retry_state):
+    """Log retry attempts."""
+    exc = retry_state.outcome.exception()
+    print(f"    [retry] Attempt {retry_state.attempt_number} failed: {type(exc).__name__}: {exc}")
+
+
+# Retry decorator for general API errors with exponential backoff
+retry_on_gemini_call = retry(
+    stop=stop_after_attempt(5),
+    wait=wait_exponential(multiplier=4, min=5, max=120),
+    retry=retry_if_exception_type(_RETRIABLE_EXCEPTIONS),
+    after=log_retry,
+)
+
+# Retry decorator specifically for rate limits with fixed wait
+retry_on_rate_limit = retry(
+    stop=stop_after_attempt(10),
+    wait=wait_fixed(60),
+    retry=retry_if_exception_type(_RETRIABLE_EXCEPTIONS),
+    after=log_retry,
+)
+
+
 def setup_gemini():
-    """Configure Gemini API with API key from environment variable."""
+    """Configure Gemini API client with API key from environment variable."""
     api_key = os.getenv('GEMINI_API_KEY')
     if not api_key or api_key == 'your-api-key-here':
-        print("Error: GEMINI_API_KEY not set in .env file.")
-        print("Please set GEMINI_API_KEY in the .env file")
+        print("Error: GEMINI_API_KEY not set.")
+        print("Please set GEMINI_API_KEY environment variable")
         sys.exit(1)
     
-    genai.configure(api_key=api_key)
-    return genai.GenerativeModel(
-        model_name='gemini-2.0-flash-exp',
-        system_instruction=SYSTEM_PROMPT
-    )
+    return genai.Client(api_key=api_key)
 
 
 def get_page_count(pdf_path):
@@ -87,76 +127,74 @@ def convert_pdf_page(pdf_path, page_num):
         return None
 
 
-def ocr_page_with_gemini(model, image, page_num):
+@retry_on_gemini_call
+@retry_on_rate_limit
+async def ocr_image_async(client: genai.Client, image: Image.Image) -> str:
+    """OCR a single image using Gemini async API with retries."""
+    response = await client.aio.models.generate_content(
+        model="gemini-2.0-flash",
+        config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
+        contents=[
+            image,
+            "OCR the image into Markdown. Format tables as CSV. Do not surround your output with triple backticks.",
+        ],
+    )
+    return response.text or ""
+
+
+async def ocr_page_with_gemini(client: genai.Client, image: Image.Image, page_num: int) -> str:
     """Send a single image to Gemini for OCR and return Markdown text."""
-    import time
-    prompt = "OCR the image into Markdown. Format tables as CSV. Do not surround your output with triple backticks."
-    
-    max_retries = 3
-    for attempt in range(max_retries):
-        try:
-            response = model.generate_content([image, prompt])
-            page_text = response.text
-            return f"# Page {page_num}\n\n{page_text}\n\n"
-        except Exception as e:
-            error_str = str(e)
-            if '429' in error_str or 'quota' in error_str.lower():
-                if attempt < max_retries - 1:
-                    wait_time = 10 * (attempt + 1)  # 10s, 20s, 30s
-                    print(f"    Rate limit hit on page {page_num}, waiting {wait_time}s...")
-                    time.sleep(wait_time)
-                    continue
-            print(f"Warning: Error processing page {page_num}: {e}")
-            return f"# Page {page_num}\n\n[Error processing this page: {e}]\n\n"
-    
-    return f"# Page {page_num}\n\n[Error: Max retries exceeded]\n\n"
+    try:
+        page_text = await ocr_image_async(client, image)
+        return f"# Page {page_num}\n\n{page_text}\n\n"
+    except Exception as e:
+        print(f"Warning: Page {page_num} failed after all retries: {e}")
+        return f"# Page {page_num}\n\n[Error: {e}]\n\n"
 
 
-def process_single_page(model, pdf_path, page_num, total_pages):
-    """Process a single page (convert + OCR). Returns (page_num, page_text)."""
-    # Convert single page
-    image = convert_pdf_page(pdf_path, page_num)
-    if image is None:
-        page_text = f"# Page {page_num}\n\n[Error: Could not convert page]\n\n"
-    else:
-        page_text = ocr_page_with_gemini(model, image, page_num)
-    
-    return (page_num, page_text)
+async def process_page_async(client: genai.Client, pdf_path: Path, page_num: int, semaphore: asyncio.Semaphore) -> tuple[int, str]:
+    """Process a single page with semaphore for concurrency control."""
+    async with semaphore:
+        image = convert_pdf_page(pdf_path, page_num)
+        if image is None:
+            return (page_num, f"# Page {page_num}\n\n[Error: Could not convert page]\n\n")
+        
+        page_text = await ocr_page_with_gemini(client, image, page_num)
+        return (page_num, page_text)
 
 
-def process_pdf(model, pdf_path, output_path, max_workers=5):
-    """Process PDF pages in parallel using ThreadPoolExecutor."""
-    # Get total page count
+async def process_pdf_async(client: genai.Client, pdf_path: Path, output_path: Path, max_concurrent: int = 3) -> bool:
+    """Process PDF pages with async concurrency control."""
     total_pages = get_page_count(pdf_path)
     if total_pages is None:
         return False
     
     print(f"  Pages: {total_pages}")
     
-    # Clear/create output file
-    output_path.write_text("", encoding='utf-8')
+    # Use semaphore to limit concurrent API calls
+    semaphore = asyncio.Semaphore(max_concurrent)
     
-    # Process pages in parallel
-    results = {}
+    # Create tasks for all pages
+    tasks = [
+        process_page_async(client, pdf_path, page_num, semaphore)
+        for page_num in range(1, total_pages + 1)
+    ]
     
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        # Submit all pages
-        futures = {
-            executor.submit(process_single_page, model, pdf_path, page_num, total_pages): page_num
-            for page_num in range(1, total_pages + 1)
-        }
-        
-        # Collect results as they complete
-        for future in as_completed(futures):
-            page_num, page_text = future.result()
-            results[page_num] = page_text
+    # Run all tasks concurrently (limited by semaphore)
+    results = await asyncio.gather(*tasks)
     
-    # Write results in order
+    # Sort results by page number and write
+    results_dict = {page_num: text for page_num, text in results}
     with open(output_path, 'w', encoding='utf-8') as f:
-        for page_num in sorted(results.keys()):
-            f.write(results[page_num])
+        for page_num in sorted(results_dict.keys()):
+            f.write(results_dict[page_num])
     
     return True
+
+
+def process_pdf(client: genai.Client, pdf_path: Path, output_path: Path, max_concurrent: int = 3) -> bool:
+    """Synchronous wrapper for async PDF processing."""
+    return asyncio.run(process_pdf_async(client, pdf_path, output_path, max_concurrent))
 
 
 def main():
@@ -180,7 +218,7 @@ def main():
     
     # Setup Gemini
     print("Setting up Gemini API...")
-    model = setup_gemini()
+    client = setup_gemini()
     print("✓ Gemini API configured")
     print()
     
@@ -199,7 +237,7 @@ def main():
         
         print(f"[{i}/{len(pdf_files)}] Processing {pdf_path.name}")
         
-        success = process_pdf(model, pdf_path, output_path)
+        success = process_pdf(client, pdf_path, output_path, max_concurrent=3)
         
         if success:
             print(f"  ✓ Saved to: {output_path.name}")
@@ -215,6 +253,7 @@ def main():
     print(f"Processing complete!")
     print(f"  Success: {success_count}/{len(pdf_files)}")
     print(f"  Failed:  {fail_count}/{len(pdf_files)}")
+    print(f"\nRun validate_ocr_vs_golden.py to check coverage.")
 
 
 if __name__ == "__main__":

@@ -13,11 +13,12 @@ from __future__ import annotations
 import argparse
 import json
 import random
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
 from faker import Faker
+from generate_claim_data import generate_incidents
 
 fake = Faker()
 
@@ -34,7 +35,56 @@ class LossRunHTMLGenerator:
         if seed is not None:
             random.seed(seed)
             Faker.seed(seed)
+        self.seed = seed
         self.format = format
+
+    def apply_document_problems(self, incidents: list[dict], problems: dict[str, bool]) -> list[dict]:
+        incidents_out = [i.copy() for i in incidents]
+
+        if problems.get("duplicates", False) and incidents_out:
+            k = min(5, len(incidents_out) // 10)
+            if k > 0:
+                duplicate_indices = random.sample(range(len(incidents_out)), k=k)
+                for idx in duplicate_indices:
+                    incidents_out.insert(random.randint(0, len(incidents_out)), incidents_out[idx].copy())
+
+        if problems.get("large_doc", False) and len(incidents_out) < 500:
+            target_count = 500
+            additional_needed = target_count - len(incidents_out)
+            if additional_needed > 0:
+                random_state = random.getstate()
+                faker_state = fake.random.getstate()
+                try:
+                    extra_seed = None if self.seed is None else (self.seed + 9991)
+                    extra_incidents = generate_incidents(additional_needed, seed=extra_seed, start_year=2023)
+                    extra_dicts = [i.model_dump() for i in extra_incidents]
+                finally:
+                    random.setstate(random_state)
+                    fake.random.setstate(faker_state)
+
+                existing_seqs: list[int] = []
+                for inc in incidents_out:
+                    inc_num = str(inc.get("incident_number", ""))
+                    if inc_num.startswith("#"):
+                        try:
+                            existing_seqs.append(int(inc_num[1:]) - 30000)
+                        except ValueError:
+                            pass
+                next_seq = max(existing_seqs, default=len(incidents_out)) + 1
+
+                for j, inc in enumerate(extra_dicts):
+                    seq = next_seq + j
+                    inc["incident_number"] = f"#{30000 + seq}"
+                    loss_date = str(inc.get("date_of_loss", "01/01/2023"))
+                    try:
+                        ref_year = int(loss_date.split("/")[-1]) % 100
+                    except ValueError:
+                        ref_year = 23
+                    inc["reference_number"] = f"L{ref_year}{seq:04d}"
+
+                incidents_out.extend(extra_dicts)
+
+        return incidents_out
 
     @staticmethod
     def _generate_header_info(incidents: list[dict]) -> dict:
@@ -42,6 +92,8 @@ class LossRunHTMLGenerator:
         # Use first incident's company info
         company_name = incidents[0]["company_name"] if incidents else fake.company()
         account_num = f"A{random.randint(100000, 999999):07d}"
+
+        run_dt = datetime(2024, 1, 1) + timedelta(minutes=random.randint(0, 365 * 24 * 60 - 1))
         
         return {
             "carrier_name": random.choice([
@@ -55,8 +107,8 @@ class LossRunHTMLGenerator:
             "carrier_phone": fake.phone_number(),
             "account_name": company_name,
             "account_number": account_num,
-            "run_date": datetime.now().strftime("%m/%d/%Y"),
-            "run_time": datetime.now().strftime("%I:%M %p"),
+            "run_date": run_dt.strftime("%m/%d/%Y"),
+            "run_time": run_dt.strftime("%I:%M %p"),
             "policy_period": "07/01/2023 - 07/01/2024",
             "policy_type": "Trucking"
         }
@@ -368,7 +420,15 @@ class LossRunHTMLGenerator:
         
         return html
 
-    def _generate_table_row(self, incident: dict, row_num: int, problems: dict, use_merged: bool = False) -> str:
+    def _generate_table_row(
+        self,
+        incident: dict,
+        row_num: int,
+        problems: dict,
+        use_merged: bool = False,
+        rowspan: str = "",
+        omit_merged_cells: bool = False,
+    ) -> str:
         """Generate a single table row for table format."""
         inc_num = incident.get("incident_number", f"#{row_num}")
         ref_num = incident.get("reference_number", "")
@@ -395,17 +455,15 @@ class LossRunHTMLGenerator:
         total_paid = bi.get("paid", 0) + pd.get("paid", 0) + lae.get("paid", 0) + ded.get("paid", 0)
         total_incurred = bi.get("total_incurred", 0) + pd.get("total_incurred", 0) + lae.get("total_incurred", 0) + ded.get("total_incurred", 0)
         
-        # Problem 7: Merged cells - randomly merge some cells
-        rowspan = ""
-        if use_merged and random.random() < 0.15:  # 15% chance of merged cell
-            rowspan = ' rowspan="2"'
+        incident_cell = f"<td{rowspan}>{inc_num}</td>" if not omit_merged_cells else ""
+        coverage_cell = f"<td{rowspan}>{coverage}</td>" if not omit_merged_cells else ""
         
         return f"""
         <tr>
-            <td{rowspan}>{inc_num}</td>
+            {incident_cell}
             <td>{ref_num}</td>
             <td>{company}</td>
-            <td{rowspan}>{coverage}</td>
+            {coverage_cell}
             <td>{status}</td>
             <td>{policy}</td>
             <td>{loss_date}</td>
@@ -442,7 +500,7 @@ class LossRunHTMLGenerator:
         <tbody>"""
         
         use_merged = problems.get("merged_cells", False)
-        skip_next = False
+        omit_merged_cells = False
         
         for idx, incident in enumerate(incidents):
             # Problem 1: Page breaks
@@ -473,17 +531,19 @@ class LossRunHTMLGenerator:
         </thead>
         <tbody>"""
             
-            if skip_next:
-                skip_next = False
-                continue
-            
-            row_html = self._generate_table_row(incident, idx + 1, problems, use_merged)
-            
-            # Check if this row has merged cells
-            if use_merged and 'rowspan="2"' in row_html and idx < len(incidents) - 1:
-                skip_next = True
-            
-            html += row_html
+            start_merge = use_merged and (not omit_merged_cells) and idx < len(incidents) - 1 and random.random() < 0.15
+            rowspan = ' rowspan="2"' if start_merge else ""
+
+            html += self._generate_table_row(
+                incident,
+                idx + 1,
+                problems,
+                use_merged=use_merged,
+                rowspan=rowspan,
+                omit_merged_cells=omit_merged_cells,
+            )
+
+            omit_merged_cells = start_merge
         
         html += """
         </tbody>
@@ -496,18 +556,6 @@ class LossRunHTMLGenerator:
         """Generate complete loss run HTML document."""
         if problems is None:
             problems = {}
-        
-        # Problem 3: Add exact duplicates
-        if problems.get("duplicates", False):
-            duplicate_indices = random.sample(range(len(incidents)), k=min(5, len(incidents) // 10))
-            for idx in duplicate_indices:
-                incidents.insert(random.randint(0, len(incidents)), incidents[idx].copy())
-        
-        # Problem 4: Large documents
-        if problems.get("large_doc", False) and len(incidents) < 500:
-            original_count = len(incidents)
-            while len(incidents) < 500:
-                incidents.extend([i.copy() for i in incidents[:original_count]])
         
         # Generate header info
         header_info = self._generate_header_info(incidents)
@@ -673,6 +721,7 @@ def main() -> None:
 
     # Generate HTML
     generator = LossRunHTMLGenerator(seed=args.seed, format=args.format)
+    incidents = generator.apply_document_problems(incidents, problems)
     html = generator.generate(incidents, problems=problems)
 
     # Write output

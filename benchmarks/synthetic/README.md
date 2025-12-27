@@ -11,9 +11,11 @@ This benchmark tests entity extraction from semi-structured insurance claims dat
           ↓
 3. Render HTML → PDF                    ← Final test document
           ↓
-4. Extract Entities from PDF            ← Test your extraction system
+4. OCR PDF → Text                       ← Convert document to machine-readable text
           ↓
-5. Compare with Golden Data             ← Evaluate accuracy
+5. Extract Entities from Text           ← Test your extraction system
+          ↓
+6. Compare with Golden Data             ← Evaluate accuracy
 ```
 
 ## Problems Injected

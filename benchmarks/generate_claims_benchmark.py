@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 import shutil
 from datetime import datetime
@@ -128,7 +129,9 @@ async def generate_instance(
     pdf_path = output_dir / f"{instance_id}.pdf"
     
     # Use unique seed for each instance
-    seed = base_seed + hash(instance_id) % 10000
+    seed_material = f"{base_seed}:{instance_id}".encode("utf-8")
+    seed_offset = int(hashlib.md5(seed_material).hexdigest()[:8], 16) % 10000
+    seed = base_seed + seed_offset
     
     print(f"\n{'='*60}")
     print(f"Generating: {instance_id}")
@@ -137,12 +140,15 @@ async def generate_instance(
     # Step 1: Generate structured incidents data
     print(f"[1/3] Generating {num_claims} claims (seed={seed})...")
     incidents = generate_incidents(num_claims, seed=seed, start_year=2023)
-    write_json(incidents, json_path)
     
     # Step 2: Generate HTML with problems
     print(f"[2/3] Generating HTML with problems (format={format})...")
     generator = LossRunHTMLGenerator(seed=seed, format=format)
     incidents_dicts = [i.model_dump() for i in incidents]
+    incidents_dicts = generator.apply_document_problems(incidents_dicts, problems)
+    json_path.write_text(json.dumps(incidents_dicts, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"✓ Saved {len(incidents_dicts)} incidents → {json_path}")
+
     html_content = generator.generate(incidents_dicts, problems=problems)
     html_path.write_text(html_content, encoding="utf-8")
     
@@ -156,7 +162,7 @@ async def generate_instance(
     # Get file sizes
     json_size = json_path.stat().st_size
     pdf_size = pdf_path.stat().st_size
-    pdf_pages = estimate_pages(num_claims, problems)
+    pdf_pages = estimate_pages(len(incidents_dicts), problems)
     
     print(f"  ✓ Generated: {instance_id}.pdf ({pdf_pages} pages, {pdf_size / 1024:.1f} KB)")
     
@@ -165,7 +171,7 @@ async def generate_instance(
         "id": instance_id,
         "difficulty": tier,
         "format": format,
-        "num_claims": num_claims,
+        "num_claims": len(incidents_dicts),
         "pages_estimate": pdf_pages,
         "problems": enabled_problems,
         "has_duplicates": problems.get("duplicates", False),
@@ -282,7 +288,7 @@ async def generate_all_benchmarks(
         config = BENCHMARK_CONFIG[tier]
         instances = await generate_tier(tier, config, output_dir, base_seed)
         all_instances.extend(instances)
-        total_claims += config["claims_per_pdf"] * len(instances)
+        total_claims += sum(i["num_claims"] for i in instances)
     
     # Generate metadata file
     metadata = {
@@ -298,8 +304,9 @@ async def generate_all_benchmarks(
             tier: {
                 "claims_per_pdf": BENCHMARK_CONFIG[tier]["claims_per_pdf"],
                 "num_instances": BENCHMARK_CONFIG[tier]["num_instances"],
-                "total_claims": BENCHMARK_CONFIG[tier]["claims_per_pdf"]
-                * BENCHMARK_CONFIG[tier]["num_instances"],
+                "total_claims": sum(
+                    i["num_claims"] for i in all_instances if i["difficulty"] == tier
+                ),
             }
             for tier in BENCHMARK_CONFIG.keys()
         },

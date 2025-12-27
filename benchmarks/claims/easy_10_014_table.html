@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horizon Cargo LLC - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .page-break {
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">National Interstate</div>
+            <div class="header-line">6854 Julia Route, Masonmouth, WY 47336</div>
+            <div class="header-line">Phone: (698)498-0981</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> Horizon Cargo LLC, Acct. # A0419001</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 08/30/2024, 12:59 PM</div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30001</td>
+            <td>L230001</td>
+            <td>Horizon Cargo LLC</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L23A1848</td>
+            <td>06/22/2023</td>
+            <td>TN</td>
+            <td>Bowers, Dustin</td>
+            <td style="max-width: 200px; white-space: pre-line;">Windshield shattered by road debris</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$37,704.82</td>
+            <td style="text-align: right;">$37,704.82</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L240002</td>
+            <td>Titan Transport Group</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L24A2722</td>
+            <td>08/01/2024</td>
+            <td>CA</td>
+            <td>Davis, David</td>
+            <td style="max-width: 200px; white-space: pre-line;">Load shift caused cargo damage</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$47,652.58</td>
+            <td style="text-align: right;">$47,652.58</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L230003</td>
+            <td>Elliston Logistics</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A7400</td>
+            <td>06/18/2023</td>
+            <td>IL</td>
+            <td>Sharp, Laura</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing into loading dock, hit guardrail</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$29,335.42</td>
+            <td style="text-align: right;">$6,583.53</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L240004</td>
+            <td>Vaughn Transport LLC</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A3195</td>
+            <td>05/16/2024</td>
+            <td>TN</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling tree branch during storm</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$11,682.01</td>
+            <td style="text-align: right;">$7,569.60</td>
+        </tr>
+        <tr>
+            <td>#30005</td>
+            <td>L240005</td>
+            <td>Castillo Freight LLC</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A3772</td>
+            <td>10/16/2024</td>
+            <td>PA</td>
+            <td>Rich, Samantha</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV at traffic light</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$20,399.68</td>
+            <td style="text-align: right;">$14,172.79</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L230006</td>
+            <td>Scottchester Cargo</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L23A4536</td>
+            <td>05/11/2023</td>
+            <td>TN</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Transmission failure during transport</td>
+            <td style="text-align: right;">$60,425.65</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$56,490.88</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L240007</td>
+            <td>Eagle Cargo Inc</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A2327</td>
+            <td>09/26/2024</td>
+            <td>AZ</td>
+            <td>Williams, Mary</td>
+            <td style="max-width: 200px; white-space: pre-line;">Fuel tank punctured by road debris</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$11,102.48</td>
+            <td style="text-align: right;">$6,295.52</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L240008</td>
+            <td>Atlas Logistics Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A2669</td>
+            <td>06/20/2024</td>
+            <td>GA</td>
+            <td>Payne, Lisa</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV lost control on wet pavement, struck guardrail</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$42,027.72</td>
+            <td style="text-align: right;">$27,939.90</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L230009</td>
+            <td>West Brittanyborough Express</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L23A9093</td>
+            <td>12/29/2023</td>
+            <td>OK</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Cargo damaged during transport - water intrusion</td>
+            <td style="text-align: right;">$58,204.43</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$56,829.35</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L240010</td>
+            <td>Diaz Express Co</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L24A6105</td>
+            <td>11/01/2024</td>
+            <td>PA</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Insured transporting vehicle was damaged</td>
+            <td style="text-align: right;">$20,626.42</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$20,626.42</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L240004</td>
+            <td>Vaughn Transport LLC</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A3195</td>
+            <td>05/16/2024</td>
+            <td>TN</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling tree branch during storm</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$11,682.01</td>
+            <td style="text-align: right;">$7,569.60</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$139,256.50</td>
+                <td>$211,586.72</td>
+                <td>$61,408.23</td>
+                <td>$289,434.99</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 11</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>

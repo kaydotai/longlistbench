@@ -9,8 +9,6 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
-import subprocess
-import sys
 from pathlib import Path
 
 # Import from local modules
@@ -43,12 +41,14 @@ async def generate_benchmark_async(
     # Step 1: Generate structured incidents data
     print(f"\n[1/3] Generating {num_claims} incidents...")
     incidents = generate_incidents(num_claims, seed=seed, start_year=2023)
-    write_json(incidents, json_path)
+    generator = LossRunHTMLGenerator(seed=seed)
+    incidents_dicts = [i.model_dump() for i in incidents]
+    incidents_dicts = generator.apply_document_problems(incidents_dicts, problems)
+    json_path.write_text(json.dumps(incidents_dicts, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"✓ Saved {len(incidents_dicts)} incidents → {json_path}")
 
     # Step 2: Generate HTML with problems
     print("\n[2/3] Generating HTML with problems...")
-    generator = LossRunHTMLGenerator(seed=seed)
-    incidents_dicts = [i.model_dump() for i in incidents]
     html_content = generator.generate(incidents_dicts, problems=problems)
     html_path.write_text(html_content, encoding="utf-8")
     
@@ -66,7 +66,7 @@ async def generate_benchmark_async(
     print(f"  Golden data: {json_path}")
     print(f"  HTML:        {html_path}")
     print(f"  PDF:         {pdf_path}")
-    print(f"  Claims:      {num_claims}")
+    print(f"  Claims:      {len(incidents_dicts)}")
     print(f"  Problems:    {', '.join(enabled_problems) if enabled_problems else 'none'}")
 
 

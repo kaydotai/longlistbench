@@ -1,0 +1,431 @@
+{
+  "timestamp": "2025-12-27T22:32:55.809628",
+  "model_stats": {
+    "gemini": {
+      "total_samples": 5,
+      "total_f1": 0,
+      "total_recall": 0,
+      "total_precision": 0,
+      "errors": 5,
+      "by_tier": {
+        "easy": {
+          "count": 2,
+          "f1_sum": 0,
+          "recall_sum": 0,
+          "avg_f1": 0.0,
+          "avg_recall": 0.0
+        },
+        "hard": {
+          "count": 1,
+          "f1_sum": 0,
+          "recall_sum": 0,
+          "avg_f1": 0.0,
+          "avg_recall": 0.0
+        },
+        "medium": {
+          "count": 2,
+          "f1_sum": 0,
+          "recall_sum": 0,
+          "avg_f1": 0.0,
+          "avg_recall": 0.0
+        }
+      },
+      "by_format": {
+        "detailed": {
+          "count": 5,
+          "f1_sum": 0,
+          "recall_sum": 0,
+          "avg_f1": 0.0,
+          "avg_recall": 0.0
+        }
+      },
+      "avg_f1": 0.0,
+      "avg_recall": 0.0,
+      "avg_precision": 0.0
+    },
+    "gpt4": {
+      "total_samples": 5,
+      "total_f1": 4.813919413919414,
+      "total_recall": 4.735016835016835,
+      "total_precision": 4.9,
+      "errors": 0,
+      "by_tier": {
+        "easy": {
+          "count": 2,
+          "f1_sum": 1.9,
+          "recall_sum": 1.9,
+          "avg_f1": 0.95,
+          "avg_recall": 0.95
+        },
+        "hard": {
+          "count": 1,
+          "f1_sum": 0.9523809523809523,
+          "recall_sum": 0.9090909090909091,
+          "avg_f1": 0.9523809523809523,
+          "avg_recall": 0.9090909090909091
+        },
+        "medium": {
+          "count": 2,
+          "f1_sum": 1.9615384615384615,
+          "recall_sum": 1.925925925925926,
+          "avg_f1": 0.9807692307692307,
+          "avg_recall": 0.962962962962963
+        }
+      },
+      "by_format": {
+        "detailed": {
+          "count": 5,
+          "f1_sum": 4.813919413919414,
+          "recall_sum": 4.735016835016835,
+          "avg_f1": 0.9627838827838827,
+          "avg_recall": 0.9470033670033671
+        }
+      },
+      "avg_f1": 0.9627838827838827,
+      "avg_recall": 0.9470033670033671,
+      "avg_precision": 0.9800000000000001
+    },
+    "claude": {
+      "total_samples": 5,
+      "total_f1": 4.813919413919414,
+      "total_recall": 4.735016835016835,
+      "total_precision": 4.9,
+      "errors": 0,
+      "by_tier": {
+        "easy": {
+          "count": 2,
+          "f1_sum": 1.9,
+          "recall_sum": 1.9,
+          "avg_f1": 0.95,
+          "avg_recall": 0.95
+        },
+        "hard": {
+          "count": 1,
+          "f1_sum": 0.9523809523809523,
+          "recall_sum": 0.9090909090909091,
+          "avg_f1": 0.9523809523809523,
+          "avg_recall": 0.9090909090909091
+        },
+        "medium": {
+          "count": 2,
+          "f1_sum": 1.9615384615384615,
+          "recall_sum": 1.925925925925926,
+          "avg_f1": 0.9807692307692307,
+          "avg_recall": 0.962962962962963
+        }
+      },
+      "by_format": {
+        "detailed": {
+          "count": 5,
+          "f1_sum": 4.813919413919414,
+          "recall_sum": 4.735016835016835,
+          "avg_f1": 0.9627838827838827,
+          "avg_recall": 0.9470033670033671
+        }
+      },
+      "avg_f1": 0.9627838827838827,
+      "avg_recall": 0.9470033670033671,
+      "avg_precision": 0.9800000000000001
+    }
+  },
+  "detailed_results": [
+    {
+      "model": "gemini",
+      "sample": "easy_10_001_detailed",
+      "tier": "easy",
+      "format": "detailed",
+      "metrics": {
+        "recall": 0,
+        "precision": 0,
+        "f1": 0,
+        "found": 0,
+        "ground_truth_count": 10,
+        "predicted_count": 0,
+        "missing": 10,
+        "extra": 0
+      },
+      "extraction_time": 73.7417311668396,
+      "error": "RetryError[<Future at 0x10a6b3230 state=finished raised ResourceExhausted>]"
+    },
+    {
+      "model": "gpt4",
+      "sample": "easy_10_001_detailed",
+      "tier": "easy",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 10,
+        "predicted_count": 10,
+        "found": 9,
+        "recall": 0.9,
+        "precision": 0.9,
+        "f1": 0.9,
+        "missing": 1,
+        "extra": 1,
+        "missing_ids": [
+          "30010"
+        ],
+        "extra_ids": [
+          "330010"
+        ]
+      },
+      "extraction_time": 4.24265718460083,
+      "error": null
+    },
+    {
+      "model": "claude",
+      "sample": "easy_10_001_detailed",
+      "tier": "easy",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 10,
+        "predicted_count": 10,
+        "found": 9,
+        "recall": 0.9,
+        "precision": 0.9,
+        "f1": 0.9,
+        "missing": 1,
+        "extra": 1,
+        "missing_ids": [
+          "30010"
+        ],
+        "extra_ids": [
+          "330010"
+        ]
+      },
+      "extraction_time": 10.319130659103394,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "easy_10_002_detailed",
+      "tier": "easy",
+      "format": "detailed",
+      "metrics": {
+        "recall": 0,
+        "precision": 0,
+        "f1": 0,
+        "found": 0,
+        "ground_truth_count": 10,
+        "predicted_count": 0,
+        "missing": 10,
+        "extra": 0
+      },
+      "extraction_time": 73.45839595794678,
+      "error": "RetryError[<Future at 0x10ac84230 state=finished raised ResourceExhausted>]"
+    },
+    {
+      "model": "gpt4",
+      "sample": "easy_10_002_detailed",
+      "tier": "easy",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 10,
+        "predicted_count": 10,
+        "found": 10,
+        "recall": 1.0,
+        "precision": 1.0,
+        "f1": 1.0,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 5.83293604850769,
+      "error": null
+    },
+    {
+      "model": "claude",
+      "sample": "easy_10_002_detailed",
+      "tier": "easy",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 10,
+        "predicted_count": 10,
+        "found": 10,
+        "recall": 1.0,
+        "precision": 1.0,
+        "f1": 1.0,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 10.852180004119873,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_001_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "recall": 0,
+        "precision": 0,
+        "f1": 0,
+        "found": 0,
+        "ground_truth_count": 55,
+        "predicted_count": 0,
+        "missing": 55,
+        "extra": 0
+      },
+      "extraction_time": 73.64449691772461,
+      "error": "RetryError[<Future at 0x1089a9c80 state=finished raised ResourceExhausted>]"
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_001_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 50,
+        "recall": 0.9090909090909091,
+        "precision": 1.0,
+        "f1": 0.9523809523809523,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 19.427252054214478,
+      "error": null
+    },
+    {
+      "model": "claude",
+      "sample": "hard_50_001_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 50,
+        "recall": 0.9090909090909091,
+        "precision": 1.0,
+        "f1": 0.9523809523809523,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 53.118048906326294,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "medium_25_001_detailed",
+      "tier": "medium",
+      "format": "detailed",
+      "metrics": {
+        "recall": 0,
+        "precision": 0,
+        "f1": 0,
+        "found": 0,
+        "ground_truth_count": 27,
+        "predicted_count": 0,
+        "missing": 27,
+        "extra": 0
+      },
+      "extraction_time": 73.61072206497192,
+      "error": "RetryError[<Future at 0x10ac7a2d0 state=finished raised ResourceExhausted>]"
+    },
+    {
+      "model": "gpt4",
+      "sample": "medium_25_001_detailed",
+      "tier": "medium",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 27,
+        "predicted_count": 25,
+        "found": 25,
+        "recall": 0.9259259259259259,
+        "precision": 1.0,
+        "f1": 0.9615384615384615,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 7.842390060424805,
+      "error": null
+    },
+    {
+      "model": "claude",
+      "sample": "medium_25_001_detailed",
+      "tier": "medium",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 27,
+        "predicted_count": 25,
+        "found": 25,
+        "recall": 0.9259259259259259,
+        "precision": 1.0,
+        "f1": 0.9615384615384615,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 25.134827136993408,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "medium_25_002_detailed",
+      "tier": "medium",
+      "format": "detailed",
+      "metrics": {
+        "recall": 0,
+        "precision": 0,
+        "f1": 0,
+        "found": 0,
+        "ground_truth_count": 25,
+        "predicted_count": 0,
+        "missing": 25,
+        "extra": 0
+      },
+      "extraction_time": 73.52116394042969,
+      "error": "RetryError[<Future at 0x10ac785d0 state=finished raised ResourceExhausted>]"
+    },
+    {
+      "model": "gpt4",
+      "sample": "medium_25_002_detailed",
+      "tier": "medium",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 25,
+        "predicted_count": 25,
+        "found": 25,
+        "recall": 1.0,
+        "precision": 1.0,
+        "f1": 1.0,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 14.36279582977295,
+      "error": null
+    },
+    {
+      "model": "claude",
+      "sample": "medium_25_002_detailed",
+      "tier": "medium",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 25,
+        "predicted_count": 25,
+        "found": 25,
+        "recall": 1.0,
+        "precision": 1.0,
+        "f1": 1.0,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": []
+      },
+      "extraction_time": 26.409920930862427,
+      "error": null
+    }
+  ]
+}

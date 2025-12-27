@@ -1,28 +1,26 @@
 [
   {
     "incident_number": "#30001",
-    "reference_number": "L240001",
-    "company_name": "Bauer Hauling Inc",
+    "reference_number": "L230001",
+    "company_name": "Horizon Logistics Co",
     "division": "General",
-    "coverage_type": "Liability",
+    "coverage_type": "Physical Damage",
     "status": "Closed",
-    "policy_number": "L24A8663",
-    "policy_state": "FL",
+    "policy_number": "L23A3466",
+    "policy_state": "AZ",
     "cause_code": null,
-    "description": "OV changed lanes into IV, causing collision",
+    "description": "Collision with deer caused front-end damage",
     "handler": "Claims Adjuster",
     "unit_number": null,
-    "date_of_loss": "03/24/2024",
-    "loss_state": "MI",
-    "date_reported": "06/29/2024",
+    "date_of_loss": "12/05/2023",
+    "loss_state": "OK",
+    "date_reported": "12/09/2023",
     "agency": null,
-    "insured": "Bauer Hauling Inc",
+    "insured": "Horizon Logistics Co",
     "claimants": [
-      "Mccoy, Evan",
-      "Hamilton, Peter",
-      "Anderson, Christopher"
+      "Phillips, Amber"
     ],
-    "driver_name": "Pennington, Brianna",
+    "driver_name": null,
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -31,9 +29,57 @@
     },
     "pd": {
       "reserve": 0.0,
-      "paid": 47256.85,
+      "paid": 28598.12,
       "recovered": 0.0,
-      "total_incurred": 47256.85
+      "total_incurred": 28598.12
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 1243.63,
+      "recovered": 0.0,
+      "total_incurred": 1243.63
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 3804.15,
+      "total_incurred": -3804.15
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30002",
+    "reference_number": "L230002",
+    "company_name": "Edwards Hauling Co",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Open",
+    "policy_number": "L23A4270",
+    "policy_state": "AZ",
+    "cause_code": null,
+    "description": "IV hydroplaned, hit concrete barrier",
+    "handler": "Claims Adjuster",
+    "unit_number": "2024 PE 832408",
+    "date_of_loss": "05/09/2023",
+    "loss_state": "CA",
+    "date_reported": "05/15/2023",
+    "agency": null,
+    "insured": "Edwards Hauling Co",
+    "claimants": [
+      "Lewis, Austin"
+    ],
+    "driver_name": "Logan, Jose",
+    "bi": {
+      "reserve": 61573.15,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 61573.15
+    },
+    "pd": {
+      "reserve": 51695.16,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 51695.16
     },
     "lae": {
       "reserve": 0.0,
@@ -44,45 +90,44 @@
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 31015.98,
-      "total_incurred": -31015.98
+      "recovered": 0.0,
+      "total_incurred": 0.0
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30002",
-    "reference_number": "L240002",
-    "company_name": "Gonzalez Express Inc",
+    "reference_number": "L230002",
+    "company_name": "Edwards Hauling Co",
     "division": "General",
     "coverage_type": "Liability",
-    "status": "Closed",
-    "policy_number": "L24A7258",
-    "policy_state": "GA",
+    "status": "Open",
+    "policy_number": "L23A4270",
+    "policy_state": "AZ",
     "cause_code": null,
-    "description": "IV changing lanes, sideswiped OV",
+    "description": "IV hydroplaned, hit concrete barrier",
     "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "08/17/2024",
-    "loss_state": "IL",
-    "date_reported": "09/29/2024",
+    "unit_number": "2024 PE 832408",
+    "date_of_loss": "05/09/2023",
+    "loss_state": "CA",
+    "date_reported": "05/15/2023",
     "agency": null,
-    "insured": "Gonzalez Express Inc",
+    "insured": "Edwards Hauling Co",
     "claimants": [
-      "Rodriguez-Velazquez",
-      "Hart, George"
+      "Lewis, Austin"
     ],
-    "driver_name": "Rios, Logan",
+    "driver_name": "Logan, Jose",
     "bi": {
-      "reserve": 0.0,
-      "paid": 11952.93,
+      "reserve": 61573.15,
+      "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 11952.93
+      "total_incurred": 61573.15
     },
     "pd": {
-      "reserve": 0.0,
-      "paid": 10182.39,
+      "reserve": 51695.16,
+      "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 10182.39
+      "total_incurred": 51695.16
     },
     "lae": {
       "reserve": 0.0,
@@ -101,36 +146,36 @@
   {
     "incident_number": "#30003",
     "reference_number": "L230003",
-    "company_name": "Brownchester Freight",
+    "company_name": "West Jessica Hauling",
     "division": "General",
     "coverage_type": "Liability",
     "status": "Closed",
-    "policy_number": "L23A3327",
-    "policy_state": "AZ",
+    "policy_number": "L23A5814",
+    "policy_state": "TN",
     "cause_code": null,
-    "description": "IV hydroplaned, hit concrete barrier",
+    "description": "Tire blowout caused IV to veer into OV",
     "handler": "Claims Adjuster",
-    "unit_number": "2024 FR 560808",
-    "date_of_loss": "07/15/2023",
-    "loss_state": "OK",
-    "date_reported": "08/02/2023",
+    "unit_number": "2023 FR 268221",
+    "date_of_loss": "09/22/2023",
+    "loss_state": "TX",
+    "date_reported": "09/24/2023",
     "agency": null,
-    "insured": "Brownchester Freight",
+    "insured": "West Jessica Hauling",
     "claimants": [
-      "Sanchez Group"
+      "Oliver, Leslie"
     ],
-    "driver_name": "Adkins, Morgan",
+    "driver_name": "Hernandez, Beth",
     "bi": {
       "reserve": 0.0,
-      "paid": 0.0,
+      "paid": 79753.35,
       "recovered": 0.0,
-      "total_incurred": 0.0
+      "total_incurred": 79753.35
     },
     "pd": {
       "reserve": 0.0,
-      "paid": 9389.37,
+      "paid": 24909.79,
       "recovered": 0.0,
-      "total_incurred": 9389.37
+      "total_incurred": 24909.79
     },
     "lae": {
       "reserve": 0.0,
@@ -141,31 +186,33 @@
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
+      "recovered": 32337.7,
+      "total_incurred": -32337.7
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30004",
-    "reference_number": "L240004",
-    "company_name": "Bautista Transport LLC",
+    "reference_number": "L230004",
+    "company_name": "Glover Express Co",
     "division": "General",
-    "coverage_type": "Inland Marine",
+    "coverage_type": "Liability",
     "status": "Open",
-    "policy_number": "L24A6265",
-    "policy_state": "OK",
+    "policy_number": "L23A9940",
+    "policy_state": "NC",
     "cause_code": null,
-    "description": "Cargo damaged during transport - water intrusion",
+    "description": "IV brakes failed, rear-ended OV",
     "handler": "Claims Adjuster",
     "unit_number": null,
-    "date_of_loss": "01/11/2024",
-    "loss_state": "MO",
-    "date_reported": "02/02/2024",
-    "agency": null,
-    "insured": "Bautista Transport LLC",
-    "claimants": [],
-    "driver_name": "Phillips, Mark",
+    "date_of_loss": "04/27/2023",
+    "loss_state": "AR",
+    "date_reported": "08/17/2023",
+    "agency": "Barrett LLC",
+    "insured": "Glover Express Co",
+    "claimants": [
+      "Lewis, Judith"
+    ],
+    "driver_name": "White, Stephen",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -173,10 +220,10 @@
       "total_incurred": 0.0
     },
     "pd": {
-      "reserve": 35678.57,
-      "paid": 0.0,
+      "reserve": 35944.37,
+      "paid": 2349.18,
       "recovered": 0.0,
-      "total_incurred": 35678.57
+      "total_incurred": 38293.55
     },
     "lae": {
       "reserve": 0.0,
@@ -187,31 +234,31 @@
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 9840.95,
-      "total_incurred": -9840.95
+      "recovered": 5371.1,
+      "total_incurred": -5371.1
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30005",
     "reference_number": "L230005",
-    "company_name": "Ericachester Express",
+    "company_name": "Kathyton Express",
     "division": "General",
     "coverage_type": "Inland Marine",
     "status": "Closed",
-    "policy_number": "L23A5697",
-    "policy_state": "MI",
+    "policy_number": "L23A2837",
+    "policy_state": "TX",
     "cause_code": null,
-    "description": "Equipment damaged during loading",
+    "description": "Cargo crushed due to improper securing",
     "handler": "Claims Adjuster",
     "unit_number": null,
-    "date_of_loss": "06/29/2023",
-    "loss_state": "NC",
-    "date_reported": "07/19/2023",
+    "date_of_loss": "10/07/2023",
+    "loss_state": "PA",
+    "date_reported": "10/21/2023",
     "agency": null,
-    "insured": "Ericachester Express",
+    "insured": "Kathyton Express",
     "claimants": [],
-    "driver_name": null,
+    "driver_name": "Hall, Melinda",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -220,372 +267,46 @@
     },
     "pd": {
       "reserve": 0.0,
-      "paid": 18465.2,
+      "paid": 32021.4,
       "recovered": 0.0,
-      "total_incurred": 18465.2
+      "total_incurred": 32021.4
     },
     "lae": {
       "reserve": 0.0,
-      "paid": 0.0,
+      "paid": 1438.13,
       "recovered": 0.0,
-      "total_incurred": 0.0
+      "total_incurred": 1438.13
     },
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 4461.53,
-      "total_incurred": -4461.53
+      "recovered": 0.0,
+      "total_incurred": 0.0
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30006",
     "reference_number": "L230006",
-    "company_name": "Horizon Logistics Group",
-    "division": "General",
-    "coverage_type": "Physical Damage",
-    "status": "Closed",
-    "policy_number": "L23A5335",
-    "policy_state": "FL",
-    "cause_code": null,
-    "description": "Trailer damaged in loading dock collision",
-    "handler": "Claims Adjuster",
-    "unit_number": "2024 MA 115567",
-    "date_of_loss": "12/20/2023",
-    "loss_state": "MI",
-    "date_reported": "12/27/2023",
-    "agency": "Roberts-Olson",
-    "insured": "Horizon Logistics Group",
-    "claimants": [],
-    "driver_name": null,
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 13904.93,
-      "recovered": 0.0,
-      "total_incurred": 13904.93
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 1815.52,
-      "recovered": 0.0,
-      "total_incurred": 1815.52
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 3214.29,
-      "total_incurred": -3214.29
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30007",
-    "reference_number": "L230007",
-    "company_name": "Liberty Cargo Inc",
-    "division": "General",
-    "coverage_type": "Physical Damage",
-    "status": "Closed",
-    "policy_number": "L23A7519",
-    "policy_state": "TN",
-    "cause_code": null,
-    "description": "IV rollover on icy highway. Total loss.",
-    "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "03/06/2023",
-    "loss_state": "MI",
-    "date_reported": "03/16/2023",
-    "agency": null,
-    "insured": "Liberty Cargo Inc",
-    "claimants": [],
-    "driver_name": "Silva, Sheila",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 42882.08,
-      "recovered": 0.0,
-      "total_incurred": 42882.08
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 1765.96,
-      "total_incurred": -1765.96
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30008",
-    "reference_number": "L240008",
-    "company_name": "Eagle Cargo Inc",
-    "division": "General",
-    "coverage_type": "Physical Damage",
-    "status": "Closed",
-    "policy_number": "L24A3123",
-    "policy_state": "TN",
-    "cause_code": null,
-    "description": "IV struck by falling tree branch during storm",
-    "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "02/19/2024",
-    "loss_state": "IL",
-    "date_reported": "03/13/2024",
-    "agency": null,
-    "insured": "Eagle Cargo Inc",
-    "claimants": [],
-    "driver_name": "Mitchell, Robert",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 41314.69,
-      "recovered": 0.0,
-      "total_incurred": 41314.69
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 622.81,
-      "recovered": 0.0,
-      "total_incurred": 622.81
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 1936.06,
-      "total_incurred": -1936.06
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30009",
-    "reference_number": "L230009",
-    "company_name": "Atlas Cargo Group",
-    "division": "General",
-    "coverage_type": "Physical Damage",
-    "status": "Open",
-    "policy_number": "L23A1231",
-    "policy_state": "MI",
-    "cause_code": null,
-    "description": "Fuel tank punctured by road debris",
-    "handler": "Claims Adjuster",
-    "unit_number": "2023 KE 347768",
-    "date_of_loss": "12/08/2023",
-    "loss_state": "OK",
-    "date_reported": "12/14/2023",
-    "agency": null,
-    "insured": "Atlas Cargo Group",
-    "claimants": [],
-    "driver_name": "Tran, William",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 89346.43,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 89346.43
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 3251.63,
-      "total_incurred": -3251.63
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30010",
-    "reference_number": "L240010",
-    "company_name": "Heath Transport Co",
-    "division": "General",
-    "coverage_type": "Liability",
-    "status": "Closed",
-    "policy_number": "L24A8128",
-    "policy_state": "NY",
-    "cause_code": null,
-    "description": "IV merging onto highway, collided with OV",
-    "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "04/17/2024",
-    "loss_state": "CA",
-    "date_reported": "05/09/2024",
-    "agency": "Grant and Sons",
-    "insured": "Heath Transport Co",
-    "claimants": [
-      "Henry, Lindsay"
-    ],
-    "driver_name": "Carpenter, Troy",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 19221.41,
-      "recovered": 0.0,
-      "total_incurred": 19221.41
-    },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 16197.01,
-      "recovered": 0.0,
-      "total_incurred": 16197.01
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 257.8,
-      "recovered": 0.0,
-      "total_incurred": 257.8
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 26551.17,
-      "total_incurred": -26551.17
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30011",
-    "reference_number": "L240011",
-    "company_name": "Carroll Transport Group",
-    "division": "General",
-    "coverage_type": "Cargo",
-    "status": "Closed",
-    "policy_number": "L24A1925",
-    "policy_state": "MI",
-    "cause_code": null,
-    "description": "Missing items from sealed trailer",
-    "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "04/01/2024",
-    "loss_state": "CA",
-    "date_reported": "04/02/2024",
-    "agency": "Blankenship-Hill",
-    "insured": "Carroll Transport Group",
-    "claimants": [],
-    "driver_name": "Houston, Betty",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 22850.45,
-      "recovered": 0.0,
-      "total_incurred": 22850.45
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 6212.04,
-      "total_incurred": -6212.04
-    },
-    "adjuster_notes": "Teach including daughter draw may tell strategy what single off individual threat fish as write difference hour he court might."
-  },
-  {
-    "incident_number": "#30012",
-    "reference_number": "L240012",
-    "company_name": "Golden Freight Inc",
-    "division": "General",
-    "coverage_type": "Physical Damage",
-    "status": "Open",
-    "policy_number": "L24A9660",
-    "policy_state": "TN",
-    "cause_code": null,
-    "description": "Fuel tank punctured by road debris",
-    "handler": "Claims Adjuster",
-    "unit_number": "2023 VO 743020",
-    "date_of_loss": "02/06/2024",
-    "loss_state": "CA",
-    "date_reported": "03/02/2024",
-    "agency": null,
-    "insured": "Golden Freight Inc",
-    "claimants": [
-      "Taylor, John"
-    ],
-    "driver_name": "Maldonado, Vanessa",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 71957.21,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 71957.21
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 3562.34,
-      "total_incurred": -3562.34
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30013",
-    "reference_number": "L230013",
-    "company_name": "East Gordonside Logistics",
+    "company_name": "Liberty Cargo LLC",
     "division": "General",
     "coverage_type": "Liability",
     "status": "Open",
-    "policy_number": "L23A6654",
-    "policy_state": "AZ",
+    "policy_number": "L23A7903",
+    "policy_state": "AR",
     "cause_code": null,
-    "description": "IV merging onto highway, collided with OV",
+    "description": "IV backing into loading dock, hit parked OV",
     "handler": "Claims Adjuster",
-    "unit_number": "2023 VO 760322",
-    "date_of_loss": "10/22/2023",
-    "loss_state": "AR",
-    "date_reported": "11/09/2023",
-    "agency": null,
-    "insured": "East Gordonside Logistics",
+    "unit_number": null,
+    "date_of_loss": "12/14/2023",
+    "loss_state": "FL",
+    "date_reported": "04/09/2024",
+    "agency": "Hendricks and Sons",
+    "insured": "Liberty Cargo LLC",
     "claimants": [
-      "Davis, Mark"
+      "Terry, James"
     ],
-    "driver_name": "Stephens, Colin",
+    "driver_name": "Sampson, Michele",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -593,10 +314,10 @@
       "total_incurred": 0.0
     },
     "pd": {
-      "reserve": 32408.33,
-      "paid": 8825.75,
+      "reserve": 51020.77,
+      "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 41234.08
+      "total_incurred": 51020.77
     },
     "lae": {
       "reserve": 0.0,
@@ -607,274 +328,84 @@
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 31429.0,
-      "total_incurred": -31429.0
+      "recovered": 19452.41,
+      "total_incurred": -19452.41
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30014",
     "reference_number": "L240014",
-    "company_name": "Merritt Logistics LLC",
+    "company_name": "Patrick Cargo LLC",
     "division": "General",
     "coverage_type": "Liability",
-    "status": "Closed",
-    "policy_number": "L24A1539",
-    "policy_state": "FL",
+    "status": "Open",
+    "policy_number": "L24A7607",
+    "policy_state": "OH",
     "cause_code": null,
-    "description": "OV changed lanes into IV, causing collision",
+    "description": "IV backing, struck parked bridge support",
     "handler": "Claims Adjuster",
-    "unit_number": "2023 MA 242058",
-    "date_of_loss": "12/30/2024",
-    "loss_state": "AZ",
-    "date_reported": "01/04/2025",
-    "agency": null,
-    "insured": "Merritt Logistics LLC",
+    "unit_number": null,
+    "date_of_loss": "08/18/2024",
+    "loss_state": "OH",
+    "date_reported": "08/19/2024",
+    "agency": "Wilson, Olson and Beard",
+    "insured": "Patrick Cargo LLC",
     "claimants": [
-      "Brooks-Baker",
-      "Smith, John",
-      "Buchanan, Heather"
+      "King and Sons",
+      "Powell, Tommy"
     ],
-    "driver_name": "Church, Alexis",
+    "driver_name": "Brown, Shelia",
     "bi": {
+      "reserve": 101573.82,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 101573.82
+    },
+    "pd": {
+      "reserve": 37118.18,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 37118.18
+    },
+    "lae": {
       "reserve": 0.0,
       "paid": 0.0,
       "recovered": 0.0,
       "total_incurred": 0.0
     },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 21223.61,
-      "recovered": 0.0,
-      "total_incurred": 21223.61
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 1512.12,
-      "recovered": 0.0,
-      "total_incurred": 1512.12
-    },
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 11281.78,
-      "total_incurred": -11281.78
+      "recovered": 19860.38,
+      "total_incurred": -19860.38
     },
     "adjuster_notes": null
   },
   {
-    "incident_number": "#30015",
-    "reference_number": "L240015",
-    "company_name": "Liberty Hauling Group",
+    "incident_number": "#30007",
+    "reference_number": "L230007",
+    "company_name": "Holtton Express",
     "division": "General",
     "coverage_type": "Liability",
-    "status": "Closed",
-    "policy_number": "L24A9160",
-    "policy_state": "MO",
+    "status": "Open",
+    "policy_number": "L23A6310",
+    "policy_state": "MI",
     "cause_code": null,
     "description": "Tire blowout caused IV to veer into OV",
     "handler": "Claims Adjuster",
-    "unit_number": "2023 IN 676336",
-    "date_of_loss": "05/15/2024",
-    "loss_state": "MI",
-    "date_reported": "05/23/2024",
-    "agency": "Armstrong-Robles",
-    "insured": "Liberty Hauling Group",
-    "claimants": [
-      "Olson Group",
-      "Becker, David",
-      "Lee, Washington and Dougherty",
-      "Mueller, Cheryl"
-    ],
-    "driver_name": "Wheeler, Jessica",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 45573.31,
-      "recovered": 0.0,
-      "total_incurred": 45573.31
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 1114.41,
-      "recovered": 0.0,
-      "total_incurred": 1114.41
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "adjuster_notes": "Subject involve history myself worker offer himself say yard health with."
-  },
-  {
-    "incident_number": "#30016",
-    "reference_number": "L230016",
-    "company_name": "Liberty Logistics Co",
-    "division": "General",
-    "coverage_type": "Inland Marine",
-    "status": "Closed",
-    "policy_number": "L23A2830",
-    "policy_state": "MI",
-    "cause_code": null,
-    "description": "Equipment damaged during loading",
-    "handler": "Claims Adjuster",
     "unit_number": null,
-    "date_of_loss": "07/24/2023",
-    "loss_state": "OH",
-    "date_reported": "07/30/2023",
-    "agency": null,
-    "insured": "Liberty Logistics Co",
-    "claimants": [],
-    "driver_name": "Martin, Michele",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 0.0,
-      "paid": 15686.95,
-      "recovered": 0.0,
-      "total_incurred": 15686.95
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 1017.33,
-      "recovered": 0.0,
-      "total_incurred": 1017.33
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 6938.84,
-      "total_incurred": -6938.84
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30017",
-    "reference_number": "L240017",
-    "company_name": "Lake Davidside Cargo",
-    "division": "General",
-    "coverage_type": "Liability",
-    "status": "Open",
-    "policy_number": "L24A5810",
-    "policy_state": "FL",
-    "cause_code": null,
-    "description": "IV making wide turn, clipped OV on passenger side",
-    "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "02/22/2024",
-    "loss_state": "AZ",
-    "date_reported": "03/07/2024",
-    "agency": "Cross Inc",
-    "insured": "Lake Davidside Cargo",
-    "claimants": [],
-    "driver_name": "Garza, Denise",
-    "bi": {
-      "reserve": 115878.98,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 115878.98
-    },
-    "pd": {
-      "reserve": 8511.34,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 8511.34
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 8672.94,
-      "total_incurred": -8672.94
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30018",
-    "reference_number": "L240018",
-    "company_name": "Sullivan Freight Inc",
-    "division": "General",
-    "coverage_type": "Liability",
-    "status": "Open",
-    "policy_number": "L24A9231",
-    "policy_state": "PA",
-    "cause_code": null,
-    "description": "IV making right turn, trailer struck OV",
-    "handler": "Claims Adjuster",
-    "unit_number": "2023 VO 750656",
-    "date_of_loss": "04/08/2024",
-    "loss_state": "CA",
-    "date_reported": "04/14/2024",
-    "agency": null,
-    "insured": "Sullivan Freight Inc",
-    "claimants": [
-      "Rocha, Jacob"
-    ],
-    "driver_name": "Jensen, Spencer",
-    "bi": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "pd": {
-      "reserve": 58366.23,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 58366.23
-    },
-    "lae": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 0.0,
-      "total_incurred": 0.0
-    },
-    "ded": {
-      "reserve": 0.0,
-      "paid": 0.0,
-      "recovered": 12205.79,
-      "total_incurred": -12205.79
-    },
-    "adjuster_notes": null
-  },
-  {
-    "incident_number": "#30019",
-    "reference_number": "L240019",
-    "company_name": "Atlas Cargo Co",
-    "division": "General",
-    "coverage_type": "Liability",
-    "status": "Closed",
-    "policy_number": "L24A2735",
-    "policy_state": "AZ",
-    "cause_code": null,
-    "description": "IV making right turn, trailer struck OV",
-    "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "12/20/2024",
+    "date_of_loss": "01/07/2023",
     "loss_state": "AR",
-    "date_reported": "12/23/2024",
+    "date_reported": "01/11/2023",
     "agency": null,
-    "insured": "Atlas Cargo Co",
+    "insured": "Holtton Express",
     "claimants": [
-      "Bell, Erin"
+      "Craig, Jennifer",
+      "Singh, William",
+      "Perez, Andrew"
     ],
-    "driver_name": "Villarreal, Whitney",
+    "driver_name": "Andrews, Elizabeth",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -882,46 +413,284 @@
       "total_incurred": 0.0
     },
     "pd": {
-      "reserve": 0.0,
-      "paid": 46171.14,
+      "reserve": 21994.25,
+      "paid": 4615.25,
       "recovered": 0.0,
-      "total_incurred": 46171.14
+      "total_incurred": 26609.5
     },
     "lae": {
       "reserve": 0.0,
-      "paid": 1215.37,
+      "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 1215.37
+      "total_incurred": 0.0
     },
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 15389.11,
-      "total_incurred": -15389.11
+      "recovered": 28754.3,
+      "total_incurred": -28754.3
     },
     "adjuster_notes": null
   },
   {
-    "incident_number": "#30020",
-    "reference_number": "L230020",
-    "company_name": "Marsh Express LLC",
+    "incident_number": "#30008",
+    "reference_number": "L230008",
+    "company_name": "Titan Express Inc",
     "division": "General",
     "coverage_type": "Cargo",
-    "status": "Closed",
-    "policy_number": "L23A9205",
-    "policy_state": "NY",
+    "status": "Open",
+    "policy_number": "L23A4570",
+    "policy_state": "TN",
     "cause_code": null,
-    "description": "Temperature-controlled cargo spoiled",
+    "description": "Cargo crushed from improper stacking",
+    "handler": "Claims Adjuster",
+    "unit_number": "2023 MA 736511",
+    "date_of_loss": "12/29/2023",
+    "loss_state": "NY",
+    "date_reported": "01/01/2024",
+    "agency": "Johnson LLC",
+    "insured": "Titan Express Inc",
+    "claimants": [],
+    "driver_name": "Ross, Jennifer",
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 21475.55,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 21475.55
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 4699.42,
+      "total_incurred": -4699.42
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30009",
+    "reference_number": "L240009",
+    "company_name": "Aguirre Hauling Group",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Open",
+    "policy_number": "L24A3882",
+    "policy_state": "AR",
+    "cause_code": null,
+    "description": "IV making right turn, trailer struck OV",
     "handler": "Claims Adjuster",
     "unit_number": null,
-    "date_of_loss": "01/11/2023",
-    "loss_state": "GA",
-    "date_reported": "01/18/2023",
-    "agency": null,
-    "insured": "Marsh Express LLC",
+    "date_of_loss": "06/15/2024",
+    "loss_state": "NC",
+    "date_reported": "07/11/2024",
+    "agency": "Miller Inc",
+    "insured": "Aguirre Hauling Group",
     "claimants": [
-      "Lawson, Michael"
+      "Williams, Amy"
     ],
+    "driver_name": "Morton, Ruth",
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 58251.79,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 58251.79
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 22861.96,
+      "total_incurred": -22861.96
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30010",
+    "reference_number": "L230010",
+    "company_name": "Robertsonberg Express",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Closed",
+    "policy_number": "L23A6396",
+    "policy_state": "MI",
+    "cause_code": null,
+    "description": "IV hydroplaned, hit concrete barrier",
+    "handler": "Claims Adjuster",
+    "unit_number": "2024 KE 888257",
+    "date_of_loss": "08/15/2023",
+    "loss_state": "MO",
+    "date_reported": "11/27/2023",
+    "agency": "Gutierrez Group",
+    "insured": "Robertsonberg Express",
+    "claimants": [
+      "Hart and Sons"
+    ],
+    "driver_name": "Moore, Carla",
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 0.0,
+      "paid": 22046.82,
+      "recovered": 0.0,
+      "total_incurred": 22046.82
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 29148.32,
+      "total_incurred": -29148.32
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30011",
+    "reference_number": "L230011",
+    "company_name": "East Robyn Logistics",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Open",
+    "policy_number": "L23A4111",
+    "policy_state": "OK",
+    "cause_code": null,
+    "description": "IV brakes failed, rear-ended OV",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "01/10/2023",
+    "loss_state": "TN",
+    "date_reported": "02/02/2023",
+    "agency": null,
+    "insured": "East Robyn Logistics",
+    "claimants": [
+      "Diaz, Jacqueline",
+      "Vaughan, Marcus",
+      "Cantu, Christopher"
+    ],
+    "driver_name": "Gardner, Fernando",
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 34531.02,
+      "paid": 2816.93,
+      "recovered": 0.0,
+      "total_incurred": 37347.95
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 8077.4,
+      "total_incurred": -8077.4
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30012",
+    "reference_number": "L240012",
+    "company_name": "Titan Freight LLC",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Closed",
+    "policy_number": "L24A3571",
+    "policy_state": "OK",
+    "cause_code": null,
+    "description": "Tire blowout caused IV to veer into OV",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "01/25/2024",
+    "loss_state": "CA",
+    "date_reported": "05/02/2024",
+    "agency": "Gibson Ltd",
+    "insured": "Titan Freight LLC",
+    "claimants": [
+      "Allen, Watts and Jacobs"
+    ],
+    "driver_name": "Novak, Dana",
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 0.0,
+      "paid": 22845.23,
+      "recovered": 0.0,
+      "total_incurred": 22845.23
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 28896.21,
+      "total_incurred": -28896.21
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30013",
+    "reference_number": "L240013",
+    "company_name": "Delta Freight LLC",
+    "division": "General",
+    "coverage_type": "Physical Damage",
+    "status": "Closed",
+    "policy_number": "L24A4310",
+    "policy_state": "FL",
+    "cause_code": null,
+    "description": "Collision with deer caused front-end damage",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "12/03/2024",
+    "loss_state": "PA",
+    "date_reported": "01/31/2025",
+    "agency": null,
+    "insured": "Delta Freight LLC",
+    "claimants": [],
     "driver_name": null,
     "bi": {
       "reserve": 0.0,
@@ -931,9 +700,152 @@
     },
     "pd": {
       "reserve": 0.0,
-      "paid": 35121.91,
+      "paid": 46885.39,
       "recovered": 0.0,
-      "total_incurred": 35121.91
+      "total_incurred": 46885.39
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 1178.59,
+      "recovered": 0.0,
+      "total_incurred": 1178.59
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 2987.58,
+      "total_incurred": -2987.58
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30014",
+    "reference_number": "L240014",
+    "company_name": "Patrick Cargo LLC",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Open",
+    "policy_number": "L24A7607",
+    "policy_state": "OH",
+    "cause_code": null,
+    "description": "IV backing, struck parked bridge support",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "08/18/2024",
+    "loss_state": "OH",
+    "date_reported": "08/19/2024",
+    "agency": "Wilson, Olson and Beard",
+    "insured": "Patrick Cargo LLC",
+    "claimants": [
+      "King and Sons",
+      "Powell, Tommy"
+    ],
+    "driver_name": "Brown, Shelia",
+    "bi": {
+      "reserve": 101573.82,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 101573.82
+    },
+    "pd": {
+      "reserve": 37118.18,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 37118.18
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 19860.38,
+      "total_incurred": -19860.38
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30015",
+    "reference_number": "L230015",
+    "company_name": "Liberty Cargo Inc",
+    "division": "General",
+    "coverage_type": "Physical Damage",
+    "status": "Closed",
+    "policy_number": "L23A3984",
+    "policy_state": "FL",
+    "cause_code": null,
+    "description": "Fuel tank punctured by road debris",
+    "handler": "Claims Adjuster",
+    "unit_number": "2024 VO 133327",
+    "date_of_loss": "03/15/2023",
+    "loss_state": "GA",
+    "date_reported": "04/01/2023",
+    "agency": null,
+    "insured": "Liberty Cargo Inc",
+    "claimants": [],
+    "driver_name": null,
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 0.0,
+      "paid": 50750.5,
+      "recovered": 0.0,
+      "total_incurred": 50750.5
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 3987.14,
+      "total_incurred": -3987.14
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30016",
+    "reference_number": "L240016",
+    "company_name": "Cruz Cargo Group",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Closed",
+    "policy_number": "L24A2806",
+    "policy_state": "AR",
+    "cause_code": null,
+    "description": "IV changing lanes, sideswiped OV",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "01/10/2024",
+    "loss_state": "MI",
+    "date_reported": "03/07/2024",
+    "agency": null,
+    "insured": "Cruz Cargo Group",
+    "claimants": [
+      "Clarke, Jordan and Merritt"
+    ],
+    "driver_name": "Clark, Wendy",
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 0.0,
+      "paid": 48388.08,
+      "recovered": 0.0,
+      "total_incurred": 48388.08
     },
     "lae": {
       "reserve": 0.0,
@@ -946,32 +858,225 @@
       "paid": 0.0,
       "recovered": 0.0,
       "total_incurred": 0.0
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30017",
+    "reference_number": "L230017",
+    "company_name": "Titan Freight LLC",
+    "division": "General",
+    "coverage_type": "Physical Damage",
+    "status": "Open",
+    "policy_number": "L23A9691",
+    "policy_state": "GA",
+    "cause_code": null,
+    "description": "Windshield shattered by road debris",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "06/18/2023",
+    "loss_state": "FL",
+    "date_reported": "06/23/2023",
+    "agency": null,
+    "insured": "Titan Freight LLC",
+    "claimants": [
+      "Hernandez, James"
+    ],
+    "driver_name": null,
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 24396.64,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 24396.64
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 3201.05,
+      "total_incurred": -3201.05
+    },
+    "adjuster_notes": "After cause available charge others standard teach military light."
+  },
+  {
+    "incident_number": "#30018",
+    "reference_number": "L240018",
+    "company_name": "Lynn Hauling LLC",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Closed",
+    "policy_number": "L24A2801",
+    "policy_state": "MI",
+    "cause_code": null,
+    "description": "Trailer door detached, struck adjacent vehicle",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "02/06/2024",
+    "loss_state": "TN",
+    "date_reported": "02/09/2024",
+    "agency": null,
+    "insured": "Lynn Hauling LLC",
+    "claimants": [
+      "Davis-Hernandez",
+      "Brown, Tara",
+      "Padilla, Jennifer"
+    ],
+    "driver_name": "Rodriguez, Stephanie",
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 0.0,
+      "paid": 8789.03,
+      "recovered": 0.0,
+      "total_incurred": 8789.03
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 20943.37,
+      "total_incurred": -20943.37
+    },
+    "adjuster_notes": null
+  },
+  {
+    "incident_number": "#30019",
+    "reference_number": "L230019",
+    "company_name": "Collins Hauling LLC",
+    "division": "General",
+    "coverage_type": "Inland Marine",
+    "status": "Open",
+    "policy_number": "L23A1488",
+    "policy_state": "AR",
+    "cause_code": null,
+    "description": "Insured transporting vehicle was damaged",
+    "handler": "Claims Adjuster",
+    "unit_number": null,
+    "date_of_loss": "11/14/2023",
+    "loss_state": "IL",
+    "date_reported": "11/20/2023",
+    "agency": null,
+    "insured": "Collins Hauling LLC",
+    "claimants": [],
+    "driver_name": null,
+    "bi": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "pd": {
+      "reserve": 58755.08,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 58755.08
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 1442.49,
+      "total_incurred": -1442.49
+    },
+    "adjuster_notes": "Majority indicate pattern clear government design middle indeed different standard happen voice year long who require leg."
+  },
+  {
+    "incident_number": "#30020",
+    "reference_number": "L230020",
+    "company_name": "North Scottchester Transport",
+    "division": "General",
+    "coverage_type": "Liability",
+    "status": "Open",
+    "policy_number": "L23A5341",
+    "policy_state": "PA",
+    "cause_code": null,
+    "description": "OV changed lanes into IV, causing collision",
+    "handler": "Claims Adjuster",
+    "unit_number": "2023 KE 426736",
+    "date_of_loss": "10/21/2023",
+    "loss_state": "TX",
+    "date_reported": "10/28/2023",
+    "agency": null,
+    "insured": "North Scottchester Transport",
+    "claimants": [
+      "Larson, Alexandra",
+      "Jones, Danielle",
+      "Fields, Amber"
+    ],
+    "driver_name": "Graham, John",
+    "bi": {
+      "reserve": 85069.45,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 85069.45
+    },
+    "pd": {
+      "reserve": 29896.29,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 29896.29
+    },
+    "lae": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 0.0,
+      "total_incurred": 0.0
+    },
+    "ded": {
+      "reserve": 0.0,
+      "paid": 0.0,
+      "recovered": 9583.64,
+      "total_incurred": -9583.64
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30021",
     "reference_number": "L230021",
-    "company_name": "Lake Hannahville Logistics",
+    "company_name": "Armstrong Logistics LLC",
     "division": "General",
-    "coverage_type": "Liability",
-    "status": "Closed",
-    "policy_number": "L23A2105",
-    "policy_state": "MO",
+    "coverage_type": "Cargo",
+    "status": "Open",
+    "policy_number": "L23A3051",
+    "policy_state": "OH",
     "cause_code": null,
-    "description": "Tire blowout caused IV to veer into OV",
+    "description": "Shortage discovered at delivery",
     "handler": "Claims Adjuster",
-    "unit_number": "2024 IN 131665",
-    "date_of_loss": "05/06/2023",
-    "loss_state": "PA",
-    "date_reported": "05/09/2023",
-    "agency": null,
-    "insured": "Lake Hannahville Logistics",
+    "unit_number": null,
+    "date_of_loss": "07/14/2023",
+    "loss_state": "TN",
+    "date_reported": "07/16/2023",
+    "agency": "White, Dean and Greene",
+    "insured": "Armstrong Logistics LLC",
     "claimants": [
-      "Peterson, Malik",
-      "Gardner, Olivia"
+      "Mcintosh, Ricky"
     ],
-    "driver_name": "Hodges, Larry",
+    "driver_name": "Smith, Vickie",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -979,45 +1084,47 @@
       "total_incurred": 0.0
     },
     "pd": {
-      "reserve": 0.0,
-      "paid": 17174.23,
+      "reserve": 32782.72,
+      "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 17174.23
+      "total_incurred": 32782.72
     },
     "lae": {
       "reserve": 0.0,
-      "paid": 676.31,
+      "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 676.31
+      "total_incurred": 0.0
     },
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 14211.86,
-      "total_incurred": -14211.86
+      "recovered": 3840.83,
+      "total_incurred": -3840.83
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30022",
     "reference_number": "L230022",
-    "company_name": "Summit Logistics Group",
+    "company_name": "Farmerfurt Hauling",
     "division": "General",
-    "coverage_type": "Physical Damage",
+    "coverage_type": "Liability",
     "status": "Closed",
-    "policy_number": "L23A1322",
-    "policy_state": "OH",
+    "policy_number": "L23A3821",
+    "policy_state": "PA",
     "cause_code": null,
-    "description": "Windshield shattered by road debris",
+    "description": "IV hydroplaned, hit concrete barrier",
     "handler": "Claims Adjuster",
-    "unit_number": "2023 KE 923832",
-    "date_of_loss": "08/23/2023",
-    "loss_state": "GA",
-    "date_reported": "08/29/2023",
-    "agency": "Torres, Mills and Church",
-    "insured": "Summit Logistics Group",
-    "claimants": [],
-    "driver_name": "Johnson, Antonio",
+    "unit_number": null,
+    "date_of_loss": "01/20/2023",
+    "loss_state": "MI",
+    "date_reported": "02/08/2023",
+    "agency": "Spears-Lawson",
+    "insured": "Farmerfurt Hauling",
+    "claimants": [
+      "Clark, Steven"
+    ],
+    "driver_name": "Ballard, Ashley",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -1026,9 +1133,9 @@
     },
     "pd": {
       "reserve": 0.0,
-      "paid": 50221.46,
+      "paid": 47948.87,
       "recovered": 0.0,
-      "total_incurred": 50221.46
+      "total_incurred": 47948.87
     },
     "lae": {
       "reserve": 0.0,
@@ -1039,33 +1146,31 @@
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 4172.16,
-      "total_incurred": -4172.16
+      "recovered": 31850.02,
+      "total_incurred": -31850.02
     },
     "adjuster_notes": null
   },
   {
     "incident_number": "#30023",
-    "reference_number": "L230023",
-    "company_name": "Eagle Express Inc",
+    "reference_number": "L240023",
+    "company_name": "Dickson Express Co",
     "division": "General",
     "coverage_type": "Liability",
-    "status": "Closed",
-    "policy_number": "L23A2769",
-    "policy_state": "PA",
+    "status": "Open",
+    "policy_number": "L24A8225",
+    "policy_state": "TX",
     "cause_code": null,
-    "description": "IV lost control on wet pavement, struck guardrail",
+    "description": "IV changing lanes, sideswiped OV",
     "handler": "Claims Adjuster",
-    "unit_number": "2023 KE 430584",
-    "date_of_loss": "12/04/2023",
-    "loss_state": "MO",
-    "date_reported": "12/09/2023",
-    "agency": "Oneill, Hammond and Vasquez",
-    "insured": "Eagle Express Inc",
-    "claimants": [
-      "Harris, Kevin"
-    ],
-    "driver_name": "Livingston, Vickie",
+    "unit_number": "2024 IN 681321",
+    "date_of_loss": "11/18/2024",
+    "loss_state": "NY",
+    "date_reported": "11/23/2024",
+    "agency": null,
+    "insured": "Dickson Express Co",
+    "claimants": [],
+    "driver_name": "Montes, Jennifer",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -1073,10 +1178,10 @@
       "total_incurred": 0.0
     },
     "pd": {
-      "reserve": 0.0,
-      "paid": 48758.9,
+      "reserve": 38379.64,
+      "paid": 6682.71,
       "recovered": 0.0,
-      "total_incurred": 48758.9
+      "total_incurred": 45062.35
     },
     "lae": {
       "reserve": 0.0,
@@ -1087,31 +1192,33 @@
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 16011.1,
-      "total_incurred": -16011.1
+      "recovered": 18179.41,
+      "total_incurred": -18179.41
     },
-    "adjuster_notes": "Nor opportunity yet possible number official professor parent town at toward argue recently reflect become."
+    "adjuster_notes": "Human mouth value Mrs technology election himself full reason police upon easy."
   },
   {
     "incident_number": "#30024",
-    "reference_number": "L230024",
-    "company_name": "Fowler Transport Co",
+    "reference_number": "L240024",
+    "company_name": "Reneefort Freight",
     "division": "General",
-    "coverage_type": "Inland Marine",
+    "coverage_type": "Liability",
     "status": "Open",
-    "policy_number": "L23A7097",
-    "policy_state": "AZ",
+    "policy_number": "L24A3891",
+    "policy_state": "NY",
     "cause_code": null,
-    "description": "Cargo damaged during transport - water intrusion",
+    "description": "IV making wide turn, clipped OV on passenger side",
     "handler": "Claims Adjuster",
-    "unit_number": "2024 FR 246736",
-    "date_of_loss": "05/27/2023",
-    "loss_state": "AZ",
-    "date_reported": "05/28/2023",
+    "unit_number": null,
+    "date_of_loss": "06/30/2024",
+    "loss_state": "GA",
+    "date_reported": "07/06/2024",
     "agency": null,
-    "insured": "Fowler Transport Co",
-    "claimants": [],
-    "driver_name": null,
+    "insured": "Reneefort Freight",
+    "claimants": [
+      "Jennings, Curtis"
+    ],
+    "driver_name": "Rodriguez, Joseph",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -1119,10 +1226,10 @@
       "total_incurred": 0.0
     },
     "pd": {
-      "reserve": 57331.23,
+      "reserve": 12830.79,
       "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 57331.23
+      "total_incurred": 12830.79
     },
     "lae": {
       "reserve": 0.0,
@@ -1140,24 +1247,26 @@
   },
   {
     "incident_number": "#30025",
-    "reference_number": "L230025",
-    "company_name": "Liberty Logistics LLC",
+    "reference_number": "L240025",
+    "company_name": "Contreras Hauling Co",
     "division": "General",
     "coverage_type": "Inland Marine",
     "status": "Closed",
-    "policy_number": "L23A7087",
-    "policy_state": "GA",
+    "policy_number": "L24A3259",
+    "policy_state": "AZ",
     "cause_code": null,
-    "description": "Cargo stolen from locked trailer overnight",
+    "description": "Cargo damaged during transport - water intrusion",
     "handler": "Claims Adjuster",
-    "unit_number": null,
-    "date_of_loss": "05/12/2023",
-    "loss_state": "CA",
-    "date_reported": "05/19/2023",
+    "unit_number": "2024 IN 659743",
+    "date_of_loss": "02/20/2024",
+    "loss_state": "GA",
+    "date_reported": "02/25/2024",
     "agency": null,
-    "insured": "Liberty Logistics LLC",
-    "claimants": [],
-    "driver_name": "Morales, Jason",
+    "insured": "Contreras Hauling Co",
+    "claimants": [
+      "Hernandez, Daniel"
+    ],
+    "driver_name": "Barber, Alicia",
     "bi": {
       "reserve": 0.0,
       "paid": 0.0,
@@ -1166,21 +1275,21 @@
     },
     "pd": {
       "reserve": 0.0,
-      "paid": 18910.7,
+      "paid": 15762.5,
       "recovered": 0.0,
-      "total_incurred": 18910.7
+      "total_incurred": 15762.5
     },
     "lae": {
       "reserve": 0.0,
-      "paid": 1305.6,
+      "paid": 0.0,
       "recovered": 0.0,
-      "total_incurred": 1305.6
+      "total_incurred": 0.0
     },
     "ded": {
       "reserve": 0.0,
       "paid": 0.0,
-      "recovered": 5544.88,
-      "total_incurred": -5544.88
+      "recovered": 0.0,
+      "total_incurred": 0.0
     },
     "adjuster_notes": null
   }

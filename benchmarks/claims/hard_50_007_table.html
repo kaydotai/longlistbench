@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Richardborough Logistics - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .page-break {
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #ccc;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+            .content-wrapper {{
+                column-count: 2;
+                column-gap: 40px;
+                column-rule: 1px solid #ccc;
+                column-fill: auto;
+            }}
+            .content-wrapper .incident-section {{
+                break-inside: avoid;
+                page-break-inside: avoid;
+                -webkit-column-break-inside: avoid;
+            }}
+        
+    </style>
+</head>
+<body>
+<div class="content-wrapper">
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">National Interstate</div>
+            <div class="header-line">6339 Fowler Lodge, Jamesville, NM 23161</div>
+            <div class="header-line">Phone: 275-804-2068x855</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> Richardborough Logistics, Acct. # A0281280</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 07/17/2024, 09:44 AM</div>
+    </div>
+</div>
+<div style="margin: 30px 0; padding: 15px; background-color: #f5f5f5; border: 1px solid #ccc;">
+    <h3>Company Directory (Reference Only)</h3>
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Employee</th>
+                <th style="text-align: left;">Department</th>
+                <th style="text-align: left;">Email</th>
+                <th style="text-align: left;">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Adam Gonzalez</td><td>Sports administrator</td><td>stevenssarah@example.net</td><td>001-910-576-7816x9737</td></tr>
+            <tr><td>Lisa Cameron</td><td>Glass blower/designe</td><td>nguyencharles@example.net</td><td>(546)537-9547x195</td></tr>
+            <tr><td>Jennifer Franklin</td><td>Acupuncturist</td><td>arichardson@example.org</td><td>8384303616</td></tr>
+            <tr><td>Nicholas Clark</td><td>Best boy</td><td>connie58@example.org</td><td>912.254.2118x8117</td></tr>
+            <tr><td>Janice Oneal</td><td>Economist</td><td>mayerrebecca@example.org</td><td>4563525045</td></tr>
+            <tr><td>Stephen Barker</td><td>Counselling psycholo</td><td>thomasknapp@example.net</td><td>(845)901-7960x905</td></tr>
+            <tr><td>Loretta Ramirez</td><td>Manufacturing engine</td><td>danielwilliams@example.com</td><td>389-985-0673</td></tr>
+            <tr><td>Joseph Contreras</td><td>Recycling officer</td><td>jenniferjacobs@example.com</td><td>680-201-6566x5502</td></tr>
+            <tr><td>Justin Collier</td><td>Hydrographic surveyo</td><td>floresjackie@example.org</td><td>+1-398-832-7996x519</td></tr>
+            <tr><td>Susan Adams</td><td>Scientist, physiolog</td><td>jacobsmith@example.net</td><td>(898)939-9873x348</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30001</td>
+            <td>L240001</td>
+            <td>Richardborough Logistics</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A4210</td>
+            <td>03/08/2024</td>
+            <td>NC</td>
+            <td>Ingram, Troy</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV lost control on wet pavement, struck concrete barrier</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$45,434.02</td>
+            <td style="text-align: right;">$16,930.06</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L230002</td>
+            <td>Summit Express Group</td>
+            <td>Cargo</td>
+            <td>Open</td>
+            <td>L23A7129</td>
+            <td>02/18/2023</td>
+            <td>AR</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Cargo contamination during transport</td>
+            <td style="text-align: right;">$28,858.54</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$28,858.54</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L240003</td>
+            <td>Harmon Freight Group</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A4151</td>
+            <td>02/27/2024</td>
+            <td>NC</td>
+            <td>Garcia, Ryan</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing, struck parked parked OV</td>
+            <td style="text-align: right;">$55,233.04</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$49,953.52</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L240004</td>
+            <td>Summit Hauling Group</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A5599</td>
+            <td>04/11/2024</td>
+            <td>FL</td>
+            <td>Johnston, Corey</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</td>
+            <td style="text-align: right;">$23,910.06</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">($6,036.81)</td>
+        </tr>
+        <tr>
+            <td>#30005</td>
+            <td>L240005</td>
+            <td>Liberty Transport LLC</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L24A3300</td>
+            <td>05/01/2024</td>
+            <td>NY</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Load shift caused cargo damage</td>
+            <td style="text-align: right;">$49,631.17</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$39,833.68</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L240006</td>
+            <td>Smith Express LLC</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A1645</td>
+            <td>01/29/2024</td>
+            <td>OH</td>
+            <td>Smith, Jessica</td>
+            <td style="max-width: 200px; white-space: pre-line;">Collision with deer caused front-end damage</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$17,329.31</td>
+            <td style="text-align: right;">$13,687.23</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L240007</td>
+            <td>Pioneer Transport Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A5741</td>
+            <td>06/26/2024</td>
+            <td>CA</td>
+            <td>Bolton, Jason</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV lost control on wet pavement, struck dock equipment</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$8,500.26</td>
+            <td style="text-align: right;">($9,202.99)</td>
+        </tr>
+        <tr>
+            <td>#30020</td>
+            <td>L230020</td>
+            <td>Dodson Express LLC</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L23A6177</td>
+            <td>05/30/2023</td>
+            <td>AR</td>
+            <td>Mendoza, Mary</td>
+            <td style="max-width: 200px; white-space: pre-line;">Refrigeration unit failure - spoiled goods</td>
+            <td style="text-align: right;">$17,388.93</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$17,388.93</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L240008</td>
+            <td>North Claudia Freight</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L24A5410</td>
+            <td>12/23/2024</td>
+            <td>TX</td>
+            <td>Hawkins, Lisa</td>
+            <td style="max-width: 200px; white-space: pre-line;">Windshield shattered by road debris</td>
+            <td style="text-align: right;">$48,963.87</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$45,545.16</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L240009</td>
+            <td>Conniestad Logistics</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A2690</td>
+            <td>09/12/2024</td>
+            <td>GA</td>
+            <td>Schmidt, Marie</td>
+            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV to veer into OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$16,332.81</td>
+            <td style="text-align: right;">($5,500.87)</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L240010</td>
+            <td>Pioneer Express Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A5595</td>
+            <td>05/11/2024</td>
+            <td>NY</td>
+            <td>Randolph, Debra</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing into loading dock, hit dock equipment</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$5,173.17</td>
+            <td style="text-align: right;">($11,500.64)</td>
+        </tr>
+        <tr>
+            <td>#30011</td>
+            <td>L240011</td>
+            <td>Horizon Hauling Group</td>
+            <td>Cargo</td>
+            <td>Closed</td>
+            <td>L24A7890</td>
+            <td>01/28/2024</td>
+            <td>NC</td>
+            <td>Bullock, Rachel</td>
+            <td style="max-width: 200px; white-space: pre-line;">Water damage to freight</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$23,304.25</td>
+            <td style="text-align: right;">$23,304.25</td>
+        </tr>
+        <tr>
+            <td>#30012</td>
+            <td>L230012</td>
+            <td>Brown Cargo LLC</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L23A4667</td>
+            <td>06/10/2023</td>
+            <td>MI</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Windshield shattered by road debris</td>
+            <td style="text-align: right;">$64,852.91</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$63,408.64</td>
+        </tr>
+        <tr>
+            <td>#30025</td>
+            <td>L240025</td>
+            <td>Evanschester Logistics</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A4380</td>
+            <td>08/31/2024</td>
+            <td>PA</td>
+            <td>Brown, Cynthia</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV lost control on wet pavement, struck concrete barrier</td>
+            <td style="text-align: right;">$176,773.21</td>
+            <td style="text-align: right;">$10,145.71</td>
+            <td style="text-align: right;">$165,246.10</td>
+        </tr>
+        <tr>
+            <td>#30013</td>
+            <td>L230013</td>
+            <td>Summit Cargo Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A9674</td>
+            <td>09/04/2023</td>
+            <td>PA</td>
+            <td>Garcia, John</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="text-align: right;">$10,663.39</td>
+            <td style="text-align: right;">$1,694.18</td>
+            <td style="text-align: right;">($12,329.48)</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30014</td>
+            <td>L230014</td>
+            <td>Lake Davidmouth Express</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A5016</td>
+            <td>10/03/2023</td>
+            <td>AR</td>
+            <td>Vega, Robert</td>
+            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV to veer into OV</td>
+            <td style="text-align: right;">$21,734.39</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$14,641.24</td>
+        </tr>
+        <tr>
+            <td>#30015</td>
+            <td>L230015</td>
+            <td>Lake Patriciaville Hauling</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L23A9044</td>
+            <td>08/17/2023</td>
+            <td>MI</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Collision with deer caused front-end damage</td>
+            <td style="text-align: right;">$37,041.76</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$35,251.97</td>
+        </tr>
+        <tr>
+            <td>#30016</td>
+            <td>L240016</td>
+            <td>Summit Express Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A7997</td>
+            <td>06/11/2024</td>
+            <td>PA</td>
+            <td>Roberts, Brian</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes into IV, causing collision</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$19,253.71</td>
+            <td style="text-align: right;">$12,676.02</td>
+        </tr>
+        <tr>
+            <td>#30017</td>
+            <td>L230017</td>
+            <td>West Dillonberg Hauling</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A9669</td>
+            <td>02/09/2023</td>
+            <td>OK</td>
+            <td>Robinson, Tammy</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="text-align: right;">$12,137.28</td>
+            <td style="text-align: right;">$1,378.93</td>
+            <td style="text-align: right;">$724.03</td>
+        </tr>
+        <tr>
+            <td>#30018</td>
+            <td>L240018</td>
+            <td>Horizon Logistics Inc</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L24A9505</td>
+            <td>03/07/2024</td>
+            <td>GA</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Load shift caused cargo damage</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$27,340.00</td>
+            <td style="text-align: right;">$25,287.51</td>
+        </tr>
+        <tr>
+            <td>#30019</td>
+            <td>L230019</td>
+            <td>New Randallview Transport</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A1732</td>
+            <td>10/08/2023</td>
+            <td>NY</td>
+            <td>Davis, David</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing into loading dock, hit guardrail</td>
+            <td style="text-align: right;">$17,963.01</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">($12,583.40)</td>
+        </tr>
+        <tr>
+            <td>#30036</td>
+            <td>L230036</td>
+            <td>Little Hauling Inc</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L23A2126</td>
+            <td>04/27/2023</td>
+            <td>GA</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Trailer damaged in loading dock collision</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$77,721.41</td>
+            <td style="text-align: right;">$73,117.00</td>
+        </tr>
+        <tr>
+            <td>#30020</td>
+            <td>L230020</td>
+            <td>Dodson Express LLC</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L23A6177</td>
+            <td>05/30/2023</td>
+            <td>AR</td>
+            <td>Mendoza, Mary</td>
+            <td style="max-width: 200px; white-space: pre-line;">Refrigeration unit failure - spoiled goods</td>
+            <td style="text-align: right;">$17,388.93</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$17,388.93</td>
+        </tr>
+        <tr>
+            <td>#30021</td>
+            <td>L240021</td>
+            <td>Thomaston Freight</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A1208</td>
+            <td>08/20/2024</td>
+            <td>CA</td>
+            <td>Hartman, Bryan</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing into loading dock, hit parked OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$27,131.26</td>
+            <td style="text-align: right;">($4,155.71)</td>
+        </tr>
+        <tr>
+            <td>#30022</td>
+            <td>L240022</td>
+            <td>West Amyfort Hauling</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A6581</td>
+            <td>09/30/2024</td>
+            <td>OK</td>
+            <td>Curry, Jeffrey</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</td>
+            <td style="text-align: right;">$20,767.13</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">($10,284.94)</td>
+        </tr>
+        <tr>
+            <td>#30023</td>
+            <td>L240023</td>
+            <td>Titan Cargo Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A9250</td>
+            <td>02/21/2024</td>
+            <td>AR</td>
+            <td>Butler, Brittany</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV ran stop sign, struck IV broadside</td>
+            <td style="text-align: right;">$36,266.17</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$25,338.13</td>
+        </tr>
+        <tr>
+            <td>#30024</td>
+            <td>L240024</td>
+            <td>Atlas Transport Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A6494</td>
+            <td>08/08/2024</td>
+            <td>NY</td>
+            <td>Ramirez, Mary</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV merging onto highway, collided with OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$41,383.12</td>
+            <td style="text-align: right;">$22,089.56</td>
+        </tr>
+        <tr>
+            <td>#30025</td>
+            <td>L240025</td>
+            <td>Evanschester Logistics</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A4380</td>
+            <td>08/31/2024</td>
+            <td>PA</td>
+            <td>Brown, Cynthia</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV lost control on wet pavement, struck concrete barrier</td>
+            <td style="text-align: right;">$176,773.21</td>
+            <td style="text-align: right;">$10,145.71</td>
+            <td style="text-align: right;">$165,246.10</td>
+        </tr>
+        <tr>
+            <td>#30026</td>
+            <td>L240026</td>
+            <td>Martinez Cargo Group</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L24A2424</td>
+            <td>09/13/2024</td>
+            <td>NC</td>
+            <td>Carroll, Robert</td>
+            <td style="max-width: 200px; white-space: pre-line;">Equipment damaged during loading</td>
+            <td style="text-align: right;">$29,176.10</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$29,176.10</td>
+        </tr>
+        <tr>
+            <td>#30027</td>
+            <td>L240027</td>
+            <td>Gaines Hauling Group</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A2410</td>
+            <td>03/12/2024</td>
+            <td>FL</td>
+            <td>Munoz, Christina</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes into IV, causing collision</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$26,168.44</td>
+            <td style="text-align: right;">$5,430.25</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30028</td>
+            <td>L230028</td>
+            <td>Nixon Transport Co</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L23A9231</td>
+            <td>08/14/2023</td>
+            <td>TN</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Equipment damaged during loading</td>
+            <td style="text-align: right;">$9,269.94</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$9,269.94</td>
+        </tr>
+        <tr>
+            <td>#30024</td>
+            <td>L240024</td>
+            <td>Atlas Transport Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A6494</td>
+            <td>08/08/2024</td>
+            <td>NY</td>
+            <td>Ramirez, Mary</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV merging onto highway, collided with OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$41,383.12</td>
+            <td style="text-align: right;">$22,089.56</td>
+        </tr>
+        <tr>
+            <td>#30029</td>
+            <td>L240029</td>
+            <td>Traciborough Express</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A2529</td>
+            <td>09/14/2024</td>
+            <td>NY</td>
+            <td>Huffman, Beth</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</td>
+            <td style="text-align: right;">$50,241.20</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$42,238.20</td>
+        </tr>
+        <tr>
+            <td>#30030</td>
+            <td>L230030</td>
+            <td>Curry Hauling Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A6727</td>
+            <td>08/31/2023</td>
+            <td>TN</td>
+            <td>Elliott, Jeffrey</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV at traffic light</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$40,178.27</td>
+            <td style="text-align: right;">$33,851.27</td>
+        </tr>
+        <tr>
+            <td>#30031</td>
+            <td>L230031</td>
+            <td>Silva Hauling LLC</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L23A4317</td>
+            <td>03/22/2023</td>
+            <td>CA</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Transmission failure during transport</td>
+            <td style="text-align: right;">$92,377.32</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$88,691.53</td>
+        </tr>
+        <tr>
+            <td>#30032</td>
+            <td>L230032</td>
+            <td>Pioneer Cargo Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A3316</td>
+            <td>10/11/2023</td>
+            <td>TX</td>
+            <td>Wilcox, Lynn</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</td>
+            <td style="text-align: right;">$33,902.69</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$33,902.69</td>
+        </tr>
+        <tr>
+            <td>#30033</td>
+            <td>L240033</td>
+            <td>Douglasport Freight</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A3636</td>
+            <td>02/16/2024</td>
+            <td>GA</td>
+            <td>Anderson, Ebony</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV brakes failed, rear-ended OV</td>
+            <td style="text-align: right;">$13,070.33</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">($14,213.79)</td>
+        </tr>
+        <tr>
+            <td>#30034</td>
+            <td>L240034</td>
+            <td>Youngfurt Logistics</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A1392</td>
+            <td>07/08/2024</td>
+            <td>FL</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rollover on icy highway.<br>Total loss.</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$40,241.55</td>
+            <td style="text-align: right;">$35,370.94</td>
+        </tr>
+        <tr>
+            <td>#30035</td>
+            <td>L240035</td>
+            <td>Delta Transport Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A4143</td>
+            <td>09/24/2024</td>
+            <td>OH</td>
+            <td>Duran, Andrew</td>
+            <td style="max-width: 200px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$46,092.56</td>
+            <td style="text-align: right;">$37,513.18</td>
+        </tr>
+        <tr>
+            <td>#30036</td>
+            <td>L230036</td>
+            <td>Little Hauling Inc</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L23A2126</td>
+            <td>04/27/2023</td>
+            <td>GA</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Trailer damaged in loading dock collision</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$77,721.41</td>
+            <td style="text-align: right;">$73,117.00</td>
+        </tr>
+        <tr>
+            <td>#30037</td>
+            <td>L230037</td>
+            <td>Rice Hauling Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A7285</td>
+            <td>04/23/2023</td>
+            <td>OK</td>
+            <td>Miller, Jeffrey</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing, struck parked parked OV</td>
+            <td style="text-align: right;">$34,964.43</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$23,355.88</td>
+        </tr>
+        <tr>
+            <td>#30038</td>
+            <td>L230038</td>
+            <td>Horizon Freight Inc</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L23A2949</td>
+            <td>04/12/2023</td>
+            <td>MI</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling tree branch during storm</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$29,043.98</td>
+            <td style="text-align: right;">$26,292.14</td>
+        </tr>
+        <tr>
+            <td>#30039</td>
+            <td>L230039</td>
+            <td>Lake Danielland Freight</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A1080</td>
+            <td>12/15/2023</td>
+            <td>FL</td>
+            <td>Cardenas, Edward</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV changing lanes, sideswiped OV</td>
+            <td style="text-align: right;">$45,360.73</td>
+            <td style="text-align: right;">$4,419.75</td>
+            <td style="text-align: right;">$27,103.44</td>
+        </tr>
+        <tr>
+            <td>#30040</td>
+            <td>L230040</td>
+            <td>Delta Logistics Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A1814</td>
+            <td>11/02/2023</td>
+            <td>MO</td>
+            <td>Johnston, Anna</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV at traffic light</td>
+            <td style="text-align: right;">$52,035.68</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$44,134.82</td>
+        </tr>
+        <tr>
+            <td>#30041</td>
+            <td>L230041</td>
+            <td>Atlas Logistics LLC</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L23A6101</td>
+            <td>10/01/2023</td>
+            <td>IL</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Cargo stolen from locked trailer overnight</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$25,129.61</td>
+            <td style="text-align: right;">$25,129.61</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30042</td>
+            <td>L230042</td>
+            <td>Atlas Hauling Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A8933</td>
+            <td>06/02/2023</td>
+            <td>AR</td>
+            <td>Montgomery, Melissa</td>
+            <td style="max-width: 200px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</td>
+            <td style="text-align: right;">$28,001.90</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$13,081.66</td>
+        </tr>
+        <tr>
+            <td>#30043</td>
+            <td>L230043</td>
+            <td>Summit Express Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A1228</td>
+            <td>09/03/2023</td>
+            <td>NY</td>
+            <td>Martin, Sheila</td>
+            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV to veer into OV</td>
+            <td style="text-align: right;">$130,427.69</td>
+            <td style="text-align: right;">$3,299.37</td>
+            <td style="text-align: right;">$124,455.77</td>
+        </tr>
+        <tr>
+            <td>#30044</td>
+            <td>L230044</td>
+            <td>Lake Davidland Cargo</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A8806</td>
+            <td>05/29/2023</td>
+            <td>NY</td>
+            <td>Cain, Russell</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV ran stop sign, struck IV broadside</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$7,331.10</td>
+            <td style="text-align: right;">$7,331.10</td>
+        </tr>
+        <tr>
+            <td>#30045</td>
+            <td>L240045</td>
+            <td>Jordanberg Hauling</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A8594</td>
+            <td>11/17/2024</td>
+            <td>GA</td>
+            <td>Diaz, Lisa</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$45,329.49</td>
+            <td style="text-align: right;">$45,329.49</td>
+        </tr>
+        <tr>
+            <td>#30046</td>
+            <td>L230046</td>
+            <td>Horizon Freight Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A1637</td>
+            <td>07/23/2023</td>
+            <td>IL</td>
+            <td>Kidd, Alan</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$40,369.34</td>
+            <td style="text-align: right;">$11,420.60</td>
+        </tr>
+        <tr>
+            <td>#30047</td>
+            <td>L240047</td>
+            <td>Potter Hauling LLC</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A3415</td>
+            <td>03/17/2024</td>
+            <td>FL</td>
+            <td>Wilson, Dustin</td>
+            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV to veer into OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$33,346.63</td>
+            <td style="text-align: right;">$24,671.73</td>
+        </tr>
+        <tr>
+            <td>#30039</td>
+            <td>L230039</td>
+            <td>Lake Danielland Freight</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A1080</td>
+            <td>12/15/2023</td>
+            <td>FL</td>
+            <td>Cardenas, Edward</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV changing lanes, sideswiped OV</td>
+            <td style="text-align: right;">$45,360.73</td>
+            <td style="text-align: right;">$4,419.75</td>
+            <td style="text-align: right;">$27,103.44</td>
+        </tr>
+        <tr>
+            <td>#30048</td>
+            <td>L230048</td>
+            <td>Robertfort Hauling</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A2768</td>
+            <td>05/24/2023</td>
+            <td>AR</td>
+            <td>Cobb, Tanya</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV backing, struck parked guardrail</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$43,044.35</td>
+            <td style="text-align: right;">$31,897.60</td>
+        </tr>
+        <tr>
+            <td>#30049</td>
+            <td>L230049</td>
+            <td>Parker Hauling Group</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A7728</td>
+            <td>01/04/2023</td>
+            <td>MO</td>
+            <td>Mcdaniel, Tracy</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV changing lanes, sideswiped OV</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$43,017.66</td>
+            <td style="text-align: right;">$35,304.51</td>
+        </tr>
+        <tr>
+            <td>#30050</td>
+            <td>L230050</td>
+            <td>Pioneer Express Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A9444</td>
+            <td>10/13/2023</td>
+            <td>NC</td>
+            <td>Roberts, Dillon</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes into IV, causing collision</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$62,140.67</td>
+            <td style="text-align: right;">$57,076.72</td>
+        </tr>
+        </tbody>
+    </table>
+</div><div style="margin: 30px 0; padding: 15px; background-color: #f5f5f5; border: 1px solid #ccc;">
+    <h3>Company Directory (Reference Only)</h3>
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Employee</th>
+                <th style="text-align: left;">Department</th>
+                <th style="text-align: left;">Email</th>
+                <th style="text-align: left;">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Tiffany Campbell</td><td>Animal nutritionist</td><td>othomas@example.org</td><td>(711)672-0647</td></tr>
+            <tr><td>Joshua Barker</td><td>Public librarian</td><td>christinegillespie@example.net</td><td>+1-525-303-2669</td></tr>
+            <tr><td>Gabrielle Gonzales PhD</td><td>Loss adjuster, chart</td><td>ramirezmary@example.net</td><td>862-564-7604x5476</td></tr>
+            <tr><td>Robert Murray</td><td>Museum education off</td><td>ofisher@example.com</td><td>001-769-519-8489x69904</td></tr>
+            <tr><td>Lauren Mccoy</td><td>Psychologist, sport </td><td>rodriguezdaniel@example.org</td><td>303-739-1382x4190</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$1,380,535.74</td>
+                <td>$944,944.90</td>
+                <td>$621,033.50</td>
+                <td>$1,704,447.14</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 55</div>
+</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>
