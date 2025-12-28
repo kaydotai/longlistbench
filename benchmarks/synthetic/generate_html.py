@@ -455,7 +455,8 @@ class LossRunHTMLGenerator:
         total_paid = bi.get("paid", 0) + pd.get("paid", 0) + lae.get("paid", 0) + ded.get("paid", 0)
         total_incurred = bi.get("total_incurred", 0) + pd.get("total_incurred", 0) + lae.get("total_incurred", 0) + ded.get("total_incurred", 0)
         
-        incident_cell = f"<td{rowspan}>{inc_num}</td>" if not omit_merged_cells else ""
+        # Never omit incident_cell - it's a primary identifier that must always be present
+        incident_cell = f"<td>{inc_num}</td>"
         coverage_cell = f"<td{rowspan}>{coverage}</td>" if not omit_merged_cells else ""
         
         return f"""

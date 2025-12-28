@@ -1,9 +1,8 @@
 # Page 1
 
-Continental Casualty			Loss Run - Detailed Format
+Continental Casualty                   Loss Run - Detailed Format
 9203 Cochran Mission, North Brianstad, ND 12763
 Phone: 001-554-681-8516
-
 Account: Cochran Cargo Co, Acct. # A0198096
 Policy Period: 07/01/2023 - 07/01/2024 (Trucking)
 Run Date/Time: 08/16/2024, 02:57 AM
@@ -22,112 +21,184 @@ Steven Villegas,Scientist, research,fishersamantha@example.org,+1-683-788-1866x1
 Rachel Brown,Training and develop,mitchellaaron@example.com,001-263-237-9552x1910
 Janice Martinez,Engineer, manufactur,fmorrow@example.com,+1-597-787-6702x733
 ```
+
 ```csv
 Incident #,Reference #,Company,Coverage,Status,Policy #,Loss Date,State,Driver,Description,Reserve,Paid,Incurred
-#30001,L230001,Cochran Cargo Co,Liability,Open,L23A3725,11/05/2023 NY,Peterson, Crystal,Tire blowout caused IV to veer into OV,$53,588.69,$0.00,$53,588.69
-#30002,L230002,Port Juliehaven Cargo,Liability,Open,L23A2401,07/17/2023 FL,Stephenson, Donna,IV lost control on wet pavement, struck guardrail,$23,646.61,$0.00,$6,471.94
-#30003,L230003,Carter Hauling LLC,Liability,Open,L23A9092,08/21/2023 TN,Jackson, Tammy,IV backing, struck parked concrete barrier,$54,265.80,$0.00,$54,265.80
-#30004,L230004,Wilsonbury Express,Inland Marine,Open,L23A5886,04/14/2023 PA,-,Cargo stolen from locked trailer overnight,$35,942.44,$0.00,$32,860.82
+#30001,L230001,Cochran Cargo Co,Liability,Open,L23A3725,11/05/2023,NY,"Peterson, Crystal",Tire blowout caused IV to veer into OV,$53,588.69,$0.00,$53,588.69
+#30002,L230002,Port Juliehaven Cargo,Liability,Open,L23A2401,07/17/2023,FL,"Stephenson, Donna",IV lost control on wet pavement, struck guardrail,$23,646.61,$0.00,$6,471.94
+#30003,L230003,Carter Hauling LLC,Liability,Open,L23A9092,08/21/2023,TN,Jackson, Tammy,IV backing, struck parked concrete barrier,$54,265.80,$0.00,$54,265.80
+#30004,L230004,Wilsonbury Express,Inland Marine,Open,L23A5886,04/14/2023,PA,-,Cargo stolen from locked trailer overnight,$35,942.44,$0.00,$32,860.82
 ```
 
 # Page 2
 
 Incident
-#
 Reference
+Company
+Coverage Status
 #
-Company Coverage Status Policy
+#
+Policy
 #
 Loss
 Date
-State Driver Description Reserve Paid Incurred
-#30005 L240005 Pioneer Hauling LLC Liability Open L24A3905 11/23/2024 OK Duncan, IV backing into loading dock, $135,340.96 $3,683.77 $126,583.59
-Veronica hit concrete barrier
-#30006 L240006 Horizon Cargo Co Liability Closed L24A4074 12/04/2024 AZ Dean, Daniel Trailer door detached, struck $0.00 $19,762.54 $19,762.54
+State
+Driver
+Description
+Reserve
+Paid
+Incurred
+#30005
+L240005
+Pioneer Hauling LLC
+Liability
+Open L24A3905 11/23/2024 OK
+Duncan,
+Veronica
+IV backing into loading dock,
+hit concrete barrier
+$135,340.96 $3,683.77 $126,583.59
+#30006
+L240006
+Horizon Cargo Co
+Liability
+Closed L24A4074 12/04/2024 AZ
+Dean, Daniel
+Trailer door detached, struck
 adjacent vehicle
-#30007 L230007 New Joshuabury Inland Marine Open L23A7081 03/08/2023 AR Cargo damaged during transport $17,839.51 $0.00 $13,701.10
-Logistics - water intrusion
-#30008 L240008 New Ronaldfort Physical Open L24A5033 01/28/2024 NY Fuel tank punctured by road $78,516.88 $0.00 $75,676.83
-Express Damage debris
-#30009 L230009 Delta Logistics Group Liability Closed L23A8390 05/08/2023 GA Fuller, David IV backing, struck parked $0.00 $12,020.45 $12,020.45
+$0.00 $19,762.54 $19,762.54
+#30007
+L230007
+New Joshuabury
+Logistics
+Inland Marine Open L23A7081 03/08/2023 AR
+Cargo damaged during transport
+water intrusion
+$17,839.51
+$0.00 $13,701.10
+#30008
+L240008
+New Ronaldfort
+Express
+Physical
+Damage
+Open
+L24A5033 01/28/2024 NY
+Fuel tank punctured by road
+debris
+$78,516.88
+$0.00 $75,676.83
+#30009
+L230009
+Delta Logistics Group Liability
+Closed L23A8390 05/08/2023 GA
+Fuller, David
+IV backing, struck parked
 guardrail
-#30010 L240010 Thomashaven Hauling Liability Open L24A2651 01/19/2024 PA Young, Denise Trailer door detached, struck $22,458.61 $717.75 ($4,060.58)
+$0.00 $12,020.45 $12,020.45
+#30010
+L240010
+Thomashaven Hauling
+#30011
+L230011
+Liberty Express Co
+Liability
+Physical
+Damage
+Open
+L24A2651 01/19/2024 PA
+Young, Denise
+Trailer door detached, struck
 adjacent vehicle
-#30011 L230011 Liberty Express Co Physical Open L23A9889 07/02/2023 OH Engine fire while parked at $54,737.30 $0.00 $54,737.30
-Damage truck stop
-#30012 L240012 West Stevenshire Liability Closed L24A3879 04/06/2024 TN Torres, Calvin OV changed lanes into IV, $0.00 $34,160.82 $34,160.82
-Freight causing collision
-#30013 L240013 Smith Transport Inc Liability Closed L24A3790 11/13/2024 MI Barnes, Russell OV ran stop sign, struck IV $0.00 $29,480.95 $8,930.59
+$22,458.6
+$717.75 ($4,060.58)
+Open
+L23A9889 07/02/2023 OH
+Engine fire while parked at
+truck stop
+$54,737.30
+$0.00 $54,737.30
+#30012
+L240012
+West Stevenshire
+Freight
+Liability
+Closed L24A3879 04/06/2024 TN
+Torres, Calvin
+OV changed lanes into IV,
+causing collision
+$0.00 $34,160.82 $34,160.82
+#30013
+L240013
+Smith Transport Inc
+Liability
+Closed L24A3790 11/13/2024 MI
+Barnes, Russell
+OV ran stop sign, struck IV
 broadside
-#30014 L230014 Michaelbury Transport Inland Marine Closed L23A3882 04/14/2023 TN Equipment damaged during $0.00 $11,251.86 $10,708.53
+$0.00 $29,480.95 $8,930.59
+#30014
+L230014
+Michaelbury Transport Inland Marine Closed L23A3882 04/14/2023 TN
+Equipment damaged during
 loading
-#30015 L240015 Delta Logistics Co Inland Marine Closed L24A9243 05/05/2024 IL Davis, Zachary Cargo crushed due to improper $0.00 $30,037.36 $30,037.36
+$0.00 $11,251.86 $10,708.53
+#30015
+L240015
+Delta Logistics Co Inland Marine Closed L24A9243 05/05/2024 IL
+Davis, Zachary
+Cargo crushed due to improper
 securing
+$0.00 $30,037.36 $30,037.36
 
 
 # Page 3
 
-[Error processing this page: Invalid operation: The `response.parts` quick accessor requires a single candidate, but but `response.candidates` is empty.]
+-----------------------------------------------------------------------------------------------------------------------------
+
 
 # Page 4
 
-Incident
-#,Reference
-#,Company,Coverage,Status,Policy
-#,Loss
-Date,State,Driver,Description,Reserve,Paid,Incurred
-#30016,L230016,Horizon Logistics LLC,Physical
-Damage,Closed,L23A9376,10/16/2023,TN,–,Fuel tank punctured by road
-debris,$0.00,$4,506.14,$503.63
-#30017,L230017,Woodhaven Express,Physical
-Damage,Open,L23A1497,01/24/2023,TN,–,IV rollover on icy highway.
-Total loss.,$69,599.00,$0.00,$68,590.72
-#30018,L230018,Eagle Transport Group,Liability,Open,L23A2691,06/12/2023,OH,Ayala, Amy,IV making wide turn, clipped OV
-on passenger side,$19,611.13,$0.00,($896.68)
-#30019,L230019,Delta Cargo Inc,Liability,Closed,L23A3342,07/11/2023,TN,Fisher, John,Trailer door detached, struck
-adjacent vehicle,$0.00,$28,636.25,$19,175.46
-#30020,L240020,Titan Transport Inc,Liability,Closed,L24A4507,09/10/2024,OK,Martin, Brianna,IV hydroplaned, hit concrete
-barrier,$0.00,$129,318.74,$129,318.74
-#30021,L240021,Joshuamouth Cargo,Liability,Closed,L24A2419,06/28/2024,NC,Vasquez, Frank,OV changed lanes into IV,
-causing collision,$0.00,$41,089.70,$13,806.97
-#30026,L240026,Whitaker Logistics
-Group,Inland Marine,Closed,L24A8572,02/10/2024,CA,–,Insured transporting vehicle
-was damaged,$0.00,$30,035.41,$28,025.43
-#30022,L240022,Scotthaven Hauling,Inland Marine,Open,L24A6654,03/31/2024,CA,Wright, Maria,Cargo crushed due to improper
-securing,$39,002.72,$0.00,$39,002.72
-#30008,L240008,New Ronaldfort
-Express,Physical
-Damage,Open,L24A5033,01/28/2024,NY,–,Fuel tank punctured by road
-debris,$78,516.88,$0.00,$75,676.83
-#30023,L240023,Liberty Logistics Co,Liability,Closed,L24A2022,06/09/2024,TN,Miller,
-Jennifer,IV lost control on wet
-pavement, struck guardrail,$0.00,$112,238.00,$106,464.99
-#30024,L230024,Randolph Cargo LLC,Liability,Open,L23A6000,02/23/2023,TX,Zimmerman,
-Sherri,OV changed lanes into IV,
-causing collision,$24,505.07,$948.81,($3,544.52)
-#30025,L240025,Eagle Transport Inc,Liability,Open,L24A4389,04/09/2024,FL,Avery, Nicholas,Tire blowout caused IV to veer
-into OV,$48,763.83,$9,420.68,$58,184.51
-#30026,L240026,Whitaker Logistics
-Group,Inland Marine,Closed,L24A8572,02/10/2024,CA,–,Insured transporting vehicle
-was damaged,$0.00,$30,035.41,$28,025.43
-#30027,L240027,Jasonview Hauling,Liability,Closed,L24A2096,04/23/2024,FL,Jones, Kathryn,IV making right turn, trailer
-struck OV,$0.00,$77,571.14,$67,335.66
-#30028,L240028,Hughes Express Co,Physical
-Damage,Closed,L24A5668,08/19/2024,OH,Lee, Lisa,Windshield shattered by road
-debris,$0.00,$48,882.45,$46,255.62
+Incident #,Reference #,Company,Coverage,Status,Policy #,Loss Date,State,Driver,Description,Reserve,Paid,Incurred
+#30016,L230016,Horizon Logistics LLC,Physical Damage,Closed,L23A9376,10/16/2023,TN,-,Fuel tank punctured by road debris,$0.00,$4,506.14,$503.63
+#30017,L230017,Woodhaven Express,Physical Damage,Open,L23A1497,01/24/2023,TN,-,IV rollover on icy highway. Total loss.,$69,599.00,$0.00,$68,590.72
+#30018,L230018,Eagle Transport Group,Liability,Open,L23A2691,06/12/2023,OH,Ayala, Amy,IV making wide turn, clipped OV on passenger side,$19,611.13,$0.00,($896.68)
+#30019,L230019,Delta Cargo Inc,Liability,Closed,L23A3342,07/11/2023,TN,Fisher, John,Trailer door detached, struck adjacent vehicle,$0.00,$28,636.25,$19,175.46
+#30020,L240020,Titan Transport Inc,Liability,Closed,L24A4507,09/10/2024,OK,Martin, Brianna,IV hydroplaned, hit concrete barrier,$0.00,$129,318.74,$129,318.74
+#30021,L240021,Joshuamouth Cargo,Liability,Closed,L24A2419,06/28/2024,NC,Vasquez, Frank,OV changed lanes into IV, causing collision,$0.00,$41,089.70,$13,806.97
+#30026,L240026,Whitaker Logistics Group,Inland Marine,Closed,L24A8572,02/10/2024,CA,-,Insured transporting vehicle was damaged,$0.00,$30,035.41,$28,025.43
+#30022,L240022,Scotthaven Hauling,Inland Marine,Open,L24A6654,03/31/2024,CA,Wright, Maria,Cargo crushed due to improper securing,$39,002.72,$0.00,$39,002.72
+#30008,L240008,New Ronaldfort Express,Physical Damage,Open,L24A5033,01/28/2024,NY,-,Fuel tank punctured by road debris,$78,516.88,$0.00,$75,676.83
+#30023,L240023,Liberty Logistics Co,Liability,Closed,L24A2022,06/09/2024,TN,Miller, Jennifer,IV lost control on wet pavement, struck guardrail,$0.00,$112,238.00,$106,464.99
+#30024,L230024,Randolph Cargo LLC,Liability,Open,L23A6000,02/23/2023,TX,Zimmerman, Sherri,OV changed lanes into IV, causing collision,$24,505.07,$948.81,($3,544.52)
+#30025,L240025,Eagle Transport Inc,Liability,Open,L24A4389,04/09/2024,FL,Avery, Nicholas,Tire blowout caused IV to veer into OV,$48,763.83,$9,420.68,$58,184.51
+#30026,L240026,Whitaker Logistics Group,Inland Marine,Closed,L24A8572,02/10/2024,CA,-,Insured transporting vehicle was damaged,$0.00,$30,035.41,$28,025.43
+#30027,L240027,Jasonview Hauling,Liability,Closed,L24A2096,04/23/2024,FL,Jones, Kathryn,IV making right turn, trailer struck OV,$0.00,$77,571.14,$67,335.66
+#30028,L240028,Hughes Express Co,Physical Damage,Closed,L24A5668,08/19/2024,OH,Lee, Lisa,Windshield shattered by road debris,$0.00,$48,882.45,$46,255.62
 
 
 # Page 5
 
-[Error processing this page: Invalid operation: The `response.parts` quick accessor requires a single candidate, but but `response.candidates` is empty.]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 # Page 6
 
-Incident
-#,Reference
-#,Company,Coverage,Status,Policy
-#,Loss
-Date,State,Driver,Description,Reserve,Paid,Incurred
+Incident Reference
+#
+#
+Company
+Coverage Status
+Policy
+#
+Loss
+Date
+State
+Driver
+Description
+Reserve
+Paid
+Incurred
 #30029,L230029,Hannahtown Transport,Liability,Closed,L23A9443,08/28/2023,IL,Bates, Larry,IV hydroplaned, hit concrete
 barrier,$0.00,$35,238.85,$35,238.85
 #30030,L230030,Horizon Cargo Co,Liability,Closed,L23A8139,02/19/2023,NY,Elliott, Daniel,OV changed lanes into IV,
@@ -166,60 +237,22 @@ hit bridge support,$0.00,$11,391.17,($3,440.05)
 
 # Page 7
 
-[Error processing this page: Invalid operation: The `response.parts` quick accessor requires a single candidate, but but `response.candidates` is empty.]
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 # Page 8
 
-Incident
-#
-Reference
-#
-Company
-Coverage Status
-Policy
-#
-Loss
-Date
-State
-Driver
-Description
-Reserve
-Paid
-Incurred
-#30041 L230041 Roberts Transport
-LLC
-Liability Open L23A1361 01/15/2023 MI Brown, Timothy IV rear-ended OV at traffic
-light $48,224.59 $11,317.33 $59,541.92
-#30042 L230042 Gilltown Transport Liability Open L23A1967 05/29/2023 MI Harris, Amy IV making right turn, trailer
-struck OV $53,479.24 $0.00 $24,139.59
-#30043 L230043 Greene Cargo LLC
-Physical
-Damage Open L23A3365 06/03/2023 PA Osborne,
-Tracey Windshield shattered by road
-debris $30,020.32 $0.00 $30,020.32
-#30044 L230044 Horizon Express
-Group
-Liability Closed L23A7108 11/10/2023 OK Bruce, Charles IV making wide turn, clipped OV
-on passenger side $0.00 $29,038.09 $13,890.50
-#30045 L240045 Delta Transport LLC Inland Marine Open L24A1742 05/11/2024 TX - Theft of cargo from trailer at
-rest stop $59,668.90 $0.00 $59,668.90
-#30046 L230046 Myers Transport
-Group
-Liability Open L23A7389 11/30/2023 NY Scott, Lisa IV hydroplaned, hit concrete
-barrier $10,049.24 $0.00 ($12,166.64)
-#30047 L240047 Atlas Cargo Co Liability Open L24A4395 05/13/2024 CA James, Andrea Trailer door detached, struck
-adjacent vehicle $24,030.65 $0.00 ($5,660.05)
-#30048 L240048 Delta Logistics Inc Liability Open L24A1397 03/14/2024 PA Hill, Antonio IV rear-ended OV at traffic
-light $170,345.53 $0.00 $163,930.96
-#30049 L230049 Rogersmouth Express
-Physical
-Damage Closed L23A9137 05/22/2023 OK - IV rollover on icy highway.
-Total loss. $0.00 $52,331.63 $50,627.37
-#30050 L230050 West Kevinton
-Express
-Physical
-Damage Open L23A5399 09/09/2023 AR - Transmission failure during
-transport $7,391.20 $0.00 $3,077.10
+Incident #,Reference #,Company,Coverage,Status,Policy #,Loss Date,State,Driver,Description,Reserve,Paid,Incurred
+#30041,L230041,Roberts Transport LLC,Liability,Open,L23A1361,01/15/2023 MI,Brown, Timothy,IV rear-ended OV at traffic light,$48,224.59,$11,317.33,$59,541.92
+#30042,L230042,Gilltown Transport,Liability,Open,L23A1967,05/29/2023 MI,Harris, Amy,IV making right turn, trailer struck OV,$53,479.24,$0.00,$24,139.59
+#30043,L230043,Greene Cargo LLC,Physical Damage,Open,L23A3365,06/03/2023 PA,Osborne, Tracey,Windshield shattered by road debris,$30,020.32,$0.00,$30,020.32
+#30044,L230044,Horizon Express Group,Liability,Closed,L23A7108,11/10/2023 OK,Bruce, Charles,IV making wide turn, clipped OV on passenger side,$0.00,$29,038.09,$13,890.50
+#30045,L240045,Delta Transport LLC,Inland Marine,Open,L24A1742,05/11/2024 TX,-,Theft of cargo from trailer at rest stop,$59,668.90,$0.00,$59,668.90
+#30046,L230046,Myers Transport Group,Liability,Open,L23A7389,11/30/2023 NY,Scott, Lisa,IV hydroplaned, hit concrete barrier,$10,049.24,$0.00,($12,166.64)
+#30047,L240047,Atlas Cargo Co,Liability,Open,L24A4395,05/13/2024 CA,James, Andrea,Trailer door detached, struck adjacent vehicle,$24,030.65,$0.00,($5,660.05)
+#30048,L240048,Delta Logistics Inc,Liability,Open,L24A1397,03/14/2024 PA,Hill, Antonio,IV rear-ended OV at traffic light,$170,345.53,$0.00,$163,930.96
+#30049,L230049,Rogersmouth Express,Physical Damage,Closed,L23A9137,05/22/2023 OK,-,IV rollover on icy highway. Total loss.,$0.00,$52,331.63,$50,627.37
+#30050,L230050,West Kevinton Express,Physical Damage,Open,L23A5399,09/09/2023 AR,-,Transmission failure during transport,$7,391.20,$0.00,$3,077.10
 
 Company Directory (Reference Only)
 Employee,Department,Email,Phone
@@ -238,10 +271,10 @@ Gerald Castillo,Data scientist,mary10@example.org,547.788.5029
 # Page 9
 
 REPORT TOTALS
-
-Reserve,Paid,Recovered,Total Incurred
-Grand Total,$1,306,926.65,$1,057,739.08,$478,361.48,$1,886,304.25
-
+```csv
+,Reserve,Paid,Recovered,Total Incurred
+Grand Total,"$1,306,926.65","$1,057,739.08","$478,361.48","$1,886,304.25"
+```
 TOTAL NUMBER OF INCIDENTS: 55
 
 CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
