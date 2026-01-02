@@ -1,3 +1,20 @@
 % About how we syntesize the dataset
 % List all problems we identified that can occur in long list data
 % Include visual for generation pipeline
+
+% Problems:
+% 1. Page breaks - forced pagination every N rows; fragments tables/sections across pages
+%    NOTE: Current impl adds breaks BETWEEN entities, not splitting them (CSS has page-break-inside: avoid)
+%    Examples: easy_10_002, easy_10_007, medium_25_001, hard_50_001
+% 2. Multi-row entities - single entity spans multiple lines (e.g., wrapped descriptions); challenges row association
+%    Examples: easy_10_001, easy_10_006, medium_25_001, hard_50_001
+% 3. Duplicates - exact duplicate records inserted at random positions; challenges deduplication algorithms
+%    Examples: easy_10_004, easy_10_009, medium_25_001, hard_50_001
+% 4. Large documents - 500+ claims per document; prevents naive zero-shot LLM approaches, challenges accumulative generation
+%    Examples: extreme_100_001, extreme_100_002, extreme_100_003 (all extreme tier)
+% 5. Multiple tables - irrelevant distractor content (e.g., "Company Directory"); challenges noise filtering and table selection
+%    Examples: medium_25_002, medium_25_003, hard_50_001, extreme_100_001
+% 6. Multi-column layout - content rendered in 2-column CSS layout; challenges reading order reconstruction
+%    Examples: hard_50_001, hard_50_003, hard_50_004, extreme_100_001
+% 7. Merged cells - rowspan applied to table cells; challenges cell-to-row association in tabular extraction
+%    Examples: hard_50_002, hard_50_003, hard_50_005, extreme_100_001
