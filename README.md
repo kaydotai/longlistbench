@@ -5,27 +5,42 @@ Benchmark for entity extraction from semi-structured insurance claims data with 
 ## Quick Start
 
 ```bash
-# Install dependencies
-pip install -r benchmarks/requirements.txt
-playwright install chromium
+# Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
 
-# Generate the complete benchmark dataset (40 instances, 1,350 claims)
-cd benchmarks
-python generate_claims_benchmark.py
+# Install dependencies
+python -m pip install -r benchmarks/requirements.txt
+python -m playwright install chromium
+
+# Generate the complete benchmark dataset
+python benchmarks/generate_claims_benchmark.py
 ```
 
 The benchmark will be generated in `benchmarks/claims/` with 4 difficulty tiers (easy, medium, hard, extreme).
 
-See [`benchmarks/claims/README.md`](benchmarks/claims/README.md) for benchmark documentation.
+See [`benchmarks/README.md`](benchmarks/README.md) for benchmark documentation.
 
 ## Benchmark Overview
 
 - **80 benchmark instances** across 4 difficulty tiers × 2 formats
-- **2,700 total claims** to extract
+- **2,700 base claims** across all instances (some instances include additional rows due to `large_doc` and `duplicates`)
 - **7 problem types** testing real-world complexity (all implemented)
 - **2 document formats** (detailed and table views)
 - **Ground truth annotations** in JSON format
 - **OCR-processed PDFs** simulating production scenarios
+
+### Problem Types
+
+| Code | Meaning |
+|------|---------|
+| `page_breaks` | A single incident/row is split across PDF pages (content continues on the next page). |
+| `multi_row` | Key fields (especially descriptions) span multiple lines/rows instead of being single-line. |
+| `duplicates` | Duplicate incidents are inserted (exact repeats) to test deduplication and counting. |
+| `large_doc` | Document is much longer than normal (many more incidents/pages). |
+| `multiple_tables` | Adds additional irrelevant tables/sections mixed in with the main claims content. |
+| `multi_column` | Uses a multi-column layout in parts of the document to stress reading order. |
+| `merged_cells` | Uses merged table cells (e.g. `rowspan`/`colspan`) to make table structure harder. |
 
 ### Difficulty Tiers
 

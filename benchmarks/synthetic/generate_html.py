@@ -38,6 +38,47 @@ class LossRunHTMLGenerator:
         self.seed = seed
         self.format = format
 
+    @staticmethod
+    def _page_break_split_indices(total: int) -> set[int]:
+        if total <= 0:
+            return set()
+
+        if total <= 12:
+            return {max(2, total // 2)}
+
+        if total <= 60:
+            return {max(2, total // 2)}
+
+        target_splits = min(15, max(3, total // 50))
+        indices: set[int] = set()
+        for i in range(1, target_splits + 1):
+            idx = max(2, (total * i) // (target_splits + 1))
+            if idx < total:
+                indices.add(idx)
+
+        return indices
+
+    @staticmethod
+    def _inject_multiline(text: str, line_break: str) -> str:
+        if not text:
+            return text
+
+        if "\n" in text or "<br" in text:
+            return text
+
+        if ". " in text:
+            out = text.replace(". ", f".{line_break}")
+            if out != text:
+                return out
+
+        words = text.split()
+        if len(words) >= 6:
+            mid = len(words) // 2
+            return " ".join(words[:mid]) + line_break + " ".join(words[mid:])
+        if len(words) >= 2:
+            return words[0] + line_break + " ".join(words[1:])
+        return text + line_break
+
     def apply_document_problems(self, incidents: list[dict], problems: dict[str, bool]) -> list[dict]:
         incidents_out = [i.copy() for i in incidents]
 
@@ -116,17 +157,22 @@ class LossRunHTMLGenerator:
     def _html_header(self, title: str, use_columns: bool = False) -> str:
         """Generate HTML header with CSS for loss run format."""
         column_css = """
-            .content-wrapper {{
+            .content-wrapper {
                 column-count: 2;
                 column-gap: 40px;
                 column-rule: 1px solid #ccc;
                 column-fill: auto;
-            }}
-            .content-wrapper .incident-section {{
+            }
+            .content-wrapper .incident-section {
                 break-inside: avoid;
                 page-break-inside: avoid;
                 -webkit-column-break-inside: avoid;
-            }}
+            }
+            .content-wrapper .incident-section.split-incident {
+                break-inside: auto;
+                page-break-inside: auto;
+                -webkit-column-break-inside: auto;
+            }
         """ if use_columns else ""
 
         return f"""<!DOCTYPE html>
@@ -144,9 +190,15 @@ class LossRunHTMLGenerator:
                 page-break-inside: avoid;
                 break-inside: avoid-page;
             }}
+            .incident-section.split-incident {{
+                page-break-inside: auto;
+                break-inside: auto;
+            }}
             .page-break {{
-                page-break-after: always;
-                break-after: page;
+                page-break-before: always;
+                break-before: page;
+                page-break-after: auto;
+                break-after: auto;
             }}
         }}
         body {{
@@ -155,6 +207,8 @@ class LossRunHTMLGenerator:
             line-height: 1.3;
             margin: 0;
             padding: 10px;
+            background-color: #fff;
+            color: #000;
         }}
         .header {{
             margin-bottom: 15px;
@@ -178,6 +232,28 @@ class LossRunHTMLGenerator:
             page-break-inside: avoid;
             break-inside: avoid;
             overflow: hidden;
+        }}
+        .incident-section.split-incident {{
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }}
+        .incident-section.split-incident > .incident-header {{
+            background-color: #fff3cd;
+        }}
+        .continued-note {{
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }}
+        .continued-header {{
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
         }}
         .incident-header {{
             background-color: #e8e8e8;
@@ -241,9 +317,10 @@ class LossRunHTMLGenerator:
         .page-break {{
             page-break-before: always;
             break-before: page;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
         }}
         .claimants-list {{
             margin-left: 20px;
@@ -292,7 +369,13 @@ class LossRunHTMLGenerator:
 </div>
 """
 
-    def _generate_incident_section(self, incident: dict, incident_num: int, problems: dict) -> str:
+    def _generate_incident_section(
+        self,
+        incident: dict,
+        incident_num: int,
+        problems: dict,
+        split_across_pages: bool = False,
+    ) -> str:
         """Generate a detailed incident section with financial line items."""
         # Extract data
         inc_num = incident.get("incident_number", f"#{incident_num}")
@@ -313,11 +396,15 @@ class LossRunHTMLGenerator:
         
         # Problem 2: Multi-row entities - split addresses and descriptions
         if problems.get("multi_row", False):
-            description = description.replace(". ", ".\n")
+            description = self._inject_multiline(description, "\n")
         
         # Build incident header
+        incident_classes = "incident-section"
+        if split_across_pages:
+            incident_classes += " split-incident"
+
         html = f"""
-<div class="incident-section">
+<div class="{incident_classes}">
     <div class="incident-header">
         Incident {inc_num} (Ref #{ref_num})
         <span style="float: right;">{coverage} - {status}</span>
@@ -359,6 +446,14 @@ class LossRunHTMLGenerator:
         html += """
     </div>
 """
+
+        if split_across_pages:
+            html += '    <div class="continued-note">Continued on next page</div>\n'
+            html += '    <div class="page-break"></div>\n'
+            html += f'    <div class="continued-header">Incident {inc_num} (continued)</div>\n'
+
+        html += """
+"""
         
         # Financial breakdown table with separate rows per category
         bi = incident.get("bi", {})
@@ -371,9 +466,23 @@ class LossRunHTMLGenerator:
         total_paid = bi.get("paid", 0) + pd.get("paid", 0) + lae.get("paid", 0) + ded.get("paid", 0)
         total_recovered = bi.get("recovered", 0) + pd.get("recovered", 0) + lae.get("recovered", 0) + ded.get("recovered", 0)
         total_incurred = bi.get("total_incurred", 0) + pd.get("total_incurred", 0) + lae.get("total_incurred", 0) + ded.get("total_incurred", 0)
-        
-        html += """
-    <table class="financial-table">
+
+        if problems.get("merged_cells", False):
+            thead = """
+        <thead>
+            <tr>
+                <th style="text-align: left;" rowspan="2">Category</th>
+                <th colspan="4">Financials</th>
+            </tr>
+            <tr>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>"""
+        else:
+            thead = """
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -382,7 +491,11 @@ class LossRunHTMLGenerator:
                 <th>Recovered</th>
                 <th>Total Incurred</th>
             </tr>
-        </thead>
+        </thead>"""
+
+        html += f"""
+    <table class=\"financial-table\">
+{thead}
         <tbody>"""
         
         # Add rows for each category (only if non-zero)
@@ -417,7 +530,7 @@ class LossRunHTMLGenerator:
     </table>
 </div>
 """
-        
+
         return html
 
     def _generate_table_row(
@@ -428,6 +541,7 @@ class LossRunHTMLGenerator:
         use_merged: bool = False,
         rowspan: str = "",
         omit_merged_cells: bool = False,
+        split_across_pages: bool = False,
     ) -> str:
         """Generate a single table row for table format."""
         inc_num = incident.get("incident_number", f"#{row_num}")
@@ -443,7 +557,22 @@ class LossRunHTMLGenerator:
         
         # Problem 2: Multi-row entities
         if problems.get("multi_row", False):
-            description = description.replace(". ", ".<br>")
+            description = self._inject_multiline(description, "<br>")
+
+        if split_across_pages:
+            desc_lines = description.split("<br>") if "<br>" in description else [description]
+            if len(desc_lines) < 8:
+                desc_lines = (desc_lines * (8 // max(1, len(desc_lines)) + 1))[:8]
+
+            top = "<br>".join(desc_lines[:4])
+            bottom = "<br>".join(desc_lines[4:])
+            description = (
+                top
+                + "<div class=\"continued-note\">Continued on next page</div>"
+                + "<div class=\"page-break\"></div>"
+                + "<div class=\"continued-note\">Continued</div>"
+                + bottom
+            )
         
         # Get financial totals
         bi = incident.get("bi", {})
@@ -500,51 +629,38 @@ class LossRunHTMLGenerator:
         </thead>
         <tbody>"""
         
+        use_page_breaks = problems.get("page_breaks", False)
+        split_rows = self._page_break_split_indices(len(incidents)) if use_page_breaks else set()
         use_merged = problems.get("merged_cells", False)
         omit_merged_cells = False
+        merged_cells_inserted = False
         
         for idx, incident in enumerate(incidents):
-            # Problem 1: Page breaks
-            if problems.get("page_breaks", False) and idx > 0 and idx % 15 == 0:
-                html += """
-        </tbody>
-    </table>
-</div>
-<div class="page-break"></div>
-<div class="table-section">
-    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
-        <thead>
-            <tr style="background-color: #333; color: white;">
-                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Company</th>
-                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
-                <th style="padding: 5px; border: 1px solid #000;">Status</th>
-                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
-                <th style="padding: 5px; border: 1px solid #000;">State</th>
-                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
-                <th style="padding: 5px; border: 1px solid #000;">Description</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
-                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
-                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
-            </tr>
-        </thead>
-        <tbody>"""
+            row_num = idx + 1
+            split_row = bool(use_page_breaks and (row_num in split_rows))
             
-            start_merge = use_merged and (not omit_merged_cells) and idx < len(incidents) - 1 and random.random() < 0.15
+            force_merge = use_merged and (not merged_cells_inserted) and (not omit_merged_cells) and idx < len(incidents) - 1
+            start_merge = force_merge or (
+                use_merged
+                and (not omit_merged_cells)
+                and idx < len(incidents) - 1
+                and random.random() < 0.15
+            )
             rowspan = ' rowspan="2"' if start_merge else ""
 
             html += self._generate_table_row(
                 incident,
-                idx + 1,
+                row_num,
                 problems,
                 use_merged=use_merged,
                 rowspan=rowspan,
                 omit_merged_cells=omit_merged_cells,
+                split_across_pages=split_row,
             )
 
             omit_merged_cells = start_merge
+            if start_merge:
+                merged_cells_inserted = True
         
         html += """
         </tbody>
@@ -581,12 +697,16 @@ class LossRunHTMLGenerator:
             html += self._generate_table_format(incidents, header_info, problems)
         else:
             # Generate each incident in detailed format
+            use_page_breaks = problems.get("page_breaks", False)
+            split_incidents = self._page_break_split_indices(len(incidents)) if use_page_breaks else set()
             for idx, incident in enumerate(incidents, 1):
-                # Problem 1: Page breaks
-                if problems.get("page_breaks", False) and idx > 1 and idx % 10 == 0:
-                    html += '<div class="page-break"></div>\n'
-                
-                html += self._generate_incident_section(incident, idx, problems)
+                split_incident = bool(use_page_breaks and (idx in split_incidents))
+                html += self._generate_incident_section(
+                    incident,
+                    idx,
+                    problems,
+                    split_across_pages=split_incident,
+                )
         
         # Problem 5: More irrelevant content
         if problems.get("multiple_tables", False):

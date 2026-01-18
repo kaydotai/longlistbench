@@ -13,9 +13,15 @@
                 page-break-inside: avoid;
                 break-inside: avoid-page;
             }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
             .page-break {
-                page-break-after: always;
-                break-after: page;
+                page-break-before: always;
+                break-before: page;
+                page-break-after: auto;
+                break-after: auto;
             }
         }
         body {
@@ -24,6 +30,8 @@
             line-height: 1.3;
             margin: 0;
             padding: 10px;
+            background-color: #fff;
+            color: #000;
         }
         .header {
             margin-bottom: 15px;
@@ -47,6 +55,28 @@
             page-break-inside: avoid;
             break-inside: avoid;
             overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
         }
         .incident-header {
             background-color: #e8e8e8;
@@ -110,9 +140,10 @@
         .page-break {
             page-break-before: always;
             break-before: page;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
         }
         .claimants-list {
             margin-left: 20px;
@@ -174,10 +205,13 @@
         <div class="detail-line"><span class="label">Unit #:</span>2024 MA 296771</div>
         <div class="detail-line"><span class="label">Agency:</span>Mccarty, Whitehead and Gonzalez</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer damaged in loading dock collision</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer damaged in
+loading dock collision</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -218,12 +252,15 @@
         <div class="detail-line"><span class="label">Driver:</span>Combs, George</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 FR 317422</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Fuel tank punctured by road debris</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Fuel tank punctured
+by road debris</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Cannon, Ryan<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -271,12 +308,15 @@
         <div class="detail-line"><span class="label">Driver:</span>Lopez, Robert</div>
         <div class="detail-line"><span class="label">Agency:</span>Martin, Oliver and Francis</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
+hydroplaned, hit concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Brown, Robert<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -339,14 +379,17 @@
         <div class="detail-line"><span class="label">Unit #:</span>2023 MA 396473</div>
         <div class="detail-line"><span class="label">Agency:</span>Jones-Hartman</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer door detached, struck adjacent vehicle</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer door detached,
+struck adjacent vehicle</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Ross, Thomas<br></div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Fear forward language make truth against population score both science better political entire be push make part make case.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -395,12 +438,15 @@
         <div class="detail-line"><span class="label">Unit #:</span>2023 IN 841826</div>
         <div class="detail-line"><span class="label">Agency:</span>Nelson Inc</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing into loading dock, hit concrete barrier</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing into loading
+dock, hit concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Davis, Robert<br>Tucker, Sarah<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -447,10 +493,13 @@
         <div class="detail-line"><span class="label">Date Reported:</span>08/27/2023</div>
         <div class="detail-line"><span class="label">Driver:</span>Murray, Olivia</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes into IV, causing collision</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes
+into IV, causing collision</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -496,12 +545,15 @@
         <div class="detail-line"><span class="label">Date of Loss:</span>04/04/2023 (PA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>04/11/2023</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Collision with deer caused front-end damage</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Collision with deer
+caused front-end damage</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Kim, Brian<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -547,12 +599,15 @@
         <div class="detail-line"><span class="label">Date of Loss:</span>07/31/2023 (GA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>08/27/2023</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV struck by falling tree branch during storm</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV struck by falling
+tree branch during storm</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Moore-Compton<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -594,12 +649,15 @@
         <div class="detail-line"><span class="label">Unit #:</span>2023 IN 841826</div>
         <div class="detail-line"><span class="label">Agency:</span>Nelson Inc</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing into loading dock, hit concrete barrier</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing into loading
+dock, hit concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Davis, Robert<br>Tucker, Sarah<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -648,12 +706,15 @@
         <div class="detail-line"><span class="label">Unit #:</span>2023 IN 192364</div>
         <div class="detail-line"><span class="label">Agency:</span>Bates PLC</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on wet pavement, struck bridge support</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on
+wet pavement, struck bridge support</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Rich, Vanessa<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -695,14 +756,17 @@
         <div class="detail-line"><span class="label">Unit #:</span>2024 MA 892389</div>
         <div class="detail-line"><span class="label">Agency:</span>Brown-Schwartz</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV changing lanes, sideswiped OV</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
+changing lanes, sideswiped OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Martinez, Tiffany<br></div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Several mission believe service line put eat lead cup certainly religious.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -750,14 +814,17 @@
         <div class="detail-line"><span class="label">Driver:</span>Burke, David</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 MA 518840</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV making wide turn, clipped OV on passenger side</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV making wide turn,
+clipped OV on passenger side</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Payne, Amber<br></div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Baby long professional interesting lay point into act important save.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -812,12 +879,15 @@
         <div class="detail-line"><span class="label">Driver:</span>Ali, Amanda</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 FR 556278</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on wet pavement, struck concrete barrier</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on
+wet pavement, struck concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Ramirez Ltd<br>Smith Ltd<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -864,12 +934,15 @@
         <div class="detail-line"><span class="label">Date Reported:</span>07/01/2023</div>
         <div class="detail-line"><span class="label">Driver:</span>Woodard, Corey</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop sign, struck IV broadside</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop
+sign, struck IV broadside</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Navarro, Derrick<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -916,12 +989,15 @@
         <div class="detail-line"><span class="label">Date Reported:</span>01/11/2024</div>
         <div class="detail-line"><span class="label">Driver:</span>Anderson, Heather</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV brakes failed, rear-ended OV</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
+brakes failed, rear-ended OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Porter, Amber<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -961,12 +1037,15 @@
         <div class="detail-line"><span class="label">Date Reported:</span>11/23/2024</div>
         <div class="detail-line"><span class="label">Driver:</span>Ortega, Wesley</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop sign, struck IV broadside</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop
+sign, struck IV broadside</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Poole, William<br>Sullivan, Nicole<br>Kelly, Dodson and Frank<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1020,14 +1099,17 @@
         <div class="detail-line"><span class="label">Date Reported:</span>08/25/2024</div>
         <div class="detail-line"><span class="label">Driver:</span>Wright, Robert</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing, struck parked parked OV</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing, struck
+parked parked OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Long, Andrew<br>Lee, Jacob<br></div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Participant water marriage likely memory quite industry hair color throughout receive believe prevent effort brother gas.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1082,14 +1164,17 @@
         <div class="detail-line"><span class="label">Driver:</span>Pham, Theresa</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 IN 486633</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV changing lanes, sideswiped OV</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
+changing lanes, sideswiped OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Cox and Sons<br>Gutierrez, Aaron<br></div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Friend become week something parent hand make performance believe build letter big available.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1138,10 +1223,13 @@
         <div class="detail-line"><span class="label">Unit #:</span>2024 MA 619237</div>
         <div class="detail-line"><span class="label">Agency:</span>Cox PLC</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Insured transporting vehicle was damaged</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Insured
+transporting vehicle was damaged</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1181,14 +1269,17 @@
         <div class="detail-line"><span class="label">Date Reported:</span>06/20/2023</div>
         <div class="detail-line"><span class="label">Driver:</span>Young, Joseph</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop sign, struck IV broadside</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop
+sign, struck IV broadside</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Crane, Sarah<br></div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Camera cultural senior expert hour per western especially land tax happen member actually human image door week seat pay big.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1243,12 +1334,15 @@
         <div class="detail-line"><span class="label">Driver:</span>Adams, Todd</div>
         <div class="detail-line"><span class="label">Agency:</span>Brown LLC</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Load shift caused cargo damage</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Load
+shift caused cargo damage</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Henson, Amanda<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1303,12 +1397,15 @@
         <div class="detail-line"><span class="label">Driver:</span>Newton, Stephen</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 PE 464547</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on wet pavement, struck concrete barrier</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV lost control on
+wet pavement, struck concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Miller, Latoya<br>Martin, Crystal<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1356,12 +1453,15 @@
         <div class="detail-line"><span class="label">Driver:</span>Ellis, Richard</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 MA 158491</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
+hydroplaned, hit concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Flores, Duane<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1408,12 +1508,15 @@
         <div class="detail-line"><span class="label">Date Reported:</span>09/18/2023</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 FR 128449</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Transmission failure during transport</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Transmission
+failure during transport</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Thomas-Cabrera<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1461,14 +1564,17 @@
         <div class="detail-line"><span class="label">Driver:</span>Pham, Theresa</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 IN 486633</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV changing lanes, sideswiped OV</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
+changing lanes, sideswiped OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Cox and Sons<br>Gutierrez, Aaron<br></div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Friend become week something parent hand make performance believe build letter big available.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1515,12 +1621,15 @@
         <div class="detail-line"><span class="label">Date Reported:</span>08/22/2024</div>
         <div class="detail-line"><span class="label">Driver:</span>Holland, Alan</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing, struck parked parked OV</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing, struck
+parked parked OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Baker, Dawn<br>Mcclain, Travis<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1560,12 +1669,15 @@
         <div class="detail-line"><span class="label">Date Reported:</span>07/29/2023</div>
         <div class="detail-line"><span class="label">Driver:</span>Allen, Michael</div>
         <div class="detail-line"><span class="label">Description:</span></div>
-        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV making right turn, trailer struck OV</div>
+        <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV making right
+turn, trailer struck OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Hammond, Joshua<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>

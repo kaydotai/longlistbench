@@ -33,14 +33,20 @@ The benchmark introduces real-world document complexity issues:
 ## Setup
 
 ```bash
+# From the repository root
+python3 -m venv .venv
+source .venv/bin/activate
+
 # Install Python dependencies
-pip install -r ../requirements.txt
+python -m pip install -r benchmarks/requirements.txt
 
 # Install Playwright browsers (for PDF rendering)
-playwright install chromium
+python -m playwright install chromium
 ```
 
 ## Usage
+
+The commands below assume you are running from `benchmarks/synthetic/`.
 
 ### 1. Generate Structured Data (Golden Truth)
 

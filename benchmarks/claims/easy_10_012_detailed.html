@@ -13,9 +13,15 @@
                 page-break-inside: avoid;
                 break-inside: avoid-page;
             }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
             .page-break {
-                page-break-after: always;
-                break-after: page;
+                page-break-before: always;
+                break-before: page;
+                page-break-after: auto;
+                break-after: auto;
             }
         }
         body {
@@ -24,6 +30,8 @@
             line-height: 1.3;
             margin: 0;
             padding: 10px;
+            background-color: #fff;
+            color: #000;
         }
         .header {
             margin-bottom: 15px;
@@ -47,6 +55,28 @@
             page-break-inside: avoid;
             break-inside: avoid;
             overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
         }
         .incident-header {
             background-color: #e8e8e8;
@@ -110,9 +140,10 @@
         .page-break {
             page-break-before: always;
             break-before: page;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
         }
         .claimants-list {
             margin-left: 20px;
@@ -157,7 +188,9 @@
         <div class="claimants-list">Reid Inc<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -210,7 +243,9 @@
         <div class="claimants-list">Krueger, Tammy<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -268,7 +303,9 @@
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Tire blowout caused IV to veer into OV</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -320,7 +357,9 @@
         <div class="claimants-list">Gonzales, John<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -349,7 +388,7 @@
     </table>
 </div>
 
-<div class="incident-section">
+<div class="incident-section split-incident">
     <div class="incident-header">
         Incident #30005 (Ref #L230005)
         <span style="float: right;">Inland Marine - Open</span>
@@ -364,8 +403,13 @@
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Allen, Jeremy<br></div>
     </div>
+    <div class="continued-note">Continued on next page</div>
+    <div class="page-break"></div>
+    <div class="continued-header">Incident #30005 (continued)</div>
+
 
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -418,7 +462,9 @@
         <div class="claimants-list">Bennett-Jarvis<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -471,7 +517,9 @@
         <div class="claimants-list">Terry, Lisa<br>Burnett-Herrera<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -523,7 +571,9 @@
         <div class="claimants-list">Marquez, Suzanne<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -576,7 +626,9 @@
         <div class="claimants-list">Blankenship, Anna<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -611,7 +663,6 @@
         </tbody>
     </table>
 </div>
-<div class="page-break"></div>
 
 <div class="incident-section">
     <div class="incident-header">
@@ -630,7 +681,9 @@
         <div style="margin-left: 20px; font-style: italic;">Rule action together conference old new establish open seek case work support crime.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>

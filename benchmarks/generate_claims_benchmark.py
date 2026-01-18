@@ -7,7 +7,7 @@ This script generates the full benchmark suite across all difficulty tiers:
 - Hard: 50 claims each, 8 instances
 - Extreme: 100 claims each, 5 instances
 
-Total: 40 instances, 1,350 claims
+Total: 80 instances (2 formats), 2,700 base claims
 """
 
 from __future__ import annotations
@@ -16,18 +16,12 @@ import argparse
 import asyncio
 import hashlib
 import json
-import shutil
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-# Import from synthetic modules
 import sys
-sys.path.insert(0, str(Path(__file__).parent / "synthetic"))
-
-from generate_claim_data import generate_incidents, write_json
-from generate_html import LossRunHTMLGenerator
-from html_to_pdf import html_to_pdf
 
 
 # Benchmark configuration
@@ -98,6 +92,17 @@ BENCHMARK_CONFIG = {
 }
 
 
+_INSTANCE_JSON_RE = re.compile(
+    r"^(?P<tier>easy|medium|hard|extreme)_(?P<base_claims>\d+)_(?P<instance>\d{3})_(?P<format>detailed|table)\.json$"
+)
+
+
+def _ensure_synthetic_imports() -> None:
+    synthetic_path = str(Path(__file__).parent / "synthetic")
+    if synthetic_path not in sys.path:
+        sys.path.insert(0, synthetic_path)
+
+
 async def generate_instance(
     tier: str,
     instance_num: int,
@@ -136,6 +141,11 @@ async def generate_instance(
     print(f"\n{'='*60}")
     print(f"Generating: {instance_id}")
     print(f"{'='*60}")
+
+    _ensure_synthetic_imports()
+    from generate_claim_data import generate_incidents
+    from generate_html import LossRunHTMLGenerator
+    from html_to_pdf import html_to_pdf
     
     # Step 1: Generate structured incidents data
     print(f"[1/3] Generating {num_claims} claims (seed={seed})...")
@@ -184,6 +194,83 @@ async def generate_instance(
         },
     }
     
+    return metadata
+
+
+def rebuild_metadata(output_dir: Path, base_seed: int) -> dict[str, Any]:
+    instances: list[dict[str, Any]] = []
+
+    for json_path in sorted(output_dir.glob("*.json")):
+        if json_path.name == "metadata.json":
+            continue
+        m = _INSTANCE_JSON_RE.match(json_path.name)
+        if not m:
+            continue
+
+        tier = m.group("tier")
+        instance_num = int(m.group("instance"))
+        fmt = m.group("format")
+        instance_id = json_path.stem
+
+        problems = BENCHMARK_CONFIG[tier]["problem_combinations"][
+            (instance_num - 1) % len(BENCHMARK_CONFIG[tier]["problem_combinations"])
+        ]
+        enabled_problems = [k for k, v in problems.items() if v]
+
+        seed_material = f"{base_seed}:{instance_id}".encode("utf-8")
+        seed_offset = int(hashlib.md5(seed_material).hexdigest()[:8], 16) % 10000
+        seed = base_seed + seed_offset
+
+        try:
+            data = json.loads(json_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+
+        pdf_path = output_dir / f"{instance_id}.pdf"
+        json_size = json_path.stat().st_size
+        pdf_size = pdf_path.stat().st_size if pdf_path.exists() else 0
+        pages_estimate = estimate_pages(len(data), problems)
+
+        instances.append(
+            {
+                "id": instance_id,
+                "difficulty": tier,
+                "format": fmt,
+                "num_claims": len(data),
+                "pages_estimate": pages_estimate,
+                "problems": enabled_problems,
+                "has_duplicates": problems.get("duplicates", False),
+                "seed": seed,
+                "files": {
+                    "ground_truth": f"{instance_id}.json",
+                    "pdf": f"{instance_id}.pdf",
+                    "json_size_bytes": json_size,
+                    "pdf_size_bytes": pdf_size,
+                },
+            }
+        )
+
+    total_claims = sum(i["num_claims"] for i in instances)
+    metadata = {
+        "dataset_name": "lost-and-found-entities-v1",
+        "version": "1.0.1",
+        "description": "Benchmark for long-list entity extraction from insurance claims",
+        "generated_at": datetime.now().isoformat(),
+        "base_seed": base_seed,
+        "total_instances": len(instances),
+        "total_claims": total_claims,
+        "schema_version": "1.0",
+        "difficulty_tiers": {
+            tier: {
+                "claims_per_pdf": BENCHMARK_CONFIG[tier]["claims_per_pdf"],
+                "num_instances": BENCHMARK_CONFIG[tier]["num_instances"],
+                "total_claims": sum(i["num_claims"] for i in instances if i["difficulty"] == tier),
+            }
+            for tier in BENCHMARK_CONFIG.keys()
+        },
+        "instances": instances,
+    }
+
     return metadata
 
 
@@ -263,6 +350,8 @@ async def generate_all_benchmarks(
         tiers: List of tiers to generate (default: all)
     """
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    _ensure_synthetic_imports()
     
     # Determine which tiers to generate
     if tiers is None:
@@ -293,7 +382,7 @@ async def generate_all_benchmarks(
     # Generate metadata file
     metadata = {
         "dataset_name": "lost-and-found-entities-v1",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "description": "Benchmark for long-list entity extraction from insurance claims",
         "generated_at": datetime.now().isoformat(),
         "base_seed": base_seed,
@@ -342,16 +431,19 @@ def main() -> None:
         epilog="""
 Examples:
   # Generate all tiers
-  python generate_claims_benchmark.py
+  python benchmarks/generate_claims_benchmark.py
 
   # Generate specific tiers only
-  python generate_claims_benchmark.py --tiers easy medium
+  python benchmarks/generate_claims_benchmark.py --tiers easy medium
 
   # Custom output directory
-  python generate_claims_benchmark.py -o benchmarks/claims_v2
+  python benchmarks/generate_claims_benchmark.py -o claims_v2
 
   # Custom seed for different dataset
-  python generate_claims_benchmark.py -s 12345
+  python benchmarks/generate_claims_benchmark.py -s 12345
+
+  # Rebuild claims/metadata.json from existing outputs
+  python benchmarks/generate_claims_benchmark.py --rebuild-metadata
         """,
     )
     
@@ -370,6 +462,11 @@ Examples:
         help="Base random seed for reproducibility (default: 42)",
     )
     parser.add_argument(
+        "--rebuild-metadata",
+        action="store_true",
+        help="Rebuild metadata.json from existing outputs in the output directory without regenerating files",
+    )
+    parser.add_argument(
         "--tiers",
         nargs="+",
         choices=["easy", "medium", "hard", "extreme"],
@@ -379,6 +476,14 @@ Examples:
     args = parser.parse_args()
     
     output_dir = Path(__file__).parent / args.output
+
+    if args.rebuild_metadata:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        metadata_path = output_dir / "metadata.json"
+        metadata = rebuild_metadata(output_dir=output_dir, base_seed=args.seed)
+        metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+        print(f"✓ Rebuilt metadata: {metadata_path}")
+        return
     
     asyncio.run(
         generate_all_benchmarks(

@@ -4,9 +4,14 @@ This directory contains benchmark generation and processing tools for the Lost a
 
 ## Setup
 
+Run these commands from the repository root.
+
 1. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   python3 -m venv .venv
+   source .venv/bin/activate
+   python -m pip install -r benchmarks/requirements.txt
+   python -m playwright install chromium
    ```
 
 2. Install poppler (required for PDF processing):
@@ -30,21 +35,72 @@ This directory contains benchmark generation and processing tools for the Lost a
 Generate synthetic insurance claim PDFs:
 
 ```bash
-python generate_claims_benchmark.py
+python benchmarks/generate_claims_benchmark.py
 ```
+
+If you need to regenerate `claims/metadata.json` (without regenerating PDFs/HTML/JSON), run:
+
+```bash
+python benchmarks/generate_claims_benchmark.py --rebuild-metadata
+```
+
+## Problem Matrix (Which files have which problems)
+
+The authoritative mapping of `instance_id -> problems` lives in the generated `<output_dir>/metadata.json` under `instances[]`.
+
+Each instance is generated in **two formats** (`detailed` and `table`) and each format produces:
+
+- **PDF**: `<instance_id>.pdf`
+- **HTML**: `<instance_id>.html`
+- **Ground truth**: `<instance_id>.json`
+
+Below is the expected problem mapping based on `BENCHMARK_CONFIG` (the instance number cycles through the tier’s problem combinations).
+
+### Easy (`easy_10_XXX_{detailed,table}`)
+
+| Instance numbers | Enabled problems |
+|---|---|
+| `001, 006, 011` | `multi_row` |
+| `002, 007, 012` | `page_breaks` |
+| `003, 008, 013` | `multi_row`, `page_breaks` |
+| `004, 009, 014` | `duplicates` |
+| `005, 010, 015` | `multi_row`, `duplicates` |
+
+### Medium (`medium_25_XXX_{detailed,table}`)
+
+| Instance numbers | Enabled problems |
+|---|---|
+| `001, 005, 009` | `page_breaks`, `multi_row`, `duplicates` |
+| `002, 006, 010` | `page_breaks`, `multi_row`, `multiple_tables` |
+| `003, 007, 011` | `multi_row`, `duplicates`, `multiple_tables` |
+| `004, 008, 012` | `page_breaks`, `duplicates`, `multiple_tables` |
+
+### Hard (`hard_50_XXX_{detailed,table}`)
+
+| Instance numbers | Enabled problems |
+|---|---|
+| `001, 004, 007` | `page_breaks`, `multi_row`, `duplicates`, `multiple_tables`, `multi_column` |
+| `002, 005, 008` | `page_breaks`, `multi_row`, `duplicates`, `multiple_tables`, `merged_cells` |
+| `003, 006` | `page_breaks`, `multi_row`, `duplicates`, `multi_column`, `merged_cells` |
+
+### Extreme (`extreme_100_XXX_{detailed,table}`)
+
+| Instance numbers | Enabled problems |
+|---|---|
+| `001-005` | `page_breaks`, `multi_row`, `duplicates`, `large_doc`, `multiple_tables`, `multi_column`, `merged_cells` |
 
 ## OCR Claims PDFs
 
 Process all PDF files in the `claims/` directory using Gemini:
 
 ```bash
-python ocr_claims_pdfs.py
+python benchmarks/ocr_claims_pdfs.py
 ```
 
 This will:
 - Process all PDF files in parallel
 - Extract text using Google Gemini vision model
-- Save results as `*_ocr.txt` files alongside each PDF
+- Save results as `*_ocr.md` files alongside each PDF
 - Skip files that have already been processed
 - Handle multi-page PDFs efficiently
 
@@ -56,16 +112,16 @@ Run extraction evaluation across Gemini, GPT-4, and Claude:
 
 ```bash
 # Full evaluation (all models, all samples)
-python evaluate_models.py
+python benchmarks/evaluate_models.py
 
 # Quick test (one sample per tier)
-python evaluate_models.py --quick
+python benchmarks/evaluate_models.py --quick
 
 # Specific models only
-python evaluate_models.py --models gemini gpt4
+python benchmarks/evaluate_models.py --models gemini gpt4
 
 # Specific tiers/formats
-python evaluate_models.py --tiers easy medium --formats detailed
+python benchmarks/evaluate_models.py --tiers easy medium --formats detailed
 ```
 
 Results are saved to `results/`:

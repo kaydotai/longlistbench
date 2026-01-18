@@ -27,7 +27,7 @@ try:
 except ImportError as e:
     print(f"Error: Required packages not installed: {e}")
     print("Please install them with:")
-    print("  pip install google-genai tenacity pillow pdf2image python-dotenv")
+    print("  python -m pip install google-genai tenacity pillow pdf2image python-dotenv")
     print("\nYou may also need to install poppler:")
     print("  macOS: brew install poppler")
     print("  Linux: apt-get install poppler-utils")

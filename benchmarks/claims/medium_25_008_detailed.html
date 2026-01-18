@@ -13,9 +13,15 @@
                 page-break-inside: avoid;
                 break-inside: avoid-page;
             }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
             .page-break {
-                page-break-after: always;
-                break-after: page;
+                page-break-before: always;
+                break-before: page;
+                page-break-after: auto;
+                break-after: auto;
             }
         }
         body {
@@ -24,6 +30,8 @@
             line-height: 1.3;
             margin: 0;
             padding: 10px;
+            background-color: #fff;
+            color: #000;
         }
         .header {
             margin-bottom: 15px;
@@ -47,6 +55,28 @@
             page-break-inside: avoid;
             break-inside: avoid;
             overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
         }
         .incident-header {
             background-color: #e8e8e8;
@@ -110,9 +140,10 @@
         .page-break {
             page-break-before: always;
             break-before: page;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
         }
         .claimants-list {
             margin-left: 20px;
@@ -179,7 +210,9 @@
         <div style="margin-left: 20px; font-style: italic;">Mention south Republican history into ground bar human ahead.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -226,7 +259,9 @@
         <div style="margin-left: 20px; font-style: italic;">Result despite wind them design sort knowledge throughout bring arrive produce bar others model apply.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -284,7 +319,9 @@
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rollover on icy highway. Total loss.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -345,7 +382,9 @@
         <div style="margin-left: 20px; font-style: italic;">Result despite wind them design sort knowledge throughout bring arrive produce bar others model apply.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -405,7 +444,9 @@
         <div class="claimants-list">Walker, Hailey<br>Braun, Brent<br>Vega, Diane<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -460,7 +501,9 @@
         <div style="margin-left: 20px; font-style: italic;">Edge set picture process loss grow available note him.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -529,7 +572,9 @@
         <div style="margin-left: 20px; font-style: italic;">Economy society model wide mean with give suggest option create lay why concern matter commercial.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -581,7 +626,9 @@
         <div class="claimants-list">Martin, Brian<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -627,7 +674,9 @@
         <div class="claimants-list">Clark, Benjamin<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -676,7 +725,6 @@
         </tbody>
     </table>
 </div>
-<div class="page-break"></div>
 
 <div class="incident-section">
     <div class="incident-header">
@@ -696,7 +744,9 @@
         <div class="claimants-list">Ray, Michael<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -741,7 +791,9 @@
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -801,7 +853,9 @@
         <div class="claimants-list">Jackson, John<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -830,7 +884,7 @@
     </table>
 </div>
 
-<div class="incident-section">
+<div class="incident-section split-incident">
     <div class="incident-header">
         Incident #30011 (Ref #L230011)
         <span style="float: right;">Liability - Open</span>
@@ -847,8 +901,13 @@
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Smith, Amy<br></div>
     </div>
+    <div class="continued-note">Continued on next page</div>
+    <div class="page-break"></div>
+    <div class="continued-header">Incident #30011 (continued)</div>
+
 
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -900,7 +959,9 @@
         <div class="claimants-list">Ward, Erika<br>Bowman, Kurt<br>Campos, Pamela<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -951,7 +1012,9 @@
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Pallets damaged in transit</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -997,7 +1060,9 @@
         <div style="margin-left: 20px; font-style: italic;">Accept star maintain scientist rather reach rate budget here establish nothing economy difference.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1043,7 +1108,9 @@
         <div class="claimants-list">Simpson, Randall<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1097,7 +1164,9 @@
         <div class="claimants-list">Thompson, Anthony<br>Barrera, Stephanie<br>Frank, Katie<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1149,7 +1218,9 @@
         <div class="claimants-list">Porter, Amanda<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1177,7 +1248,6 @@
         </tbody>
     </table>
 </div>
-<div class="page-break"></div>
 
 <div class="incident-section">
     <div class="incident-header">
@@ -1199,7 +1269,9 @@
         <div style="margin-left: 20px; font-style: italic;">Project camera its drug window military I two because rise either instead cultural.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1258,7 +1330,9 @@
         <div class="claimants-list">Gregory, Brenda<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1304,7 +1378,9 @@
         <div class="claimants-list">Galvan, Denise<br>Dougherty, Cassandra<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1350,7 +1426,9 @@
         <div class="claimants-list">Lynch, Mcgrath and Myers<br>Christensen, Mary<br>Adams, Marissa<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1403,7 +1481,9 @@
         <div class="claimants-list">Brock, Christopher<br></div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1462,7 +1542,9 @@
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1520,7 +1602,9 @@
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Transmission failure during transport</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>
@@ -1574,7 +1658,9 @@
         <div style="margin-left: 20px; font-style: italic;">Number minute collection message result else treatment get doctor computer claim guy piece risk everything.</div>
     </div>
 
+
     <table class="financial-table">
+
         <thead>
             <tr>
                 <th style="text-align: left;">Category</th>

@@ -13,9 +13,15 @@
                 page-break-inside: avoid;
                 break-inside: avoid-page;
             }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
             .page-break {
-                page-break-after: always;
-                break-after: page;
+                page-break-before: always;
+                break-before: page;
+                page-break-after: auto;
+                break-after: auto;
             }
         }
         body {
@@ -24,6 +30,8 @@
             line-height: 1.3;
             margin: 0;
             padding: 10px;
+            background-color: #fff;
+            color: #000;
         }
         .header {
             margin-bottom: 15px;
@@ -47,6 +55,28 @@
             page-break-inside: avoid;
             break-inside: avoid;
             overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
         }
         .incident-header {
             background-color: #e8e8e8;
@@ -110,9 +140,10 @@
         .page-break {
             page-break-before: always;
             break-before: page;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #ccc;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
         }
         .claimants-list {
             margin-left: 20px;
@@ -195,7 +226,7 @@
             <td>09/23/2024</td>
             <td>OH</td>
             <td>Cooley, Timothy</td>
-            <td style="max-width: 200px; white-space: pre-line;">Shortage discovered at delivery</td>
+            <td style="max-width: 200px; white-space: pre-line;">Shortage<br>discovered at delivery</td>
             <td style="text-align: right;">$17,854.49</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$15,794.81</td>
@@ -210,7 +241,7 @@
             <td>04/27/2023</td>
             <td>GA</td>
             <td>Jones, Mark</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV making wide turn, clipped OV on passenger side</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making wide turn,<br>clipped OV on passenger side</td>
             <td style="text-align: right;">$6,934.02</td>
             <td style="text-align: right;">$167.13</td>
             <td style="text-align: right;">$7,101.15</td>
@@ -225,7 +256,7 @@
             <td>05/19/2024</td>
             <td>AR</td>
             <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Engine fire while parked at truck stop</td>
+            <td style="max-width: 200px; white-space: pre-line;">Engine fire while<br>parked at truck stop</td>
             <td style="text-align: right;">$87,969.54</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$85,794.56</td>
@@ -240,7 +271,7 @@
             <td>11/02/2024</td>
             <td>AR</td>
             <td>James, Melissa</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right<br>turn, trailer struck OV</td>
             <td style="text-align: right;">$46,939.05</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$46,939.05</td>
@@ -255,7 +286,7 @@
             <td>06/29/2024</td>
             <td>TX</td>
             <td>Shea, Dana</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV making wide turn, clipped OV on passenger side</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making wide turn,<br>clipped OV on passenger side</td>
             <td style="text-align: right;">$37,779.01</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$14,072.62</td>
@@ -270,7 +301,7 @@
             <td>11/11/2024</td>
             <td>MI</td>
             <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Refrigeration unit failure - spoiled goods</td>
+            <td style="max-width: 200px; white-space: pre-line;">Refrigeration unit failure<br>- spoiled goods</td>
             <td style="text-align: right;">$25,848.50</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$19,406.28</td>
@@ -285,7 +316,7 @@
             <td>11/23/2023</td>
             <td>AZ</td>
             <td>Villegas, Matthew</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV<br>hydroplaned, hit concrete barrier</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$32,320.50</td>
             <td style="text-align: right;">$16,086.86</td>
@@ -300,7 +331,7 @@
             <td>11/09/2024</td>
             <td>TX</td>
             <td>Barrett, Angela</td>
-            <td style="max-width: 200px; white-space: pre-line;">Collision with deer caused front-end damage</td>
+            <td style="max-width: 200px; white-space: pre-line;">Collision with deer<br>caused front-end damage</td>
             <td style="text-align: right;">$86,845.17</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$82,609.48</td>
@@ -315,7 +346,7 @@
             <td>11/20/2024</td>
             <td>FL</td>
             <td>Johnson, Steven</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV at traffic light</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV<br>at traffic light</td>
             <td style="text-align: right;">$27,996.06</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$27,996.06</td>
@@ -330,7 +361,7 @@
             <td>10/27/2024</td>
             <td>FL</td>
             <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Windshield shattered by road debris</td>
+            <td style="max-width: 200px; white-space: pre-line;">Windshield<br>shattered by road debris</td>
             <td style="text-align: right;">$53,868.79</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$50,853.73</td>
@@ -345,7 +376,7 @@
             <td>08/28/2023</td>
             <td>IL</td>
             <td>Sweeney, Julian</td>
-            <td style="max-width: 200px; white-space: pre-line;">Cargo contamination during transport</td>
+            <td style="max-width: 200px; white-space: pre-line;">Cargo<br>contamination during transport</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$29,365.29</td>
             <td style="text-align: right;">$29,365.29</td>
@@ -360,7 +391,7 @@
             <td>07/09/2023</td>
             <td>TN</td>
             <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Engine fire while parked at truck stop</td>
+            <td style="max-width: 200px; white-space: pre-line;">Engine fire while<br>parked at truck stop</td>
             <td style="text-align: right;">$40,883.52</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$38,305.16</td>
@@ -375,7 +406,7 @@
             <td>01/12/2023</td>
             <td>FL</td>
             <td>Velasquez, Elizabeth</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV changing lanes, sideswiped OV</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV<br>changing lanes, sideswiped OV</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$35,122.82</td>
             <td style="text-align: right;">$35,122.82</td>
@@ -390,7 +421,7 @@
             <td>08/20/2024</td>
             <td>NC</td>
             <td>Peterson, Debra</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling tree branch during storm</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling<br>tree branch during storm</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$16,738.72</td>
             <td style="text-align: right;">$14,523.94</td>
@@ -405,7 +436,7 @@
             <td>04/24/2023</td>
             <td>TX</td>
             <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Water damage to freight</td>
+            <td style="max-width: 200px; white-space: pre-line;">Water<br>damage to freight</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$35,835.10</td>
             <td style="text-align: right;">$28,530.50</td>
@@ -420,7 +451,7 @@
             <td>04/29/2024</td>
             <td>TN</td>
             <td>Miller, Daniel</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV<br>hydroplaned, hit concrete barrier</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$7,454.44</td>
             <td style="text-align: right;">$7,454.44</td>
@@ -435,7 +466,7 @@
             <td>01/21/2024</td>
             <td>TN</td>
             <td>Warren, Diane</td>
-            <td style="max-width: 200px; white-space: pre-line;">OV ran stop sign, struck IV broadside</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV ran stop<br>sign, struck IV broadside</td>
             <td style="text-align: right;">$117,443.59</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$102,468.22</td>
@@ -450,7 +481,7 @@
             <td>01/21/2024</td>
             <td>TN</td>
             <td>Warren, Diane</td>
-            <td style="max-width: 200px; white-space: pre-line;">OV ran stop sign, struck IV broadside</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV ran stop<br>sign, struck IV broadside</td>
             <td style="text-align: right;">$117,443.59</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$102,468.22</td>
@@ -465,7 +496,7 @@
             <td>03/05/2023</td>
             <td>IL</td>
             <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling tree branch during storm</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling<br>tree branch during storm</td>
             <td style="text-align: right;">$42,416.18</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$37,913.41</td>
@@ -480,7 +511,7 @@
             <td>04/11/2023</td>
             <td>OH</td>
             <td>Roman, Sarah</td>
-            <td style="max-width: 200px; white-space: pre-line;">OV ran stop sign, struck IV broadside</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV ran stop<br>sign, struck IV broadside</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$107,791.17</td>
             <td style="text-align: right;">$107,791.17</td>
@@ -495,7 +526,7 @@
             <td>10/14/2024</td>
             <td>MI</td>
             <td>Howard, Mary</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV lost control on wet pavement, struck parked OV</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV lost control on<br>wet pavement, struck parked OV</td>
             <td style="text-align: right;">$5,375.50</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">($14,774.71)</td>
@@ -510,7 +541,7 @@
             <td>03/22/2024</td>
             <td>AR</td>
             <td>Glover, Stanley</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling tree branch during storm</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling<br>tree branch during storm</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$16,061.34</td>
             <td style="text-align: right;">$14,918.22</td>
@@ -525,7 +556,7 @@
             <td>01/05/2024</td>
             <td>NY</td>
             <td>Garcia, Hannah</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV making right turn, trailer struck OV</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making right<br>turn, trailer struck OV</td>
             <td style="text-align: right;">$49,781.98</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$40,887.27</td>
@@ -540,7 +571,7 @@
             <td>04/24/2023</td>
             <td>TX</td>
             <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Water damage to freight</td>
+            <td style="max-width: 200px; white-space: pre-line;">Water<br>damage to freight</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$35,835.10</td>
             <td style="text-align: right;">$28,530.50</td>
@@ -555,7 +586,7 @@
             <td>02/03/2024</td>
             <td>PA</td>
             <td>Johnson, Shawna</td>
-            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV to veer into OV</td>
+            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV<br>to veer into OV</td>
             <td style="text-align: right;">$79,581.40</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$44,674.94</td>
@@ -570,7 +601,7 @@
             <td>01/24/2023</td>
             <td>TX</td>
             <td>Lawson, Steven</td>
-            <td style="max-width: 200px; white-space: pre-line;">Cargo stolen from locked trailer overnight</td>
+            <td style="max-width: 200px; white-space: pre-line;">Cargo stolen from<br>locked trailer overnight</td>
             <td style="text-align: right;">$44,500.86</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$44,500.86</td>
@@ -585,7 +616,7 @@
             <td>05/16/2023</td>
             <td>CA</td>
             <td>Holt, Alexandra</td>
-            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes into IV, causing collision</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes<br>into IV, causing collision</td>
             <td style="text-align: right;">$0.00</td>
             <td style="text-align: right;">$38,585.15</td>
             <td style="text-align: right;">$10,934.09</td>
