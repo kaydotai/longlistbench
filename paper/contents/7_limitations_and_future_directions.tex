@@ -1,2 +1,17 @@
-% Limitations of our dataset? 
-% I am actually not sure, maybe the fact that its syntetic?
+\subsection{Limitations}
+Lost-and-Found Entities is designed to be a practical benchmark for long-list extraction in semi-structured business documents, but it has several limitations.
+\begin{itemize}
+    \item \textbf{Synthetic generation}: while the schema and failure modes are motivated by production documents, the records and layouts are programmatically generated. This may under-represent rare formatting conventions and highly idiosyncratic carrier templates.
+    \item \textbf{OCR stack}: OCR transcripts are produced by a single vision-language model with a fixed prompt. Classical OCR systems and alternative prompts may yield different error distributions.
+    \item \textbf{Domain scope}: the current instances focus on trucking insurance loss runs. Generalization to other long-list domains (invoices, purchase orders, medical billing, financial statements) should be validated.
+    \item \textbf{Metric granularity}: the current reported metric matches at the incident identifier level. Accurately extracting all fields for each incident (and handling duplicates as first-class entities) remains an open evaluation extension.
+\end{itemize}
+
+\subsection{Future directions}
+We see multiple immediate extensions that would strengthen the benchmark and increase its utility.
+\begin{itemize}
+    \item \textbf{Field-level scoring}: incorporate per-field accuracy for the full incident schema and explicitly evaluate duplicate detection and normalization.
+    \item \textbf{Broader OCR conditions}: add scans with blur/noise, different DPI settings, and non-LLM OCR baselines.
+    \item \textbf{Broader document families}: add additional carrier templates and long-list document types beyond loss runs.
+    \item \textbf{Scalable extraction protocols}: benchmark chunking, retrieval-augmented extraction, and layout-aware reconstruction strategies for the extreme tier (500 incidents).
+\end{itemize}

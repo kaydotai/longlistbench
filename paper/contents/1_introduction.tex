@@ -1,7 +1,11 @@
-The introduction should provide context for your research, explain the problem you're addressing, and outline the contributions of your work. Recent studies have explored various approaches to this problem~\cite{author2023title,author2023conference}. 
+Long-list entity extraction---recovering dozens to hundreds of repeated records from semi-structured documents---is a core requirement for document automation in domains such as insurance, finance, and procurement. While recent advances in document understanding models (e.g., layout-aware pretraining~\cite{xu2020layoutlm} and OCR-free approaches~\cite{kim2022donut}) and general-purpose LLMs have improved extraction quality, robust evaluation of long-list scenarios remains limited.
+
+Many established benchmarks focus on key-value style extraction or relatively short, form-like documents (e.g., FUNSD~\cite{jaume2019funsd}) or narrow document types such as receipts (SROIE~\cite{huang2021sroie}). More recent datasets such as DocILE~\cite{simsa2023docile} include business documents and line items, but long lists in the wild often exhibit additional failure modes: repeated entities, page breaks, multi-column reading order, irrelevant tables, and table constructs such as merged cells. VRDU~\cite{wang2023vrdu} highlights that hierarchical and long-list fields remain challenging for LLM-based extraction.
+
+We introduce Lost-and-Found Entities, a benchmark designed to stress-test long-list extraction on loss run documents under systematically injected document phenomena and OCR noise.
 
 \subsection{Background and Motivation}
-Describe the background of the problem and why it's important to solve. As noted by Smith~\cite{author2022book}, this area has seen significant development in recent years. Online resources~\cite{author2023web} provide additional context for understanding the scope of this challenge.
+In production workflows, a single loss run PDF can contain many incidents and associated financial breakdowns. Systems must extract a complete list of claim records (not merely a few key-value pairs) while handling complex layouts and noisy OCR. We aim to support research on extraction methods that remain reliable as list length grows and as layout artifacts accumulate.
 
 % Motivation:
 % Growing popularity of AI automations. 
@@ -10,23 +14,29 @@ Describe the background of the problem and why it's important to solve. As noted
 % The biggest ROI comes from working with large documents as an extraction pipeline developed ones can be used to process thousands of entries which would take days for humans (some more study on time working with docs), those large docs would have list entities. 
 
 \subsection{Research Questions}
-State your main research questions or hypotheses.
+This work is organized around three practical questions:
+\begin{itemize}
+    \item How do common long-list document phenomena (page breaks, duplicates, multi-row cells, multi-column layouts, irrelevant tables, merged cells) affect extraction quality?
+    \item To what extent are end-to-end failures attributable to OCR transcription versus downstream extraction?
+    \item How do strong off-the-shelf LLMs perform under a simple, reproducible zero-shot protocol?
+\end{itemize}
 
 % There is no good benchmark that focuses completely on long list extraction. Main focus is Key Value extraction. (VRDU?)
 
 \subsection{Contributions}
-Clearly list the main contributions of this work:
+We make the following contributions:
 \begin{itemize}
-    \item First contribution
-    \item Second contribution
-    \item Third contribution
+    \item A reproducible benchmark generation pipeline that produces paired ground truth JSON, rendered PDFs, and OCR transcripts.
+    \item A dataset of 80 documents (40 detailed, 40 table) containing 6{,}828 incident rows across four difficulty tiers, with an extreme tier reaching 500 incidents per document.
+    \item A taxonomy of seven injected problem types and evaluation scripts for incident-level scoring and OCR identifier coverage.
+    \item Baseline results for GPT-4o and Claude Sonnet 4 under a shared prompt, highlighting remaining gaps in long-list extraction.
 \end{itemize}
 
 % Comprehensive dataset for long list eval
 % Standardirized set of tools for eval
 
 \subsection{Paper Organization}
-The rest of this paper is organized as follows: Section~\ref{sec:conclusion} concludes the paper and discusses future work.
+Section~\ref{sec:related-work} reviews relevant datasets and models. Section~\ref{sec:methodology} describes benchmark construction and the problem taxonomy. Section~\ref{sec:evaluation} presents the evaluation protocol. Section~\ref{sec:results} reports baseline results. Section~\ref{sec:limitations} discusses limitations and future directions, and Section~\ref{sec:conclusion} concludes.
 
 % weird, maybe delete it, need to compare to some paper. 
 % Use CORD as sample cause it was accepted to NeurIPS

@@ -3,6 +3,23 @@
 % accumulative generation (continue)
 % Test Redacto - get their attention 
 
-% tell about eval tools created for this (they will need to be added to this repo and open sourced) 
+We evaluate systems on the task of extracting a list of claim records from the OCR transcript of each PDF. The benchmark provides both the OCR transcript and a structured JSON ground truth for each document.
 
-% results of evals go into next chapter
+\subsection{OCR transcription}
+All PDFs are converted to Markdown using a Gemini vision model (\texttt{benchmarks/ocr\_claims\_pdfs.py}). Each page is rendered to an image and transcribed with a system prompt that emphasizes preserving layout, spacing, and tables. In particular, tables are emitted in a CSV-like form inside Markdown, and the output is concatenated across pages.
+
+\subsection{LLM extraction protocol}
+We provide a lightweight, zero-shot evaluation harness (\texttt{benchmarks/evaluate\_models.py}) that applies the same extraction prompt to multiple LLM providers and requires the model to return a JSON array of claim objects. The prompt requests seven fields (incident number, company name, date of loss, status, driver, coverage type, and total incurred). Predictions are stored as \texttt{\{sample\}\_\{model\}\_predicted.json}, and aggregate reports are exported as \texttt{evaluation\_report.json} and \texttt{evaluation\_report.md}.
+
+\subsection{Incident-level matching and metrics}
+For scoring we use the incident number as a primary identifier. Incident numbers are normalized by stripping common prefixes (e.g., \texttt{\#}, \texttt{Incident \#}). Let $G$ be the list of ground-truth records and $P$ be the list of predicted records. We compute:
+\begin{align}
+\mathrm{found} &= |\mathcal{I}(G) \cap \mathcal{I}(P)|,\\
+\mathrm{recall} &= \frac{\mathrm{found}}{|G|},\\
+\mathrm{precision} &= \frac{\mathrm{found}}{|P|},\\
+\mathrm{F1} &= \frac{2\,\mathrm{precision}\,\mathrm{recall}}{\mathrm{precision}+\mathrm{recall}},
+\end{align}
+where $\mathcal{I}(\cdot)$ denotes the set of normalized incident identifiers present in the list. We additionally report missing and extra incident identifiers to support qualitative error analysis.
+
+\subsection{OCR identifier coverage baseline}
+To separate OCR failures from extraction failures, we run a deterministic identifier coverage check (\texttt{benchmarks/validate\_ocr\_vs\_golden.py}) which verifies whether incident numbers and reference numbers from the ground truth appear verbatim in the OCR transcript.
