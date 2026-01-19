@@ -1,0 +1,127 @@
+# Page 1
+
+Great West Casualty                            Loss Run - Detailed
+7845 Cortez Neck, Lake Matthewberg, ID                      Format
+56211
+Phone: 938-564-921
+
+Account: Cortez Express Inc, Acct. # A0166489
+Policy Period: 07/01/2023 - 07/01/2024 (Trucking)
+Run Date/Time: 06/10/2024, 04:30 PM
+
+____________________________________________________________________________________________________
+
+Company Directory (Reference Only)
+
+Employee,Department,Email,Phone
+"Andrea Anderson","Tree surgeon",harrellkristina@example.com,287-315-0576
+
+Employee,Department,Email,Phone
+"Christian Lozano","International aid/de",ricejillian@example.net,286-847-3090
+"Austin Fields","Loss adjuster, chart",kimberly83@example.org,"+1-956-521-5063x1537"
+"Veronica Little","Newspaper journalist",jenniferbaker@example.org,001-779-627-0404x922
+"Tracy Gilbert","Investment banker, c",cherylbarton@example.net,"+1-839-207-1120x797"
+"Karen Gutierrez",Tax inspector,slee@example.com,370.535.5463
+"Andrew Aguilar",Trading standards of,youngdylan@example.net,339-246-3099
+
+____________________________________________________________________________________________________
+
+Incident #,Reference #,Company,Coverage,Status,Policy #,Loss Date,State,Driver,Description,Reserve,Paid,Incurred
+#30001,L230001,Cortez Express Inc,Inland Marine,Closed,L23A7361,09/27/2023,TX,"Potts, Elijah",Equipment damaged during loading,$0.00,"$31,984.44","$23,691.38"
+#30002,L240002,Eagle Transport Group,Liability,Closed,L24A8163,12/18/2024,PA,"Anderson, Cheryl","IV making wide turn, clipped OV on passenger side",$0.00,"$27,863.91","$27,863.91"
+#30003,L240003,Morris Logistics Group,Liability,Open,L24A6989,09/01/2024,NY,"Short, Shannon","OV changed lanes into IV, causing collision","$25,093.81",$0.00,"$14,868.67"
+#30004,L240004,Port Stacyville Freight,Cargo,Closed,L24A3591,02/15/2024,AZ,-,Missing items from sealed trailer,$0.00,"$37,946.37","$37,946.37"
+#30005,L240005,Atlas Cargo Co,Inland Marine,Closed,L24A5252,08/02/2024,OH,"Hall, Cynthia",Insured transporting vehicle was damaged,$0.00,$939.30,$939.30
+#30006,L240006,Jones Freight Co,Liability,Closed,L24A5451,08/05/2024,OH,"Ryan, Christian","IV making right turn, trailer struck OV",$0.00,"$40,826.34","$40,826.34"
+#30007,L240007,Thompson Logistics Inc,Liability,Open,L24A1910,12/19/2024,TN,"Jones, Michael","IV brakes failed, rear-ended OV","$54,294.81",$0.00,"$42,718.49"
+#30008,L230008,Newman Transport LLC,Liability,Open,L23A6013,05/24/2023,PA,"Melton, Tara","IV merging onto highway, collided with OV","$29,671.57",$0.00,"$9,057.19"
+#30009,L240009,Delta Express Co,Liability,Open,L24A4355,04/19/2024,AZ,"Garcia, Mary","Trailer door detached, struck adjacent vehicle","$56,205.01",$0.00,"$50,230.60"
+#30006,L240006,Jones Freight Co,Liability,Closed,L24A5451,08/05/2024,OH,"Ryan, Christian","IV making right turn, trailer struck OV",$0.00,"$40,826.34","$40,826.34"
+#30010,L230010,North Paulfort Transport,Liability,Closed,L23A3064,01/23/2023,AZ,"Russell, Joseph","IV hydroplaned, hit concrete barrier",$0.00,"$32,593.15","$25,829.60"
+#30011,L230011,Horizon Cargo Group,Inland Marine,Closed,L23A6378,05/29/2023,TX,-,Cargo stolen from locked trailer overnight,$0.00,"$1,282.12","$1,282.12"
+
+# Page 2
+
+Incident #,Reference #,Company,Coverage,Status,Policy #,Loss Date,State,Driver,Description,Reserve,Paid,Incurred
+#30029,L230029,Liberty Hauling Inc,Liability,Open,L23A2261,08/17/2023,NC,"Todd, Martha",Tire blowout caused IV to veer into OV,"$142,128.04",$0.00,"$142,128.04"
+#30012,L240012,Kellyberg Freight,Liability,Closed,L24A9349,01/18/2024,PA,"Rodriguez, Pamela","OV changed lanes into IV, causing collision",$0.00,"$49,344.87","$34,075.17"
+#30013,L230013,Michaelberg Cargo,Liability,Open,L23A8632,11/02/2023,OH,"Joseph, Erika","IV merging onto highway, collided with OV","$50,661.41",$0.00,"$45,500.54"
+#30014,L230014,Pioneer Freight LLC,Liability,Open,L23A3524,03/07/2023,NY,"Hernandez, Bradley","IV hydroplaned, hit concrete barrier","$55,278.57",$0.00,"$55,278.57"
+#30015,L230015,Roberts Express Co,Liability,Closed,L23A6014,05/01/2023,NY,"Stanley, Corey","IV changing lanes, sideswiped OV",$0.00,"$13,618.67","($4,668.75)"
+#30016,L240016,Garcia Freight Inc,Physical Damage,Open,L24A2913,11/07/2024,MI,-,Trailer damaged in loading dock collision","$99,142.20",$0.00,"$97,506.40"
+#30017,L230017,Foster Logistics LLC,Liability,Closed,L23A3227,10/10/2023,OK,"Miller, Katie","IV lost control on wet pavement, struck bridge support",$0.00,"$32,504.10","$32,504.10"
+#30018,L230018,Mora Logistics Inc,Liability,Open,L23A3277,07/21/2023,PA,"Warren, Kelly","IV backing into loading dock, hit guardrail","$35,511.61","$1,663.94","$13,040.08"
+#30019,L230019,Titan Freight Inc,Liability,Open,L23A7353,08/10/2023,TN,"Russell, Amy","IV lost control on wet pavement, struck bridge support","$20,788.10","$1,154.24","$21,942.34"
+#30020,L240020,Delta Express Group,Liability,Closed,L24A7335,04/29/2024,TN,"Hamilton, Ryan","IV changing lanes, sideswiped OV",$0.00,"$37,348.17","$37,348.17"
+#30021,L230021,North Scott Transport,Liability,Open,L23A3818,04/11/2023,AR,"Wright, Jerry","OV changed lanes into IV, causing collision","$181,082.16",$0.00,"$172,325.32"
+#30023,L230023,Smithview Freight,Cargo,Closed,L23A1406,06/06/2023,MO,"Rowland, Joseph",Shortage discovered at delivery,$0.00,"$20,013.94","$20,013.94"
+#30022,L240022,Colemanstad Hauling,Liability,Open,L24A6232,04/07/2024,IL,"Finley, Jacob","IV lost control on wet pavement, struck bridge support","$148,129.01",$0.00,"$148,129.01"
+#30023,L230023,Smithview Freight,Cargo,Closed,L23A1406,06/06/2023,MO,"Rowland, Joseph",Shortage discovered at delivery,$0.00,"$20,013.94","$20,013.94"
+,,,,,,,,,IV brakes failed; rear-ended OV,,,
+,,,,,,,,,IV brakes failed; rear-ended OV,,,
+,,,,,,,,,Continued on next page,,,
+#30024,L230024,Lake Heathermouth Logistics,Liability,Closed,L23A7522,05/30/2023,OK,"Stewart, Joshua",,$0.00,"$46,168.71","$46,168.71"
+
+# Page 3
+
+Incident #,Reference #,Company,Coverage,Status,Policy #,Loss Date,State,Driver,Description,Reserve,Paid,Incurred
+#30001,L230001,Cortez Express Inc,Inland Marine,Closed,L23A7361,09/27/2023,TX,"Potts, Elijah",Equipment damaged during loading,$0.00,"$31,984.44","$23,691.38"
+#30025,L230025,Cervantes Freight LLC,Liability,Closed,L23A2086,08/23/2023,MI,"Baker, Crystal","IV backing, struck parked bridge support",$0.00,"$115,009.68","$89,741.82"
+#30026,L240026,Summit Express LLC,Inland Marine,Closed,L24A6776,06/04/2024,MO,"Vincent, Dennis",Load shift caused cargo damage,$0.00,"$25,126.52","$21,003.60"
+#30027,L230027,Li Express LLC,Liability,Open,L23A1317,10/27/2023,MI,"Wilson, Michael",Tire blowout caused IV to veer into OV,"$146,535.55","$8,124.32","$154,659.87"
+#30028,L230028,Atlas Logistics Co,Inland Marine,Open,L23A4053,02/24/2023,PA,-,Insured transporting vehicle was damaged,"$55,543.25",$0.00,"$47,365.84"
+#30029,L230029,Liberty Hauling Inc,Liability,Open,L23A2261,08/17/2023,NC,"Todd, Martha",Tire blowout caused IV to veer into OV,"$142,128.04",$0.00,"$142,128.04"
+#30030,L230030,Meghanfort Express,Inland Marine,Closed,L23A1475,01/08/2023,MI,-,Equipment damaged during loading,$0.00,"$11,788.93","$4,301.08"
+#30031,L240031,Horizon Freight LLC,Liability,Open,L24A5796,10/17/2024,NY,"Sanchez, James","OV ran stop sign, struck IV broadside","$52,147.09","$9,189.34","$30,172.97"
+#30032,L230032,Shepardburgh Cargo,Inland Marine,Closed,L23A6039,05/04/2023,NY,"Johnson, Sheila",Cargo stolen from locked trailer overnight,$0.00,"$3,904.00","$3,904.00"
+#30033,L240033,Robertfort Express,Liability,Open,L24A7418,07/21/2024,PA,"Liu, Rodney","IV backing into loading dock, hit concrete barrier","$43,248.11",$0.00","$37,609.30"
+#30034,L230034,Titan Transport Group,Liability,Open,L23A4937,11/02/2023,MI,"Hoover, Jeremy","IV making wide turn, clipped OV on passenger side","$137,192.70","$1,062.25","$138,254.95"
+#30035,L230035,West Jenniferstad Hauling,Liability,Closed,L23A6082,03/02/2023,IL,"Liu, Madeline","IV brakes failed, rear-ended OV",$0.00,"$18,970.04","$3,683.31"
+#30036,L240036,Liberty Transport Inc,Liability,Open,L24A1462,04/01/2024,CA,"Mcmahon, Martin","OV changed lanes into IV, causing collision","$41,855.71","$11,828.55","$53,684.26"
+#30037,L240037,Delta Freight Co,Liability,Closed,L24A1836,11/21/2024,NY,"Chavez, Cody","IV lost control on wet pavement, struck concrete barrier",$0.00,"$36,673.91","$36,673.91"
+#30038,L230038,Strickland Hauling Inc,Liability,Closed,L23A8414,04/05/2023,OK,"Shelton, John","IV merging onto highway, collided with OV",$0.00,"$20,339.30","$4,359.05"
+#30039,L230039,Gomezmouth Freight,Inland Marine,Open,L23A4412,10/02/2023,NC,"Esparza, Misty",Refrigeration unit failure - spoiled goods,"$53,299.66",$0.00","$53,299.66"
+#30040,L230040,Lake Dustin Cargo,Physical Damage,Open,L23A9120,08/30/2023,NC,-,IV struck by falling tree branch during storm,"$60,265.44",$0.00","$56,144.42"
+#30041,L240041,Liberty Transport Group,Physical Damage,Open,L24A2603,09/08/2024,NC,-,Trailer damaged in loading dock collision,"$29,607.88",$0.00","$26,437.20"
+#30042,L240042,Jamesstad Express,Liability,Open,L24A8949,08/22/2024,PA,"Bradley, Anthony",Tire blowout caused IV to veer into OV,"$28,204.33",$0.00","$28,204.33"
+#30043,L230043,Ramirezton Freight,Liability,Closed,L23A1983,04/09/2023,GA,"Douglas, Carlos","IV lost control on wet pavement, struck concrete barrier",$0.00,"$105,723.15","$89,859.36"
+
+# Page 4
+
+Incident #,Reference #,Company,Coverage,Status,Policy #,Loss Date,State,Driver,Description,Reserve,Paid,Incurred
+#30044,L240044,Delta Express Group,Liability,Closed,L24A3588,08/12/2024,NC,"Rush, Taylor",Tire blowout caused IV to veer into OV,$0.00,"$42,367.12","$18,142.79"
+#30045,L230045,South Josephburgh Cargo,Inland Marine,Closed,L23A4093,03/17/2023,NY,"Gibson, Randall",Cargo damaged during transport - water intrusion,$0.00,"$47,749.59","$38,109.98"
+#30046,L230046,Eagle Transport Inc,Liability,Closed,L23A6260,02/28/2023,OH,"Tran, Tony","OV ran stop sign, struck IV broadside",$0.00,"$13,091.46","$13,091.46"
+#30023,L230023,Smithview Freight,Cargo,Closed,L23A1406,06/06/2023,MO,"Rowland, Joseph",Shortage discovered at delivery,$0.00,"$20,013.94","$20,013.94"
+#30047,L230047,Wells Cargo Co,Liability,Closed,L23A5594,12/02/2023,CA,"Ali, Jared","IV lost control on wet pavement, struck guardrail",$0.00,"$76,952.64","$69,531.34"
+#30048,L240048,Brownfurt Express,Liability,Closed,L24A3069,05/14/2024,MI,"Sanders, Douglas","IV backing into loading dock, hit parked OV",$0.00,"$97,582.67","$87,268.02"
+#30049,L240049,Pioneer Express LLC,Liability,Open,L24A1515,11/16/2024,MO,"Miller, Edwin","IV brakes failed, rear-ended ov","$56,754.34",$0.00,"$39,636.86"
+#30050,L240050,Titan Express Group,Inland Marine,Closed,L24A7518,07/16/2024,NC,"Wong, Jessica",Equipment damaged during loading,$0.00,"$21,343.66","$21,343.66"
+
+                                                        Employee,Department,Email,Phone
+                                                        Christina Nelson,Production manager,psolomon@example.com,600-657-4985x5979
+
+**Company Directory (Reference Only)**
+
+Employee,Department,Email,Phone
+John Barnes,"Surveyor, commercial",loriramos@example.net,+1-565-202-8311x00090
+Summer Barnes,"Engineer, maintenanc",shaneferguson@example.com,001-443-470-4655x21617
+Joseph Howard,Corporate investment,jeffburton@example.com,318-631-9415x34802
+Erin Vasquez,Animator,palmerkevin@example.com,(740) 786-0331
+Emily Smith,Associate Professor,boltonpatricia@example.net,001-216-481-9456x91565
+Christina Smith,Computer games devel,jessicaodonnell@example.com,001-542-798-7435
+Jackie Smith,"Teacher, English as",jrichardson@example.com,749.876.9515
+Joseph Peterson,Animal nutritionist,garrett87@example.org,+1-846-738-9438x5417
+
+**REPORT TOTALS**
+
+,Reserve,Paid,Recovered,Total Incurred
+Grand Total,"$1,744,768.40","$1,154,918.06","$349,984.17","$2,549,702.29"
+
+TOTAL NUMBER OF INCIDENTS: 55
+
+# Page 5
+
+____________________________________________________________________________________________________
+                        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+

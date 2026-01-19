@@ -7,6 +7,7 @@ Saves OCR results as Markdown files alongside the PDFs.
 import asyncio
 import io
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -143,29 +144,39 @@ async def ocr_image_async(client: genai.Client, image: Image.Image, model_name: 
     return response.text or ""
 
 
-async def ocr_page_with_gemini(client: genai.Client, image: Image.Image, page_num: int, model_name: str = "gemini-2.0-flash") -> str:
+async def ocr_page_with_gemini(client: genai.Client, image: Image.Image, page_num: int, model_names: list[str]) -> str:
     """Send a single image to Gemini for OCR and return Markdown text."""
-    try:
-        page_text = await ocr_image_async(client, image, model_name)
-        return f"# Page {page_num}\n\n{page_text}\n\n"
-    except Exception as e:
-        print(f"Warning: Page {page_num} failed after all retries: {e}")
-        return f"# Page {page_num}\n\n[Error: {e}]\n\n"
+    last_error: Exception | None = None
+    for model_name in model_names:
+        try:
+            page_text = await ocr_image_async(client, image, model_name)
+            if page_text.strip():
+                return f"# Page {page_num}\n\n{page_text}\n\n"
+            last_error = ValueError(f"Empty response (model={model_name})")
+        except Exception as e:
+            last_error = e
+            print(f"Warning: Page {page_num} failed with model={model_name}: {e}")
+
+    print(f"Warning: Page {page_num} failed after all model fallbacks: {last_error}")
+    return f"# Page {page_num}\n\n[Error: {last_error}]\n\n"
 
 
-async def process_page_async(client: genai.Client, pdf_path: Path, page_num: int, semaphore: asyncio.Semaphore, model_name: str = "gemini-2.0-flash", dpi: int = 200) -> tuple[int, str]:
+async def process_page_async(client: genai.Client, pdf_path: Path, page_num: int, semaphore: asyncio.Semaphore, model_names: list[str], dpi: int = 200) -> tuple[int, str]:
     """Process a single page with semaphore for concurrency control."""
     async with semaphore:
         image = convert_pdf_page(pdf_path, page_num, dpi=dpi)
         if image is None:
             return (page_num, f"# Page {page_num}\n\n[Error: Could not convert page]\n\n")
         
-        page_text = await ocr_page_with_gemini(client, image, page_num, model_name)
+        page_text = await ocr_page_with_gemini(client, image, page_num, model_names)
         return (page_num, page_text)
 
 
-async def process_pdf_async(client: genai.Client, pdf_path: Path, output_path: Path, max_concurrent: int = 3, model_name: str = "gemini-2.0-flash", dpi: int = 200) -> bool:
+async def process_pdf_async(client: genai.Client, pdf_path: Path, output_path: Path, max_concurrent: int = 3, model_names: list[str] | None = None, dpi: int = 200) -> bool:
     """Process PDF pages with async concurrency control."""
+    if not model_names:
+        model_names = ["gemini-2.0-flash"]
+
     total_pages = get_page_count(pdf_path)
     if total_pages is None:
         return False
@@ -177,7 +188,7 @@ async def process_pdf_async(client: genai.Client, pdf_path: Path, output_path: P
     
     # Create tasks for all pages
     tasks = [
-        process_page_async(client, pdf_path, page_num, semaphore, model_name, dpi)
+        process_page_async(client, pdf_path, page_num, semaphore, model_names, dpi)
         for page_num in range(1, total_pages + 1)
     ]
     
@@ -193,12 +204,12 @@ async def process_pdf_async(client: genai.Client, pdf_path: Path, output_path: P
     return True
 
 
-def process_pdf(client: genai.Client, pdf_path: Path, output_path: Path, max_concurrent: int = 3, model_name: str = "gemini-2.0-flash", dpi: int = 200) -> bool:
+def process_pdf(client: genai.Client, pdf_path: Path, output_path: Path, max_concurrent: int = 3, model_names: list[str] | None = None, dpi: int = 200) -> bool:
     """Synchronous wrapper for async PDF processing."""
-    return asyncio.run(process_pdf_async(client, pdf_path, output_path, max_concurrent, model_name, dpi))
+    return asyncio.run(process_pdf_async(client, pdf_path, output_path, max_concurrent, model_names, dpi))
 
 
-def main():
+async def main_async() -> None:
     import argparse
     
     parser = argparse.ArgumentParser(description="OCR PDF files using Google Gemini")
@@ -209,9 +220,27 @@ def main():
         help="Gemini model to use (default: gemini-2.0-flash, try: gemini-3-flash-preview)",
     )
     parser.add_argument(
+        "--fallback-models",
+        type=str,
+        default="gemini-2.5-flash,gemini-3-pro-preview",
+        help="Comma-separated fallback models to try if a page fails (default: gemini-2.5-flash,gemini-3-pro-preview)",
+    )
+    parser.add_argument(
         "--file", "-f",
         type=str,
         help="Process a specific PDF file (e.g., 'extreme_100_001_table.pdf')",
+    )
+    parser.add_argument(
+        "--tiers",
+        nargs="+",
+        choices=["easy", "medium", "hard", "extreme"],
+        help="Only process PDFs whose filename starts with one of these tiers",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=0,
+        help="Only process the first N PDFs after filtering (default: 0 = no limit)",
     )
     parser.add_argument(
         "--output-suffix",
@@ -230,8 +259,20 @@ def main():
         default=200,
         help="DPI for PDF to image conversion (default: 200, try 300-400 for dense tables)",
     )
+    parser.add_argument(
+        "--max-concurrent",
+        type=int,
+        default=3,
+        help="Max concurrent OCR requests per PDF (default: 3)",
+    )
     
     args = parser.parse_args()
+
+    fallback_models = [m.strip() for m in re.split(r"[\s,]+", args.fallback_models) if m.strip()]
+    model_chain: list[str] = []
+    for m in [args.model, *fallback_models]:
+        if m and m not in model_chain:
+            model_chain.append(m)
     
     # Setup paths
     script_dir = Path(__file__).parent
@@ -250,13 +291,19 @@ def main():
         pdf_files = [pdf_path]
     else:
         pdf_files = sorted(claims_dir.glob("*.pdf"))
+
+    if args.tiers and not args.file:
+        pdf_files = [p for p in pdf_files if any(p.name.startswith(f"{tier}_") for tier in args.tiers)]
+
+    if args.limit and args.limit > 0:
+        pdf_files = pdf_files[: args.limit]
     
     if not pdf_files:
         print(f"No PDF files found in {claims_dir}")
         sys.exit(1)
     
     print(f"Found {len(pdf_files)} PDF file(s) to process")
-    print(f"Model: {args.model}, DPI: {args.dpi}")
+    print(f"Models: {' -> '.join(model_chain)}, DPI: {args.dpi}")
     print()
     
     # Setup Gemini
@@ -280,7 +327,14 @@ def main():
         
         print(f"[{i}/{len(pdf_files)}] Processing {pdf_path.name}")
         
-        success = process_pdf(client, pdf_path, output_path, max_concurrent=3, model_name=args.model, dpi=args.dpi)
+        success = await process_pdf_async(
+            client,
+            pdf_path,
+            output_path,
+            max_concurrent=args.max_concurrent,
+            model_names=model_chain,
+            dpi=args.dpi,
+        )
         
         if success:
             print(f"  ✓ Saved to: {output_path.name}")
@@ -297,6 +351,10 @@ def main():
     print(f"  Success: {success_count}/{len(pdf_files)}")
     print(f"  Failed:  {fail_count}/{len(pdf_files)}")
     print(f"\nRun validate_ocr_vs_golden.py to check coverage.")
+
+
+def main() -> None:
+    asyncio.run(main_async())
 
 
 if __name__ == "__main__":

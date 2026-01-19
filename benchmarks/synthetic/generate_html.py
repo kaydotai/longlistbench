@@ -173,6 +173,10 @@ class LossRunHTMLGenerator:
                 page-break-inside: auto;
                 -webkit-column-break-inside: auto;
             }
+            .content-wrapper .table-section {
+                column-span: all;
+                -webkit-column-span: all;
+            }
         """ if use_columns else ""
 
         return f"""<!DOCTYPE html>
