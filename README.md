@@ -17,8 +17,6 @@ python -m playwright install chromium
 python benchmarks/generate_claims_benchmark.py
 ```
 
-The benchmark will be generated in `benchmarks/claims/` with 4 difficulty tiers (easy, medium, hard, extreme).
-
 See [`benchmarks/README.md`](benchmarks/README.md) for benchmark documentation.
 
 ## Benchmark Overview
@@ -64,7 +62,7 @@ For development and testing, see [`benchmarks/synthetic/README.md`](benchmarks/s
 
 ### Installing the Pre-Commit Hook
 
-To ensure the paper compiles successfully before committing, install the pre-commit hook:
+Optional: install a pre-commit hook to quickly sanity-check that the paper compiles:
 
 ```bash
 # From the repository root
@@ -72,12 +70,18 @@ cp pre-commit .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
 ```
 
-The hook will automatically run `make` in the `paper` directory before each commit and prevent the commit if compilation fails.
+The hook runs a fast LaTeX compile (`make quick`) in the `paper` directory and prevents the commit if compilation fails.
 
 **Manually invoking the hook:**
 ```bash
 # Test the hook without committing
 .git/hooks/pre-commit
+```
+
+Alternatively, run the same check from your virtualenv:
+```bash
+source .venv/bin/activate
+make -C paper quick
 ```
 
 **Note:** You can skip the hook for a specific commit using:
