@@ -1,36 +1,15 @@
-% About how we syntesize the dataset
-% List all problems we identified that can occur in long list data
-% Include visual for generation pipeline
-
-% Problems:
-% 1. Page breaks - forced pagination every N rows; fragments tables/sections across pages
-%    NOTE: Current impl adds breaks BETWEEN entities, not splitting them (CSS has page-break-inside: avoid)
-%    Examples: easy_10_002, easy_10_007, medium_25_001, hard_50_001
-% 2. Multi-row entities - single entity spans multiple lines (e.g., wrapped descriptions); challenges row association
-%    Examples: easy_10_001, easy_10_006, medium_25_001, hard_50_001
-% 3. Duplicates - exact duplicate records inserted at random positions; challenges deduplication algorithms
-%    Examples: easy_10_004, easy_10_009, medium_25_001, hard_50_001
-% 4. Large documents - 500+ claims per document; prevents naive zero-shot LLM approaches, challenges accumulative generation
-%    Examples: extreme_100_001, extreme_100_002, extreme_100_003 (all extreme tier)
-% 5. Multiple tables - irrelevant distractor content (e.g., "Company Directory"); challenges noise filtering and table selection
-%    Examples: medium_25_002, medium_25_003, hard_50_001, extreme_100_001
-% 6. Multi-column layout - content rendered in 2-column CSS layout; challenges reading order reconstruction
-%    Examples: hard_50_001, hard_50_003, hard_50_004, extreme_100_001
-% 7. Merged cells - rowspan applied to table cells; challenges cell-to-row association in tabular extraction
-%    Examples: hard_50_002, hard_50_003, hard_50_005, extreme_100_001
-
-We construct Lost-and-Found Entities, a synthetic benchmark for long-list entity extraction from trucking insurance loss run documents. Each benchmark instance consists of (i) structured ground truth incidents (JSON), (ii) a rendered PDF, and (iii) an OCR transcript of the PDF in Markdown.
+We construct LongListBench, a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident/line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground truth incidents (JSON), (ii) a rendered PDF, and (iii) an OCR transcript of the PDF in Markdown.
 
 \subsection{Entity schema}
-Ground truth incidents follow the schema in \texttt{benchmarks/models/loss\_run.py}. In this paper we focus on extracting seven fields that commonly drive downstream claims processing: \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}.
+Ground truth incidents follow the schema in \path{benchmarks/models/loss_run.py}. In this paper we focus on extracting seven fields that commonly drive downstream workflows: \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}.
 
 \subsection{Document generation}
-Benchmark instances are generated with seeded randomness for reproducibility (\texttt{benchmarks/generate\_claims\_benchmark.py}). Structured incidents are created by \texttt{benchmarks/synthetic/generate\_claim\_data.py}. We then render the incidents into visually rich loss run documents using \texttt{benchmarks/synthetic/generate\_html.py} and one of two layouts:
+Benchmark instances are generated with seeded randomness for reproducibility (\path{benchmarks/generate_claims_benchmark.py}). Structured incidents are created by \path{benchmarks/synthetic/generate_claim_data.py}. We then render the incidents into visually rich documents using \path{benchmarks/synthetic/generate_html.py} and one of two layouts:
 \begin{enumerate}
     \item \textbf{Detailed}: a repeated incident block with narrative text and a small financial table.
     \item \textbf{Table}: a compact tabular representation formatted as a CSV-like table.
 \end{enumerate}
-The HTML is rendered into PDF using headless Chromium via Playwright (\texttt{benchmarks/synthetic/html\_to\_pdf.py}).
+The HTML is rendered into PDF using headless Chromium via Playwright (\path{benchmarks/synthetic/html_to_pdf.py}).
 
 \subsection{Injected problem types}
 We inject seven recurring document phenomena that complicate long-list extraction (Table~\ref{tab:problem-taxonomy}). These effects are applied at the HTML level prior to PDF rendering.
@@ -55,6 +34,6 @@ Merged cells & Use row/column spanning and omitted repeated cells in table forma
 \end{table}
 
 \subsection{Dataset scale}
-The released dataset (\texttt{lost-and-found-entities-v1}, version 1.0.1; see \texttt{benchmarks/claims/metadata.json}) contains 80 PDFs (40 detailed, 40 table) with 6{,}828 incident rows. Difficulty tiers are configured as 15 easy instances (10 claims/PDF), 12 medium (25 claims/PDF), 8 hard (50 claims/PDF), and 5 extreme (100 claims/PDF nominal). In the extreme tier, enabling \texttt{large\_doc} expands each document to 500 incidents. Enabling \texttt{duplicates} injects additional duplicate rows (up to 5 per document), causing the number of incident rows to exceed the nominal tier size.
+The released dataset (\texttt{longlistbench-v1}, version 1.0.1; see \path{benchmarks/claims/metadata.json}) contains 80 PDFs (40 detailed, 40 table) with 6{,}828 incident rows. Difficulty tiers are configured as 15 easy instances (10 claims/PDF), 12 medium (25 claims/PDF), 8 hard (50 claims/PDF), and 5 extreme (100 claims/PDF nominal). In the extreme tier, enabling \texttt{large\_doc} expands each document to 500 incidents. Enabling \texttt{duplicates} injects additional duplicate rows (up to 5 per document), causing the number of incident rows to exceed the nominal tier size.
 
 Across the 80 documents, the most common injected issues are multi-row entities (62/80), page breaks (56/80), duplicates (56/80), and multiple tables (40/80).

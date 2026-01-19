@@ -1,12 +1,9 @@
-Lost-and-Found Entities targets a persistent gap in document understanding evaluation: extracting long lists of repeated entities from semi-structured business documents under realistic layout and OCR noise. We presented a benchmark construction pipeline that produces paired (PDF, OCR, JSON) artifacts and systematically injects common long-list failure modes.
-
-% Main contribution - a comprehensive dataset to evaluate pipeline / model ability to extract long list entities
-% How can long list extraction be even more complex? - for future research
+LongListBench targets a persistent gap in document understanding evaluation: extracting long lists of repeated entities from semi-structured business documents under realistic layout and OCR noise. We presented a benchmark construction pipeline that produces paired (PDF, OCR, JSON) artifacts and systematically injects common long-list failure modes.
 
 \subsection{Summary}
 Our main contributions are:
 \begin{itemize}
-    \item A reproducible benchmark generation pipeline for loss run documents spanning two formats and four difficulty tiers.
+    \item A reproducible benchmark generation pipeline for semi-structured documents with long incident lists spanning two formats and four difficulty tiers.
     \item A taxonomy of seven problem types that frequently break long-list extraction systems, including duplicates, page breaks, multi-row entities, multi-column layout, and merged cells.
     \item An evaluation harness and baseline results that quantify the gap between near-perfect OCR identifier retention and imperfect end-to-end extraction.
 \end{itemize}

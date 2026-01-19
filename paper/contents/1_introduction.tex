@@ -2,16 +2,10 @@ Long-list entity extraction---recovering dozens to hundreds of repeated records 
 
 Many established benchmarks focus on key-value style extraction or relatively short, form-like documents (e.g., FUNSD~\cite{jaume2019funsd}) or narrow document types such as receipts (SROIE~\cite{huang2021sroie}). More recent datasets such as DocILE~\cite{simsa2023docile} include business documents and line items, but long lists in the wild often exhibit additional failure modes: repeated entities, page breaks, multi-column reading order, irrelevant tables, and table constructs such as merged cells. VRDU~\cite{wang2023vrdu} highlights that hierarchical and long-list fields remain challenging for LLM-based extraction.
 
-We introduce Lost-and-Found Entities, a benchmark designed to stress-test long-list extraction on loss run documents under systematically injected document phenomena and OCR noise.
+We introduce LongListBench, a benchmark designed to stress-test long-list extraction from semi-structured business documents with long incident/line-item lists under systematically injected document phenomena and OCR noise. The benchmark is inspired by recurring patterns observed in real-world claims documents.
 
 \subsection{Background and Motivation}
-In production workflows, a single loss run PDF can contain many incidents and associated financial breakdowns. Systems must extract a complete list of claim records (not merely a few key-value pairs) while handling complex layouts and noisy OCR. We aim to support research on extraction methods that remain reliable as list length grows and as layout artifacts accumulate.
-
-% Motivation:
-% Growing popularity of AI automations. 
-% So far the most most progress has been achieved on automation of document understanding. Need to find some reference for that, maybe some survey on AI automations.
-% We at Kay.ai also discovered that document automation delivers the highest ROI and LLM models are the most advanced there (reference benchmark results for models maybe?), after trying Browser and Voice automations.
-% The biggest ROI comes from working with large documents as an extraction pipeline developed ones can be used to process thousands of entries which would take days for humans (some more study on time working with docs), those large docs would have list entities. 
+In production workflows, a single semi-structured PDF can contain many incidents or line items and associated financial breakdowns. Systems must extract a complete list of records (not merely a few key-value pairs) while handling complex layouts and noisy OCR. We aim to support research on extraction methods that remain reliable as list length grows and as layout artifacts accumulate.
 
 \subsection{Research Questions}
 This work is organized around three practical questions:
@@ -20,8 +14,6 @@ This work is organized around three practical questions:
     \item To what extent are end-to-end failures attributable to OCR transcription versus downstream extraction?
     \item How do strong off-the-shelf LLMs perform under a simple, reproducible zero-shot protocol?
 \end{itemize}
-
-% There is no good benchmark that focuses completely on long list extraction. Main focus is Key Value extraction. (VRDU?)
 
 \subsection{Contributions}
 We make the following contributions:
@@ -32,11 +24,5 @@ We make the following contributions:
     \item Baseline results for GPT-4o and Claude Sonnet 4 under a shared prompt, highlighting remaining gaps in long-list extraction.
 \end{itemize}
 
-% Comprehensive dataset for long list eval
-% Standardirized set of tools for eval
-
 \subsection{Paper Organization}
 Section~\ref{sec:related-work} reviews relevant datasets and models. Section~\ref{sec:methodology} describes benchmark construction and the problem taxonomy. Section~\ref{sec:evaluation} presents the evaluation protocol. Section~\ref{sec:results} reports baseline results. Section~\ref{sec:limitations} discusses limitations and future directions, and Section~\ref{sec:conclusion} concludes.
-
-% weird, maybe delete it, need to compare to some paper. 
-% Use CORD as sample cause it was accepted to NeurIPS

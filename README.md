@@ -1,6 +1,6 @@
-# Lost and Found Entities
+# LongListBench
 
-Benchmark for entity extraction from semi-structured insurance claims data with intentionally introduced complexity.
+Benchmark for long-list entity extraction from semi-structured documents under layout and OCR noise, inspired by recurring patterns observed in real-world claims documents.
 
 ## Quick Start
 

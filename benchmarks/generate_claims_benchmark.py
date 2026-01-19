@@ -252,9 +252,9 @@ def rebuild_metadata(output_dir: Path, base_seed: int) -> dict[str, Any]:
 
     total_claims = sum(i["num_claims"] for i in instances)
     metadata = {
-        "dataset_name": "lost-and-found-entities-v1",
+        "dataset_name": "longlistbench-v1",
         "version": "1.0.1",
-        "description": "Benchmark for long-list entity extraction from insurance claims",
+        "description": "Benchmark for long-list entity extraction under layout and OCR noise",
         "generated_at": datetime.now().isoformat(),
         "base_seed": base_seed,
         "total_instances": len(instances),
@@ -358,7 +358,7 @@ async def generate_all_benchmarks(
         tiers = ["easy", "medium", "hard", "extreme"]
     
     print(f"\n{'='*60}")
-    print("LOST-AND-FOUND ENTITIES BENCHMARK GENERATOR")
+    print("LONGLISTBENCH BENCHMARK GENERATOR")
     print(f"{'='*60}")
     print(f"Output directory: {output_dir}")
     print(f"Base seed: {base_seed}")
@@ -381,9 +381,9 @@ async def generate_all_benchmarks(
     
     # Generate metadata file
     metadata = {
-        "dataset_name": "lost-and-found-entities-v1",
+        "dataset_name": "longlistbench-v1",
         "version": "1.0.1",
-        "description": "Benchmark for long-list entity extraction from insurance claims",
+        "description": "Benchmark for long-list entity extraction under layout and OCR noise",
         "generated_at": datetime.now().isoformat(),
         "base_seed": base_seed,
         "total_instances": len(all_instances),
@@ -426,7 +426,7 @@ async def generate_all_benchmarks(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Generate complete benchmark dataset for Lost-and-Found Entities",
+        description="Generate complete benchmark dataset for LongListBench",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

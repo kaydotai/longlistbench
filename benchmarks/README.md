@@ -1,6 +1,6 @@
 # Benchmarks
 
-This directory contains benchmark generation and processing tools for the Lost and Found Entities project.
+This directory contains benchmark generation and processing tools for the LongListBench project.
 
 ## Setup
 
@@ -32,7 +32,7 @@ Run these commands from the repository root.
 
 ## Generate Claims Benchmark
 
-Generate synthetic insurance claim PDFs:
+Generate synthetic benchmark PDFs:
 
 ```bash
 python benchmarks/generate_claims_benchmark.py

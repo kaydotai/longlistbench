@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""
-Multi-model evaluation script for the Lost and Found Entities benchmark.
+"""Multi-model evaluation script for the LongListBench benchmark.
+
 Runs extraction tests on Gemini, GPT-4, and Claude using the same prompts.
 """
 
@@ -64,9 +64,9 @@ def setup_anthropic():
 # Extraction Functions
 # ============================================================================
 
-EXTRACTION_PROMPT = """Extract all insurance claims from the following document.
+EXTRACTION_PROMPT = """Extract all incident records from the following document.
 
-For each claim, extract these fields:
+For each incident, extract these fields:
 - incident_number
 - company_name
 - date_of_loss
@@ -532,7 +532,7 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Multi-model evaluation for Lost and Found Entities')
+    parser = argparse.ArgumentParser(description='Multi-model evaluation for LongListBench')
     parser.add_argument('--models', nargs='+', default=['gemini', 'gpt4', 'claude'],
                        choices=['gemini', 'gpt4', 'claude'],
                        help='Models to evaluate (default: all)')
@@ -558,7 +558,7 @@ def main():
         ]
     
     print("="*70)
-    print("MULTI-MODEL EVALUATION: Lost and Found Entities Benchmark")
+    print("MULTI-MODEL EVALUATION: LongListBench Benchmark")
     print("="*70)
     print()
     print(f"Models: {', '.join(args.models)}")
