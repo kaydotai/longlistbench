@@ -131,7 +131,7 @@ def convert_pdf_page(pdf_path, page_num, dpi=200):
 
 @retry_on_gemini_call
 @retry_on_rate_limit
-async def ocr_image_async(client: genai.Client, image: Image.Image, model_name: str = "gemini-2.0-flash") -> str:
+async def ocr_image_async(client: genai.Client, image: Image.Image, model_name: str = "gemini-2.5-flash") -> str:
     """OCR a single image using Gemini async API with retries."""
     response = await client.aio.models.generate_content(
         model=model_name,
@@ -175,7 +175,7 @@ async def process_page_async(client: genai.Client, pdf_path: Path, page_num: int
 async def process_pdf_async(client: genai.Client, pdf_path: Path, output_path: Path, max_concurrent: int = 3, model_names: list[str] | None = None, dpi: int = 200) -> bool:
     """Process PDF pages with async concurrency control."""
     if not model_names:
-        model_names = ["gemini-2.0-flash"]
+        model_names = ["gemini-2.5-flash"]
 
     total_pages = get_page_count(pdf_path)
     if total_pages is None:
@@ -216,8 +216,8 @@ async def main_async() -> None:
     parser.add_argument(
         "--model", "-m",
         type=str,
-        default="gemini-2.0-flash",
-        help="Gemini model to use (default: gemini-2.0-flash, try: gemini-3-flash-preview)",
+        default="gemini-2.5-flash",
+        help="Gemini model to use (default: gemini-2.5-flash, try: gemini-3-flash-preview)",
     )
     parser.add_argument(
         "--fallback-models",
