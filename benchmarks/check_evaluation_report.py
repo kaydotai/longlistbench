@@ -86,11 +86,19 @@ def evaluate_extraction(predicted: list[dict], ground_truth: list[dict]) -> dict
             if isinstance(v, dict):
                 for kk, vv in v.items():
                     pairs.append(
-                        f"{incident_id}|{k}.{kk}|{json.dumps(vv, sort_keys=True, separators=(',', ':'))}"
+                        json.dumps(
+                            [incident_id, f"{k}.{kk}", vv],
+                            sort_keys=True,
+                            separators=(",", ":"),
+                        )
                     )
             else:
                 pairs.append(
-                    f"{incident_id}|{k}|{json.dumps(v, sort_keys=True, separators=(',', ':'))}"
+                    json.dumps(
+                        [incident_id, k, v],
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    )
                 )
         return pairs
 

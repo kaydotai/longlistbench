@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Multi-model evaluation script for the LongListBench benchmark.
 
-Runs extraction tests on Gemini, GPT-4, and Claude using the same prompts.
+Runs extraction tests on GPT-4o, GPT-5.2, and Gemini 2.5 using the same prompts.
 """
 
 import argparse
@@ -10,7 +10,9 @@ import os
 import re
 import subprocess
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -137,16 +139,24 @@ Document:
 def parse_json_response(response_text: str) -> Any:
     """Parse JSON from LLM response, handling markdown code blocks."""
     text = response_text.strip()
-    # Remove markdown code blocks if present
-    if text.startswith('```'):
-        text = text.split('```')[1]
-        if text.startswith('json'):
-            text = text[4:]
-    text = text.strip()
+
+    code_block_match = re.search(r"```(?:json)?\s*(.*?)\s*```", text, flags=re.DOTALL | re.IGNORECASE)
+    if code_block_match is not None:
+        text = code_block_match.group(1).strip()
+
+    def _repair_common_json_issues(s: str) -> str:
+        s = s.strip()
+        s = re.sub(r",\s*([}\]])", r"\1", s)
+        s = re.sub(r"}\s*{", r"},{", s)
+        s = re.sub(r"\]\s*\[", r"],[", s)
+        s = re.sub(r'"\s*(?="[^"]*"\s*:)', '",', s)
+        s = re.sub(r'\b(true|false|null)\b\s*(?="[^"]*"\s*:)', r"\1,", s)
+        s = re.sub(r'(\d+(?:\.\d+)?|\]|\})\s*(?="[^"]*"\s*:)', r"\1,", s)
+        return s
+
     try:
         return json.loads(text)
     except json.JSONDecodeError:
-        # Try to recover JSON embedded in surrounding text.
         start_candidates = [p for p in (text.find('{'), text.find('[')) if p != -1]
         if not start_candidates:
             raise
@@ -156,7 +166,13 @@ def parse_json_response(response_text: str) -> Any:
         end = max(end_obj, end_arr)
         if end <= start:
             raise
-        return json.loads(text[start : end + 1])
+
+        candidate = text[start : end + 1]
+        try:
+            return json.loads(candidate)
+        except json.JSONDecodeError:
+            repaired = _repair_common_json_issues(candidate)
+            return json.loads(repaired)
 
 
 def _validate_incident_dict_is_complete(incident: dict) -> None:
@@ -319,6 +335,12 @@ def extract_with_gemini(client, ocr_text: str, model_id: str) -> list[dict]:
             ocr_text=chunk_text,
             schema_json=_LOSS_RUN_EXTRACTION_SCHEMA_JSON,
         )
+        # Disable thinking for Gemini 2.5+ models to avoid token consumption
+        # that truncates JSON output
+        thinking_config = None
+        if "2.5" in model_id or "3" in model_id.split("-")[0]:
+            thinking_config = types.ThinkingConfig(thinking_budget=0)
+        
         response = client.models.generate_content(
             model=model_id,
             contents=prompt,
@@ -327,6 +349,7 @@ def extract_with_gemini(client, ocr_text: str, model_id: str) -> list[dict]:
                 maxOutputTokens=8192,
                 responseMimeType="application/json",
                 responseSchema=LossRunExtraction,
+                thinking_config=thinking_config,
             ),
         )
         parsed = getattr(response, "parsed", None)
@@ -337,9 +360,16 @@ def extract_with_gemini(client, ocr_text: str, model_id: str) -> list[dict]:
         return _extract_chunk(ocr_text)
 
     chunks = _split_ocr_into_chunks(ocr_text)
-    per_chunk: list[list[dict]] = []
-    for chunk in chunks:
-        per_chunk.append(_extract_chunk(chunk))
+    max_workers = int(os.getenv("LLB_GEMINI_CHUNK_WORKERS", "2"))
+    per_chunk: list[list[dict]] = [None] * len(chunks)
+    if max_workers <= 1 or len(chunks) <= 1:
+        for i, chunk in enumerate(chunks):
+            per_chunk[i] = _extract_chunk(chunk)
+    else:
+        with ThreadPoolExecutor(max_workers=min(max_workers, len(chunks))) as ex:
+            futures = [ex.submit(_extract_chunk, chunk) for chunk in chunks]
+            for i, fut in enumerate(futures):
+                per_chunk[i] = fut.result()
     return _merge_incident_lists(per_chunk)
 
 
@@ -381,9 +411,16 @@ def extract_with_openai(client, ocr_text: str, model_id: str) -> list[dict]:
         return _extract_chunk(ocr_text)
 
     chunks = _split_ocr_into_chunks(ocr_text)
-    per_chunk: list[list[dict]] = []
-    for chunk in chunks:
-        per_chunk.append(_extract_chunk(chunk))
+    max_workers = int(os.getenv("LLB_OPENAI_CHUNK_WORKERS", "4"))
+    per_chunk: list[list[dict]] = [None] * len(chunks)
+    if max_workers <= 1 or len(chunks) <= 1:
+        for i, chunk in enumerate(chunks):
+            per_chunk[i] = _extract_chunk(chunk)
+    else:
+        with ThreadPoolExecutor(max_workers=min(max_workers, len(chunks))) as ex:
+            futures = [ex.submit(_extract_chunk, chunk) for chunk in chunks]
+            for i, fut in enumerate(futures):
+                per_chunk[i] = fut.result()
     return _merge_incident_lists(per_chunk)
 
 
@@ -408,18 +445,33 @@ def extract_with_anthropic(client, ocr_text: str, model_id: str) -> list[dict]:
         return _extract_chunk(ocr_text)
 
     chunks = _split_ocr_into_chunks(ocr_text)
-    per_chunk: list[list[dict]] = []
-    for chunk in chunks:
-        per_chunk.append(_extract_chunk(chunk))
+    max_workers = int(os.getenv("LLB_ANTHROPIC_CHUNK_WORKERS", "2"))
+    per_chunk: list[list[dict]] = [None] * len(chunks)
+    if max_workers <= 1 or len(chunks) <= 1:
+        for i, chunk in enumerate(chunks):
+            per_chunk[i] = _extract_chunk(chunk)
+    else:
+        with ThreadPoolExecutor(max_workers=min(max_workers, len(chunks))) as ex:
+            futures = [ex.submit(_extract_chunk, chunk) for chunk in chunks]
+            for i, fut in enumerate(futures):
+                per_chunk[i] = fut.result()
     return _merge_incident_lists(per_chunk)
 
 
 # Model configurations
 MODELS = {
     'gemini': ModelConfig(
-        name='Gemini 2.0 Flash',
+        name='Gemini 2.5',
         provider='Google',
-        model_id='gemini-2.0-flash-exp',
+        model_id=os.getenv('GEMINI_MODEL_ID', 'gemini-2.5-flash'),
+        setup_fn=setup_gemini,
+        extract_fn=extract_with_gemini,
+    ),
+    # Alias for backwards compatibility
+    'gemini25': ModelConfig(
+        name='Gemini 2.5',
+        provider='Google',
+        model_id=os.getenv('GEMINI_25_MODEL_ID', 'gemini-2.5-flash'),
         setup_fn=setup_gemini,
         extract_fn=extract_with_gemini,
     ),
@@ -524,11 +576,19 @@ def evaluate_extraction(predicted: list[dict], ground_truth: list[dict]) -> dict
             if isinstance(v, dict):
                 for kk, vv in v.items():
                     pairs.append(
-                        f"{incident_id}|{k}.{kk}|{json.dumps(vv, sort_keys=True, separators=(',', ':'))}"
+                        json.dumps(
+                            [incident_id, f"{k}.{kk}", vv],
+                            sort_keys=True,
+                            separators=(",", ":"),
+                        )
                     )
             else:
                 pairs.append(
-                    f"{incident_id}|{k}|{json.dumps(v, sort_keys=True, separators=(',', ':'))}"
+                    json.dumps(
+                        [incident_id, k, v],
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    )
                 )
         return pairs
 
@@ -618,6 +678,8 @@ def run_evaluation(
     formats: list[str] = None,
     claims_dir: Path = None,
     output_dir: Path = None,
+    parallel_models: bool = False,
+    model_workers: int | None = None,
 ) -> list[EvaluationResult]:
     """Run evaluation across specified models and samples."""
     
@@ -660,6 +722,24 @@ def run_evaluation(
     print()
     
     results = []
+
+    if not parallel_models:
+        parallel_models = os.getenv("LLB_PARALLEL_MODELS", "0") == "1"
+
+    if model_workers is None:
+        model_workers = int(os.getenv("LLB_MODEL_WORKERS", str(len(models))))
+    model_workers = max(1, int(model_workers))
+
+    gemini_rate_lock = threading.Lock()
+    gemini_next_allowed_time = 0.0
+
+    def _gemini_rate_limit() -> None:
+        nonlocal gemini_next_allowed_time
+        with gemini_rate_lock:
+            now = time.time()
+            if now < gemini_next_allowed_time:
+                time.sleep(gemini_next_allowed_time - now)
+            gemini_next_allowed_time = time.time() + 5.0
     
     for sample in samples:
         print(f"{'='*70}")
@@ -680,19 +760,16 @@ def run_evaluation(
         print(f"  OCR text: {len(ocr_text):,} characters")
         print()
         
-        for model_key in models:
-            if model_key not in clients:
-                continue
-            
+        def _eval_one_model(model_key: str) -> EvaluationResult:
             config = MODELS[model_key]
             client = clients[model_key]
-            
-            print(f"  [{config.name}]")
-            
+
+            if model_key.startswith("gemini"):
+                _gemini_rate_limit()
+
             start_time = time.time()
             error = None
-            predicted = []
-            
+            predicted: list[dict] = []
             try:
                 predicted = config.extract_fn(client, ocr_text, config.model_id)
             except Exception as e:
@@ -701,36 +778,27 @@ def run_evaluation(
                     error = f"{type(underlying).__name__}: {underlying}"
                 else:
                     error = str(e)
-                print(f"    ✗ Error: {error}")
 
             extraction_time = time.time() - start_time
 
-            # Rate limiting delay between model calls
-            if model_key == 'gemini':
-                time.sleep(5)
-            
             if not error:
                 metrics = evaluate_extraction(predicted, ground_truth)
-                
-                # Save predictions
                 pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
-                with open(pred_path, 'w') as f:
+                with open(pred_path, "w") as f:
                     json.dump(predicted, f, indent=2)
-                
-                print(f"    Predicted: {metrics['predicted_count']} claims")
-                print(f"    Recall: {metrics['recall']:.1%}  Precision: {metrics['precision']:.1%}  F1: {metrics['f1']:.1%}")
-                print(f"    Time: {extraction_time:.1f}s")
-                
-                if metrics['missing'] > 0:
-                    print(f"    ⚠ Missing: {metrics['missing']}")
-                if metrics['extra'] > 0:
-                    print(f"    ⚠ Extra: {metrics['extra']}")
             else:
-                metrics = {'recall': 0, 'precision': 0, 'f1': 0, 'found': 0, 
-                          'ground_truth_count': len(ground_truth), 'predicted_count': 0,
-                          'missing': len(ground_truth), 'extra': 0}
-            
-            results.append(EvaluationResult(
+                metrics = {
+                    "recall": 0,
+                    "precision": 0,
+                    "f1": 0,
+                    "found": 0,
+                    "ground_truth_count": len(ground_truth),
+                    "predicted_count": 0,
+                    "missing": len(ground_truth),
+                    "extra": 0,
+                }
+
+            return EvaluationResult(
                 model=model_key,
                 sample=sample,
                 tier=tier,
@@ -738,9 +806,48 @@ def run_evaluation(
                 metrics=metrics,
                 extraction_time=extraction_time,
                 error=error,
-            ))
-            
-            print()
+            )
+
+        active_models = [m for m in models if m in clients]
+
+        if not parallel_models or len(active_models) <= 1:
+            for model_key in active_models:
+                config = MODELS[model_key]
+                print(f"  [{config.name}]")
+                r = _eval_one_model(model_key)
+                if r.error:
+                    print(f"    ✗ Error: {r.error}")
+                else:
+                    m = r.metrics
+                    print(f"    Predicted: {m['predicted_count']} claims")
+                    print(f"    Recall: {m['recall']:.1%}  Precision: {m['precision']:.1%}  F1: {m['f1']:.1%}")
+                    print(f"    Time: {r.extraction_time:.1f}s")
+                    if m.get('missing', 0) > 0:
+                        print(f"    ⚠ Missing: {m['missing']}")
+                    if m.get('extra', 0) > 0:
+                        print(f"    ⚠ Extra: {m['extra']}")
+                results.append(r)
+                print()
+        else:
+            with ThreadPoolExecutor(max_workers=min(model_workers, len(active_models))) as ex:
+                future_map = {ex.submit(_eval_one_model, mk): mk for mk in active_models}
+                for fut in as_completed(future_map):
+                    r = fut.result()
+                    config = MODELS[r.model]
+                    print(f"  [{config.name}]")
+                    if r.error:
+                        print(f"    ✗ Error: {r.error}")
+                    else:
+                        m = r.metrics
+                        print(f"    Predicted: {m['predicted_count']} claims")
+                        print(f"    Recall: {m['recall']:.1%}  Precision: {m['precision']:.1%}  F1: {m['f1']:.1%}")
+                        print(f"    Time: {r.extraction_time:.1f}s")
+                        if m.get('missing', 0) > 0:
+                            print(f"    ⚠ Missing: {m['missing']}")
+                        if m.get('extra', 0) > 0:
+                            print(f"    ⚠ Extra: {m['extra']}")
+                    results.append(r)
+                    print()
         
         # Rate limiting between samples
         time.sleep(1)
@@ -1060,9 +1167,11 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
 
 def main():
     parser = argparse.ArgumentParser(description='Multi-model evaluation for LongListBench')
-    parser.add_argument('--models', nargs='+', default=['gemini', 'gpt4', 'claude'],
-                       choices=['gemini', 'gpt52', 'gpt4', 'claude'],
-                       help='Models to evaluate (default: all)')
+    parser.add_argument('--models', nargs='+', default=['gemini', 'gpt4', 'gpt52'],
+                       choices=['gemini', 'gemini25', 'gpt52', 'gpt4', 'claude'],
+                       help='Models to evaluate (default: gemini, gpt4, gpt52)')
+    parser.add_argument('--output-dir', default=None,
+                       help='Directory to write predictions and evaluation reports (default: benchmarks/results)')
     parser.add_argument('--tiers', nargs='+', default=None,
                        choices=['easy', 'medium', 'hard', 'extreme'],
                        help='Difficulty tiers to test (default: all)')
@@ -1077,6 +1186,10 @@ def main():
                        help='Regenerate reports from saved *_predicted.json files (no API calls)')
     parser.add_argument('--previous-report', default=None,
                        help='Optional path to an evaluation_report.json to reuse extraction_time values from')
+    parser.add_argument('--parallel-models', action='store_true',
+                       help='Run all selected models in parallel for each sample')
+    parser.add_argument('--model-workers', type=int, default=None,
+                       help='Max number of parallel model workers (default: len(models) or LLB_MODEL_WORKERS)')
     
     args = parser.parse_args()
     
@@ -1099,24 +1212,28 @@ def main():
     
     if args.offline: 
         previous_report_path = Path(args.previous_report) if args.previous_report else None
+        output_dir = Path(args.output_dir) if args.output_dir else (Path(__file__).parent / "results")
         results = run_evaluation_from_saved_predictions(
             models=args.models,
             samples=args.samples,
             tiers=args.tiers,
             formats=args.formats,
+            output_dir=output_dir,
             previous_report_path=previous_report_path,
         )
     else:
+        output_dir = Path(args.output_dir) if args.output_dir else (Path(__file__).parent / "results")
         results = run_evaluation(
             models=args.models,
             samples=args.samples,
             tiers=args.tiers,
             formats=args.formats,
+            output_dir=output_dir,
+            parallel_models=args.parallel_models,
+            model_workers=args.model_workers,
         )
     
     # Generate reports
-    output_dir = Path(__file__).parent / "results"
-    output_dir.mkdir(exist_ok=True)
     generate_report(results, output_dir)
     
     print()
