@@ -1,7 +1,7 @@
-We summarize results for (i) OCR fidelity and (ii) baseline extraction performance. OCR coverage and LLM baseline numbers are produced by the released scripts in the repository; we additionally report a simple auxiliary identifier-only baseline for context.
+We summarize results for (i) OCR fidelity and (ii) baseline extraction performance. OCR coverage and LLM baseline numbers are produced by the released scripts in the repository.
 
 \subsection{OCR identifier coverage}
-Using \texttt{benchmarks/validate\_ocr\_vs\_golden.py} we measure how often key identifiers from the ground truth appear verbatim in the OCR transcript. Across the full dataset (80 OCR transcripts), incident numbers exhibit 100\% coverage (mean and minimum). Reference numbers exhibit 99.997\% mean coverage with a minimum of 99.8\% (one missing reference in \texttt{extreme\_100\_002\_table}). These results indicate that, for primary identifiers, our OCR step rarely drops information and that most downstream failures are attributable to extraction rather than transcription.
+Using \texttt{benchmarks/validate\_ocr\_vs\_golden.py} we measure how often key identifiers from the ground truth appear verbatim in the OCR transcript. Across the full dataset (80 OCR transcripts), incident numbers and reference numbers exhibit 100\% coverage (mean and minimum). These results indicate that, for primary identifiers, our OCR step rarely drops information and that most downstream failures are attributable to extraction rather than transcription.
 
 \begin{table}[t]
 \centering
@@ -12,32 +12,29 @@ Using \texttt{benchmarks/validate\_ocr\_vs\_golden.py} we measure how often key 
 Identifier & Mean coverage & Min coverage \\
 \midrule
 Incident number & 100.0\% & 100.0\% \\
-Reference number & 99.997\% & 99.8\% \\
+Reference number & 100.0\% & 100.0\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \subsection{Zero-shot LLM extraction baseline}
-We evaluate three LLMs using the shared prompt and evaluation harness in \texttt{benchmarks/evaluate\_models.py}. The current report (\texttt{benchmarks/results/evaluation\_report.*}) covers five detailed-format samples (two easy, two medium, one hard). GPT-4o and Claude Sonnet 4 achieve the same average incident-level performance: 96.3\% F1, 94.7\% recall, and 98.0\% precision. Average extraction runtime is 10.3 seconds per document for GPT-4o and 25.2 seconds for Claude. Gemini 2.0 Flash failed on all evaluated samples due to API resource exhaustion.
+We evaluate three LLMs using the shared prompt and evaluation harness in \texttt{benchmarks/evaluate\_models.py}. The current report (\texttt{benchmarks/results/evaluation\_report.*}) covers three detailed-format samples (one hard and two extreme), and uses schema-conformant, field-level scoring. Over this subset, GPT-4o achieves 89.1\% average F1 (87.8\% recall, 90.6\% precision), GPT-5.2 achieves 82.9\% average F1 (81.5\% recall, 84.4\% precision), and Gemini 2.0 Flash achieves 86.5\% average F1 (85.0\% recall, 88.1\% precision).
 
 \begin{table}[t]
 \centering
-\caption{Zero-shot LLM baseline results on five detailed-format samples (\texttt{benchmarks/results/evaluation\_report.json}).}
+\caption{Zero-shot LLM baseline results on three detailed-format samples under schema-conformant, field-level scoring (\texttt{benchmarks/results/evaluation\_report.json}).}
 \label{tab:llm-baselines}
-\begin{tabular}{lrrrrr}
+\begin{tabular}{lrrrr}
 \toprule
-Model & Samples & Avg Recall & Avg Precision & Avg F1 & Avg Time (s) \\
+Model & Samples & Avg Recall & Avg Precision & Avg F1 \\
 \midrule
-GPT-4o & 5 & 94.7\% & 98.0\% & 96.3\% & 10.3 \\
-Claude Sonnet 4 & 5 & 94.7\% & 98.0\% & 96.3\% & 25.2 \\
-Gemini 2.0 Flash & 5 & -- & -- & -- & -- \\
+GPT-4o & 3 & 87.8\% & 90.6\% & 89.1\% \\
+GPT-5.2 & 3 & 81.5\% & 84.4\% & 82.9\% \\
+Gemini 2.0 Flash & 3 & 85.0\% & 88.1\% & 86.5\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Qualitatively, errors often manifest as single-identifier corruption within an otherwise correct long list. For example, in \texttt{easy\_10\_001\_detailed} both GPT-4o and Claude miss one ground-truth incident identifier (\texttt{30010}) and emit one spurious identifier (\texttt{330010}), resulting in 90\% F1.
-
-\subsection{Deterministic identifier extraction baseline}
-As a minimal deterministic baseline, we extract incident numbers from OCR text using regular expressions (\texttt{Incident \#\{digits\}} in detailed format and line-initial \texttt{\#\{digits\}} in table format). Scored with the same incident-level metric, this identifier-only baseline achieves 97.4\% average F1 on both detailed and table documents, with 100\% precision and approximately 95\% recall. The residual recall loss is driven primarily by documents with injected exact duplicates: the evaluation metric counts duplicate rows in the ground truth while matching is performed on unique incident identifiers.
+Qualitatively, errors often manifest as local field-level deviations (e.g., missing optional strings, numeric drift in financial breakdowns, or small identifier formatting mistakes) spread across an otherwise correct long list.
 
 These findings suggest that recovering identifiers is largely deterministic under our OCR pipeline, while the main open challenge for long-list extraction is robustly segmenting and populating full per-incident records under layout disruptions (page breaks, multi-column order, irrelevant tables, merged cells) and scale (hundreds of incidents).

@@ -4,17 +4,19 @@ We evaluate systems on the task of extracting a list of incident records from th
 All PDFs are converted to Markdown using a Gemini vision model (\texttt{benchmarks/ocr\_claims\_pdfs.py}). Each page is rendered to an image and transcribed with a system prompt that emphasizes preserving layout, spacing, and tables. In particular, tables are emitted in a CSV-like form inside Markdown, and the output is concatenated across pages.
 
 \subsection{LLM extraction protocol}
-We provide a lightweight, zero-shot evaluation harness (\texttt{benchmarks/evaluate\_models.py}) that applies the same extraction prompt to multiple LLM providers and requires the model to return a JSON array of incident objects. The prompt requests seven fields (incident number, company name, date of loss, status, driver, coverage type, and total incurred). Predictions are stored as \texttt{\{sample\}\_\{model\}\_predicted.json}, and aggregate reports are exported as \texttt{evaluation\_report.json} and \texttt{evaluation\_report.md}.
+We provide a lightweight, zero-shot evaluation harness (\texttt{benchmarks/evaluate\_models.py}) that applies the same extraction prompt to multiple LLM providers and requires the model to return a JSON list of incident objects conforming to the full incident schema. To ensure schema conformance, model outputs are validated and normalized against a Pydantic schema before scoring. Predictions are stored as \texttt{\{sample\}\_\{model\}\_predicted.json}, and aggregate reports are exported as \texttt{evaluation\_report.json} and \texttt{evaluation\_report.md}.
 
-\subsection{Incident-level matching and metrics}
-For scoring we use the incident number as a primary identifier. Incident numbers are normalized by stripping common prefixes (e.g., \texttt{\#}, \texttt{Incident \#}). Let $G$ be the list of ground-truth records and $P$ be the list of predicted records. We compute:
+\subsection{Field-level matching and metrics}
+For scoring we use the incident number as the record identifier. Incident numbers are normalized by stripping common prefixes (e.g., \texttt{\#}, \texttt{Incident \#}). Let $G$ be the list of ground-truth records and $P$ be the list of predicted records. We compute micro precision/recall/F1 over field-value pairs, after canonicalizing each incident under the schema.
+
+For each incident, we flatten its fields into a multiset of strings of the form \texttt{incident\_id|field\_path|value} (including nested financial breakdown fields). We then define:
 \begin{align}
-\mathrm{found} &= |\mathcal{I}(G) \cap \mathcal{I}(P)|,\\
-\mathrm{recall} &= \frac{\mathrm{found}}{|G|},\\
-\mathrm{precision} &= \frac{\mathrm{found}}{|P|},\\
+\mathrm{found} &= |\mathcal{F}(G) \cap \mathcal{F}(P)|,\\
+\mathrm{recall} &= \frac{\mathrm{found}}{|\mathcal{F}(G)|},\\
+\mathrm{precision} &= \frac{\mathrm{found}}{|\mathcal{F}(P)|},\\
 \mathrm{F1} &= \frac{2\,\mathrm{precision}\,\mathrm{recall}}{\mathrm{precision}+\mathrm{recall}},
 \end{align}
-where $\mathcal{I}(\cdot)$ denotes the set of normalized incident identifiers present in the list. We additionally report missing and extra incident identifiers to support qualitative error analysis.
+where $\mathcal{F}(\cdot)$ denotes the multiset of flattened field-value pairs across incidents. We additionally report missing and extra incident identifiers to support qualitative error analysis.
 
 \subsection{OCR identifier coverage baseline}
 To separate OCR failures from extraction failures, we run a deterministic identifier coverage check (\texttt{benchmarks/validate\_ocr\_vs\_golden.py}) which verifies whether incident numbers and reference numbers from the ground truth appear verbatim in the OCR transcript.

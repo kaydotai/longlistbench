@@ -1,69 +1,53 @@
 # Multi-Model Evaluation Report
 
-Generated: 2025-12-27 22:32:55
+Generated: 2026-01-20 09:33:12
 
 ## Overall Results
 
 | Model | Avg F1 | Avg Recall | Avg Precision | Samples | Errors |
 |-------|--------|------------|---------------|---------|--------|
-| Gemini 2.0 Flash | 0.0% | 0.0% | 0.0% | 5 | 5 |
-| GPT-4o | 96.3% | 94.7% | 98.0% | 5 | 0 |
-| Claude Sonnet 4 | 96.3% | 94.7% | 98.0% | 5 | 0 |
+| GPT-4o | 89.1% | 87.8% | 90.6% | 3 | 0 |
+| GPT-5.2 | 82.9% | 81.5% | 84.4% | 3 | 0 |
+| Gemini 2.0 Flash | 86.5% | 85.0% | 88.1% | 3 | 0 |
 
 ## Results by Difficulty Tier
 
 | Model | Easy | Medium | Hard | Extreme |
 |-------|------|--------|------|---------|
-| Gemini 2.0 Flash | 0.0% | 0.0% | 0.0% | 0.0% |
-| GPT-4o | 95.0% | 98.1% | 95.2% | 0.0% |
-| Claude Sonnet 4 | 95.0% | 98.1% | 95.2% | 0.0% |
+| GPT-4o | 0.0% | 0.0% | 86.5% | 90.5% |
+| GPT-5.2 | 0.0% | 0.0% | 80.9% | 83.8% |
+| Gemini 2.0 Flash | 0.0% | 0.0% | 84.8% | 87.3% |
 
 ## Results by Document Format
 
 | Model | Detailed | Table |
 |-------|----------|-------|
-| Gemini 2.0 Flash | 0.0% | 0.0% |
-| GPT-4o | 96.3% | 0.0% |
-| Claude Sonnet 4 | 96.3% | 0.0% |
+| GPT-4o | 89.1% | 0.0% |
+| GPT-5.2 | 82.9% | 0.0% |
+| Gemini 2.0 Flash | 86.5% | 0.0% |
 
 ## Detailed Results
-
-### easy_10_001_detailed
-
-| Model | F1 | Recall | Precision | Predicted | Time |
-|-------|-----|--------|-----------|-----------|------|
-| Gemini 2.0 Flash | ERROR | - | - | - | - |
-| GPT-4o | 90.0% | 90.0% | 90.0% | 10 | 4.2s |
-| Claude Sonnet 4 | 90.0% | 90.0% | 90.0% | 10 | 10.3s |
-
-### easy_10_002_detailed
-
-| Model | F1 | Recall | Precision | Predicted | Time |
-|-------|-----|--------|-----------|-----------|------|
-| Gemini 2.0 Flash | ERROR | - | - | - | - |
-| GPT-4o | 100.0% | 100.0% | 100.0% | 10 | 5.8s |
-| Claude Sonnet 4 | 100.0% | 100.0% | 100.0% | 10 | 10.9s |
 
 ### hard_50_001_detailed
 
 | Model | F1 | Recall | Precision | Predicted | Time |
 |-------|-----|--------|-----------|-----------|------|
-| Gemini 2.0 Flash | ERROR | - | - | - | - |
-| GPT-4o | 95.2% | 90.9% | 100.0% | 50 | 19.4s |
-| Claude Sonnet 4 | 95.2% | 90.9% | 100.0% | 50 | 53.1s |
+| GPT-4o | 86.5% | 83.3% | 89.9% | 51 | 19.4s |
+| GPT-5.2 | 80.9% | 77.2% | 84.9% | 50 | 0.0s |
+| Gemini 2.0 Flash | 84.8% | 81.0% | 89.1% | 50 | 0.0s |
 
-### medium_25_001_detailed
-
-| Model | F1 | Recall | Precision | Predicted | Time |
-|-------|-----|--------|-----------|-----------|------|
-| Gemini 2.0 Flash | ERROR | - | - | - | - |
-| GPT-4o | 96.2% | 92.6% | 100.0% | 25 | 7.8s |
-| Claude Sonnet 4 | 96.2% | 92.6% | 100.0% | 25 | 25.1s |
-
-### medium_25_002_detailed
+### extreme_100_001_detailed
 
 | Model | F1 | Recall | Precision | Predicted | Time |
 |-------|-----|--------|-----------|-----------|------|
-| Gemini 2.0 Flash | ERROR | - | - | - | - |
-| GPT-4o | 100.0% | 100.0% | 100.0% | 25 | 14.4s |
-| Claude Sonnet 4 | 100.0% | 100.0% | 100.0% | 25 | 26.4s |
+| GPT-4o | 90.3% | 89.9% | 90.7% | 496 | 0.0s |
+| GPT-5.2 | 83.8% | 83.5% | 84.1% | 496 | 0.0s |
+| Gemini 2.0 Flash | 86.4% | 86.2% | 86.7% | 497 | 0.0s |
+
+### extreme_100_002_detailed
+
+| Model | F1 | Recall | Precision | Predicted | Time |
+|-------|-----|--------|-----------|-----------|------|
+| GPT-4o | 90.6% | 90.1% | 91.2% | 494 | 1767.0s |
+| GPT-5.2 | 83.9% | 83.7% | 84.1% | 498 | 1903.8s |
+| Gemini 2.0 Flash | 88.2% | 88.0% | 88.5% | 497 | 1868.8s |
