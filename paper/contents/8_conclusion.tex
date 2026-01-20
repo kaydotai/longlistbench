@@ -8,5 +8,11 @@ Our main contributions are:
     \item An evaluation harness and baseline results that quantify the gap between near-perfect OCR identifier retention and imperfect end-to-end extraction.
 \end{itemize}
 
+\subsection{Practical takeaways}
+We intend LongListBench to be useful as a measurement tool for both research and engineering workflows. Two practical takeaways are worth emphasizing. First, identifier retention in OCR is near-perfect (Table~\ref{tab:ocr-coverage}), so most end-to-end failures should be attributed to downstream parsing, segmentation, and field population rather than transcription. Second, even with schema-conformant structured outputs and a shared prompt, field-level extraction on the medium tier remains materially below perfect (Table~\ref{tab:llm-baselines}), with a large gap between detailed and table formats (Table~\ref{tab:llm-baselines-format}), indicating substantial headroom for methods that explicitly model reading order, table structure, and long-range consistency.
+
+\subsection{Recommended reporting}
+For comparability across papers and systems, we recommend that LongListBench results report (i) OCR identifier coverage, (ii) schema-conformant field-level precision/recall/F1 under the released evaluator, and (iii) the extraction protocol used for long documents (e.g., full-context vs chunking, chunk sizes, and merge strategy). The extreme tier, in particular, is intended to stress scaling behavior: methods that succeed on short lists may fail due to context limits, brittle segmentation, or accumulated small errors across hundreds of records.
+
 \subsection{Future Work}
 We view the benchmark as a foundation for studying scalable, layout-robust extraction. Immediate next steps include improved handling of duplicates and merged cells, and evaluation of methods that can reliably extract hundreds of incidents in a single document (Section~\ref{sec:limitations}).

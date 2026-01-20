@@ -1,7 +1,7 @@
 We construct LongListBench, a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident/line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground truth incidents (JSON), (ii) a rendered PDF, and (iii) an OCR transcript of the PDF in Markdown.
 
 \subsection{Entity schema}
-Ground truth incidents follow the schema in \path{benchmarks/models/loss_run.py}. In this paper we focus on extracting seven fields that commonly drive downstream workflows: \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}.
+Ground truth incidents follow the schema in \path{benchmarks/models/loss_run.py}, represented as a Pydantic model. The schema includes incident identifiers, policy metadata, narrative text, and nested financial breakdowns (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}). While downstream workflows often emphasize fields such as \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}, our evaluator requires and scores the full schema.
 
 \subsection{Document generation}
 Benchmark instances are generated with seeded randomness for reproducibility (\path{benchmarks/generate_claims_benchmark.py}). Structured incidents are created by \path{benchmarks/synthetic/generate_claim_data.py}. We then render the incidents into visually rich documents using \path{benchmarks/synthetic/generate_html.py} and one of two layouts:
