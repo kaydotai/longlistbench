@@ -2,6 +2,8 @@
 
 Benchmark for long-list entity extraction from semi-structured documents under layout and OCR noise, inspired by recurring patterns observed in real-world claims documents.
 
+This benchmark was developed at [Kay.ai](https://kay.ai).
+
 ## Quick Start
 
 ```bash
