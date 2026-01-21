@@ -13,6 +13,9 @@ source .venv/bin/activate
 python -m pip install -r benchmarks/requirements.txt
 python -m playwright install chromium
 
+# Set API keys (only needed for OCR/evaluation runs)
+cp .env.example .env
+
 # Generate the complete benchmark dataset
 python benchmarks/generate_claims_benchmark.py
 ```
@@ -49,10 +52,22 @@ See [`benchmarks/README.md`](benchmarks/README.md) for benchmark documentation.
 | Hard | 50 | 8×2 = 16 | Detailed + Table | 5-6 |
 | Extreme | 100 | 5×2 = 10 | Detailed + Table | All 7 |
 
+Note: these are nominal sizes; the released dataset includes additional rows from `duplicates` and `large_doc`. In the current release, ground-truth incident counts per document range from 10--11 (easy), 25--27 (medium), 55 (hard), and 500 (extreme).
+
 ### Document Formats
 
 - **Detailed**: Incident sections with line items and financial breakdowns
 - **Table**: Compact tabular format with all claims in rows
+
+## Baseline Results (Released)
+
+Schema-conformant field-level micro F1 averaged across all 80 documents (see `benchmarks/results_*_all/evaluation_report.json`):
+
+| Model | Avg F1 | Avg Recall | Avg Precision |
+|------|--------|------------|---------------|
+| Gemini 2.5 | 81.9% | 80.4% | 83.4% |
+| GPT-4o | 80.0% | 78.3% | 82.0% |
+| GPT-5.2 | 78.1% | 76.8% | 79.6% |
 
 ## Development
 

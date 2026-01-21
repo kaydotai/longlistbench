@@ -123,26 +123,14 @@ python html_to_pdf.py -i data/hard_claims.html
 
 ## Entity Schema
 
-Each claim contains the following entities to extract:
+Generated incidents conform to `LossRunIncident` (see `benchmarks/models/loss_run.py`). The schema includes incident identifiers, policy metadata, narrative fields, and nested financial breakdowns.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `claim_id` | string | Unique identifier (e.g., CLM-000001) |
-| `claimant_name` | string | Full name of claimant |
-| `claimant_email` | string | Email address |
-| `claimant_phone` | string | Phone number |
-| `policy_number` | string | Policy identifier |
-| `claim_date` | string | Date claim occurred (ISO format) |
-| `reported_date` | string | Date claim reported |
-| `incident_type` | string | Type of incident |
-| `incident_location` | string | Physical address |
-| `amount_claimed` | float | Amount claimed (USD) |
-| `amount_approved` | float/null | Amount approved (null if pending) |
-| `status` | string | Current status |
-| `adjuster_name` | string | Assigned adjuster |
-| `adjuster_email` | string | Adjuster's email |
-| `description` | string | Incident description |
-| `notes` | string/null | Additional notes |
+Key fields:
+
+- `incident_number`, `reference_number`
+- `company_name`, `division`, `insured`, `agency`, `policy_number`, `policy_state`
+- `coverage_type`, `status`, `date_of_loss`, `date_reported`, `loss_state`, `unit_number`, `driver_name`, `claimants`, `cause_code`, `handler`, `adjuster_notes`, `description`
+- `bi`, `pd`, `lae`, `ded` (each has `reserve`, `paid`, `recovered`, `total_incurred`)
 
 ## File Structure
 
