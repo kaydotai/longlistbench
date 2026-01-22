@@ -27,6 +27,3 @@ For each incident, we flatten its fields into a multiset of canonicalized triple
 \mathrm{F1} &= \frac{2\,\mathrm{precision}\,\mathrm{recall}}{\mathrm{precision}+\mathrm{recall}},
 \end{align}
 where $\mathcal{F}(\cdot)$ denotes the multiset of flattened field-value pairs across incidents. We additionally report missing and extra incident identifiers and count exact record matches for incidents whose canonicalized objects match exactly.
-
-\subsection{OCR identifier coverage baseline}
-To separate OCR failures from extraction failures, we run a deterministic identifier coverage check (\texttt{benchmarks/validate\_ocr\_vs\_golden.py}) which verifies whether incident numbers and reference numbers from the ground truth appear verbatim in the OCR transcript.

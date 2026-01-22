@@ -11,27 +11,86 @@ Benchmark instances are generated with seeded randomness for reproducibility (\p
 \end{enumerate}
 The HTML is rendered into PDF using headless Chromium via Playwright (\path{benchmarks/synthetic/html_to_pdf.py}).
 
-\subsection{Injected problem types}
-We inject seven recurring document phenomena that complicate long-list extraction (Table~\ref{tab:problem-taxonomy}). These effects are applied at the HTML level prior to PDF rendering.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual diagram
+    \fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}Document Generation Pipeline Diagram\vspace{3cm}}}
+    \caption{Overview of the benchmark document generation pipeline.}
+    \label{fig:generation-pipeline}
+\end{figure}
 
-\begin{table}[t]
-\centering
-\caption{Problem types injected into benchmark documents.}
-\label{tab:problem-taxonomy}
-\begin{tabular}{p{0.23\linewidth}p{0.71\linewidth}}
-\toprule
-Problem & Description \\
-\midrule
-Page breaks & Split incidents/rows across page boundaries. \\
-Multi-row entities & Insert line breaks inside cells (e.g., descriptions) to stress OCR and parsing. \\
-Exact duplicates & Repeat a subset of incidents verbatim. \\
-Large documents & Expand documents to at least 500 incidents to stress context limits. \\
-Multiple tables & Add irrelevant tables (e.g., company directory) alongside the true claims. \\
-Multi-column layout & Render content in two columns, inducing reading-order ambiguity. \\
-Merged cells & Use row/column spanning and omitted repeated cells in table format. \\
-\bottomrule
-\end{tabular}
-\end{table}
+\subsection{Injected problem types}
+We inject seven recurring document phenomena that complicate long-list extraction. These effects are applied at the HTML level prior to PDF rendering.
+
+\paragraph{Page breaks.}
+In real-world documents, page boundaries frequently split logical entities mid-record. A single incident may begin on one page with identifiers and description, while its financial breakdown appears on the next. This is particularly common in loss runs and itemized bills where dense formatting leaves no natural breakpoints. OCR systems typically process pages independently, producing separate text blocks that must be reassembled. Extraction models must recognize continuation patterns and avoid treating the second half of a split record as a new entity or dropping it entirely.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual screenshot
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}Page Breaks Example\vspace{2cm}}}
+    \caption{Example of an incident split across a page boundary.}
+    \label{fig:example-page-breaks}
+\end{figure}
+
+\paragraph{Multi-row entities.}
+Table cells often contain text that wraps across multiple lines, especially for description fields, addresses, or claimant lists. When OCR linearizes such content, it may interleave text from adjacent columns or treat each line as a separate cell. For example, a description spanning three lines might appear as three distinct rows in the OCR output, with column alignment lost. Extraction models must recognize that these lines belong to a single logical cell and reconstruct the original cell boundaries from visual or positional cues.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual screenshot
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}Multi-row Entities Example\vspace{2cm}}}
+    \caption{Example of a cell containing multiple lines of text.}
+    \label{fig:example-multi-row}
+\end{figure}
+
+\paragraph{Exact duplicates.}
+Production documents sometimes contain intentionally repeated records. In insurance contexts, the same incident may appear multiple times due to amendments, re-openings, or reporting across multiple policy periods. Unlike data entry errors, these duplicates are semantically meaningful and must be preserved in the extracted output. Many extraction pipelines include deduplication as a post-processing step, which would incorrectly collapse valid duplicate entries. Models must faithfully reproduce the document content without applying implicit deduplication logic.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual screenshot
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}Exact Duplicates Example\vspace{2cm}}}
+    \caption{Example of duplicate incident records.}
+    \label{fig:example-duplicates}
+\end{figure}
+
+\paragraph{Large documents.}
+Real loss runs and itemized bills routinely contain hundreds of line items. A single trucking company's annual loss run may list 200--500 incidents; a hospital bill for a complex procedure can exceed 1{,}000 charge lines. These documents push against context window limits of current LLMs. Even models with 128K+ token windows may exhibit degraded recall on items appearing in the middle of very long documents (the "lost in the middle" phenomenon). We include an extreme tier with 500 incidents per document to measure how extraction quality scales with document length.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual screenshot
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}Large Documents Example\vspace{2cm}}}
+    \caption{Example of a document with hundreds of incidents.}
+    \label{fig:example-large-doc}
+\end{figure}
+
+\paragraph{Multiple tables.}
+Business documents frequently embed auxiliary tables alongside the primary data. A loss run PDF might include a cover page with agent contact information, a summary table of totals by coverage type, or a glossary of status codes---none of which should be extracted as incident records. Models must distinguish the target entity table from these distractors based on schema matching, header recognition, or positional cues. Naive approaches that extract all tabular content will produce false positives from irrelevant tables.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual screenshot
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}Multiple Tables Example\vspace{2cm}}}
+    \caption{Example of irrelevant tables appearing alongside claims data.}
+    \label{fig:example-multiple-tables}
+\end{figure}
+
+\paragraph{Multi-column layout.}
+Some documents use multi-column layouts to fit more content per page. This creates reading-order ambiguity: should text be read left-to-right across columns or top-to-bottom within each column? Standard OCR often assumes a single-column flow, interleaving content from parallel columns into an incoherent sequence. For example, incident \#1's description might be concatenated with incident \#10's financial data if both appear at the same vertical position in adjacent columns. Correct extraction requires column detection and proper reading-order reconstruction.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual screenshot
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}Multi-column Layout Example\vspace{2cm}}}
+    \caption{Example of a two-column document layout.}
+    \label{fig:example-multi-column}
+\end{figure}
+
+\paragraph{Merged cells.}
+Tables often use merged cells for visual grouping. A common pattern is merging the company name cell across all incidents belonging to that company, or merging a coverage type header across its associated rows. In the rendered PDF, these appear as single cells spanning multiple rows or columns. OCR may report the merged cell's content only once, leaving subsequent rows with empty values for that field. Extraction models must propagate the merged value to all spanned rows, recognizing that an empty cell indicates inheritance from above rather than a missing value.
+\begin{figure}[ht]
+    \centering
+    % TODO: Replace with actual screenshot
+    \fbox{\parbox{0.6\textwidth}{\centering\vspace{2cm}Merged Cells Example\vspace{2cm}}}
+    \caption{Example of a table with merged and spanning cells.}
+    \label{fig:example-merged-cells}
+\end{figure}
 
 \subsection{Dataset scale}
 The released dataset (\texttt{longlistbench-v1}, version 1.0.1; see \path{benchmarks/claims/metadata.json}) contains 80 PDFs (40 detailed, 40 table) with 6{,}828 incident rows. Difficulty tiers are configured as 15 easy instances (10 claims/PDF), 12 medium (25 claims/PDF), 8 hard (50 claims/PDF), and 5 extreme (100 claims/PDF nominal). In the extreme tier, enabling \texttt{large\_doc} expands each document to 500 incidents. Enabling \texttt{duplicates} injects additional duplicate rows (up to 5 per document), causing the number of incident rows to exceed the nominal tier size.

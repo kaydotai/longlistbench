@@ -1,0 +1,117 @@
+\section*{Appendix A: Evaluation Schemas}
+\addcontentsline{toc}{section}{Appendix A: Evaluation Schemas}
+\label{sec:appendix-schemas}
+
+A recurring challenge with existing document extraction benchmarks is incomplete or ambiguous schema documentation. Without clear specifications, it can be difficult to understand expected field formats, handling of optional values, or normalization rules. Researchers attempting to reproduce results must often reverse-engineer these details from examples or evaluation scripts, leading to inconsistent implementations and incomparable metrics.
+
+To ensure full reproducibility, we provide complete schemas with explicit type annotations, default values, and field descriptions. All schemas are implemented as Pydantic models, enabling automatic JSON Schema generation and runtime validation. The evaluation script validates model outputs against these schemas before scoring, ensuring that format errors are caught early rather than silently degrading metrics.
+
+\subsection*{A.1 Financial Breakdown Schema}
+
+Each incident contains four financial breakdown objects (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}) with the following structure:
+
+\begin{lstlisting}[language=Python, caption={FinancialBreakdown schema}]
+class FinancialBreakdown(BaseModel):
+    reserve: float = 0.0
+        # Amount reserved for potential payout
+    paid: float = 0.0
+        # Amount already paid
+    recovered: float = 0.0
+        # Amount recovered (e.g., deductible)
+    total_incurred: float = 0.0
+        # Reserve + Paid - Recovered
+\end{lstlisting}
+
+\subsection*{A.2 Loss Run Incident Schema}
+
+The primary entity schema representing a single insurance claim incident:
+
+\begin{lstlisting}[language=Python, caption={LossRunIncident schema}]
+class LossRunIncident(BaseModel):
+    # Identifiers
+    incident_number: str
+        # Incident number (e.g., #12345)
+    reference_number: str
+        # Reference ID (e.g., L240123)
+
+    # Company information
+    company_name: str
+        # Trucking company name
+    division: str = "General"
+        # Company division
+    insured: str
+        # Insured party name
+    agency: Optional[str] = None
+        # Insurance agency name
+
+    # Policy details
+    policy_number: str
+        # Policy identifier
+    policy_state: str
+        # Policy state abbreviation
+    coverage_type: str
+        # Coverage type (Liability, Physical Damage,
+        # Inland Marine, Cargo)
+    status: str
+        # Open or Closed
+
+    # Incident details
+    description: str
+        # Detailed incident description
+    cause_code: Optional[str] = None
+        # Internal cause code
+    date_of_loss: str
+        # Date incident occurred
+    date_reported: str
+        # Date reported to insurance
+    loss_state: str
+        # State where loss occurred
+
+    # Personnel
+    handler: str = "Claims Adjuster"
+        # Claims handler
+    driver_name: Optional[str] = None
+        # Driver name at time of incident
+    claimants: list[str] = []
+        # List of claimants
+
+    # Vehicle
+    unit_number: Optional[str] = None
+        # Vehicle/truck unit ID
+
+    # Financial breakdowns
+    bi: FinancialBreakdown
+        # Bodily Injury
+    pd: FinancialBreakdown
+        # Property Damage
+    lae: FinancialBreakdown
+        # Loss Adjustment Expense
+    ded: FinancialBreakdown
+        # Deductible
+
+    # Notes
+    adjuster_notes: Optional[str] = None
+        # Additional adjuster notes
+\end{lstlisting}
+
+\subsection*{A.3 Extraction Output Schema}
+
+Models are expected to return a JSON object matching the following structure:
+
+\begin{lstlisting}[language=Python, caption={LossRunExtraction schema}]
+class LossRunExtraction(BaseModel):
+    incidents: list[LossRunIncident]
+\end{lstlisting}
+
+\subsection*{A.4 Field Scoring Rules}
+
+During evaluation, fields are normalized and compared as follows:
+
+\begin{itemize}
+    \item \textbf{String fields}: Trimmed of whitespace. Optional string fields treat empty strings as \texttt{null}.
+    \item \textbf{Numeric fields}: Rounded to two decimal places. Negative zero is normalized to zero.
+    \item \textbf{List fields}: Sorted alphabetically for comparison.
+    \item \textbf{Financial breakdowns}: Each sub-field (\texttt{reserve}, \texttt{paid}, \texttt{recovered}, \texttt{total\_incurred}) is scored independently.
+\end{itemize}
+
+The evaluation computes field-level precision, recall, and F1 by flattening each incident into (incident\_id, field\_path, value) tuples and comparing predicted tuples against ground truth.

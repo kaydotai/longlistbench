@@ -5,7 +5,7 @@ Many established benchmarks focus on key-value style extraction or relatively sh
 We introduce LongListBench, a benchmark designed to stress-test long-list extraction from semi-structured business documents with long incident/line-item lists under systematically injected document phenomena and OCR noise. The benchmark is inspired by recurring patterns observed in real-world claims documents.
 
 \subsection{Background and Motivation}
-In production workflows, a single semi-structured PDF can contain many incidents or line items and associated financial breakdowns. Systems must extract a complete list of records (not merely a few key-value pairs) while handling complex layouts and noisy OCR. We aim to support research on extraction methods that remain reliable as list length grows and as layout artifacts accumulate.
+This work originates from production challenges encountered at Kay.ai and in prior industry experience. A client engagement required generating Statements of Values (SOVs) from loss-run PDFs containing insurance claims---documents spanning hundreds of pages with varied formats and numerous layout artifacts. After evaluating off-the-shelf models and commercial extraction services, we identified long-list extraction as an underserved problem: existing tools performed adequately on short forms but degraded on documents with dozens to hundreds of repeated records. Similar challenges arose when processing itemized medical bills containing thousands of claim lines, exhibiting wide variation in table structures and OCR quality. These experiences motivated the development of a dedicated extraction pipeline (to be described in a subsequent paper) and, in turn, the need for a rigorous benchmark to measure progress on extraction methods that remain reliable as list length grows and as layout artifacts accumulate.
 
 \subsection{Research Questions}
 This work is organized around three practical questions:
@@ -24,5 +24,3 @@ We make the following contributions:
     \item Baseline results for GPT-5.2, GPT-4o, and Gemini 2.5 under a shared prompt, highlighting remaining gaps in long-list extraction.
 \end{itemize}
 
-\subsection{Paper Organization}
-Section~\ref{sec:related-work} reviews relevant datasets and models. Section~\ref{sec:methodology} describes benchmark construction and the problem taxonomy. Section~\ref{sec:evaluation} presents the evaluation protocol. Section~\ref{sec:results} reports baseline results. Section~\ref{sec:limitations} discusses limitations and future directions, and Section~\ref{sec:conclusion} concludes.
