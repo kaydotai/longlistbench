@@ -30,6 +30,7 @@
 \usepackage{array}
 
 % Links and references (hyperref should be loaded late)
+\usepackage{xurl}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -58,9 +59,27 @@
 \lstset{
     basicstyle=\ttfamily\small,
     breaklines=true,
+    breakatwhitespace=false,
+    postbreak=\mbox{\textcolor{gray}{$\hookrightarrow$}\space},
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    tabsize=4,
     frame=single,
-    numbers=left,
+    framesep=2pt,
+    framerule=0.2pt,
+    rulecolor=\color{black!20},
+    backgroundcolor=\color{white},
+    keywordstyle=\bfseries\color{blue!60!black},
+    commentstyle=\itshape\color{black!55},
+    stringstyle=\color{red!55!black},
+    numbers=none,
     numberstyle=\tiny\color{gray},
+    numbersep=10pt,
+    xleftmargin=0.6em,
+    framexleftmargin=0.6em,
+    aboveskip=0.8\baselineskip,
+    belowskip=0.8\baselineskip,
 }
 
 % Custom theorem environments

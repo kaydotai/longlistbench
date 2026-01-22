@@ -11,15 +11,16 @@ To ensure full reproducibility, we provide complete schemas with explicit type a
 Each incident contains four financial breakdown objects (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}) with the following structure:
 
 \begin{lstlisting}[language=Python, caption={FinancialBreakdown schema}]
+from __future__ import annotations
+
+from pydantic import BaseModel, Field
+
+
 class FinancialBreakdown(BaseModel):
-    reserve: float = 0.0
-        # Amount reserved for potential payout
-    paid: float = 0.0
-        # Amount already paid
-    recovered: float = 0.0
-        # Amount recovered (e.g., deductible)
-    total_incurred: float = 0.0
-        # Reserve + Paid - Recovered
+    reserve: float = Field(default=0.0, description="Amount reserved for potential payout")
+    paid: float = Field(default=0.0, description="Amount already paid")
+    recovered: float = Field(default=0.0, description="Amount recovered (e.g., deductible)")
+    total_incurred: float = Field(default=0.0, description="Reserve + Paid - Recovered")
 \end{lstlisting}
 
 \subsection*{A.2 Loss Run Incident Schema}
@@ -27,71 +28,38 @@ class FinancialBreakdown(BaseModel):
 The primary entity schema representing a single insurance claim incident:
 
 \begin{lstlisting}[language=Python, caption={LossRunIncident schema}]
+from typing import Optional
+
+from pydantic import BaseModel, Field
+
+
 class LossRunIncident(BaseModel):
-    # Identifiers
-    incident_number: str
-        # Incident number (e.g., #12345)
-    reference_number: str
-        # Reference ID (e.g., L240123)
+    incident_number: str = Field(description="Incident number (e.g., #12345)")
+    reference_number: str = Field(description="Reference ID (e.g., L240123)")
+    company_name: str = Field(description="Trucking company name")
+    division: str = Field(default="General", description="Company division")
+    coverage_type: str = Field(description="Coverage type (Liability, Physical Damage, Inland Marine, Cargo)")
+    status: str = Field(description="Open or Closed")
+    policy_number: str = Field(description="Policy identifier")
+    policy_state: str = Field(description="Policy state abbreviation")
+    cause_code: Optional[str] = Field(default=None, description="Internal cause code")
+    description: str = Field(description="Detailed incident description")
+    handler: str = Field(default="Claims Adjuster", description="Claims handler")
+    unit_number: Optional[str] = Field(default=None, description="Vehicle/truck unit ID")
+    date_of_loss: str = Field(description="Date incident occurred")
+    loss_state: str = Field(description="State where loss occurred")
+    date_reported: str = Field(description="Date reported to insurance")
+    agency: Optional[str] = Field(default=None, description="Insurance agency name")
+    insured: str = Field(description="Insured party name")
+    claimants: list[str] = Field(default_factory=list, description="List of claimants")
+    driver_name: Optional[str] = Field(default=None, description="Driver name at time of incident")
 
-    # Company information
-    company_name: str
-        # Trucking company name
-    division: str = "General"
-        # Company division
-    insured: str
-        # Insured party name
-    agency: Optional[str] = None
-        # Insurance agency name
+    bi: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Bodily Injury")
+    pd: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Property Damage")
+    lae: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Loss Adjustment Expense")
+    ded: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Deductible")
 
-    # Policy details
-    policy_number: str
-        # Policy identifier
-    policy_state: str
-        # Policy state abbreviation
-    coverage_type: str
-        # Coverage type (Liability, Physical Damage,
-        # Inland Marine, Cargo)
-    status: str
-        # Open or Closed
-
-    # Incident details
-    description: str
-        # Detailed incident description
-    cause_code: Optional[str] = None
-        # Internal cause code
-    date_of_loss: str
-        # Date incident occurred
-    date_reported: str
-        # Date reported to insurance
-    loss_state: str
-        # State where loss occurred
-
-    # Personnel
-    handler: str = "Claims Adjuster"
-        # Claims handler
-    driver_name: Optional[str] = None
-        # Driver name at time of incident
-    claimants: list[str] = []
-        # List of claimants
-
-    # Vehicle
-    unit_number: Optional[str] = None
-        # Vehicle/truck unit ID
-
-    # Financial breakdowns
-    bi: FinancialBreakdown
-        # Bodily Injury
-    pd: FinancialBreakdown
-        # Property Damage
-    lae: FinancialBreakdown
-        # Loss Adjustment Expense
-    ded: FinancialBreakdown
-        # Deductible
-
-    # Notes
-    adjuster_notes: Optional[str] = None
-        # Additional adjuster notes
+    adjuster_notes: Optional[str] = Field(default=None, description="Additional adjuster notes")
 \end{lstlisting}
 
 \subsection*{A.3 Extraction Output Schema}
@@ -111,7 +79,7 @@ During evaluation, fields are normalized and compared as follows:
     \item \textbf{String fields}: Trimmed of whitespace. Optional string fields treat empty strings as \texttt{null}.
     \item \textbf{Numeric fields}: Rounded to two decimal places. Negative zero is normalized to zero.
     \item \textbf{List fields}: Sorted alphabetically for comparison.
-    \item \textbf{Financial breakdowns}: Each sub-field (\texttt{reserve}, \texttt{paid}, \texttt{recovered}, \texttt{total\_incurred}) is scored independently.
+    \item \textbf{Financial breakdowns}: Each sub-field (\path{reserve}, \path{paid}, \path{recovered}, \path{total_incurred}) is scored independently.
 \end{itemize}
 
-The evaluation computes field-level precision, recall, and F1 by flattening each incident into (incident\_id, field\_path, value) tuples and comparing predicted tuples against ground truth.
+The evaluation computes field-level precision, recall, and F1 by flattening each incident into (\path{incident_id}, \path{field_path}, \path{value}) tuples and comparing predicted tuples against ground truth.

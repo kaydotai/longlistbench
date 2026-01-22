@@ -1,18 +1,35 @@
 \subsection{Limitations}
-LongListBench is designed to be a practical benchmark for long-list extraction in semi-structured business documents, but it has several limitations.
-\begin{itemize}
-    \item \textbf{Synthetic generation}: while the schema and failure modes are motivated by production documents, the records and layouts are programmatically generated. This may under-represent rare formatting conventions and highly idiosyncratic carrier templates.
-    \item \textbf{OCR stack}: OCR transcripts are produced by a single vision-language model with a fixed prompt. Classical OCR systems and alternative prompts may yield different error distributions.
-    \item \textbf{Domain scope}: the current instances are inspired by recurring patterns observed in real-world claims documents. Generalization to other long-list domains (invoices, purchase orders, medical billing, financial statements) should be validated.
-    \item \textbf{Metric granularity}: while we report schema-conformant, field-level scoring, the metric does not capture semantic equivalence or provide exact-match analyses, and it remains challenging to evaluate duplicates as first-class entities.
-\end{itemize}
+LongListBench is designed as a measurement tool for long-list extraction under controlled layout and OCR noise. The current release prioritizes reproducibility and targeted stressors over exhaustive coverage of document variability. Table~\ref{tab:benchmark-scope} summarizes what LongListBench v1 covers and what it does not.
+
+\begin{table}[t]
+\centering
+\caption{Scope of LongListBench v1.}
+\label{tab:benchmark-scope}
+\begin{tabular}{p{0.46\linewidth}p{0.46\linewidth}}
+\toprule
+Covered in v1 & Not covered / out of scope \\
+\midrule
+Claims-style long lists (loss runs) in two renderings (detailed and table) & Other long-list families (invoices, purchase orders, medical billing, financial statements) and non-English documents \\
+Programmatic layouts with seven injected phenomena & Scan artifacts (skew, blur, stamps, handwriting), complex typography, and highly idiosyncratic templates \\
+VLM-based OCR transcripts with strong identifier retention & Broader OCR stacks and prompt variants; OCR bounding boxes and reading-order supervision \\
+Schema-conformant, field-level micro scoring with canonicalization & Semantic equivalence, downstream task-based metrics, and duplicate-aware entity matching \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In addition, our primary record identifier is the incident number. This choice simplifies evaluation and enables stable alignment at scale, but it can understate performance when a model extracts most fields correctly while corrupting identifiers. It also complicates the interpretation of results on documents containing exact duplicate incidents.
 
 \subsection{Future directions}
-We see multiple immediate extensions that would strengthen LongListBench and increase its utility.
-\begin{itemize}
-    \item \textbf{Per-field analysis}: report more detailed per-field accuracy for the full incident schema, and explicitly evaluate duplicate detection and normalization.
-    \item \textbf{Exact-match analysis}: evaluate the ability of models to produce exact matches for extracted fields.
-    \item \textbf{Broader OCR conditions}: add scans with blur/noise, different DPI settings, and non-LLM OCR baselines.
-    \item \textbf{Broader document families}: add additional templates and long-list document types beyond the claims-inspired formats in the current release.
-    \item \textbf{Scalable extraction protocols}: benchmark chunking, retrieval-augmented extraction, and layout-aware reconstruction strategies for the extreme tier (500 incidents).
-\end{itemize}
+We view LongListBench as an extensible benchmark and evaluation harness. The most valuable extensions are those that broaden the noise distribution, provide stronger signals for layout reconstruction, and benchmark extraction protocols that remain robust at hundreds of records.
+
+\paragraph{Broader OCR conditions and layout supervision.}
+An immediate next step is to expand OCR conditions beyond a single VLM-based transcript. This includes scanned variants (blur, noise, skew, and resolution changes), classical OCR baselines, and prompt variations. For a small subset, releasing page-level supervision (e.g., table cell boxes or reading-order annotations) would enable controlled evaluation of layout-aware reconstruction methods.
+
+\paragraph{Protocol benchmarks for long contexts.}
+The extreme tier (500 incidents) is intended to pressure extraction protocols, not only base model quality. A natural extension is to benchmark chunking and merge strategies, retrieval-augmented extraction, and layout-aware segmentation under a unified interface, and to report cost and latency alongside accuracy.
+
+\paragraph{Richer evaluation views.}
+Field-level micro F1 is a stable aggregate, but it hides systematic error patterns. Future releases should include per-field breakdowns, record-level exact match rates, and duplicate-aware matching that treats repeated incidents as first-class entities rather than an edge case of identifier collisions.
+
+\paragraph{Broader document families.}
+Finally, expanding the benchmark to additional long-list domains and templates would test whether methods generalize beyond claims-style tables, and would make LongListBench a more comprehensive measurement suite for long-list extraction.

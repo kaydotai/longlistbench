@@ -1,25 +1,25 @@
 We evaluate systems on the task of extracting a list of incident records from the OCR transcript of each PDF. The benchmark provides both the OCR transcript and a structured JSON ground truth for each document.
 
 \subsection{OCR transcription}
-All PDFs are converted to Markdown using a Gemini vision model (\texttt{benchmarks/ocr\_claims\_pdfs.py}). Each page is rendered to an image and transcribed with a system prompt that emphasizes preserving layout, spacing, and tables. In particular, tables are emitted in a CSV-like form inside Markdown, and the output is concatenated across pages.
+All PDFs are converted to Markdown using a Gemini vision model (\path{benchmarks/ocr_claims_pdfs.py}). Each page is rendered to an image and transcribed with a system prompt that emphasizes preserving layout, spacing, and tables. In particular, tables are emitted in a CSV-like form inside Markdown, and the output is concatenated across pages.
 
 \subsection{LLM extraction protocol}
-We provide a lightweight, zero-shot evaluation harness (\texttt{benchmarks/evaluate\_models.py}) that applies the same extraction prompt to multiple LLM providers and requires the model to return a JSON list of incident objects conforming to the full incident schema. The prompt includes a JSON Schema serialization of the target Pydantic model and is executed at temperature 0. Where supported, we request native structured outputs (e.g., response schemas) to reduce formatting errors.
+We provide a lightweight, zero-shot evaluation harness (\path{benchmarks/evaluate_models.py}) that applies the same extraction prompt to multiple LLM providers and requires the model to return a JSON list of incident objects conforming to the full incident schema. The prompt includes a JSON Schema serialization of the target Pydantic model and is executed at temperature 0. Where supported, we request native structured outputs (e.g., response schemas) to reduce formatting errors.
 
-To ensure schema conformance, model outputs are validated and normalized against a Pydantic schema before scoring. Predictions are stored as \texttt{\{sample\}\_\{model\}\_predicted.json}, and aggregate reports are exported as \texttt{evaluation\_report.json} and \texttt{evaluation\_report.md}.
+To ensure schema conformance, model outputs are validated and normalized against a Pydantic schema before scoring. Predictions are stored as \path{sample_model_predicted.json}, and aggregate reports are exported as \path{evaluation_report.json} and \path{evaluation_report.md}.
 
 \subsection{Chunking and merging for long documents}
 Hard and extreme documents can contain hundreds of incidents, and the OCR transcript may exceed practical context limits. The evaluation harness therefore supports chunked extraction: the OCR text is split into overlapping chunks using simple incident-number markers, targeting at most eight incidents per chunk. Each chunk is extracted independently, and chunk-level predictions are merged by normalized incident identifier, preferring non-empty fields and combining nested financial breakdown subfields.
 
 \subsection{Report regeneration and validation}
-To support reproducible analysis, the harness can regenerate summary reports offline from saved prediction files and optionally reuse extraction-time values from a previous report. A companion checker script (\texttt{benchmarks/check\_evaluation\_report.py}) recomputes metrics from the saved predictions and the golden data, and flags schema violations or report inconsistencies.
+To support reproducible analysis, the harness can regenerate summary reports offline from saved prediction files and optionally reuse extraction-time values from a previous report. A companion checker script (\path{benchmarks/check_evaluation_report.py}) recomputes metrics from the saved predictions and the golden data, and flags schema violations or report inconsistencies.
 
 \subsection{Field-level matching and metrics}
 For scoring we use the incident number as the record identifier. Incident numbers are normalized by stripping common prefixes (e.g., \texttt{\#}, \texttt{Incident \#}). Let $G$ be the list of ground-truth records and $P$ be the list of predicted records. We compute micro precision/recall/F1 over field-value pairs, after canonicalizing each incident under the schema.
 
 Canonicalization strips whitespace from strings, maps empty optional strings to null, sorts claimant lists, and rounds monetary values in nested financial breakdowns to two decimal places. Metrics are computed per document and then averaged across documents for tier- and format-level summaries.
 
-For each incident, we flatten its fields into a multiset of canonicalized triples (\texttt{incident\_id}, \texttt{field\_path}, \texttt{value}) (including nested financial breakdown fields). We then define:
+For each incident, we flatten its fields into a multiset of canonicalized triples (\path{incident_id}, \path{field_path}, \path{value}) (including nested financial breakdown fields). We then define:
 \begin{align}
 \mathrm{found} &= |\mathcal{F}(G) \cap \mathcal{F}(P)|,\\
 \mathrm{recall} &= \frac{\mathrm{found}}{|\mathcal{F}(G)|},\\
