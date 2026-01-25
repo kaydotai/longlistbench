@@ -4,71 +4,73 @@
 
 A recurring challenge with existing document extraction benchmarks is incomplete or ambiguous schema documentation. Without clear specifications, it can be difficult to understand expected field formats, handling of optional values, or normalization rules. Researchers attempting to reproduce results must often reverse-engineer these details from examples or evaluation scripts, leading to inconsistent implementations and incomparable metrics.
 
-To ensure full reproducibility, we provide complete schemas with explicit type annotations, default values, and field descriptions. All schemas are implemented as Pydantic models, enabling automatic JSON Schema generation and runtime validation. The evaluation script validates model outputs against these schemas before scoring, ensuring that format errors are caught early rather than silently degrading metrics.
+To ensure full reproducibility, we provide complete schemas with explicit type annotations, default values, and field descriptions. The evaluation script validates model outputs against these schemas before scoring, ensuring that format errors are caught early rather than silently degrading metrics.
 
 \subsection*{A.1 Financial Breakdown Schema}
 
 Each incident contains four financial breakdown objects (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}) with the following structure:
 
-\begin{lstlisting}[language=Python, caption={FinancialBreakdown schema}]
-from __future__ import annotations
-
-from pydantic import BaseModel, Field
-
-
-class FinancialBreakdown(BaseModel):
-    reserve: float = Field(default=0.0, description="Amount reserved for potential payout")
-    paid: float = Field(default=0.0, description="Amount already paid")
-    recovered: float = Field(default=0.0, description="Amount recovered (e.g., deductible)")
-    total_incurred: float = Field(default=0.0, description="Reserve + Paid - Recovered")
+\begin{lstlisting}[caption={FinancialBreakdown schema}]
+FinancialBreakdown:
+    reserve: Float = 0.0        // Amount reserved for potential payout
+    paid: Float = 0.0           // Amount already paid
+    recovered: Float = 0.0      // Amount recovered (e.g., deductible)
+    total_incurred: Float = 0.0 // Reserve + Paid - Recovered
 \end{lstlisting}
 
 \subsection*{A.2 Loss Run Incident Schema}
 
 The primary entity schema representing a single insurance claim incident:
 
-\begin{lstlisting}[language=Python, caption={LossRunIncident schema}]
-from typing import Optional
+\begin{lstlisting}[caption={LossRunIncident schema}]
+LossRunIncident:
+    // Identifiers
+    incident_number: String       // Incident number (e.g., #12345)
+    reference_number: String      // Reference ID (e.g., L240123)
 
-from pydantic import BaseModel, Field
+    // Company information
+    company_name: String          // Trucking company name
+    division: String = "General"  // Company division
 
+    // Policy details
+    coverage_type: String         // Liability, Physical Damage, etc.
+    status: String                // Open or Closed
+    policy_number: String         // Policy identifier
+    policy_state: String          // Policy state abbreviation
 
-class LossRunIncident(BaseModel):
-    incident_number: str = Field(description="Incident number (e.g., #12345)")
-    reference_number: str = Field(description="Reference ID (e.g., L240123)")
-    company_name: str = Field(description="Trucking company name")
-    division: str = Field(default="General", description="Company division")
-    coverage_type: str = Field(description="Coverage type (Liability, Physical Damage, Inland Marine, Cargo)")
-    status: str = Field(description="Open or Closed")
-    policy_number: str = Field(description="Policy identifier")
-    policy_state: str = Field(description="Policy state abbreviation")
-    cause_code: Optional[str] = Field(default=None, description="Internal cause code")
-    description: str = Field(description="Detailed incident description")
-    handler: str = Field(default="Claims Adjuster", description="Claims handler")
-    unit_number: Optional[str] = Field(default=None, description="Vehicle/truck unit ID")
-    date_of_loss: str = Field(description="Date incident occurred")
-    loss_state: str = Field(description="State where loss occurred")
-    date_reported: str = Field(description="Date reported to insurance")
-    agency: Optional[str] = Field(default=None, description="Insurance agency name")
-    insured: str = Field(description="Insured party name")
-    claimants: list[str] = Field(default_factory=list, description="List of claimants")
-    driver_name: Optional[str] = Field(default=None, description="Driver name at time of incident")
+    // Incident details
+    cause_code: String?           // Internal cause code (optional)
+    description: String           // Detailed incident description
+    handler: String = "Claims Adjuster"
+    unit_number: String?          // Vehicle/truck unit ID (optional)
 
-    bi: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Bodily Injury")
-    pd: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Property Damage")
-    lae: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Loss Adjustment Expense")
-    ded: FinancialBreakdown = Field(default_factory=FinancialBreakdown, description="Deductible")
+    // Dates and locations
+    date_of_loss: String          // Date incident occurred
+    loss_state: String            // State where loss occurred
+    date_reported: String         // Date reported to insurance
 
-    adjuster_notes: Optional[str] = Field(default=None, description="Additional adjuster notes")
+    // Parties involved
+    agency: String?               // Insurance agency name (optional)
+    insured: String               // Insured party name
+    claimants: List[String] = []  // List of claimants
+    driver_name: String?          // Driver name at time of incident (optional)
+
+    // Financial breakdowns
+    bi: FinancialBreakdown        // Bodily Injury
+    pd: FinancialBreakdown        // Property Damage
+    lae: FinancialBreakdown       // Loss Adjustment Expense
+    ded: FinancialBreakdown       // Deductible
+
+    adjuster_notes: String?       // Additional adjuster notes (optional)
 \end{lstlisting}
 
 \subsection*{A.3 Extraction Output Schema}
 
 Models are expected to return a JSON object matching the following structure:
 
-\begin{lstlisting}[language=Python, caption={LossRunExtraction schema}]
-class LossRunExtraction(BaseModel):
-    incidents: list[LossRunIncident]
+\begin{lstlisting}[caption={LossRunExtraction schema}]
+LossRunExtraction:
+    incidents: List[LossRunIncident]
 \end{lstlisting}
 
 \subsection*{A.4 Field Scoring Rules}

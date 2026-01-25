@@ -56,6 +56,24 @@
 % Code listings (if needed)
 \usepackage{listings}
 \usepackage{xcolor}
+
+% Define colors for pseudo code
+\definecolor{schematype}{RGB}{0, 112, 192}      % Blue for types
+\definecolor{schemaprop}{RGB}{128, 64, 0}       % Brown for properties
+\definecolor{schemacomment}{RGB}{96, 96, 96}    % Gray for comments
+\definecolor{schemastring}{RGB}{163, 21, 21}    % Red for string values
+
+% Define pseudo code language
+\lstdefinelanguage{schema}{
+    keywords={String, Float, List, FinancialBreakdown, LossRunIncident, LossRunExtraction},
+    keywordstyle=\color{schematype}\bfseries,
+    morecomment=[l]{//},
+    commentstyle=\color{schemacomment}\itshape,
+    morestring=[b]",
+    stringstyle=\color{schemastring},
+    sensitive=true,
+}
+
 \lstset{
     basicstyle=\ttfamily\small,
     breaklines=true,
@@ -70,9 +88,9 @@
     framerule=0.2pt,
     rulecolor=\color{black!20},
     backgroundcolor=\color{white},
-    keywordstyle=\bfseries\color{blue!60!black},
-    commentstyle=\itshape\color{black!55},
-    stringstyle=\color{red!55!black},
+    keywordstyle=\bfseries\color{schematype},
+    commentstyle=\itshape\color{schemacomment},
+    stringstyle=\color{schemastring},
     numbers=none,
     numberstyle=\tiny\color{gray},
     numbersep=10pt,
@@ -80,6 +98,7 @@
     framexleftmargin=0.6em,
     aboveskip=0.8\baselineskip,
     belowskip=0.8\baselineskip,
+    language=schema,
 }
 
 % Custom theorem environments
@@ -142,8 +161,8 @@
 \label{sec:conclusion}
 \input{contents/8_conclusion}
 
-\section*{Acknowledgments}
-\input{contents/9_acknowledgments}
+% \section*{Acknowledgments}
+% \input{contents/9_acknowledgments}
 
 \printbibliography
 

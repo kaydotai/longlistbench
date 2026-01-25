@@ -1,26 +1,31 @@
 We construct LongListBench, a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident/line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground truth incidents (JSON), (ii) a rendered PDF, and (iii) an OCR transcript of the PDF in Markdown.
 
 \subsection{Entity schema}
-Ground truth incidents follow the schema in \path{benchmarks/models/loss_run.py}, represented as a Pydantic model. The schema includes incident identifiers, policy metadata, narrative text, and nested financial breakdowns (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}). While downstream workflows often emphasize fields such as \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}, our evaluator requires and scores the full schema.
+Ground truth incidents follow a structured schema (see \hyperref[sec:appendix-schemas]{Appendix~A}) that includes incident identifiers, policy metadata, narrative text, and nested financial breakdowns (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}). While downstream workflows often emphasize fields such as \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}, our evaluator requires and scores the full schema.
 
 \subsection{Document generation}
-Benchmark instances are generated with seeded randomness for reproducibility (\path{benchmarks/generate_claims_benchmark.py}). Structured incidents are created by \path{benchmarks/synthetic/generate_claim_data.py}. We then render the incidents into visually rich documents using \path{benchmarks/synthetic/generate_html.py} and one of two layouts:
+\Cref{fig:generation-pipeline} illustrates the benchmark construction pipeline, which consists of two phases.
+
+\paragraph{Schema design (green path).}
+Human annotators reviewed real insurance loss run documents from trucking companies to identify common fields, layouts, and formatting patterns. From this analysis, we defined a structured JSON schema capturing incident identifiers, policy metadata, narrative descriptions, and nested financial breakdowns. This schema serves as ground truth for evaluation.
+
+\paragraph{Synthetic generation (purple path).}
+Rather than using real documents (which contain sensitive information), we generate synthetic documents that preserve realistic layout challenges:
 \begin{enumerate}
-    \item \textbf{Detailed}: a repeated incident block with narrative text and a small financial table.
-    \item \textbf{Table}: a compact tabular representation formatted as a CSV-like table.
+    \item \textbf{Problem configuration}: We catalog recurring layout issues from real documents (page breaks splitting records, merged cells, multi-column layouts, etc.) and encode them as configurable problem types.
+    \item \textbf{Document rendering}: A Python script generates synthetic incident data matching our schema, renders HTML with the specified problems injected, and converts to PDF via headless Chromium.
+    \item \textbf{OCR transcription}: Each PDF is processed by Gemini 2.5 Flash, which converts page images to text.
+    \item \textbf{Markdown output}: The vision model outputs structured Markdown that preserves tables and spatial layout, simulating real OCR pipeline output.
 \end{enumerate}
-The HTML is rendered into PDF using headless Chromium via Playwright (\path{benchmarks/synthetic/html_to_pdf.py}).
 
 \begin{figure}[ht]
     \centering
-    \IfFileExists{figures/generation_pipeline.png}{
-        \includegraphics[width=0.9\linewidth]{figures/generation_pipeline.png}
-    }{
-        \fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}Document Generation Pipeline Diagram\vspace{3cm}}}
-    }
-    \caption{Overview of the benchmark document generation pipeline.}
+    \includegraphics[width=0.7\linewidth]{figures/generation.png}
+    \caption{Benchmark construction pipeline. Green path: schema design from real documents. Purple path: synthetic document generation and OCR transcription.}
     \label{fig:generation-pipeline}
 \end{figure}
+
+Documents are rendered in one of two formats: (i) \textbf{Detailed}---repeated incident blocks with narrative text and financial tables, or (ii) \textbf{Table}---a compact tabular representation. All generation uses seeded randomness for reproducibility.
 
 \subsection{Injected problem types}
 We inject seven recurring document phenomena that complicate long-list extraction. These effects are applied at the HTML level prior to PDF rendering.
