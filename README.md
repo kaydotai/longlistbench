@@ -22,7 +22,29 @@ cp .env.example .env
 python benchmarks/generate_claims_benchmark.py
 ```
 
+## Command-Line Reproducibility
+
+Convenience targets are provided via the repository root `Makefile`:
+
+```bash
+make help
+
+# Create venv + install deps + install Playwright Chromium
+make setup
+
+# Generate synthetic benchmark dataset (PDF/HTML/JSON)
+make generate
+
+# Build the paper
+make paper
+```
+
 See [`benchmarks/README.md`](benchmarks/README.md) for benchmark documentation.
+
+## Versioning and Citation
+
+- **Version**: see `VERSION`.
+- **Citation metadata**: see `CITATION.cff`.
 
 ## Benchmark Overview
 
@@ -87,7 +109,13 @@ cp pre-commit .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
 ```
 
-The hook runs a fast LaTeX compile (`make quick`) in the `paper` directory and prevents the commit if compilation fails.
+The hook runs a fast LaTeX compile (`make quick`) in the `paper` directory; in strict mode it can prevent the commit if compilation fails.
+
+By default, the hook is best-effort and will skip (or warn) when dependencies are missing. To make paper compilation failures block commits, set:
+
+```bash
+export STRICT_PAPER_COMPILE=1
+```
 
 **Manually invoking the hook:**
 ```bash

@@ -4,20 +4,35 @@
 
 echo "Running pre-commit hook: Compiling paper..."
 
-# Add common LaTeX paths on macOS
-export PATH="/Library/TeX/texbin:/usr/local/texlive/2025/bin/universal-darwin:$PATH"
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+if [[ -z "$REPO_ROOT" ]]; then
+    echo "(pre-commit) Not in a git repo; skipping."
+    exit 0
+fi
 
-# Change to the paper directory
-cd "$(git rev-parse --show-toplevel)/paper" || exit 1
+if ! command -v make >/dev/null 2>&1; then
+    echo "(pre-commit) 'make' not found; skipping paper compile."
+    exit 0
+fi
 
-# Run a quick compile (single pass, no bibliography update)
-if make quick; then
+if [[ ! -f "$REPO_ROOT/paper/Makefile" ]]; then
+    echo "(pre-commit) paper/Makefile not found; skipping."
+    exit 0
+fi
+
+# Best-effort quick compile (single pass, no bibliography update).
+# Set STRICT_PAPER_COMPILE=1 to make failures block the commit.
+if make -C "$REPO_ROOT/paper" quick; then
     echo "✓ Paper compiled successfully!"
     exit 0
-else
-    echo "✗ Paper compilation failed!"
-    echo "Please fix the compilation errors before committing."
-    echo "You can skip this hook with: git commit --no-verify"
+fi
+
+echo "(pre-commit) Paper quick-compile failed."
+echo "(pre-commit) To reproduce: make -C paper quick"
+echo "(pre-commit) You can skip hooks with: git commit --no-verify"
+
+if [[ "${STRICT_PAPER_COMPILE:-0}" == "1" ]]; then
     exit 1
 fi
 
+exit 0

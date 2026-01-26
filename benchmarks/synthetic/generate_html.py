@@ -199,10 +199,11 @@ class LossRunHTMLGenerator:
                 break-inside: auto;
             }}
             .page-break {{
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }}
         }}
         body {{
@@ -244,6 +245,25 @@ class LossRunHTMLGenerator:
         }}
         .incident-section.split-incident > .incident-header {{
             background-color: #fff3cd;
+        }}
+        .content-wrapper .incident-section.split-incident {{
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }}
+        .content-wrapper .incident-section.split-incident > .incident-header {{
+            column-span: none;
+            -webkit-column-span: none;
+        }}
+        .content-wrapper .incident-section.split-incident .financial-table {{
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }}
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {{
+            padding: 2px;
         }}
         .continued-note {{
             margin: 6px 0;
@@ -319,9 +339,11 @@ class LossRunHTMLGenerator:
             text-align: center;
         }}
         .page-break {{
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -379,6 +401,7 @@ class LossRunHTMLGenerator:
         incident_num: int,
         problems: dict,
         split_across_pages: bool = False,
+        use_columns: bool = False,
     ) -> str:
         """Generate a detailed incident section with financial line items."""
         # Extract data
@@ -452,13 +475,18 @@ class LossRunHTMLGenerator:
 """
 
         if split_across_pages:
-            html += '    <div class="continued-note">Continued on next page</div>\n'
-            html += '    <div class="page-break"></div>\n'
-            html += f'    <div class="continued-header">Incident {inc_num} (continued)</div>\n'
+            html += '</div>\n'
+            if use_columns:
+                html += '</div>\n'
+            html += '<div class="page-break"></div>\n'
+            if use_columns:
+                html += '<div class="content-wrapper">\n'
+            html += '<div class="incident-section split-incident">\n'
+            html += f'''    <div class="incident-header">
+        Incident {inc_num} (Ref #{ref_num})
+        <span style="float: right;">{coverage} - {status}</span>
+    </div>\n'''
 
-        html += """
-"""
-        
         # Financial breakdown table with separate rows per category
         bi = incident.get("bi", {})
         pd = incident.get("pd", {})
@@ -563,21 +591,6 @@ class LossRunHTMLGenerator:
         if problems.get("multi_row", False):
             description = self._inject_multiline(description, "<br>")
 
-        if split_across_pages:
-            desc_lines = description.split("<br>") if "<br>" in description else [description]
-            if len(desc_lines) < 8:
-                desc_lines = (desc_lines * (8 // max(1, len(desc_lines)) + 1))[:8]
-
-            top = "<br>".join(desc_lines[:4])
-            bottom = "<br>".join(desc_lines[4:])
-            description = (
-                top
-                + "<div class=\"continued-note\">Continued on next page</div>"
-                + "<div class=\"page-break\"></div>"
-                + "<div class=\"continued-note\">Continued</div>"
-                + bottom
-            )
-        
         # Get financial totals
         bi = incident.get("bi", {})
         pd = incident.get("pd", {})
@@ -639,9 +652,38 @@ class LossRunHTMLGenerator:
         omit_merged_cells = False
         merged_cells_inserted = False
         
+        table_header = """        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>"""
+
         for idx, incident in enumerate(incidents):
             row_num = idx + 1
             split_row = bool(use_page_breaks and (row_num in split_rows))
+            
+            if split_row:
+                html += """
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+""" + table_header
             
             force_merge = use_merged and (not merged_cells_inserted) and (not omit_merged_cells) and idx < len(incidents) - 1
             start_merge = force_merge or (
@@ -659,7 +701,7 @@ class LossRunHTMLGenerator:
                 use_merged=use_merged,
                 rowspan=rowspan,
                 omit_merged_cells=omit_merged_cells,
-                split_across_pages=split_row,
+                split_across_pages=False,  # Handled above now
             )
 
             omit_merged_cells = start_merge
@@ -710,6 +752,7 @@ class LossRunHTMLGenerator:
                     idx,
                     problems,
                     split_across_pages=split_incident,
+                    use_columns=problems.get("multi_column", False),
                 )
         
         # Problem 5: More irrelevant content

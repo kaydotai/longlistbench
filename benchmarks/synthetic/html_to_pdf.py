@@ -29,10 +29,14 @@ async def html_to_pdf(html_path: Path, pdf_path: Path) -> None:
         html_content = html_path.read_text(encoding="utf-8")
         await page.set_content(html_content)
 
+        await page.emulate_media(media="print")
+
         # Generate PDF with proper print settings
         await page.pdf(
             path=str(pdf_path),
             format="A4",
+            landscape=True,
+            prefer_css_page_size=True,
             print_background=True,
             margin={
                 "top": "2cm",
