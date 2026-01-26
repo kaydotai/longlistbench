@@ -49,7 +49,8 @@ except ModuleNotFoundError:
 
 
 if load_dotenv is not None:
-    load_dotenv()
+    _REPO_ROOT = Path(__file__).resolve().parents[1]
+    load_dotenv(_REPO_ROOT / ".env")
     load_dotenv(Path(__file__).parent / ".env")
 
 # ============================================================================
@@ -686,9 +687,9 @@ def run_evaluation(
     if claims_dir is None:
         claims_dir = Path(__file__).parent / "claims"
     if output_dir is None:
-        output_dir = Path(__file__).parent / "results"
+        output_dir = Path(__file__).parent / "results" / "scratch"
     
-    output_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     
     # Discover available samples
     if samples is None:
@@ -867,9 +868,9 @@ def run_evaluation_from_saved_predictions(
     if claims_dir is None:
         claims_dir = Path(__file__).parent / "claims"
     if output_dir is None:
-        output_dir = Path(__file__).parent / "results"
+        output_dir = Path(__file__).parent / "results" / "scratch"
 
-    output_dir.mkdir(exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     if samples is None:
         samples = []
@@ -911,13 +912,14 @@ def run_evaluation_from_saved_predictions(
 
     try:
         repo_root = Path(__file__).resolve().parent.parent
+        rel_report_path = current_report_path.resolve().relative_to(repo_root)
         head_json = subprocess.check_output(
             [
                 "git",
                 "-C",
                 str(repo_root),
                 "show",
-                "HEAD:benchmarks/results/evaluation_report.json",
+                f"HEAD:{rel_report_path.as_posix()}",
             ],
             text=True,
         )
@@ -1171,7 +1173,7 @@ def main():
                        choices=['gemini', 'gemini25', 'gpt52', 'gpt4', 'claude'],
                        help='Models to evaluate (default: gemini, gpt4, gpt52)')
     parser.add_argument('--output-dir', default=None,
-                       help='Directory to write predictions and evaluation reports (default: benchmarks/results)')
+                       help='Directory to write predictions and evaluation reports (default: benchmarks/results/scratch)')
     parser.add_argument('--tiers', nargs='+', default=None,
                        choices=['easy', 'medium', 'hard', 'extreme'],
                        help='Difficulty tiers to test (default: all)')
@@ -1212,7 +1214,7 @@ def main():
     
     if args.offline: 
         previous_report_path = Path(args.previous_report) if args.previous_report else None
-        output_dir = Path(args.output_dir) if args.output_dir else (Path(__file__).parent / "results")
+        output_dir = Path(args.output_dir) if args.output_dir else (Path(__file__).parent / "results" / "scratch")
         results = run_evaluation_from_saved_predictions(
             models=args.models,
             samples=args.samples,
@@ -1222,7 +1224,7 @@ def main():
             previous_report_path=previous_report_path,
         )
     else:
-        output_dir = Path(args.output_dir) if args.output_dir else (Path(__file__).parent / "results")
+        output_dir = Path(args.output_dir) if args.output_dir else (Path(__file__).parent / "results" / "scratch")
         results = run_evaluation(
             models=args.models,
             samples=args.samples,

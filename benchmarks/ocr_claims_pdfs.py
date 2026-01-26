@@ -35,7 +35,9 @@ except ImportError as e:
     sys.exit(1)
 
 # Load environment variables from .env file
-load_dotenv()
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(_REPO_ROOT / ".env")
+load_dotenv(Path(__file__).parent / ".env")
 
 # Try to import Google API error for retry handling
 try:
@@ -222,8 +224,8 @@ async def main_async() -> None:
     parser.add_argument(
         "--fallback-models",
         type=str,
-        default="gemini-2.5-flash,gemini-3-pro-preview",
-        help="Comma-separated fallback models to try if a page fails (default: gemini-2.5-flash,gemini-3-pro-preview)",
+        default="gemini-2.5-flash",
+        help="Comma-separated fallback models to try if a page fails (default: gemini-2.5-flash)",
     )
     parser.add_argument(
         "--file", "-f",

@@ -33,7 +33,7 @@
 **Sample**: `hard_50_001_detailed` (55 claims), `extreme_100_001_detailed` (500 claims)
 **Evidence**: Documents with dozens to hundreds of claims; the extreme tier expands to 500 claims per document via `large_doc`
 **Impact**: Context window challenges, attention degradation
-**Actual results**: full per-tier evaluation reports are included under `benchmarks/results_*_all/`.
+**Actual results**: full per-tier evaluation reports are included under `benchmarks/results/released/`.
 
 ### ✅ Problem 5: Multiple Tables
 **Sample**: `hard_50_001_detailed`
@@ -63,10 +63,10 @@ Brandon Smith,Embryologist, clinic,cperry@example.net,(545)472-8786
 
 For full, reproducible baseline evaluation metrics (schema-conformant field-level precision/recall/F1), see:
 
-- `benchmarks/results_easy_all/evaluation_report.md`
-- `benchmarks/results_medium_all/evaluation_report.md`
-- `benchmarks/results_hard_all/evaluation_report.md`
-- `benchmarks/results_extreme_all/evaluation_report.md`
+- `benchmarks/results/released/easy/evaluation_report.md`
+- `benchmarks/results/released/medium/evaluation_report.md`
+- `benchmarks/results/released/hard/evaluation_report.md`
+- `benchmarks/results/released/extreme/evaluation_report.md`
 
 ## Problem Impact Analysis
 
@@ -114,4 +114,4 @@ For full, reproducible baseline evaluation metrics (schema-conformant field-leve
 
 ## Conclusion
 
-**The benchmark is VALID and COMPREHENSIVE.** All 7 problem types are present and measurably affect extraction quality; the released evaluation reports under `benchmarks/results_*_all/` quantify these effects using schema-conformant, field-level scoring.
+**The benchmark is VALID and COMPREHENSIVE.** All 7 problem types are present and measurably affect extraction quality; the released evaluation reports under `benchmarks/results/released/` quantify these effects using schema-conformant, field-level scoring.

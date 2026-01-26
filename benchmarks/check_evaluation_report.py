@@ -422,7 +422,10 @@ def main() -> int:
 
     script_dir = Path(__file__).parent
     claims_dir = Path(args.claims_dir) if args.claims_dir else (script_dir / "claims")
-    results_dir = Path(args.results_dir) if args.results_dir else (script_dir / "results")
+    default_results_dir = script_dir / "results" / "scratch"
+    if not default_results_dir.exists():
+        default_results_dir = script_dir / "results"
+    results_dir = Path(args.results_dir) if args.results_dir else default_results_dir
     report_json = Path(args.report_json) if args.report_json else (results_dir / "evaluation_report.json")
 
     errors: list[str] = []

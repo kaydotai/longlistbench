@@ -132,6 +132,12 @@ def main():
         help="Validate a specific sample (e.g., 'easy_10_001_detailed')",
     )
     parser.add_argument(
+        "--tiers",
+        nargs="+",
+        choices=["easy", "medium", "hard", "extreme"],
+        help="Only validate samples whose filename starts with one of these tiers",
+    )
+    parser.add_argument(
         "-v", "--verbose",
         action="store_true",
         help="Show missing identifiers",
@@ -153,6 +159,13 @@ def main():
         # Find all samples with OCR files
         ocr_files = sorted(claims_dir.glob("*_ocr.md"))
         samples = [f.stem.replace("_ocr", "") for f in ocr_files]
+
+    if args.tiers and not args.sample:
+        samples = [
+            s
+            for s in samples
+            if any(s.startswith(f"{tier}_") for tier in args.tiers)
+        ]
     
     if not samples:
         print("No OCR files found. Run ocr_claims_pdfs.py first.")

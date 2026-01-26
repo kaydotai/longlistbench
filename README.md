@@ -22,7 +22,7 @@ cp .env.example .env
 python benchmarks/generate_claims_benchmark.py
 ```
 
-## Command-Line Reproducibility
+## Reproducibility
 
 Convenience targets are provided via the repository root `Makefile`:
 
@@ -85,7 +85,7 @@ Note: these are nominal sizes; the released dataset includes additional rows fro
 
 ## Baseline Results (Released)
 
-Schema-conformant field-level micro F1 averaged across all 80 documents (see `benchmarks/results_*_all/evaluation_report.json`):
+Schema-conformant field-level micro F1 averaged across all 80 documents (see `benchmarks/results/released/*/evaluation_report.json`):
 
 | Model | Avg F1 | Avg Recall | Avg Precision |
 |------|--------|------------|---------------|

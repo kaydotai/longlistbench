@@ -27,7 +27,7 @@ Run these commands from the repository root.
    ```bash
    cp .env.example .env
    ```
-   Then edit `.env` and set:
+   Then edit the repo-root `.env` and set:
    ```
    GEMINI_API_KEY=your-gemini-api-key
    OPENAI_API_KEY=your-openai-api-key
@@ -35,7 +35,7 @@ Run these commands from the repository root.
    # Optional (only needed if you evaluate Claude)
    ANTHROPIC_API_KEY=your-anthropic-api-key
 
-   # Optional override
+   # Optional override (only affects benchmarks/evaluate_models.py; default is gemini-2.5-flash)
    GEMINI_MODEL_ID=gemini-2.5-flash
    ```
 
@@ -115,6 +115,16 @@ This will:
 
 The script will show progress for each file and provide a summary at the end.
 
+Recommended staged workflow (validate each tier before moving on):
+
+```bash
+python benchmarks/ocr_claims_pdfs.py --force --tiers easy
+python benchmarks/validate_ocr_vs_golden.py --claims-dir claims --tiers easy
+
+python benchmarks/ocr_claims_pdfs.py --force --tiers medium
+python benchmarks/validate_ocr_vs_golden.py --claims-dir claims --tiers medium
+```
+
 ## Multi-Model Evaluation
 
 Run extraction evaluation across Gemini 2.5 (`gemini`), GPT-4o (`gpt4`), and GPT-5.2 (`gpt52`).
@@ -132,24 +142,24 @@ python benchmarks/evaluate_models.py --quick
 python benchmarks/evaluate_models.py --tiers easy medium --formats detailed
 
 # Regenerate a report offline from an existing results directory
-python benchmarks/evaluate_models.py --offline --output-dir benchmarks/results_medium_all
+python benchmarks/evaluate_models.py --offline --output-dir benchmarks/results/released/medium
 ```
 
-Results are written to the `--output-dir` (default: `benchmarks/results/`):
+Results are written to the `--output-dir` (default: `benchmarks/results/scratch/`):
 - `evaluation_report.json` - Full metrics data
 - `evaluation_report.md` - Human-readable summary
 
 This repository includes released evaluation artifacts under:
-- `benchmarks/results_easy_all/`
-- `benchmarks/results_medium_all/`
-- `benchmarks/results_hard_all/`
-- `benchmarks/results_extreme_all/`
+- `benchmarks/results/released/easy/`
+- `benchmarks/results/released/medium/`
+- `benchmarks/results/released/hard/`
+- `benchmarks/results/released/extreme/`
 
 ## Directory Structure
 
 - `claims/` - Generated benchmark claims (PDFs, JSONs, and OCR results)
-- `results/` - Scratch evaluation output directory (default)
-- `results_*_all/` - Released evaluation artifacts per tier
+- `results/scratch/` - Scratch evaluation output directory (default)
+- `results/released/` - Released evaluation artifacts per tier
 - `synthetic/` - Synthetic data generation tools
 - `generate_claims_benchmark.py` - Main benchmark generation script
 - `ocr_claims_pdfs.py` - OCR processing script for PDFs

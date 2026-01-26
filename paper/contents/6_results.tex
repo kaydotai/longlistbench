@@ -18,11 +18,11 @@ Reference number & 100.0\% & 100.0\% \\
 \end{table}
 
 \subsection{Zero-shot LLM extraction baseline}
-We evaluate three LLMs using the shared prompt and evaluation harness in \path{benchmarks/evaluate_models.py}. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports (\path{benchmarks/results_*_all/evaluation_report.*}). Averaged across all documents, Gemini 2.5 achieves 81.9\% average F1 (80.4\% recall, 83.4\% precision), GPT-4o achieves 80.0\% average F1 (78.3\% recall, 82.0\% precision), and GPT-5.2 achieves 78.1\% average field-level F1 (76.8\% recall, 79.6\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
+We evaluate three LLMs using the shared prompt and evaluation harness in \path{benchmarks/evaluate_models.py}. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports (\path{benchmarks/results/released/*/evaluation_report.*}). Averaged across all documents, Gemini 2.5 achieves 81.9\% average F1 (80.4\% recall, 83.4\% precision), GPT-4o achieves 80.0\% average F1 (78.3\% recall, 82.0\% precision), and GPT-5.2 achieves 78.1\% average field-level F1 (76.8\% recall, 79.6\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
 
 \begin{table}[t]
 \centering
-\caption{Zero-shot LLM baseline results across the full benchmark (80 documents) under schema-conformant, field-level scoring (computed from \protect\path{benchmarks/results_*_all/evaluation_report.json}).}
+\caption{Zero-shot LLM baseline results across the full benchmark (80 documents) under schema-conformant, field-level scoring (computed from \protect\path{benchmarks/results/released/*/evaluation_report.json}).}
 \label{tab:llm-baselines}
 \begin{tabular}{lrrrr}
 \toprule
@@ -37,7 +37,7 @@ GPT-5.2 & 80 & 76.8\% & 79.6\% & 78.1\% \\
 
 \begin{table}[t]
 \centering
-\caption{Baseline F1 by document format aggregated across all tiers (\protect\path{benchmarks/results_*_all/evaluation_report.json}).}
+\caption{Baseline F1 by document format aggregated across all tiers (\protect\path{benchmarks/results/released/*/evaluation_report.json}).}
 \label{tab:llm-baselines-format}
 \begin{tabular}{lrr}
 \toprule
@@ -52,7 +52,7 @@ GPT-5.2 & 83.5\% & 72.8\% \\
 
 \begin{table}[t]
 \centering
-\caption{Baseline F1 by difficulty tier (average across documents within each tier; \protect\path{benchmarks/results_*_all/evaluation_report.json}).}
+\caption{Baseline F1 by difficulty tier (average across documents within each tier; \protect\path{benchmarks/results/released/*/evaluation_report.json}).}
 \label{tab:llm-baselines-tier}
 \begin{tabular}{lrrrr}
 \toprule

@@ -18,10 +18,11 @@
                 break-inside: auto;
             }
             .page-break {
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
         body {
@@ -63,6 +64,25 @@
         }
         .incident-section.split-incident > .incident-header {
             background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
         }
         .continued-note {
             margin: 6px 0;
@@ -138,9 +158,11 @@
             text-align: center;
         }
         .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -211,7 +233,6 @@ hydroplaned, hit concrete barrier</div>
         <div class="claimants-list">Coleman, Mary<br>Mosley, Keith<br>Owen, David<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -268,7 +289,6 @@ turn, trailer struck OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Rise money property house live already picture run west character guess door table perhaps laugh.</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -327,7 +347,6 @@ struck adjacent vehicle</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Jones, Phyllis<br>Hodges, Delgado and Anderson<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -392,7 +411,6 @@ sign, struck IV broadside</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Zhang, Lisa<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -465,7 +483,6 @@ turn, trailer struck OV</div>
         <div class="claimants-list">Rios, Hernandez and Mcgrath<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -522,7 +539,6 @@ items from sealed trailer</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Evans, Christopher<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -583,7 +599,6 @@ parked parked OV</div>
         <div class="claimants-list">Andrews, Shannon<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -639,7 +654,6 @@ parked parked OV</div>
 transport - water intrusion</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -691,7 +705,6 @@ hydroplaned, hit concrete barrier</div>
         <div class="claimants-list">Patterson, Bobby<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -740,7 +753,6 @@ hydroplaned, hit concrete barrier</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV changed lanes
 into IV, causing collision</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -800,7 +812,6 @@ hydroplaned, hit concrete barrier</div>
         <div class="claimants-list">Rivera, Jodi<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -859,7 +870,6 @@ clipped OV on passenger side</div>
         <div class="claimants-list">King, Rebecca<br>Brown, James<br>Weaver, Ashley<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -916,7 +926,6 @@ backing, struck parked guardrail</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Franklin, Joseph<br>Jones, Jones and Ryan<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -982,7 +991,6 @@ brakes failed, rear-ended OV</div>
         <div class="claimants-list">Bell, Jason<br>Conley, Daniel<br>Johnson, Amy<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1039,7 +1047,6 @@ transport - water intrusion</div>
         <div class="claimants-list">Clark, Matthew<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1090,7 +1097,6 @@ parked concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Raymond, Hopkins and Anderson<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1147,7 +1153,6 @@ parked concrete barrier</div>
 discovered at delivery</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1194,7 +1199,6 @@ discovered at delivery</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo damaged during
 transport - water intrusion</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1251,7 +1255,6 @@ transport - water intrusion</div>
 transporting vehicle was damaged</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1302,7 +1305,6 @@ Total loss.</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Smith, Carla<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1358,7 +1360,6 @@ Total loss.</div>
 discovered at delivery</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1405,7 +1406,6 @@ discovered at delivery</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo crushed due
 to improper securing</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1457,7 +1457,6 @@ clipped OV on passenger side</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Garcia, Jennifer<br>Miller-Wolfe<br>Swanson LLC<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1512,7 +1511,6 @@ clipped OV on passenger side</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Windshield
 shattered by road debris</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1573,7 +1571,6 @@ to veer into OV</div>
         <div style="margin-left: 20px; font-style: italic;">Price bar hear find until data fact former born everything she single it film page.</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1633,7 +1630,6 @@ to veer into OV</div>
         <div class="claimants-list">Jackson, David<br>Morales, Samuel<br>Richards, Anthony<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1688,10 +1684,15 @@ to veer into OV</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Fuel tank punctured
 by road debris</div>
     </div>
-    <div class="continued-note">Continued on next page</div>
-    <div class="page-break"></div>
-    <div class="continued-header">Incident #30027 (continued)</div>
-
+</div>
+</div>
+<div class="page-break"></div>
+<div class="content-wrapper">
+<div class="incident-section split-incident">
+    <div class="incident-header">
+        Incident #30027 (Ref #L230027)
+        <span style="float: right;">Physical Damage - Closed</span>
+    </div>
 
     <table class="financial-table">
 
@@ -1750,7 +1751,6 @@ brakes failed, rear-ended OV</div>
         <div class="claimants-list">Bell, Jason<br>Conley, Daniel<br>Johnson, Amy<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1808,7 +1808,6 @@ clipped OV on passenger side</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Chambers, William<br>Bailey, Alison<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1873,7 +1872,6 @@ clipped OV on passenger side</div>
 to improper securing</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -1925,7 +1923,6 @@ failure during transport</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Adjuster Notes:</span></div>
         <div style="margin-left: 20px; font-style: italic;">Southern onto serious imagine enjoy authority hotel knowledge scientist program end particularly pass probably choice break practice industry claim.</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -1984,7 +1981,6 @@ into IV, causing collision</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Finley, Anna<br>Jordan, Robin<br>Ward, Tabitha<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2052,7 +2048,6 @@ changing lanes, sideswiped OV</div>
         <div class="claimants-list">Allen, Michelle<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2103,7 +2098,6 @@ to veer into OV</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Jones, Andrew<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2163,7 +2157,6 @@ highway, collided with OV</div>
         <div class="claimants-list">Harris, Benjamin<br>Hughes, Ryan<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2220,7 +2213,6 @@ Total loss.</div>
         <div style="margin-left: 20px; font-style: italic;">Lay director top door buy month middle hot military low camera.</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2275,7 +2267,6 @@ highway, collided with OV</div>
         <div style="margin-left: 20px; font-style: italic;">Article guy early peace bill reduce produce push adult although arrive husband past stuff mean suggest physical increase.</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2323,7 +2314,6 @@ highway, collided with OV</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Shortage
 discovered at delivery</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2376,7 +2366,6 @@ brakes failed, rear-ended OV</div>
         <div class="claimants-list">Bowen, Angela<br>Burns, Morgan<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2426,7 +2415,6 @@ parked bridge support</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Mccoy, Susan<br>Tanner, Michael<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2481,7 +2469,6 @@ parked concrete barrier</div>
         <div style="margin-left: 20px; font-style: italic;">Customer stay concern sign relationship can bag less election manager enjoy expert myself cover high green think think always.</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2532,7 +2519,6 @@ struck adjacent vehicle</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Skinner LLC<br>Jackson Group<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2587,7 +2573,6 @@ struck adjacent vehicle</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo crushed due
 to improper securing</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2646,7 +2631,6 @@ dock, hit bridge support</div>
         <div class="claimants-list">Martinez, Benjamin<br>Mclaughlin, Melissa<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2703,7 +2687,6 @@ hydroplaned, hit concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Moody, Christina<br>Wilson, Newman and Baxter<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2769,7 +2752,6 @@ turn, trailer struck OV</div>
         <div class="claimants-list">Turner, Victoria<br>Gross, Hannah<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2827,7 +2809,6 @@ backing, struck parked guardrail</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Medina, Jonathan<br>Ramos, Michael<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -2894,7 +2875,6 @@ changing lanes, sideswiped OV</div>
         <div class="claimants-list">Church, Miguel<br>Blackburn, Charles<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -2952,7 +2932,6 @@ into IV, causing collision</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Finley, Anna<br>Jordan, Robin<br>Ward, Tabitha<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -3017,7 +2996,6 @@ sign, struck IV broadside</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Zhang, Lisa<br></div>
     </div>
-
 
     <table class="financial-table">
 
@@ -3091,7 +3069,6 @@ into IV, causing collision</div>
         <div class="claimants-list">Finley, Anna<br>Jordan, Robin<br>Ward, Tabitha<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -3154,7 +3131,6 @@ into IV, causing collision</div>
 struck adjacent vehicle</div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -3206,7 +3182,6 @@ at traffic light</div>
         <div class="claimants-list">Glover, Tina<br></div>
     </div>
 
-
     <table class="financial-table">
 
         <thead>
@@ -3254,7 +3229,6 @@ at traffic light</div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Fuel tank punctured
 by road debris</div>
     </div>
-
 
     <table class="financial-table">
 
@@ -3314,7 +3288,6 @@ hydroplaned, hit concrete barrier</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
         <div class="claimants-list">Nixon, Robert<br>Brown, Michael<br></div>
     </div>
-
 
     <table class="financial-table">
 
