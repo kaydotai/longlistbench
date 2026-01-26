@@ -1,7 +1,7 @@
-We summarize results for (i) OCR fidelity and (ii) baseline extraction performance. OCR coverage and LLM baseline numbers are produced by the released scripts in the repository.
+We summarize results for (i) OCR fidelity and (ii) baseline extraction performance.
 
 \subsection{OCR identifier coverage}
-Using \path{benchmarks/validate_ocr_vs_golden.py} we measure how often key identifiers from the ground truth appear verbatim in the OCR transcript. Across the full dataset (80 OCR transcripts), incident numbers and reference numbers exhibit 100\% coverage (mean and minimum). These results indicate that, for primary identifiers, our OCR step rarely drops information and that most downstream failures are attributable to extraction rather than transcription.
+We measure how often key identifiers from the ground truth appear verbatim in the OCR transcript. Across the full dataset (80 OCR transcripts), incident numbers and reference numbers exhibit 100\% coverage (mean and minimum). These results indicate that, for primary identifiers, our OCR step rarely drops information and that most downstream failures are attributable to extraction rather than transcription.
 
 \begin{table}[t]
 \centering
@@ -18,11 +18,11 @@ Reference number & 100.0\% & 100.0\% \\
 \end{table}
 
 \subsection{Zero-shot LLM extraction baseline}
-We evaluate three LLMs using the shared prompt and evaluation harness in \path{benchmarks/evaluate_models.py}. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports (\path{benchmarks/results/released/*/evaluation_report.*}). Averaged across all documents, Gemini 2.5 achieves 81.9\% average F1 (80.4\% recall, 83.4\% precision), GPT-4o achieves 80.0\% average F1 (78.3\% recall, 82.0\% precision), and GPT-5.2 achieves 78.1\% average field-level F1 (76.8\% recall, 79.6\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
+We evaluate three LLMs using the shared prompt and released evaluation harness. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports. Averaged across all documents, Gemini 2.5 achieves 81.9\% average F1 (80.4\% recall, 83.4\% precision), GPT-4o achieves 80.0\% average F1 (78.3\% recall, 82.0\% precision), and GPT-5.2 achieves 78.1\% average field-level F1 (76.8\% recall, 79.6\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
 
 \begin{table}[t]
 \centering
-\caption{Zero-shot LLM baseline results across the full benchmark (80 documents) under schema-conformant, field-level scoring (computed from \protect\path{benchmarks/results/released/*/evaluation_report.json}).}
+\caption{Zero-shot LLM baseline results across the full benchmark (80 documents) under schema-conformant, field-level scoring (computed from released evaluation reports).}
 \label{tab:llm-baselines}
 \begin{tabular}{lrrrr}
 \toprule
@@ -37,7 +37,7 @@ GPT-5.2 & 80 & 76.8\% & 79.6\% & 78.1\% \\
 
 \begin{table}[t]
 \centering
-\caption{Baseline F1 by document format aggregated across all tiers (\protect\path{benchmarks/results/released/*/evaluation_report.json}).}
+\caption{Baseline F1 by document format aggregated across all tiers (computed from released evaluation reports).}
 \label{tab:llm-baselines-format}
 \begin{tabular}{lrr}
 \toprule
@@ -52,7 +52,7 @@ GPT-5.2 & 83.5\% & 72.8\% \\
 
 \begin{table}[t]
 \centering
-\caption{Baseline F1 by difficulty tier (average across documents within each tier; \protect\path{benchmarks/results/released/*/evaluation_report.json}).}
+\caption{Baseline F1 by difficulty tier (average across documents within each tier; computed from released evaluation reports).}
 \label{tab:llm-baselines-tier}
 \begin{tabular}{lrrrr}
 \toprule

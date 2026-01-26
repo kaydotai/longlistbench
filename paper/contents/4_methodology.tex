@@ -1,4 +1,4 @@
-We construct LongListBench, a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident/line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground truth incidents (JSON), (ii) a rendered PDF, and (iii) an OCR transcript of the PDF in Markdown.
+We construct LongListBench\footnote{Code, data, and implementation details are available at \url{https://github.com/kaydotai/longlistbench}.}, a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident/line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground truth incidents (JSON), (ii) a rendered PDF, and (iii) an OCR transcript of the PDF in Markdown.
 
 \subsection{Entity schema}
 Ground truth incidents follow a structured schema (see \hyperref[sec:appendix-schemas]{Appendix~A}) that includes incident identifiers, policy metadata, narrative text, and nested financial breakdowns (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}). While downstream workflows often emphasize fields such as \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}, our evaluator requires and scores the full schema.
@@ -10,13 +10,13 @@ Ground truth incidents follow a structured schema (see \hyperref[sec:appendix-sc
 Human annotators reviewed real insurance loss run documents from trucking companies to identify common fields, layouts, and formatting patterns. From this analysis, we defined a structured JSON schema capturing incident identifiers, policy metadata, narrative descriptions, and nested financial breakdowns. This schema serves as ground truth for evaluation.
 
 \paragraph{Synthetic generation (purple path).}
-Rather than using real documents (which contain sensitive information), we generate synthetic documents that preserve realistic layout challenges:
-\begin{enumerate}
-    \item \textbf{Problem configuration}: We catalog recurring layout issues from real documents (page breaks splitting records, merged cells, multi-column layouts, etc.) and encode them as configurable problem types.
-    \item \textbf{Document rendering}: A Python script generates synthetic incident data matching our schema, renders HTML with the specified problems injected, and converts to PDF via headless Chromium.
-    \item \textbf{OCR transcription}: Each PDF is processed by Gemini 2.5 Flash, which converts page images to text.
-    \item \textbf{Markdown output}: The vision model outputs structured Markdown that preserves tables and spatial layout, simulating real OCR pipeline output.
-\end{enumerate}
+ Rather than using real documents (which contain sensitive information), we generate synthetic documents that preserve realistic layout challenges:
+ \begin{enumerate}
+     \item \textbf{Problem configuration}: We identify recurring layout artifacts in real documents (e.g., page breaks splitting records, merged cells, and multi-column layouts) and encode them as configurable problem types.
+     \item \textbf{Document rendering}: We generate synthetic incident records under the target schema, render them to HTML with selected problem types injected, and convert the resulting HTML to PDF via headless Chromium.
+     \item \textbf{OCR transcription}: We transcribe each PDF into text using Gemini 2.5 Flash on page images.
+     \item \textbf{Markdown output}: Transcripts are stored as structured Markdown that preserves table structure and approximate spatial layout, consistent with typical OCR pipeline outputs.
+ \end{enumerate}
 
 \begin{figure}[ht]
     \centering
@@ -93,6 +93,6 @@ Tables often use merged cells for visual grouping. A common pattern is merging t
 \end{figure}
 
 \subsection{Dataset scale}
-The released dataset (\texttt{longlistbench-v1}, version 1.0.1; see \path{benchmarks/claims/metadata.json}) contains 80 PDFs (40 detailed, 40 table) with 6{,}828 incident rows. Difficulty tiers are configured as 15 easy instances (10 claims/PDF), 12 medium (25 claims/PDF), 8 hard (50 claims/PDF), and 5 extreme (100 claims/PDF nominal). In the extreme tier, enabling \texttt{large\_doc} expands each document to 500 incidents. Enabling \texttt{duplicates} injects additional duplicate rows (up to 5 per document), causing the number of incident rows to exceed the nominal tier size.
+The released dataset (\texttt{longlistbench-v1}, version 1.0.1) contains 80 PDFs (40 detailed, 40 table) with 6{,}828 incident rows. Difficulty tiers are configured as 15 easy instances (10 claims/PDF), 12 medium (25 claims/PDF), 8 hard (50 claims/PDF), and 5 extreme (100 claims/PDF nominal). In the extreme tier, enabling \texttt{large\_doc} expands each document to 500 incidents. Enabling \texttt{duplicates} injects additional duplicate rows (up to 5 per document), causing the number of incident rows to exceed the nominal tier size.
 
 Across the 80 documents, the most common injected issues are multi-row entities (62/80), page breaks (56/80), duplicates (56/80), and multiple tables (40/80).
