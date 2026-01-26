@@ -4,7 +4,7 @@
 
 A recurring challenge with existing document extraction benchmarks is incomplete or ambiguous schema documentation. Without clear specifications, it can be difficult to understand expected field formats, handling of optional values, or normalization rules. Researchers attempting to reproduce results must often reverse-engineer these details from examples or evaluation scripts, leading to inconsistent implementations and incomparable metrics.
 
-To ensure full reproducibility, we provide complete schemas with explicit type annotations, default values, and field descriptions. All schemas are implemented as Pydantic models, enabling automatic JSON Schema generation and runtime validation. The evaluation script validates model outputs against these schemas before scoring, ensuring that format errors are caught early rather than silently degrading metrics.
+To ensure full reproducibility, we provide complete schemas with explicit type annotations, default values, and field descriptions. The evaluation script validates model outputs against these schemas before scoring, ensuring that format errors are caught early rather than silently degrading metrics.
 
 \subsection*{A.1 Financial Breakdown Schema}
 
