@@ -1169,9 +1169,9 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
 
 def main():
     parser = argparse.ArgumentParser(description='Multi-model evaluation for LongListBench')
-    parser.add_argument('--models', nargs='+', default=['gemini', 'gpt4', 'gpt52'],
+    parser.add_argument('--models', nargs='+', default=['gemini', 'gpt52'],
                        choices=['gemini', 'gemini25', 'gpt52', 'gpt4', 'claude'],
-                       help='Models to evaluate (default: gemini, gpt4, gpt52)')
+                       help='Models to evaluate (default: gemini, gpt52)')
     parser.add_argument('--output-dir', default=None,
                        help='Directory to write predictions and evaluation reports (default: benchmarks/results/scratch)')
     parser.add_argument('--tiers', nargs='+', default=None,

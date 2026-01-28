@@ -90,7 +90,6 @@ Schema-conformant field-level micro F1 averaged across all 80 documents (see `be
 | Model | Avg F1 | Avg Recall | Avg Precision |
 |------|--------|------------|---------------|
 | Gemini 2.5 | 81.9% | 80.4% | 83.4% |
-| GPT-4o | 80.0% | 78.3% | 82.0% |
 | GPT-5.2 | 78.1% | 76.8% | 79.6% |
 
 ## Development

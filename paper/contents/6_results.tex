@@ -18,7 +18,7 @@ Reference number & 100.0\% & 100.0\% \\
 \end{table}
 
 \subsection{Zero-shot LLM extraction baseline}
-We evaluate three LLMs using the shared prompt and released evaluation harness. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports. Averaged across all documents, Gemini 2.5 achieves 81.9\% average F1 (80.4\% recall, 83.4\% precision), GPT-4o achieves 80.0\% average F1 (78.3\% recall, 82.0\% precision), and GPT-5.2 achieves 78.1\% average field-level F1 (76.8\% recall, 79.6\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
+We evaluate two LLMs using the shared prompt and released evaluation harness. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports. Averaged across all documents, Gemini 2.5 achieves 81.9\% average F1 (80.4\% recall, 83.4\% precision), and GPT-5.2 achieves 78.1\% average field-level F1 (76.8\% recall, 79.6\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
 
 \begin{table}[t]
 \centering
@@ -29,7 +29,6 @@ We evaluate three LLMs using the shared prompt and released evaluation harness. 
 Model & Samples & Avg Recall & Avg Precision & Avg F1 \\
 \midrule
 Gemini 2.5 & 80 & 80.4\% & 83.4\% & 81.9\% \\
-GPT-4o & 80 & 78.3\% & 82.0\% & 80.0\% \\
 GPT-5.2 & 80 & 76.8\% & 79.6\% & 78.1\% \\
 \bottomrule
 \end{tabular}
@@ -44,7 +43,6 @@ GPT-5.2 & 80 & 76.8\% & 79.6\% & 78.1\% \\
 Model & Detailed F1 & Table F1 \\
 \midrule
 Gemini 2.5 & 89.8\% & 73.9\% \\
-GPT-4o & 89.3\% & 70.8\% \\
 GPT-5.2 & 83.5\% & 72.8\% \\
 \bottomrule
 \end{tabular}
@@ -54,14 +52,14 @@ GPT-5.2 & 83.5\% & 72.8\% \\
 \centering
 \caption{Baseline F1 by difficulty tier (average across documents within each tier; computed from released evaluation reports).}
 \label{tab:llm-baselines-tier}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lrrr}
 \toprule
-Tier & Samples & Gemini 2.5 F1 & GPT-4o F1 & GPT-5.2 F1 \\
+Tier & Samples & Gemini 2.5 F1 & GPT-5.2 F1 \\
 \midrule
-Easy & 30 & 85.1\% & 82.2\% & 80.2\% \\
-Medium & 24 & 80.5\% & 79.7\% & 76.7\% \\
-Hard & 16 & 78.1\% & 76.6\% & 76.0\% \\
-Extreme & 10 & 81.6\% & 80.0\% & 78.9\% \\
+Easy & 30 & 85.1\% & 80.2\% \\
+Medium & 24 & 80.5\% & 76.7\% \\
+Hard & 16 & 78.1\% & 76.0\% \\
+Extreme & 10 & 81.6\% & 78.9\% \\
 \bottomrule
 \end{tabular}
 \end{table}

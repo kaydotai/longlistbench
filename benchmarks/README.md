@@ -127,13 +127,13 @@ python benchmarks/validate_ocr_vs_golden.py --claims-dir claims --tiers medium
 
 ## Multi-Model Evaluation
 
-Run extraction evaluation across Gemini 2.5 (`gemini`), GPT-4o (`gpt4`), and GPT-5.2 (`gpt52`).
+Run extraction evaluation across Gemini 2.5 (`gemini`) and GPT-5.2 (`gpt52`).
 
 Note: running evaluation with `--offline` regenerates reports from saved `*_predicted.json` files without making API calls.
 
 ```bash
 # Full evaluation (all tiers, both formats)
-python benchmarks/evaluate_models.py --models gemini gpt4 gpt52 --parallel-models --model-workers 3
+python benchmarks/evaluate_models.py --models gemini gpt52 --parallel-models --model-workers 2
 
 # Quick test (one sample per tier)
 python benchmarks/evaluate_models.py --quick

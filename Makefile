@@ -24,7 +24,7 @@ ocr:
 	. .venv/bin/activate && python benchmarks/ocr_claims_pdfs.py
 
 eval:
-	. .venv/bin/activate && python benchmarks/evaluate_models.py --models gemini gpt4 gpt52 --parallel-models --model-workers 3
+	. .venv/bin/activate && python benchmarks/evaluate_models.py --models gemini gpt52 --parallel-models --model-workers 2
 
 paper:
 	$(MAKE) -C paper pdf

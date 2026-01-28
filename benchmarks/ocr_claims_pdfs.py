@@ -65,10 +65,13 @@ Remember: Convert ONLY what is visible in the document - do not add, assume, or 
 """
 
 
+OCR_PAGE_TIMEOUT_SECONDS = int(os.getenv("OCR_PAGE_TIMEOUT_SECONDS", "300"))
+
+
 # Build retriable exceptions tuple
-_RETRIABLE_EXCEPTIONS = (Exception,)  # Base case
+_RETRIABLE_EXCEPTIONS: tuple[type[BaseException], ...] = (asyncio.TimeoutError, OSError)
 if GoogleApiError is not None:
-    _RETRIABLE_EXCEPTIONS = (GoogleApiError,)
+    _RETRIABLE_EXCEPTIONS = (GoogleApiError, asyncio.TimeoutError, OSError)
 
 
 def log_retry(retry_state):
@@ -135,13 +138,16 @@ def convert_pdf_page(pdf_path, page_num, dpi=200):
 @retry_on_rate_limit
 async def ocr_image_async(client: genai.Client, image: Image.Image, model_name: str = "gemini-2.5-flash") -> str:
     """OCR a single image using Gemini async API with retries."""
-    response = await client.aio.models.generate_content(
-        model=model_name,
-        config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
-        contents=[
-            image,
-            "OCR the image into Markdown. Format tables as CSV. Do not surround your output with triple backticks.",
-        ],
+    response = await asyncio.wait_for(
+        client.aio.models.generate_content(
+            model=model_name,
+            config=types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT),
+            contents=[
+                image,
+                "OCR the image into Markdown. Format tables as CSV. Do not surround your output with triple backticks.",
+            ],
+        ),
+        timeout=OCR_PAGE_TIMEOUT_SECONDS,
     )
     return response.text or ""
 
@@ -194,8 +200,11 @@ async def process_pdf_async(client: genai.Client, pdf_path: Path, output_path: P
         for page_num in range(1, total_pages + 1)
     ]
     
-    # Run all tasks concurrently (limited by semaphore)
-    results = await asyncio.gather(*tasks)
+    results: list[tuple[int, str]] = []
+    for task in asyncio.as_completed(tasks):
+        page_num, page_text = await task
+        results.append((page_num, page_text))
+        print(f"    ✓ Page {page_num}/{total_pages}", flush=True)
     
     # Sort results by page number and write
     results_dict = {page_num: text for page_num, text in results}
