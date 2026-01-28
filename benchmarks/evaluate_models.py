@@ -12,7 +12,7 @@ import subprocess
 import sys
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as FuturesTimeoutError
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -681,6 +681,7 @@ def run_evaluation(
     output_dir: Path = None,
     parallel_models: bool = False,
     model_workers: int | None = None,
+    resume: bool = True,
 ) -> list[EvaluationResult]:
     """Run evaluation across specified models and samples."""
     
@@ -721,8 +722,20 @@ def run_evaluation(
             print(f"  ✗ {config.name} failed: {e}")
     
     print()
-    
+
     results = []
+
+    active_models = [m for m in models if m in clients]
+    total_pairs = len(samples) * len(active_models)
+    if resume and total_pairs > 0:
+        existing_pairs = 0
+        for sample in samples:
+            for model_key in active_models:
+                pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
+                if pred_path.exists() and pred_path.stat().st_size > 0:
+                    existing_pairs += 1
+        print(f"Resume enabled: {existing_pairs}/{total_pairs} prediction files already exist")
+        print()
 
     if not parallel_models:
         parallel_models = os.getenv("LLB_PARALLEL_MODELS", "0") == "1"
@@ -742,9 +755,11 @@ def run_evaluation(
                 time.sleep(gemini_next_allowed_time - now)
             gemini_next_allowed_time = time.time() + 5.0
     
-    for sample in samples:
+    pair_index = 0
+
+    for sample_idx, sample in enumerate(samples, start=1):
         print(f"{'='*70}")
-        print(f"Sample: {sample}")
+        print(f"Sample: {sample} ({sample_idx}/{len(samples)})")
         print(f"{'='*70}")
         
         tier, fmt = get_sample_info(sample)
@@ -760,7 +775,7 @@ def run_evaluation(
         print(f"  Ground truth: {len(ground_truth)} claims")
         print(f"  OCR text: {len(ocr_text):,} characters")
         print()
-        
+
         def _eval_one_model(model_key: str) -> EvaluationResult:
             config = MODELS[model_key]
             client = clients[model_key]
@@ -772,7 +787,31 @@ def run_evaluation(
             error = None
             predicted: list[dict] = []
             try:
-                predicted = config.extract_fn(client, ocr_text, config.model_id)
+                extract_timeout_s = float(os.getenv("LLB_EXTRACT_TIMEOUT_SECONDS", "1800"))
+                heartbeat_s = float(os.getenv("LLB_EXTRACT_HEARTBEAT_SECONDS", "30"))
+
+                def _do_extract() -> object:
+                    return config.extract_fn(client, ocr_text, config.model_id)
+
+                with ThreadPoolExecutor(max_workers=1) as _ex:
+                    _fut = _ex.submit(_do_extract)
+                    raw_predicted: object
+                    while True:
+                        remaining = extract_timeout_s - (time.time() - start_time)
+                        if remaining <= 0:
+                            raise FuturesTimeoutError()
+                        try:
+                            raw_predicted = _fut.result(timeout=min(heartbeat_s, remaining))
+                            break
+                        except FuturesTimeoutError:
+                            elapsed = time.time() - start_time
+                            print(
+                                f"    … still extracting ({elapsed:.0f}s/{extract_timeout_s:.0f}s)",
+                                flush=True,
+                            )
+                predicted = _validate_and_normalize_predictions(raw_predicted)
+            except FuturesTimeoutError:
+                error = f"TimeoutError: extraction exceeded {os.getenv('LLB_EXTRACT_TIMEOUT_SECONDS', '1800')}s"
             except Exception as e:
                 if RetryError is not None and isinstance(e, RetryError) and getattr(e, "last_attempt", None) is not None:
                     underlying = e.last_attempt.exception()
@@ -809,13 +848,35 @@ def run_evaluation(
                 error=error,
             )
 
-        active_models = [m for m in models if m in clients]
-
         if not parallel_models or len(active_models) <= 1:
             for model_key in active_models:
+                pair_index += 1
                 config = MODELS[model_key]
-                print(f"  [{config.name}]")
-                r = _eval_one_model(model_key)
+                pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
+                if resume and pred_path.exists() and pred_path.stat().st_size > 0:
+                    try:
+                        raw_predicted = json.loads(pred_path.read_text(encoding="utf-8"))
+                        predicted = _validate_and_normalize_predictions(raw_predicted)
+                        metrics = evaluate_extraction(predicted, ground_truth)
+                        r = EvaluationResult(
+                            model=model_key,
+                            sample=sample,
+                            tier=tier,
+                            format=fmt,
+                            metrics=metrics,
+                            extraction_time=0.0,
+                            error=None,
+                        )
+                        print(f"  [{config.name}] Pair {pair_index}/{total_pairs} SKIP")
+                    except Exception as e:
+                        print(f"  [{config.name}] Pair {pair_index}/{total_pairs} RUN (invalid existing prediction: {e})")
+                        print(f"    → extracting…", flush=True)
+                        r = _eval_one_model(model_key)
+                else:
+                    print(f"  [{config.name}] Pair {pair_index}/{total_pairs} RUN")
+                    print(f"    → extracting…", flush=True)
+                    r = _eval_one_model(model_key)
+
                 if r.error:
                     print(f"    ✗ Error: {r.error}")
                 else:
@@ -831,7 +892,54 @@ def run_evaluation(
                 print()
         else:
             with ThreadPoolExecutor(max_workers=min(model_workers, len(active_models))) as ex:
-                future_map = {ex.submit(_eval_one_model, mk): mk for mk in active_models}
+                future_map = {}
+                skipped: list[EvaluationResult] = []
+                for model_key in active_models:
+                    pair_index += 1
+                    config = MODELS[model_key]
+                    pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
+                    if resume and pred_path.exists() and pred_path.stat().st_size > 0:
+                        try:
+                            raw_predicted = json.loads(pred_path.read_text(encoding="utf-8"))
+                            predicted = _validate_and_normalize_predictions(raw_predicted)
+                            metrics = evaluate_extraction(predicted, ground_truth)
+                            skipped.append(
+                                EvaluationResult(
+                                    model=model_key,
+                                    sample=sample,
+                                    tier=tier,
+                                    format=fmt,
+                                    metrics=metrics,
+                                    extraction_time=0.0,
+                                    error=None,
+                                )
+                            )
+                            print(f"  [{config.name}] Pair {pair_index}/{total_pairs} SKIP")
+                        except Exception as e:
+                            print(
+                                f"  [{config.name}] Pair {pair_index}/{total_pairs} RUN (invalid existing prediction: {e})"
+                            )
+                            print(f"    → extracting…", flush=True)
+                            future_map[ex.submit(_eval_one_model, model_key)] = model_key
+                    else:
+                        print(f"  [{config.name}] Pair {pair_index}/{total_pairs} RUN")
+                        print(f"    → extracting…", flush=True)
+                        future_map[ex.submit(_eval_one_model, model_key)] = model_key
+
+                for r in skipped:
+                    results.append(r)
+                    m = r.metrics
+                    config = MODELS[r.model]
+                    print(f"  [{config.name}]")
+                    print(f"    Predicted: {m['predicted_count']} claims")
+                    print(f"    Recall: {m['recall']:.1%}  Precision: {m['precision']:.1%}  F1: {m['f1']:.1%}")
+                    print(f"    Time: {r.extraction_time:.1f}s")
+                    if m.get('missing', 0) > 0:
+                        print(f"    ⚠ Missing: {m['missing']}")
+                    if m.get('extra', 0) > 0:
+                        print(f"    ⚠ Extra: {m['extra']}")
+                    print()
+
                 for fut in as_completed(future_map):
                     r = fut.result()
                     config = MODELS[r.model]
@@ -1192,6 +1300,8 @@ def main():
                        help='Run all selected models in parallel for each sample')
     parser.add_argument('--model-workers', type=int, default=None,
                        help='Max number of parallel model workers (default: len(models) or LLB_MODEL_WORKERS)')
+    parser.add_argument('--no-resume', action='store_true',
+                       help='Do not reuse existing *_predicted.json files; always rerun extractions')
     
     args = parser.parse_args()
     
@@ -1233,6 +1343,7 @@ def main():
             output_dir=output_dir,
             parallel_models=args.parallel_models,
             model_workers=args.model_workers,
+            resume=(not args.no_resume),
         )
     
     # Generate reports
