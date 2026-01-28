@@ -25,7 +25,7 @@ Human annotators reviewed real insurance loss run documents from trucking compan
     \label{fig:generation-pipeline}
 \end{figure}
 
-Documents are rendered in one of two formats: (i) \textbf{Detailed}---repeated incident blocks with narrative text and financial tables, or (ii) \textbf{Table}---a compact tabular representation. All generation uses seeded randomness for reproducibility.
+Documents are rendered in one of two formats: (i) \textbf{Detailed}, which uses repeated incident blocks with narrative text and financial tables, or (ii) \textbf{Table}, which uses a compact tabular representation. All generation uses seeded randomness for reproducibility.
 
 \subsection{Injected problem types}
 We inject seven recurring document phenomena that complicate long-list extraction. These effects are applied at the HTML level prior to PDF rendering.
@@ -64,7 +64,7 @@ Production documents sometimes contain intentionally repeated records. In insura
 Real loss runs and itemized bills routinely contain hundreds of line items. A single trucking company's annual loss run may list 200--500 incidents; a hospital bill for a complex procedure can exceed 1{,}000 charge lines. These documents push against context window limits of current LLMs. Even models with 128K+ token windows may exhibit degraded recall on items appearing in the middle of very long documents (the "lost in the middle" phenomenon). We include an extreme tier with 500 incidents per document to measure how extraction quality scales with document length.
 
 \paragraph{Multiple tables.}
-Business documents frequently embed auxiliary tables alongside the primary data. A loss run PDF might include a cover page with agent contact information, a summary table of totals by coverage type, or a glossary of status codes---none of which should be extracted as incident records. Models must distinguish the target entity table from these distractors based on schema matching, header recognition, or positional cues. Naive approaches that extract all tabular content will produce false positives from irrelevant tables.
+Business documents frequently embed auxiliary tables alongside the primary data. A loss run PDF might include a cover page with agent contact information, a summary table of totals by coverage type, or a glossary of status codes; none of these should be extracted as incident records. Models must distinguish the target entity table from these distractors based on schema matching, header recognition, or positional cues. Naive approaches that extract all tabular content will produce false positives from irrelevant tables.
 
 \paragraph{Multi-column layout.}
 Some documents use multi-column layouts to fit more content per page. This creates reading-order ambiguity: should text be read left-to-right across columns or top-to-bottom within each column? Standard OCR often assumes a single-column flow, interleaving content from parallel columns into an incoherent sequence. For example, incident \#1's description might be concatenated with incident \#10's financial data if both appear at the same vertical position in adjacent columns. Correct extraction requires column detection and proper reading-order reconstruction.
