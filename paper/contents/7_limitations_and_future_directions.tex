@@ -11,7 +11,7 @@ Covered in v1 & Not covered / out of scope \\
 \midrule
 Claims-style long lists (loss runs) in two renderings (detailed and table) & Other long-list families (invoices, purchase orders, medical billing, financial statements) and non-English documents \\
 Programmatic layouts with seven injected phenomena & Scan artifacts (skew, blur, stamps, handwriting), complex typography, and highly idiosyncratic templates \\
-VLM-based OCR transcripts with strong identifier retention & Broader OCR stacks and prompt variants; OCR bounding boxes and reading-order supervision \\
+VLM-based OCR text with strong identifier retention & Broader OCR stacks and prompt variants; OCR bounding boxes and reading-order supervision \\
 Schema-conformant, field-level micro scoring with canonicalization & Semantic equivalence, downstream task-based metrics, and duplicate-aware entity matching \\
 \bottomrule
 \end{tabular}
@@ -23,7 +23,7 @@ In addition, our primary record identifier is the incident number. This choice s
 We view LongListBench as an extensible benchmark and evaluation harness. The most valuable extensions are those that broaden the noise distribution, provide stronger signals for layout reconstruction, and benchmark extraction protocols that remain robust at hundreds of records.
 
 \paragraph{Broader OCR conditions and layout supervision.}
-An immediate next step is to expand OCR conditions beyond a single VLM-based transcript. This includes scanned variants (blur, noise, skew, and resolution changes), classical OCR baselines, and prompt variations. For a small subset, releasing page-level supervision (e.g., table cell boxes or reading-order annotations) would enable controlled evaluation of layout-aware reconstruction methods.
+An immediate next step is to expand OCR conditions beyond a single VLM-based OCR output. This includes scanned variants (blur, noise, skew, and resolution changes), classical OCR baselines, and prompt variations. For a small subset, releasing page-level supervision (e.g., table cell boxes or reading-order annotations) would enable controlled evaluation of layout-aware reconstruction methods.
 
 \paragraph{Protocol benchmarks for long contexts.}
 The extreme tier (500 incidents) is intended to pressure extraction protocols, not only base model quality. A natural extension is to benchmark chunking and merge strategies, retrieval-augmented extraction, and layout-aware segmentation under a unified interface, and to report cost and latency alongside accuracy.
