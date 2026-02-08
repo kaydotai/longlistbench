@@ -1,0 +1,18 @@
+LongListBench targets a persistent gap in document understanding evaluation: extracting long lists of repeated entities from semi-structured business documents under realistic layout and OCR noise. We presented a benchmark construction pipeline that produces paired (PDF, OCR, JSON) artifacts and systematically injects common long-list failure modes.
+
+\subsection{Summary}
+Our main contributions are:
+\begin{itemize}
+    \item A reproducible benchmark generation pipeline for semi-structured documents with long incident lists spanning two formats and four difficulty tiers.
+    \item A taxonomy of seven problem types that frequently break long-list extraction systems, including duplicates, page breaks, multi-row entities, multi-column layout, and merged cells.
+    \item An evaluation harness and baseline results that quantify the gap between near-perfect OCR identifier retention and imperfect end-to-end extraction.
+\end{itemize}
+
+\subsection{Practical takeaways}
+We intend LongListBench to be useful as a measurement tool for both research and engineering workflows. Two practical takeaways are worth emphasizing. First, identifier retention in OCR is near-perfect (Table~\ref{tab:ocr-coverage}), so most end-to-end failures should be attributed to downstream parsing, segmentation, and field population rather than OCR errors. Second, even with schema-conformant structured outputs and a shared prompt, field-level extraction across the full benchmark remains materially below perfect (Table~\ref{tab:llm-baselines}), with a large gap between detailed and table formats (Table~\ref{tab:llm-baselines-format}) and meaningful variation across difficulty tiers (Table~\ref{tab:llm-baselines-tier}), indicating substantial headroom for methods that explicitly model reading order, table structure, and long-range consistency.
+
+\subsection{Recommended reporting}
+For comparability across papers and systems, we recommend that LongListBench results report (i) OCR identifier coverage, (ii) schema-conformant field-level precision/recall/F1 under the released evaluator, and (iii) the extraction protocol used for long documents (e.g., full-context vs chunking, chunk sizes, and merge strategy). The extreme tier, in particular, is intended to stress scaling behavior: methods that succeed on short lists may fail due to context limits, brittle segmentation, or accumulated small errors across hundreds of records.
+
+\subsection{Future Work}
+We view the benchmark as a foundation for studying scalable, layout-robust extraction. Immediate next steps include improved handling of duplicates and merged cells, and evaluation of methods that can reliably extract hundreds of incidents in a single document (Section~\ref{sec:limitations}).

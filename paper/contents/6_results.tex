@@ -1,0 +1,69 @@
+We summarize results for (i) OCR fidelity and (ii) baseline extraction performance.
+
+\subsection{OCR identifier coverage}
+We measure how often key identifiers from the ground truth appear verbatim in the OCR text. Across the full dataset (80 OCR texts), incident numbers and reference numbers exhibit 100\% coverage (mean and minimum). These results indicate that, for primary identifiers, our OCR step rarely drops information and that most downstream failures are attributable to extraction rather than OCR errors.
+
+\begin{table}[t]
+\centering
+\caption{OCR identifier coverage on the full dataset (80 documents).}
+\label{tab:ocr-coverage}
+\begin{tabular}{lrr}
+\toprule
+Identifier & Mean coverage & Min coverage \\
+\midrule
+Incident number & 100.0\% & 100.0\% \\
+Reference number & 100.0\% & 100.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Zero-shot LLM extraction baseline}
+We evaluate two LLMs using the shared prompt and released evaluation harness. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports. Averaged across all documents, Gemini 2.5 achieves 81.4\% average F1 (79.8\% recall, 83.0\% precision), and GPT-5.2 achieves 78.0\% average field-level F1 (76.6\% recall, 79.5\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
+
+\begin{table}[t]
+\centering
+\caption{Zero-shot LLM baseline results across the full benchmark (80 documents) under schema-conformant, field-level scoring (computed from released evaluation reports).}
+\label{tab:llm-baselines}
+\begin{tabular}{lrrrr}
+\toprule
+Model & Samples & Avg Recall & Avg Precision & Avg F1 \\
+\midrule
+Gemini 2.5 & 80 & 79.8\% & 83.0\% & 81.4\% \\
+GPT-5.2 & 80 & 76.6\% & 79.5\% & 78.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Baseline F1 by document format aggregated across all tiers (computed from released evaluation reports).}
+\label{tab:llm-baselines-format}
+\begin{tabular}{lrr}
+\toprule
+Model & Detailed F1 & Table F1 \\
+\midrule
+Gemini 2.5 & 89.5\% & 73.2\% \\
+GPT-5.2 & 83.8\% & 72.2\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Baseline F1 by difficulty tier (average across documents within each tier; computed from released evaluation reports).}
+\label{tab:llm-baselines-tier}
+\begin{tabular}{lrrr}
+\toprule
+Tier & Samples & Gemini 2.5 F1 & GPT-5.2 F1 \\
+\midrule
+Easy & 30 & 84.4\% & 80.2\% \\
+Medium & 24 & 79.7\% & 76.7\% \\
+Hard & 16 & 78.1\% & 75.4\% \\
+Extreme & 10 & 81.3\% & 78.6\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Qualitatively, errors often manifest as local field-level deviations (e.g., missing optional strings, numeric drift in financial breakdowns, or small identifier formatting mistakes) spread across an otherwise correct long list.
+
+These findings suggest that recovering identifiers is largely deterministic under our OCR pipeline, while the main open challenge for long-list extraction is robustly segmenting and populating full per-incident records under layout disruptions (page breaks, multi-column order, irrelevant tables, merged cells) and scale (hundreds of incidents).

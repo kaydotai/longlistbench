@@ -1,0 +1,126 @@
+\documentclass[12pt]{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+% Page layout - arXiv compliant (US letter, 1" margins)
+\usepackage[letterpaper,margin=1in]{geometry}
+
+% Spacing - single space for arXiv (comment out for double-space drafts)
+% \usepackage{setspace}
+% \doublespacing
+
+% Math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Graphics and figures
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+
+% Links and references (hyperref should be loaded late)
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    pdfauthor={Anton Fedoruk, Serhii Shchoholiev, Akhil Mehta},
+    pdftitle={LongListBench: A Benchmark for Long-List Entity Extraction Under Layout and OCR Noise},
+    pdfsubject={Benchmark for long-list entity extraction under layout and OCR noise},
+    pdfkeywords={document understanding, information extraction, OCR, large language models, benchmark, long-list entity extraction, layout noise},
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    pdfstartview=FitH,
+    pdfpagemode=UseOutlines,
+}
+\usepackage{cleveref}
+
+% Bibliography
+\usepackage{csquotes}
+\usepackage[style=ieee,sorting=none]{biblatex}
+\addbibresource{references.bib}
+
+% Custom theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Document metadata
+\title{LongListBench: A Benchmark for Long-List Entity Extraction Under Layout and OCR Noise}
+\author{
+    Anton Fedoruk\textsuperscript{1}\thanks{\texttt{anton@kay.ai}}
+    \hspace{2em}
+    Serhii Shchoholiev\textsuperscript{1}\thanks{\texttt{serhii@kay.ai}}
+    \hspace{2em}
+    Akhil Mehta\textsuperscript{1}\thanks{\texttt{akhil@kay.ai}}
+    \\[1em]
+    \normalsize\textsuperscript{1}Kay.ai, Brooklyn, NY, USA
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\input{contents/0_abstract}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+\input{contents/1_introduction}
+
+\section{Related Work}
+\label{sec:related-work}
+\input{contents/2_related_work}
+
+\section{Benchmark Construction}
+\label{sec:methodology}
+\input{contents/4_methodology}
+
+\section{Evaluation}
+\label{sec:evaluation}
+\input{contents/5_evaluation}
+
+\section{Results}
+\label{sec:results}
+\input{contents/6_results}
+
+\section{Limitations and Future Directions}
+\label{sec:limitations}
+\input{contents/7_limitations_and_future_directions}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{contents/8_conclusion}
+
+% \section*{Acknowledgments}
+% \input{contents/9_acknowledgments}
+
+\printbibliography
+
+\newpage
+\input{contents/appendix_schemas}
+
+\end{document}
+

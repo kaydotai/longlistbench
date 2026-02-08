@@ -1,0 +1,2272 @@
+{
+  "built_at": "2026-02-08T15:50:03.318137",
+  "dataset_dir": "/Users/anton/d/kay/lost-and-found-entities/benchmarks/claims",
+  "source_metadata": "metadata.json",
+  "total_instances": 80,
+  "instances": [
+    {
+      "id": "easy_10_001_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 3965,
+      "files": {
+        "pdf": "easy_10_001_detailed.pdf",
+        "html": "easy_10_001_detailed.html",
+        "ground_truth": "easy_10_001_detailed.json",
+        "ocr_md": "easy_10_001_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 139086,
+        "html_size_bytes": 26300,
+        "json_size_bytes": 11650,
+        "ocr_md_size_bytes": 6816,
+        "pdf_pages": 6
+      }
+    },
+    {
+      "id": "easy_10_001_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 6452,
+      "files": {
+        "pdf": "easy_10_001_table.pdf",
+        "html": "easy_10_001_table.html",
+        "ground_truth": "easy_10_001_table.json",
+        "ocr_md": "easy_10_001_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 128702,
+        "html_size_bytes": 13038,
+        "json_size_bytes": 11607,
+        "ocr_md_size_bytes": 2262,
+        "pdf_pages": 1
+      }
+    },
+    {
+      "id": "easy_10_002_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 8966,
+      "files": {
+        "pdf": "easy_10_002_detailed.pdf",
+        "html": "easy_10_002_detailed.html",
+        "ground_truth": "easy_10_002_detailed.json",
+        "ocr_md": "easy_10_002_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 136551,
+        "html_size_bytes": 25924,
+        "json_size_bytes": 11644,
+        "ocr_md_size_bytes": 1053522,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_002_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 2671,
+      "files": {
+        "pdf": "easy_10_002_table.pdf",
+        "html": "easy_10_002_table.html",
+        "ground_truth": "easy_10_002_table.json",
+        "ocr_md": "easy_10_002_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 128988,
+        "html_size_bytes": 13268,
+        "json_size_bytes": 11634,
+        "ocr_md_size_bytes": 3658,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_003_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 1370,
+      "files": {
+        "pdf": "easy_10_003_detailed.pdf",
+        "html": "easy_10_003_detailed.html",
+        "ground_truth": "easy_10_003_detailed.json",
+        "ocr_md": "easy_10_003_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 136333,
+        "html_size_bytes": 25739,
+        "json_size_bytes": 11617,
+        "ocr_md_size_bytes": 6991,
+        "pdf_pages": 6
+      }
+    },
+    {
+      "id": "easy_10_003_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 9909,
+      "files": {
+        "pdf": "easy_10_003_table.pdf",
+        "html": "easy_10_003_table.html",
+        "ground_truth": "easy_10_003_table.json",
+        "ocr_md": "easy_10_003_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 129139,
+        "html_size_bytes": 13225,
+        "json_size_bytes": 11694,
+        "ocr_md_size_bytes": 4320,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_004_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 1027,
+      "files": {
+        "pdf": "easy_10_004_detailed.pdf",
+        "html": "easy_10_004_detailed.html",
+        "ground_truth": "easy_10_004_detailed.json",
+        "ocr_md": "easy_10_004_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 137123,
+        "html_size_bytes": 28798,
+        "json_size_bytes": 12967,
+        "ocr_md_size_bytes": 7783,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_004_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 8327,
+      "files": {
+        "pdf": "easy_10_004_table.pdf",
+        "html": "easy_10_004_table.html",
+        "ground_truth": "easy_10_004_table.json",
+        "ocr_md": "easy_10_004_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 127236,
+        "html_size_bytes": 13573,
+        "json_size_bytes": 12682,
+        "ocr_md_size_bytes": 4653,
+        "pdf_pages": 1
+      }
+    },
+    {
+      "id": "easy_10_005_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 992,
+      "files": {
+        "pdf": "easy_10_005_detailed.pdf",
+        "html": "easy_10_005_detailed.html",
+        "ground_truth": "easy_10_005_detailed.json",
+        "ocr_md": "easy_10_005_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 135325,
+        "html_size_bytes": 28292,
+        "json_size_bytes": 12686,
+        "ocr_md_size_bytes": 29822,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_005_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 8981,
+      "files": {
+        "pdf": "easy_10_005_table.pdf",
+        "html": "easy_10_005_table.html",
+        "ground_truth": "easy_10_005_table.json",
+        "ocr_md": "easy_10_005_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 129060,
+        "html_size_bytes": 13576,
+        "json_size_bytes": 12680,
+        "ocr_md_size_bytes": 181101,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_006_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 7541,
+      "files": {
+        "pdf": "easy_10_006_detailed.pdf",
+        "html": "easy_10_006_detailed.html",
+        "ground_truth": "easy_10_006_detailed.json",
+        "ocr_md": "easy_10_006_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 136134,
+        "html_size_bytes": 26103,
+        "json_size_bytes": 11782,
+        "ocr_md_size_bytes": 7028,
+        "pdf_pages": 6
+      }
+    },
+    {
+      "id": "easy_10_006_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 2798,
+      "files": {
+        "pdf": "easy_10_006_table.pdf",
+        "html": "easy_10_006_table.html",
+        "ground_truth": "easy_10_006_table.json",
+        "ocr_md": "easy_10_006_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 129335,
+        "html_size_bytes": 13089,
+        "json_size_bytes": 11624,
+        "ocr_md_size_bytes": 2300,
+        "pdf_pages": 1
+      }
+    },
+    {
+      "id": "easy_10_007_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 8283,
+      "files": {
+        "pdf": "easy_10_007_detailed.pdf",
+        "html": "easy_10_007_detailed.html",
+        "ground_truth": "easy_10_007_detailed.json",
+        "ocr_md": "easy_10_007_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 137119,
+        "html_size_bytes": 27316,
+        "json_size_bytes": 11843,
+        "ocr_md_size_bytes": 6773,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_007_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 691,
+      "files": {
+        "pdf": "easy_10_007_table.pdf",
+        "html": "easy_10_007_table.html",
+        "ground_truth": "easy_10_007_table.json",
+        "ocr_md": "easy_10_007_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 128594,
+        "html_size_bytes": 13369,
+        "json_size_bytes": 11657,
+        "ocr_md_size_bytes": 3847,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_008_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 4844,
+      "files": {
+        "pdf": "easy_10_008_detailed.pdf",
+        "html": "easy_10_008_detailed.html",
+        "ground_truth": "easy_10_008_detailed.json",
+        "ocr_md": "easy_10_008_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 137391,
+        "html_size_bytes": 26922,
+        "json_size_bytes": 11789,
+        "ocr_md_size_bytes": 6950,
+        "pdf_pages": 6
+      }
+    },
+    {
+      "id": "easy_10_008_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 5401,
+      "files": {
+        "pdf": "easy_10_008_table.pdf",
+        "html": "easy_10_008_table.html",
+        "ground_truth": "easy_10_008_table.json",
+        "ocr_md": "easy_10_008_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 129199,
+        "html_size_bytes": 13181,
+        "json_size_bytes": 11984,
+        "ocr_md_size_bytes": 2269,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_009_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 2765,
+      "files": {
+        "pdf": "easy_10_009_detailed.pdf",
+        "html": "easy_10_009_detailed.html",
+        "ground_truth": "easy_10_009_detailed.json",
+        "ocr_md": "easy_10_009_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 127931,
+        "html_size_bytes": 26515,
+        "json_size_bytes": 12384,
+        "ocr_md_size_bytes": 6072,
+        "pdf_pages": 6
+      }
+    },
+    {
+      "id": "easy_10_009_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 8743,
+      "files": {
+        "pdf": "easy_10_009_table.pdf",
+        "html": "easy_10_009_table.html",
+        "ground_truth": "easy_10_009_table.json",
+        "ocr_md": "easy_10_009_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 129093,
+        "html_size_bytes": 13653,
+        "json_size_bytes": 13054,
+        "ocr_md_size_bytes": 2430,
+        "pdf_pages": 1
+      }
+    },
+    {
+      "id": "easy_10_010_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 9156,
+      "files": {
+        "pdf": "easy_10_010_detailed.pdf",
+        "html": "easy_10_010_detailed.html",
+        "ground_truth": "easy_10_010_detailed.json",
+        "ocr_md": "easy_10_010_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 138009,
+        "html_size_bytes": 28372,
+        "json_size_bytes": 12929,
+        "ocr_md_size_bytes": 7695,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_010_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 7385,
+      "files": {
+        "pdf": "easy_10_010_table.pdf",
+        "html": "easy_10_010_table.html",
+        "ground_truth": "easy_10_010_table.json",
+        "ocr_md": "easy_10_010_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 130595,
+        "html_size_bytes": 13608,
+        "json_size_bytes": 12856,
+        "ocr_md_size_bytes": 2396,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_011_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 614,
+      "files": {
+        "pdf": "easy_10_011_detailed.pdf",
+        "html": "easy_10_011_detailed.html",
+        "ground_truth": "easy_10_011_detailed.json",
+        "ocr_md": "easy_10_011_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 130885,
+        "html_size_bytes": 25155,
+        "json_size_bytes": 11347,
+        "ocr_md_size_bytes": 6285,
+        "pdf_pages": 6
+      }
+    },
+    {
+      "id": "easy_10_011_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 5983,
+      "files": {
+        "pdf": "easy_10_011_table.pdf",
+        "html": "easy_10_011_table.html",
+        "ground_truth": "easy_10_011_table.json",
+        "ocr_md": "easy_10_011_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 126385,
+        "html_size_bytes": 13006,
+        "json_size_bytes": 11422,
+        "ocr_md_size_bytes": 5108,
+        "pdf_pages": 1
+      }
+    },
+    {
+      "id": "easy_10_012_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 8356,
+      "files": {
+        "pdf": "easy_10_012_detailed.pdf",
+        "html": "easy_10_012_detailed.html",
+        "ground_truth": "easy_10_012_detailed.json",
+        "ocr_md": "easy_10_012_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 137539,
+        "html_size_bytes": 26572,
+        "json_size_bytes": 11578,
+        "ocr_md_size_bytes": 6708,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_012_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 4544,
+      "files": {
+        "pdf": "easy_10_012_table.pdf",
+        "html": "easy_10_012_table.html",
+        "ground_truth": "easy_10_012_table.json",
+        "ocr_md": "easy_10_012_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 128527,
+        "html_size_bytes": 13439,
+        "json_size_bytes": 11657,
+        "ocr_md_size_bytes": 3339,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_013_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 3746,
+      "files": {
+        "pdf": "easy_10_013_detailed.pdf",
+        "html": "easy_10_013_detailed.html",
+        "ground_truth": "easy_10_013_detailed.json",
+        "ocr_md": "easy_10_013_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 139091,
+        "html_size_bytes": 26548,
+        "json_size_bytes": 11912,
+        "ocr_md_size_bytes": 7212,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_013_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "seed": 5887,
+      "files": {
+        "pdf": "easy_10_013_table.pdf",
+        "html": "easy_10_013_table.html",
+        "ground_truth": "easy_10_013_table.json",
+        "ocr_md": "easy_10_013_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 128934,
+        "html_size_bytes": 13162,
+        "json_size_bytes": 11695,
+        "ocr_md_size_bytes": 4304,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "easy_10_014_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 8210,
+      "files": {
+        "pdf": "easy_10_014_detailed.pdf",
+        "html": "easy_10_014_detailed.html",
+        "ground_truth": "easy_10_014_detailed.json",
+        "ocr_md": "easy_10_014_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 137649,
+        "html_size_bytes": 27952,
+        "json_size_bytes": 12914,
+        "ocr_md_size_bytes": 6857,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_014_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 4490,
+      "files": {
+        "pdf": "easy_10_014_table.pdf",
+        "html": "easy_10_014_table.html",
+        "ground_truth": "easy_10_014_table.json",
+        "ocr_md": "easy_10_014_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 127087,
+        "html_size_bytes": 13568,
+        "json_size_bytes": 12473,
+        "ocr_md_size_bytes": 4962,
+        "pdf_pages": 1
+      }
+    },
+    {
+      "id": "easy_10_015_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 2071,
+      "files": {
+        "pdf": "easy_10_015_detailed.pdf",
+        "html": "easy_10_015_detailed.html",
+        "ground_truth": "easy_10_015_detailed.json",
+        "ocr_md": "easy_10_015_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 136815,
+        "html_size_bytes": 28027,
+        "json_size_bytes": 12746,
+        "ocr_md_size_bytes": 7449,
+        "pdf_pages": 7
+      }
+    },
+    {
+      "id": "easy_10_015_table",
+      "difficulty": "easy",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "seed": 9131,
+      "files": {
+        "pdf": "easy_10_015_table.pdf",
+        "html": "easy_10_015_table.html",
+        "ground_truth": "easy_10_015_table.json",
+        "ocr_md": "easy_10_015_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 127196,
+        "html_size_bytes": 13655,
+        "json_size_bytes": 12840,
+        "ocr_md_size_bytes": 2582,
+        "pdf_pages": 2
+      }
+    },
+    {
+      "id": "extreme_100_001_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 4254,
+      "files": {
+        "pdf": "extreme_100_001_detailed.pdf",
+        "html": "extreme_100_001_detailed.html",
+        "ground_truth": "extreme_100_001_detailed.json",
+        "ocr_md": "extreme_100_001_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 716481,
+        "html_size_bytes": 1065277,
+        "json_size_bytes": 580687,
+        "ocr_md_size_bytes": 325454,
+        "pdf_pages": 143
+      }
+    },
+    {
+      "id": "extreme_100_001_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 8801,
+      "files": {
+        "pdf": "extreme_100_001_table.pdf",
+        "html": "extreme_100_001_table.html",
+        "ground_truth": "extreme_100_001_table.json",
+        "ocr_md": "extreme_100_001_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 298278,
+        "html_size_bytes": 306561,
+        "json_size_bytes": 581536,
+        "ocr_md_size_bytes": 124211,
+        "pdf_pages": 32
+      }
+    },
+    {
+      "id": "extreme_100_002_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 708,
+      "files": {
+        "pdf": "extreme_100_002_detailed.pdf",
+        "html": "extreme_100_002_detailed.html",
+        "ground_truth": "extreme_100_002_detailed.json",
+        "ocr_md": "extreme_100_002_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 720787,
+        "html_size_bytes": 1063880,
+        "json_size_bytes": 581597,
+        "ocr_md_size_bytes": 324557,
+        "pdf_pages": 146
+      }
+    },
+    {
+      "id": "extreme_100_002_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 242,
+      "files": {
+        "pdf": "extreme_100_002_table.pdf",
+        "html": "extreme_100_002_table.html",
+        "ground_truth": "extreme_100_002_table.json",
+        "ocr_md": "extreme_100_002_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 300857,
+        "html_size_bytes": 307610,
+        "json_size_bytes": 585600,
+        "ocr_md_size_bytes": 107990,
+        "pdf_pages": 34
+      }
+    },
+    {
+      "id": "extreme_100_003_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 557,
+      "files": {
+        "pdf": "extreme_100_003_detailed.pdf",
+        "html": "extreme_100_003_detailed.html",
+        "ground_truth": "extreme_100_003_detailed.json",
+        "ocr_md": "extreme_100_003_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 722992,
+        "html_size_bytes": 1073192,
+        "json_size_bytes": 582665,
+        "ocr_md_size_bytes": 695492,
+        "pdf_pages": 146
+      }
+    },
+    {
+      "id": "extreme_100_003_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 5493,
+      "files": {
+        "pdf": "extreme_100_003_table.pdf",
+        "html": "extreme_100_003_table.html",
+        "ground_truth": "extreme_100_003_table.json",
+        "ocr_md": "extreme_100_003_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 299683,
+        "html_size_bytes": 307212,
+        "json_size_bytes": 581219,
+        "ocr_md_size_bytes": 115507,
+        "pdf_pages": 34
+      }
+    },
+    {
+      "id": "extreme_100_004_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 9028,
+      "files": {
+        "pdf": "extreme_100_004_detailed.pdf",
+        "html": "extreme_100_004_detailed.html",
+        "ground_truth": "extreme_100_004_detailed.json",
+        "ocr_md": "extreme_100_004_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 717614,
+        "html_size_bytes": 1064686,
+        "json_size_bytes": 582187,
+        "ocr_md_size_bytes": 401770,
+        "pdf_pages": 143
+      }
+    },
+    {
+      "id": "extreme_100_004_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 8214,
+      "files": {
+        "pdf": "extreme_100_004_table.pdf",
+        "html": "extreme_100_004_table.html",
+        "ground_truth": "extreme_100_004_table.json",
+        "ocr_md": "extreme_100_004_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 297557,
+        "html_size_bytes": 306919,
+        "json_size_bytes": 582719,
+        "ocr_md_size_bytes": 128477,
+        "pdf_pages": 31
+      }
+    },
+    {
+      "id": "extreme_100_005_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 3728,
+      "files": {
+        "pdf": "extreme_100_005_detailed.pdf",
+        "html": "extreme_100_005_detailed.html",
+        "ground_truth": "extreme_100_005_detailed.json",
+        "ocr_md": "extreme_100_005_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 720580,
+        "html_size_bytes": 1067909,
+        "json_size_bytes": 583020,
+        "ocr_md_size_bytes": 337085,
+        "pdf_pages": 146
+      }
+    },
+    {
+      "id": "extreme_100_005_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "seed": 6143,
+      "files": {
+        "pdf": "extreme_100_005_table.pdf",
+        "html": "extreme_100_005_table.html",
+        "ground_truth": "extreme_100_005_table.json",
+        "ocr_md": "extreme_100_005_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 302273,
+        "html_size_bytes": 306918,
+        "json_size_bytes": 583241,
+        "ocr_md_size_bytes": 122127,
+        "pdf_pages": 34
+      }
+    },
+    {
+      "id": "hard_50_001_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "seed": 1261,
+      "files": {
+        "pdf": "hard_50_001_detailed.pdf",
+        "html": "hard_50_001_detailed.html",
+        "ground_truth": "hard_50_001_detailed.json",
+        "ocr_md": "hard_50_001_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 206328,
+        "html_size_bytes": 119580,
+        "json_size_bytes": 64444,
+        "ocr_md_size_bytes": 37404,
+        "pdf_pages": 16
+      }
+    },
+    {
+      "id": "hard_50_001_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "seed": 4160,
+      "files": {
+        "pdf": "hard_50_001_table.pdf",
+        "html": "hard_50_001_table.html",
+        "ground_truth": "hard_50_001_table.json",
+        "ocr_md": "hard_50_001_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 170047,
+        "html_size_bytes": 44209,
+        "json_size_bytes": 63868,
+        "ocr_md_size_bytes": 11758,
+        "pdf_pages": 5
+      }
+    },
+    {
+      "id": "hard_50_002_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "seed": 1679,
+      "files": {
+        "pdf": "hard_50_002_detailed.pdf",
+        "html": "hard_50_002_detailed.html",
+        "ground_truth": "hard_50_002_detailed.json",
+        "ocr_md": "hard_50_002_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 224213,
+        "html_size_bytes": 124623,
+        "json_size_bytes": 63828,
+        "ocr_md_size_bytes": 37927,
+        "pdf_pages": 33
+      }
+    },
+    {
+      "id": "hard_50_002_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "seed": 6853,
+      "files": {
+        "pdf": "hard_50_002_table.pdf",
+        "html": "hard_50_002_table.html",
+        "ground_truth": "hard_50_002_table.json",
+        "ocr_md": "hard_50_002_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 170309,
+        "html_size_bytes": 43212,
+        "json_size_bytes": 64224,
+        "ocr_md_size_bytes": 11530,
+        "pdf_pages": 6
+      }
+    },
+    {
+      "id": "hard_50_003_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "seed": 7893,
+      "files": {
+        "pdf": "hard_50_003_detailed.pdf",
+        "html": "hard_50_003_detailed.html",
+        "ground_truth": "hard_50_003_detailed.json",
+        "ocr_md": "hard_50_003_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 188159,
+        "html_size_bytes": 119373,
+        "json_size_bytes": 63252,
+        "ocr_md_size_bytes": 1082317,
+        "pdf_pages": 17
+      }
+    },
+    {
+      "id": "hard_50_003_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "seed": 9266,
+      "files": {
+        "pdf": "hard_50_003_table.pdf",
+        "html": "hard_50_003_table.html",
+        "ground_truth": "hard_50_003_table.json",
+        "ocr_md": "hard_50_003_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 142198,
+        "html_size_bytes": 40394,
+        "json_size_bytes": 63736,
+        "ocr_md_size_bytes": 10177,
+        "pdf_pages": 4
+      }
+    },
+    {
+      "id": "hard_50_004_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "seed": 2463,
+      "files": {
+        "pdf": "hard_50_004_detailed.pdf",
+        "html": "hard_50_004_detailed.html",
+        "ground_truth": "hard_50_004_detailed.json",
+        "ocr_md": "hard_50_004_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 206772,
+        "html_size_bytes": 123741,
+        "json_size_bytes": 64507,
+        "ocr_md_size_bytes": 39212,
+        "pdf_pages": 16
+      }
+    },
+    {
+      "id": "hard_50_004_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "seed": 1070,
+      "files": {
+        "pdf": "hard_50_004_table.pdf",
+        "html": "hard_50_004_table.html",
+        "ground_truth": "hard_50_004_table.json",
+        "ocr_md": "hard_50_004_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 168700,
+        "html_size_bytes": 43688,
+        "json_size_bytes": 64423,
+        "ocr_md_size_bytes": 13348,
+        "pdf_pages": 5
+      }
+    },
+    {
+      "id": "hard_50_005_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "seed": 2671,
+      "files": {
+        "pdf": "hard_50_005_detailed.pdf",
+        "html": "hard_50_005_detailed.html",
+        "ground_truth": "hard_50_005_detailed.json",
+        "ocr_md": "hard_50_005_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 227000,
+        "html_size_bytes": 127677,
+        "json_size_bytes": 64533,
+        "ocr_md_size_bytes": 38101,
+        "pdf_pages": 34
+      }
+    },
+    {
+      "id": "hard_50_005_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "seed": 4476,
+      "files": {
+        "pdf": "hard_50_005_table.pdf",
+        "html": "hard_50_005_table.html",
+        "ground_truth": "hard_50_005_table.json",
+        "ocr_md": "hard_50_005_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 168245,
+        "html_size_bytes": 42784,
+        "json_size_bytes": 63913,
+        "ocr_md_size_bytes": 13215,
+        "pdf_pages": 5
+      }
+    },
+    {
+      "id": "hard_50_006_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "seed": 2401,
+      "files": {
+        "pdf": "hard_50_006_detailed.pdf",
+        "html": "hard_50_006_detailed.html",
+        "ground_truth": "hard_50_006_detailed.json",
+        "ocr_md": "hard_50_006_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 214740,
+        "html_size_bytes": 123356,
+        "json_size_bytes": 64174,
+        "ocr_md_size_bytes": 75948,
+        "pdf_pages": 18
+      }
+    },
+    {
+      "id": "hard_50_006_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "seed": 8070,
+      "files": {
+        "pdf": "hard_50_006_table.pdf",
+        "html": "hard_50_006_table.html",
+        "ground_truth": "hard_50_006_table.json",
+        "ocr_md": "hard_50_006_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 143207,
+        "html_size_bytes": 42538,
+        "json_size_bytes": 63971,
+        "ocr_md_size_bytes": 10089,
+        "pdf_pages": 4
+      }
+    },
+    {
+      "id": "hard_50_007_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "seed": 3242,
+      "files": {
+        "pdf": "hard_50_007_detailed.pdf",
+        "html": "hard_50_007_detailed.html",
+        "ground_truth": "hard_50_007_detailed.json",
+        "ocr_md": "hard_50_007_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 206949,
+        "html_size_bytes": 121784,
+        "json_size_bytes": 64841,
+        "ocr_md_size_bytes": 1084154,
+        "pdf_pages": 17
+      }
+    },
+    {
+      "id": "hard_50_007_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "seed": 2046,
+      "files": {
+        "pdf": "hard_50_007_table.pdf",
+        "html": "hard_50_007_table.html",
+        "ground_truth": "hard_50_007_table.json",
+        "ocr_md": "hard_50_007_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 166818,
+        "html_size_bytes": 43546,
+        "json_size_bytes": 63653,
+        "ocr_md_size_bytes": 11724,
+        "pdf_pages": 5
+      }
+    },
+    {
+      "id": "hard_50_008_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "seed": 3109,
+      "files": {
+        "pdf": "hard_50_008_detailed.pdf",
+        "html": "hard_50_008_detailed.html",
+        "ground_truth": "hard_50_008_detailed.json",
+        "ocr_md": "hard_50_008_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 229951,
+        "html_size_bytes": 125305,
+        "json_size_bytes": 64305,
+        "ocr_md_size_bytes": 36654,
+        "pdf_pages": 36
+      }
+    },
+    {
+      "id": "hard_50_008_table",
+      "difficulty": "hard",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "seed": 3725,
+      "files": {
+        "pdf": "hard_50_008_table.pdf",
+        "html": "hard_50_008_table.html",
+        "ground_truth": "hard_50_008_table.json",
+        "ocr_md": "hard_50_008_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 167461,
+        "html_size_bytes": 42114,
+        "json_size_bytes": 63540,
+        "ocr_md_size_bytes": 11483,
+        "pdf_pages": 5
+      }
+    },
+    {
+      "id": "medium_25_001_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 2131,
+      "files": {
+        "pdf": "medium_25_001_detailed.pdf",
+        "html": "medium_25_001_detailed.html",
+        "ground_truth": "medium_25_001_detailed.json",
+        "ocr_md": "medium_25_001_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 159168,
+        "html_size_bytes": 58650,
+        "json_size_bytes": 31246,
+        "ocr_md_size_bytes": 17681,
+        "pdf_pages": 15
+      }
+    },
+    {
+      "id": "medium_25_001_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 1075,
+      "files": {
+        "pdf": "medium_25_001_table.pdf",
+        "html": "medium_25_001_table.html",
+        "ground_truth": "medium_25_001_table.json",
+        "ocr_md": "medium_25_001_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 135588,
+        "html_size_bytes": 23175,
+        "json_size_bytes": 31381,
+        "ocr_md_size_bytes": 5596,
+        "pdf_pages": 3
+      }
+    },
+    {
+      "id": "medium_25_002_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "seed": 3617,
+      "files": {
+        "pdf": "medium_25_002_detailed.pdf",
+        "html": "medium_25_002_detailed.html",
+        "ground_truth": "medium_25_002_detailed.json",
+        "ocr_md": "medium_25_002_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 180105,
+        "html_size_bytes": 60078,
+        "json_size_bytes": 29364,
+        "ocr_md_size_bytes": 17745,
+        "pdf_pages": 15
+      }
+    },
+    {
+      "id": "medium_25_002_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "seed": 1982,
+      "files": {
+        "pdf": "medium_25_002_table.pdf",
+        "html": "medium_25_002_table.html",
+        "ground_truth": "medium_25_002_table.json",
+        "ocr_md": "medium_25_002_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 163884,
+        "html_size_bytes": 25263,
+        "json_size_bytes": 29353,
+        "ocr_md_size_bytes": 7154,
+        "pdf_pages": 4
+      }
+    },
+    {
+      "id": "medium_25_003_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 8991,
+      "files": {
+        "pdf": "medium_25_003_detailed.pdf",
+        "html": "medium_25_003_detailed.html",
+        "ground_truth": "medium_25_003_detailed.json",
+        "ocr_md": "medium_25_003_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 183041,
+        "html_size_bytes": 65840,
+        "json_size_bytes": 31992,
+        "ocr_md_size_bytes": 19748,
+        "pdf_pages": 17
+      }
+    },
+    {
+      "id": "medium_25_003_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 4336,
+      "files": {
+        "pdf": "medium_25_003_table.pdf",
+        "html": "medium_25_003_table.html",
+        "ground_truth": "medium_25_003_table.json",
+        "ocr_md": "medium_25_003_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 161671,
+        "html_size_bytes": 26070,
+        "json_size_bytes": 31637,
+        "ocr_md_size_bytes": 6295,
+        "pdf_pages": 3
+      }
+    },
+    {
+      "id": "medium_25_004_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 5215,
+      "files": {
+        "pdf": "medium_25_004_detailed.pdf",
+        "html": "medium_25_004_detailed.html",
+        "ground_truth": "medium_25_004_detailed.json",
+        "ocr_md": "medium_25_004_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 182530,
+        "html_size_bytes": 65961,
+        "json_size_bytes": 31901,
+        "ocr_md_size_bytes": 18549,
+        "pdf_pages": 16
+      }
+    },
+    {
+      "id": "medium_25_004_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 4627,
+      "files": {
+        "pdf": "medium_25_004_table.pdf",
+        "html": "medium_25_004_table.html",
+        "ground_truth": "medium_25_004_table.json",
+        "ocr_md": "medium_25_004_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 161973,
+        "html_size_bytes": 26490,
+        "json_size_bytes": 31357,
+        "ocr_md_size_bytes": 6903,
+        "pdf_pages": 4
+      }
+    },
+    {
+      "id": "medium_25_005_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 2287,
+      "files": {
+        "pdf": "medium_25_005_detailed.pdf",
+        "html": "medium_25_005_detailed.html",
+        "ground_truth": "medium_25_005_detailed.json",
+        "ocr_md": "medium_25_005_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 164626,
+        "html_size_bytes": 63388,
+        "json_size_bytes": 31889,
+        "ocr_md_size_bytes": 18096,
+        "pdf_pages": 17
+      }
+    },
+    {
+      "id": "medium_25_005_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 6054,
+      "files": {
+        "pdf": "medium_25_005_table.pdf",
+        "html": "medium_25_005_table.html",
+        "ground_truth": "medium_25_005_table.json",
+        "ocr_md": "medium_25_005_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 132659,
+        "html_size_bytes": 23262,
+        "json_size_bytes": 31361,
+        "ocr_md_size_bytes": 8897,
+        "pdf_pages": 3
+      }
+    },
+    {
+      "id": "medium_25_006_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "seed": 6589,
+      "files": {
+        "pdf": "medium_25_006_detailed.pdf",
+        "html": "medium_25_006_detailed.html",
+        "ground_truth": "medium_25_006_detailed.json",
+        "ocr_md": "medium_25_006_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 175860,
+        "html_size_bytes": 58486,
+        "json_size_bytes": 29025,
+        "ocr_md_size_bytes": 16685,
+        "pdf_pages": 15
+      }
+    },
+    {
+      "id": "medium_25_006_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "seed": 2975,
+      "files": {
+        "pdf": "medium_25_006_table.pdf",
+        "html": "medium_25_006_table.html",
+        "ground_truth": "medium_25_006_table.json",
+        "ocr_md": "medium_25_006_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 160705,
+        "html_size_bytes": 24408,
+        "json_size_bytes": 28960,
+        "ocr_md_size_bytes": 6671,
+        "pdf_pages": 4
+      }
+    },
+    {
+      "id": "medium_25_007_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 7816,
+      "files": {
+        "pdf": "medium_25_007_detailed.pdf",
+        "html": "medium_25_007_detailed.html",
+        "ground_truth": "medium_25_007_detailed.json",
+        "ocr_md": "medium_25_007_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 182871,
+        "html_size_bytes": 65306,
+        "json_size_bytes": 31719,
+        "ocr_md_size_bytes": 19802,
+        "pdf_pages": 16
+      }
+    },
+    {
+      "id": "medium_25_007_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 7682,
+      "files": {
+        "pdf": "medium_25_007_table.pdf",
+        "html": "medium_25_007_table.html",
+        "ground_truth": "medium_25_007_table.json",
+        "ocr_md": "medium_25_007_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 160109,
+        "html_size_bytes": 26294,
+        "json_size_bytes": 31995,
+        "ocr_md_size_bytes": 6518,
+        "pdf_pages": 3
+      }
+    },
+    {
+      "id": "medium_25_008_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 8166,
+      "files": {
+        "pdf": "medium_25_008_detailed.pdf",
+        "html": "medium_25_008_detailed.html",
+        "ground_truth": "medium_25_008_detailed.json",
+        "ocr_md": "medium_25_008_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 183406,
+        "html_size_bytes": 66115,
+        "json_size_bytes": 32042,
+        "ocr_md_size_bytes": 18994,
+        "pdf_pages": 17
+      }
+    },
+    {
+      "id": "medium_25_008_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 611,
+      "files": {
+        "pdf": "medium_25_008_table.pdf",
+        "html": "medium_25_008_table.html",
+        "ground_truth": "medium_25_008_table.json",
+        "ocr_md": "medium_25_008_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 162766,
+        "html_size_bytes": 26609,
+        "json_size_bytes": 31394,
+        "ocr_md_size_bytes": 6926,
+        "pdf_pages": 4
+      }
+    },
+    {
+      "id": "medium_25_009_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 1375,
+      "files": {
+        "pdf": "medium_25_009_detailed.pdf",
+        "html": "medium_25_009_detailed.html",
+        "ground_truth": "medium_25_009_detailed.json",
+        "ocr_md": "medium_25_009_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 162059,
+        "html_size_bytes": 59914,
+        "json_size_bytes": 31569,
+        "ocr_md_size_bytes": 17728,
+        "pdf_pages": 15
+      }
+    },
+    {
+      "id": "medium_25_009_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 4505,
+      "files": {
+        "pdf": "medium_25_009_table.pdf",
+        "html": "medium_25_009_table.html",
+        "ground_truth": "medium_25_009_table.json",
+        "ocr_md": "medium_25_009_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 135681,
+        "html_size_bytes": 23167,
+        "json_size_bytes": 31093,
+        "ocr_md_size_bytes": 5252,
+        "pdf_pages": 3
+      }
+    },
+    {
+      "id": "medium_25_010_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "seed": 503,
+      "files": {
+        "pdf": "medium_25_010_detailed.pdf",
+        "html": "medium_25_010_detailed.html",
+        "ground_truth": "medium_25_010_detailed.json",
+        "ocr_md": "medium_25_010_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 176653,
+        "html_size_bytes": 59420,
+        "json_size_bytes": 28845,
+        "ocr_md_size_bytes": 16595,
+        "pdf_pages": 15
+      }
+    },
+    {
+      "id": "medium_25_010_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "seed": 145,
+      "files": {
+        "pdf": "medium_25_010_table.pdf",
+        "html": "medium_25_010_table.html",
+        "ground_truth": "medium_25_010_table.json",
+        "ocr_md": "medium_25_010_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 160135,
+        "html_size_bytes": 24781,
+        "json_size_bytes": 29286,
+        "ocr_md_size_bytes": 6207,
+        "pdf_pages": 4
+      }
+    },
+    {
+      "id": "medium_25_011_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 7913,
+      "files": {
+        "pdf": "medium_25_011_detailed.pdf",
+        "html": "medium_25_011_detailed.html",
+        "ground_truth": "medium_25_011_detailed.json",
+        "ocr_md": "medium_25_011_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 181497,
+        "html_size_bytes": 62092,
+        "json_size_bytes": 31230,
+        "ocr_md_size_bytes": 18250,
+        "pdf_pages": 17
+      }
+    },
+    {
+      "id": "medium_25_011_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 3230,
+      "files": {
+        "pdf": "medium_25_011_table.pdf",
+        "html": "medium_25_011_table.html",
+        "ground_truth": "medium_25_011_table.json",
+        "ocr_md": "medium_25_011_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 160842,
+        "html_size_bytes": 26552,
+        "json_size_bytes": 31218,
+        "ocr_md_size_bytes": 6580,
+        "pdf_pages": 3
+      }
+    },
+    {
+      "id": "medium_25_012_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 2332,
+      "files": {
+        "pdf": "medium_25_012_detailed.pdf",
+        "html": "medium_25_012_detailed.html",
+        "ground_truth": "medium_25_012_detailed.json",
+        "ocr_md": "medium_25_012_detailed_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 182887,
+        "html_size_bytes": 65941,
+        "json_size_bytes": 31769,
+        "ocr_md_size_bytes": 20044,
+        "pdf_pages": 17
+      }
+    },
+    {
+      "id": "medium_25_012_table",
+      "difficulty": "medium",
+      "format": "table",
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "seed": 7414,
+      "files": {
+        "pdf": "medium_25_012_table.pdf",
+        "html": "medium_25_012_table.html",
+        "ground_truth": "medium_25_012_table.json",
+        "ocr_md": "medium_25_012_table_ocr.md",
+        "pdf_exists": true,
+        "html_exists": true,
+        "ground_truth_exists": true,
+        "ocr_md_exists": true,
+        "pdf_size_bytes": 162374,
+        "html_size_bytes": 26695,
+        "json_size_bytes": 31428,
+        "ocr_md_size_bytes": 6805,
+        "pdf_pages": 4
+      }
+    }
+  ]
+}

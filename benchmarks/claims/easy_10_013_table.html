@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Summit Express Inc - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            .page-break {
+                page-break-before: always;
+                break-before: page;
+                page-break-after: auto;
+                break-after: auto;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">Sentry Insurance</div>
+            <div class="header-line">2580 Dennis Court, Rebeccaland, CA 84653</div>
+            <div class="header-line">Phone: (214)633-9490</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> Summit Express Inc, Acct. # A0291670</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 04/07/2024, 11:03 PM</div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Company</th>
+                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 5px; border: 1px solid #000;">Status</th>
+                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 5px; border: 1px solid #000;">State</th>
+                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
+                <th style="padding: 5px; border: 1px solid #000;">Description</th>
+                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
+                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
+                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30001</td>
+            <td>L230001</td>
+            <td>Summit Express Inc</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L23A3378</td>
+            <td>05/22/2023</td>
+            <td>FL</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">Refrigeration unit failure<br>- spoiled goods</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$29,102.26</td>
+            <td style="text-align: right;">$23,489.94</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L230002</td>
+            <td>Titan Cargo Inc</td>
+            <td>Cargo</td>
+            <td>Open</td>
+            <td>L23A4978</td>
+            <td>03/22/2023</td>
+            <td>TN</td>
+            <td>Dominguez, Christina</td>
+            <td style="max-width: 200px; white-space: pre-line;">Cargo<br>crushed from improper stacking</td>
+            <td style="text-align: right;">$14,475.57</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$14,475.57</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L240003</td>
+            <td>Atlas Cargo Group</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A3150</td>
+            <td>03/30/2024</td>
+            <td>TN</td>
+            <td>Hernandez, Thomas</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV making wide turn,<br>clipped OV on passenger side</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$30,624.17</td>
+            <td style="text-align: right;">$30,624.17</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L240004</td>
+            <td>Clayside Transport</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A3620</td>
+            <td>04/10/2024</td>
+            <td>NC</td>
+            <td>—</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV rollover on icy highway.<br>Total loss.</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$4,055.40</td>
+            <td style="text-align: right;">$1,922.37</td>
+        </tr>
+        <tr>
+            <td>#30005</td>
+            <td>L230005</td>
+            <td>Liberty Hauling Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A7861</td>
+            <td>01/05/2023</td>
+            <td>NY</td>
+            <td>Ramsey, Ariana</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV ran stop<br>sign, struck IV broadside<br>OV ran stop<br>sign, struck IV broadside<div class="page-break"></div>OV ran stop<br>sign, struck IV broadside<br>OV ran stop<br>sign, struck IV broadside</td>
+            <td style="text-align: right;">$27,969.06</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$3,018.53</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L230006</td>
+            <td>Brewerstad Hauling</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A8621</td>
+            <td>07/08/2023</td>
+            <td>CA</td>
+            <td>Baker, Sarah</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV<br>hydroplaned, hit concrete barrier</td>
+            <td style="text-align: right;">$75,205.78</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$75,205.78</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L240007</td>
+            <td>Lake Amyside Hauling</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A1539</td>
+            <td>08/16/2024</td>
+            <td>NC</td>
+            <td>Ellis, Arthur</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV<br>hydroplaned, hit concrete barrier</td>
+            <td style="text-align: right;">$62,514.29</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$62,514.29</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L230008</td>
+            <td>Green Freight Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A2709</td>
+            <td>08/12/2023</td>
+            <td>PA</td>
+            <td>Fletcher, William</td>
+            <td style="max-width: 200px; white-space: pre-line;">OV ran stop<br>sign, struck IV broadside</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$34,058.31</td>
+            <td style="text-align: right;">$34,058.31</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L230009</td>
+            <td>Singh Cargo Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A7551</td>
+            <td>09/24/2023</td>
+            <td>TN</td>
+            <td>Wilkins, Lauren</td>
+            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV<br>to veer into OV</td>
+            <td style="text-align: right;">$51,549.98</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$51,549.98</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L240010</td>
+            <td>Rice Express Co</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A5971</td>
+            <td>11/13/2024</td>
+            <td>TX</td>
+            <td>Turner, Lindsay</td>
+            <td style="max-width: 200px; white-space: pre-line;">IV struck by falling<br>tree branch during storm</td>
+            <td style="text-align: right;">$0.00</td>
+            <td style="text-align: right;">$21,207.90</td>
+            <td style="text-align: right;">$17,564.83</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$231,714.68</td>
+                <td>$119,048.04</td>
+                <td>$36,338.95</td>
+                <td>$314,423.77</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 10</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>

@@ -1,0 +1,1576 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Benchmark Instance Index</title>
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --panel: #121826;
+      --text: #e6e6e6;
+      --muted: #a0a0a0;
+      --border: #2a3142;
+      --header: #171f30;
+      --link: #8ab4ff;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+      font-weight: 650;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input[type="search"] {
+      flex: 1;
+      min-width: 260px;
+      background: #0f1420;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      background: var(--header);
+      border-bottom: 1px solid var(--border);
+      padding: 10px;
+      text-align: left;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    tbody td {
+      border-top: 1px solid var(--border);
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+      margin-right: 10px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .num {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Benchmark Instance Index</h1>
+    <div class="meta">
+      <div><span class="mono">/Users/anton/d/kay/lost-and-found-entities/benchmarks/claims</span></div>
+      <div>Built at: <span class="mono">2026-02-08T15:50:03.318137</span></div>
+      <div>Total instances: <span class="mono">80</span></div>
+      <div>By tier: <span class="mono">easy: 30, extreme: 10, hard: 16, medium: 24</span></div>
+      <div>By format: <span class="mono">detailed: 40, table: 40</span></div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <input id="search" type="search" placeholder="Filter by id / problems / tier / format..." oninput="filterRows()" />
+      </div>
+      <div class="hint">Click a column header to sort. Links open the corresponding PDF/HTML/JSON in this directory.</div>
+    </div>
+
+    <div class="panel" style="padding: 0; overflow-x: auto;">
+      <table id="index">
+        <thead>
+          <tr>
+            <th data-type="text">id</th>
+            <th data-type="text">tier</th>
+            <th data-type="text">format</th>
+            <th data-type="num" class="num">claims</th>
+            <th data-type="num" class="num">est. pages</th>
+            <th data-type="num" class="num">pdf pages</th>
+            <th data-type="text">problems</th>
+            <th data-type="text">files</th>
+            <th data-type="num" class="num">pdf size</th>
+            <th data-type="num" class="num">html size</th>
+            <th data-type="num" class="num">json size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+  <td class="mono">easy_10_001_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">6</td>
+  <td>multi_row</td>
+  <td>
+    <a href="./easy_10_001_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_001_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_001_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">135.8 KB</td>
+  <td class="num">25.7 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_001_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">1</td>
+  <td>multi_row</td>
+  <td>
+    <a href="./easy_10_001_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_001_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_001_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">125.7 KB</td>
+  <td class="num">12.7 KB</td>
+  <td class="num">11.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_002_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>page_breaks</td>
+  <td>
+    <a href="./easy_10_002_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_002_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_002_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">133.4 KB</td>
+  <td class="num">25.3 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_002_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>page_breaks</td>
+  <td>
+    <a href="./easy_10_002_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_002_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_002_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">126.0 KB</td>
+  <td class="num">13.0 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_003_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">6</td>
+  <td>multi_row, page_breaks</td>
+  <td>
+    <a href="./easy_10_003_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_003_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_003_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">133.1 KB</td>
+  <td class="num">25.1 KB</td>
+  <td class="num">11.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_003_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>multi_row, page_breaks</td>
+  <td>
+    <a href="./easy_10_003_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_003_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_003_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">126.1 KB</td>
+  <td class="num">12.9 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_004_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>duplicates</td>
+  <td>
+    <a href="./easy_10_004_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_004_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_004_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">133.9 KB</td>
+  <td class="num">28.1 KB</td>
+  <td class="num">12.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_004_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">1</td>
+  <td>duplicates</td>
+  <td>
+    <a href="./easy_10_004_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_004_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_004_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">124.3 KB</td>
+  <td class="num">13.3 KB</td>
+  <td class="num">12.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_005_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>multi_row, duplicates</td>
+  <td>
+    <a href="./easy_10_005_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_005_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_005_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">132.2 KB</td>
+  <td class="num">27.6 KB</td>
+  <td class="num">12.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_005_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>multi_row, duplicates</td>
+  <td>
+    <a href="./easy_10_005_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_005_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_005_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">126.0 KB</td>
+  <td class="num">13.3 KB</td>
+  <td class="num">12.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_006_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">6</td>
+  <td>multi_row</td>
+  <td>
+    <a href="./easy_10_006_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_006_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_006_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">132.9 KB</td>
+  <td class="num">25.5 KB</td>
+  <td class="num">11.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_006_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">1</td>
+  <td>multi_row</td>
+  <td>
+    <a href="./easy_10_006_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_006_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_006_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">126.3 KB</td>
+  <td class="num">12.8 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_007_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>page_breaks</td>
+  <td>
+    <a href="./easy_10_007_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_007_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_007_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">133.9 KB</td>
+  <td class="num">26.7 KB</td>
+  <td class="num">11.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_007_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>page_breaks</td>
+  <td>
+    <a href="./easy_10_007_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_007_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_007_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">125.6 KB</td>
+  <td class="num">13.1 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_008_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">6</td>
+  <td>multi_row, page_breaks</td>
+  <td>
+    <a href="./easy_10_008_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_008_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_008_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">134.2 KB</td>
+  <td class="num">26.3 KB</td>
+  <td class="num">11.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_008_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>multi_row, page_breaks</td>
+  <td>
+    <a href="./easy_10_008_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_008_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_008_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">126.2 KB</td>
+  <td class="num">12.9 KB</td>
+  <td class="num">11.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_009_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">6</td>
+  <td>duplicates</td>
+  <td>
+    <a href="./easy_10_009_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_009_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_009_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">124.9 KB</td>
+  <td class="num">25.9 KB</td>
+  <td class="num">12.1 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_009_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">1</td>
+  <td>duplicates</td>
+  <td>
+    <a href="./easy_10_009_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_009_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_009_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">126.1 KB</td>
+  <td class="num">13.3 KB</td>
+  <td class="num">12.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_010_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>multi_row, duplicates</td>
+  <td>
+    <a href="./easy_10_010_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_010_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_010_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">134.8 KB</td>
+  <td class="num">27.7 KB</td>
+  <td class="num">12.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_010_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>multi_row, duplicates</td>
+  <td>
+    <a href="./easy_10_010_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_010_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_010_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">127.5 KB</td>
+  <td class="num">13.3 KB</td>
+  <td class="num">12.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_011_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">6</td>
+  <td>multi_row</td>
+  <td>
+    <a href="./easy_10_011_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_011_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_011_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">127.8 KB</td>
+  <td class="num">24.6 KB</td>
+  <td class="num">11.1 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_011_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">1</td>
+  <td>multi_row</td>
+  <td>
+    <a href="./easy_10_011_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_011_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_011_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">123.4 KB</td>
+  <td class="num">12.7 KB</td>
+  <td class="num">11.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_012_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>page_breaks</td>
+  <td>
+    <a href="./easy_10_012_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_012_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_012_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">134.3 KB</td>
+  <td class="num">25.9 KB</td>
+  <td class="num">11.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_012_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>page_breaks</td>
+  <td>
+    <a href="./easy_10_012_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_012_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_012_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">125.5 KB</td>
+  <td class="num">13.1 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_013_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>multi_row, page_breaks</td>
+  <td>
+    <a href="./easy_10_013_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_013_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_013_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">135.8 KB</td>
+  <td class="num">25.9 KB</td>
+  <td class="num">11.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_013_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">10</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>multi_row, page_breaks</td>
+  <td>
+    <a href="./easy_10_013_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_013_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_013_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">125.9 KB</td>
+  <td class="num">12.9 KB</td>
+  <td class="num">11.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_014_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>duplicates</td>
+  <td>
+    <a href="./easy_10_014_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_014_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_014_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">134.4 KB</td>
+  <td class="num">27.3 KB</td>
+  <td class="num">12.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_014_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">1</td>
+  <td>duplicates</td>
+  <td>
+    <a href="./easy_10_014_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_014_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_014_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">124.1 KB</td>
+  <td class="num">13.2 KB</td>
+  <td class="num">12.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_015_detailed</td>
+  <td>easy</td>
+  <td>detailed</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">7</td>
+  <td>multi_row, duplicates</td>
+  <td>
+    <a href="./easy_10_015_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_015_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_015_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">133.6 KB</td>
+  <td class="num">27.4 KB</td>
+  <td class="num">12.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">easy_10_015_table</td>
+  <td>easy</td>
+  <td>table</td>
+  <td class="num">11</td>
+  <td class="num">2</td>
+  <td class="num">2</td>
+  <td>multi_row, duplicates</td>
+  <td>
+    <a href="./easy_10_015_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./easy_10_015_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./easy_10_015_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">124.2 KB</td>
+  <td class="num">13.3 KB</td>
+  <td class="num">12.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_001_detailed</td>
+  <td>extreme</td>
+  <td>detailed</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">143</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_001_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_001_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_001_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">699.7 KB</td>
+  <td class="num">1.02 MB</td>
+  <td class="num">567.1 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_001_table</td>
+  <td>extreme</td>
+  <td>table</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">32</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_001_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_001_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_001_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">291.3 KB</td>
+  <td class="num">299.4 KB</td>
+  <td class="num">567.9 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_002_detailed</td>
+  <td>extreme</td>
+  <td>detailed</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">146</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_002_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_002_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_002_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">703.9 KB</td>
+  <td class="num">1.01 MB</td>
+  <td class="num">568.0 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_002_table</td>
+  <td>extreme</td>
+  <td>table</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">34</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_002_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_002_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_002_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">293.8 KB</td>
+  <td class="num">300.4 KB</td>
+  <td class="num">571.9 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_003_detailed</td>
+  <td>extreme</td>
+  <td>detailed</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">146</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_003_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_003_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_003_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">706.0 KB</td>
+  <td class="num">1.02 MB</td>
+  <td class="num">569.0 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_003_table</td>
+  <td>extreme</td>
+  <td>table</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">34</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_003_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_003_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_003_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">292.7 KB</td>
+  <td class="num">300.0 KB</td>
+  <td class="num">567.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_004_detailed</td>
+  <td>extreme</td>
+  <td>detailed</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">143</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_004_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_004_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_004_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">700.8 KB</td>
+  <td class="num">1.02 MB</td>
+  <td class="num">568.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_004_table</td>
+  <td>extreme</td>
+  <td>table</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">31</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_004_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_004_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_004_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">290.6 KB</td>
+  <td class="num">299.7 KB</td>
+  <td class="num">569.1 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_005_detailed</td>
+  <td>extreme</td>
+  <td>detailed</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">146</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_005_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_005_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_005_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">703.7 KB</td>
+  <td class="num">1.02 MB</td>
+  <td class="num">569.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">extreme_100_005_table</td>
+  <td>extreme</td>
+  <td>table</td>
+  <td class="num">500</td>
+  <td class="num">76</td>
+  <td class="num">34</td>
+  <td>page_breaks, multi_row, duplicates, large_doc, multiple_tables, multi_column, merged_cells</td>
+  <td>
+    <a href="./extreme_100_005_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./extreme_100_005_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./extreme_100_005_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">295.2 KB</td>
+  <td class="num">299.7 KB</td>
+  <td class="num">569.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_001_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">10</td>
+  <td class="num">16</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, multi_column</td>
+  <td>
+    <a href="./hard_50_001_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_001_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_001_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">201.5 KB</td>
+  <td class="num">116.8 KB</td>
+  <td class="num">62.9 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_001_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">10</td>
+  <td class="num">5</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, multi_column</td>
+  <td>
+    <a href="./hard_50_001_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_001_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_001_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">166.1 KB</td>
+  <td class="num">43.2 KB</td>
+  <td class="num">62.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_002_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">14</td>
+  <td class="num">33</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, merged_cells</td>
+  <td>
+    <a href="./hard_50_002_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_002_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_002_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">219.0 KB</td>
+  <td class="num">121.7 KB</td>
+  <td class="num">62.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_002_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">14</td>
+  <td class="num">6</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, merged_cells</td>
+  <td>
+    <a href="./hard_50_002_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_002_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_002_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">166.3 KB</td>
+  <td class="num">42.2 KB</td>
+  <td class="num">62.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_003_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">8</td>
+  <td class="num">17</td>
+  <td>page_breaks, multi_row, duplicates, multi_column, merged_cells</td>
+  <td>
+    <a href="./hard_50_003_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_003_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_003_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">183.7 KB</td>
+  <td class="num">116.6 KB</td>
+  <td class="num">61.8 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_003_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">8</td>
+  <td class="num">4</td>
+  <td>page_breaks, multi_row, duplicates, multi_column, merged_cells</td>
+  <td>
+    <a href="./hard_50_003_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_003_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_003_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">138.9 KB</td>
+  <td class="num">39.4 KB</td>
+  <td class="num">62.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_004_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">10</td>
+  <td class="num">16</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, multi_column</td>
+  <td>
+    <a href="./hard_50_004_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_004_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_004_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">201.9 KB</td>
+  <td class="num">120.8 KB</td>
+  <td class="num">63.0 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_004_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">10</td>
+  <td class="num">5</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, multi_column</td>
+  <td>
+    <a href="./hard_50_004_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_004_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_004_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">164.7 KB</td>
+  <td class="num">42.7 KB</td>
+  <td class="num">62.9 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_005_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">14</td>
+  <td class="num">34</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, merged_cells</td>
+  <td>
+    <a href="./hard_50_005_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_005_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_005_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">221.7 KB</td>
+  <td class="num">124.7 KB</td>
+  <td class="num">63.0 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_005_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">14</td>
+  <td class="num">5</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, merged_cells</td>
+  <td>
+    <a href="./hard_50_005_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_005_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_005_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">164.3 KB</td>
+  <td class="num">41.8 KB</td>
+  <td class="num">62.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_006_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">8</td>
+  <td class="num">18</td>
+  <td>page_breaks, multi_row, duplicates, multi_column, merged_cells</td>
+  <td>
+    <a href="./hard_50_006_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_006_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_006_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">209.7 KB</td>
+  <td class="num">120.5 KB</td>
+  <td class="num">62.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_006_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">8</td>
+  <td class="num">4</td>
+  <td>page_breaks, multi_row, duplicates, multi_column, merged_cells</td>
+  <td>
+    <a href="./hard_50_006_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_006_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_006_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">139.9 KB</td>
+  <td class="num">41.5 KB</td>
+  <td class="num">62.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_007_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">10</td>
+  <td class="num">17</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, multi_column</td>
+  <td>
+    <a href="./hard_50_007_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_007_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_007_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">202.1 KB</td>
+  <td class="num">118.9 KB</td>
+  <td class="num">63.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_007_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">10</td>
+  <td class="num">5</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, multi_column</td>
+  <td>
+    <a href="./hard_50_007_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_007_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_007_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">162.9 KB</td>
+  <td class="num">42.5 KB</td>
+  <td class="num">62.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_008_detailed</td>
+  <td>hard</td>
+  <td>detailed</td>
+  <td class="num">55</td>
+  <td class="num">14</td>
+  <td class="num">36</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, merged_cells</td>
+  <td>
+    <a href="./hard_50_008_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_008_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_008_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">224.6 KB</td>
+  <td class="num">122.4 KB</td>
+  <td class="num">62.8 KB</td>
+</tr>
+<tr>
+  <td class="mono">hard_50_008_table</td>
+  <td>hard</td>
+  <td>table</td>
+  <td class="num">55</td>
+  <td class="num">14</td>
+  <td class="num">5</td>
+  <td>page_breaks, multi_row, duplicates, multiple_tables, merged_cells</td>
+  <td>
+    <a href="./hard_50_008_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./hard_50_008_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./hard_50_008_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">163.5 KB</td>
+  <td class="num">41.1 KB</td>
+  <td class="num">62.1 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_001_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">15</td>
+  <td>page_breaks, multi_row, duplicates</td>
+  <td>
+    <a href="./medium_25_001_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_001_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_001_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">155.4 KB</td>
+  <td class="num">57.3 KB</td>
+  <td class="num">30.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_001_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">3</td>
+  <td>page_breaks, multi_row, duplicates</td>
+  <td>
+    <a href="./medium_25_001_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_001_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_001_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">132.4 KB</td>
+  <td class="num">22.6 KB</td>
+  <td class="num">30.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_002_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">25</td>
+  <td class="num">7</td>
+  <td class="num">15</td>
+  <td>page_breaks, multi_row, multiple_tables</td>
+  <td>
+    <a href="./medium_25_002_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_002_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_002_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">175.9 KB</td>
+  <td class="num">58.7 KB</td>
+  <td class="num">28.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_002_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">25</td>
+  <td class="num">7</td>
+  <td class="num">4</td>
+  <td>page_breaks, multi_row, multiple_tables</td>
+  <td>
+    <a href="./medium_25_002_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_002_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_002_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">160.0 KB</td>
+  <td class="num">24.7 KB</td>
+  <td class="num">28.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_003_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">17</td>
+  <td>multi_row, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_003_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_003_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_003_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">178.8 KB</td>
+  <td class="num">64.3 KB</td>
+  <td class="num">31.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_003_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">3</td>
+  <td>multi_row, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_003_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_003_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_003_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">157.9 KB</td>
+  <td class="num">25.5 KB</td>
+  <td class="num">30.9 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_004_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">16</td>
+  <td>page_breaks, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_004_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_004_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_004_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">178.3 KB</td>
+  <td class="num">64.4 KB</td>
+  <td class="num">31.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_004_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">4</td>
+  <td>page_breaks, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_004_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_004_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_004_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">158.2 KB</td>
+  <td class="num">25.9 KB</td>
+  <td class="num">30.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_005_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">17</td>
+  <td>page_breaks, multi_row, duplicates</td>
+  <td>
+    <a href="./medium_25_005_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_005_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_005_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">160.8 KB</td>
+  <td class="num">61.9 KB</td>
+  <td class="num">31.1 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_005_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">3</td>
+  <td>page_breaks, multi_row, duplicates</td>
+  <td>
+    <a href="./medium_25_005_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_005_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_005_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">129.5 KB</td>
+  <td class="num">22.7 KB</td>
+  <td class="num">30.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_006_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">25</td>
+  <td class="num">7</td>
+  <td class="num">15</td>
+  <td>page_breaks, multi_row, multiple_tables</td>
+  <td>
+    <a href="./medium_25_006_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_006_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_006_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">171.7 KB</td>
+  <td class="num">57.1 KB</td>
+  <td class="num">28.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_006_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">25</td>
+  <td class="num">7</td>
+  <td class="num">4</td>
+  <td>page_breaks, multi_row, multiple_tables</td>
+  <td>
+    <a href="./medium_25_006_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_006_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_006_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">156.9 KB</td>
+  <td class="num">23.8 KB</td>
+  <td class="num">28.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_007_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">16</td>
+  <td>multi_row, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_007_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_007_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_007_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">178.6 KB</td>
+  <td class="num">63.8 KB</td>
+  <td class="num">31.0 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_007_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">3</td>
+  <td>multi_row, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_007_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_007_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_007_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">156.4 KB</td>
+  <td class="num">25.7 KB</td>
+  <td class="num">31.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_008_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">17</td>
+  <td>page_breaks, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_008_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_008_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_008_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">179.1 KB</td>
+  <td class="num">64.6 KB</td>
+  <td class="num">31.3 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_008_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">4</td>
+  <td>page_breaks, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_008_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_008_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_008_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">159.0 KB</td>
+  <td class="num">26.0 KB</td>
+  <td class="num">30.7 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_009_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">15</td>
+  <td>page_breaks, multi_row, duplicates</td>
+  <td>
+    <a href="./medium_25_009_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_009_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_009_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">158.3 KB</td>
+  <td class="num">58.5 KB</td>
+  <td class="num">30.8 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_009_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">3</td>
+  <td>page_breaks, multi_row, duplicates</td>
+  <td>
+    <a href="./medium_25_009_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_009_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_009_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">132.5 KB</td>
+  <td class="num">22.6 KB</td>
+  <td class="num">30.4 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_010_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">25</td>
+  <td class="num">7</td>
+  <td class="num">15</td>
+  <td>page_breaks, multi_row, multiple_tables</td>
+  <td>
+    <a href="./medium_25_010_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_010_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_010_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">172.5 KB</td>
+  <td class="num">58.0 KB</td>
+  <td class="num">28.2 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_010_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">25</td>
+  <td class="num">7</td>
+  <td class="num">4</td>
+  <td>page_breaks, multi_row, multiple_tables</td>
+  <td>
+    <a href="./medium_25_010_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_010_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_010_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">156.4 KB</td>
+  <td class="num">24.2 KB</td>
+  <td class="num">28.6 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_011_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">17</td>
+  <td>multi_row, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_011_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_011_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_011_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">177.2 KB</td>
+  <td class="num">60.6 KB</td>
+  <td class="num">30.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_011_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">3</td>
+  <td>multi_row, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_011_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_011_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_011_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">157.1 KB</td>
+  <td class="num">25.9 KB</td>
+  <td class="num">30.5 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_012_detailed</td>
+  <td>medium</td>
+  <td>detailed</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">17</td>
+  <td>page_breaks, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_012_detailed.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_012_detailed.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_012_detailed.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">178.6 KB</td>
+  <td class="num">64.4 KB</td>
+  <td class="num">31.0 KB</td>
+</tr>
+<tr>
+  <td class="mono">medium_25_012_table</td>
+  <td>medium</td>
+  <td>table</td>
+  <td class="num">27</td>
+  <td class="num">6</td>
+  <td class="num">4</td>
+  <td>page_breaks, duplicates, multiple_tables</td>
+  <td>
+    <a href="./medium_25_012_table.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+    <a href="./medium_25_012_table.html" target="_blank" rel="noopener noreferrer">html</a>
+    <a href="./medium_25_012_table.json" target="_blank" rel="noopener noreferrer">json</a>
+  </td>
+  <td class="num">158.6 KB</td>
+  <td class="num">26.1 KB</td>
+  <td class="num">30.7 KB</td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function normalize(s) {
+      return (s || '').toString().toLowerCase();
+    }
+
+    function filterRows() {
+      const q = normalize(document.getElementById('search').value);
+      const tbody = document.querySelector('#index tbody');
+      for (const tr of tbody.querySelectorAll('tr')) {
+        const text = normalize(tr.innerText);
+        tr.style.display = text.includes(q) ? '' : 'none';
+      }
+    }
+
+    let sortState = { idx: null, asc: true };
+
+    function getCellValue(tr, idx) {
+      const td = tr.children[idx];
+      return td ? td.innerText.trim() : '';
+    }
+
+    function toNumber(s) {
+      const n = Number((s || '').replace(/[^0-9.]/g, ''));
+      return Number.isFinite(n) ? n : -1;
+    }
+
+    function sortTable(idx, type) {
+      const tbody = document.querySelector('#index tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const asc = (sortState.idx === idx) ? !sortState.asc : true;
+      sortState = { idx, asc };
+
+      rows.sort((a, b) => {
+        const av = getCellValue(a, idx);
+        const bv = getCellValue(b, idx);
+        if (type === 'num') {
+          return asc ? (toNumber(av) - toNumber(bv)) : (toNumber(bv) - toNumber(av));
+        }
+        return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+      });
+
+      for (const r of rows) {
+        tbody.appendChild(r);
+      }
+    }
+
+    for (const th of document.querySelectorAll('#index thead th')) {
+      th.addEventListener('click', () => sortTable(th.cellIndex, th.dataset.type || 'text'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,1244 @@
+{
+  "timestamp": "2026-01-20T21:41:11.468404",
+  "model_stats": {
+    "gpt52": {
+      "total_samples": 16,
+      "total_f1": 12.1664769891185,
+      "total_recall": 11.654040404040403,
+      "total_precision": 12.72665577342048,
+      "errors": 0,
+      "by_tier": {
+        "hard": {
+          "count": 16,
+          "f1_sum": 12.1664769891185,
+          "recall_sum": 11.654040404040403,
+          "avg_f1": 0.7604048118199063,
+          "avg_recall": 0.7283775252525252
+        }
+      },
+      "by_format": {
+        "detailed": {
+          "count": 8,
+          "f1_sum": 6.446161525406809,
+          "recall_sum": 6.167676767676768,
+          "avg_f1": 0.8057701906758511,
+          "avg_recall": 0.770959595959596
+        },
+        "table": {
+          "count": 8,
+          "f1_sum": 5.72031546371169,
+          "recall_sum": 5.486363636363636,
+          "avg_f1": 0.7150394329639612,
+          "avg_recall": 0.6857954545454545
+        }
+      },
+      "avg_f1": 0.7604048118199063,
+      "avg_recall": 0.7283775252525252,
+      "avg_precision": 0.79541598583878
+    },
+    "gemini": {
+      "total_samples": 16,
+      "total_f1": 12.49911650194669,
+      "total_recall": 11.95909090909091,
+      "total_precision": 13.090718954248366,
+      "errors": 0,
+      "by_tier": {
+        "hard": {
+          "count": 16,
+          "f1_sum": 12.49911650194669,
+          "recall_sum": 11.95909090909091,
+          "avg_f1": 0.7811947813716681,
+          "avg_recall": 0.7474431818181819
+        }
+      },
+      "by_format": {
+        "detailed": {
+          "count": 8,
+          "f1_sum": 6.981321753019866,
+          "recall_sum": 6.67979797979798,
+          "avg_f1": 0.8726652191274833,
+          "avg_recall": 0.8349747474747475
+        },
+        "table": {
+          "count": 8,
+          "f1_sum": 5.517794748926825,
+          "recall_sum": 5.27929292929293,
+          "avg_f1": 0.6897243436158531,
+          "avg_recall": 0.6599116161616162
+        }
+      },
+      "avg_f1": 0.7811947813716681,
+      "avg_recall": 0.7474431818181819,
+      "avg_precision": 0.8181699346405229
+    },
+    "gpt4": {
+      "total_samples": 16,
+      "total_f1": 12.24992003977853,
+      "total_recall": 11.69141414141414,
+      "total_precision": 12.86518029433996,
+      "errors": 0,
+      "by_tier": {
+        "hard": {
+          "count": 16,
+          "f1_sum": 12.24992003977853,
+          "recall_sum": 11.69141414141414,
+          "avg_f1": 0.7656200024861581,
+          "avg_recall": 0.7307133838383838
+        }
+      },
+      "by_format": {
+        "detailed": {
+          "count": 8,
+          "f1_sum": 6.889642511576474,
+          "recall_sum": 6.56868686868687,
+          "avg_f1": 0.8612053139470592,
+          "avg_recall": 0.8210858585858587
+        },
+        "table": {
+          "count": 8,
+          "f1_sum": 5.360277528202057,
+          "recall_sum": 5.122727272727273,
+          "avg_f1": 0.6700346910252571,
+          "avg_recall": 0.6403409090909091
+        }
+      },
+      "avg_f1": 0.7656200024861581,
+      "avg_recall": 0.7307133838383838,
+      "avg_precision": 0.8040737683962474
+    }
+  },
+  "detailed_results": [
+    {
+      "model": "gpt52",
+      "sample": "hard_50_001_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1538,
+        "recall": 0.7767676767676768,
+        "precision": 0.8544444444444445,
+        "f1": 0.8137566137566137,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 40.2250440120697,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_001_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1644,
+        "recall": 0.8303030303030303,
+        "precision": 0.9133333333333333,
+        "f1": 0.8698412698412699,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 52.724721908569336,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_001_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 49,
+        "found": 1607,
+        "recall": 0.8116161616161616,
+        "precision": 0.9109977324263039,
+        "f1": 0.8584401709401709,
+        "missing": 1,
+        "extra": 0,
+        "missing_ids": [
+          "30021"
+        ],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1764
+      },
+      "extraction_time": 68.70576810836792,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_001_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1351,
+        "recall": 0.6823232323232323,
+        "precision": 0.735838779956427,
+        "f1": 0.7080712788259959,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "30000"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 53.19044613838196,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_001_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1274,
+        "recall": 0.6434343434343435,
+        "precision": 0.7077777777777777,
+        "f1": 0.6740740740740742,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 77.83726477622986,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_001_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1330,
+        "recall": 0.6717171717171717,
+        "precision": 0.7388888888888889,
+        "f1": 0.7037037037037037,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 128.53469681739807,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_002_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1534,
+        "recall": 0.7747474747474747,
+        "precision": 0.8522222222222222,
+        "f1": 0.8116402116402116,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 38.7054328918457,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_002_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1649,
+        "recall": 0.8328282828282828,
+        "precision": 0.9161111111111111,
+        "f1": 0.8724867724867724,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 55.31127595901489,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_002_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1649,
+        "recall": 0.8328282828282828,
+        "precision": 0.9161111111111111,
+        "f1": 0.8724867724867724,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 60.21580696105957,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_002_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1372,
+        "recall": 0.692929292929293,
+        "precision": 0.7472766884531591,
+        "f1": 0.719077568134172,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "0026"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 56.670663833618164,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_002_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1296,
+        "recall": 0.6545454545454545,
+        "precision": 0.7058823529411765,
+        "f1": 0.679245283018868,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "0026"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 78.240895986557,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_002_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1280,
+        "recall": 0.6464646464646465,
+        "precision": 0.6971677559912854,
+        "f1": 0.6708595387840671,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "0026"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 106.14657402038574,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_003_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1519,
+        "recall": 0.7671717171717172,
+        "precision": 0.8438888888888889,
+        "f1": 0.8037037037037037,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 36.33056616783142,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_003_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1655,
+        "recall": 0.8358585858585859,
+        "precision": 0.9194444444444444,
+        "f1": 0.8756613756613756,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 53.067930936813354,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_003_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 49,
+        "found": 1616,
+        "recall": 0.8161616161616162,
+        "precision": 0.9160997732426304,
+        "f1": 0.8632478632478633,
+        "missing": 1,
+        "extra": 0,
+        "missing_ids": [
+          "30040"
+        ],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1764
+      },
+      "extraction_time": 63.453561782836914,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_003_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1353,
+        "recall": 0.6833333333333333,
+        "precision": 0.7516666666666667,
+        "f1": 0.715873015873016,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 61.58050990104675,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_003_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1329,
+        "recall": 0.6712121212121213,
+        "precision": 0.7383333333333333,
+        "f1": 0.7031746031746031,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 81.13042902946472,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_003_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1225,
+        "recall": 0.6186868686868687,
+        "precision": 0.6805555555555556,
+        "f1": 0.6481481481481481,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 97.40104293823242,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_004_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1519,
+        "recall": 0.7671717171717172,
+        "precision": 0.8438888888888889,
+        "f1": 0.8037037037037037,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 43.94146513938904,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_004_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1542,
+        "recall": 0.7787878787878788,
+        "precision": 0.8566666666666667,
+        "f1": 0.8158730158730159,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 50.648998975753784,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_004_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1661,
+        "recall": 0.8388888888888889,
+        "precision": 0.9227777777777778,
+        "f1": 0.8788359788359789,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 1,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 53.364567041397095,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_004_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1360,
+        "recall": 0.6868686868686869,
+        "precision": 0.7555555555555555,
+        "f1": 0.7195767195767195,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 77.88803005218506,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_004_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1304,
+        "recall": 0.6585858585858586,
+        "precision": 0.7244444444444444,
+        "f1": 0.68994708994709,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 79.8089337348938,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_004_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1305,
+        "recall": 0.6590909090909091,
+        "precision": 0.725,
+        "f1": 0.6904761904761905,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 90.88378095626831,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_005_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1531,
+        "recall": 0.7732323232323233,
+        "precision": 0.8338779956427015,
+        "f1": 0.8024109014675053,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "633"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 34.071256160736084,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_005_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1651,
+        "recall": 0.8338383838383838,
+        "precision": 0.9172222222222223,
+        "f1": 0.8735449735449736,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 54.61524033546448,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_005_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1663,
+        "recall": 0.8398989898989899,
+        "precision": 0.9057734204793029,
+        "f1": 0.8715932914046122,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "633"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 55.444201946258545,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_005_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1333,
+        "recall": 0.6732323232323232,
+        "precision": 0.7405555555555555,
+        "f1": 0.7052910052910053,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 60.66885185241699,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_005_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1287,
+        "recall": 0.65,
+        "precision": 0.7009803921568627,
+        "f1": 0.6745283018867924,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "7539"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 80.92357516288757,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_005_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1209,
+        "recall": 0.6106060606060606,
+        "precision": 0.6716666666666666,
+        "f1": 0.6396825396825397,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 102.89214897155762,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_006_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1524,
+        "recall": 0.7696969696969697,
+        "precision": 0.8466666666666667,
+        "f1": 0.8063492063492064,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 38.944965839385986,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_006_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1648,
+        "recall": 0.8323232323232324,
+        "precision": 0.9155555555555556,
+        "f1": 0.8719576719576719,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 48.514179944992065,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_006_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1640,
+        "recall": 0.8282828282828283,
+        "precision": 0.9111111111111111,
+        "f1": 0.8677248677248678,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 66.75802493095398,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_006_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1347,
+        "recall": 0.6803030303030303,
+        "precision": 0.7483333333333333,
+        "f1": 0.7126984126984127,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 55.73382496833801,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_006_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1355,
+        "recall": 0.6843434343434344,
+        "precision": 0.7527777777777778,
+        "f1": 0.716931216931217,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 79.85275530815125,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_006_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1256,
+        "recall": 0.6343434343434343,
+        "precision": 0.6977777777777778,
+        "f1": 0.6645502645502646,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 133.71937108039856,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_007_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1517,
+        "recall": 0.7661616161616162,
+        "precision": 0.8262527233115469,
+        "f1": 0.7950733752620545,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "1794"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 34.33156895637512,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_007_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1655,
+        "recall": 0.8358585858585859,
+        "precision": 0.9014161220043573,
+        "f1": 0.8674004192872118,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "1794"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 56.600213050842285,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_007_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1650,
+        "recall": 0.8333333333333334,
+        "precision": 0.8986928104575164,
+        "f1": 0.8647798742138365,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "1794"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 62.13606905937195,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_007_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1366,
+        "recall": 0.6898989898989899,
+        "precision": 0.7440087145969498,
+        "f1": 0.7159329140461215,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "024"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 59.96412801742554,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_007_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1275,
+        "recall": 0.6439393939393939,
+        "precision": 0.7083333333333334,
+        "f1": 0.6746031746031746,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 84.05919694900513,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_007_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1250,
+        "recall": 0.6313131313131313,
+        "precision": 0.6944444444444444,
+        "f1": 0.6613756613756613,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 98.32205581665039,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_008_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1530,
+        "recall": 0.7727272727272727,
+        "precision": 0.85,
+        "f1": 0.8095238095238095,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 39.618674993515015,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_008_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1651,
+        "recall": 0.8338383838383838,
+        "precision": 0.9172222222222223,
+        "f1": 0.8735449735449736,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 60.06709623336792,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_008_detailed",
+      "tier": "hard",
+      "format": "detailed",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1651,
+        "recall": 0.8338383838383838,
+        "precision": 0.9172222222222223,
+        "f1": 0.8735449735449736,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 65.97820591926575,
+      "error": null
+    },
+    {
+      "model": "gpt52",
+      "sample": "hard_50_008_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 51,
+        "found": 1381,
+        "recall": 0.6974747474747475,
+        "precision": 0.7521786492374728,
+        "f1": 0.7237945492662474,
+        "missing": 0,
+        "extra": 1,
+        "missing_ids": [],
+        "extra_ids": [
+          "023"
+        ],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1836
+      },
+      "extraction_time": 64.5339891910553,
+      "error": null
+    },
+    {
+      "model": "gemini",
+      "sample": "hard_50_008_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1333,
+        "recall": 0.6732323232323232,
+        "precision": 0.7405555555555555,
+        "f1": 0.7052910052910053,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 82.12944912910461,
+      "error": null
+    },
+    {
+      "model": "gpt4",
+      "sample": "hard_50_008_table",
+      "tier": "hard",
+      "format": "table",
+      "metrics": {
+        "ground_truth_count": 55,
+        "predicted_count": 50,
+        "found": 1288,
+        "recall": 0.6505050505050505,
+        "precision": 0.7155555555555555,
+        "f1": 0.6814814814814815,
+        "missing": 0,
+        "extra": 0,
+        "missing_ids": [],
+        "extra_ids": [],
+        "exact_record_matches": 0,
+        "total_gold_field_pairs": 1980,
+        "total_pred_field_pairs": 1800
+      },
+      "extraction_time": 114.16006207466125,
+      "error": null
+    }
+  ]
+}

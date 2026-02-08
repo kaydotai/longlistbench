@@ -1,0 +1,1658 @@
+{
+  "dataset_name": "longlistbench-v1",
+  "version": "1.0.0-beta.1",
+  "description": "Benchmark for long-list entity extraction under layout and OCR noise",
+  "generated_at": "2026-02-08T15:50:02.533200",
+  "base_seed": 42,
+  "total_instances": 80,
+  "total_claims": 6828,
+  "schema_version": "1.0",
+  "difficulty_tiers": {
+    "easy": {
+      "claims_per_pdf": 10,
+      "num_instances": 15,
+      "total_claims": 312
+    },
+    "medium": {
+      "claims_per_pdf": 25,
+      "num_instances": 12,
+      "total_claims": 636
+    },
+    "hard": {
+      "claims_per_pdf": 50,
+      "num_instances": 8,
+      "total_claims": 880
+    },
+    "extreme": {
+      "claims_per_pdf": 100,
+      "num_instances": 5,
+      "total_claims": 5000
+    }
+  },
+  "instances": [
+    {
+      "id": "easy_10_001_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row"
+      ],
+      "has_duplicates": false,
+      "seed": 3965,
+      "files": {
+        "ground_truth": "easy_10_001_detailed.json",
+        "pdf": "easy_10_001_detailed.pdf",
+        "json_size_bytes": 11650,
+        "pdf_size_bytes": 139086
+      }
+    },
+    {
+      "id": "easy_10_001_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row"
+      ],
+      "has_duplicates": false,
+      "seed": 6452,
+      "files": {
+        "ground_truth": "easy_10_001_table.json",
+        "pdf": "easy_10_001_table.pdf",
+        "json_size_bytes": 11607,
+        "pdf_size_bytes": 128702
+      }
+    },
+    {
+      "id": "easy_10_002_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 8966,
+      "files": {
+        "ground_truth": "easy_10_002_detailed.json",
+        "pdf": "easy_10_002_detailed.pdf",
+        "json_size_bytes": 11644,
+        "pdf_size_bytes": 136551
+      }
+    },
+    {
+      "id": "easy_10_002_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 2671,
+      "files": {
+        "ground_truth": "easy_10_002_table.json",
+        "pdf": "easy_10_002_table.pdf",
+        "json_size_bytes": 11634,
+        "pdf_size_bytes": 128988
+      }
+    },
+    {
+      "id": "easy_10_003_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 1370,
+      "files": {
+        "ground_truth": "easy_10_003_detailed.json",
+        "pdf": "easy_10_003_detailed.pdf",
+        "json_size_bytes": 11617,
+        "pdf_size_bytes": 136333
+      }
+    },
+    {
+      "id": "easy_10_003_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 9909,
+      "files": {
+        "ground_truth": "easy_10_003_table.json",
+        "pdf": "easy_10_003_table.pdf",
+        "json_size_bytes": 11694,
+        "pdf_size_bytes": 129139
+      }
+    },
+    {
+      "id": "easy_10_004_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 1027,
+      "files": {
+        "ground_truth": "easy_10_004_detailed.json",
+        "pdf": "easy_10_004_detailed.pdf",
+        "json_size_bytes": 12967,
+        "pdf_size_bytes": 137123
+      }
+    },
+    {
+      "id": "easy_10_004_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 8327,
+      "files": {
+        "ground_truth": "easy_10_004_table.json",
+        "pdf": "easy_10_004_table.pdf",
+        "json_size_bytes": 12682,
+        "pdf_size_bytes": 127236
+      }
+    },
+    {
+      "id": "easy_10_005_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 992,
+      "files": {
+        "ground_truth": "easy_10_005_detailed.json",
+        "pdf": "easy_10_005_detailed.pdf",
+        "json_size_bytes": 12686,
+        "pdf_size_bytes": 135325
+      }
+    },
+    {
+      "id": "easy_10_005_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 8981,
+      "files": {
+        "ground_truth": "easy_10_005_table.json",
+        "pdf": "easy_10_005_table.pdf",
+        "json_size_bytes": 12680,
+        "pdf_size_bytes": 129060
+      }
+    },
+    {
+      "id": "easy_10_006_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row"
+      ],
+      "has_duplicates": false,
+      "seed": 7541,
+      "files": {
+        "ground_truth": "easy_10_006_detailed.json",
+        "pdf": "easy_10_006_detailed.pdf",
+        "json_size_bytes": 11782,
+        "pdf_size_bytes": 136134
+      }
+    },
+    {
+      "id": "easy_10_006_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row"
+      ],
+      "has_duplicates": false,
+      "seed": 2798,
+      "files": {
+        "ground_truth": "easy_10_006_table.json",
+        "pdf": "easy_10_006_table.pdf",
+        "json_size_bytes": 11624,
+        "pdf_size_bytes": 129335
+      }
+    },
+    {
+      "id": "easy_10_007_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 8283,
+      "files": {
+        "ground_truth": "easy_10_007_detailed.json",
+        "pdf": "easy_10_007_detailed.pdf",
+        "json_size_bytes": 11843,
+        "pdf_size_bytes": 137119
+      }
+    },
+    {
+      "id": "easy_10_007_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 691,
+      "files": {
+        "ground_truth": "easy_10_007_table.json",
+        "pdf": "easy_10_007_table.pdf",
+        "json_size_bytes": 11657,
+        "pdf_size_bytes": 128594
+      }
+    },
+    {
+      "id": "easy_10_008_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 4844,
+      "files": {
+        "ground_truth": "easy_10_008_detailed.json",
+        "pdf": "easy_10_008_detailed.pdf",
+        "json_size_bytes": 11789,
+        "pdf_size_bytes": 137391
+      }
+    },
+    {
+      "id": "easy_10_008_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 5401,
+      "files": {
+        "ground_truth": "easy_10_008_table.json",
+        "pdf": "easy_10_008_table.pdf",
+        "json_size_bytes": 11984,
+        "pdf_size_bytes": 129199
+      }
+    },
+    {
+      "id": "easy_10_009_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 2765,
+      "files": {
+        "ground_truth": "easy_10_009_detailed.json",
+        "pdf": "easy_10_009_detailed.pdf",
+        "json_size_bytes": 12384,
+        "pdf_size_bytes": 127931
+      }
+    },
+    {
+      "id": "easy_10_009_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 8743,
+      "files": {
+        "ground_truth": "easy_10_009_table.json",
+        "pdf": "easy_10_009_table.pdf",
+        "json_size_bytes": 13054,
+        "pdf_size_bytes": 129093
+      }
+    },
+    {
+      "id": "easy_10_010_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 9156,
+      "files": {
+        "ground_truth": "easy_10_010_detailed.json",
+        "pdf": "easy_10_010_detailed.pdf",
+        "json_size_bytes": 12929,
+        "pdf_size_bytes": 138009
+      }
+    },
+    {
+      "id": "easy_10_010_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 7385,
+      "files": {
+        "ground_truth": "easy_10_010_table.json",
+        "pdf": "easy_10_010_table.pdf",
+        "json_size_bytes": 12856,
+        "pdf_size_bytes": 130595
+      }
+    },
+    {
+      "id": "easy_10_011_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row"
+      ],
+      "has_duplicates": false,
+      "seed": 614,
+      "files": {
+        "ground_truth": "easy_10_011_detailed.json",
+        "pdf": "easy_10_011_detailed.pdf",
+        "json_size_bytes": 11347,
+        "pdf_size_bytes": 130885
+      }
+    },
+    {
+      "id": "easy_10_011_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row"
+      ],
+      "has_duplicates": false,
+      "seed": 5983,
+      "files": {
+        "ground_truth": "easy_10_011_table.json",
+        "pdf": "easy_10_011_table.pdf",
+        "json_size_bytes": 11422,
+        "pdf_size_bytes": 126385
+      }
+    },
+    {
+      "id": "easy_10_012_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 8356,
+      "files": {
+        "ground_truth": "easy_10_012_detailed.json",
+        "pdf": "easy_10_012_detailed.pdf",
+        "json_size_bytes": 11578,
+        "pdf_size_bytes": 137539
+      }
+    },
+    {
+      "id": "easy_10_012_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 4544,
+      "files": {
+        "ground_truth": "easy_10_012_table.json",
+        "pdf": "easy_10_012_table.pdf",
+        "json_size_bytes": 11657,
+        "pdf_size_bytes": 128527
+      }
+    },
+    {
+      "id": "easy_10_013_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 3746,
+      "files": {
+        "ground_truth": "easy_10_013_detailed.json",
+        "pdf": "easy_10_013_detailed.pdf",
+        "json_size_bytes": 11912,
+        "pdf_size_bytes": 139091
+      }
+    },
+    {
+      "id": "easy_10_013_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 10,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "page_breaks"
+      ],
+      "has_duplicates": false,
+      "seed": 5887,
+      "files": {
+        "ground_truth": "easy_10_013_table.json",
+        "pdf": "easy_10_013_table.pdf",
+        "json_size_bytes": 11695,
+        "pdf_size_bytes": 128934
+      }
+    },
+    {
+      "id": "easy_10_014_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 8210,
+      "files": {
+        "ground_truth": "easy_10_014_detailed.json",
+        "pdf": "easy_10_014_detailed.pdf",
+        "json_size_bytes": 12914,
+        "pdf_size_bytes": 137649
+      }
+    },
+    {
+      "id": "easy_10_014_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 4490,
+      "files": {
+        "ground_truth": "easy_10_014_table.json",
+        "pdf": "easy_10_014_table.pdf",
+        "json_size_bytes": 12473,
+        "pdf_size_bytes": 127087
+      }
+    },
+    {
+      "id": "easy_10_015_detailed",
+      "difficulty": "easy",
+      "format": "detailed",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 2071,
+      "files": {
+        "ground_truth": "easy_10_015_detailed.json",
+        "pdf": "easy_10_015_detailed.pdf",
+        "json_size_bytes": 12746,
+        "pdf_size_bytes": 136815
+      }
+    },
+    {
+      "id": "easy_10_015_table",
+      "difficulty": "easy",
+      "format": "table",
+      "num_claims": 11,
+      "pages_estimate": 2,
+      "problems": [
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 9131,
+      "files": {
+        "ground_truth": "easy_10_015_table.json",
+        "pdf": "easy_10_015_table.pdf",
+        "json_size_bytes": 12840,
+        "pdf_size_bytes": 127196
+      }
+    },
+    {
+      "id": "extreme_100_001_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 4254,
+      "files": {
+        "ground_truth": "extreme_100_001_detailed.json",
+        "pdf": "extreme_100_001_detailed.pdf",
+        "json_size_bytes": 580687,
+        "pdf_size_bytes": 716481
+      }
+    },
+    {
+      "id": "extreme_100_001_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 8801,
+      "files": {
+        "ground_truth": "extreme_100_001_table.json",
+        "pdf": "extreme_100_001_table.pdf",
+        "json_size_bytes": 581536,
+        "pdf_size_bytes": 298278
+      }
+    },
+    {
+      "id": "extreme_100_002_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 708,
+      "files": {
+        "ground_truth": "extreme_100_002_detailed.json",
+        "pdf": "extreme_100_002_detailed.pdf",
+        "json_size_bytes": 581597,
+        "pdf_size_bytes": 720787
+      }
+    },
+    {
+      "id": "extreme_100_002_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 242,
+      "files": {
+        "ground_truth": "extreme_100_002_table.json",
+        "pdf": "extreme_100_002_table.pdf",
+        "json_size_bytes": 585600,
+        "pdf_size_bytes": 300857
+      }
+    },
+    {
+      "id": "extreme_100_003_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 557,
+      "files": {
+        "ground_truth": "extreme_100_003_detailed.json",
+        "pdf": "extreme_100_003_detailed.pdf",
+        "json_size_bytes": 582665,
+        "pdf_size_bytes": 722992
+      }
+    },
+    {
+      "id": "extreme_100_003_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 5493,
+      "files": {
+        "ground_truth": "extreme_100_003_table.json",
+        "pdf": "extreme_100_003_table.pdf",
+        "json_size_bytes": 581219,
+        "pdf_size_bytes": 299683
+      }
+    },
+    {
+      "id": "extreme_100_004_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 9028,
+      "files": {
+        "ground_truth": "extreme_100_004_detailed.json",
+        "pdf": "extreme_100_004_detailed.pdf",
+        "json_size_bytes": 582187,
+        "pdf_size_bytes": 717614
+      }
+    },
+    {
+      "id": "extreme_100_004_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 8214,
+      "files": {
+        "ground_truth": "extreme_100_004_table.json",
+        "pdf": "extreme_100_004_table.pdf",
+        "json_size_bytes": 582719,
+        "pdf_size_bytes": 297557
+      }
+    },
+    {
+      "id": "extreme_100_005_detailed",
+      "difficulty": "extreme",
+      "format": "detailed",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 3728,
+      "files": {
+        "ground_truth": "extreme_100_005_detailed.json",
+        "pdf": "extreme_100_005_detailed.pdf",
+        "json_size_bytes": 583020,
+        "pdf_size_bytes": 720580
+      }
+    },
+    {
+      "id": "extreme_100_005_table",
+      "difficulty": "extreme",
+      "format": "table",
+      "num_claims": 500,
+      "pages_estimate": 76,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "large_doc",
+        "multiple_tables",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 6143,
+      "files": {
+        "ground_truth": "extreme_100_005_table.json",
+        "pdf": "extreme_100_005_table.pdf",
+        "json_size_bytes": 583241,
+        "pdf_size_bytes": 302273
+      }
+    },
+    {
+      "id": "hard_50_001_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "has_duplicates": true,
+      "seed": 1261,
+      "files": {
+        "ground_truth": "hard_50_001_detailed.json",
+        "pdf": "hard_50_001_detailed.pdf",
+        "json_size_bytes": 64444,
+        "pdf_size_bytes": 206328
+      }
+    },
+    {
+      "id": "hard_50_001_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "has_duplicates": true,
+      "seed": 4160,
+      "files": {
+        "ground_truth": "hard_50_001_table.json",
+        "pdf": "hard_50_001_table.pdf",
+        "json_size_bytes": 63868,
+        "pdf_size_bytes": 170047
+      }
+    },
+    {
+      "id": "hard_50_002_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 1679,
+      "files": {
+        "ground_truth": "hard_50_002_detailed.json",
+        "pdf": "hard_50_002_detailed.pdf",
+        "json_size_bytes": 63828,
+        "pdf_size_bytes": 224213
+      }
+    },
+    {
+      "id": "hard_50_002_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 6853,
+      "files": {
+        "ground_truth": "hard_50_002_table.json",
+        "pdf": "hard_50_002_table.pdf",
+        "json_size_bytes": 64224,
+        "pdf_size_bytes": 170309
+      }
+    },
+    {
+      "id": "hard_50_003_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 7893,
+      "files": {
+        "ground_truth": "hard_50_003_detailed.json",
+        "pdf": "hard_50_003_detailed.pdf",
+        "json_size_bytes": 63252,
+        "pdf_size_bytes": 188159
+      }
+    },
+    {
+      "id": "hard_50_003_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 9266,
+      "files": {
+        "ground_truth": "hard_50_003_table.json",
+        "pdf": "hard_50_003_table.pdf",
+        "json_size_bytes": 63736,
+        "pdf_size_bytes": 142198
+      }
+    },
+    {
+      "id": "hard_50_004_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "has_duplicates": true,
+      "seed": 2463,
+      "files": {
+        "ground_truth": "hard_50_004_detailed.json",
+        "pdf": "hard_50_004_detailed.pdf",
+        "json_size_bytes": 64507,
+        "pdf_size_bytes": 206772
+      }
+    },
+    {
+      "id": "hard_50_004_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "has_duplicates": true,
+      "seed": 1070,
+      "files": {
+        "ground_truth": "hard_50_004_table.json",
+        "pdf": "hard_50_004_table.pdf",
+        "json_size_bytes": 64423,
+        "pdf_size_bytes": 168700
+      }
+    },
+    {
+      "id": "hard_50_005_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 2671,
+      "files": {
+        "ground_truth": "hard_50_005_detailed.json",
+        "pdf": "hard_50_005_detailed.pdf",
+        "json_size_bytes": 64533,
+        "pdf_size_bytes": 227000
+      }
+    },
+    {
+      "id": "hard_50_005_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 4476,
+      "files": {
+        "ground_truth": "hard_50_005_table.json",
+        "pdf": "hard_50_005_table.pdf",
+        "json_size_bytes": 63913,
+        "pdf_size_bytes": 168245
+      }
+    },
+    {
+      "id": "hard_50_006_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 2401,
+      "files": {
+        "ground_truth": "hard_50_006_detailed.json",
+        "pdf": "hard_50_006_detailed.pdf",
+        "json_size_bytes": 64174,
+        "pdf_size_bytes": 214740
+      }
+    },
+    {
+      "id": "hard_50_006_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 8,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multi_column",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 8070,
+      "files": {
+        "ground_truth": "hard_50_006_table.json",
+        "pdf": "hard_50_006_table.pdf",
+        "json_size_bytes": 63971,
+        "pdf_size_bytes": 143207
+      }
+    },
+    {
+      "id": "hard_50_007_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "has_duplicates": true,
+      "seed": 3242,
+      "files": {
+        "ground_truth": "hard_50_007_detailed.json",
+        "pdf": "hard_50_007_detailed.pdf",
+        "json_size_bytes": 64841,
+        "pdf_size_bytes": 206949
+      }
+    },
+    {
+      "id": "hard_50_007_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 10,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "multi_column"
+      ],
+      "has_duplicates": true,
+      "seed": 2046,
+      "files": {
+        "ground_truth": "hard_50_007_table.json",
+        "pdf": "hard_50_007_table.pdf",
+        "json_size_bytes": 63653,
+        "pdf_size_bytes": 166818
+      }
+    },
+    {
+      "id": "hard_50_008_detailed",
+      "difficulty": "hard",
+      "format": "detailed",
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 3109,
+      "files": {
+        "ground_truth": "hard_50_008_detailed.json",
+        "pdf": "hard_50_008_detailed.pdf",
+        "json_size_bytes": 64305,
+        "pdf_size_bytes": 229951
+      }
+    },
+    {
+      "id": "hard_50_008_table",
+      "difficulty": "hard",
+      "format": "table",
+      "num_claims": 55,
+      "pages_estimate": 14,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates",
+        "multiple_tables",
+        "merged_cells"
+      ],
+      "has_duplicates": true,
+      "seed": 3725,
+      "files": {
+        "ground_truth": "hard_50_008_table.json",
+        "pdf": "hard_50_008_table.pdf",
+        "json_size_bytes": 63540,
+        "pdf_size_bytes": 167461
+      }
+    },
+    {
+      "id": "medium_25_001_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 2131,
+      "files": {
+        "ground_truth": "medium_25_001_detailed.json",
+        "pdf": "medium_25_001_detailed.pdf",
+        "json_size_bytes": 31246,
+        "pdf_size_bytes": 159168
+      }
+    },
+    {
+      "id": "medium_25_001_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 1075,
+      "files": {
+        "ground_truth": "medium_25_001_table.json",
+        "pdf": "medium_25_001_table.pdf",
+        "json_size_bytes": 31381,
+        "pdf_size_bytes": 135588
+      }
+    },
+    {
+      "id": "medium_25_002_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "has_duplicates": false,
+      "seed": 3617,
+      "files": {
+        "ground_truth": "medium_25_002_detailed.json",
+        "pdf": "medium_25_002_detailed.pdf",
+        "json_size_bytes": 29364,
+        "pdf_size_bytes": 180105
+      }
+    },
+    {
+      "id": "medium_25_002_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "has_duplicates": false,
+      "seed": 1982,
+      "files": {
+        "ground_truth": "medium_25_002_table.json",
+        "pdf": "medium_25_002_table.pdf",
+        "json_size_bytes": 29353,
+        "pdf_size_bytes": 163884
+      }
+    },
+    {
+      "id": "medium_25_003_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 8991,
+      "files": {
+        "ground_truth": "medium_25_003_detailed.json",
+        "pdf": "medium_25_003_detailed.pdf",
+        "json_size_bytes": 31992,
+        "pdf_size_bytes": 183041
+      }
+    },
+    {
+      "id": "medium_25_003_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 4336,
+      "files": {
+        "ground_truth": "medium_25_003_table.json",
+        "pdf": "medium_25_003_table.pdf",
+        "json_size_bytes": 31637,
+        "pdf_size_bytes": 161671
+      }
+    },
+    {
+      "id": "medium_25_004_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 5215,
+      "files": {
+        "ground_truth": "medium_25_004_detailed.json",
+        "pdf": "medium_25_004_detailed.pdf",
+        "json_size_bytes": 31901,
+        "pdf_size_bytes": 182530
+      }
+    },
+    {
+      "id": "medium_25_004_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 4627,
+      "files": {
+        "ground_truth": "medium_25_004_table.json",
+        "pdf": "medium_25_004_table.pdf",
+        "json_size_bytes": 31357,
+        "pdf_size_bytes": 161973
+      }
+    },
+    {
+      "id": "medium_25_005_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 2287,
+      "files": {
+        "ground_truth": "medium_25_005_detailed.json",
+        "pdf": "medium_25_005_detailed.pdf",
+        "json_size_bytes": 31889,
+        "pdf_size_bytes": 164626
+      }
+    },
+    {
+      "id": "medium_25_005_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 6054,
+      "files": {
+        "ground_truth": "medium_25_005_table.json",
+        "pdf": "medium_25_005_table.pdf",
+        "json_size_bytes": 31361,
+        "pdf_size_bytes": 132659
+      }
+    },
+    {
+      "id": "medium_25_006_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "has_duplicates": false,
+      "seed": 6589,
+      "files": {
+        "ground_truth": "medium_25_006_detailed.json",
+        "pdf": "medium_25_006_detailed.pdf",
+        "json_size_bytes": 29025,
+        "pdf_size_bytes": 175860
+      }
+    },
+    {
+      "id": "medium_25_006_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "has_duplicates": false,
+      "seed": 2975,
+      "files": {
+        "ground_truth": "medium_25_006_table.json",
+        "pdf": "medium_25_006_table.pdf",
+        "json_size_bytes": 28960,
+        "pdf_size_bytes": 160705
+      }
+    },
+    {
+      "id": "medium_25_007_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 7816,
+      "files": {
+        "ground_truth": "medium_25_007_detailed.json",
+        "pdf": "medium_25_007_detailed.pdf",
+        "json_size_bytes": 31719,
+        "pdf_size_bytes": 182871
+      }
+    },
+    {
+      "id": "medium_25_007_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 7682,
+      "files": {
+        "ground_truth": "medium_25_007_table.json",
+        "pdf": "medium_25_007_table.pdf",
+        "json_size_bytes": 31995,
+        "pdf_size_bytes": 160109
+      }
+    },
+    {
+      "id": "medium_25_008_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 8166,
+      "files": {
+        "ground_truth": "medium_25_008_detailed.json",
+        "pdf": "medium_25_008_detailed.pdf",
+        "json_size_bytes": 32042,
+        "pdf_size_bytes": 183406
+      }
+    },
+    {
+      "id": "medium_25_008_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 611,
+      "files": {
+        "ground_truth": "medium_25_008_table.json",
+        "pdf": "medium_25_008_table.pdf",
+        "json_size_bytes": 31394,
+        "pdf_size_bytes": 162766
+      }
+    },
+    {
+      "id": "medium_25_009_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 1375,
+      "files": {
+        "ground_truth": "medium_25_009_detailed.json",
+        "pdf": "medium_25_009_detailed.pdf",
+        "json_size_bytes": 31569,
+        "pdf_size_bytes": 162059
+      }
+    },
+    {
+      "id": "medium_25_009_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "duplicates"
+      ],
+      "has_duplicates": true,
+      "seed": 4505,
+      "files": {
+        "ground_truth": "medium_25_009_table.json",
+        "pdf": "medium_25_009_table.pdf",
+        "json_size_bytes": 31093,
+        "pdf_size_bytes": 135681
+      }
+    },
+    {
+      "id": "medium_25_010_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "has_duplicates": false,
+      "seed": 503,
+      "files": {
+        "ground_truth": "medium_25_010_detailed.json",
+        "pdf": "medium_25_010_detailed.pdf",
+        "json_size_bytes": 28845,
+        "pdf_size_bytes": 176653
+      }
+    },
+    {
+      "id": "medium_25_010_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 25,
+      "pages_estimate": 7,
+      "problems": [
+        "page_breaks",
+        "multi_row",
+        "multiple_tables"
+      ],
+      "has_duplicates": false,
+      "seed": 145,
+      "files": {
+        "ground_truth": "medium_25_010_table.json",
+        "pdf": "medium_25_010_table.pdf",
+        "json_size_bytes": 29286,
+        "pdf_size_bytes": 160135
+      }
+    },
+    {
+      "id": "medium_25_011_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 7913,
+      "files": {
+        "ground_truth": "medium_25_011_detailed.json",
+        "pdf": "medium_25_011_detailed.pdf",
+        "json_size_bytes": 31230,
+        "pdf_size_bytes": 181497
+      }
+    },
+    {
+      "id": "medium_25_011_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "multi_row",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 3230,
+      "files": {
+        "ground_truth": "medium_25_011_table.json",
+        "pdf": "medium_25_011_table.pdf",
+        "json_size_bytes": 31218,
+        "pdf_size_bytes": 160842
+      }
+    },
+    {
+      "id": "medium_25_012_detailed",
+      "difficulty": "medium",
+      "format": "detailed",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 2332,
+      "files": {
+        "ground_truth": "medium_25_012_detailed.json",
+        "pdf": "medium_25_012_detailed.pdf",
+        "json_size_bytes": 31769,
+        "pdf_size_bytes": 182887
+      }
+    },
+    {
+      "id": "medium_25_012_table",
+      "difficulty": "medium",
+      "format": "table",
+      "num_claims": 27,
+      "pages_estimate": 6,
+      "problems": [
+        "page_breaks",
+        "duplicates",
+        "multiple_tables"
+      ],
+      "has_duplicates": true,
+      "seed": 7414,
+      "files": {
+        "ground_truth": "medium_25_012_table.json",
+        "pdf": "medium_25_012_table.pdf",
+        "json_size_bytes": 31428,
+        "pdf_size_bytes": 162374
+      }
+    }
+  ]
+}

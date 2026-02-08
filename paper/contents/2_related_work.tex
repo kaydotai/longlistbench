@@ -1,0 +1,11 @@
+Research on information extraction (IE) from visually rich documents has produced a broad ecosystem of datasets and models. However, much of the public evaluation landscape emphasizes either short documents (e.g., forms) or key-value extraction, leaving long-list entity extraction underexplored.
+
+\subsection{Document IE benchmarks}
+Early and widely used benchmarks such as FUNSD~\cite{jaume2019funsd} focus on form understanding in noisy scans. Receipt datasets and challenges such as SROIE~\cite{huang2021sroie} emphasize OCR and key fields in narrow document types. These benchmarks are valuable, but typically contain relatively short documents and do not directly stress long lists of repeated entities.
+
+DocILE~\cite{simsa2023docile} broadens the scope to business documents and includes line-item recognition, which is closer in spirit to long-list extraction. VRDU~\cite{wang2023vrdu} further argues that hierarchical and repeated fields (e.g., invoice line items) remain difficult for LLM-based extraction. Our benchmark complements these efforts by focusing on list length, repeated entity boundaries, and a targeted taxonomy of long-list failure modes.
+
+\subsection{Document understanding models}
+Layout-aware pretraining approaches such as LayoutLM~\cite{xu2020layoutlm} jointly model textual content and 2D document structure, yielding strong performance on a range of document understanding tasks. In parallel, OCR-free approaches such as Donut~\cite{kim2022donut} avoid explicit OCR by directly generating structured outputs from document images, mitigating OCR error propagation at the cost of specialized training.
+
+In contrast, our work is model-agnostic: we provide paired PDF, OCR text, and ground truth, enabling evaluation of OCR-based pipelines, OCR-free models, and LLM-based extraction. Our primary goal is to support reproducible measurement of long-list extraction robustness under realistic layout artifacts.
