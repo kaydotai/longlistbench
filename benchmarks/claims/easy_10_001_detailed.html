@@ -18,10 +18,11 @@
                 break-inside: auto;
             }
             .page-break {
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
         body {
@@ -63,6 +64,25 @@
         }
         .incident-section.split-incident > .incident-header {
             background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
         }
         .continued-note {
             margin: 6px 0;
@@ -138,9 +158,11 @@
             text-align: center;
         }
         .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -181,6 +203,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A4321 (GA)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>04/27/2023 (AR)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>06/05/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Rodriguez Logistics LLC</div>
+        <div class="detail-line"><span class="label">Insured:</span>Rodriguez Logistics LLC</div>
         <div class="detail-line"><span class="label">Driver:</span>Michael, Shawn</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 PE 912116</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -236,6 +260,8 @@ changing lanes, sideswiped OV</div>
         <div class="detail-line"><span class="label">Policy #:</span>L24A3653 (MI)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>03/08/2024 (AZ)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>04/03/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Fisherville Freight</div>
+        <div class="detail-line"><span class="label">Insured:</span>Fisherville Freight</div>
         <div class="detail-line"><span class="label">Driver:</span>Martinez, Jason</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">OV ran stop
@@ -292,6 +318,8 @@ sign, struck IV broadside</div>
         <div class="detail-line"><span class="label">Policy #:</span>L23A7286 (FL)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>12/29/2023 (AR)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>03/25/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Eagle Cargo Group</div>
+        <div class="detail-line"><span class="label">Insured:</span>Eagle Cargo Group</div>
         <div class="detail-line"><span class="label">Driver:</span>Alexander, Tonya</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
@@ -353,6 +381,8 @@ brakes failed, rear-ended OV</div>
         <div class="detail-line"><span class="label">Policy #:</span>L23A3343 (NC)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>04/21/2023 (GA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>05/22/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Atlas Freight Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Atlas Freight Inc</div>
         <div class="detail-line"><span class="label">Driver:</span>Williams, Megan</div>
         <div class="detail-line"><span class="label">Agency:</span>Santiago Inc</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -417,6 +447,8 @@ at traffic light</div>
         <div class="detail-line"><span class="label">Policy #:</span>L23A1657 (MO)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>05/11/2023 (AR)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>05/12/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Baker Logistics Co</div>
+        <div class="detail-line"><span class="label">Insured:</span>Baker Logistics Co</div>
         <div class="detail-line"><span class="label">Driver:</span>Webb, Michelle</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 PE 929295</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -470,6 +502,8 @@ parked at truck stop</div>
         <div class="detail-line"><span class="label">Policy #:</span>L24A1545 (AR)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>12/13/2024 (NY)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>12/15/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Pioneer Express LLC</div>
+        <div class="detail-line"><span class="label">Insured:</span>Pioneer Express LLC</div>
         <div class="detail-line"><span class="label">Driver:</span>Wright, Sarah</div>
         <div class="detail-line"><span class="label">Agency:</span>Gilbert PLC</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -525,6 +559,8 @@ struck adjacent vehicle</div>
         <div class="detail-line"><span class="label">Policy #:</span>L24A6802 (MO)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>12/02/2024 (CA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>12/08/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Mcguirefurt Hauling</div>
+        <div class="detail-line"><span class="label">Insured:</span>Mcguirefurt Hauling</div>
         <div class="detail-line"><span class="label">Driver:</span>Gonzalez, Belinda</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV
@@ -572,6 +608,8 @@ hydroplaned, hit concrete barrier</div>
         <div class="detail-line"><span class="label">Policy #:</span>L23A9029 (TX)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>04/23/2023 (OK)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>08/13/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Mccormick Freight Group</div>
+        <div class="detail-line"><span class="label">Insured:</span>Mccormick Freight Group</div>
         <div class="detail-line"><span class="label">Driver:</span>Allen, Frank</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Temperature-controlled
@@ -624,6 +662,8 @@ cargo spoiled</div>
         <div class="detail-line"><span class="label">Policy #:</span>L24A1822 (GA)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>08/27/2024 (NC)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>09/14/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Hayes Cargo Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Hayes Cargo Inc</div>
         <div class="detail-line"><span class="label">Driver:</span>Scott, Laurie</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Temperature-controlled
@@ -673,6 +713,8 @@ cargo spoiled</div>
         <div class="detail-line"><span class="label">Policy #:</span>L23A9512 (MO)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>07/20/2023 (OK)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>07/27/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Titan Logistics Co</div>
+        <div class="detail-line"><span class="label">Insured:</span>Titan Logistics Co</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Engine fire while
 parked at truck stop</div>

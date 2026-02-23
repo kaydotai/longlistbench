@@ -414,6 +414,8 @@ class LossRunHTMLGenerator:
         loss_state = incident.get("loss_state", "")
         policy_num = incident.get("policy_number", "")
         policy_state = incident.get("policy_state", "")
+        company_name = incident.get("company_name") or ""
+        insured_name = incident.get("insured") or company_name
         driver = incident.get("driver_name") or ""
         claimants = incident.get("claimants", [])
         unit = incident.get("unit_number") or ""
@@ -439,7 +441,15 @@ class LossRunHTMLGenerator:
         <div class="detail-line"><span class="label">Policy #:</span>{policy_num} ({policy_state})</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>{loss_date} ({loss_state})</div>
         <div class="detail-line"><span class="label">Date Reported:</span>{reported_date}</div>"""
-        
+
+        if company_name:
+            html += f"""
+        <div class="detail-line"><span class="label">Company:</span>{company_name}</div>"""
+
+        if insured_name:
+            html += f"""
+        <div class="detail-line"><span class="label">Insured:</span>{insured_name}</div>"""
+
         if driver:
             html += f"""
         <div class="detail-line"><span class="label">Driver:</span>{driver}</div>"""
@@ -578,12 +588,23 @@ class LossRunHTMLGenerator:
         inc_num = incident.get("incident_number", f"#{row_num}")
         ref_num = incident.get("reference_number", "")
         company = incident.get("company_name", "")
+        insured = incident.get("insured") or company
+        division = incident.get("division", "")
+        handler = incident.get("handler", "")
+        agency = incident.get("agency", "")
         coverage = incident.get("coverage_type", "")
         status = incident.get("status", "")
         policy = incident.get("policy_number", "")
+        policy_state = incident.get("policy_state", "")
         loss_date = incident.get("date_of_loss", "")
+        reported_date = incident.get("date_reported", "")
         loss_state = incident.get("loss_state", "")
+        unit_number = incident.get("unit_number") or "—"
         driver = incident.get("driver_name") or "—"
+        claimants = incident.get("claimants", [])
+        claimants_text = ", ".join(claimants) if claimants else "—"
+        cause_code = incident.get("cause_code", "")
+        notes = incident.get("adjuster_notes", "")
         description = incident.get("description", "")
         
         # Problem 2: Multi-row entities
@@ -598,7 +619,42 @@ class LossRunHTMLGenerator:
         
         total_reserve = bi.get("reserve", 0) + pd.get("reserve", 0) + lae.get("reserve", 0) + ded.get("reserve", 0)
         total_paid = bi.get("paid", 0) + pd.get("paid", 0) + lae.get("paid", 0) + ded.get("paid", 0)
+        total_recovered = bi.get("recovered", 0) + pd.get("recovered", 0) + lae.get("recovered", 0) + ded.get("recovered", 0)
         total_incurred = bi.get("total_incurred", 0) + pd.get("total_incurred", 0) + lae.get("total_incurred", 0) + ded.get("total_incurred", 0)
+
+        def _category_line(name: str, values: dict) -> str:
+            return (
+                f"{name}: Reserve {self._format_currency(values.get('reserve', 0))} | "
+                f"Paid {self._format_currency(values.get('paid', 0))} | "
+                f"Recovered {self._format_currency(values.get('recovered', 0))} | "
+                f"Total Incurred {self._format_currency(values.get('total_incurred', 0))}"
+            )
+
+        details_lines = [
+            f"Insured: {insured}",
+            f"Division: {division}",
+            f"Handler: {handler}",
+            f"Agency: {agency}",
+            f"Policy State: {policy_state}",
+            f"Date Reported: {reported_date}",
+            f"Unit Number: {unit_number}",
+            f"Driver: {driver}",
+            f"Claimants: {claimants_text}",
+            f"Cause Code: {cause_code}",
+            f"Description: {description}",
+            f"Adjuster Notes: {notes}",
+            _category_line("BI", bi),
+            _category_line("PD", pd),
+            _category_line("LAE", lae),
+            _category_line("DED", ded),
+            (
+                f"Incident Total: Reserve {self._format_currency(total_reserve)} | "
+                f"Paid {self._format_currency(total_paid)} | "
+                f"Recovered {self._format_currency(total_recovered)} | "
+                f"Total Incurred {self._format_currency(total_incurred)}"
+            ),
+        ]
+        details_html = "<br>".join(details_lines)
         
         # Never omit incident_cell - it's a primary identifier that must always be present
         incident_cell = f"<td>{inc_num}</td>"
@@ -614,33 +670,25 @@ class LossRunHTMLGenerator:
             <td>{policy}</td>
             <td>{loss_date}</td>
             <td>{loss_state}</td>
-            <td>{driver}</td>
-            <td style="max-width: 200px; white-space: pre-line;">{description}</td>
-            <td style="text-align: right;">{self._format_currency(total_reserve)}</td>
-            <td style="text-align: right;">{self._format_currency(total_paid)}</td>
-            <td style="text-align: right;">{self._format_currency(total_incurred)}</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">{details_html}</td>
         </tr>"""
     
     def _generate_table_format(self, incidents: list[dict], header_info: dict, problems: dict) -> str:
         """Generate compact table format for loss run."""
         html = f"""
 <div class="table-section">
-    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
         <thead>
             <tr style="background-color: #333; color: white;">
-                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Company</th>
-                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
-                <th style="padding: 5px; border: 1px solid #000;">Status</th>
-                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
-                <th style="padding: 5px; border: 1px solid #000;">State</th>
-                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
-                <th style="padding: 5px; border: 1px solid #000;">Description</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
-                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
-                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
             </tr>
         </thead>
         <tbody>"""
@@ -653,19 +701,15 @@ class LossRunHTMLGenerator:
         
         table_header = """        <thead>
             <tr style="background-color: #333; color: white;">
-                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Company</th>
-                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
-                <th style="padding: 5px; border: 1px solid #000;">Status</th>
-                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
-                <th style="padding: 5px; border: 1px solid #000;">State</th>
-                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
-                <th style="padding: 5px; border: 1px solid #000;">Description</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
-                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
-                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
             </tr>
         </thead>
         <tbody>"""
@@ -681,7 +725,7 @@ class LossRunHTMLGenerator:
 </div>
 <div class="page-break"></div>
 <div class="table-section">
-    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
 """ + table_header
             
             force_merge = use_merged and (not merged_cells_inserted) and (not omit_merged_cells) and idx < len(incidents) - 1

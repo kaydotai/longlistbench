@@ -18,7 +18,7 @@ Reference number & 100.0\% & 100.0\% \\
 \end{table}
 
 \subsection{Zero-shot LLM extraction baseline}
-We evaluate two LLMs using the shared prompt and released evaluation harness. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports. Averaged across all documents, Gemini 2.5 achieves 81.4\% average F1 (79.8\% recall, 83.0\% precision), and GPT-5.2 achieves 78.0\% average field-level F1 (76.6\% recall, 79.5\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
+We evaluate two LLMs using the shared prompt and released evaluation harness. We report schema-conformant, field-level scoring across the full benchmark (80 documents: 40 detailed, 40 table) using the released per-tier evaluation reports. Averaged across all documents, Gemini 2.5 achieves 81.9\% average F1 (80.4\% recall, 83.4\% precision), and GPT-5.2 achieves 78.1\% average field-level F1 (76.8\% recall, 79.6\% precision) (Table~\ref{tab:llm-baselines}). Across all models, the detailed format is substantially easier than the table format (Table~\ref{tab:llm-baselines-format}), and performance varies meaningfully across difficulty tiers (Table~\ref{tab:llm-baselines-tier}).
 
 \begin{table}[t]
 \centering
@@ -28,8 +28,8 @@ We evaluate two LLMs using the shared prompt and released evaluation harness. We
 \toprule
 Model & Samples & Avg Recall & Avg Precision & Avg F1 \\
 \midrule
-Gemini 2.5 & 80 & 79.8\% & 83.0\% & 81.4\% \\
-GPT-5.2 & 80 & 76.6\% & 79.5\% & 78.0\% \\
+Gemini 2.5 & 80 & 80.4\% & 83.4\% & 81.9\% \\
+GPT-5.2 & 80 & 76.8\% & 79.6\% & 78.1\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -42,8 +42,8 @@ GPT-5.2 & 80 & 76.6\% & 79.5\% & 78.0\% \\
 \toprule
 Model & Detailed F1 & Table F1 \\
 \midrule
-Gemini 2.5 & 89.5\% & 73.2\% \\
-GPT-5.2 & 83.8\% & 72.2\% \\
+Gemini 2.5 & 89.8\% & 73.9\% \\
+GPT-5.2 & 83.5\% & 72.8\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -56,12 +56,37 @@ GPT-5.2 & 83.8\% & 72.2\% \\
 \toprule
 Tier & Samples & Gemini 2.5 F1 & GPT-5.2 F1 \\
 \midrule
-Easy & 30 & 84.4\% & 80.2\% \\
-Medium & 24 & 79.7\% & 76.7\% \\
-Hard & 16 & 78.1\% & 75.4\% \\
-Extreme & 10 & 81.3\% & 78.6\% \\
+Easy & 30 & 85.1\% & 80.2\% \\
+Medium & 24 & 80.5\% & 76.7\% \\
+Hard & 16 & 78.1\% & 76.0\% \\
+Extreme & 10 & 81.6\% & 78.9\% \\
 \bottomrule
 \end{tabular}
+\end{table}
+
+\paragraph{Regenerated results (Gemini 2.5).}
+After regenerating all documents and OCR artifacts, we reran Gemini~2.5 on the full 80-instance benchmark with LongListBench-compatible scoring in two modes: single-pass vanilla extraction and chunk-by-count pipeline extraction ($\tau=250$, $K=10$). These refreshed numbers are not directly comparable to Tables~\ref{tab:llm-baselines}--\ref{tab:llm-baselines-tier}, which report the released full-80 baseline artifacts.
+
+\begin{table}[t]
+\centering
+\caption{Regenerated results (80 docs, 6{,}828 entries; Gemini~2.5) comparing vanilla vs chunk-by-count pipeline. Per-tier rows show per-document macro averages; the ``All'' row is weighted by ground-truth entry count.}
+\label{tab:regen-tier-comparison}
+\begingroup
+\setlength{\tabcolsep}{4pt}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Tier & Vanilla incident $F_1$ & Vanilla micro $F_1$ & Pipeline incident $F_1$ & Pipeline micro $F_1$ \\
+\midrule
+Easy (30)     & 0.9825 & 0.9814 & 1.0000 & 0.9992 \\
+Medium (24)   & 0.9792 & 0.9761 & 1.0000 & 0.9986 \\
+Hard (16)     & 0.9613 & 0.9577 & 0.9994 & 0.9971 \\
+Extreme (10)  & 0.3849 & 0.3727 & 0.9994 & 0.9664 \\
+\midrule
+All (6828)    & 0.5419 & 0.5321 & 0.9995 & 0.9749 \\
+\bottomrule
+\end{tabular}
+\endgroup
 \end{table}
 
 Qualitatively, errors often manifest as local field-level deviations (e.g., missing optional strings, numeric drift in financial breakdowns, or small identifier formatting mistakes) spread across an otherwise correct long list.

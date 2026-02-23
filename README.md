@@ -92,6 +92,20 @@ Schema-conformant field-level micro F1 averaged across all 80 documents (see `be
 | Gemini 2.5 | 81.9% | 80.4% | 83.4% |
 | GPT-5.2 | 78.1% | 76.8% | 79.6% |
 
+### Regenerated Vanilla vs Pipeline (Gemini 2.5)
+
+After regenerating all documents and OCR artifacts, Gemini 2.5 was rerun on the full 80-instance benchmark with LongListBench-compatible scoring in vanilla (single-pass) and chunk-by-count pipeline modes:
+
+| Tier | Entries | Vanilla incident F1 | Vanilla micro F1 | Pipeline incident F1 | Pipeline micro F1 |
+|------|--------:|---------------------|-------------------|----------------------|--------------------|
+| Easy (30) | 312 | 0.9825 | 0.9814 | 1.0000 | 0.9992 |
+| Medium (24) | 636 | 0.9792 | 0.9761 | 1.0000 | 0.9986 |
+| Hard (16) | 880 | 0.9613 | 0.9577 | 0.9994 | 0.9971 |
+| Extreme (10) | 5000 | 0.3849 | 0.3727 | 0.9994 | 0.9664 |
+| **All (80)** | **6828** | **0.5419** | **0.5321** | **0.9995** | **0.9749** |
+
+Per-tier rows are per-document macro averages; the "All" row is weighted by ground-truth entry count.
+
 ## Development
 
 For development and testing, see [`benchmarks/synthetic/README.md`](benchmarks/synthetic/README.md) for the synthetic data generator.

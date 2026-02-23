@@ -19,8 +19,8 @@ brew install --cask mactex
 
 ## VSCode Extension
 
-LaTeX Workshop  
-https://marketplace.cursorapi.com/items/?itemName=James-Yu.latex-workshop
+LaTeX Workshop
+https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop
 
 ## Compilation
 
@@ -70,4 +70,3 @@ The compiled PDF will be generated as `main.pdf` in the same directory.
 - Ensure all required LaTeX packages are installed
 - Run `make clean` if you encounter persistent errors
 - For bibliography issues, ensure you're using `biber` (not `bibtex`) as specified in the preamble
-

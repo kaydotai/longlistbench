@@ -1,7 +1,7 @@
 We construct LongListBench\footnote{Code, data, and implementation details are available at \url{https://github.com/kaydotai/longlistbench}.}, a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident/line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground truth incidents (JSON), (ii) a rendered PDF, and (iii) OCR text of the PDF in Markdown.
 
 \subsection{Entity schema}
-Ground truth incidents follow a structured schema (see \hyperref[sec:appendix-schemas]{Appendix~A}) that includes incident identifiers, policy metadata, narrative text, and nested financial breakdowns (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}). While downstream workflows often emphasize fields such as \texttt{incident\_number}, \texttt{company\_name}, \texttt{date\_of\_loss}, \texttt{status}, \texttt{driver\_name}, \texttt{coverage\_type}, and \texttt{total\_incurred}, our evaluator requires and scores the full schema.
+Ground truth incidents follow a structured schema (see \hyperref[sec:appendix-schemas]{Appendix~A}) that includes incident identifiers, policy metadata, narrative text, and nested financial breakdowns (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}). While downstream workflows often emphasize a small subset of high-value fields (e.g., incident identifiers, loss dates, and financial totals), our evaluator requires and scores the full schema.
 
 \subsection{Document generation}
 \Cref{fig:generation-pipeline} illustrates the benchmark construction pipeline, which consists of two phases.

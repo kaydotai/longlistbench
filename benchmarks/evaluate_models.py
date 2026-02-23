@@ -137,6 +137,56 @@ Document:
 """
 
 
+def _repair_truncated_json(raw: str) -> dict | None:
+    """Salvage complete incidents from truncated JSON output.
+
+    When the LLM hits the output-token limit the JSON is cut mid-object.
+    This helper finds the last complete incident object in the array and
+    returns a valid partial result.
+    """
+    idx = raw.find('"incidents"')
+    if idx == -1:
+        return None
+    arr_start = raw.find("[", idx)
+    if arr_start == -1:
+        return None
+
+    # Walk the array region tracking brace depth while respecting JSON strings
+    # so that braces inside string values (e.g. descriptions) are ignored.
+    search_region = raw[arr_start:]
+    last_good = -1
+    depth = 0
+    in_string = False
+    escape = False
+    for i, ch in enumerate(search_region):
+        if escape:
+            escape = False
+            continue
+        if ch == "\\":
+            if in_string:
+                escape = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            continue
+        if in_string:
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                last_good = i
+    if last_good == -1:
+        return None
+
+    repaired = '{"incidents": ' + search_region[: last_good + 1] + "]}"
+    try:
+        return json.loads(repaired)
+    except json.JSONDecodeError:
+        return None
+
+
 def parse_json_response(response_text: str) -> Any:
     """Parse JSON from LLM response, handling markdown code blocks."""
     text = response_text.strip()
@@ -172,8 +222,17 @@ def parse_json_response(response_text: str) -> Any:
         try:
             return json.loads(candidate)
         except json.JSONDecodeError:
-            repaired = _repair_common_json_issues(candidate)
-            return json.loads(repaired)
+            try:
+                repaired = _repair_common_json_issues(candidate)
+                return json.loads(repaired)
+            except json.JSONDecodeError:
+                pass
+
+        # Last resort: salvage complete incidents from truncated JSON
+        salvaged = _repair_truncated_json(text)
+        if salvaged is not None:
+            return salvaged
+        raise json.JSONDecodeError("Could not parse JSON response", text, 0)
 
 
 def _validate_incident_dict_is_complete(incident: dict) -> None:
@@ -504,6 +563,30 @@ MODELS = {
 # Evaluation Logic
 # ============================================================================
 
+_DATE_FIELDS = {"date_of_loss", "date_reported"}
+
+def _normalize_date(value: Any) -> str:
+    """Normalize date strings to MM/DD/YYYY for consistent comparison."""
+    if value is None:
+        return ""
+    s = " ".join(str(value).strip().split())
+    if not s:
+        return ""
+    for fmt in (
+        "%m/%d/%Y",
+        "%m/%d/%y",
+        "%Y-%m-%d",
+        "%Y/%m/%d",
+        "%m-%d-%Y",
+    ):
+        try:
+            dt = datetime.strptime(s, fmt)
+            return dt.strftime("%m/%d/%Y")
+        except ValueError:
+            continue
+    return s
+
+
 def normalize_incident_number(incident_num: str) -> str:
     """Normalize incident number for comparison."""
     if not incident_num:
@@ -564,6 +647,8 @@ def evaluate_extraction(predicted: list[dict], ground_truth: list[dict]) -> dict
                     v = []
                 cleaned = [str(x).strip() for x in v if str(x).strip()]
                 obj[k] = sorted(cleaned)
+            elif k in _DATE_FIELDS:
+                obj[k] = _normalize_date(v)
             elif isinstance(v, str) or v is None:
                 obj[k] = _norm_str(v, optional=(k in _OPTIONAL_STR_FIELDS))
             else:

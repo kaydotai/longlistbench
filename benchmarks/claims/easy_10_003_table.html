@@ -18,10 +18,11 @@
                 break-inside: auto;
             }
             .page-break {
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
         body {
@@ -63,6 +64,25 @@
         }
         .incident-section.split-incident > .incident-header {
             background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
         }
         .continued-note {
             margin: 6px 0;
@@ -138,9 +158,11 @@
             text-align: center;
         }
         .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -173,22 +195,18 @@
 </div>
 
 <div class="table-section">
-    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
         <thead>
             <tr style="background-color: #333; color: white;">
-                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Company</th>
-                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
-                <th style="padding: 5px; border: 1px solid #000;">Status</th>
-                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
-                <th style="padding: 5px; border: 1px solid #000;">State</th>
-                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
-                <th style="padding: 5px; border: 1px solid #000;">Description</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
-                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
-                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
             </tr>
         </thead>
         <tbody>
@@ -201,11 +219,7 @@
             <td>L24A4107</td>
             <td>10/15/2024</td>
             <td>IL</td>
-            <td>Gray, Mary</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV making right<br>turn, trailer struck OV</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$112,508.38</td>
-            <td style="text-align: right;">$77,945.31</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: North Alexandra Express<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Miller-Hale<br>Policy State: OK<br>Date Reported: 10/22/2024<br>Unit Number: 2023 FR 588025<br>Driver: Gray, Mary<br>Claimants: —<br>Cause Code: None<br>Description: IV making right<br>turn, trailer struck OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $88,390.97 | Recovered $0.00 | Total Incurred $88,390.97<br>PD: Reserve $0.00 | Paid $24,117.41 | Recovered $0.00 | Total Incurred $24,117.41<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $34,563.07 | Total Incurred ($34,563.07)<br>Incident Total: Reserve $0.00 | Paid $112,508.38 | Recovered $34,563.07 | Total Incurred $77,945.31</td>
         </tr>
         <tr>
             <td>#30002</td>
@@ -216,11 +230,7 @@
             <td>L24A5806</td>
             <td>03/31/2024</td>
             <td>IL</td>
-            <td>Vaughan, Heather</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV merging onto<br>highway, collided with OV</td>
-            <td style="text-align: right;">$14,689.80</td>
-            <td style="text-align: right;">$3,297.27</td>
-            <td style="text-align: right;">($7,966.92)</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Delta Express Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TN<br>Date Reported: 04/06/2024<br>Unit Number: 2024 KE 429666<br>Driver: Vaughan, Heather<br>Claimants: Wolf, Travis<br>Cause Code: None<br>Description: IV merging onto<br>highway, collided with OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $14,689.80 | Paid $3,297.27 | Recovered $0.00 | Total Incurred $17,987.07<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $25,953.99 | Total Incurred ($25,953.99)<br>Incident Total: Reserve $14,689.80 | Paid $3,297.27 | Recovered $25,953.99 | Total Incurred ($7,966.92)</td>
         </tr>
         <tr>
             <td>#30003</td>
@@ -231,11 +241,7 @@
             <td>L24A5331</td>
             <td>01/30/2024</td>
             <td>TX</td>
-            <td>Johnson, Kelly</td>
-            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV<br>to veer into OV</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$113,619.61</td>
-            <td style="text-align: right;">$113,619.61</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Duran Logistics LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AZ<br>Date Reported: 02/03/2024<br>Unit Number: —<br>Driver: Johnson, Kelly<br>Claimants: Ochoa, Jake, Stewart, Beverly, Young, Miguel<br>Cause Code: None<br>Description: Tire blowout caused IV<br>to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $81,966.72 | Recovered $0.00 | Total Incurred $81,966.72<br>PD: Reserve $0.00 | Paid $31,652.89 | Recovered $0.00 | Total Incurred $31,652.89<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $113,619.61 | Recovered $0.00 | Total Incurred $113,619.61</td>
         </tr>
         <tr>
             <td>#30004</td>
@@ -246,12 +252,28 @@
             <td>L23A3589</td>
             <td>08/09/2023</td>
             <td>GA</td>
-            <td>Hernandez, Marc</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV making wide turn,<br>clipped OV on passenger side</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$25,819.95</td>
-            <td style="text-align: right;">$5,698.56</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Atlas Cargo Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NY<br>Date Reported: 08/12/2023<br>Unit Number: —<br>Driver: Hernandez, Marc<br>Claimants: Davis, Richard<br>Cause Code: None<br>Description: IV making wide turn,<br>clipped OV on passenger side<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $25,559.58 | Recovered $0.00 | Total Incurred $25,559.58<br>LAE: Reserve $0.00 | Paid $260.37 | Recovered $0.00 | Total Incurred $260.37<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $20,121.39 | Total Incurred ($20,121.39)<br>Incident Total: Reserve $0.00 | Paid $25,819.95 | Recovered $20,121.39 | Total Incurred $5,698.56</td>
         </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
         <tr>
             <td>#30005</td>
             <td>L230005</td>
@@ -261,11 +283,7 @@
             <td>L23A4540</td>
             <td>05/17/2023</td>
             <td>NY</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Cargo damaged during<br>transport - water intrusion<br>Cargo damaged during<br>transport - water intrusion<div class="page-break"></div>Cargo damaged during<br>transport - water intrusion<br>Cargo damaged during<br>transport - water intrusion</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$49,080.02</td>
-            <td style="text-align: right;">$49,080.02</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Mitchell Transport LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: FL<br>Date Reported: 06/11/2023<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Cargo damaged during<br>transport - water intrusion<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $49,080.02 | Recovered $0.00 | Total Incurred $49,080.02<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $49,080.02 | Recovered $0.00 | Total Incurred $49,080.02</td>
         </tr>
         <tr>
             <td>#30006</td>
@@ -276,11 +294,7 @@
             <td>L24A8177</td>
             <td>07/04/2024</td>
             <td>NC</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Equipment<br>damaged during loading</td>
-            <td style="text-align: right;">$2,738.06</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$2,738.06</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Pioneer Express Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: PA<br>Date Reported: 07/30/2024<br>Unit Number: —<br>Driver: —<br>Claimants: Harvey, Nathaniel<br>Cause Code: None<br>Description: Equipment<br>damaged during loading<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $2,738.06 | Paid $0.00 | Recovered $0.00 | Total Incurred $2,738.06<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $2,738.06 | Paid $0.00 | Recovered $0.00 | Total Incurred $2,738.06</td>
         </tr>
         <tr>
             <td>#30007</td>
@@ -291,11 +305,7 @@
             <td>L24A2601</td>
             <td>09/03/2024</td>
             <td>NY</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Transmission<br>failure during transport</td>
-            <td style="text-align: right;">$60,515.61</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$59,371.72</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: West Sean Freight<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Aguilar Group<br>Policy State: MO<br>Date Reported: 10/02/2024<br>Unit Number: —<br>Driver: —<br>Claimants: Haney, Kurt<br>Cause Code: None<br>Description: Transmission<br>failure during transport<br>Adjuster Notes: Middle thought become many will thank single perform fire create participant son team group worker song.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $60,515.61 | Paid $0.00 | Recovered $0.00 | Total Incurred $60,515.61<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $1,143.89 | Total Incurred ($1,143.89)<br>Incident Total: Reserve $60,515.61 | Paid $0.00 | Recovered $1,143.89 | Total Incurred $59,371.72</td>
         </tr>
         <tr>
             <td>#30008</td>
@@ -306,11 +316,7 @@
             <td>L24A2402</td>
             <td>03/06/2024</td>
             <td>PA</td>
-            <td>Rasmussen, Jason</td>
-            <td style="max-width: 200px; white-space: pre-line;">Cargo damaged during<br>transport - water intrusion</td>
-            <td style="text-align: right;">$49,063.26</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$49,063.26</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Danielchester Logistics<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: MO<br>Date Reported: 03/10/2024<br>Unit Number: 2023 KE 509886<br>Driver: Rasmussen, Jason<br>Claimants: —<br>Cause Code: None<br>Description: Cargo damaged during<br>transport - water intrusion<br>Adjuster Notes: Avoid able increase official buy discussion service section realize finish describe case between important material ball.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $49,063.26 | Paid $0.00 | Recovered $0.00 | Total Incurred $49,063.26<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $49,063.26 | Paid $0.00 | Recovered $0.00 | Total Incurred $49,063.26</td>
         </tr>
         <tr>
             <td>#30009</td>
@@ -321,11 +327,7 @@
             <td>L23A2707</td>
             <td>08/18/2023</td>
             <td>TX</td>
-            <td>Kelly, Rachael</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV<br>brakes failed, rear-ended OV</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$48,072.26</td>
-            <td style="text-align: right;">$48,072.26</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Titan Cargo Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Gonzales, Ramsey and Lam<br>Policy State: MI<br>Date Reported: 09/12/2023<br>Unit Number: —<br>Driver: Kelly, Rachael<br>Claimants: Ramirez, Jacob<br>Cause Code: None<br>Description: IV<br>brakes failed, rear-ended OV<br>Adjuster Notes: Woman under campaign trade Mr wonder news wish truth rate.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $48,072.26 | Recovered $0.00 | Total Incurred $48,072.26<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $48,072.26 | Recovered $0.00 | Total Incurred $48,072.26</td>
         </tr>
         <tr>
             <td>#30010</td>
@@ -336,11 +338,7 @@
             <td>L24A7857</td>
             <td>06/10/2024</td>
             <td>AR</td>
-            <td>Ochoa, Julia</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV<br>hydroplaned, hit concrete barrier</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$15,252.50</td>
-            <td style="text-align: right;">$15,252.50</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: East Shari Express<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AZ<br>Date Reported: 06/19/2024<br>Unit Number: —<br>Driver: Ochoa, Julia<br>Claimants: Hudson, Monica<br>Cause Code: None<br>Description: IV<br>hydroplaned, hit concrete barrier<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $15,252.50 | Recovered $0.00 | Total Incurred $15,252.50<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $15,252.50 | Recovered $0.00 | Total Incurred $15,252.50</td>
         </tr>
         </tbody>
     </table>

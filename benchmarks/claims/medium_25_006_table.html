@@ -18,10 +18,11 @@
                 break-inside: auto;
             }
             .page-break {
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
         body {
@@ -63,6 +64,25 @@
         }
         .incident-section.split-incident > .incident-header {
             background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
         }
         .continued-note {
             margin: 6px 0;
@@ -138,9 +158,11 @@
             text-align: center;
         }
         .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -193,22 +215,18 @@
 </div>
 
 <div class="table-section">
-    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
         <thead>
             <tr style="background-color: #333; color: white;">
-                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Company</th>
-                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
-                <th style="padding: 5px; border: 1px solid #000;">Status</th>
-                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
-                <th style="padding: 5px; border: 1px solid #000;">State</th>
-                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
-                <th style="padding: 5px; border: 1px solid #000;">Description</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
-                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
-                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
             </tr>
         </thead>
         <tbody>
@@ -221,11 +239,7 @@
             <td>L24A2618</td>
             <td>05/31/2024</td>
             <td>CA</td>
-            <td>Soto, Stephanie</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV backing, struck<br>parked parked OV</td>
-            <td style="text-align: right;">$55,956.17</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$40,581.81</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Summit Logistics Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Vincent, Todd and Barker<br>Policy State: AZ<br>Date Reported: 06/20/2024<br>Unit Number: 2023 PE 690724<br>Driver: Soto, Stephanie<br>Claimants: Brown, Nathan, Macdonald, Figueroa and Campbell, Wilson, Marshall and Dalton<br>Cause Code: None<br>Description: IV backing, struck<br>parked parked OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $55,956.17 | Paid $0.00 | Recovered $0.00 | Total Incurred $55,956.17<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $15,374.36 | Total Incurred ($15,374.36)<br>Incident Total: Reserve $55,956.17 | Paid $0.00 | Recovered $15,374.36 | Total Incurred $40,581.81</td>
         </tr>
         <tr>
             <td>#30002</td>
@@ -236,11 +250,7 @@
             <td>L24A1738</td>
             <td>05/08/2024</td>
             <td>TN</td>
-            <td>Reed, Michael</td>
-            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes<br>into IV, causing collision</td>
-            <td style="text-align: right;">$6,168.61</td>
-            <td style="text-align: right;">$850.68</td>
-            <td style="text-align: right;">($11,313.92)</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: House Logistics Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: MO<br>Date Reported: 06/03/2024<br>Unit Number: 2023 VO 166640<br>Driver: Reed, Michael<br>Claimants: Smith, Anna<br>Cause Code: None<br>Description: OV changed lanes<br>into IV, causing collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $6,168.61 | Paid $850.68 | Recovered $0.00 | Total Incurred $7,019.29<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $18,333.21 | Total Incurred ($18,333.21)<br>Incident Total: Reserve $6,168.61 | Paid $850.68 | Recovered $18,333.21 | Total Incurred ($11,313.92)</td>
         </tr>
         <tr>
             <td>#30003</td>
@@ -251,11 +261,7 @@
             <td>L24A5719</td>
             <td>08/15/2024</td>
             <td>CA</td>
-            <td>Parsons, Jasmine</td>
-            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV<br>to veer into OV</td>
-            <td style="text-align: right;">$195,280.23</td>
-            <td style="text-align: right;">$13,789.27</td>
-            <td style="text-align: right;">$190,431.85</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: North Kennethport Hauling<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AZ<br>Date Reported: 09/11/2024<br>Unit Number: 2024 IN 144164<br>Driver: Parsons, Jasmine<br>Claimants: Mitchell Inc, Garcia, Jonathan<br>Cause Code: None<br>Description: Tire blowout caused IV<br>to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $149,254.70 | Paid $0.00 | Recovered $0.00 | Total Incurred $149,254.70<br>PD: Reserve $46,025.53 | Paid $13,789.27 | Recovered $0.00 | Total Incurred $59,814.80<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $18,637.65 | Total Incurred ($18,637.65)<br>Incident Total: Reserve $195,280.23 | Paid $13,789.27 | Recovered $18,637.65 | Total Incurred $190,431.85</td>
         </tr>
         <tr>
             <td>#30004</td>
@@ -266,11 +272,7 @@
             <td>L23A2844</td>
             <td>09/30/2023</td>
             <td>NC</td>
-            <td>Bowman, Kimberly</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV backing into loading<br>dock, hit parked OV</td>
-            <td style="text-align: right;">$27,338.55</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$27,338.55</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Samanthahaven Logistics<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AZ<br>Date Reported: 10/06/2023<br>Unit Number: 2023 MA 656167<br>Driver: Bowman, Kimberly<br>Claimants: Mills, Timothy, Lester, Andrew<br>Cause Code: None<br>Description: IV backing into loading<br>dock, hit parked OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $27,338.55 | Paid $0.00 | Recovered $0.00 | Total Incurred $27,338.55<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $27,338.55 | Paid $0.00 | Recovered $0.00 | Total Incurred $27,338.55</td>
         </tr>
         <tr>
             <td>#30005</td>
@@ -281,11 +283,7 @@
             <td>L24A2898</td>
             <td>10/06/2024</td>
             <td>OH</td>
-            <td>Brown, Jeremy</td>
-            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes<br>into IV, causing collision</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$21,850.70</td>
-            <td style="text-align: right;">$6,966.40</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Horizon Freight LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: FL<br>Date Reported: 10/13/2024<br>Unit Number: —<br>Driver: Brown, Jeremy<br>Claimants: Williams, Green and Rivers<br>Cause Code: None<br>Description: OV changed lanes<br>into IV, causing collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $21,850.70 | Recovered $0.00 | Total Incurred $21,850.70<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $14,884.30 | Total Incurred ($14,884.30)<br>Incident Total: Reserve $0.00 | Paid $21,850.70 | Recovered $14,884.30 | Total Incurred $6,966.40</td>
         </tr>
         <tr>
             <td>#30006</td>
@@ -296,11 +294,7 @@
             <td>L24A7060</td>
             <td>08/15/2024</td>
             <td>MI</td>
-            <td>Sanchez, Diane</td>
-            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV<br>to veer into OV</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$10,191.80</td>
-            <td style="text-align: right;">($16,636.84)</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Port Andrewland Logistics<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TN<br>Date Reported: 09/01/2024<br>Unit Number: —<br>Driver: Sanchez, Diane<br>Claimants: Valdez, Leonard and Benjamin, Jackson, Carl<br>Cause Code: None<br>Description: Tire blowout caused IV<br>to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $10,191.80 | Recovered $0.00 | Total Incurred $10,191.80<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $26,828.64 | Total Incurred ($26,828.64)<br>Incident Total: Reserve $0.00 | Paid $10,191.80 | Recovered $26,828.64 | Total Incurred ($16,636.84)</td>
         </tr>
         <tr>
             <td>#30007</td>
@@ -311,11 +305,7 @@
             <td>L24A6534</td>
             <td>08/02/2024</td>
             <td>MI</td>
-            <td>Brooks, Tricia</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV<br>at traffic light</td>
-            <td style="text-align: right;">$6,748.69</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">($2,709.03)</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Lutzstad Cargo<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Lara-Arroyo<br>Policy State: TN<br>Date Reported: 08/03/2024<br>Unit Number: 2023 MA 669147<br>Driver: Brooks, Tricia<br>Claimants: Conner, Heather<br>Cause Code: None<br>Description: IV rear-ended OV<br>at traffic light<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $6,748.69 | Paid $0.00 | Recovered $0.00 | Total Incurred $6,748.69<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $9,457.72 | Total Incurred ($9,457.72)<br>Incident Total: Reserve $6,748.69 | Paid $0.00 | Recovered $9,457.72 | Total Incurred ($2,709.03)</td>
         </tr>
         <tr>
             <td>#30008</td>
@@ -326,11 +316,7 @@
             <td>L23A9172</td>
             <td>02/02/2023</td>
             <td>TX</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Trailer damaged in<br>loading dock collision</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$79,779.10</td>
-            <td style="text-align: right;">$74,808.81</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Edwards Express Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Martinez, Werner and Allen<br>Policy State: AZ<br>Date Reported: 02/03/2023<br>Unit Number: 2023 VO 589681<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Trailer damaged in<br>loading dock collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $79,779.10 | Recovered $0.00 | Total Incurred $79,779.10<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,970.29 | Total Incurred ($4,970.29)<br>Incident Total: Reserve $0.00 | Paid $79,779.10 | Recovered $4,970.29 | Total Incurred $74,808.81</td>
         </tr>
         <tr>
             <td>#30009</td>
@@ -341,11 +327,7 @@
             <td>L23A3369</td>
             <td>08/30/2023</td>
             <td>MI</td>
-            <td>Lynn, Jason</td>
-            <td style="max-width: 200px; white-space: pre-line;">Trailer door detached,<br>struck adjacent vehicle</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$60,138.09</td>
-            <td style="text-align: right;">$60,138.09</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Pioneer Transport Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: FL<br>Date Reported: 09/05/2023<br>Unit Number: —<br>Driver: Lynn, Jason<br>Claimants: Leonard-Smith, Davidson, Jon<br>Cause Code: None<br>Description: Trailer door detached,<br>struck adjacent vehicle<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $41,109.34 | Recovered $0.00 | Total Incurred $41,109.34<br>PD: Reserve $0.00 | Paid $19,028.75 | Recovered $0.00 | Total Incurred $19,028.75<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $60,138.09 | Recovered $0.00 | Total Incurred $60,138.09</td>
         </tr>
         <tr>
             <td>#30010</td>
@@ -356,11 +338,7 @@
             <td>L23A1326</td>
             <td>01/18/2023</td>
             <td>AR</td>
-            <td>Ferguson, Amy</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV backing, struck<br>parked dock equipment</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$16,570.26</td>
-            <td style="text-align: right;">$3,276.22</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Delta Logistics Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Farrell, Carlson and Fernandez<br>Policy State: TX<br>Date Reported: 01/29/2023<br>Unit Number: 2023 IN 952637<br>Driver: Ferguson, Amy<br>Claimants: Meyer, Bowman and Frank<br>Cause Code: None<br>Description: IV backing, struck<br>parked dock equipment<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $16,570.26 | Recovered $0.00 | Total Incurred $16,570.26<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $13,294.04 | Total Incurred ($13,294.04)<br>Incident Total: Reserve $0.00 | Paid $16,570.26 | Recovered $13,294.04 | Total Incurred $3,276.22</td>
         </tr>
         <tr>
             <td>#30011</td>
@@ -371,12 +349,28 @@
             <td>L23A9503</td>
             <td>01/17/2023</td>
             <td>CA</td>
-            <td>Moore, Melissa</td>
-            <td style="max-width: 200px; white-space: pre-line;">Trailer damaged in<br>loading dock collision</td>
-            <td style="text-align: right;">$58,369.07</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$53,689.60</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Mccullough Transport Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: GA<br>Date Reported: 01/20/2023<br>Unit Number: 2024 PE 679994<br>Driver: Moore, Melissa<br>Claimants: Blackburn, Taylor and Bailey<br>Cause Code: None<br>Description: Trailer damaged in<br>loading dock collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $58,369.07 | Paid $0.00 | Recovered $0.00 | Total Incurred $58,369.07<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,679.47 | Total Incurred ($4,679.47)<br>Incident Total: Reserve $58,369.07 | Paid $0.00 | Recovered $4,679.47 | Total Incurred $53,689.60</td>
         </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
         <tr>
             <td>#30012</td>
             <td>L230012</td>
@@ -386,11 +380,7 @@
             <td>L23A6517</td>
             <td>02/02/2023</td>
             <td>PA</td>
-            <td>Shaffer, Michael</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV making right<br>turn, trailer struck OV<br>IV making right<br>turn, trailer struck OV<div class="page-break"></div>IV making right<br>turn, trailer struck OV<br>IV making right<br>turn, trailer struck OV</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$46,057.40</td>
-            <td style="text-align: right;">$24,402.40</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: South Jesse Express<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NC<br>Date Reported: 02/03/2023<br>Unit Number: —<br>Driver: Shaffer, Michael<br>Claimants: —<br>Cause Code: None<br>Description: IV making right<br>turn, trailer struck OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $46,057.40 | Recovered $0.00 | Total Incurred $46,057.40<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $21,655.00 | Total Incurred ($21,655.00)<br>Incident Total: Reserve $0.00 | Paid $46,057.40 | Recovered $21,655.00 | Total Incurred $24,402.40</td>
         </tr>
         <tr>
             <td>#30013</td>
@@ -401,11 +391,7 @@
             <td>L23A9426</td>
             <td>11/08/2023</td>
             <td>OH</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Cargo damaged during<br>transport - water intrusion</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$16,068.53</td>
-            <td style="text-align: right;">$16,068.53</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Andersen Cargo LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Dunn, Bullock and Wilson<br>Policy State: NC<br>Date Reported: 11/09/2023<br>Unit Number: 2023 MA 937184<br>Driver: —<br>Claimants: Harris, Adam<br>Cause Code: None<br>Description: Cargo damaged during<br>transport - water intrusion<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $15,254.45 | Recovered $0.00 | Total Incurred $15,254.45<br>LAE: Reserve $0.00 | Paid $814.08 | Recovered $0.00 | Total Incurred $814.08<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $16,068.53 | Recovered $0.00 | Total Incurred $16,068.53</td>
         </tr>
         <tr>
             <td>#30014</td>
@@ -416,11 +402,7 @@
             <td>L24A2209</td>
             <td>10/28/2024</td>
             <td>NC</td>
-            <td>Martinez, Kimberly</td>
-            <td style="max-width: 200px; white-space: pre-line;">Engine fire while<br>parked at truck stop</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$77,805.94</td>
-            <td style="text-align: right;">$73,069.77</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Jasminefurt Freight<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NC<br>Date Reported: 10/30/2024<br>Unit Number: —<br>Driver: Martinez, Kimberly<br>Claimants: Barnes, Charles<br>Cause Code: None<br>Description: Engine fire while<br>parked at truck stop<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $77,805.94 | Recovered $0.00 | Total Incurred $77,805.94<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,736.17 | Total Incurred ($4,736.17)<br>Incident Total: Reserve $0.00 | Paid $77,805.94 | Recovered $4,736.17 | Total Incurred $73,069.77</td>
         </tr>
         <tr>
             <td>#30015</td>
@@ -431,11 +413,7 @@
             <td>L23A5286</td>
             <td>09/09/2023</td>
             <td>AZ</td>
-            <td>Jacobs, Jacob</td>
-            <td style="max-width: 200px; white-space: pre-line;">OV changed lanes<br>into IV, causing collision</td>
-            <td style="text-align: right;">$13,941.12</td>
-            <td style="text-align: right;">$2,751.21</td>
-            <td style="text-align: right;">$9,547.95</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Santiago Freight Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Ford LLC<br>Policy State: PA<br>Date Reported: 10/04/2023<br>Unit Number: —<br>Driver: Jacobs, Jacob<br>Claimants: —<br>Cause Code: None<br>Description: OV changed lanes<br>into IV, causing collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $13,941.12 | Paid $2,751.21 | Recovered $0.00 | Total Incurred $16,692.33<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $7,144.38 | Total Incurred ($7,144.38)<br>Incident Total: Reserve $13,941.12 | Paid $2,751.21 | Recovered $7,144.38 | Total Incurred $9,547.95</td>
         </tr>
         <tr>
             <td>#30016</td>
@@ -446,11 +424,7 @@
             <td>L24A8273</td>
             <td>12/29/2024</td>
             <td>OK</td>
-            <td>Dean, Victor</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV merging onto<br>highway, collided with OV</td>
-            <td style="text-align: right;">$128,018.84</td>
-            <td style="text-align: right;">$855.04</td>
-            <td style="text-align: right;">$96,008.00</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Summit Logistics LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Landry-Wells<br>Policy State: AZ<br>Date Reported: 01/09/2025<br>Unit Number: 2023 MA 114292<br>Driver: Dean, Victor<br>Claimants: Kelly, Tanner<br>Cause Code: None<br>Description: IV merging onto<br>highway, collided with OV<br>Adjuster Notes: None<br>BI: Reserve $120,728.09 | Paid $0.00 | Recovered $0.00 | Total Incurred $120,728.09<br>PD: Reserve $7,290.75 | Paid $855.04 | Recovered $0.00 | Total Incurred $8,145.79<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $32,865.88 | Total Incurred ($32,865.88)<br>Incident Total: Reserve $128,018.84 | Paid $855.04 | Recovered $32,865.88 | Total Incurred $96,008.00</td>
         </tr>
         <tr>
             <td>#30017</td>
@@ -461,11 +435,7 @@
             <td>L24A1573</td>
             <td>09/26/2024</td>
             <td>AZ</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Refrigeration unit failure<br>- spoiled goods</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$29,790.78</td>
-            <td style="text-align: right;">$28,046.14</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: West Maria Cargo<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TX<br>Date Reported: 09/28/2024<br>Unit Number: —<br>Driver: —<br>Claimants: Brown, Michael<br>Cause Code: None<br>Description: Refrigeration unit failure<br>- spoiled goods<br>Adjuster Notes: Special expect chance hotel crime myself writer third oil old language fine discuss expert.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $29,790.78 | Recovered $0.00 | Total Incurred $29,790.78<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $1,744.64 | Total Incurred ($1,744.64)<br>Incident Total: Reserve $0.00 | Paid $29,790.78 | Recovered $1,744.64 | Total Incurred $28,046.14</td>
         </tr>
         <tr>
             <td>#30018</td>
@@ -476,11 +446,7 @@
             <td>L24A8998</td>
             <td>07/15/2024</td>
             <td>MO</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Water<br>damage to freight</td>
-            <td style="text-align: right;">$33,587.14</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$33,587.14</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Price Cargo Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Burnett-Osborn<br>Policy State: NY<br>Date Reported: 07/17/2024<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Water<br>damage to freight<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $33,587.14 | Paid $0.00 | Recovered $0.00 | Total Incurred $33,587.14<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $33,587.14 | Paid $0.00 | Recovered $0.00 | Total Incurred $33,587.14</td>
         </tr>
         <tr>
             <td>#30019</td>
@@ -491,11 +457,7 @@
             <td>L24A5566</td>
             <td>02/01/2024</td>
             <td>FL</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Equipment<br>damaged during loading</td>
-            <td style="text-align: right;">$32,739.45</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$27,331.93</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Tamarafort Freight<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: OK<br>Date Reported: 02/03/2024<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Equipment<br>damaged during loading<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $32,739.45 | Paid $0.00 | Recovered $0.00 | Total Incurred $32,739.45<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $5,407.52 | Total Incurred ($5,407.52)<br>Incident Total: Reserve $32,739.45 | Paid $0.00 | Recovered $5,407.52 | Total Incurred $27,331.93</td>
         </tr>
         <tr>
             <td>#30020</td>
@@ -506,11 +468,7 @@
             <td>L23A9218</td>
             <td>12/29/2023</td>
             <td>FL</td>
-            <td>Bradley, Jessica</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV<br>changing lanes, sideswiped OV</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$21,524.10</td>
-            <td style="text-align: right;">$21,524.10</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Baker Cargo LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Smith-Sweeney<br>Policy State: IL<br>Date Reported: 02/02/2024<br>Unit Number: —<br>Driver: Bradley, Jessica<br>Claimants: —<br>Cause Code: None<br>Description: IV<br>changing lanes, sideswiped OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $21,524.10 | Recovered $0.00 | Total Incurred $21,524.10<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $21,524.10 | Recovered $0.00 | Total Incurred $21,524.10</td>
         </tr>
         <tr>
             <td>#30021</td>
@@ -521,11 +479,7 @@
             <td>L24A9502</td>
             <td>09/11/2024</td>
             <td>MI</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Cargo crushed due<br>to improper securing</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$43,307.97</td>
-            <td style="text-align: right;">$43,307.97</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Bruceland Express<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NY<br>Date Reported: 10/10/2024<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Cargo crushed due<br>to improper securing<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $43,307.97 | Recovered $0.00 | Total Incurred $43,307.97<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $43,307.97 | Recovered $0.00 | Total Incurred $43,307.97</td>
         </tr>
         <tr>
             <td>#30022</td>
@@ -536,11 +490,7 @@
             <td>L23A9227</td>
             <td>04/19/2023</td>
             <td>OK</td>
-            <td>Smith, Matthew</td>
-            <td style="max-width: 200px; white-space: pre-line;">Theft of cargo from<br>trailer at rest stop</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$21,432.65</td>
-            <td style="text-align: right;">$12,595.53</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Mills Express Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TX<br>Date Reported: 04/29/2023<br>Unit Number: 2024 FR 172530<br>Driver: Smith, Matthew<br>Claimants: Reed, Ruth, Glenn-James<br>Cause Code: None<br>Description: Theft of cargo from<br>trailer at rest stop<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $21,432.65 | Recovered $0.00 | Total Incurred $21,432.65<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $8,837.12 | Total Incurred ($8,837.12)<br>Incident Total: Reserve $0.00 | Paid $21,432.65 | Recovered $8,837.12 | Total Incurred $12,595.53</td>
         </tr>
         <tr>
             <td>#30023</td>
@@ -551,11 +501,7 @@
             <td>L24A9585</td>
             <td>07/06/2024</td>
             <td>NY</td>
-            <td>Gonzalez, John</td>
-            <td style="max-width: 200px; white-space: pre-line;">Trailer damaged in<br>loading dock collision</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$58,765.75</td>
-            <td style="text-align: right;">$56,973.62</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Duncan Freight Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NC<br>Date Reported: 07/13/2024<br>Unit Number: —<br>Driver: Gonzalez, John<br>Claimants: Stewart, Erik<br>Cause Code: None<br>Description: Trailer damaged in<br>loading dock collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $58,765.75 | Recovered $0.00 | Total Incurred $58,765.75<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $1,792.13 | Total Incurred ($1,792.13)<br>Incident Total: Reserve $0.00 | Paid $58,765.75 | Recovered $1,792.13 | Total Incurred $56,973.62</td>
         </tr>
         <tr>
             <td>#30024</td>
@@ -566,11 +512,7 @@
             <td>L23A4087</td>
             <td>03/21/2023</td>
             <td>NY</td>
-            <td>Ray, Melissa</td>
-            <td style="max-width: 200px; white-space: pre-line;">Cargo damaged during<br>transport - water intrusion</td>
-            <td style="text-align: right;">$48,033.72</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$48,033.72</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Horizon Freight Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TX<br>Date Reported: 03/22/2023<br>Unit Number: —<br>Driver: Ray, Melissa<br>Claimants: —<br>Cause Code: None<br>Description: Cargo damaged during<br>transport - water intrusion<br>Adjuster Notes: Painting when bank trip street thank spend state give after fall crime ago stand.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $48,033.72 | Paid $0.00 | Recovered $0.00 | Total Incurred $48,033.72<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $48,033.72 | Paid $0.00 | Recovered $0.00 | Total Incurred $48,033.72</td>
         </tr>
         <tr>
             <td>#30025</td>
@@ -581,11 +523,7 @@
             <td>L23A7456</td>
             <td>04/05/2023</td>
             <td>OK</td>
-            <td>Brown, Steven</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV<br>hydroplaned, hit concrete barrier</td>
-            <td style="text-align: right;">$59,065.45</td>
-            <td style="text-align: right;">$7,557.01</td>
-            <td style="text-align: right;">$66,622.46</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Horizon Hauling LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: MO<br>Date Reported: 05/02/2023<br>Unit Number: —<br>Driver: Brown, Steven<br>Claimants: Perez, Denise<br>Cause Code: None<br>Description: IV<br>hydroplaned, hit concrete barrier<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $59,065.45 | Paid $7,557.01 | Recovered $0.00 | Total Incurred $66,622.46<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $59,065.45 | Paid $7,557.01 | Recovered $0.00 | Total Incurred $66,622.46</td>
         </tr>
         </tbody>
     </table>

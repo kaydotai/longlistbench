@@ -18,10 +18,11 @@
                 break-inside: auto;
             }
             .page-break {
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
         body {
@@ -63,6 +64,25 @@
         }
         .incident-section.split-incident > .incident-header {
             background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
         }
         .continued-note {
             margin: 6px 0;
@@ -138,9 +158,11 @@
             text-align: center;
         }
         .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -181,6 +203,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A8796 (MO)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>02/24/2023 (TN)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>02/25/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Liberty Express Group</div>
+        <div class="detail-line"><span class="label">Insured:</span>Liberty Express Group</div>
         <div class="detail-line"><span class="label">Driver:</span>Martinez, Allen</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV merging onto highway, collided with OV</div>
@@ -234,6 +258,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A7162 (FL)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>12/20/2024 (IL)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>12/26/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Summit Freight Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Summit Freight Inc</div>
         <div class="detail-line"><span class="label">Driver:</span>Griffith, Denise</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 MA 938628</div>
         <div class="detail-line"><span class="label">Agency:</span>Gray, Schmidt and Hunt</div>
@@ -294,6 +320,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A7453 (FL)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>09/26/2023 (AR)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>09/29/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Delta Transport Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Delta Transport Inc</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Trailer damaged in loading dock collision</div>
     </div>
@@ -344,6 +372,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A5630 (NY)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>09/08/2024 (GA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>09/15/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Titan Hauling Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Titan Hauling Inc</div>
         <div class="detail-line"><span class="label">Driver:</span>Peterson, James</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 KE 949284</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -398,6 +428,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A7860 (OH)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>07/18/2024 (GA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>11/04/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Richardson Express Group</div>
+        <div class="detail-line"><span class="label">Insured:</span>Richardson Express Group</div>
         <div class="detail-line"><span class="label">Agency:</span>Carr-Davis</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo crushed from improper stacking</div>
@@ -442,6 +474,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A3474 (PA)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>04/29/2024 (OH)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>08/09/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Horizon Cargo Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Horizon Cargo Inc</div>
         <div class="detail-line"><span class="label">Driver:</span>Bennett, Sarah</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV hydroplaned, hit concrete barrier</div>
@@ -486,6 +520,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A5587 (PA)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>11/18/2023 (NY)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>11/23/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Summit Freight Group</div>
+        <div class="detail-line"><span class="label">Insured:</span>Summit Freight Group</div>
         <div class="detail-line"><span class="label">Agency:</span>Hardy-Collier</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Load shift caused cargo damage</div>
@@ -530,6 +566,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A4567 (IL)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>05/08/2024 (PA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>05/15/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>East Colin Cargo</div>
+        <div class="detail-line"><span class="label">Insured:</span>East Colin Cargo</div>
         <div class="detail-line"><span class="label">Driver:</span>Sullivan, Sonya</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 IN 712212</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -584,6 +622,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A7162 (FL)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>12/20/2024 (IL)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>12/26/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Summit Freight Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Summit Freight Inc</div>
         <div class="detail-line"><span class="label">Driver:</span>Griffith, Denise</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 MA 938628</div>
         <div class="detail-line"><span class="label">Agency:</span>Gray, Schmidt and Hunt</div>
@@ -644,6 +684,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A1392 (MI)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>07/26/2024 (CA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>07/29/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Thomas Express Co</div>
+        <div class="detail-line"><span class="label">Insured:</span>Thomas Express Co</div>
         <div class="detail-line"><span class="label">Driver:</span>Moran, Phillip</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Missing items from sealed trailer</div>
@@ -695,6 +737,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A9355 (FL)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>09/26/2024 (NY)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>09/28/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>South Gavinfurt Express</div>
+        <div class="detail-line"><span class="label">Insured:</span>South Gavinfurt Express</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Refrigeration unit failure - spoiled goods</div>
     </div>

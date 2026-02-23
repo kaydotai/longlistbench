@@ -18,10 +18,11 @@
                 break-inside: auto;
             }
             .page-break {
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
         body {
@@ -63,6 +64,25 @@
         }
         .incident-section.split-incident > .incident-header {
             background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
         }
         .continued-note {
             margin: 6px 0;
@@ -138,9 +158,11 @@
             text-align: center;
         }
         .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -173,22 +195,18 @@
 </div>
 
 <div class="table-section">
-    <table class="claims-table" style="width: 100%; border-collapse: collapse; font-size: 7pt;">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
         <thead>
             <tr style="background-color: #333; color: white;">
-                <th style="padding: 5px; border: 1px solid #000;">Incident #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reference #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Company</th>
-                <th style="padding: 5px; border: 1px solid #000;">Coverage</th>
-                <th style="padding: 5px; border: 1px solid #000;">Status</th>
-                <th style="padding: 5px; border: 1px solid #000;">Policy #</th>
-                <th style="padding: 5px; border: 1px solid #000;">Loss Date</th>
-                <th style="padding: 5px; border: 1px solid #000;">State</th>
-                <th style="padding: 5px; border: 1px solid #000;">Driver</th>
-                <th style="padding: 5px; border: 1px solid #000;">Description</th>
-                <th style="padding: 5px; border: 1px solid #000;">Reserve</th>
-                <th style="padding: 5px; border: 1px solid #000;">Paid</th>
-                <th style="padding: 5px; border: 1px solid #000;">Incurred</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
             </tr>
         </thead>
         <tbody>
@@ -201,11 +219,7 @@
             <td>L23A7682</td>
             <td>05/05/2023</td>
             <td>NC</td>
-            <td>Beasley, Cindy</td>
-            <td style="max-width: 200px; white-space: pre-line;">Tire blowout caused IV<br>to veer into OV</td>
-            <td style="text-align: right;">$40,665.46</td>
-            <td style="text-align: right;">$7,050.36</td>
-            <td style="text-align: right;">$47,715.82</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Summit Cargo Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NY<br>Date Reported: 05/07/2023<br>Unit Number: —<br>Driver: Beasley, Cindy<br>Claimants: Gibson, Stacey<br>Cause Code: None<br>Description: Tire blowout caused IV<br>to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $40,665.46 | Paid $7,050.36 | Recovered $0.00 | Total Incurred $47,715.82<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $40,665.46 | Paid $7,050.36 | Recovered $0.00 | Total Incurred $47,715.82</td>
         </tr>
         <tr>
             <td>#30002</td>
@@ -216,11 +230,7 @@
             <td>L23A9284</td>
             <td>11/01/2023</td>
             <td>MI</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Windshield<br>shattered by road debris</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$18,823.95</td>
-            <td style="text-align: right;">$14,152.73</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Garciashire Transport<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Mccarthy PLC<br>Policy State: NY<br>Date Reported: 11/07/2023<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Windshield<br>shattered by road debris<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $18,823.95 | Recovered $0.00 | Total Incurred $18,823.95<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,671.22 | Total Incurred ($4,671.22)<br>Incident Total: Reserve $0.00 | Paid $18,823.95 | Recovered $4,671.22 | Total Incurred $14,152.73</td>
         </tr>
         <tr>
             <td>#30003</td>
@@ -231,11 +241,7 @@
             <td>L24A3265</td>
             <td>11/17/2024</td>
             <td>FL</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV rollover on icy highway.<br>Total loss.</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$3,936.96</td>
-            <td style="text-align: right;">$3,936.96</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Janetside Express<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Morgan Ltd<br>Policy State: MO<br>Date Reported: 11/18/2024<br>Unit Number: —<br>Driver: —<br>Claimants: Schneider, John<br>Cause Code: None<br>Description: IV rollover on icy highway.<br>Total loss.<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $3,936.96 | Recovered $0.00 | Total Incurred $3,936.96<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $3,936.96 | Recovered $0.00 | Total Incurred $3,936.96</td>
         </tr>
         <tr>
             <td>#30004</td>
@@ -246,11 +252,7 @@
             <td>L24A6878</td>
             <td>06/20/2024</td>
             <td>MO</td>
-            <td>Mullins, Erica</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV<br>at traffic light</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$79,702.63</td>
-            <td style="text-align: right;">$67,412.98</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Eagle Cargo Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: CA<br>Date Reported: 06/23/2024<br>Unit Number: 2023 IN 520380<br>Driver: Mullins, Erica<br>Claimants: Hall, Tyrone, Pruitt, Craig, Mcgee, Lisa<br>Cause Code: None<br>Description: IV rear-ended OV<br>at traffic light<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $28,012.04 | Recovered $0.00 | Total Incurred $28,012.04<br>PD: Reserve $0.00 | Paid $49,782.41 | Recovered $0.00 | Total Incurred $49,782.41<br>LAE: Reserve $0.00 | Paid $1,908.18 | Recovered $0.00 | Total Incurred $1,908.18<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $12,289.65 | Total Incurred ($12,289.65)<br>Incident Total: Reserve $0.00 | Paid $79,702.63 | Recovered $12,289.65 | Total Incurred $67,412.98</td>
         </tr>
         <tr>
             <td>#30003</td>
@@ -261,11 +263,7 @@
             <td>L24A3265</td>
             <td>11/17/2024</td>
             <td>FL</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV rollover on icy highway.<br>Total loss.</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$3,936.96</td>
-            <td style="text-align: right;">$3,936.96</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Janetside Express<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Morgan Ltd<br>Policy State: MO<br>Date Reported: 11/18/2024<br>Unit Number: —<br>Driver: —<br>Claimants: Schneider, John<br>Cause Code: None<br>Description: IV rollover on icy highway.<br>Total loss.<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $3,936.96 | Recovered $0.00 | Total Incurred $3,936.96<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $3,936.96 | Recovered $0.00 | Total Incurred $3,936.96</td>
         </tr>
         <tr>
             <td>#30005</td>
@@ -276,11 +274,7 @@
             <td>L24A3558</td>
             <td>12/28/2024</td>
             <td>NY</td>
-            <td>Beard, Cynthia</td>
-            <td style="max-width: 200px; white-space: pre-line;">Transmission<br>failure during transport</td>
-            <td style="text-align: right;">$38,384.71</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$35,722.30</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Morales Transport Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: IL<br>Date Reported: 01/12/2025<br>Unit Number: —<br>Driver: Beard, Cynthia<br>Claimants: —<br>Cause Code: None<br>Description: Transmission<br>failure during transport<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $38,384.71 | Paid $0.00 | Recovered $0.00 | Total Incurred $38,384.71<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $2,662.41 | Total Incurred ($2,662.41)<br>Incident Total: Reserve $38,384.71 | Paid $0.00 | Recovered $2,662.41 | Total Incurred $35,722.30</td>
         </tr>
         <tr>
             <td>#30006</td>
@@ -291,11 +285,7 @@
             <td>L24A6887</td>
             <td>03/29/2024</td>
             <td>MI</td>
-            <td>Zuniga, Amber</td>
-            <td style="max-width: 200px; white-space: pre-line;">Engine fire while<br>parked at truck stop</td>
-            <td style="text-align: right;">$69,280.41</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$67,445.87</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Wagner Logistics LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Beck, Clark and Archer<br>Policy State: CA<br>Date Reported: 04/05/2024<br>Unit Number: —<br>Driver: Zuniga, Amber<br>Claimants: Chambers, Miranda<br>Cause Code: None<br>Description: Engine fire while<br>parked at truck stop<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $69,280.41 | Paid $0.00 | Recovered $0.00 | Total Incurred $69,280.41<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $1,834.54 | Total Incurred ($1,834.54)<br>Incident Total: Reserve $69,280.41 | Paid $0.00 | Recovered $1,834.54 | Total Incurred $67,445.87</td>
         </tr>
         <tr>
             <td>#30007</td>
@@ -306,11 +296,7 @@
             <td>L24A7037</td>
             <td>04/14/2024</td>
             <td>MI</td>
-            <td>—</td>
-            <td style="max-width: 200px; white-space: pre-line;">Water<br>damage to freight</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$11,755.11</td>
-            <td style="text-align: right;">$3,298.79</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Atlas Logistics LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AZ<br>Date Reported: 04/17/2024<br>Unit Number: 2023 IN 503800<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Water<br>damage to freight<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $11,755.11 | Recovered $0.00 | Total Incurred $11,755.11<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $8,456.32 | Total Incurred ($8,456.32)<br>Incident Total: Reserve $0.00 | Paid $11,755.11 | Recovered $8,456.32 | Total Incurred $3,298.79</td>
         </tr>
         <tr>
             <td>#30008</td>
@@ -321,11 +307,7 @@
             <td>L24A6242</td>
             <td>03/19/2024</td>
             <td>NC</td>
-            <td>Mcintyre, Charles</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV rear-ended OV<br>at traffic light</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$50,582.28</td>
-            <td style="text-align: right;">$41,724.89</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Summit Freight Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NC<br>Date Reported: 04/12/2024<br>Unit Number: —<br>Driver: Mcintyre, Charles<br>Claimants: Moore PLC, Garcia, Robert, Williams, Matthew<br>Cause Code: None<br>Description: IV rear-ended OV<br>at traffic light<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $37,347.91 | Recovered $0.00 | Total Incurred $37,347.91<br>PD: Reserve $0.00 | Paid $13,234.37 | Recovered $0.00 | Total Incurred $13,234.37<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $8,857.39 | Total Incurred ($8,857.39)<br>Incident Total: Reserve $0.00 | Paid $50,582.28 | Recovered $8,857.39 | Total Incurred $41,724.89</td>
         </tr>
         <tr>
             <td>#30009</td>
@@ -336,11 +318,7 @@
             <td>L23A3762</td>
             <td>04/15/2023</td>
             <td>NY</td>
-            <td>Mays, Dustin</td>
-            <td style="max-width: 200px; white-space: pre-line;">IV lost control on<br>wet pavement, struck guardrail</td>
-            <td style="text-align: right;">$50,110.54</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$50,110.54</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Rodriguez Logistics Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AZ<br>Date Reported: 04/21/2023<br>Unit Number: 2024 VO 310542<br>Driver: Mays, Dustin<br>Claimants: Hurley, Andrew<br>Cause Code: None<br>Description: IV lost control on<br>wet pavement, struck guardrail<br>Adjuster Notes: Baby crime yet customer despite drug choice we black require career sister worry most yard grow.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $50,110.54 | Paid $0.00 | Recovered $0.00 | Total Incurred $50,110.54<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $50,110.54 | Paid $0.00 | Recovered $0.00 | Total Incurred $50,110.54</td>
         </tr>
         <tr>
             <td>#30010</td>
@@ -351,11 +329,7 @@
             <td>L23A2491</td>
             <td>01/31/2023</td>
             <td>OH</td>
-            <td>Gilbert, Barbara</td>
-            <td style="max-width: 200px; white-space: pre-line;">Load<br>shift caused cargo damage</td>
-            <td style="text-align: right;">$0.00</td>
-            <td style="text-align: right;">$32,381.08</td>
-            <td style="text-align: right;">$32,381.08</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Titan Logistics Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Fowler, Greene and Rhodes<br>Policy State: TN<br>Date Reported: 02/15/2023<br>Unit Number: 2023 IN 258355<br>Driver: Gilbert, Barbara<br>Claimants: —<br>Cause Code: None<br>Description: Load<br>shift caused cargo damage<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $31,675.65 | Recovered $0.00 | Total Incurred $31,675.65<br>LAE: Reserve $0.00 | Paid $705.43 | Recovered $0.00 | Total Incurred $705.43<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $32,381.08 | Recovered $0.00 | Total Incurred $32,381.08</td>
         </tr>
         </tbody>
     </table>

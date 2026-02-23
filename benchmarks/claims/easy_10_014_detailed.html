@@ -18,10 +18,11 @@
                 break-inside: auto;
             }
             .page-break {
-                page-break-before: always;
-                break-before: page;
-                page-break-after: auto;
-                break-after: auto;
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
             }
         }
         body {
@@ -63,6 +64,25 @@
         }
         .incident-section.split-incident > .incident-header {
             background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
         }
         .continued-note {
             margin: 6px 0;
@@ -138,9 +158,11 @@
             text-align: center;
         }
         .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
             page-break-before: always;
             break-before: page;
-            height: 0;
             margin: 0;
             padding: 0;
             border: 0;
@@ -181,6 +203,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A3345 (NY)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>11/04/2024 (TX)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>11/09/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Wrightfurt Logistics</div>
+        <div class="detail-line"><span class="label">Insured:</span>Wrightfurt Logistics</div>
         <div class="detail-line"><span class="label">Driver:</span>Powell, Rebecca</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rollover on icy highway. Total loss.</div>
@@ -234,6 +258,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A9628 (TX)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>09/23/2023 (MI)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>09/26/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Williams Cargo Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Williams Cargo Inc</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 PE 613146</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Refrigeration unit failure - spoiled goods</div>
@@ -287,6 +313,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A8210 (FL)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>05/17/2023 (TN)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>05/20/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Hill Express Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Hill Express Inc</div>
         <div class="detail-line"><span class="label">Driver:</span>Sanchez, Drew</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 KE 986501</div>
         <div class="detail-line"><span class="label">Agency:</span>Mueller and Sons</div>
@@ -342,6 +370,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A3529 (AR)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>10/28/2023 (CA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>10/29/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>East Chris Express</div>
+        <div class="detail-line"><span class="label">Insured:</span>East Chris Express</div>
         <div class="detail-line"><span class="label">Driver:</span>Miller, Tracy</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV backing, struck parked concrete barrier</div>
@@ -388,6 +418,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A8505 (GA)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>02/27/2024 (MO)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>02/28/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>New Nicholestad Express</div>
+        <div class="detail-line"><span class="label">Insured:</span>New Nicholestad Express</div>
         <div class="detail-line"><span class="label">Driver:</span>Harrison, Justin</div>
         <div class="detail-line"><span class="label">Unit #:</span>2024 PE 889273</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -442,6 +474,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A9364 (NY)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>04/30/2023 (MI)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>05/31/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Atlas Freight Co</div>
+        <div class="detail-line"><span class="label">Insured:</span>Atlas Freight Co</div>
         <div class="detail-line"><span class="label">Driver:</span>Coffey, Kimberly</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV brakes failed, rear-ended OV</div>
@@ -495,6 +529,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A3345 (NY)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>11/04/2024 (TX)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>11/09/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Wrightfurt Logistics</div>
+        <div class="detail-line"><span class="label">Insured:</span>Wrightfurt Logistics</div>
         <div class="detail-line"><span class="label">Driver:</span>Powell, Rebecca</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV rollover on icy highway. Total loss.</div>
@@ -548,6 +584,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A8963 (CA)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>01/07/2024 (TX)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>01/09/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Port Maureen Hauling</div>
+        <div class="detail-line"><span class="label">Insured:</span>Port Maureen Hauling</div>
         <div class="detail-line"><span class="label">Driver:</span>Freeman, Barbara</div>
         <div class="detail-line"><span class="label">Unit #:</span>2023 KE 842506</div>
         <div class="detail-line"><span class="label">Description:</span></div>
@@ -600,6 +638,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A2235 (MI)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>12/21/2023 (TX)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>01/08/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Preston Transport Inc</div>
+        <div class="detail-line"><span class="label">Insured:</span>Preston Transport Inc</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Cargo stolen from locked trailer overnight</div>
         <div class="detail-line" style="margin-top: 5px;"><span class="label">Claimant(s):</span></div>
@@ -645,6 +685,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L24A6914 (OH)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>11/01/2024 (CA)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>11/07/2024</div>
+        <div class="detail-line"><span class="label">Company:</span>Christinaview Hauling</div>
+        <div class="detail-line"><span class="label">Insured:</span>Christinaview Hauling</div>
         <div class="detail-line"><span class="label">Driver:</span>Phillips, Chelsea</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">Tire blowout caused IV to veer into OV</div>
@@ -705,6 +747,8 @@
         <div class="detail-line"><span class="label">Policy #:</span>L23A8768 (AZ)</div>
         <div class="detail-line"><span class="label">Date of Loss:</span>08/01/2023 (AZ)</div>
         <div class="detail-line"><span class="label">Date Reported:</span>08/06/2023</div>
+        <div class="detail-line"><span class="label">Company:</span>Clarke Freight LLC</div>
+        <div class="detail-line"><span class="label">Insured:</span>Clarke Freight LLC</div>
         <div class="detail-line"><span class="label">Driver:</span>Perez, Toni</div>
         <div class="detail-line"><span class="label">Description:</span></div>
         <div style="margin-left: 20px; margin-top: 5px; white-space: pre-line;">IV making wide turn, clipped OV on passenger side</div>
