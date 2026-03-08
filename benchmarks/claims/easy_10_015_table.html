@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Liberty Freight Co - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            .page-break {
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
+            page-break-before: always;
+            break-before: page;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">National Interstate</div>
+            <div class="header-line">1036 Lisa Center, Reynoldsshire, AR 12744</div>
+            <div class="header-line">Phone: +1-835-513-4668x07961</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> Liberty Freight Co, Acct. # A0820984</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 12/10/2024, 12:38 PM</div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30002</td>
+            <td>L230002</td>
+            <td>Liberty Freight Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A3374</td>
+            <td>07/28/2023</td>
+            <td>AZ</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Liberty Freight Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NC<br>Date Reported: 07/29/2023<br>Unit Number: —<br>Driver: Johnson, Cassie<br>Claimants: Bennett, Laura, Wilson, William<br>Cause Code: None<br>Description: Tire blowout caused IV<br>to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $15,675.61 | Paid $3,842.10 | Recovered $0.00 | Total Incurred $19,517.71<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $15,675.61 | Paid $3,842.10 | Recovered $0.00 | Total Incurred $19,517.71</td>
+        </tr>
+        <tr>
+            <td>#30001</td>
+            <td>L240001</td>
+            <td>Atlas Express Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A9940</td>
+            <td>09/08/2024</td>
+            <td>FL</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Atlas Express Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Cummings and Sons<br>Policy State: PA<br>Date Reported: 09/15/2024<br>Unit Number: 2023 MA 630081<br>Driver: Berry, Clarence<br>Claimants: Perez, Leroy<br>Cause Code: None<br>Description: Tire blowout caused IV<br>to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $4,638.08 | Recovered $0.00 | Total Incurred $4,638.08<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $16,311.04 | Total Incurred ($16,311.04)<br>Incident Total: Reserve $0.00 | Paid $4,638.08 | Recovered $16,311.04 | Total Incurred ($11,672.96)</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L230002</td>
+            <td>Liberty Freight Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A3374</td>
+            <td>07/28/2023</td>
+            <td>AZ</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Liberty Freight Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NC<br>Date Reported: 07/29/2023<br>Unit Number: —<br>Driver: Johnson, Cassie<br>Claimants: Bennett, Laura, Wilson, William<br>Cause Code: None<br>Description: Tire blowout caused IV<br>to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $15,675.61 | Paid $3,842.10 | Recovered $0.00 | Total Incurred $19,517.71<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $15,675.61 | Paid $3,842.10 | Recovered $0.00 | Total Incurred $19,517.71</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L240003</td>
+            <td>Port Jonathanside Hauling</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A1094</td>
+            <td>08/04/2024</td>
+            <td>GA</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Port Jonathanside Hauling<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Mack Ltd<br>Policy State: NC<br>Date Reported: 08/08/2024<br>Unit Number: —<br>Driver: Thompson, Christopher<br>Claimants: Wiley, Donald, Johnson, Robert<br>Cause Code: None<br>Description: IV backing into loading<br>dock, hit concrete barrier<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $13,523.63 | Recovered $0.00 | Total Incurred $13,523.63<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $19,130.43 | Total Incurred ($19,130.43)<br>Incident Total: Reserve $0.00 | Paid $13,523.63 | Recovered $19,130.43 | Total Incurred ($5,606.80)</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L230004</td>
+            <td>Liberty Hauling Inc</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A2572</td>
+            <td>09/02/2023</td>
+            <td>AR</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Liberty Hauling Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Thompson, Montoya and Mcclure<br>Policy State: AR<br>Date Reported: 09/03/2023<br>Unit Number: —<br>Driver: Haynes, Kelly<br>Claimants: Walker-Greer<br>Cause Code: None<br>Description: IV backing, struck<br>parked concrete barrier<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $88,948.19 | Recovered $0.00 | Total Incurred $88,948.19<br>PD: Reserve $0.00 | Paid $47,298.59 | Recovered $0.00 | Total Incurred $47,298.59<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $23,596.75 | Total Incurred ($23,596.75)<br>Incident Total: Reserve $0.00 | Paid $136,246.78 | Recovered $23,596.75 | Total Incurred $112,650.03</td>
+        </tr>
+        <tr>
+            <td>#30005</td>
+            <td>L240005</td>
+            <td>Pioneer Hauling LLC</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A6325</td>
+            <td>11/02/2024</td>
+            <td>FL</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Pioneer Hauling LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Smith-Gonzalez<br>Policy State: FL<br>Date Reported: 11/14/2024<br>Unit Number: —<br>Driver: Douglas, Logan<br>Claimants: Clark, Allen, Watts, Caitlin<br>Cause Code: None<br>Description: OV changed lanes<br>into IV, causing collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $48,967.33 | Recovered $0.00 | Total Incurred $48,967.33<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $48,967.33 | Recovered $0.00 | Total Incurred $48,967.33</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L240006</td>
+            <td>Summit Cargo LLC</td>
+            <td>Cargo</td>
+            <td>Closed</td>
+            <td>L24A8470</td>
+            <td>05/21/2024</td>
+            <td>NC</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Summit Cargo LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: FL<br>Date Reported: 06/05/2024<br>Unit Number: —<br>Driver: —<br>Claimants: Dean, Stacey<br>Cause Code: None<br>Description: Cargo<br>contamination during transport<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $33,473.18 | Recovered $0.00 | Total Incurred $33,473.18<br>LAE: Reserve $0.00 | Paid $1,451.50 | Recovered $0.00 | Total Incurred $1,451.50<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $34,924.68 | Recovered $0.00 | Total Incurred $34,924.68</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L230007</td>
+            <td>Lawson Express Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A8044</td>
+            <td>06/23/2023</td>
+            <td>NC</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Lawson Express Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: IL<br>Date Reported: 06/29/2023<br>Unit Number: —<br>Driver: Nunez, Billy<br>Claimants: Matthews, Kimberly, Bryant, Patrick, Parker-Lopez, Burns, Sarah<br>Cause Code: None<br>Description: IV merging onto<br>highway, collided with OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $9,923.45 | Paid $0.00 | Recovered $0.00 | Total Incurred $9,923.45<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $27,949.47 | Total Incurred ($27,949.47)<br>Incident Total: Reserve $9,923.45 | Paid $0.00 | Recovered $27,949.47 | Total Incurred ($18,026.02)</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L240008</td>
+            <td>Port Timothy Hauling</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A8193</td>
+            <td>05/23/2024</td>
+            <td>OK</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Port Timothy Hauling<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Mccoy Group<br>Policy State: MI<br>Date Reported: 08/03/2024<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Collision with deer<br>caused front-end damage<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $70,235.97 | Recovered $0.00 | Total Incurred $70,235.97<br>LAE: Reserve $0.00 | Paid $412.26 | Recovered $0.00 | Total Incurred $412.26<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $2,443.46 | Total Incurred ($2,443.46)<br>Incident Total: Reserve $0.00 | Paid $70,648.23 | Recovered $2,443.46 | Total Incurred $68,204.77</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L230009</td>
+            <td>Best Logistics Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A4709</td>
+            <td>01/21/2023</td>
+            <td>NY</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Best Logistics Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AZ<br>Date Reported: 01/23/2023<br>Unit Number: 2024 KE 828737<br>Driver: Smith, Katherine<br>Claimants: Miller, Courtney, Lloyd, Danielle<br>Cause Code: None<br>Description: IV merging onto<br>highway, collided with OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $10,532.69 | Recovered $0.00 | Total Incurred $10,532.69<br>PD: Reserve $0.00 | Paid $32,290.93 | Recovered $0.00 | Total Incurred $32,290.93<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $23,742.88 | Total Incurred ($23,742.88)<br>Incident Total: Reserve $0.00 | Paid $42,823.62 | Recovered $23,742.88 | Total Incurred $19,080.74</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L230010</td>
+            <td>Carson Transport LLC</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A7760</td>
+            <td>03/16/2023</td>
+            <td>OH</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Carson Transport LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: FL<br>Date Reported: 03/18/2023<br>Unit Number: —<br>Driver: Cruz, Rebecca<br>Claimants: Joseph, Sarah<br>Cause Code: None<br>Description: IV lost control on<br>wet pavement, struck parked OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $36,024.74 | Recovered $0.00 | Total Incurred $36,024.74<br>PD: Reserve $0.00 | Paid $25,468.98 | Recovered $0.00 | Total Incurred $25,468.98<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $8,542.48 | Total Incurred ($8,542.48)<br>Incident Total: Reserve $0.00 | Paid $61,493.72 | Recovered $8,542.48 | Total Incurred $52,951.24</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$41,274.67</td>
+                <td>$420,950.27</td>
+                <td>$121,716.51</td>
+                <td>$340,508.43</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 11</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>

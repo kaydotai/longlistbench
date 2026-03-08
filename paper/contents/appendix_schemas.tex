@@ -1,0 +1,146 @@
+\section*{Appendix A: Evaluation Schemas}
+\addcontentsline{toc}{section}{Appendix A: Evaluation Schemas}
+\label{sec:appendix-schemas}
+
+A recurring challenge with existing document extraction benchmarks is incomplete or ambiguous schema documentation. Without clear specifications, it can be difficult to understand expected field formats, handling of optional values, or normalization rules. Researchers attempting to reproduce results must often reverse-engineer these details from examples or evaluation scripts, leading to inconsistent implementations and incomparable metrics.
+
+To ensure full reproducibility, we provide complete schemas with explicit type annotations, default values, and field descriptions. The evaluation script validates model outputs against these schemas before scoring, ensuring that format errors are caught early rather than silently degrading metrics.
+
+\subsection*{A.1 Financial Breakdown Schema}
+
+Each incident contains four financial breakdown objects (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}) with the following fields:
+
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth} >{\raggedright\arraybackslash}p{0.13\textwidth} >{\raggedright\arraybackslash}p{0.13\textwidth} >{\raggedright\arraybackslash}p{0.43\textwidth}@{}}
+\toprule
+Field & Type & Default & Description \\
+\midrule
+\endfirsthead
+\toprule
+Field & Type & Default & Description \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+\texttt{reserve} & float & 0.0 & Amount reserved for potential payout \\
+\texttt{paid} & float & 0.0 & Amount already paid \\
+\texttt{recovered} & float & 0.0 & Amount recovered (e.g., deductible) \\
+\texttt{total\_\allowbreak incurred} & float & 0.0 & Reserve + Paid - Recovered \\
+\end{longtable}
+\endgroup
+
+\subsection*{A.2 Loss Run Incident Schema}
+
+The primary entity schema representing a single insurance claim incident:
+
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth} >{\raggedright\arraybackslash}p{0.13\textwidth} >{\raggedright\arraybackslash}p{0.13\textwidth} >{\raggedright\arraybackslash}p{0.43\textwidth}@{}}
+\toprule
+Field & Type & Default & Description \\
+\midrule
+\endfirsthead
+\toprule
+Field & Type & Default & Description \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+\texttt{incident\_\allowbreak number} & string & required & Incident number (e.g., \#12345) \\
+\texttt{reference\_\allowbreak number} & string & required & Reference ID (e.g., L240123) \\
+\texttt{company\_\allowbreak name} & string & required & Trucking company name \\
+division & string & General & Company division \\
+\texttt{coverage\_\allowbreak type} & string & required & Coverage type (Liability, Physical Damage, Inland Marine, Cargo) \\
+status & string & required & Open or Closed \\
+\texttt{policy\_\allowbreak number} & string & required & Policy identifier \\
+\texttt{policy\_\allowbreak state} & string & required & Policy state abbreviation \\
+\texttt{cause\_\allowbreak code} & optional string & null & Internal cause code \\
+description & string & required & Detailed incident description \\
+handler & string & Claims Adjuster & Claims handler \\
+\texttt{unit\_\allowbreak number} & optional string & null & Vehicle/truck unit ID \\
+\texttt{date\_\allowbreak of\_\allowbreak loss} & string & required & Date incident occurred \\
+\texttt{loss\_\allowbreak state} & string & required & State where loss occurred \\
+\texttt{date\_\allowbreak reported} & string & required & Date reported to insurance \\
+agency & optional string & null & Insurance agency name \\
+insured & string & required & Insured party name \\
+claimants & list of strings & [] & List of claimants \\
+\texttt{driver\_\allowbreak name} & optional string & null & Driver name at time of incident \\
+bi & financial breakdown & \{\} & Bodily Injury \\
+pd & financial breakdown & \{\} & Property Damage \\
+lae & financial breakdown & \{\} & Loss Adjustment Expense \\
+ded & financial breakdown & \{\} & Deductible \\
+\texttt{adjuster\_\allowbreak notes} & optional string & null & Additional adjuster notes \\
+\end{longtable}
+\endgroup
+
+\subsection*{A.3 Extraction Output Schema}
+
+Models are expected to return a JSON object matching the following structure:
+
+\begingroup
+\small
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.16\textwidth} >{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}p{0.16\textwidth} >{\raggedright\arraybackslash}p{0.36\textwidth}@{}}
+\toprule
+Field & Type & Default & Description \\
+\midrule
+incidents & list of LossRunIncident & required & List of extracted incident records \\
+\bottomrule
+\end{tabular}
+\endgroup
+
+\subsection*{A.4 Field Scoring Rules}
+
+We compute schema-conformant, field-level precision/recall/F1 by canonicalizing records under the schema and comparing multisets of field-value pairs.
+
+\paragraph{Step 1: Canonicalize each incident (schema validation + normalization).}
+Both predictions and ground truth are parsed as full \texttt{LossRunIncident} objects and then normalized:
+\begin{itemize}
+    \item \textbf{Incident identifier}: we compute a normalized incident ID by stripping common prefixes from \texttt{incident\_number} (e.g., \texttt{Incident \#}, \texttt{\#}, \texttt{INC}) and trimming whitespace.
+    \item \textbf{String fields}: all strings are trimmed. For optional string fields, the empty string is treated as \texttt{null}. Optional string fields are:
+    \begin{itemize}
+        \item \texttt{cause\_code}
+        \item \texttt{unit\_number}
+        \item \texttt{agency}
+        \item \texttt{driver\_name}
+        \item \texttt{adjuster\_notes}
+    \end{itemize}
+    \item \textbf{Claimants}: coerced to a list; each entry is trimmed; empty entries are dropped; the list is sorted.
+    \item \textbf{Financial breakdowns}: for each breakdown object (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}), we ensure it is an object and normalize each numeric field by converting to float, rounding to two decimals, and mapping negative zero to zero. Unparseable values are treated as 0.0. Breakdown numeric fields are:
+    \begin{itemize}
+        \item \texttt{reserve}
+        \item \texttt{paid}
+        \item \texttt{recovered}
+        \item \texttt{total\_incurred}
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Step 2: Flatten incidents into a multiset of field-value pairs.}
+For each canonicalized incident, we emit a list of triples (\path{incident\_id}, \path{field\_path}, \path{value}). Nested financial fields are represented with dotted paths (e.g., \path{bi.reserve}).
+
+\paragraph{Step 3: Compare using multiset intersection (supports duplicates).}
+Let $\mathcal{F}(G)$ be the multiset of flattened triples from the ground truth and $\mathcal{F}(P)$ the multiset from predictions. We compute
+\begin{align}
+\mathrm{found} &= |\mathcal{F}(G) \cap \mathcal{F}(P)|,\\
+\mathrm{recall} &= \frac{\mathrm{found}}{|\mathcal{F}(G)|},\\
+\mathrm{precision} &= \frac{\mathrm{found}}{|\mathcal{F}(P)|},\\
+\mathrm{F1} &= \frac{2\,\mathrm{precision}\,\mathrm{recall}}{\mathrm{precision}+\mathrm{recall}}.
+\end{align}
+The multiset formulation means that if a document contains exact duplicate incidents (same normalized \path{incident\_id}), they are counted with multiplicity, and the score only credits matches up to the minimum count in each multiset.
+
+\paragraph{Additional diagnostics.}
+We also report:
+\begin{itemize}
+    \item \textbf{Missing/extra incident IDs}: computed from the set of normalized incident IDs present in each list.
+    \item \textbf{Exact record matches}: the number of fully-matching incident objects, computed as a multiset intersection over canonicalized incident JSON objects grouped by incident ID.
+\end{itemize}

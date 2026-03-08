@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>South Stephaniemouth Logistics - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            .page-break {
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
+            page-break-before: always;
+            break-before: page;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">Sentry Insurance</div>
+            <div class="header-line">2698 David Mills, Mariamouth, SD 26272</div>
+            <div class="header-line">Phone: +1-545-791-4575x2022</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> South Stephaniemouth Logistics, Acct. # A0822840</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 04/19/2024, 06:59 AM</div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30001</td>
+            <td>L240001</td>
+            <td>South Stephaniemouth Logistics</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L24A5359</td>
+            <td>06/19/2024</td>
+            <td>OH</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: South Stephaniemouth Logistics<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: MI<br>Date Reported: 06/25/2024<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Insured transporting vehicle was damaged<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $22,483.15 | Recovered $0.00 | Total Incurred $22,483.15<br>LAE: Reserve $0.00 | Paid $1,921.23 | Recovered $0.00 | Total Incurred $1,921.23<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $1,713.24 | Total Incurred ($1,713.24)<br>Incident Total: Reserve $0.00 | Paid $24,404.38 | Recovered $1,713.24 | Total Incurred $22,691.14</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L240002</td>
+            <td>Atlas Logistics Group</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A3360</td>
+            <td>05/23/2024</td>
+            <td>TX</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Atlas Logistics Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: CA<br>Date Reported: 05/26/2024<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Engine fire while parked at truck stop<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $79,193.49 | Recovered $0.00 | Total Incurred $79,193.49<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $2,398.95 | Total Incurred ($2,398.95)<br>Incident Total: Reserve $0.00 | Paid $79,193.49 | Recovered $2,398.95 | Total Incurred $76,794.54</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L240003</td>
+            <td>Atlas Hauling Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A2938</td>
+            <td>06/07/2024</td>
+            <td>PA</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Atlas Hauling Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TX<br>Date Reported: 06/16/2024<br>Unit Number: 2023 KE 146132<br>Driver: Anderson, Jerry<br>Claimants: Little-Richards, Avery, Jasmine<br>Cause Code: None<br>Description: IV hydroplaned, hit concrete barrier<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $37,970.16 | Recovered $0.00 | Total Incurred $37,970.16<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $37,970.16 | Recovered $0.00 | Total Incurred $37,970.16</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L240004</td>
+            <td>Adams Logistics Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A1071</td>
+            <td>10/17/2024</td>
+            <td>AR</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Adams Logistics Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TN<br>Date Reported: 10/19/2024<br>Unit Number: —<br>Driver: Rodriguez, Brittany<br>Claimants: Curry, Brian<br>Cause Code: None<br>Description: IV backing into loading dock, hit concrete barrier<br>Adjuster Notes: Section pass ago successful film writer open glass whole style two traditional whom ask always sister rise.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $7,500.98 | Paid $2,162.75 | Recovered $0.00 | Total Incurred $9,663.73<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $7,500.98 | Paid $2,162.75 | Recovered $0.00 | Total Incurred $9,663.73</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30005</td>
+            <td>L240005</td>
+            <td>Robertmouth Logistics</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A1852</td>
+            <td>02/09/2024</td>
+            <td>TX</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Robertmouth Logistics<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AR<br>Date Reported: 06/04/2024<br>Unit Number: 2024 MA 430295<br>Driver: Petty, Craig<br>Claimants: Orozco, Julie<br>Cause Code: None<br>Description: IV making right turn, trailer struck OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $38,581.77 | Recovered $0.00 | Total Incurred $38,581.77<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $33,023.42 | Total Incurred ($33,023.42)<br>Incident Total: Reserve $0.00 | Paid $38,581.77 | Recovered $33,023.42 | Total Incurred $5,558.35</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L240006</td>
+            <td>West Juliemouth Freight</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L24A2324</td>
+            <td>09/22/2024</td>
+            <td>GA</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: West Juliemouth Freight<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: NY<br>Date Reported: 09/29/2024<br>Unit Number: 2024 VO 925504<br>Driver: —<br>Claimants: Nunez, Kenneth<br>Cause Code: None<br>Description: Insured transporting vehicle was damaged<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $36,325.77 | Paid $0.00 | Recovered $0.00 | Total Incurred $36,325.77<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $36,325.77 | Paid $0.00 | Recovered $0.00 | Total Incurred $36,325.77</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L230007</td>
+            <td>Atlas Freight Inc</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L23A1845</td>
+            <td>01/28/2023</td>
+            <td>OH</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Atlas Freight Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Thompson LLC<br>Policy State: OH<br>Date Reported: 01/30/2023<br>Unit Number: —<br>Driver: Lewis, David<br>Claimants: —<br>Cause Code: None<br>Description: IV rollover on icy highway. Total loss.<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $78,968.31 | Paid $0.00 | Recovered $0.00 | Total Incurred $78,968.31<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $2,234.91 | Total Incurred ($2,234.91)<br>Incident Total: Reserve $78,968.31 | Paid $0.00 | Recovered $2,234.91 | Total Incurred $76,733.40</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L240008</td>
+            <td>Liberty Transport Co</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L24A9041</td>
+            <td>12/05/2024</td>
+            <td>AR</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Liberty Transport Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AR<br>Date Reported: 02/16/2025<br>Unit Number: —<br>Driver: Ruiz, Sarah<br>Claimants: Velazquez, Stephanie<br>Cause Code: None<br>Description: Theft of cargo from trailer at rest stop<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $42,517.76 | Recovered $0.00 | Total Incurred $42,517.76<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $42,517.76 | Recovered $0.00 | Total Incurred $42,517.76</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L230009</td>
+            <td>West Tony Transport</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A4648</td>
+            <td>11/21/2023</td>
+            <td>CA</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: West Tony Transport<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Coffey and Sons<br>Policy State: CA<br>Date Reported: 12/05/2023<br>Unit Number: —<br>Driver: Ortiz, Laura<br>Claimants: Atkinson, Kevin<br>Cause Code: None<br>Description: IV backing into loading dock, hit dock equipment<br>Adjuster Notes: Condition upon above office yard town feeling important degree.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $23,280.09 | Paid $0.00 | Recovered $0.00 | Total Incurred $23,280.09<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $22,146.17 | Total Incurred ($22,146.17)<br>Incident Total: Reserve $23,280.09 | Paid $0.00 | Recovered $22,146.17 | Total Incurred $1,133.92</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L230010</td>
+            <td>Eagle Transport Group</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L23A3702</td>
+            <td>10/07/2023</td>
+            <td>AZ</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Eagle Transport Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: OH<br>Date Reported: 10/08/2023<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Collision with deer caused front-end damage<br>Adjuster Notes: Last arm ready find hard alone draw turn people option event news two business black morning.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $58,537.30 | Paid $0.00 | Recovered $0.00 | Total Incurred $58,537.30<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,828.29 | Total Incurred ($4,828.29)<br>Incident Total: Reserve $58,537.30 | Paid $0.00 | Recovered $4,828.29 | Total Incurred $53,709.01</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$204,612.45</td>
+                <td>$224,830.31</td>
+                <td>$66,344.98</td>
+                <td>$363,097.78</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 10</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>

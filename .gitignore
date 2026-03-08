@@ -1,0 +1,45 @@
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bcf
+*.run.xml
+*.xdv
+
+# PDF output (comment out if you want to track PDFs)
+# *.pdf
+
+# Editor files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build directory
+build/
+
+benchmarks/results/scratch/
+
+# Virtual environment
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+.idea
