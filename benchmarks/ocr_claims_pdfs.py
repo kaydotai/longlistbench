@@ -325,9 +325,9 @@ def process_pdf(client: Any, pdf_path: Path, output_path: Path, max_concurrent: 
     return asyncio.run(process_pdf_async(client, pdf_path, output_path, max_concurrent, model_names, dpi))
 
 
-async def main_async() -> None:
+def build_arg_parser():
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="OCR PDF files using Google Gemini")
     parser.add_argument(
         "--model", "-m",
@@ -384,13 +384,18 @@ async def main_async() -> None:
     parser.add_argument(
         "--ocr-engine",
         choices=["auto", "text-layer", "gemini"],
-        default="auto",
+        default="gemini",
         help=(
-            "OCR engine: auto (prefer text-layer, fallback gemini), "
-            "text-layer (pdftotext only), gemini (vision OCR only)."
+            "OCR engine: gemini (vision OCR only, default), "
+            "auto (prefer text-layer, fallback gemini), "
+            "text-layer (pdftotext only)."
         ),
     )
-    
+    return parser
+
+
+async def main_async() -> None:
+    parser = build_arg_parser()
     args = parser.parse_args()
 
     fallback_models = [m.strip() for m in re.split(r"[\s,]+", args.fallback_models) if m.strip()]

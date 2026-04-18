@@ -1,42 +1,28 @@
-We summarize results for (i) OCR fidelity and (ii) baseline extraction performance.
+We summarize results for (i) the paired clean/OCR benchmark setup and (ii) baseline extraction performance on the OCR condition.
 
-\subsection{OCR identifier coverage}
-We measure how often key identifiers from the ground truth appear verbatim in the OCR text. Across the full dataset (80 OCR texts), incident numbers and reference numbers exhibit 100\% coverage (mean and minimum). These results indicate that, for primary identifiers, our OCR step preserves key identifiers reliably. They do not, however, rule out OCR degradation on other fields such as free-text descriptions or numeric values.
-
-\begin{table}[t]
-\centering
-\caption{OCR identifier coverage on the full dataset (80 documents).}
-\label{tab:ocr-coverage}
-\begin{tabular}{lrr}
-\toprule
-Identifier & Mean coverage & Min coverage \\
-\midrule
-Incident number & 100.0\% & 100.0\% \\
-Reference number & 100.0\% & 100.0\% \\
-\bottomrule
-\end{tabular}
-\end{table}
+\subsection{Transcript-conditioned setup}
+LongListBench now exposes two transcript conditions for the same rendered document: a clean canonical transcript and a noisy OCR transcript. This enables controlled clean-vs-OCR comparisons without changing the underlying layout, page structure, or ground truth. The paired setup is part of the release, but the quantitative baseline table in this revision focuses on the OCR condition, which matches the saved tiered reports currently included in the repository.
 
 \subsection{Two extraction regimes}
-We compare two local Gemini evaluation regimes that differ primarily in how they handle long OCR inputs. The first is full-context one-shot extraction, which submits the entire OCR text in one call and salvages complete incidents from truncated JSON when necessary. The second is auto-chunked extraction, which splits long OCR inputs into fixed token-budget chunks and extracts each chunk independently before concatenating the resulting incident lists. Both regimes are evaluated on the same synchronized 80-document snapshot from this repository.
+We compare two local Gemini evaluation regimes that differ primarily in how they handle long OCR inputs. The first is full-context one-shot extraction, which submits the entire OCR transcript in one call and salvages complete incidents from truncated JSON when necessary. The second is auto-chunked extraction, which splits long OCR inputs into fixed token-budget chunks and extracts each chunk independently before concatenating the resulting incident lists. Both regimes are evaluated on the same synchronized 80-document OCR snapshot from this repository.
 
 \begin{table}[t]
 \centering
 \small
-\caption{Comparison of the two local extraction regimes. Overall columns report corpus-level weighted field-value micro $F_1$ on the synchronized 80-document snapshot. The final column compares field-level $F_1$ on the representative extreme sample \texttt{extreme\_100\_001\_detailed}.}
+\caption{Comparison of the two local extraction regimes on the synchronized 80-document OCR snapshot. Columns report corpus-level weighted field-value micro $F_1$ overall and on the extreme tier.}
 \label{tab:two-regimes}
-\begin{tabular}{@{}lccc@{}}
+\begin{tabular}{@{}lcc@{}}
 \toprule
-Regime & Overall & Extreme & Representative \\
+Regime & Overall & Extreme \\
 \midrule
-One-shot & 27.4\% & 5.9\% & 5.7\% \\
-Auto-chunked & 84.8\% & 81.7\% & 63.3\% \\
+One-shot & 27.4\% & 5.9\% \\
+Auto-chunked & 84.8\% & 81.7\% \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Moving from full-context one-shot extraction to the local chunked baseline therefore improves overall weighted field-level $F_1$ by 57.4 points and raises the representative 500-incident sample from 5.7\% to 63.3\% $F_1$. The one-shot regime remains strong on easy documents (97.2\%), but then degrades sharply to 74.6\% on medium, 44.4\% on hard, and 5.9\% on extreme. By contrast, the simplified local chunked baseline reaches 97.3\% on easy, 96.5\% on medium, 87.7\% on hard, 71.0\% on detailed documents overall, and 95.9\% on table documents overall. In other words, chunking still mitigates context-length collapse, but the simpler released baseline now shows a pronounced gap between long detailed documents and long tables, with residual errors concentrated in record recovery, reading order, and layout-sensitive field completion.
+Moving from full-context one-shot extraction to the local chunked baseline therefore improves overall weighted field-level $F_1$ by 57.4 points and extreme-tier weighted field-level $F_1$ by 75.8 points on the same snapshot. The one-shot regime remains strong on easy documents (97.2\%), but then degrades sharply to 74.6\% on medium, 44.4\% on hard, and 5.9\% on extreme. By contrast, the local chunked baseline reaches 97.3\% on easy, 96.5\% on medium, 87.7\% on hard, 71.0\% on detailed documents overall, and 95.9\% on table documents overall. In other words, chunking substantially reduces the severe long-document degradation seen in the one-shot regime, but the local chunked baseline still shows a pronounced gap between long detailed documents and long tables, with residual errors concentrated in record recovery, reading order, and layout-sensitive field completion. Because the strongest page-break and multi-column stressors are concentrated in detailed-format content in v1, this detailed-versus-table gap should not be interpreted as a pure format effect.
 
 Qualitatively, errors often manifest as local field-level deviations (e.g., missing optional strings, numeric drift in financial breakdowns, or small identifier formatting mistakes) spread across an otherwise correct long list.
 
-These findings suggest that recovering primary identifiers is largely deterministic under our OCR pipeline, while the main open challenge for long-list extraction is robustly segmenting and populating full per-incident records under layout disruptions (page breaks, multi-column order, distractor tables, merged cells) and scale (hundreds of incidents).
+These findings suggest that the main open challenge for long-list extraction is robustly segmenting and populating full per-incident records under layout disruptions (page breaks, multi-column order, distractor tables, merged cells) and scale (hundreds of incidents). The paired clean/OCR benchmark design is intended to separate this difficulty from OCR-specific degradation in follow-up evaluations by comparing canonical and OCR conditions directly.

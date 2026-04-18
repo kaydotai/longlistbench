@@ -1,6 +1,6 @@
 # LongListBench
 
-Benchmark for long-list entity extraction from semi-structured documents under layout and OCR noise, inspired by recurring patterns observed in real-world claims documents.
+Benchmark for long-list entity extraction from semi-structured documents under complex layouts and OCR noise, inspired by recurring patterns observed in real-world claims documents.
 
 This benchmark was developed at [Kay.ai](https://kay.ai).
 
@@ -19,6 +19,7 @@ python -m playwright install chromium
 cp .env.example .env
 
 # Generate the complete benchmark dataset
+# This writes JSON, HTML, PDF, and canonical transcript files.
 python benchmarks/generate_claims_benchmark.py
 ```
 
@@ -50,49 +51,52 @@ See [`benchmarks/README.md`](benchmarks/README.md) for benchmark documentation.
 
 - **80 benchmark instances** across 4 difficulty tiers × 2 formats
 - **2,700 base claims** across all instances (some instances include additional rows due to `large_doc` and `duplicates`)
-- **7 problem types** testing real-world complexity (all implemented)
+- **7 implemented problem types** approximating common long-list failure modes
 - **2 document formats** (detailed and table views)
 - **Ground truth annotations** in JSON format
-- **OCR-processed PDFs** simulating production scenarios
+- **Canonical transcripts** derived from rendered HTML
+- **OCR transcripts** derived from page-image OCR
 
 ### Problem Types
 
 | Code | Meaning |
 |------|---------|
-| `page_breaks` | A single incident/row is split across PDF pages (content continues on the next page). |
+| `page_breaks` | Detailed documents can split one incident across pages; table documents insert row-boundary page breaks with repeated table headers. |
 | `multi_row` | Key fields (especially descriptions) span multiple lines/rows instead of being single-line. |
 | `duplicates` | Duplicate incidents are inserted (exact repeats) to test deduplication and counting. |
 | `large_doc` | Document is much longer than normal (many more incidents/pages). |
 | `multiple_tables` | Adds additional irrelevant tables/sections mixed in with the main claims content. |
-| `multi_column` | Uses a multi-column layout in parts of the document to stress reading order. |
+| `multi_column` | Uses a multi-column layout in detailed-format content and distractor sections to stress reading order. |
 | `merged_cells` | Uses merged table cells (e.g. `rowspan`/`colspan`) to make table structure harder. |
+
+The strongest `page_breaks` and `multi_column` effects are format-dependent: detailed documents receive split-record page breaks and multi-column primary content, while table documents keep the main claims table single-span.
 
 ### Difficulty Tiers
 
-| Tier | Claims/PDF | Instances | Formats | Problems |
-|------|------------|-----------|---------|----------|
-| Easy | 10 | 15×2 = 30 | Detailed + Table | 1-2 |
-| Medium | 25 | 12×2 = 24 | Detailed + Table | 3-4 |
-| Hard | 50 | 8×2 = 16 | Detailed + Table | 5-6 |
-| Extreme | 100 | 5×2 = 10 | Detailed + Table | All 7 |
+| Tier | Seed Claims/PDF | Released Rows/Doc | Instances | Formats | Problems |
+|------|-----------------|-------------------|-----------|---------|----------|
+| Easy | 10 | 10-11 | 15×2 = 30 | Detailed + Table | 1-2 |
+| Medium | 25 | 25-27 | 12×2 = 24 | Detailed + Table | 3-4 |
+| Hard | 50 | 55 | 8×2 = 16 | Detailed + Table | 5-6 |
+| Extreme | 100 | 500 | 5×2 = 10 | Detailed + Table | All 7 |
 
-Note: these are nominal sizes; the released dataset includes additional rows from `duplicates` and `large_doc`. In the current release, ground-truth incident counts per document range from 10--11 (easy), 25--27 (medium), 55 (hard), and 500 (extreme).
+The released dataset includes additional rows from `duplicates` and `large_doc`. Extreme filenames retain a legacy `_100_` seed-count suffix, but every released extreme document contains 500 incidents.
 
 ### Document Formats
 
 - **Detailed**: Incident sections with line items and financial breakdowns
 - **Table**: Compact tabular format with all claims in rows
 
-## Verified Gemini 2.5 Baseline
+## Verified Gemini 2.5 OCR Baseline
 
-Using the synchronized benchmark snapshot from this repository, we highlight two local extraction regimes:
+Using the synchronized OCR-condition snapshot from this repository, we highlight two local extraction regimes:
 
-| Regime | Overall weighted micro F1 | Extreme-tier weighted micro F1 | Representative extreme F1 |
-|--------|----------------------------|--------------------------------|---------------------------|
-| Full-context one-shot | 27.4% | 5.9% | 5.7% (`extreme_100_001_detailed`) |
-| Auto-chunked (`longlistbench`) | 84.8% | 81.7% | 63.3% (`extreme_100_001_detailed`) |
+| Regime | Overall weighted micro F1 | Extreme-tier weighted micro F1 |
+|--------|----------------------------|--------------------------------|
+| Full-context one-shot | 27.4% | 5.9% |
+| Auto-chunked (`longlistbench`) | 84.8% | 81.7% |
 
-The local one-shot regime remains strong on easy documents (97.2%), but drops to 74.6% on medium, 44.4% on hard, and 5.9% on extreme. The simplified local auto-chunked regime reaches 97.3% weighted F1 on easy, 96.5% on medium, 87.7% on hard, 71.0% on detailed documents overall, and 95.9% on table documents overall. Chunking therefore mitigates the catastrophic long-context failure mode, but the simpler released baseline still leaves substantial residual errors, especially on long detailed documents.
+Moving from full-context one-shot to the local auto-chunked regime improves overall weighted F1 by 57.4 points and extreme-tier weighted F1 by 75.8 points on the same snapshot. The one-shot regime remains strong on easy documents (97.2%), but drops to 74.6% on medium, 44.4% on hard, and 5.9% on extreme. By contrast, the local auto-chunked regime reaches 97.3% weighted F1 on easy, 96.5% on medium, 87.7% on hard, 71.0% on detailed documents overall, and 95.9% on table documents overall. Chunking therefore mitigates the catastrophic long-context failure mode, but the local chunked baseline still leaves substantial residual errors, especially on long detailed documents. The evaluator now also supports direct clean-vs-OCR comparisons by running the same extractor over `canonical` and `ocr` transcript conditions.
 
 ## Development
 

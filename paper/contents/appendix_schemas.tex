@@ -99,7 +99,39 @@ incidents & list of LossRunIncident & required & List of extracted incident reco
 \end{tabular}
 \endgroup
 
-\subsection*{A.4 Field Scoring Rules}
+\subsection*{A.4 Extraction Prompt Template}
+
+All providers use the same core prompt template shown below. The harness substitutes \texttt{\{schema\_json\}} with the JSON schema for the extraction object and \texttt{\{ocr\_text\}} with the selected transcript condition (`canonical` or `ocr`).
+
+\begingroup
+\small
+\begin{verbatim}
+Extract all incident records from the following document.
+
+Requirements:
+- Return ALL incidents you can find in the document.
+- Each incident MUST include ALL fields in the schema.
+- When a value is unknown:
+  - For required string fields, use "" (empty string), not null.
+  - For optional fields, use null.
+  - For list fields, use [].
+  - For numeric fields, use 0.0.
+- Output MUST be valid JSON that conforms to the schema.
+
+Schema (JSON Schema):
+{schema_json}
+
+Output JSON shape:
+{
+  "incidents": [ ... ]
+}
+
+Document:
+{ocr_text}
+\end{verbatim}
+\endgroup
+
+\subsection*{A.5 Field Scoring Rules}
 
 We compute schema-conformant, field-level precision/recall/F1 by canonicalizing records under the schema and comparing multisets of field-value pairs.
 

@@ -43,6 +43,23 @@ def _file_size_bytes(path: Path) -> int | None:
 
 
 def build_instance_index(dataset_dir: Path) -> dict[str, Any]:
+    """Build a comprehensive index of benchmark instances from dataset metadata.
+
+    Reads metadata.json from the dataset directory and collects information about
+    each instance including file existence, sizes, PDF page counts, and metadata
+    like difficulty, format, and number of claims.
+
+    Args:
+        dataset_dir: Path to the dataset directory containing metadata.json and instance files
+
+    Returns:
+        Dictionary containing:
+            - built_at: ISO timestamp of index creation
+            - dataset_dir: String path to the dataset directory
+            - source_metadata: Filename of the source metadata
+            - total_instances: Count of instances in the index
+            - instances: List of instance dictionaries with file info and metadata
+    """
     metadata_path = dataset_dir / "metadata.json"
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
 
@@ -57,6 +74,7 @@ def build_instance_index(dataset_dir: Path) -> dict[str, Any]:
         html_path = dataset_dir / f"{instance_id}.html"
         json_path = dataset_dir / f"{instance_id}.json"
         ocr_md_path = dataset_dir / f"{instance_id}_ocr.md"
+        canonical_md_path = dataset_dir / f"{instance_id}_canonical.md"
 
         out_instances.append(
             {
@@ -71,17 +89,21 @@ def build_instance_index(dataset_dir: Path) -> dict[str, Any]:
                     "pdf": str(pdf_path.name),
                     "html": str(html_path.name),
                     "ground_truth": str(json_path.name),
+                    "canonical_md": str(canonical_md_path.name),
                     "ocr_md": str(ocr_md_path.name),
                     "pdf_exists": pdf_path.exists(),
                     "html_exists": html_path.exists(),
                     "ground_truth_exists": json_path.exists(),
+                    "canonical_md_exists": canonical_md_path.exists(),
                     "ocr_md_exists": ocr_md_path.exists(),
                     "pdf_size_bytes": _file_size_bytes(pdf_path),
                     "html_size_bytes": _file_size_bytes(html_path),
                     "json_size_bytes": _file_size_bytes(json_path),
+                    "canonical_md_size_bytes": _file_size_bytes(canonical_md_path),
                     "ocr_md_size_bytes": _file_size_bytes(ocr_md_path),
                     "pdf_pages": _get_pdf_page_count(pdf_path),
                 },
+                "transcripts_available": inst.get("transcripts_available", []),
             }
         )
 
@@ -112,10 +134,13 @@ def write_csv(index: dict[str, Any], csv_path: Path) -> None:
                 "num_claims": inst.get("num_claims"),
                 "pages_estimate": inst.get("pages_estimate"),
                 "pdf_pages": files.get("pdf_pages"),
+                "transcripts_available": ";".join(inst.get("transcripts_available", [])),
                 "problems": problems_str,
                 "pdf_size_bytes": files.get("pdf_size_bytes"),
                 "html_size_bytes": files.get("html_size_bytes"),
                 "json_size_bytes": files.get("json_size_bytes"),
+                "canonical_md_size_bytes": files.get("canonical_md_size_bytes"),
+                "ocr_md_size_bytes": files.get("ocr_md_size_bytes"),
             }
         )
 
@@ -126,10 +151,13 @@ def write_csv(index: dict[str, Any], csv_path: Path) -> None:
         "num_claims",
         "pages_estimate",
         "pdf_pages",
+        "transcripts_available",
         "problems",
         "pdf_size_bytes",
         "html_size_bytes",
         "json_size_bytes",
+        "canonical_md_size_bytes",
+        "ocr_md_size_bytes",
     ]
 
     with csv_path.open("w", encoding="utf-8", newline="") as f:
@@ -168,10 +196,14 @@ def write_html(index: dict[str, Any], html_path: Path) -> None:
         pdf_name = str(files.get("pdf") or "")
         html_name = str(files.get("html") or "")
         gt_name = str(files.get("ground_truth") or "")
+        canonical_name = str(files.get("canonical_md") or "")
+        ocr_name = str(files.get("ocr_md") or "")
 
         pdf_href = "./" + quote(pdf_name) if pdf_name else ""
         html_href = "./" + quote(html_name) if html_name else ""
         gt_href = "./" + quote(gt_name) if gt_name else ""
+        canonical_href = "./" + quote(canonical_name) if canonical_name else ""
+        ocr_href = "./" + quote(ocr_name) if ocr_name else ""
 
         pdf_pages = files.get("pdf_pages")
         pdf_pages_str = "" if pdf_pages is None else str(pdf_pages)
@@ -191,6 +223,8 @@ def write_html(index: dict[str, Any], html_path: Path) -> None:
                     f"    <a href=\"{escape(pdf_href)}\" target=\"_blank\" rel=\"noopener noreferrer\">pdf</a>",
                     f"    <a href=\"{escape(html_href)}\" target=\"_blank\" rel=\"noopener noreferrer\">html</a>",
                     f"    <a href=\"{escape(gt_href)}\" target=\"_blank\" rel=\"noopener noreferrer\">json</a>",
+                    f"    <a href=\"{escape(canonical_href)}\" target=\"_blank\" rel=\"noopener noreferrer\">canonical</a>",
+                    f"    <a href=\"{escape(ocr_href)}\" target=\"_blank\" rel=\"noopener noreferrer\">ocr</a>",
                     "  </td>",
                     f"  <td class=\"num\">{escape(_fmt_bytes(files.get('pdf_size_bytes')))}</td>",
                     f"  <td class=\"num\">{escape(_fmt_bytes(files.get('html_size_bytes')))}</td>",
@@ -349,7 +383,7 @@ def write_html(index: dict[str, Any], html_path: Path) -> None:
       <div class=\"controls\">
         <input id=\"search\" type=\"search\" placeholder=\"Filter by id / problems / tier / format...\" oninput=\"filterRows()\" />
       </div>
-      <div class=\"hint\">Click a column header to sort. Links open the corresponding PDF/HTML/JSON in this directory.</div>
+      <div class=\"hint\">Click a column header to sort. Links open the corresponding benchmark artifacts in this directory.</div>
     </div>
 
     <div class=\"panel\" style=\"padding: 0; overflow-x: auto;\">

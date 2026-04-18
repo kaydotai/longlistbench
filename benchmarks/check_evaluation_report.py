@@ -1,7 +1,7 @@
 import argparse
 import json
 import sys
-from collections import Counter
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -12,149 +12,10 @@ if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
 from models.loss_run import FinancialBreakdown, LossRunIncident
-
-
-def normalize_incident_number(incident_num: str) -> str:
-    if not incident_num:
-        return ""
-    incident_num = str(incident_num).strip()
-    for prefix in ["Incident #", "Incident#", "Incident ", "#", "INC"]:
-        if incident_num.startswith(prefix):
-            incident_num = incident_num[len(prefix):]
-    return incident_num.strip()
-
-
-def evaluate_extraction(predicted: list[dict], ground_truth: list[dict]) -> dict[str, Any]:
-    gt_count = len(ground_truth)
-    pred_count = len(predicted)
-
-    _OPTIONAL_STR_FIELDS = {
-        "cause_code",
-        "unit_number",
-        "agency",
-        "driver_name",
-        "adjuster_notes",
-    }
-    _BREAKDOWN_KEYS = {"bi", "pd", "lae", "ded"}
-    _BREAKDOWN_FIELDS = {"reserve", "paid", "recovered", "total_incurred"}
-
-    def _norm_str(v: Any, *, optional: bool) -> Any:
-        if v is None:
-            return None
-        s = str(v).strip()
-        if optional and s == "":
-            return None
-        return s
-
-    def _norm_float(v: Any) -> float:
-        try:
-            f = float(v)
-        except Exception:
-            f = 0.0
-        f = round(f, 2)
-        if f == -0.0:
-            f = 0.0
-        return f
-
-    def _canonicalize(item: dict) -> dict:
-        obj = LossRunIncident.model_validate(item).model_dump(mode="json")
-
-        for k, v in list(obj.items()):
-            if k in _BREAKDOWN_KEYS:
-                if not isinstance(v, dict):
-                    v = {}
-                b: dict[str, Any] = {}
-                for bf in _BREAKDOWN_FIELDS:
-                    b[bf] = _norm_float(v.get(bf, 0.0))
-                obj[k] = b
-            elif k == "claimants":
-                if not isinstance(v, list):
-                    v = []
-                cleaned = [str(x).strip() for x in v if str(x).strip()]
-                obj[k] = sorted(cleaned)
-            elif isinstance(v, str) or v is None:
-                obj[k] = _norm_str(v, optional=(k in _OPTIONAL_STR_FIELDS))
-            else:
-                obj[k] = v
-
-        return obj
-
-    def _flatten_pairs(incident_id: str, obj: dict) -> list[str]:
-        pairs: list[str] = []
-        for k, v in obj.items():
-            if isinstance(v, dict):
-                for kk, vv in v.items():
-                    pairs.append(
-                        json.dumps(
-                            [incident_id, f"{k}.{kk}", vv],
-                            sort_keys=True,
-                            separators=(",", ":"),
-                        )
-                    )
-            else:
-                pairs.append(
-                    json.dumps(
-                        [incident_id, k, v],
-                        sort_keys=True,
-                        separators=(",", ":"),
-                    )
-                )
-        return pairs
-
-    gt_by_id: dict[str, list[str]] = {}
-    pred_by_id: dict[str, list[str]] = {}
-    gt_pairs: list[str] = []
-    pred_pairs: list[str] = []
-
-    for item in ground_truth:
-        obj = _canonicalize(item)
-        inc = normalize_incident_number(obj.get("incident_number", ""))
-        gt_by_id.setdefault(inc, []).append(json.dumps(obj, sort_keys=True, separators=(",", ":")))
-        gt_pairs.extend(_flatten_pairs(inc, obj))
-
-    for item in predicted:
-        obj = _canonicalize(item)
-        inc = normalize_incident_number(obj.get("incident_number", ""))
-        pred_by_id.setdefault(inc, []).append(json.dumps(obj, sort_keys=True, separators=(",", ":")))
-        pred_pairs.extend(_flatten_pairs(inc, obj))
-
-    gt_ids = set(gt_by_id.keys()) - {""}
-    pred_ids = set(pred_by_id.keys()) - {""}
-    missing_ids = sorted(gt_ids - pred_ids)
-    extra_ids = sorted(pred_ids - gt_ids)
-
-    exact_record_matches = 0
-    for inc in sorted(gt_ids & pred_ids):
-        exact_record_matches += sum(
-            (Counter(gt_by_id.get(inc, [])) & Counter(pred_by_id.get(inc, []))).values()
-        )
-
-    gt_pairs_counter = Counter(gt_pairs)
-    pred_pairs_counter = Counter(pred_pairs)
-    found_pairs = sum((gt_pairs_counter & pred_pairs_counter).values())
-
-    total_gt_pairs = sum(gt_pairs_counter.values())
-    total_pred_pairs = sum(pred_pairs_counter.values())
-
-    recall = found_pairs / total_gt_pairs if total_gt_pairs > 0 else 0.0
-    precision = found_pairs / total_pred_pairs if total_pred_pairs > 0 else 0.0
-    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
-
-    return {
-        "ground_truth_count": gt_count,
-        "predicted_count": pred_count,
-        "found": found_pairs,
-        "recall": recall,
-        "precision": precision,
-        "f1": f1,
-        "missing": len(missing_ids),
-        "extra": len(extra_ids),
-        "missing_ids": missing_ids,
-        "extra_ids": extra_ids,
-        "exact_record_matches": exact_record_matches,
-        "total_gold_field_pairs": total_gt_pairs,
-        "total_pred_field_pairs": total_pred_pairs,
-    }
+try:
+    from .evaluation_metrics import evaluate_extraction
+except ImportError:
+    from evaluation_metrics import evaluate_extraction
 
 
 _LOSS_RUN_FIELDS = set(LossRunIncident.model_fields.keys())
@@ -260,6 +121,7 @@ def _recompute_model_stats(detailed_results: list[dict[str, Any]]) -> dict[str, 
         model = r["model"]
         tier = r["tier"]
         fmt = r["format"]
+        transcript = r.get("transcript", "ocr")
         metrics = r.get("metrics") or {}
         error = r.get("error")
 
@@ -276,6 +138,7 @@ def _recompute_model_stats(detailed_results: list[dict[str, Any]]) -> dict[str, 
                 "errors": 0,
                 "by_tier": {},
                 "by_format": {},
+                "by_transcript": {},
             }
 
         stats = model_stats[model]
@@ -326,6 +189,24 @@ def _recompute_model_stats(detailed_results: list[dict[str, Any]]) -> dict[str, 
         stats["by_format"][fmt]["gold_pairs_sum"] += int(metrics.get("total_gold_field_pairs", 0))
         stats["by_format"][fmt]["pred_pairs_sum"] += int(metrics.get("total_pred_field_pairs", 0))
 
+        if transcript not in stats["by_transcript"]:
+            stats["by_transcript"][transcript] = {
+                "count": 0,
+                "rows": 0,
+                "f1_sum": 0.0,
+                "recall_sum": 0.0,
+                "found_sum": 0,
+                "gold_pairs_sum": 0,
+                "pred_pairs_sum": 0,
+            }
+        stats["by_transcript"][transcript]["count"] += 1
+        stats["by_transcript"][transcript]["rows"] += int(metrics.get("ground_truth_count", 0))
+        stats["by_transcript"][transcript]["f1_sum"] += float(metrics.get("f1", 0.0))
+        stats["by_transcript"][transcript]["recall_sum"] += float(metrics.get("recall", 0.0))
+        stats["by_transcript"][transcript]["found_sum"] += int(metrics.get("found", 0))
+        stats["by_transcript"][transcript]["gold_pairs_sum"] += int(metrics.get("total_gold_field_pairs", 0))
+        stats["by_transcript"][transcript]["pred_pairs_sum"] += int(metrics.get("total_pred_field_pairs", 0))
+
     for stats in model_stats.values():
         n = stats["total_samples"]
         stats["avg_f1"] = stats["total_f1"] / n if n > 0 else 0.0
@@ -367,6 +248,20 @@ def _recompute_model_stats(detailed_results: list[dict[str, Any]]) -> dict[str, 
             fmt_stats["weighted_f1"] = (
                 2 * fmt_stats["weighted_precision"] * fmt_stats["weighted_recall"] / (fmt_stats["weighted_precision"] + fmt_stats["weighted_recall"])
                 if (fmt_stats["weighted_precision"] + fmt_stats["weighted_recall"]) > 0 else 0.0
+            )
+
+        for transcript_stats in stats["by_transcript"].values():
+            c = transcript_stats["count"]
+            transcript_stats["avg_f1"] = transcript_stats["f1_sum"] / c if c > 0 else 0.0
+            transcript_stats["avg_recall"] = transcript_stats["recall_sum"] / c if c > 0 else 0.0
+            gold_pairs = transcript_stats["gold_pairs_sum"]
+            pred_pairs = transcript_stats["pred_pairs_sum"]
+            found_sum = transcript_stats["found_sum"]
+            transcript_stats["weighted_recall"] = found_sum / gold_pairs if gold_pairs > 0 else 0.0
+            transcript_stats["weighted_precision"] = found_sum / pred_pairs if pred_pairs > 0 else 0.0
+            transcript_stats["weighted_f1"] = (
+                2 * transcript_stats["weighted_precision"] * transcript_stats["weighted_recall"] / (transcript_stats["weighted_precision"] + transcript_stats["weighted_recall"])
+                if (transcript_stats["weighted_precision"] + transcript_stats["weighted_recall"]) > 0 else 0.0
             )
 
     return model_stats
@@ -429,7 +324,9 @@ def _compare_model_stats(
                         f"model_stats[{model}].{key} mismatch (report={ev!r}, recomputed={av!r})"
                     )
 
-        for group_key in ["by_tier", "by_format"]:
+        for group_key in ["by_tier", "by_format", "by_transcript"]:
+            if group_key == "by_transcript" and group_key not in e:
+                continue
             e_group = e.get(group_key) or {}
             a_group = a.get(group_key) or {}
 
@@ -527,26 +424,30 @@ def main() -> int:
     for entry in detailed_results:
         model = entry["model"]
         sample = entry["sample"]
+        transcript = entry.get("transcript", "ocr")
 
         if entry.get("error"):
-            errors.append(f"{sample} / {model}: report has error entry: {entry['error']}")
+            errors.append(f"{sample} [{transcript}] / {model}: report has error entry: {entry['error']}")
             continue
 
-        pred_path = results_dir / f"{sample}_{model}_predicted.json"
+        pred_path = results_dir / f"{sample}_{transcript}_{model}_predicted.json"
+        legacy_pred_path = results_dir / f"{sample}_{model}_predicted.json" if transcript == "ocr" else None
+        if not pred_path.exists() and legacy_pred_path is not None and legacy_pred_path.exists():
+            pred_path = legacy_pred_path
         if not pred_path.exists():
-            errors.append(f"{sample} / {model}: missing predicted file {pred_path}")
+            errors.append(f"{sample} [{transcript}] / {model}: missing predicted file {pred_path}")
             continue
 
         gt_path = claims_dir / f"{sample}.json"
         if not gt_path.exists():
-            errors.append(f"{sample} / {model}: missing ground truth file {gt_path}")
+            errors.append(f"{sample} [{transcript}] / {model}: missing ground truth file {gt_path}")
             continue
 
         predicted_raw = json.loads(pred_path.read_text(encoding="utf-8"))
         try:
             predicted = _validate_and_normalize_predictions(predicted_raw)
         except Exception as e:
-            errors.append(f"{sample} / {model}: predicted output failed schema validation: {e}")
+            errors.append(f"{sample} [{transcript}] / {model}: predicted output failed schema validation: {e}")
             continue
         ground_truth = json.loads(gt_path.read_text(encoding="utf-8"))
 

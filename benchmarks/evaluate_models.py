@@ -13,7 +13,6 @@ import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as FuturesTimeoutError
-from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -26,6 +25,10 @@ if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
 from models.loss_run import FinancialBreakdown, LossRunIncident
+try:
+    from .evaluation_metrics import evaluate_extraction
+except ImportError:
+    from evaluation_metrics import evaluate_extraction
 
 try:
     from dotenv import load_dotenv
@@ -240,9 +243,13 @@ def _validate_incident_dict_is_complete(incident: dict) -> None:
     if extra:
         raise ValueError(f"Incident has unexpected fields: {sorted(extra)}")
 
+    missing = _LOSS_RUN_FIELDS - set(incident.keys())
+    if missing:
+        raise ValueError(f"Incident missing required fields: {sorted(missing)}")
+
     for breakdown_key in _BREAKDOWN_KEYS:
         if breakdown_key not in incident:
-            continue
+            raise ValueError(f"Incident missing required field: {breakdown_key}")
         breakdown = incident.get(breakdown_key)
         if not isinstance(breakdown, dict):
             raise ValueError(f"Incident field '{breakdown_key}' must be an object")
@@ -251,6 +258,12 @@ def _validate_incident_dict_is_complete(incident: dict) -> None:
         if b_extra:
             raise ValueError(
                 f"Incident.{breakdown_key} has unexpected fields: {sorted(b_extra)}"
+            )
+
+        b_missing = _BREAKDOWN_FIELDS - set(breakdown.keys())
+        if b_missing:
+            raise ValueError(
+                f"Incident.{breakdown_key} missing required fields: {sorted(b_missing)}"
             )
 
 
@@ -581,177 +594,6 @@ MODELS = {
 # Evaluation Logic
 # ============================================================================
 
-_DATE_FIELDS = {"date_of_loss", "date_reported"}
-
-def _normalize_date(value: Any) -> str:
-    """Normalize date strings to MM/DD/YYYY for consistent comparison."""
-    if value is None:
-        return ""
-    s = " ".join(str(value).strip().split())
-    if not s:
-        return ""
-    for fmt in (
-        "%m/%d/%Y",
-        "%m/%d/%y",
-        "%Y-%m-%d",
-        "%Y/%m/%d",
-        "%m-%d-%Y",
-    ):
-        try:
-            dt = datetime.strptime(s, fmt)
-            return dt.strftime("%m/%d/%Y")
-        except ValueError:
-            continue
-    return s
-
-
-def normalize_incident_number(incident_num: str) -> str:
-    """Normalize incident number for comparison."""
-    if not incident_num:
-        return ""
-    incident_num = str(incident_num).strip()
-    for prefix in ['Incident #', 'Incident#', 'Incident ', '#', 'INC']:
-        if incident_num.startswith(prefix):
-            incident_num = incident_num[len(prefix):]
-    return incident_num.strip()
-
-
-def evaluate_extraction(predicted: list[dict], ground_truth: list[dict]) -> dict[str, Any]:
-    """Compute evaluation metrics."""
-    gt_count = len(ground_truth)
-    pred_count = len(predicted)
-
-    _OPTIONAL_STR_FIELDS = {
-        "cause_code",
-        "unit_number",
-        "agency",
-        "driver_name",
-        "adjuster_notes",
-    }
-    _BREAKDOWN_KEYS = {"bi", "pd", "lae", "ded"}
-    _BREAKDOWN_FIELDS = {"reserve", "paid", "recovered", "total_incurred"}
-
-    def _norm_str(v: Any, *, optional: bool) -> Any:
-        if v is None:
-            return None
-        s = str(v).strip()
-        if optional and s == "":
-            return None
-        return s
-
-    def _norm_float(v: Any) -> float:
-        try:
-            f = float(v)
-        except Exception:
-            f = 0.0
-        f = round(f, 2)
-        if f == -0.0:
-            f = 0.0
-        return f
-
-    def _canonicalize(item: dict) -> dict:
-        obj = LossRunIncident.model_validate(item).model_dump(mode="json")
-
-        for k, v in list(obj.items()):
-            if k in _BREAKDOWN_KEYS:
-                if not isinstance(v, dict):
-                    v = {}
-                b: dict[str, Any] = {}
-                for bf in _BREAKDOWN_FIELDS:
-                    b[bf] = _norm_float(v.get(bf, 0.0))
-                obj[k] = b
-            elif k == "claimants":
-                if not isinstance(v, list):
-                    v = []
-                cleaned = [str(x).strip() for x in v if str(x).strip()]
-                obj[k] = sorted(cleaned)
-            elif k in _DATE_FIELDS:
-                obj[k] = _normalize_date(v)
-            elif isinstance(v, str) or v is None:
-                obj[k] = _norm_str(v, optional=(k in _OPTIONAL_STR_FIELDS))
-            else:
-                obj[k] = v
-
-        return obj
-
-    def _flatten_pairs(incident_id: str, obj: dict) -> list[str]:
-        pairs: list[str] = []
-        for k, v in obj.items():
-            if isinstance(v, dict):
-                for kk, vv in v.items():
-                    pairs.append(
-                        json.dumps(
-                            [incident_id, f"{k}.{kk}", vv],
-                            sort_keys=True,
-                            separators=(",", ":"),
-                        )
-                    )
-            else:
-                pairs.append(
-                    json.dumps(
-                        [incident_id, k, v],
-                        sort_keys=True,
-                        separators=(",", ":"),
-                    )
-                )
-        return pairs
-
-    gt_by_id: dict[str, list[str]] = {}
-    pred_by_id: dict[str, list[str]] = {}
-
-    gt_pairs: list[str] = []
-    pred_pairs: list[str] = []
-
-    for item in ground_truth:
-        obj = _canonicalize(item)
-        inc = normalize_incident_number(obj.get("incident_number", ""))
-        gt_by_id.setdefault(inc, []).append(json.dumps(obj, sort_keys=True, separators=(",", ":")))
-        gt_pairs.extend(_flatten_pairs(inc, obj))
-
-    for item in predicted:
-        obj = _canonicalize(item)
-        inc = normalize_incident_number(obj.get("incident_number", ""))
-        pred_by_id.setdefault(inc, []).append(json.dumps(obj, sort_keys=True, separators=(",", ":")))
-        pred_pairs.extend(_flatten_pairs(inc, obj))
-
-    gt_ids = set(gt_by_id.keys()) - {""}
-    pred_ids = set(pred_by_id.keys()) - {""}
-
-    missing_ids = sorted(gt_ids - pred_ids)
-    extra_ids = sorted(pred_ids - gt_ids)
-
-    exact_record_matches = 0
-    for inc in sorted(gt_ids & pred_ids):
-        exact_record_matches += sum((Counter(gt_by_id.get(inc, [])) & Counter(pred_by_id.get(inc, []))).values())
-
-    gt_pairs_counter = Counter(gt_pairs)
-    pred_pairs_counter = Counter(pred_pairs)
-    found_pairs = sum((gt_pairs_counter & pred_pairs_counter).values())
-
-    total_gt_pairs = sum(gt_pairs_counter.values())
-    total_pred_pairs = sum(pred_pairs_counter.values())
-
-    recall = found_pairs / total_gt_pairs if total_gt_pairs > 0 else 0.0
-    precision = found_pairs / total_pred_pairs if total_pred_pairs > 0 else 0.0
-    f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0.0
-
-    return {
-        "ground_truth_count": gt_count,
-        "predicted_count": pred_count,
-        "found": found_pairs,
-        "recall": recall,
-        "precision": precision,
-        "f1": f1,
-        "missing": len(missing_ids),
-        "extra": len(extra_ids),
-        "missing_ids": missing_ids,
-        "extra_ids": extra_ids,
-        "exact_record_matches": exact_record_matches,
-        "total_gold_field_pairs": total_gt_pairs,
-        "total_pred_field_pairs": total_pred_pairs,
-    }
-
-
 # ============================================================================
 # Main Evaluation Runner
 # ============================================================================
@@ -765,6 +607,86 @@ class EvaluationResult:
     metrics: dict
     extraction_time: float
     error: str = None
+    transcript: str = "ocr"
+
+
+_TRANSCRIPT_SUFFIXES = {
+    "ocr": "_ocr.md",
+    "canonical": "_canonical.md",
+}
+
+_QUICK_SAMPLES = [
+    "easy_10_001_detailed",
+    "medium_25_001_detailed",
+    "hard_50_001_detailed",
+    "extreme_100_001_detailed",
+]
+
+
+@dataclass(frozen=True)
+class EvaluationInput:
+    sample: str
+    tier: str
+    format: str
+    transcript: str
+
+
+def _transcript_input_path(claims_dir: Path, sample: str, transcript: str) -> Path:
+    return claims_dir / f"{sample}{_TRANSCRIPT_SUFFIXES[transcript]}"
+
+
+def _prediction_output_path(output_dir: Path, sample: str, transcript: str, model_key: str) -> Path:
+    return output_dir / f"{sample}_{transcript}_{model_key}_predicted.json"
+
+
+def _legacy_prediction_output_path(output_dir: Path, sample: str, transcript: str, model_key: str) -> Path | None:
+    if transcript != "ocr":
+        return None
+    return output_dir / f"{sample}_{model_key}_predicted.json"
+
+
+def _discover_evaluation_inputs(
+    *,
+    claims_dir: Path,
+    samples: list[str] | None,
+    tiers: list[str] | None,
+    formats: list[str] | None,
+    transcripts: list[str] | None,
+) -> list[EvaluationInput]:
+    transcript_list = transcripts or ["ocr"]
+    out: list[EvaluationInput] = []
+
+    if samples is None:
+        sample_names = set()
+        for transcript in transcript_list:
+            suffix = _TRANSCRIPT_SUFFIXES[transcript]
+            for transcript_path in claims_dir.glob(f"*{suffix}"):
+                if transcript_path.stat().st_size <= 0:
+                    continue
+                sample = transcript_path.name[: -len(suffix)]
+                json_file = claims_dir / f"{sample}.json"
+                if not json_file.exists():
+                    continue
+                tier, fmt = get_sample_info(sample)
+                if (tiers is None or tier in tiers) and (formats is None or fmt in formats):
+                    sample_names.add(sample)
+        ordered_samples = sorted(sample_names)
+    else:
+        ordered_samples = list(samples)
+
+    for sample in ordered_samples:
+        tier, fmt = get_sample_info(sample)
+        if tiers is not None and tier not in tiers:
+            continue
+        if formats is not None and fmt not in formats:
+            continue
+        for transcript in transcript_list:
+            transcript_path = _transcript_input_path(claims_dir, sample, transcript)
+            json_file = claims_dir / f"{sample}.json"
+            if transcript_path.exists() and transcript_path.stat().st_size > 0 and json_file.exists():
+                out.append(EvaluationInput(sample=sample, tier=tier, format=fmt, transcript=transcript))
+
+    return out
 
 
 def get_sample_info(sample_name: str) -> tuple[str, str]:
@@ -780,6 +702,7 @@ def run_evaluation(
     samples: list[str] = None,
     tiers: list[str] = None,
     formats: list[str] = None,
+    transcripts: list[str] = None,
     claims_dir: Path = None,
     output_dir: Path = None,
     parallel_models: bool = False,
@@ -794,20 +717,18 @@ def run_evaluation(
         output_dir = Path(__file__).parent / "results" / "scratch"
     
     output_dir.mkdir(parents=True, exist_ok=True)
-    
-    # Discover available samples
-    if samples is None:
-        samples = []
-        for ocr_file in sorted(claims_dir.glob("*_ocr.md")):
-            sample = ocr_file.stem.replace("_ocr", "")
-            json_file = claims_dir / f"{sample}.json"
-            if json_file.exists() and ocr_file.stat().st_size > 0:
-                tier, fmt = get_sample_info(sample)
-                if (tiers is None or tier in tiers) and (formats is None or fmt in formats):
-                    samples.append(sample)
-    
-    print(f"Evaluating {len(samples)} samples across {len(models)} models")
-    print(f"Samples: {', '.join(samples[:5])}{'...' if len(samples) > 5 else ''}")
+
+    eval_inputs = _discover_evaluation_inputs(
+        claims_dir=claims_dir,
+        samples=samples,
+        tiers=tiers,
+        formats=formats,
+        transcripts=transcripts,
+    )
+
+    preview = [f"{entry.sample} ({entry.transcript})" for entry in eval_inputs[:5]]
+    print(f"Evaluating {len(eval_inputs)} sample/transcript inputs across {len(models)} models")
+    print(f"Samples: {', '.join(preview)}{'...' if len(eval_inputs) > 5 else ''}")
     print()
     
     # Setup models
@@ -829,13 +750,16 @@ def run_evaluation(
     results = []
 
     active_models = [m for m in models if m in clients]
-    total_pairs = len(samples) * len(active_models)
+    total_pairs = len(eval_inputs) * len(active_models)
     if resume and total_pairs > 0:
         existing_pairs = 0
-        for sample in samples:
+        for entry in eval_inputs:
             for model_key in active_models:
-                pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
+                pred_path = _prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
+                legacy_path = _legacy_prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
                 if pred_path.exists() and pred_path.stat().st_size > 0:
+                    existing_pairs += 1
+                elif legacy_path is not None and legacy_path.exists() and legacy_path.stat().st_size > 0:
                     existing_pairs += 1
         print(f"Resume enabled: {existing_pairs}/{total_pairs} prediction files already exist")
         print()
@@ -860,23 +784,20 @@ def run_evaluation(
     
     pair_index = 0
 
-    for sample_idx, sample in enumerate(samples, start=1):
+    for sample_idx, entry in enumerate(eval_inputs, start=1):
         print(f"{'='*70}")
-        print(f"Sample: {sample} ({sample_idx}/{len(samples)})")
+        print(f"Sample: {entry.sample} [{entry.transcript}] ({sample_idx}/{len(eval_inputs)})")
         print(f"{'='*70}")
-        
-        tier, fmt = get_sample_info(sample)
-        
-        # Load data
-        ocr_path = claims_dir / f"{sample}_ocr.md"
-        json_path = claims_dir / f"{sample}.json"
-        
-        ocr_text = ocr_path.read_text(encoding='utf-8')
+
+        transcript_path = _transcript_input_path(claims_dir, entry.sample, entry.transcript)
+        json_path = claims_dir / f"{entry.sample}.json"
+
+        transcript_text = transcript_path.read_text(encoding='utf-8')
         with open(json_path) as f:
             ground_truth = json.load(f)
         
         print(f"  Ground truth: {len(ground_truth)} claims")
-        print(f"  OCR text: {len(ocr_text):,} characters")
+        print(f"  {entry.transcript} text: {len(transcript_text):,} characters")
         print()
 
         def _eval_one_model(model_key: str) -> EvaluationResult:
@@ -894,7 +815,7 @@ def run_evaluation(
                 heartbeat_s = float(os.getenv("LLB_EXTRACT_HEARTBEAT_SECONDS", "30"))
 
                 def _do_extract() -> object:
-                    return config.extract_fn(client, ocr_text, config.model_id)
+                    return config.extract_fn(client, transcript_text, config.model_id)
 
                 with ThreadPoolExecutor(max_workers=1) as _ex:
                     _fut = _ex.submit(_do_extract)
@@ -926,49 +847,44 @@ def run_evaluation(
 
             if not error:
                 metrics = evaluate_extraction(predicted, ground_truth)
-                pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
+                pred_path = _prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
                 with open(pred_path, "w") as f:
                     json.dump(predicted, f, indent=2)
             else:
-                metrics = {
-                    "recall": 0,
-                    "precision": 0,
-                    "f1": 0,
-                    "found": 0,
-                    "ground_truth_count": len(ground_truth),
-                    "predicted_count": 0,
-                    "missing": len(ground_truth),
-                    "extra": 0,
-                }
+                metrics = evaluate_extraction([], ground_truth)
 
             return EvaluationResult(
                 model=model_key,
-                sample=sample,
-                tier=tier,
-                format=fmt,
+                sample=entry.sample,
+                tier=entry.tier,
+                format=entry.format,
                 metrics=metrics,
                 extraction_time=extraction_time,
                 error=error,
+                transcript=entry.transcript,
             )
 
         if not parallel_models or len(active_models) <= 1:
             for model_key in active_models:
                 pair_index += 1
                 config = MODELS[model_key]
-                pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
-                if resume and pred_path.exists() and pred_path.stat().st_size > 0:
+                pred_path = _prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
+                legacy_path = _legacy_prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
+                existing_pred_path = pred_path if pred_path.exists() and pred_path.stat().st_size > 0 else legacy_path
+                if resume and existing_pred_path is not None and existing_pred_path.exists() and existing_pred_path.stat().st_size > 0:
                     try:
-                        raw_predicted = json.loads(pred_path.read_text(encoding="utf-8"))
+                        raw_predicted = json.loads(existing_pred_path.read_text(encoding="utf-8"))
                         predicted = _validate_and_normalize_predictions(raw_predicted)
                         metrics = evaluate_extraction(predicted, ground_truth)
                         r = EvaluationResult(
                             model=model_key,
-                            sample=sample,
-                            tier=tier,
-                            format=fmt,
+                            sample=entry.sample,
+                            tier=entry.tier,
+                            format=entry.format,
                             metrics=metrics,
                             extraction_time=0.0,
                             error=None,
+                            transcript=entry.transcript,
                         )
                         print(f"  [{config.name}] Pair {pair_index}/{total_pairs} SKIP")
                     except Exception as e:
@@ -1000,21 +916,24 @@ def run_evaluation(
                 for model_key in active_models:
                     pair_index += 1
                     config = MODELS[model_key]
-                    pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
-                    if resume and pred_path.exists() and pred_path.stat().st_size > 0:
+                    pred_path = _prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
+                    legacy_path = _legacy_prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
+                    existing_pred_path = pred_path if pred_path.exists() and pred_path.stat().st_size > 0 else legacy_path
+                    if resume and existing_pred_path is not None and existing_pred_path.exists() and existing_pred_path.stat().st_size > 0:
                         try:
-                            raw_predicted = json.loads(pred_path.read_text(encoding="utf-8"))
+                            raw_predicted = json.loads(existing_pred_path.read_text(encoding="utf-8"))
                             predicted = _validate_and_normalize_predictions(raw_predicted)
                             metrics = evaluate_extraction(predicted, ground_truth)
                             skipped.append(
                                 EvaluationResult(
                                     model=model_key,
-                                    sample=sample,
-                                    tier=tier,
-                                    format=fmt,
+                                    sample=entry.sample,
+                                    tier=entry.tier,
+                                    format=entry.format,
                                     metrics=metrics,
                                     extraction_time=0.0,
                                     error=None,
+                                    transcript=entry.transcript,
                                 )
                             )
                             print(f"  [{config.name}] Pair {pair_index}/{total_pairs} SKIP")
@@ -1072,6 +991,7 @@ def run_evaluation_from_saved_predictions(
     samples: list[str] = None,
     tiers: list[str] = None,
     formats: list[str] = None,
+    transcripts: list[str] = None,
     claims_dir: Path = None,
     output_dir: Path = None,
     previous_report_path: Path = None,
@@ -1083,17 +1003,15 @@ def run_evaluation_from_saved_predictions(
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    if samples is None:
-        samples = []
-        for ocr_file in sorted(claims_dir.glob("*_ocr.md")):
-            sample = ocr_file.stem.replace("_ocr", "")
-            json_file = claims_dir / f"{sample}.json"
-            if json_file.exists() and ocr_file.stat().st_size > 0:
-                tier, fmt = get_sample_info(sample)
-                if (tiers is None or tier in tiers) and (formats is None or fmt in formats):
-                    samples.append(sample)
+    eval_inputs = _discover_evaluation_inputs(
+        claims_dir=claims_dir,
+        samples=samples,
+        tiers=tiers,
+        formats=formats,
+        transcripts=transcripts,
+    )
 
-    time_lookup: dict[tuple[str, str], float] = {}
+    time_lookup: dict[tuple[str, str, str], float] = {}
 
     report_paths: list[Path] = []
     current_report_path = output_dir / "evaluation_report.json"
@@ -1112,7 +1030,8 @@ def run_evaluation_from_saved_predictions(
                 for entry in report.get("detailed_results", []):
                     if entry.get("error"):
                         continue
-                    key = (entry.get("sample"), entry.get("model"))
+                    transcript = entry.get("transcript", "ocr")
+                    key = (entry.get("sample"), transcript, entry.get("model"))
                     if not key[0] or not key[1] or entry.get("extraction_time") is None:
                         continue
                     t = float(entry["extraction_time"])
@@ -1138,8 +1057,9 @@ def run_evaluation_from_saved_predictions(
         for entry in head_report.get("detailed_results", []):
             if entry.get("error"):
                 continue
-            key = (entry.get("sample"), entry.get("model"))
-            if key[0] and key[1] and entry.get("extraction_time") is not None:
+            transcript = entry.get("transcript", "ocr")
+            key = (entry.get("sample"), transcript, entry.get("model"))
+            if key[0] and key[2] and entry.get("extraction_time") is not None:
                 t = float(entry["extraction_time"])
                 if t > 0 and time_lookup.get(key, 0.0) == 0.0:
                     time_lookup[key] = t
@@ -1148,9 +1068,8 @@ def run_evaluation_from_saved_predictions(
 
     results: list[EvaluationResult] = []
 
-    for sample in samples:
-        tier, fmt = get_sample_info(sample)
-        json_path = claims_dir / f"{sample}.json"
+    for entry in eval_inputs:
+        json_path = claims_dir / f"{entry.sample}.json"
         with open(json_path) as f:
             ground_truth = json.load(f)
 
@@ -1158,12 +1077,14 @@ def run_evaluation_from_saved_predictions(
             if model_key not in MODELS:
                 continue
 
-            pred_path = output_dir / f"{sample}_{model_key}_predicted.json"
+            pred_path = _prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
+            legacy_path = _legacy_prediction_output_path(output_dir, entry.sample, entry.transcript, model_key)
+            existing_pred_path = pred_path if pred_path.exists() else legacy_path
             error = None
             predicted: list[dict] = []
-            if pred_path.exists():
+            if existing_pred_path is not None and existing_pred_path.exists():
                 try:
-                    raw_predicted = json.loads(pred_path.read_text(encoding="utf-8"))
+                    raw_predicted = json.loads(existing_pred_path.read_text(encoding="utf-8"))
                     predicted = _validate_and_normalize_predictions(raw_predicted)
                 except Exception as e:
                     error = f"Failed to load predicted JSON: {e}"
@@ -1173,28 +1094,20 @@ def run_evaluation_from_saved_predictions(
             if not error:
                 metrics = evaluate_extraction(predicted, ground_truth)
             else:
-                metrics = {
-                    "recall": 0,
-                    "precision": 0,
-                    "f1": 0,
-                    "found": 0,
-                    "ground_truth_count": len(ground_truth),
-                    "predicted_count": 0,
-                    "missing": len(ground_truth),
-                    "extra": 0,
-                }
+                metrics = evaluate_extraction([], ground_truth)
 
-            extraction_time = time_lookup.get((sample, model_key), 0.0)
+            extraction_time = time_lookup.get((entry.sample, entry.transcript, model_key), 0.0)
 
             results.append(
                 EvaluationResult(
                     model=model_key,
-                    sample=sample,
-                    tier=tier,
-                    format=fmt,
+                    sample=entry.sample,
+                    tier=entry.tier,
+                    format=entry.format,
                     metrics=metrics,
                     extraction_time=extraction_time,
                     error=error,
+                    transcript=entry.transcript,
                 )
             )
 
@@ -1225,6 +1138,7 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
                 'errors': 0,
                 'by_tier': {},
                 'by_format': {},
+                'by_transcript': {},
             }
         
         stats = model_stats[r.model]
@@ -1276,6 +1190,25 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
         stats['by_format'][r.format]['found_sum'] += r.metrics.get('found', 0)
         stats['by_format'][r.format]['gold_pairs_sum'] += r.metrics.get('total_gold_field_pairs', 0)
         stats['by_format'][r.format]['pred_pairs_sum'] += r.metrics.get('total_pred_field_pairs', 0)
+
+        # By transcript condition
+        if r.transcript not in stats['by_transcript']:
+            stats['by_transcript'][r.transcript] = {
+                'count': 0,
+                'rows': 0,
+                'f1_sum': 0,
+                'recall_sum': 0,
+                'found_sum': 0,
+                'gold_pairs_sum': 0,
+                'pred_pairs_sum': 0,
+            }
+        stats['by_transcript'][r.transcript]['count'] += 1
+        stats['by_transcript'][r.transcript]['rows'] += r.metrics.get('ground_truth_count', 0)
+        stats['by_transcript'][r.transcript]['f1_sum'] += r.metrics['f1']
+        stats['by_transcript'][r.transcript]['recall_sum'] += r.metrics['recall']
+        stats['by_transcript'][r.transcript]['found_sum'] += r.metrics.get('found', 0)
+        stats['by_transcript'][r.transcript]['gold_pairs_sum'] += r.metrics.get('total_gold_field_pairs', 0)
+        stats['by_transcript'][r.transcript]['pred_pairs_sum'] += r.metrics.get('total_pred_field_pairs', 0)
     
     # Compute averages
     for model, stats in model_stats.items():
@@ -1320,6 +1253,20 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
                 2 * fmt_stats['weighted_precision'] * fmt_stats['weighted_recall'] / (fmt_stats['weighted_precision'] + fmt_stats['weighted_recall'])
                 if (fmt_stats['weighted_precision'] + fmt_stats['weighted_recall']) > 0 else 0
             )
+
+        for transcript_stats in stats['by_transcript'].values():
+            c = transcript_stats['count']
+            transcript_stats['avg_f1'] = transcript_stats['f1_sum'] / c if c > 0 else 0
+            transcript_stats['avg_recall'] = transcript_stats['recall_sum'] / c if c > 0 else 0
+            gold_pairs = transcript_stats['gold_pairs_sum']
+            pred_pairs = transcript_stats['pred_pairs_sum']
+            found_sum = transcript_stats['found_sum']
+            transcript_stats['weighted_recall'] = found_sum / gold_pairs if gold_pairs > 0 else 0
+            transcript_stats['weighted_precision'] = found_sum / pred_pairs if pred_pairs > 0 else 0
+            transcript_stats['weighted_f1'] = (
+                2 * transcript_stats['weighted_precision'] * transcript_stats['weighted_recall'] / (transcript_stats['weighted_precision'] + transcript_stats['weighted_recall'])
+                if (transcript_stats['weighted_precision'] + transcript_stats['weighted_recall']) > 0 else 0
+            )
     
     # Save JSON report
     report = {
@@ -1331,6 +1278,7 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
                 'sample': r.sample,
                 'tier': r.tier,
                 'format': r.format,
+                'transcript': r.transcript,
                 'metrics': r.metrics,
                 'extraction_time': r.extraction_time,
                 'error': r.error,
@@ -1354,6 +1302,11 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
         "| Model | Weighted F1 | Weighted Recall | Weighted Precision | Macro F1 | Rows | Samples | Errors |",
         "|-------|-------------|-----------------|--------------------|----------|------|---------|--------|",
     ]
+
+    def _format_weighted_pct(group_stats: dict | None) -> str:
+        if not group_stats or group_stats.get("count", 0) == 0:
+            return "N/A"
+        return f"{group_stats['weighted_f1']:.1%}"
     
     for model_key in model_order:
         if model_key in model_stats:
@@ -1380,7 +1333,7 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
             name = MODELS[model_key].name
             tiers = ['easy', 'medium', 'hard', 'extreme']
             tier_scores = [
-                f"{s['by_tier'].get(t, {}).get('weighted_f1', 0):.1%}" for t in tiers
+                _format_weighted_pct(s["by_tier"].get(t)) for t in tiers
             ]
             md_lines.append(f"| {name} | {' | '.join(tier_scores)} |")
     
@@ -1396,9 +1349,25 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
         if model_key in model_stats:
             s = model_stats[model_key]
             name = MODELS[model_key].name
-            detailed = s['by_format'].get('detailed', {}).get('weighted_f1', 0)
-            table = s['by_format'].get('table', {}).get('weighted_f1', 0)
-            md_lines.append(f"| {name} | {detailed:.1%} | {table:.1%} |")
+            detailed = _format_weighted_pct(s["by_format"].get("detailed"))
+            table = _format_weighted_pct(s["by_format"].get("table"))
+            md_lines.append(f"| {name} | {detailed} | {table} |")
+
+    md_lines.extend([
+        "",
+        "## Results by Transcript Condition",
+        "",
+        "| Model | Canonical | OCR |",
+        "|-------|-----------|-----|",
+    ])
+
+    for model_key in model_order:
+        if model_key in model_stats:
+            s = model_stats[model_key]
+            name = MODELS[model_key].name
+            canonical = _format_weighted_pct(s["by_transcript"].get("canonical"))
+            ocr = _format_weighted_pct(s["by_transcript"].get("ocr"))
+            md_lines.append(f"| {name} | {canonical} | {ocr} |")
     
     md_lines.extend([
         "",
@@ -1407,17 +1376,18 @@ def generate_report(results: list[EvaluationResult], output_path: Path):
     ])
     
     # Group by sample
-    samples_seen = set()
+    samples_seen: set[tuple[str, str]] = set()
     for r in results:
-        if r.sample not in samples_seen:
-            samples_seen.add(r.sample)
-            md_lines.append(f"### {r.sample}")
+        sample_key = (r.sample, r.transcript)
+        if sample_key not in samples_seen:
+            samples_seen.add(sample_key)
+            md_lines.append(f"### {r.sample} ({r.transcript})")
             md_lines.append("")
             md_lines.append("| Model | F1 | Recall | Precision | Predicted | Time |")
             md_lines.append("|-------|-----|--------|-----------|-----------|------|")
             
             for r2 in results:
-                if r2.sample == r.sample:
+                if r2.sample == r.sample and r2.transcript == r.transcript:
                     name = MODELS[r2.model].name
                     m = r2.metrics
                     if r2.error:
@@ -1452,6 +1422,9 @@ def main():
     parser.add_argument('--formats', nargs='+', default=None,
                        choices=['detailed', 'table'],
                        help='Document formats to test (default: all)')
+    parser.add_argument('--transcripts', nargs='+', default=['ocr'],
+                       choices=['canonical', 'ocr'],
+                       help='Transcript conditions to test (default: ocr)')
     parser.add_argument('--samples', nargs='+', default=None,
                        help='Specific samples to test (default: all available)')
     parser.add_argument('--quick', action='store_true',
@@ -1471,11 +1444,7 @@ def main():
     
     # Quick mode: one sample per tier
     if args.quick:
-        args.samples = [
-            'easy_10_001_detailed',
-            'medium_25_001_detailed',
-            'hard_50_001_detailed',
-        ]
+        args.samples = list(_QUICK_SAMPLES)
     
     print("="*70)
     print("MULTI-MODEL EVALUATION: LongListBench Benchmark")
@@ -1484,6 +1453,7 @@ def main():
     print(f"Models: {', '.join(args.models)}")
     print(f"Tiers: {args.tiers or 'all'}")
     print(f"Formats: {args.formats or 'all'}")
+    print(f"Transcripts: {args.transcripts or 'all'}")
     print()
     
     if args.offline: 
@@ -1494,6 +1464,7 @@ def main():
             samples=args.samples,
             tiers=args.tiers,
             formats=args.formats,
+            transcripts=args.transcripts,
             output_dir=output_dir,
             previous_report_path=previous_report_path,
         )
@@ -1504,6 +1475,7 @@ def main():
             samples=args.samples,
             tiers=args.tiers,
             formats=args.formats,
+            transcripts=args.transcripts,
             output_dir=output_dir,
             parallel_models=args.parallel_models,
             model_workers=args.model_workers,

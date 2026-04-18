@@ -1,4 +1,4 @@
-LongListBench\footnote{Code, data, and implementation details are available at \url{https://github.com/kaydotai/longlistbench}.} is a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident and line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground-truth incidents in JSON, (ii) a rendered PDF, and (iii) OCR text of the PDF in Markdown.
+LongListBench\footnote{Code, data, and implementation details are available at \url{https://github.com/kaydotai/longlistbench}.} is a synthetic benchmark for long-list entity extraction in semi-structured business documents with long incident and line-item lists, inspired by recurring patterns observed in real-world claims documents. Each benchmark instance consists of (i) structured ground-truth incidents in JSON, (ii) rendered HTML/PDF artifacts, and (iii) transcript conditions in Markdown.
 
 \subsection{Entity schema}
 Ground truth incidents follow a structured schema (see \hyperref[sec:appendix-schemas]{Appendix~A}) that includes incident identifiers, policy metadata, narrative text, and nested financial breakdowns (\texttt{bi}, \texttt{pd}, \texttt{lae}, \texttt{ded}). While downstream workflows often emphasize a small subset of high-value fields (e.g., incident identifiers, loss dates, and financial totals), our evaluator requires and scores the full schema.
@@ -14,8 +14,9 @@ Human annotators reviewed real insurance loss run documents from trucking compan
  \begin{enumerate}
      \item \textbf{Problem configuration}: We identify recurring layout artifacts in real documents (e.g., page breaks splitting records, merged cells, and multi-column layouts) and encode them as configurable problem types.
      \item \textbf{Document rendering}: We generate synthetic incident records under the target schema, render them to HTML with selected problem types injected, and convert the resulting HTML to PDF via headless Chromium.
-     \item \textbf{OCR}: We obtain OCR text for each PDF using Gemini 2.5 Flash on page images.
-     \item \textbf{Markdown output}: OCR text is stored as structured Markdown that preserves table structure and approximate spatial layout, consistent with typical OCR pipeline outputs.
+     \item \textbf{Canonical transcript}: We derive a clean transcript directly from the rendered HTML structure, preserving intended reading order, page boundaries, headers, tables, and distractor sections without OCR corruption.
+     \item \textbf{OCR transcript}: We obtain a noisy transcript for each PDF using Gemini OCR on rendered page images.
+     \item \textbf{Markdown output}: Both transcript conditions are stored as page-concatenated Markdown for evaluation.
  \end{enumerate}
 
 \begin{figure}[ht]
@@ -31,7 +32,7 @@ Documents are rendered in one of two formats: (i) \textbf{Detailed}, which uses 
 We inject seven recurring document phenomena that complicate long-list extraction. These effects are applied at the HTML level prior to PDF rendering.
 
 \paragraph{Page breaks.}
-In real-world documents, page boundaries frequently split logical entities mid-record. A single incident may begin on one page with identifiers and description, while its financial breakdown appears on the next. This is particularly common in loss runs and itemized bills where dense formatting leaves no natural breakpoints. OCR systems typically process pages independently, producing separate text blocks that must be reassembled. Extraction models must recognize continuation patterns and avoid treating the second half of a split record as a new entity or dropping it entirely.
+In real-world documents, page boundaries frequently interrupt local record context. In our detailed format, a single incident can begin on one page with identifiers and description while its financial breakdown appears on the next. In our table format, we instead insert page breaks between groups of rows and repeat table headers across the break. OCR systems typically process pages independently, producing separate text blocks that must be reassembled. Extraction models must therefore preserve continuity across pages and avoid dropping rows or misattaching continuation content.
 \begin{figure}[ht]
     \centering
     \IfFileExists{figures/example_page_breaks.png}{
@@ -58,7 +59,7 @@ Table cells often contain text that wraps across multiple lines, especially for 
 
 \paragraph{Exact duplicates.}
 \mbox{}\\
-Production documents sometimes contain intentionally repeated records. In insurance contexts, the same incident may appear multiple times due to amendments, re-openings, or reporting across multiple policy periods. Unlike data entry errors, these duplicates are semantically meaningful and must be preserved in the extracted output. Many extraction pipelines include deduplication as a post-processing step, which would incorrectly collapse valid duplicate entries. Models must faithfully reproduce the document content without applying implicit deduplication logic.
+Production documents sometimes contain intentionally repeated records. In insurance contexts, the same incident may appear multiple times due to amendments, re-openings, or reporting across multiple policy periods. Unlike data entry errors, these duplicates are semantically meaningful and must be preserved in the extracted output. Many extraction pipelines include deduplication as a post-processing step, which would incorrectly collapse valid duplicate entries. In LongListBench v1 we model this stressor as exact record repeats rather than near-duplicates or amended variants.
 
 \paragraph{Large documents.}
 Real loss runs and itemized bills routinely contain hundreds of line items. A single trucking company's annual loss run may list 200--500 incidents; a hospital bill for a complex procedure can exceed 1{,}000 charge lines. These documents push against context window limits of current LLMs. Even models with 128K+ token windows may exhibit degraded recall on items appearing in the middle of very long documents (the "lost in the middle" phenomenon). We include an extreme tier with 500 incidents per document to measure how extraction quality scales with document length.
@@ -67,7 +68,7 @@ Real loss runs and itemized bills routinely contain hundreds of line items. A si
 Business documents frequently embed auxiliary tables alongside the primary data. A loss run PDF might include a cover page with agent contact information, a summary table of totals by coverage type, or a glossary of status codes; none of these should be extracted as incident records. Models must distinguish the target entity table from these distractors based on schema matching, header recognition, or positional cues. Naive approaches that extract all tabular content will produce false positives from irrelevant tables.
 
 \paragraph{Multi-column layout.}
-Some documents use multi-column layouts to fit more content per page. This creates reading-order ambiguity: should text be read left-to-right across columns or top-to-bottom within each column? Standard OCR often assumes a single-column flow, interleaving content from parallel columns into an incoherent sequence. For example, incident \#1's description might be concatenated with incident \#10's financial data if both appear at the same vertical position in adjacent columns. Correct extraction requires column detection and proper reading-order reconstruction.
+Some documents use multi-column layouts to fit more content per page. This creates reading-order ambiguity: should text be read left-to-right across columns or top-to-bottom within each column? Standard OCR often assumes a single-column flow, interleaving content from parallel columns into an incoherent sequence. In LongListBench v1 this stressor primarily affects detailed-format primary content and auxiliary sections; the main table-format claims table remains single-span to preserve a readable tabular baseline.
 \begin{figure}[ht]
     \centering
     \IfFileExists{figures/example_multi_column.png}{
@@ -93,6 +94,6 @@ Tables often use merged cells for visual grouping. A common pattern is merging t
 \end{figure}
 
 \subsection{Dataset scale}
-The released dataset (\texttt{longlistbench-v1}, version 1.0.1) contains 80 PDFs (40 detailed, 40 table) with 6{,}828 incident rows. Difficulty tiers are configured as 15 easy base instances (10 claims/PDF nominal), 12 medium (25 claims/PDF nominal), 8 hard (50 claims/PDF nominal), and 5 extreme (500 claims/PDF nominal); each base instance is rendered in both detailed and table formats, yielding 80 documents in total. Enabling \texttt{duplicates} injects additional duplicate rows, causing some documents to exceed the nominal tier size.
+The released dataset (\texttt{longlistbench-v1}, version 1.0.2) contains 80 rendered documents (40 detailed, 40 table) with 6{,}828 incident rows and paired clean and OCR transcripts for evaluation. Difficulty tiers are configured as 15 easy base instances (seeded with 10 claims/PDF), 12 medium (25), 8 hard (50), and 5 extreme instances seeded with 100 claims/PDF and then expanded to 500 incidents per released document via \texttt{large\_doc}. Each base instance is rendered in both detailed and table formats, yielding 80 documents in total. Enabling \texttt{duplicates} injects additional duplicate rows, causing some documents to exceed the seed count.
 
 Across the 80 documents, the most common injected issues are multi-row entities (62/80), page breaks (56/80), duplicates (56/80), and multiple tables (40/80).

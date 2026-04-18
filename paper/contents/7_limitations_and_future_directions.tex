@@ -10,14 +10,14 @@ LongListBench is designed as a measurement tool for long-list extraction under c
 Covered in v1 & Not covered / out of scope \\
 \midrule
 Claims-style long lists (loss runs) in two renderings (detailed and table) & Other long-list families (invoices, purchase orders, medical billing, financial statements) and non-English documents \\
-Programmatic layouts with seven injected phenomena & Scan artifacts (skew, blur, stamps, handwriting), complex typography, and highly idiosyncratic templates \\
-VLM-based OCR text with strong identifier retention & Broader OCR stacks and prompt variants; OCR bounding boxes and reading-order supervision \\
+Programmatic layouts with seven injected phenomena (including some format-specific variants and exact duplicates) & Scan artifacts (skew, blur, stamps, handwriting), complex typography, and highly idiosyncratic templates \\
+Canonical and VLM-OCR transcript conditions for claims-style documents & Broader OCR stacks and prompt variants; OCR bounding boxes and reading-order supervision \\
 Schema-conformant, field-level micro scoring with canonicalization & Semantic equivalence, downstream task-based metrics, and duplicate-aware entity matching \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-In addition, our primary record identifier is the incident number. This choice simplifies evaluation and enables stable alignment at scale, but it can understate performance when a model extracts most fields correctly while corrupting identifiers. It also complicates the interpretation of results on documents containing exact duplicate incidents.
+In addition, our primary record identifier is the incident number. This choice simplifies evaluation and enables stable alignment at scale, but it can understate performance when a model extracts most fields correctly while corrupting identifiers. It also complicates the interpretation of results on documents containing exact duplicate incidents. Some injected stressors are intentionally format-specific in v1: the strongest page-break and multi-column effects appear in detailed-format content, while table-format documents keep the main claims table single-span. The canonical-vs-OCR setup isolates OCR penalty, but it does not fully explain all failure modes: extraction protocols can still fail on clean transcripts because of long lists, layout structure, and schema-completion errors.
 
 \subsection{Future directions}
 We view LongListBench as an extensible benchmark and evaluation harness. The most valuable extensions are those that broaden the noise distribution, provide stronger signals for layout reconstruction, and benchmark extraction protocols that remain robust at hundreds of records.

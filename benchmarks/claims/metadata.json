@@ -1,32 +1,44 @@
 {
   "dataset_name": "longlistbench-v1",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Benchmark for long-list entity extraction under layout and OCR noise",
-  "generated_at": "2026-01-18T19:59:24.644770",
+  "generated_at": "2026-04-18T07:46:55.077308",
   "base_seed": 42,
   "total_instances": 80,
   "total_claims": 6828,
   "schema_version": "1.0",
+  "transcript_conditions": [
+    "canonical",
+    "ocr"
+  ],
   "difficulty_tiers": {
     "easy": {
-      "claims_per_pdf": 10,
+      "seed_claims_per_pdf": 10,
       "num_instances": 15,
-      "total_claims": 312
+      "total_claims": 312,
+      "min_claims_per_document": 10,
+      "max_claims_per_document": 11
     },
     "medium": {
-      "claims_per_pdf": 25,
+      "seed_claims_per_pdf": 25,
       "num_instances": 12,
-      "total_claims": 636
+      "total_claims": 636,
+      "min_claims_per_document": 25,
+      "max_claims_per_document": 27
     },
     "hard": {
-      "claims_per_pdf": 50,
+      "seed_claims_per_pdf": 50,
       "num_instances": 8,
-      "total_claims": 880
+      "total_claims": 880,
+      "min_claims_per_document": 55,
+      "max_claims_per_document": 55
     },
     "extreme": {
-      "claims_per_pdf": 500,
+      "seed_claims_per_pdf": 100,
       "num_instances": 5,
-      "total_claims": 5000
+      "total_claims": 5000,
+      "min_claims_per_document": 500,
+      "max_claims_per_document": 500
     }
   },
   "instances": [
@@ -44,9 +56,16 @@
       "files": {
         "ground_truth": "easy_10_001_detailed.json",
         "pdf": "easy_10_001_detailed.pdf",
-        "json_size_bytes": 11650,
-        "pdf_size_bytes": 139086
-      }
+        "canonical_md": "easy_10_001_detailed_canonical.md",
+        "ocr_md": "easy_10_001_detailed_ocr.md",
+        "json_size_bytes": 11651,
+        "pdf_size_bytes": 141562,
+        "canonical_size_bytes": 6306
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_001_table",
@@ -62,9 +81,16 @@
       "files": {
         "ground_truth": "easy_10_001_table.json",
         "pdf": "easy_10_001_table.pdf",
-        "json_size_bytes": 11607,
-        "pdf_size_bytes": 128702
-      }
+        "canonical_md": "easy_10_001_table_canonical.md",
+        "ocr_md": "easy_10_001_table_ocr.md",
+        "json_size_bytes": 11608,
+        "pdf_size_bytes": 150818,
+        "canonical_size_bytes": 9712
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_002_detailed",
@@ -80,9 +106,16 @@
       "files": {
         "ground_truth": "easy_10_002_detailed.json",
         "pdf": "easy_10_002_detailed.pdf",
-        "json_size_bytes": 11644,
-        "pdf_size_bytes": 153732
-      }
+        "canonical_md": "easy_10_002_detailed_canonical.md",
+        "ocr_md": "easy_10_002_detailed_ocr.md",
+        "json_size_bytes": 11645,
+        "pdf_size_bytes": 137386,
+        "canonical_size_bytes": 6284
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_002_table",
@@ -98,9 +131,16 @@
       "files": {
         "ground_truth": "easy_10_002_table.json",
         "pdf": "easy_10_002_table.pdf",
-        "json_size_bytes": 11634,
-        "pdf_size_bytes": 140943
-      }
+        "canonical_md": "easy_10_002_table_canonical.md",
+        "ocr_md": "easy_10_002_table_ocr.md",
+        "json_size_bytes": 11635,
+        "pdf_size_bytes": 150808,
+        "canonical_size_bytes": 9946
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_003_detailed",
@@ -117,9 +157,16 @@
       "files": {
         "ground_truth": "easy_10_003_detailed.json",
         "pdf": "easy_10_003_detailed.pdf",
-        "json_size_bytes": 11617,
-        "pdf_size_bytes": 153593
-      }
+        "canonical_md": "easy_10_003_detailed_canonical.md",
+        "ocr_md": "easy_10_003_detailed_ocr.md",
+        "json_size_bytes": 11618,
+        "pdf_size_bytes": 138954,
+        "canonical_size_bytes": 6247
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_003_table",
@@ -136,9 +183,16 @@
       "files": {
         "ground_truth": "easy_10_003_table.json",
         "pdf": "easy_10_003_table.pdf",
-        "json_size_bytes": 11694,
-        "pdf_size_bytes": 141108
-      }
+        "canonical_md": "easy_10_003_table_canonical.md",
+        "ocr_md": "easy_10_003_table_ocr.md",
+        "json_size_bytes": 11695,
+        "pdf_size_bytes": 150631,
+        "canonical_size_bytes": 10014
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_004_detailed",
@@ -154,9 +208,16 @@
       "files": {
         "ground_truth": "easy_10_004_detailed.json",
         "pdf": "easy_10_004_detailed.pdf",
-        "json_size_bytes": 12967,
-        "pdf_size_bytes": 137123
-      }
+        "canonical_md": "easy_10_004_detailed_canonical.md",
+        "ocr_md": "easy_10_004_detailed_ocr.md",
+        "json_size_bytes": 12968,
+        "pdf_size_bytes": 138793,
+        "canonical_size_bytes": 7046
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_004_table",
@@ -172,9 +233,16 @@
       "files": {
         "ground_truth": "easy_10_004_table.json",
         "pdf": "easy_10_004_table.pdf",
-        "json_size_bytes": 12682,
-        "pdf_size_bytes": 127236
-      }
+        "canonical_md": "easy_10_004_table_canonical.md",
+        "ocr_md": "easy_10_004_table_ocr.md",
+        "json_size_bytes": 12683,
+        "pdf_size_bytes": 151225,
+        "canonical_size_bytes": 10513
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_005_detailed",
@@ -191,9 +259,16 @@
       "files": {
         "ground_truth": "easy_10_005_detailed.json",
         "pdf": "easy_10_005_detailed.pdf",
-        "json_size_bytes": 12686,
-        "pdf_size_bytes": 135325
-      }
+        "canonical_md": "easy_10_005_detailed_canonical.md",
+        "ocr_md": "easy_10_005_detailed_ocr.md",
+        "json_size_bytes": 12687,
+        "pdf_size_bytes": 136247,
+        "canonical_size_bytes": 6852
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_005_table",
@@ -210,9 +285,16 @@
       "files": {
         "ground_truth": "easy_10_005_table.json",
         "pdf": "easy_10_005_table.pdf",
-        "json_size_bytes": 12680,
-        "pdf_size_bytes": 129060
-      }
+        "canonical_md": "easy_10_005_table_canonical.md",
+        "ocr_md": "easy_10_005_table_ocr.md",
+        "json_size_bytes": 12681,
+        "pdf_size_bytes": 152111,
+        "canonical_size_bytes": 10568
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_006_detailed",
@@ -228,9 +310,16 @@
       "files": {
         "ground_truth": "easy_10_006_detailed.json",
         "pdf": "easy_10_006_detailed.pdf",
-        "json_size_bytes": 11782,
-        "pdf_size_bytes": 136134
-      }
+        "canonical_md": "easy_10_006_detailed_canonical.md",
+        "ocr_md": "easy_10_006_detailed_ocr.md",
+        "json_size_bytes": 11783,
+        "pdf_size_bytes": 138269,
+        "canonical_size_bytes": 6296
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_006_table",
@@ -246,9 +335,16 @@
       "files": {
         "ground_truth": "easy_10_006_table.json",
         "pdf": "easy_10_006_table.pdf",
-        "json_size_bytes": 11624,
-        "pdf_size_bytes": 129335
-      }
+        "canonical_md": "easy_10_006_table_canonical.md",
+        "ocr_md": "easy_10_006_table_ocr.md",
+        "json_size_bytes": 11625,
+        "pdf_size_bytes": 151358,
+        "canonical_size_bytes": 9789
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_007_detailed",
@@ -264,9 +360,16 @@
       "files": {
         "ground_truth": "easy_10_007_detailed.json",
         "pdf": "easy_10_007_detailed.pdf",
-        "json_size_bytes": 11843,
-        "pdf_size_bytes": 154323
-      }
+        "canonical_md": "easy_10_007_detailed_canonical.md",
+        "ocr_md": "easy_10_007_detailed_ocr.md",
+        "json_size_bytes": 11844,
+        "pdf_size_bytes": 139358,
+        "canonical_size_bytes": 6589
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_007_table",
@@ -282,9 +385,16 @@
       "files": {
         "ground_truth": "easy_10_007_table.json",
         "pdf": "easy_10_007_table.pdf",
-        "json_size_bytes": 11657,
-        "pdf_size_bytes": 140563
-      }
+        "canonical_md": "easy_10_007_table_canonical.md",
+        "ocr_md": "easy_10_007_table_ocr.md",
+        "json_size_bytes": 11658,
+        "pdf_size_bytes": 149989,
+        "canonical_size_bytes": 9967
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_008_detailed",
@@ -301,9 +411,16 @@
       "files": {
         "ground_truth": "easy_10_008_detailed.json",
         "pdf": "easy_10_008_detailed.pdf",
-        "json_size_bytes": 11789,
-        "pdf_size_bytes": 155119
-      }
+        "canonical_md": "easy_10_008_detailed_canonical.md",
+        "ocr_md": "easy_10_008_detailed_ocr.md",
+        "json_size_bytes": 11790,
+        "pdf_size_bytes": 141233,
+        "canonical_size_bytes": 6547
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_008_table",
@@ -320,9 +437,16 @@
       "files": {
         "ground_truth": "easy_10_008_table.json",
         "pdf": "easy_10_008_table.pdf",
-        "json_size_bytes": 11984,
-        "pdf_size_bytes": 141169
-      }
+        "canonical_md": "easy_10_008_table_canonical.md",
+        "ocr_md": "easy_10_008_table_ocr.md",
+        "json_size_bytes": 11985,
+        "pdf_size_bytes": 151059,
+        "canonical_size_bytes": 10224
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_009_detailed",
@@ -338,9 +462,16 @@
       "files": {
         "ground_truth": "easy_10_009_detailed.json",
         "pdf": "easy_10_009_detailed.pdf",
-        "json_size_bytes": 12384,
-        "pdf_size_bytes": 127931
-      }
+        "canonical_md": "easy_10_009_detailed_canonical.md",
+        "ocr_md": "easy_10_009_detailed_ocr.md",
+        "json_size_bytes": 12385,
+        "pdf_size_bytes": 129201,
+        "canonical_size_bytes": 6348
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_009_table",
@@ -356,9 +487,16 @@
       "files": {
         "ground_truth": "easy_10_009_table.json",
         "pdf": "easy_10_009_table.pdf",
-        "json_size_bytes": 13054,
-        "pdf_size_bytes": 129093
-      }
+        "canonical_md": "easy_10_009_table_canonical.md",
+        "ocr_md": "easy_10_009_table_ocr.md",
+        "json_size_bytes": 13055,
+        "pdf_size_bytes": 153120,
+        "canonical_size_bytes": 10871
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_010_detailed",
@@ -375,9 +513,16 @@
       "files": {
         "ground_truth": "easy_10_010_detailed.json",
         "pdf": "easy_10_010_detailed.pdf",
-        "json_size_bytes": 12929,
-        "pdf_size_bytes": 138009
-      }
+        "canonical_md": "easy_10_010_detailed_canonical.md",
+        "ocr_md": "easy_10_010_detailed_ocr.md",
+        "json_size_bytes": 12930,
+        "pdf_size_bytes": 140686,
+        "canonical_size_bytes": 6916
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_010_table",
@@ -394,9 +539,16 @@
       "files": {
         "ground_truth": "easy_10_010_table.json",
         "pdf": "easy_10_010_table.pdf",
-        "json_size_bytes": 12856,
-        "pdf_size_bytes": 130595
-      }
+        "canonical_md": "easy_10_010_table_canonical.md",
+        "ocr_md": "easy_10_010_table_ocr.md",
+        "json_size_bytes": 12857,
+        "pdf_size_bytes": 153954,
+        "canonical_size_bytes": 10766
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_011_detailed",
@@ -412,9 +564,16 @@
       "files": {
         "ground_truth": "easy_10_011_detailed.json",
         "pdf": "easy_10_011_detailed.pdf",
-        "json_size_bytes": 11347,
-        "pdf_size_bytes": 130885
-      }
+        "canonical_md": "easy_10_011_detailed_canonical.md",
+        "ocr_md": "easy_10_011_detailed_ocr.md",
+        "json_size_bytes": 11348,
+        "pdf_size_bytes": 131835,
+        "canonical_size_bytes": 5890
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_011_table",
@@ -430,9 +589,16 @@
       "files": {
         "ground_truth": "easy_10_011_table.json",
         "pdf": "easy_10_011_table.pdf",
-        "json_size_bytes": 11422,
-        "pdf_size_bytes": 126385
-      }
+        "canonical_md": "easy_10_011_table_canonical.md",
+        "ocr_md": "easy_10_011_table_ocr.md",
+        "json_size_bytes": 11423,
+        "pdf_size_bytes": 148516,
+        "canonical_size_bytes": 9589
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_012_detailed",
@@ -448,9 +614,16 @@
       "files": {
         "ground_truth": "easy_10_012_detailed.json",
         "pdf": "easy_10_012_detailed.pdf",
-        "json_size_bytes": 11578,
-        "pdf_size_bytes": 154733
-      }
+        "canonical_md": "easy_10_012_detailed_canonical.md",
+        "ocr_md": "easy_10_012_detailed_ocr.md",
+        "json_size_bytes": 11579,
+        "pdf_size_bytes": 138588,
+        "canonical_size_bytes": 6360
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_012_table",
@@ -466,9 +639,16 @@
       "files": {
         "ground_truth": "easy_10_012_table.json",
         "pdf": "easy_10_012_table.pdf",
-        "json_size_bytes": 11657,
-        "pdf_size_bytes": 140489
-      }
+        "canonical_md": "easy_10_012_table_canonical.md",
+        "ocr_md": "easy_10_012_table_ocr.md",
+        "json_size_bytes": 11658,
+        "pdf_size_bytes": 150388,
+        "canonical_size_bytes": 9906
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_013_detailed",
@@ -485,9 +665,16 @@
       "files": {
         "ground_truth": "easy_10_013_detailed.json",
         "pdf": "easy_10_013_detailed.pdf",
-        "json_size_bytes": 11912,
-        "pdf_size_bytes": 156308
-      }
+        "canonical_md": "easy_10_013_detailed_canonical.md",
+        "ocr_md": "easy_10_013_detailed_ocr.md",
+        "json_size_bytes": 11913,
+        "pdf_size_bytes": 140795,
+        "canonical_size_bytes": 6504
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_013_table",
@@ -504,9 +691,16 @@
       "files": {
         "ground_truth": "easy_10_013_table.json",
         "pdf": "easy_10_013_table.pdf",
-        "json_size_bytes": 11695,
-        "pdf_size_bytes": 140904
-      }
+        "canonical_md": "easy_10_013_table_canonical.md",
+        "ocr_md": "easy_10_013_table_ocr.md",
+        "json_size_bytes": 11696,
+        "pdf_size_bytes": 151452,
+        "canonical_size_bytes": 9988
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_014_detailed",
@@ -522,9 +716,16 @@
       "files": {
         "ground_truth": "easy_10_014_detailed.json",
         "pdf": "easy_10_014_detailed.pdf",
-        "json_size_bytes": 12914,
-        "pdf_size_bytes": 137649
-      }
+        "canonical_md": "easy_10_014_detailed_canonical.md",
+        "ocr_md": "easy_10_014_detailed_ocr.md",
+        "json_size_bytes": 12915,
+        "pdf_size_bytes": 138874,
+        "canonical_size_bytes": 6827
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_014_table",
@@ -540,9 +741,16 @@
       "files": {
         "ground_truth": "easy_10_014_table.json",
         "pdf": "easy_10_014_table.pdf",
-        "json_size_bytes": 12473,
-        "pdf_size_bytes": 127087
-      }
+        "canonical_md": "easy_10_014_table_canonical.md",
+        "ocr_md": "easy_10_014_table_ocr.md",
+        "json_size_bytes": 12474,
+        "pdf_size_bytes": 149915,
+        "canonical_size_bytes": 10371
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_015_detailed",
@@ -559,9 +767,16 @@
       "files": {
         "ground_truth": "easy_10_015_detailed.json",
         "pdf": "easy_10_015_detailed.pdf",
-        "json_size_bytes": 12746,
-        "pdf_size_bytes": 136815
-      }
+        "canonical_md": "easy_10_015_detailed_canonical.md",
+        "ocr_md": "easy_10_015_detailed_ocr.md",
+        "json_size_bytes": 12747,
+        "pdf_size_bytes": 138336,
+        "canonical_size_bytes": 6764
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "easy_10_015_table",
@@ -578,9 +793,16 @@
       "files": {
         "ground_truth": "easy_10_015_table.json",
         "pdf": "easy_10_015_table.pdf",
-        "json_size_bytes": 12840,
-        "pdf_size_bytes": 127196
-      }
+        "canonical_md": "easy_10_015_table_canonical.md",
+        "ocr_md": "easy_10_015_table_ocr.md",
+        "json_size_bytes": 12841,
+        "pdf_size_bytes": 150411,
+        "canonical_size_bytes": 10668
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_001_detailed",
@@ -602,9 +824,16 @@
       "files": {
         "ground_truth": "extreme_100_001_detailed.json",
         "pdf": "extreme_100_001_detailed.pdf",
-        "json_size_bytes": 580687,
-        "pdf_size_bytes": 756527
-      }
+        "canonical_md": "extreme_100_001_detailed_canonical.md",
+        "ocr_md": "extreme_100_001_detailed_ocr.md",
+        "json_size_bytes": 580688,
+        "pdf_size_bytes": 716481,
+        "canonical_size_bytes": 190878
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_001_table",
@@ -626,9 +855,16 @@
       "files": {
         "ground_truth": "extreme_100_001_table.json",
         "pdf": "extreme_100_001_table.pdf",
-        "json_size_bytes": 581536,
-        "pdf_size_bytes": 313077
-      }
+        "canonical_md": "extreme_100_001_table_canonical.md",
+        "ocr_md": "extreme_100_001_table_ocr.md",
+        "json_size_bytes": 581537,
+        "pdf_size_bytes": 756082,
+        "canonical_size_bytes": 456638
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_002_detailed",
@@ -650,9 +886,16 @@
       "files": {
         "ground_truth": "extreme_100_002_detailed.json",
         "pdf": "extreme_100_002_detailed.pdf",
-        "json_size_bytes": 581597,
-        "pdf_size_bytes": 761361
-      }
+        "canonical_md": "extreme_100_002_detailed_canonical.md",
+        "ocr_md": "extreme_100_002_detailed_ocr.md",
+        "json_size_bytes": 581598,
+        "pdf_size_bytes": 720787,
+        "canonical_size_bytes": 191449
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_002_table",
@@ -674,9 +917,16 @@
       "files": {
         "ground_truth": "extreme_100_002_table.json",
         "pdf": "extreme_100_002_table.pdf",
-        "json_size_bytes": 585600,
-        "pdf_size_bytes": 314018
-      }
+        "canonical_md": "extreme_100_002_table_canonical.md",
+        "ocr_md": "extreme_100_002_table_ocr.md",
+        "json_size_bytes": 585601,
+        "pdf_size_bytes": 787063,
+        "canonical_size_bytes": 460571
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_003_detailed",
@@ -698,9 +948,16 @@
       "files": {
         "ground_truth": "extreme_100_003_detailed.json",
         "pdf": "extreme_100_003_detailed.pdf",
-        "json_size_bytes": 582665,
-        "pdf_size_bytes": 762966
-      }
+        "canonical_md": "extreme_100_003_detailed_canonical.md",
+        "ocr_md": "extreme_100_003_detailed_ocr.md",
+        "json_size_bytes": 582666,
+        "pdf_size_bytes": 722992,
+        "canonical_size_bytes": 193560
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_003_table",
@@ -722,9 +979,16 @@
       "files": {
         "ground_truth": "extreme_100_003_table.json",
         "pdf": "extreme_100_003_table.pdf",
-        "json_size_bytes": 581219,
-        "pdf_size_bytes": 313029
-      }
+        "canonical_md": "extreme_100_003_table_canonical.md",
+        "ocr_md": "extreme_100_003_table_ocr.md",
+        "json_size_bytes": 581220,
+        "pdf_size_bytes": 780163,
+        "canonical_size_bytes": 456316
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_004_detailed",
@@ -746,9 +1010,16 @@
       "files": {
         "ground_truth": "extreme_100_004_detailed.json",
         "pdf": "extreme_100_004_detailed.pdf",
-        "json_size_bytes": 582187,
-        "pdf_size_bytes": 757651
-      }
+        "canonical_md": "extreme_100_004_detailed_canonical.md",
+        "ocr_md": "extreme_100_004_detailed_ocr.md",
+        "json_size_bytes": 582188,
+        "pdf_size_bytes": 717614,
+        "canonical_size_bytes": 191828
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_004_table",
@@ -770,9 +1041,16 @@
       "files": {
         "ground_truth": "extreme_100_004_table.json",
         "pdf": "extreme_100_004_table.pdf",
-        "json_size_bytes": 582719,
-        "pdf_size_bytes": 313446
-      }
+        "canonical_md": "extreme_100_004_table_canonical.md",
+        "ocr_md": "extreme_100_004_table_ocr.md",
+        "json_size_bytes": 582720,
+        "pdf_size_bytes": 759648,
+        "canonical_size_bytes": 457657
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_005_detailed",
@@ -794,9 +1072,16 @@
       "files": {
         "ground_truth": "extreme_100_005_detailed.json",
         "pdf": "extreme_100_005_detailed.pdf",
-        "json_size_bytes": 583020,
-        "pdf_size_bytes": 760912
-      }
+        "canonical_md": "extreme_100_005_detailed_canonical.md",
+        "ocr_md": "extreme_100_005_detailed_ocr.md",
+        "json_size_bytes": 583021,
+        "pdf_size_bytes": 720580,
+        "canonical_size_bytes": 193393
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "extreme_100_005_table",
@@ -818,9 +1103,16 @@
       "files": {
         "ground_truth": "extreme_100_005_table.json",
         "pdf": "extreme_100_005_table.pdf",
-        "json_size_bytes": 583241,
-        "pdf_size_bytes": 315581
-      }
+        "canonical_md": "extreme_100_005_table_canonical.md",
+        "ocr_md": "extreme_100_005_table_ocr.md",
+        "json_size_bytes": 583242,
+        "pdf_size_bytes": 784175,
+        "canonical_size_bytes": 458222
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_001_detailed",
@@ -840,9 +1132,16 @@
       "files": {
         "ground_truth": "hard_50_001_detailed.json",
         "pdf": "hard_50_001_detailed.pdf",
-        "json_size_bytes": 64444,
-        "pdf_size_bytes": 221006
-      }
+        "canonical_md": "hard_50_001_detailed_canonical.md",
+        "ocr_md": "hard_50_001_detailed_ocr.md",
+        "json_size_bytes": 64445,
+        "pdf_size_bytes": 234903,
+        "canonical_size_bytes": 31967
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_001_table",
@@ -862,9 +1161,16 @@
       "files": {
         "ground_truth": "hard_50_001_table.json",
         "pdf": "hard_50_001_table.pdf",
-        "json_size_bytes": 63868,
-        "pdf_size_bytes": 182079
-      }
+        "canonical_md": "hard_50_001_table_canonical.md",
+        "ocr_md": "hard_50_001_table_ocr.md",
+        "json_size_bytes": 63869,
+        "pdf_size_bytes": 233945,
+        "canonical_size_bytes": 50824
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_002_detailed",
@@ -884,9 +1190,16 @@
       "files": {
         "ground_truth": "hard_50_002_detailed.json",
         "pdf": "hard_50_002_detailed.pdf",
-        "json_size_bytes": 63828,
-        "pdf_size_bytes": 241357
-      }
+        "canonical_md": "hard_50_002_detailed_canonical.md",
+        "ocr_md": "hard_50_002_detailed_ocr.md",
+        "json_size_bytes": 63829,
+        "pdf_size_bytes": 236056,
+        "canonical_size_bytes": 24646
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_002_table",
@@ -906,9 +1219,16 @@
       "files": {
         "ground_truth": "hard_50_002_table.json",
         "pdf": "hard_50_002_table.pdf",
-        "json_size_bytes": 64224,
-        "pdf_size_bytes": 182366
-      }
+        "canonical_md": "hard_50_002_table_canonical.md",
+        "ocr_md": "hard_50_002_table_ocr.md",
+        "json_size_bytes": 64225,
+        "pdf_size_bytes": 234161,
+        "canonical_size_bytes": 51175
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_003_detailed",
@@ -928,9 +1248,16 @@
       "files": {
         "ground_truth": "hard_50_003_detailed.json",
         "pdf": "hard_50_003_detailed.pdf",
-        "json_size_bytes": 63252,
-        "pdf_size_bytes": 202728
-      }
+        "canonical_md": "hard_50_003_detailed_canonical.md",
+        "ocr_md": "hard_50_003_detailed_ocr.md",
+        "json_size_bytes": 63253,
+        "pdf_size_bytes": 217782,
+        "canonical_size_bytes": 23960
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_003_table",
@@ -950,9 +1277,16 @@
       "files": {
         "ground_truth": "hard_50_003_table.json",
         "pdf": "hard_50_003_table.pdf",
-        "json_size_bytes": 63736,
-        "pdf_size_bytes": 154183
-      }
+        "canonical_md": "hard_50_003_table_canonical.md",
+        "ocr_md": "hard_50_003_table_ocr.md",
+        "json_size_bytes": 63737,
+        "pdf_size_bytes": 205890,
+        "canonical_size_bytes": 50731
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_004_detailed",
@@ -972,9 +1306,16 @@
       "files": {
         "ground_truth": "hard_50_004_detailed.json",
         "pdf": "hard_50_004_detailed.pdf",
-        "json_size_bytes": 64507,
-        "pdf_size_bytes": 221426
-      }
+        "canonical_md": "hard_50_004_detailed_canonical.md",
+        "ocr_md": "hard_50_004_detailed_ocr.md",
+        "json_size_bytes": 64508,
+        "pdf_size_bytes": 239398,
+        "canonical_size_bytes": 32578
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_004_table",
@@ -994,9 +1335,16 @@
       "files": {
         "ground_truth": "hard_50_004_table.json",
         "pdf": "hard_50_004_table.pdf",
-        "json_size_bytes": 64423,
-        "pdf_size_bytes": 180711
-      }
+        "canonical_md": "hard_50_004_table_canonical.md",
+        "ocr_md": "hard_50_004_table_ocr.md",
+        "json_size_bytes": 64424,
+        "pdf_size_bytes": 233709,
+        "canonical_size_bytes": 51243
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_005_detailed",
@@ -1016,9 +1364,16 @@
       "files": {
         "ground_truth": "hard_50_005_detailed.json",
         "pdf": "hard_50_005_detailed.pdf",
-        "json_size_bytes": 64533,
-        "pdf_size_bytes": 244146
-      }
+        "canonical_md": "hard_50_005_detailed_canonical.md",
+        "ocr_md": "hard_50_005_detailed_ocr.md",
+        "json_size_bytes": 64534,
+        "pdf_size_bytes": 245175,
+        "canonical_size_bytes": 25534
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_005_table",
@@ -1038,9 +1393,16 @@
       "files": {
         "ground_truth": "hard_50_005_table.json",
         "pdf": "hard_50_005_table.pdf",
-        "json_size_bytes": 63913,
-        "pdf_size_bytes": 181281
-      }
+        "canonical_md": "hard_50_005_table_canonical.md",
+        "ocr_md": "hard_50_005_table_ocr.md",
+        "json_size_bytes": 63914,
+        "pdf_size_bytes": 232648,
+        "canonical_size_bytes": 50852
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_006_detailed",
@@ -1060,9 +1422,16 @@
       "files": {
         "ground_truth": "hard_50_006_detailed.json",
         "pdf": "hard_50_006_detailed.pdf",
-        "json_size_bytes": 64174,
-        "pdf_size_bytes": 205604
-      }
+        "canonical_md": "hard_50_006_detailed_canonical.md",
+        "ocr_md": "hard_50_006_detailed_ocr.md",
+        "json_size_bytes": 64175,
+        "pdf_size_bytes": 222892,
+        "canonical_size_bytes": 24785
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_006_table",
@@ -1082,9 +1451,16 @@
       "files": {
         "ground_truth": "hard_50_006_table.json",
         "pdf": "hard_50_006_table.pdf",
-        "json_size_bytes": 63971,
-        "pdf_size_bytes": 156794
-      }
+        "canonical_md": "hard_50_006_table_canonical.md",
+        "ocr_md": "hard_50_006_table_ocr.md",
+        "json_size_bytes": 63972,
+        "pdf_size_bytes": 208593,
+        "canonical_size_bytes": 50913
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_007_detailed",
@@ -1104,9 +1480,16 @@
       "files": {
         "ground_truth": "hard_50_007_detailed.json",
         "pdf": "hard_50_007_detailed.pdf",
-        "json_size_bytes": 64841,
-        "pdf_size_bytes": 221522
-      }
+        "canonical_md": "hard_50_007_detailed_canonical.md",
+        "ocr_md": "hard_50_007_detailed_ocr.md",
+        "json_size_bytes": 64842,
+        "pdf_size_bytes": 239026,
+        "canonical_size_bytes": 32759
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_007_table",
@@ -1126,9 +1509,16 @@
       "files": {
         "ground_truth": "hard_50_007_table.json",
         "pdf": "hard_50_007_table.pdf",
-        "json_size_bytes": 63653,
-        "pdf_size_bytes": 178804
-      }
+        "canonical_md": "hard_50_007_table_canonical.md",
+        "ocr_md": "hard_50_007_table_ocr.md",
+        "json_size_bytes": 63654,
+        "pdf_size_bytes": 230575,
+        "canonical_size_bytes": 50621
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_008_detailed",
@@ -1148,9 +1538,16 @@
       "files": {
         "ground_truth": "hard_50_008_detailed.json",
         "pdf": "hard_50_008_detailed.pdf",
-        "json_size_bytes": 64305,
-        "pdf_size_bytes": 247120
-      }
+        "canonical_md": "hard_50_008_detailed_canonical.md",
+        "ocr_md": "hard_50_008_detailed_ocr.md",
+        "json_size_bytes": 64306,
+        "pdf_size_bytes": 240873,
+        "canonical_size_bytes": 25220
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "hard_50_008_table",
@@ -1170,9 +1567,16 @@
       "files": {
         "ground_truth": "hard_50_008_table.json",
         "pdf": "hard_50_008_table.pdf",
-        "json_size_bytes": 63540,
-        "pdf_size_bytes": 179442
-      }
+        "canonical_md": "hard_50_008_table_canonical.md",
+        "ocr_md": "hard_50_008_table_ocr.md",
+        "json_size_bytes": 63541,
+        "pdf_size_bytes": 232261,
+        "canonical_size_bytes": 50485
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_001_detailed",
@@ -1190,9 +1594,16 @@
       "files": {
         "ground_truth": "medium_25_001_detailed.json",
         "pdf": "medium_25_001_detailed.pdf",
-        "json_size_bytes": 31246,
-        "pdf_size_bytes": 176362
-      }
+        "canonical_md": "medium_25_001_detailed_canonical.md",
+        "ocr_md": "medium_25_001_detailed_ocr.md",
+        "json_size_bytes": 31247,
+        "pdf_size_bytes": 160988,
+        "canonical_size_bytes": 15677
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_001_table",
@@ -1210,9 +1621,16 @@
       "files": {
         "ground_truth": "medium_25_001_table.json",
         "pdf": "medium_25_001_table.pdf",
-        "json_size_bytes": 31381,
-        "pdf_size_bytes": 147553
-      }
+        "canonical_md": "medium_25_001_table_canonical.md",
+        "ocr_md": "medium_25_001_table_ocr.md",
+        "json_size_bytes": 31382,
+        "pdf_size_bytes": 173782,
+        "canonical_size_bytes": 25410
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_002_detailed",
@@ -1230,9 +1648,16 @@
       "files": {
         "ground_truth": "medium_25_002_detailed.json",
         "pdf": "medium_25_002_detailed.pdf",
-        "json_size_bytes": 29364,
-        "pdf_size_bytes": 197319
-      }
+        "canonical_md": "medium_25_002_detailed_canonical.md",
+        "ocr_md": "medium_25_002_detailed_ocr.md",
+        "json_size_bytes": 29365,
+        "pdf_size_bytes": 184466,
+        "canonical_size_bytes": 15201
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_002_table",
@@ -1250,9 +1675,16 @@
       "files": {
         "ground_truth": "medium_25_002_table.json",
         "pdf": "medium_25_002_table.pdf",
-        "json_size_bytes": 29353,
-        "pdf_size_bytes": 175864
-      }
+        "canonical_md": "medium_25_002_table_canonical.md",
+        "ocr_md": "medium_25_002_table_ocr.md",
+        "json_size_bytes": 29354,
+        "pdf_size_bytes": 198590,
+        "canonical_size_bytes": 23716
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_003_detailed",
@@ -1270,9 +1702,16 @@
       "files": {
         "ground_truth": "medium_25_003_detailed.json",
         "pdf": "medium_25_003_detailed.pdf",
-        "json_size_bytes": 31992,
-        "pdf_size_bytes": 183041
-      }
+        "canonical_md": "medium_25_003_detailed_canonical.md",
+        "ocr_md": "medium_25_003_detailed_ocr.md",
+        "json_size_bytes": 31993,
+        "pdf_size_bytes": 187917,
+        "canonical_size_bytes": 16720
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_003_table",
@@ -1290,9 +1729,16 @@
       "files": {
         "ground_truth": "medium_25_003_table.json",
         "pdf": "medium_25_003_table.pdf",
-        "json_size_bytes": 31637,
-        "pdf_size_bytes": 161671
-      }
+        "canonical_md": "medium_25_003_table_canonical.md",
+        "ocr_md": "medium_25_003_table_ocr.md",
+        "json_size_bytes": 31638,
+        "pdf_size_bytes": 200686,
+        "canonical_size_bytes": 25352
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_004_detailed",
@@ -1310,9 +1756,16 @@
       "files": {
         "ground_truth": "medium_25_004_detailed.json",
         "pdf": "medium_25_004_detailed.pdf",
-        "json_size_bytes": 31901,
-        "pdf_size_bytes": 199813
-      }
+        "canonical_md": "medium_25_004_detailed_canonical.md",
+        "ocr_md": "medium_25_004_detailed_ocr.md",
+        "json_size_bytes": 31902,
+        "pdf_size_bytes": 188337,
+        "canonical_size_bytes": 16834
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_004_table",
@@ -1330,9 +1783,16 @@
       "files": {
         "ground_truth": "medium_25_004_table.json",
         "pdf": "medium_25_004_table.pdf",
-        "json_size_bytes": 31357,
-        "pdf_size_bytes": 173872
-      }
+        "canonical_md": "medium_25_004_table_canonical.md",
+        "ocr_md": "medium_25_004_table_ocr.md",
+        "json_size_bytes": 31358,
+        "pdf_size_bytes": 199312,
+        "canonical_size_bytes": 25259
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_005_detailed",
@@ -1350,9 +1810,16 @@
       "files": {
         "ground_truth": "medium_25_005_detailed.json",
         "pdf": "medium_25_005_detailed.pdf",
-        "json_size_bytes": 31889,
-        "pdf_size_bytes": 181822
-      }
+        "canonical_md": "medium_25_005_detailed_canonical.md",
+        "ocr_md": "medium_25_005_detailed_ocr.md",
+        "json_size_bytes": 31890,
+        "pdf_size_bytes": 169390,
+        "canonical_size_bytes": 16913
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_005_table",
@@ -1370,9 +1837,16 @@
       "files": {
         "ground_truth": "medium_25_005_table.json",
         "pdf": "medium_25_005_table.pdf",
-        "json_size_bytes": 31361,
-        "pdf_size_bytes": 144632
-      }
+        "canonical_md": "medium_25_005_table_canonical.md",
+        "ocr_md": "medium_25_005_table_ocr.md",
+        "json_size_bytes": 31362,
+        "pdf_size_bytes": 170867,
+        "canonical_size_bytes": 25400
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_006_detailed",
@@ -1390,9 +1864,16 @@
       "files": {
         "ground_truth": "medium_25_006_detailed.json",
         "pdf": "medium_25_006_detailed.pdf",
-        "json_size_bytes": 29025,
-        "pdf_size_bytes": 193087
-      }
+        "canonical_md": "medium_25_006_detailed_canonical.md",
+        "ocr_md": "medium_25_006_detailed_ocr.md",
+        "json_size_bytes": 29026,
+        "pdf_size_bytes": 180263,
+        "canonical_size_bytes": 14842
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_006_table",
@@ -1410,9 +1891,16 @@
       "files": {
         "ground_truth": "medium_25_006_table.json",
         "pdf": "medium_25_006_table.pdf",
-        "json_size_bytes": 28960,
-        "pdf_size_bytes": 172678
-      }
+        "canonical_md": "medium_25_006_table_canonical.md",
+        "ocr_md": "medium_25_006_table_ocr.md",
+        "json_size_bytes": 28961,
+        "pdf_size_bytes": 194803,
+        "canonical_size_bytes": 23516
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_007_detailed",
@@ -1430,9 +1918,16 @@
       "files": {
         "ground_truth": "medium_25_007_detailed.json",
         "pdf": "medium_25_007_detailed.pdf",
-        "json_size_bytes": 31719,
-        "pdf_size_bytes": 182871
-      }
+        "canonical_md": "medium_25_007_detailed_canonical.md",
+        "ocr_md": "medium_25_007_detailed_ocr.md",
+        "json_size_bytes": 31720,
+        "pdf_size_bytes": 189737,
+        "canonical_size_bytes": 16517
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_007_table",
@@ -1450,9 +1945,16 @@
       "files": {
         "ground_truth": "medium_25_007_table.json",
         "pdf": "medium_25_007_table.pdf",
-        "json_size_bytes": 31995,
-        "pdf_size_bytes": 160109
-      }
+        "canonical_md": "medium_25_007_table_canonical.md",
+        "ocr_md": "medium_25_007_table_ocr.md",
+        "json_size_bytes": 31996,
+        "pdf_size_bytes": 199568,
+        "canonical_size_bytes": 25651
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_008_detailed",
@@ -1470,9 +1972,16 @@
       "files": {
         "ground_truth": "medium_25_008_detailed.json",
         "pdf": "medium_25_008_detailed.pdf",
-        "json_size_bytes": 32042,
-        "pdf_size_bytes": 201084
-      }
+        "canonical_md": "medium_25_008_detailed_canonical.md",
+        "ocr_md": "medium_25_008_detailed_ocr.md",
+        "json_size_bytes": 32043,
+        "pdf_size_bytes": 188256,
+        "canonical_size_bytes": 16923
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_008_table",
@@ -1490,9 +1999,16 @@
       "files": {
         "ground_truth": "medium_25_008_table.json",
         "pdf": "medium_25_008_table.pdf",
-        "json_size_bytes": 31394,
-        "pdf_size_bytes": 174695
-      }
+        "canonical_md": "medium_25_008_table_canonical.md",
+        "ocr_md": "medium_25_008_table_ocr.md",
+        "json_size_bytes": 31395,
+        "pdf_size_bytes": 199661,
+        "canonical_size_bytes": 25270
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_009_detailed",
@@ -1510,9 +2026,16 @@
       "files": {
         "ground_truth": "medium_25_009_detailed.json",
         "pdf": "medium_25_009_detailed.pdf",
-        "json_size_bytes": 31569,
-        "pdf_size_bytes": 179260
-      }
+        "canonical_md": "medium_25_009_detailed_canonical.md",
+        "ocr_md": "medium_25_009_detailed_ocr.md",
+        "json_size_bytes": 31570,
+        "pdf_size_bytes": 166650,
+        "canonical_size_bytes": 15998
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_009_table",
@@ -1530,9 +2053,16 @@
       "files": {
         "ground_truth": "medium_25_009_table.json",
         "pdf": "medium_25_009_table.pdf",
-        "json_size_bytes": 31093,
-        "pdf_size_bytes": 147607
-      }
+        "canonical_md": "medium_25_009_table_canonical.md",
+        "ocr_md": "medium_25_009_table_ocr.md",
+        "json_size_bytes": 31094,
+        "pdf_size_bytes": 172730,
+        "canonical_size_bytes": 25110
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_010_detailed",
@@ -1550,9 +2080,16 @@
       "files": {
         "ground_truth": "medium_25_010_detailed.json",
         "pdf": "medium_25_010_detailed.pdf",
-        "json_size_bytes": 28845,
-        "pdf_size_bytes": 193855
-      }
+        "canonical_md": "medium_25_010_detailed_canonical.md",
+        "ocr_md": "medium_25_010_detailed_ocr.md",
+        "json_size_bytes": 28846,
+        "pdf_size_bytes": 182771,
+        "canonical_size_bytes": 14765
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_010_table",
@@ -1570,9 +2107,16 @@
       "files": {
         "ground_truth": "medium_25_010_table.json",
         "pdf": "medium_25_010_table.pdf",
-        "json_size_bytes": 29286,
-        "pdf_size_bytes": 172113
-      }
+        "canonical_md": "medium_25_010_table_canonical.md",
+        "ocr_md": "medium_25_010_table_ocr.md",
+        "json_size_bytes": 29287,
+        "pdf_size_bytes": 195057,
+        "canonical_size_bytes": 23800
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_011_detailed",
@@ -1590,9 +2134,16 @@
       "files": {
         "ground_truth": "medium_25_011_detailed.json",
         "pdf": "medium_25_011_detailed.pdf",
-        "json_size_bytes": 31230,
-        "pdf_size_bytes": 181497
-      }
+        "canonical_md": "medium_25_011_detailed_canonical.md",
+        "ocr_md": "medium_25_011_detailed_ocr.md",
+        "json_size_bytes": 31231,
+        "pdf_size_bytes": 183424,
+        "canonical_size_bytes": 15524
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_011_table",
@@ -1610,9 +2161,16 @@
       "files": {
         "ground_truth": "medium_25_011_table.json",
         "pdf": "medium_25_011_table.pdf",
-        "json_size_bytes": 31218,
-        "pdf_size_bytes": 160842
-      }
+        "canonical_md": "medium_25_011_table_canonical.md",
+        "ocr_md": "medium_25_011_table_ocr.md",
+        "json_size_bytes": 31219,
+        "pdf_size_bytes": 198425,
+        "canonical_size_bytes": 25066
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_012_detailed",
@@ -1630,9 +2188,16 @@
       "files": {
         "ground_truth": "medium_25_012_detailed.json",
         "pdf": "medium_25_012_detailed.pdf",
-        "json_size_bytes": 31769,
-        "pdf_size_bytes": 200100
-      }
+        "canonical_md": "medium_25_012_detailed_canonical.md",
+        "ocr_md": "medium_25_012_detailed_ocr.md",
+        "json_size_bytes": 31770,
+        "pdf_size_bytes": 186860,
+        "canonical_size_bytes": 16614
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     },
     {
       "id": "medium_25_012_table",
@@ -1650,9 +2215,16 @@
       "files": {
         "ground_truth": "medium_25_012_table.json",
         "pdf": "medium_25_012_table.pdf",
-        "json_size_bytes": 31428,
-        "pdf_size_bytes": 174246
-      }
+        "canonical_md": "medium_25_012_table_canonical.md",
+        "ocr_md": "medium_25_012_table_ocr.md",
+        "json_size_bytes": 31429,
+        "pdf_size_bytes": 199470,
+        "canonical_size_bytes": 25314
+      },
+      "transcripts_available": [
+        "canonical",
+        "ocr"
+      ]
     }
   ]
 }

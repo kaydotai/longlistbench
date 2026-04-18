@@ -2,6 +2,11 @@
 
 This directory contains benchmark generation and processing tools for the LongListBench project.
 
+Each benchmark instance can expose two transcript conditions:
+
+- `canonical` - a clean transcript derived from the rendered HTML/document structure
+- `ocr` - a noisy transcript derived from Gemini OCR over rendered page images
+
 ## Setup
 
 Run these commands from the repository root.
@@ -32,20 +37,24 @@ Run these commands from the repository root.
    GEMINI_API_KEY=your-gemini-api-key
    OPENAI_API_KEY=your-openai-api-key
 
-   # Optional (only needed if you evaluate Claude)
-   ANTHROPIC_API_KEY=your-anthropic-api-key
-
    # Optional override (only affects benchmarks/evaluate_models.py; default is gemini-2.5-flash)
    GEMINI_MODEL_ID=gemini-2.5-flash
    ```
 
 ## Generate Claims Benchmark
 
-Generate synthetic benchmark PDFs:
+Generate synthetic benchmark artifacts:
 
 ```bash
 python benchmarks/generate_claims_benchmark.py
 ```
+
+This writes, for each instance:
+
+- `<instance_id>.json`
+- `<instance_id>.html`
+- `<instance_id>.pdf`
+- `<instance_id>_canonical.md`
 
 If you need to regenerate `claims/metadata.json` (without regenerating PDFs/HTML/JSON), run:
 
@@ -64,6 +73,11 @@ Each instance is generated in **two formats** (`detailed` and `table`) and each 
 - **Ground truth**: `<instance_id>.json`
 
 Below is the expected problem mapping based on `BENCHMARK_CONFIG` (the instance number cycles through the tier’s problem combinations).
+
+Notes:
+
+- Extreme file IDs retain a legacy `_100_` seed-count suffix; `large_doc` expands each released extreme document to 500 incidents.
+- `page_breaks` and `multi_column` are strongest in detailed format. In table format, page breaks split table sections between rows and the main claims table remains single-span.
 
 ### Easy (`easy_10_XXX_{detailed,table}`)
 
@@ -100,7 +114,7 @@ Below is the expected problem mapping based on `BENCHMARK_CONFIG` (the instance 
 
 ## OCR Claims PDFs
 
-Process all PDF files in the `claims/` directory using Gemini:
+Process PDF files in the `claims/` directory using Gemini OCR:
 
 ```bash
 python benchmarks/ocr_claims_pdfs.py
@@ -108,10 +122,12 @@ python benchmarks/ocr_claims_pdfs.py
 
 This will:
 - Process all PDF files in parallel
-- Extract text using Google Gemini vision model
+- Extract text using the Google Gemini vision model
 - Save results as `*_ocr.md` files alongside each PDF
 - Skip files that have already been processed
 - Handle multi-page PDFs efficiently
+
+The default OCR path is `gemini`, not text-layer extraction. Text-layer mode remains available only as an explicit local/debug option.
 
 The script will show progress for each file and provide a summary at the end.
 
@@ -132,22 +148,24 @@ Run extraction evaluation across Gemini 2.5 (`gemini`) and GPT-5.2 (`gpt52`).
 Note: running evaluation with `--offline` regenerates reports from saved `*_predicted.json` files without making API calls.
 
 ```bash
-# Full evaluation (all tiers, both formats)
-python benchmarks/evaluate_models.py --models gemini gpt52 --parallel-models --model-workers 2
+# Full OCR-condition evaluation (all tiers, both formats)
+python benchmarks/evaluate_models.py --models gemini gpt52 --parallel-models --model-workers 2 --transcripts ocr
 
 # Quick test (one sample per tier)
 python benchmarks/evaluate_models.py --quick
 
-# Specific tiers/formats
-python benchmarks/evaluate_models.py --tiers easy medium --formats detailed
+# Compare clean vs OCR conditions on a slice
+python benchmarks/evaluate_models.py --tiers easy --formats detailed --transcripts canonical ocr
 
 # Regenerate a report offline from an existing results directory
-python benchmarks/evaluate_models.py --offline --output-dir benchmarks/results/released/medium
+python benchmarks/evaluate_models.py --offline --output-dir benchmarks/results/released/medium --transcripts ocr
 ```
 
 Results are written to the `--output-dir` (default: `benchmarks/results/scratch/`):
 - `evaluation_report.json` - Full metrics data
 - `evaluation_report.md` - Human-readable summary
+
+When multiple transcript conditions are evaluated in the same run, reports include transcript-aware breakdowns in addition to tier/format summaries.
 
 This repository includes released evaluation artifacts under:
 - `benchmarks/results/released/easy/`
@@ -157,7 +175,7 @@ This repository includes released evaluation artifacts under:
 
 ## Directory Structure
 
-- `claims/` - Generated benchmark claims (PDFs, JSONs, and OCR results)
+- `claims/` - Generated benchmark claims (PDFs, JSONs, canonical transcripts, and OCR transcripts)
 - `results/scratch/` - Scratch evaluation output directory (default)
 - `results/released/` - Released evaluation artifacts per tier
 - `synthetic/` - Synthetic data generation tools

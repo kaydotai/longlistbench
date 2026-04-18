@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Generate complete benchmark dataset with OCR applied.
+"""Generate complete benchmark dataset artifacts.
 
 This script generates the full benchmark suite across all difficulty tiers:
-- Easy: 10 claims each, 15 instances
-- Medium: 25 claims each, 12 instances  
-- Hard: 50 claims each, 8 instances
-- Extreme: 100 claims each, 5 instances
+- Easy: seeded with 10 incidents each, 15 instances
+- Medium: seeded with 25 incidents each, 12 instances
+- Hard: seeded with 50 incidents each, 8 instances
+- Extreme: seeded with 100 incidents each, expanded to 500 incidents, 5 instances
 
-Total: 80 instances (2 formats), 2,700 base claims
+Total released rows in version 1.0.2: 6,828 incidents across 80 documents
 """
 
 from __future__ import annotations
@@ -22,6 +22,8 @@ from pathlib import Path
 from typing import Any
 
 import sys
+
+from canonical_transcripts import write_canonical_markdown_from_html
 
 
 # Benchmark configuration
@@ -116,6 +118,31 @@ def _ensure_synthetic_imports() -> None:
         sys.path.insert(0, synthetic_path)
 
 
+def _available_transcript_conditions(instances: list[dict[str, Any]]) -> list[str]:
+    ordered = ["canonical", "ocr"]
+    available = {
+        transcript
+        for instance in instances
+        for transcript in instance.get("transcripts_available", [])
+    }
+    return [transcript for transcript in ordered if transcript in available]
+
+
+def _difficulty_tier_metadata(instances: list[dict[str, Any]]) -> dict[str, dict[str, int]]:
+    out: dict[str, dict[str, int]] = {}
+    for tier, config in BENCHMARK_CONFIG.items():
+        tier_instances = [instance for instance in instances if instance["difficulty"] == tier]
+        counts = [instance["num_claims"] for instance in tier_instances]
+        out[tier] = {
+            "seed_claims_per_pdf": config["claims_per_pdf"],
+            "num_instances": config["num_instances"],
+            "total_claims": sum(counts),
+            "min_claims_per_document": min(counts) if counts else 0,
+            "max_claims_per_document": max(counts) if counts else 0,
+        }
+    return out
+
+
 async def generate_instance(
     tier: str,
     instance_num: int,
@@ -145,6 +172,7 @@ async def generate_instance(
     json_path = output_dir / f"{instance_id}.json"
     html_path = output_dir / f"{instance_id}.html"
     pdf_path = output_dir / f"{instance_id}.pdf"
+    canonical_path = output_dir / f"{instance_id}_canonical.md"
     
     # Use unique seed for each instance
     seed_material = f"{base_seed}:{instance_id}".encode("utf-8")
@@ -175,6 +203,7 @@ async def generate_instance(
 
     html_content = generator.generate(incidents_dicts, problems=problems)
     html_path.write_text(html_content, encoding="utf-8")
+    canonical_markdown = write_canonical_markdown_from_html(html_path, canonical_path)
     
     enabled_problems = [k for k, v in problems.items() if v]
     print(f"  ✓ Problems enabled: {', '.join(enabled_problems) if enabled_problems else 'none'}")
@@ -186,6 +215,7 @@ async def generate_instance(
     # Get file sizes
     json_size = json_path.stat().st_size
     pdf_size = pdf_path.stat().st_size
+    canonical_size = canonical_path.stat().st_size
     pdf_pages = estimate_pages(len(incidents_dicts), problems)
     
     print(f"  ✓ Generated: {instance_id}.pdf ({pdf_pages} pages, {pdf_size / 1024:.1f} KB)")
@@ -203,9 +233,12 @@ async def generate_instance(
         "files": {
             "ground_truth": f"{instance_id}.json",
             "pdf": f"{instance_id}.pdf",
+            "canonical_md": f"{instance_id}_canonical.md",
             "json_size_bytes": json_size,
             "pdf_size_bytes": pdf_size,
+            "canonical_size_bytes": canonical_size,
         },
+        "transcripts_available": ["canonical"],
     }
     
     return metadata
@@ -241,9 +274,20 @@ def rebuild_metadata(output_dir: Path, base_seed: int) -> dict[str, Any]:
             continue
 
         pdf_path = output_dir / f"{instance_id}.pdf"
+        html_path = output_dir / f"{instance_id}.html"
+        canonical_path = output_dir / f"{instance_id}_canonical.md"
+        ocr_path = output_dir / f"{instance_id}_ocr.md"
         json_size = json_path.stat().st_size
         pdf_size = pdf_path.stat().st_size if pdf_path.exists() else 0
+        if html_path.exists():
+            write_canonical_markdown_from_html(html_path, canonical_path)
+        canonical_size = canonical_path.stat().st_size if canonical_path.exists() else 0
         pages_estimate = estimate_pages(len(data), problems)
+        transcripts_available = []
+        if canonical_path.exists():
+            transcripts_available.append("canonical")
+        if ocr_path.exists() and ocr_path.stat().st_size > 0:
+            transcripts_available.append("ocr")
 
         instances.append(
             {
@@ -258,9 +302,13 @@ def rebuild_metadata(output_dir: Path, base_seed: int) -> dict[str, Any]:
                 "files": {
                     "ground_truth": f"{instance_id}.json",
                     "pdf": f"{instance_id}.pdf",
+                    "canonical_md": f"{instance_id}_canonical.md",
+                    "ocr_md": f"{instance_id}_ocr.md",
                     "json_size_bytes": json_size,
                     "pdf_size_bytes": pdf_size,
+                    "canonical_size_bytes": canonical_size,
                 },
+                "transcripts_available": transcripts_available,
             }
         )
 
@@ -274,14 +322,8 @@ def rebuild_metadata(output_dir: Path, base_seed: int) -> dict[str, Any]:
         "total_instances": len(instances),
         "total_claims": total_claims,
         "schema_version": "1.0",
-        "difficulty_tiers": {
-            tier: {
-                "claims_per_pdf": BENCHMARK_CONFIG[tier]["claims_per_pdf"],
-                "num_instances": BENCHMARK_CONFIG[tier]["num_instances"],
-                "total_claims": sum(i["num_claims"] for i in instances if i["difficulty"] == tier),
-            }
-            for tier in BENCHMARK_CONFIG.keys()
-        },
+        "transcript_conditions": _available_transcript_conditions(instances),
+        "difficulty_tiers": _difficulty_tier_metadata(instances),
         "instances": instances,
     }
 
@@ -325,7 +367,7 @@ async def generate_tier(
     """
     print(f"\n{'#'*60}")
     print(f"# Generating {tier.upper()} tier")
-    print(f"#   {config['claims_per_pdf']} claims/PDF × {config['num_instances']} instances × 2 formats")
+    print(f"#   {config['claims_per_pdf']} seed claims/PDF × {config['num_instances']} instances × 2 formats")
     print(f"{'#'*60}")
     
     instances_metadata = []
@@ -403,16 +445,8 @@ async def generate_all_benchmarks(
         "total_instances": len(all_instances),
         "total_claims": total_claims,
         "schema_version": "1.0",
-        "difficulty_tiers": {
-            tier: {
-                "claims_per_pdf": BENCHMARK_CONFIG[tier]["claims_per_pdf"],
-                "num_instances": BENCHMARK_CONFIG[tier]["num_instances"],
-                "total_claims": sum(
-                    i["num_claims"] for i in all_instances if i["difficulty"] == tier
-                ),
-            }
-            for tier in BENCHMARK_CONFIG.keys()
-        },
+        "transcript_conditions": _available_transcript_conditions(all_instances),
+        "difficulty_tiers": _difficulty_tier_metadata(all_instances),
         "instances": all_instances,
     }
     
