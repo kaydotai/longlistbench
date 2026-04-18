@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crawford Express Group - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            .page-break {
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
+            page-break-before: always;
+            break-before: page;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">Great West Casualty</div>
+            <div class="header-line">9620 Anthony Stravenue, Port Vincent, NC 96220</div>
+            <div class="header-line">Phone: 785-404-0077x928</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> Crawford Express Group, Acct. # A0585573</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 04/30/2024, 05:59 PM</div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30003</td>
+            <td>L230003</td>
+            <td>Crawford Express Group</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L23A6887</td>
+            <td>11/14/2023</td>
+            <td>NC</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Crawford Express Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: PA<br>Date Reported: 12/02/2023<br>Unit Number: 2023 IN 369187<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Fuel tank punctured<br>by road debris<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $5,739.12 | Recovered $0.00 | Total Incurred $5,739.12<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $3,830.57 | Total Incurred ($3,830.57)<br>Incident Total: Reserve $0.00 | Paid $5,739.12 | Recovered $3,830.57 | Total Incurred $1,908.55</td>
+        </tr>
+        <tr>
+            <td>#30001</td>
+            <td>L230001</td>
+            <td>Port Vincent Transport</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A1192</td>
+            <td>04/26/2023</td>
+            <td>OH</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Port Vincent Transport<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: FL<br>Date Reported: 05/04/2023<br>Unit Number: 2024 VO 421226<br>Driver: Fox, Joseph<br>Claimants: Howard, Johnny, Atkinson, Andrew, Murray, Carly<br>Cause Code: None<br>Description: Trailer door detached,<br>struck adjacent vehicle<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $24,595.88 | Recovered $0.00 | Total Incurred $24,595.88<br>PD: Reserve $0.00 | Paid $36,613.96 | Recovered $0.00 | Total Incurred $36,613.96<br>LAE: Reserve $0.00 | Paid $334.18 | Recovered $0.00 | Total Incurred $334.18<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $22,312.26 | Total Incurred ($22,312.26)<br>Incident Total: Reserve $0.00 | Paid $61,544.02 | Recovered $22,312.26 | Total Incurred $39,231.76</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L240002</td>
+            <td>Mathews Transport Group</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L24A4044</td>
+            <td>03/10/2024</td>
+            <td>PA</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Mathews Transport Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Hall, Gonzalez and Giles<br>Policy State: TX<br>Date Reported: 03/26/2024<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Refrigeration unit failure<br>- spoiled goods<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $52,579.13 | Paid $0.00 | Recovered $0.00 | Total Incurred $52,579.13<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $7,692.34 | Total Incurred ($7,692.34)<br>Incident Total: Reserve $52,579.13 | Paid $0.00 | Recovered $7,692.34 | Total Incurred $44,886.79</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L230003</td>
+            <td>Crawford Express Group</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L23A6887</td>
+            <td>11/14/2023</td>
+            <td>NC</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Crawford Express Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: PA<br>Date Reported: 12/02/2023<br>Unit Number: 2023 IN 369187<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Fuel tank punctured<br>by road debris<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $5,739.12 | Recovered $0.00 | Total Incurred $5,739.12<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $3,830.57 | Total Incurred ($3,830.57)<br>Incident Total: Reserve $0.00 | Paid $5,739.12 | Recovered $3,830.57 | Total Incurred $1,908.55</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L230004</td>
+            <td>Torresstad Express</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L23A6080</td>
+            <td>11/03/2023</td>
+            <td>NY</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Torresstad Express<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: TN<br>Date Reported: 11/15/2023<br>Unit Number: —<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Trailer damaged in<br>loading dock collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $6,438.12 | Recovered $0.00 | Total Incurred $6,438.12<br>LAE: Reserve $0.00 | Paid $1,369.80 | Recovered $0.00 | Total Incurred $1,369.80<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,926.43 | Total Incurred ($4,926.43)<br>Incident Total: Reserve $0.00 | Paid $7,807.92 | Recovered $4,926.43 | Total Incurred $2,881.49</td>
+        </tr>
+        <tr>
+            <td>#30005</td>
+            <td>L230005</td>
+            <td>Ross Cargo Group</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A1071</td>
+            <td>01/10/2023</td>
+            <td>AZ</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Ross Cargo Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: OK<br>Date Reported: 01/31/2023<br>Unit Number: 2023 VO 961118<br>Driver: Lam, Michael<br>Claimants: Erickson, Timothy<br>Cause Code: None<br>Description: IV<br>backing, struck parked guardrail<br>Adjuster Notes: Establish thank practice cover difference thing field turn meeting buy should require control article case reality skill improve.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $11,241.32 | Paid $0.00 | Recovered $0.00 | Total Incurred $11,241.32<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $18,086.05 | Total Incurred ($18,086.05)<br>Incident Total: Reserve $11,241.32 | Paid $0.00 | Recovered $18,086.05 | Total Incurred ($6,844.73)</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L230006</td>
+            <td>Summit Cargo Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A4713</td>
+            <td>06/30/2023</td>
+            <td>OH</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Summit Cargo Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: OK<br>Date Reported: 07/02/2023<br>Unit Number: 2023 VO 581579<br>Driver: Ford, Barry<br>Claimants: Sanchez, Lori, Mcdonald, Matthew<br>Cause Code: None<br>Description: IV backing into loading<br>dock, hit bridge support<br>Adjuster Notes: Act opportunity attack either Mrs send next may we choose strategy how.<br>BI: Reserve $0.00 | Paid $25,855.06 | Recovered $0.00 | Total Incurred $25,855.06<br>PD: Reserve $0.00 | Paid $45,070.59 | Recovered $0.00 | Total Incurred $45,070.59<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $70,925.65 | Recovered $0.00 | Total Incurred $70,925.65</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L240007</td>
+            <td>Holmes Cargo Co</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A3762</td>
+            <td>03/28/2024</td>
+            <td>PA</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Holmes Cargo Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: CA<br>Date Reported: 04/01/2024<br>Unit Number: —<br>Driver: Alexander, Hannah<br>Claimants: Compton, Kimberly, Robbins, Richard<br>Cause Code: None<br>Description: IV making right<br>turn, trailer struck OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $37,976.18 | Recovered $0.00 | Total Incurred $37,976.18<br>PD: Reserve $0.00 | Paid $23,140.66 | Recovered $0.00 | Total Incurred $23,140.66<br>LAE: Reserve $0.00 | Paid $1,503.86 | Recovered $0.00 | Total Incurred $1,503.86<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $62,620.70 | Recovered $0.00 | Total Incurred $62,620.70</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L230008</td>
+            <td>Atlas Transport Group</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A9459</td>
+            <td>06/21/2023</td>
+            <td>NY</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Atlas Transport Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: GA<br>Date Reported: 06/24/2023<br>Unit Number: —<br>Driver: Miller, Debra<br>Claimants: Bryant, Lisa<br>Cause Code: None<br>Description: IV<br>hydroplaned, hit concrete barrier<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $16,288.19 | Recovered $0.00 | Total Incurred $16,288.19<br>LAE: Reserve $0.00 | Paid $1,013.16 | Recovered $0.00 | Total Incurred $1,013.16<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $17,301.35 | Recovered $0.00 | Total Incurred $17,301.35</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L230009</td>
+            <td>New Morgan Logistics</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L23A7565</td>
+            <td>11/06/2023</td>
+            <td>TN</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: New Morgan Logistics<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: IL<br>Date Reported: 11/24/2023<br>Unit Number: 2024 FR 402872<br>Driver: Wright, Adam<br>Claimants: —<br>Cause Code: None<br>Description: OV changed lanes<br>into IV, causing collision<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $49,400.56 | Recovered $0.00 | Total Incurred $49,400.56<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $25,211.53 | Total Incurred ($25,211.53)<br>Incident Total: Reserve $0.00 | Paid $49,400.56 | Recovered $25,211.53 | Total Incurred $24,189.03</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L240010</td>
+            <td>Williams Cargo Group</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A1422</td>
+            <td>07/21/2024</td>
+            <td>TX</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Williams Cargo Group<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: MO<br>Date Reported: 07/26/2024<br>Unit Number: 2023 MA 446089<br>Driver: Ramirez, Alicia<br>Claimants: Newman, Kim, Tucker, Shawn<br>Cause Code: None<br>Description: IV<br>changing lanes, sideswiped OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $43,202.51 | Paid $0.00 | Recovered $0.00 | Total Incurred $43,202.51<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $16,212.12 | Total Incurred ($16,212.12)<br>Incident Total: Reserve $43,202.51 | Paid $0.00 | Recovered $16,212.12 | Total Incurred $26,990.39</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$107,022.96</td>
+                <td>$281,078.44</td>
+                <td>$102,101.87</td>
+                <td>$285,999.53</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 11</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>

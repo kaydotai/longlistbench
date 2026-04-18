@@ -1,0 +1,30 @@
+# LaTeX build files (do not submit to arXiv)
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bcf
+*.run.xml
+*.xdv
+
+# PDF output (arXiv generates this)
+*.pdf
+
+# Editor files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build directory
+build/
+
+# arXiv submission package
+arxiv_submission/
+arxiv_submission.tar.gz
+

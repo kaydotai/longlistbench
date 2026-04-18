@@ -1,0 +1,34 @@
+name: Paper Build
+
+on:
+  pull_request:
+    paths:
+      - "paper/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "paper/**"
+
+jobs:
+  build-paper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build LaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: paper
+          root_file: main.tex
+          texlive_version: 2025
+          args: -pdf -interaction=nonstopmode -halt-on-error
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper/main.pdf
+          if-no-files-found: error

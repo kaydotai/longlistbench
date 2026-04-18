@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reyes Hauling Co - Loss Run</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.5cm;
+        }
+        @media print {
+            .incident-section {
+                page-break-inside: avoid;
+                break-inside: avoid-page;
+            }
+            .incident-section.split-incident {
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+            .page-break {
+                display: block !important;
+                width: 100% !important;
+                height: 1px !important;
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 8pt;
+            line-height: 1.3;
+            margin: 0;
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+        .header {
+            margin-bottom: 15px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+        .header-line {
+            margin: 2px 0;
+        }
+        .company-name {
+            font-weight: bold;
+            font-size: 11pt;
+        }
+        .report-title {
+            text-align: right;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .incident-section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            break-inside: avoid;
+            overflow: hidden;
+        }
+        .incident-section.split-incident {
+            page-break-inside: auto;
+            break-inside: auto;
+            overflow: visible;
+        }
+        .incident-section.split-incident > .incident-header {
+            background-color: #fff3cd;
+        }
+        .content-wrapper .incident-section.split-incident {
+            overflow: hidden;
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident > .incident-header {
+            column-span: none;
+            -webkit-column-span: none;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table {
+            table-layout: fixed;
+            width: 100%;
+            max-width: 100%;
+            font-size: 7pt;
+        }
+        .content-wrapper .incident-section.split-incident .financial-table th,
+        .content-wrapper .incident-section.split-incident .financial-table td {
+            padding: 2px;
+        }
+        .continued-note {
+            margin: 6px 0;
+            font-size: 7pt;
+            text-align: center;
+            font-style: italic;
+            color: #444;
+        }
+        .continued-header {
+            background-color: #fff3cd;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px dashed #444;
+        }
+        .incident-header {
+            background-color: #e8e8e8;
+            padding: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 1px solid #000;
+        }
+        .incident-details {
+            margin-left: 10px;
+            margin-bottom: 8px;
+        }
+        .detail-line {
+            margin: 2px 0;
+        }
+        .label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+        }
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 8pt;
+        }
+        .financial-table th {
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            padding: 4px;
+            text-align: right;
+            font-weight: bold;
+        }
+        .financial-table td {
+            border: 1px solid #666;
+            padding: 4px;
+            text-align: right;
+        }
+        .financial-table td.category {
+            text-align: left;
+            font-weight: bold;
+        }
+        .total-row {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        .grand-total-section {
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #e8e8e8;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #000;
+            font-size: 7pt;
+            text-align: center;
+        }
+        .page-break {
+            display: block;
+            width: 100%;
+            height: 1px;
+            page-break-before: always;
+            break-before: page;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        .claimants-list {
+            margin-left: 20px;
+            font-style: italic;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <div class="company-name">Continental Casualty</div>
+            <div class="header-line">4558 Patrick Forge, New Christopherville, AZ 96368</div>
+            <div class="header-line">Phone: (258)467-5892</div>
+        </div>
+        <div class="report-title">
+            Loss Run - Detailed Format
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        <div class="header-line"><strong>Account:</strong> Reyes Hauling Co, Acct. # A0214882</div>
+        <div class="header-line"><strong>Policy Period:</strong> 07/01/2023 - 07/01/2024 (Trucking)</div>
+        <div class="header-line"><strong>Run Date/Time:</strong> 10/06/2024, 10:30 AM</div>
+    </div>
+</div>
+
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30001</td>
+            <td>L230001</td>
+            <td>Reyes Hauling Co</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L23A7380</td>
+            <td>03/27/2023</td>
+            <td>NC</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Reyes Hauling Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: GA<br>Date Reported: 03/28/2023<br>Unit Number: 2023 PE 328973<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Cargo stolen from locked trailer overnight<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $11,704.90 | Paid $0.00 | Recovered $0.00 | Total Incurred $11,704.90<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $11,704.90 | Paid $0.00 | Recovered $0.00 | Total Incurred $11,704.90</td>
+        </tr>
+        <tr>
+            <td>#30002</td>
+            <td>L240002</td>
+            <td>Lake Sarastad Hauling</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L24A5304</td>
+            <td>12/27/2024</td>
+            <td>TX</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Lake Sarastad Hauling<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: PA<br>Date Reported: 01/01/2025<br>Unit Number: —<br>Driver: Shaw, Seth<br>Claimants: —<br>Cause Code: None<br>Description: Refrigeration unit failure - spoiled goods<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $26,320.91 | Recovered $0.00 | Total Incurred $26,320.91<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $26,320.91 | Recovered $0.00 | Total Incurred $26,320.91</td>
+        </tr>
+        <tr>
+            <td>#30003</td>
+            <td>L240003</td>
+            <td>North Helen Logistics</td>
+            <td>Physical Damage</td>
+            <td>Closed</td>
+            <td>L24A1226</td>
+            <td>02/05/2024</td>
+            <td>GA</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: North Helen Logistics<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: MI<br>Date Reported: 02/19/2024<br>Unit Number: 2024 FR 835600<br>Driver: Reed, David<br>Claimants: —<br>Cause Code: None<br>Description: Fuel tank punctured by road debris<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $57,362.43 | Recovered $0.00 | Total Incurred $57,362.43<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>Incident Total: Reserve $0.00 | Paid $57,362.43 | Recovered $0.00 | Total Incurred $57,362.43</td>
+        </tr>
+        <tr>
+            <td>#30004</td>
+            <td>L230004</td>
+            <td>Robinson Logistics Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L23A8516</td>
+            <td>09/01/2023</td>
+            <td>NY</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Robinson Logistics Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: Mays-Mcguire<br>Policy State: NY<br>Date Reported: 09/02/2023<br>Unit Number: —<br>Driver: Allison, John<br>Claimants: Webster, Christopher<br>Cause Code: None<br>Description: IV lost control on wet pavement, struck guardrail<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $40,151.04 | Paid $4,559.82 | Recovered $0.00 | Total Incurred $44,710.86<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $10,332.75 | Total Incurred ($10,332.75)<br>Incident Total: Reserve $40,151.04 | Paid $4,559.82 | Recovered $10,332.75 | Total Incurred $34,378.11</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="page-break"></div>
+<div class="table-section">
+    <table class="claims-table" style="width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 6pt;">
+        <thead>
+            <tr style="background-color: #333; color: white;">
+                <th style="padding: 3px; border: 1px solid #000;">Incident #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Reference #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Company</th>
+                <th style="padding: 3px; border: 1px solid #000;">Coverage</th>
+                <th style="padding: 3px; border: 1px solid #000;">Status</th>
+                <th style="padding: 3px; border: 1px solid #000;">Policy #</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss Date</th>
+                <th style="padding: 3px; border: 1px solid #000;">Loss State</th>
+                <th style="padding: 3px; border: 1px solid #000;">Incident Details</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#30005</td>
+            <td>L240005</td>
+            <td>Delta Transport Co</td>
+            <td>Inland Marine</td>
+            <td>Closed</td>
+            <td>L24A7576</td>
+            <td>04/12/2024</td>
+            <td>NY</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Delta Transport Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: AR<br>Date Reported: 04/15/2024<br>Unit Number: —<br>Driver: —<br>Claimants: Harris, Nguyen and Miller, Parker, Benjamin<br>Cause Code: None<br>Description: Load shift caused cargo damage<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $49,645.24 | Recovered $0.00 | Total Incurred $49,645.24<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,458.39 | Total Incurred ($4,458.39)<br>Incident Total: Reserve $0.00 | Paid $49,645.24 | Recovered $4,458.39 | Total Incurred $45,186.85</td>
+        </tr>
+        <tr>
+            <td>#30006</td>
+            <td>L240006</td>
+            <td>Chapman Transport Inc</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A2349</td>
+            <td>06/01/2024</td>
+            <td>FL</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Chapman Transport Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: MO<br>Date Reported: 06/08/2024<br>Unit Number: —<br>Driver: Carpenter, David<br>Claimants: Harris, Connie<br>Cause Code: None<br>Description: Tire blowout caused IV to veer into OV<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $49,926.05 | Paid $0.00 | Recovered $0.00 | Total Incurred $49,926.05<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $32,620.61 | Total Incurred ($32,620.61)<br>Incident Total: Reserve $49,926.05 | Paid $0.00 | Recovered $32,620.61 | Total Incurred $17,305.44</td>
+        </tr>
+        <tr>
+            <td>#30007</td>
+            <td>L240007</td>
+            <td>East Kellytown Hauling</td>
+            <td>Liability</td>
+            <td>Closed</td>
+            <td>L24A7007</td>
+            <td>10/30/2024</td>
+            <td>AZ</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: East Kellytown Hauling<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: CA<br>Date Reported: 11/06/2024<br>Unit Number: —<br>Driver: Hughes, Karen<br>Claimants: Phillips, Molly<br>Cause Code: None<br>Description: IV backing into loading dock, hit concrete barrier<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $0.00 | Paid $30,459.91 | Recovered $0.00 | Total Incurred $30,459.91<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $21,053.61 | Total Incurred ($21,053.61)<br>Incident Total: Reserve $0.00 | Paid $30,459.91 | Recovered $21,053.61 | Total Incurred $9,406.30</td>
+        </tr>
+        <tr>
+            <td>#30008</td>
+            <td>L240008</td>
+            <td>Sharp Hauling LLC</td>
+            <td>Inland Marine</td>
+            <td>Open</td>
+            <td>L24A5285</td>
+            <td>09/22/2024</td>
+            <td>MO</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Sharp Hauling LLC<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: CA<br>Date Reported: 10/11/2024<br>Unit Number: 2024 PE 771091<br>Driver: —<br>Claimants: —<br>Cause Code: None<br>Description: Cargo crushed due to improper securing<br>Adjuster Notes: Yourself have care real notice site reduce section table work base at need stop want human.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $17,475.97 | Paid $0.00 | Recovered $0.00 | Total Incurred $17,475.97<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $542.74 | Total Incurred ($542.74)<br>Incident Total: Reserve $17,475.97 | Paid $0.00 | Recovered $542.74 | Total Incurred $16,933.23</td>
+        </tr>
+        <tr>
+            <td>#30009</td>
+            <td>L240009</td>
+            <td>Horizon Logistics Co</td>
+            <td>Liability</td>
+            <td>Open</td>
+            <td>L24A4405</td>
+            <td>07/12/2024</td>
+            <td>NY</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Horizon Logistics Co<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: IL<br>Date Reported: 07/24/2024<br>Unit Number: 2024 KE 655238<br>Driver: Benson, Jacob<br>Claimants: Watts, Curtis, Mullins, Stacie, Fowler, Jeffrey<br>Cause Code: None<br>Description: IV rear-ended OV at traffic light<br>Adjuster Notes: None<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $19,295.56 | Paid $0.00 | Recovered $0.00 | Total Incurred $19,295.56<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $15,698.19 | Total Incurred ($15,698.19)<br>Incident Total: Reserve $19,295.56 | Paid $0.00 | Recovered $15,698.19 | Total Incurred $3,597.37</td>
+        </tr>
+        <tr>
+            <td>#30010</td>
+            <td>L230010</td>
+            <td>Stein Logistics Inc</td>
+            <td>Physical Damage</td>
+            <td>Open</td>
+            <td>L23A5202</td>
+            <td>10/22/2023</td>
+            <td>NC</td>
+            <td style="max-width: 520px; white-space: pre-line; line-height: 1.25;">Insured: Stein Logistics Inc<br>Division: General<br>Handler: Claims Adjuster<br>Agency: None<br>Policy State: GA<br>Date Reported: 10/25/2023<br>Unit Number: 2023 VO 324003<br>Driver: Rodriguez, Alicia<br>Claimants: —<br>Cause Code: None<br>Description: Trailer damaged in loading dock collision<br>Adjuster Notes: Wait quite could to thought recently cultural talk draw those treat investment stock church this nor worry woman spring back.<br>BI: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>PD: Reserve $56,792.77 | Paid $0.00 | Recovered $0.00 | Total Incurred $56,792.77<br>LAE: Reserve $0.00 | Paid $0.00 | Recovered $0.00 | Total Incurred $0.00<br>DED: Reserve $0.00 | Paid $0.00 | Recovered $4,762.55 | Total Incurred ($4,762.55)<br>Incident Total: Reserve $56,792.77 | Paid $0.00 | Recovered $4,762.55 | Total Incurred $52,030.22</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="grand-total-section">
+    <div style="font-size: 11pt; margin-bottom: 10px;">REPORT TOTALS</div>
+    <table class="financial-table" style="width: 60%;">
+        <thead>
+            <tr>
+                <th style="text-align: left;"></th>
+                <th>Reserve</th>
+                <th>Paid</th>
+                <th>Recovered</th>
+                <th>Total Incurred</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="total-row">
+                <td class="category">Grand Total</td>
+                <td>$195,346.29</td>
+                <td>$168,348.31</td>
+                <td>$89,468.84</td>
+                <td>$274,225.76</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 10px;">TOTAL NUMBER OF INCIDENTS: 10</div>
+</div>
+
+    <div class="footer">
+        CONFIDENTIAL - NOT FOR AUDIT: MANAGERIAL USE ONLY
+    </div>
+</body>
+</html>
