@@ -139,7 +139,10 @@ make -C paper quick
 git commit --no-verify
 ```
 
-### Requirements
+### Paper Build Only
+
+LaTeX is only needed if you want to compile the paper locally.
 
 - LaTeX distribution (TeX Live, MacTeX, or similar)
-- `pdflatex` and `biber` must be available in your PATH
+- `pdflatex` and `biber` available in your `PATH`
+- See [paper/README.md](paper/README.md) for paper-specific build instructions
