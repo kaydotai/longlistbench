@@ -75,6 +75,50 @@ class ExtractionCoreTests(unittest.TestCase):
         self.assertIn("only the operative provision paragraph", prompt)
         self.assertIn("Exclude document-level totals", prompt)
 
+    def test_ifta_return_schedule_contract_includes_return_totals_without_count(self):
+        ground_truth = [
+            {
+                "schedule": "Quarterly Return 0",
+                "jurisdiction": "PA",
+                "surcharge": "N",
+                "distance_miles": 1200,
+                "total_due": 24.50,
+            },
+            {
+                "schedule": "Return Totals (Quarterly Return 0)",
+                "jurisdiction": "",
+                "surcharge": "",
+                "distance_miles": 1200,
+                "total_due": 24.50,
+            },
+        ]
+
+        prompt = build_record_extraction_prompt("OCR BODY", ground_truth)
+
+        self.assertIn("IFTA return-schedule rules:", prompt)
+        self.assertIn(
+            "Include every jurisdiction row, every Non-IFTA row, and every row labeled Return Totals.",
+            prompt,
+        )
+        self.assertIn("Exclude intermediate subtotals, payment lines, and remittance lines.", prompt)
+        self.assertEqual(
+            prompt,
+            build_record_extraction_prompt("OCR BODY", ground_truth + [ground_truth[0]]),
+        )
+
+    def test_non_ifta_contract_does_not_include_return_schedule_rules(self):
+        ground_truth = [
+            {
+                "record_type": "driver_record",
+                "driver_name": "Jordan Lee",
+                "jurisdiction": "PA",
+            }
+        ]
+
+        prompt = build_record_extraction_prompt("OCR BODY", ground_truth)
+
+        self.assertNotIn("IFTA return-schedule rules:", prompt)
+
 
 if __name__ == "__main__":
     unittest.main()

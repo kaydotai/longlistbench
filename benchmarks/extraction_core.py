@@ -281,6 +281,18 @@ _LOSS_RUN_EXTRACTION_SCHEMA_JSON = json.dumps(
 _GENERIC_PROMPT_EXCLUDED_FIELDS = {"record_id", "applies_to_record_id"}
 
 
+def ifta_return_schedule_scope_rules(all_fields: set[str]) -> list[str]:
+    """Return IFTA scope rules when the target fields identify a return schedule."""
+    if not {"schedule", "jurisdiction"}.issubset(all_fields):
+        return []
+    return [
+        "",
+        "IFTA return-schedule rules:",
+        "- Include every jurisdiction row, every Non-IFTA row, and every row labeled Return Totals.",
+        "- Exclude intermediate subtotals, payment lines, and remittance lines.",
+    ]
+
+
 EXTRACTION_PROMPT = """Extract all incident records from the following document.
 
 Requirements:
@@ -362,6 +374,7 @@ def build_record_extraction_contract(ground_truth: list[dict]) -> str:
             "- For operations documents, extract one record per target table row or section-row combination matching the allowed fields.",
         ]
     )
+    lines.extend(ifta_return_schedule_scope_rules(all_fields))
     if "policy_clause_item" in by_type:
         lines.extend(
             [

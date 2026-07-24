@@ -118,6 +118,24 @@ class AgenticExtractionTests(unittest.TestCase):
         self.assertIn("records.json", args[5])
         self.assertIn("policy_form_item", args[4])
 
+    def test_agent_contract_includes_ifta_return_totals(self) -> None:
+        ground_truth = [
+            {
+                "schedule": "Quarterly Return 0",
+                "jurisdiction": "PA",
+                "distance_miles": 1200,
+                "total_due": 24.50,
+            }
+        ]
+
+        instructions, _task, _output, expects_records = regime_agentic._build_agent_contract(
+            ground_truth
+        )
+
+        self.assertTrue(expects_records)
+        self.assertIn("IFTA return-schedule rules:", instructions)
+        self.assertIn("every row labeled Return Totals", instructions)
+
 
 class OpenAiOneshotTests(unittest.TestCase):
     def _fake_client(self, content: str) -> mock.MagicMock:

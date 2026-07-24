@@ -29,6 +29,7 @@ try:
         _LOSS_RUN_EXTRACTION_SCHEMA_JSON,
         _validate_and_normalize_predictions,
         estimate_cost_usd,
+        ifta_return_schedule_scope_rules,
         parse_json_response,
         record_usage,
         trace_dir,
@@ -40,6 +41,7 @@ except ImportError:
         _LOSS_RUN_EXTRACTION_SCHEMA_JSON,
         _validate_and_normalize_predictions,
         estimate_cost_usd,
+        ifta_return_schedule_scope_rules,
         parse_json_response,
         record_usage,
         trace_dir,
@@ -173,6 +175,7 @@ def _field_summary_for_records(ground_truth: list[dict]) -> str:
             "- For policy_location_item, extract one record per unique scheduled location/building/classification row, not one per repeated mention.",
         ]
     )
+    lines.extend(ifta_return_schedule_scope_rules(all_fields))
     return "\n".join(lines)
 
 
