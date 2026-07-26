@@ -22,6 +22,20 @@ def _write_run(
     report = {
         "dataset": {"manifest_sha256": manifest},
         "model_stats": {key: {"total_samples": samples, "total_rows": rows}},
+        "detailed_results": [
+            {
+                "sample": f"sample_{index:03d}",
+                "tier": "core_operations",
+                "metrics": {
+                    "ground_truth_count": 1,
+                    "predicted_count": 1,
+                    "exact_record_recall": 1.0,
+                    "f1": 1.0,
+                    "complete_document": True,
+                },
+            }
+            for index in range(samples)
+        ],
     }
     metadata = {
         "requested_model": key,
@@ -89,6 +103,44 @@ def test_bonsai_run_is_labeled_local_and_together_ai(tmp_path: Path) -> None:
         models, _ = export_leaderboard_space.load_runs(tmp_path)
 
     assert models[0]["harness"] == "Local + Together AI"
+
+
+@pytest.mark.parametrize(
+    ("details", "message"),
+    [
+        (None, "missing detailed_results"),
+        ([], "expected 32 unique documents"),
+        (
+            [
+                {
+                    "sample": "duplicate",
+                    "tier": "core_operations",
+                    "metrics": {},
+                }
+            ]
+            * 32,
+            "expected 32 unique documents",
+        ),
+    ],
+)
+def test_load_runs_requires_one_unique_document_result_per_sample(
+    tmp_path: Path,
+    details: list[dict] | None,
+    message: str,
+) -> None:
+    run = export_leaderboard_space.RUNS[0]
+    _write_run(tmp_path, run["run_dir"], run["key"], manifest="a" * 64)
+    report_path = tmp_path / run["run_dir"] / "evaluation_report.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    if details is None:
+        del report["detailed_results"]
+    else:
+        report["detailed_results"] = details
+    report_path.write_text(json.dumps(report), encoding="utf-8")
+
+    with patch.object(export_leaderboard_space, "RUNS", (run,)):
+        with pytest.raises(ValueError, match=message):
+            export_leaderboard_space.load_runs(tmp_path)
 
 
 def test_summarize_document_results_keeps_only_comparable_metrics() -> None:
@@ -303,3 +355,5 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
     assert 'id="metric-definition-popover"' in html
     assert 'aria-label="Explain token price"' in html
     assert 'aria-label="Explain field F1"' in html
+    assert "function showDefinition(button) {\n    closeDetails();" in html
+    assert "function toggleDetails(button) {\n    closeDefinition();" in html

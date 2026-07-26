@@ -78,6 +78,19 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
         report = json.loads((results_dir / run_dir / "evaluation_report.json").read_text(encoding="utf-8"))
         meta = json.loads((results_dir / run_dir / "run_metadata.json").read_text(encoding="utf-8"))
         stats = report["model_stats"][key]
+        try:
+            detailed_results = report["detailed_results"]
+        except KeyError:
+            raise ValueError(f"{run_dir} is missing detailed_results") from None
+        document_samples = {detail["sample"] for detail in detailed_results}
+        if (
+            len(detailed_results) != stats["total_samples"]
+            or len(document_samples) != stats["total_samples"]
+        ):
+            raise ValueError(
+                f"{run_dir} expected {stats['total_samples']} unique documents, "
+                f"found {len(detailed_results)} rows and {len(document_samples)} unique samples"
+            )
         manifest = report["dataset"]["manifest_sha256"]
         shape = (stats["total_samples"], stats["total_rows"])
         if expected_manifest is None:
@@ -105,7 +118,7 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
             ),
             "run_date": meta["generated_at"][:10],
             "stats": stats,
-            "detailed_results": report.get("detailed_results", []),
+            "detailed_results": detailed_results,
         })
     return models, dataset_meta
 
@@ -946,6 +959,7 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
   }}
 
   function toggleDetails(button) {{
+    closeDefinition();
     const panel = document.getElementById(button.getAttribute("aria-controls"));
     const opening = panel.hidden;
     closeDetails();
@@ -955,6 +969,7 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
   }}
 
   function showDefinition(button) {{
+    closeDetails();
     if (activeDefinitionButton === button && !popover.hidden) {{
       closeDefinition();
       return;
