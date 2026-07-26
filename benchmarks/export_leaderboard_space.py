@@ -105,12 +105,29 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
             ),
             "run_date": meta["generated_at"][:10],
             "stats": stats,
+            "detailed_results": report.get("detailed_results", []),
         })
     return models, dataset_meta
 
 
 def pct(value: float, digits: int = 1) -> str:
     return f"{100 * value:.{digits}f}"
+
+
+def summarize_document_results(details: list[dict]) -> list[dict]:
+    documents = []
+    for detail in details:
+        metrics = detail["metrics"]
+        documents.append({
+            "sample": detail["sample"],
+            "tier": detail["tier"],
+            "gold_records": metrics["ground_truth_count"],
+            "predicted_records": metrics["predicted_count"],
+            "exact_record_recall": metrics["exact_record_recall"],
+            "field_f1": metrics["f1"],
+            "complete_document": metrics["complete_document"],
+        })
+    return documents
 
 
 def build_data(models: list[dict], dataset_meta: dict) -> dict:
@@ -146,6 +163,7 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "by_tier": s["by_tier"],
             "by_family": s["by_complexity_regime"],
             "by_stressor": s["by_stressor"],
+            "documents": summarize_document_results(m["detailed_results"]),
         })
     rows.sort(key=lambda r: r["exact_record_recall"], reverse=True)
     return {
@@ -255,14 +273,39 @@ def build_html(data: dict) -> str:
         price_label = "$0 local" if combined == 0 else f"{money(combined)}/M"
         row_class = " class='winner'" if rank == 1 else ""
         leader_badge = "<span class='leader-badge'>Leader</span>" if rank == 1 else ""
+        documents = result.get("documents", [])
+        details_id = f"result-details-{rank}"
+        details_button = (
+            f'<button class="details-button" type="button" aria-expanded=\'false\' '
+            f"aria-controls='{details_id}' data-model-name='{result['model']}' "
+            f"aria-label='Show document details for {result['model']}'>"
+            "<span data-details-label>Details</span>"
+            "<span class='details-symbol' aria-hidden='true'>+</span></button>"
+            if documents
+            else ""
+        )
+        document_rows = "".join(
+            "<tr>"
+            f"<td class='document-name'>{document['sample']}</td>"
+            f"<td class='numeric'>{document['gold_records']}</td>"
+            f"<td class='numeric'>{document['predicted_records']}</td>"
+            f"<td class='numeric'>{pct(document['exact_record_recall'])}%</td>"
+            f"<td class='numeric'>{pct(document['field_f1'])}%</td>"
+            "<td class='document-complete'>"
+            f"<span class='document-status {'complete' if document['complete_document'] else 'incomplete'}'>"
+            f"{'Complete' if document['complete_document'] else 'Incomplete'}</span></td>"
+            "</tr>"
+            for document in documents
+        )
         rows_html.append(
-            f"<tr{row_class} data-original-rank='{rank}'>"
+            f"<tr{row_class} data-result-row data-original-rank='{rank}' data-details-row='{details_id}'>"
             f"<td class='rank' data-rank-cell>#{rank}</td>"
             f"<td class='configuration' data-column='configuration' "
             f"data-sort-value='{result['model'].casefold()}'><div class='model-line'>"
             f"<strong>{result['model']}</strong>{leader_badge}</div>"
             f"<span>{result['harness']} · {result['effort']} · {result['run_date']}</span>"
-            f"<span class='protocol'>{result['protocol']}</span></td>"
+            f"<div class='configuration-actions'><span class='protocol'>{result['protocol']}</span>"
+            f"{details_button}</div></td>"
             f"<td class='numeric price' data-column='combined_token_price' "
             f"data-sort-value='{combined}'>{price_label}</td>"
             f"<td class='numeric primary' data-column='exact_record_recall' "
@@ -280,6 +323,19 @@ def build_html(data: dict) -> str:
             f"<td class='numeric' data-column='weighted_f1' "
             f"data-sort-value='{result['weighted_f1']}'>{pct(result['weighted_f1'])}%</td>"
             "</tr>"
+            + (
+                f"<tr class='detail-row' id='{details_id}' data-detail-for='{rank}' hidden>"
+                "<td colspan='8'><div class='detail-panel'>"
+                "<div class='detail-panel-heading'>"
+                f"<strong>{result['model']}</strong><span>{len(documents)} documents</span></div>"
+                "<div class='document-scroll'><table class='document-table'>"
+                "<thead><tr><th>Document</th><th class='numeric'>Gold records</th>"
+                "<th class='numeric'>Predicted</th><th class='numeric'>Exact recall</th>"
+                "<th class='numeric'>Field F1</th><th>Complete</th></tr></thead>"
+                f"<tbody>{document_rows}</tbody></table></div></div></td></tr>"
+                if documents
+                else ""
+            )
         )
 
     chart_html = build_cost_chart(results)
@@ -480,13 +536,13 @@ th[aria-sort="descending"] .sort-arrow {{ color: var(--ink); }}
   outline: 3px solid var(--signal);
   outline-offset: 2px;
 }}
-tbody tr {{ transition: background-color .16s ease; }}
-tbody tr:hover {{ background: rgba(255,255,255,.68); }}
-tbody tr.winner {{
+tbody > tr[data-result-row] {{ transition: background-color .16s ease; }}
+tbody > tr[data-result-row]:hover {{ background: rgba(255,255,255,.68); }}
+tbody > tr.winner {{
   background: linear-gradient(90deg, rgba(255,225,0,.22), rgba(255,225,0,.06) 46%, transparent);
 }}
-tbody tr.winner:hover {{ background: linear-gradient(90deg, rgba(255,225,0,.3), rgba(255,225,0,.1) 46%, transparent); }}
-tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
+tbody > tr.winner:hover {{ background: linear-gradient(90deg, rgba(255,225,0,.3), rgba(255,225,0,.1) 46%, transparent); }}
+tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
 .rank {{
   width: 54px;
   color: var(--muted);
@@ -510,9 +566,14 @@ tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
   color: var(--muted);
   font-size: 11px;
 }}
+.configuration-actions {{
+  margin-top: 7px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}}
 .protocol {{
   display: inline-block;
-  margin-top: 7px;
   padding: 3px 6px;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -521,6 +582,106 @@ tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
   letter-spacing: .04em;
   text-transform: uppercase;
 }}
+.details-button {{
+  padding: 3px 7px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #bbb8b0;
+  border-radius: 4px;
+  background: rgba(255,255,255,.56);
+  color: var(--ink);
+  cursor: pointer;
+  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}}
+.details-button:hover,
+.details-button[aria-expanded="true"] {{
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--white);
+}}
+.details-button:focus-visible {{
+  outline: 3px solid var(--signal);
+  outline-offset: 2px;
+}}
+.details-symbol {{ width: 8px; text-align: center; }}
+.detail-row[hidden] {{ display: none; }}
+.detail-row > td {{
+  padding: 0;
+  border-top: 0;
+  white-space: normal;
+}}
+.detail-panel {{
+  padding: 14px 16px 16px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-strong);
+}}
+.detail-panel-heading {{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}}
+.detail-panel-heading strong {{ font-size: 13px; font-weight: 600; }}
+.detail-panel-heading span {{
+  color: var(--muted);
+  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}}
+.document-scroll {{
+  max-height: 380px;
+  overflow: auto;
+  border: 1px solid #cfccc4;
+  border-radius: 10px;
+  background: rgba(255,255,255,.72);
+}}
+.document-table {{
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 12px;
+}}
+.document-table th,
+.document-table td {{
+  padding: 9px 11px;
+  border-top: 1px solid #e3e0d9;
+  white-space: nowrap;
+}}
+.document-table thead th {{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-top: 0;
+  background: #f1efea;
+}}
+.document-table tbody tr:hover {{ background: rgba(255,255,255,.8); }}
+.document-name {{
+  font: 10px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .01em;
+}}
+.document-status {{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}}
+.document-status::before {{
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b8b5ae;
+}}
+.document-status.complete {{ color: var(--ink); }}
+.document-status.complete::before {{ background: var(--signal); }}
 .numeric {{ text-align: right; font-variant-numeric: tabular-nums; }}
 .price {{ font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }}
 .primary {{ font-size: 17px; font-weight: 600; }}
@@ -753,6 +914,7 @@ tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
   const tbody = table.querySelector("tbody");
   const buttons = Array.from(table.querySelectorAll(".sort-button"));
   const definitionButtons = Array.from(table.querySelectorAll(".definition-button"));
+  const detailButtons = Array.from(table.querySelectorAll(".details-button"));
   const popover = document.querySelector("#metric-definition-popover");
   const popoverTitle = popover.querySelector("strong");
   const popoverCopy = popover.querySelector("p");
@@ -763,6 +925,33 @@ tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
     definitionButtons.forEach((button) => button.setAttribute("aria-expanded", "false"));
     popover.hidden = true;
     activeDefinitionButton = null;
+  }}
+
+  function setDetailsButton(button, expanded) {{
+    button.setAttribute("aria-expanded", String(expanded));
+    button.setAttribute(
+      "aria-label",
+      (expanded ? "Hide" : "Show") + " document details for " + button.dataset.modelName
+    );
+    button.querySelector("[data-details-label]").textContent = expanded ? "Hide" : "Details";
+    button.querySelector(".details-symbol").textContent = expanded ? "−" : "+";
+  }}
+
+  function closeDetails() {{
+    detailButtons.forEach((button) => {{
+      const panel = document.getElementById(button.getAttribute("aria-controls"));
+      panel.hidden = true;
+      setDetailsButton(button, false);
+    }});
+  }}
+
+  function toggleDetails(button) {{
+    const panel = document.getElementById(button.getAttribute("aria-controls"));
+    const opening = panel.hidden;
+    closeDetails();
+    if (!opening) return;
+    panel.hidden = false;
+    setDetailsButton(button, true);
   }}
 
   function showDefinition(button) {{
@@ -795,7 +984,8 @@ tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
   function sortTable(button, direction) {{
     const key = button.dataset.sortKey;
     const type = button.dataset.sortType;
-    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const rows = Array.from(tbody.querySelectorAll("[data-result-row]"));
+    closeDetails();
     rows.sort((leftRow, rightRow) => {{
       const left = leftRow.querySelector('[data-column="' + key + '"]').dataset.sortValue;
       const right = rightRow.querySelector('[data-column="' + key + '"]').dataset.sortValue;
@@ -807,7 +997,11 @@ tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
       }}
       return direction === "ascending" ? comparison : -comparison;
     }});
-    rows.forEach((row) => tbody.appendChild(row));
+    rows.forEach((row) => {{
+      tbody.appendChild(row);
+      const detailRow = document.getElementById(row.dataset.detailsRow);
+      if (detailRow) tbody.appendChild(detailRow);
+    }});
 
     buttons.forEach((candidate) => {{
       const heading = candidate.closest("th");
@@ -838,10 +1032,22 @@ tbody tr.winner td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
     }});
   }});
 
+  detailButtons.forEach((button) => {{
+    button.addEventListener("click", () => toggleDetails(button));
+  }});
+
   document.addEventListener("click", (event) => {{
     if (!popover.hidden && !popover.contains(event.target)) closeDefinition();
   }});
   document.addEventListener("keydown", (event) => {{
+    const expandedDetails = detailButtons.find(
+      (button) => button.getAttribute("aria-expanded") === "true"
+    );
+    if (event.key === "Escape" && expandedDetails) {{
+      closeDetails();
+      expandedDetails.focus();
+      return;
+    }}
     if (event.key !== "Escape" || popover.hidden) return;
     const button = activeDefinitionButton;
     closeDefinition();

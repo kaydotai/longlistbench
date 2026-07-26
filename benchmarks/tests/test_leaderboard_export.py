@@ -91,6 +91,36 @@ def test_bonsai_run_is_labeled_local_and_together_ai(tmp_path: Path) -> None:
     assert models[0]["harness"] == "Local + Together AI"
 
 
+def test_summarize_document_results_keeps_only_comparable_metrics() -> None:
+    details = [
+        {
+            "sample": "driver_mvr_packet_001",
+            "tier": "core_operations",
+            "metrics": {
+                "ground_truth_count": 260,
+                "predicted_count": 230,
+                "exact_record_recall": 0.7153846154,
+                "f1": 0.8687643899,
+                "complete_document": False,
+                "missing_ids": ["do-not-export"],
+                "extra_ids": ["do-not-export"],
+            },
+        }
+    ]
+
+    assert export_leaderboard_space.summarize_document_results(details) == [
+        {
+            "sample": "driver_mvr_packet_001",
+            "tier": "core_operations",
+            "gold_records": 260,
+            "predicted_records": 230,
+            "exact_record_recall": 0.7153846154,
+            "field_f1": 0.8687643899,
+            "complete_document": False,
+        }
+    ]
+
+
 def test_cost_chart_has_no_local_price_band() -> None:
     chart = export_leaderboard_space.build_cost_chart(
         [
@@ -208,6 +238,17 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
             "structural_exact_recall": exact - 0.05,
             "scale_control_exact_recall": exact + 0.01,
             "weighted_f1": min(1, exact + 0.01),
+            "documents": [
+                {
+                    "sample": "driver_mvr_packet_001",
+                    "tier": "core_operations",
+                    "gold_records": 260,
+                    "predicted_records": 230,
+                    "exact_record_recall": exact,
+                    "field_f1": min(1, exact + 0.01),
+                    "complete_document": False,
+                }
+            ],
         }
 
     data = {
@@ -247,6 +288,15 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
     assert 'data-sort-key="combined_token_price"' in html
     assert 'data-sort-key="exact_record_recall"' in html
     assert 'aria-sort="descending"' in html
+    assert html.count('class="details-button"') == 2
+    assert html.count("class='detail-row'") == 2
+    assert "driver_mvr_packet_001" in html
+    assert "Gold records" in html
+    assert "Predicted" in html
+    assert "Field F1" in html
+    assert "aria-expanded='false'" in html
+    assert " hidden>" in html
+    assert 'tbody.querySelectorAll("[data-result-row]")' in html
     assert '<details class="metric-guide">' not in html
     assert "metric-grid" not in html
     assert html.count('class="definition-button"') == 6
