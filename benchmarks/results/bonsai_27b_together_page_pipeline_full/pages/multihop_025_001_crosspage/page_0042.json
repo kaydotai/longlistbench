@@ -1,0 +1,110 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "page_number": 42,
+  "page_sha256": "207ba2cf28f30902b74ae270104995c36732d89544cc9a0e933c7b054403667a",
+  "candidates": [
+    {
+      "incident_number": "LR23-G2381",
+      "description": "Medical invoice image indexed. Coding review is pending before payment consideration.",
+      "handler": "RECOV",
+      "date_of_loss": "02/03/2024"
+    },
+    {
+      "incident_number": "LR24-E7603",
+      "description": "Supervisor reviewed the current file status and returned the activity to the examiner queue.",
+      "handler": "CLERK",
+      "date_of_loss": "03/05/2024"
+    },
+    {
+      "incident_number": "LR25-F4897",
+      "description": "Initial contact attempt documented; callback window entered for the assigned examiner.",
+      "handler": "EXAM",
+      "date_of_loss": "04/07/2024"
+    },
+    {
+      "incident_number": "LR25-L2642",
+      "description": "Repair documentation received and routed for review of labor rates and prior damage.",
+      "handler": "CLERK",
+      "date_of_loss": "05/09/2024"
+    },
+    {
+      "incident_number": "LR24-D3447",
+      "description": "Coverage question sent to policy services; diary extended pending the written response.",
+      "handler": "SUPV",
+      "date_of_loss": "06/11/2024"
+    },
+    {
+      "incident_number": "LR25-N7758",
+      "description": "Reserve review completed. No authority change was requested on this activity entry.",
+      "handler": "EXAM",
+      "date_of_loss": "07/13/2024"
+    },
+    {
+      "incident_number": "LR23-A3482",
+      "description": "Statement request issued to the reporting party and indexed to incoming correspondence.",
+      "handler": "EXAM",
+      "date_of_loss": "08/15/2024"
+    },
+    {
+      "incident_number": "LR23-D9003",
+      "description": "Recovery potential reviewed after liability discussion; follow-up remains open.",
+      "handler": "SUPV",
+      "date_of_loss": "09/17/2024"
+    },
+    {
+      "incident_number": "LR23-Q5377",
+      "description": "Medical invoice image indexed. Coding review is pending before payment consideration.",
+      "handler": "CLERK",
+      "date_of_loss": "10/19/2024"
+    },
+    {
+      "incident_number": "LR23-X1053",
+      "description": "Supervisor reviewed the current file status and returned the activity to the examiner queue.",
+      "handler": "EXAM",
+      "date_of_loss": "11/21/2024"
+    },
+    {
+      "incident_number": "LR25-R8111",
+      "description": "Initial contact attempt documented; callback window entered for the assigned examiner.",
+      "handler": "SUPV",
+      "date_of_loss": "12/23/2024"
+    },
+    {
+      "incident_number": "LR23-W5452",
+      "description": "Repair documentation received and routed for review of labor rates and prior damage.",
+      "handler": "RECOV",
+      "date_of_loss": "01/25/2024"
+    },
+    {
+      "incident_number": "LR23-W4353",
+      "description": "Coverage question sent to policy services; diary extended pending the written response.",
+      "handler": "EXAM",
+      "date_of_loss": "02/27/2024"
+    },
+    {
+      "incident_number": "LR24-T2330",
+      "description": "Reserve review completed. No authority change was requested on this activity entry.",
+      "handler": "SUPV",
+      "date_of_loss": "03/02/2024"
+    },
+    {
+      "incident_number": "LR25-F3832",
+      "description": "Statement request issued to the reporting party and indexed to incoming correspondence.",
+      "handler": "SUPV",
+      "date_of_loss": "04/04/2024"
+    },
+    {
+      "incident_number": "LR23-D3447",
+      "description": "Recovery potential reviewed after liability discussion; follow-up remains open.",
+      "handler": "CLERK",
+      "date_of_loss": "05/06/2024"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1088,
+  "completion_tokens": 2171,
+  "elapsed_seconds": 26.723831749986857,
+  "request_fingerprint": "4bd438b5b0b771d8e228d7d804ca6cbf0fae1d9001e1aad600938c2d5df237e3",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,97 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 69,
+  "page_sha256": "6155e6ae60c16876a32593fa6f621ca2acf2153c3df9ccd23fb5bbd31c99a256",
+  "candidates": [
+    {
+      "building_number": "002",
+      "classification": "Ordinary Payroll Limitation",
+      "form_number": "BPF 04 67",
+      "limit": "$125,000",
+      "location_number": "002",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "location_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "This form applies to Ordinary Payroll Limitation at Location 002, Building 002, subject to the $125,000 limit and $1,000 deductible shown in the declarations.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "Form BPF 04 67 edition 12 23 must be read with the premises schedule and the 90 Days valuation entry.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "When the carrier provides financial indemnity for a loss, it automatically assumes the policyholder's rights to pursue recovery from any third party responsible for the impairment. This transfer of rights is fundamental to the equitable distribution of risk.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "The policyholder must execute any documents and perform any actions necessary to secure and preserve these recovery rights. Any action taken by the policyholder that prejudices the carrier's ability to pursue subrogation may result in a proportional reduction of the indemnity provided.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "Prior to the occurrence of an event, the policyholder may waive their rights of recovery against another party through a formal written contract. The carrier acknowledges such waivers provided they are executed before the loss and documented appropriately.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "After an event has occurred, the policyholder may not waive recovery rights against any party without the explicit written authorization of the carrier. Unauthorized post-loss waivers severely compromise the carrier's financial position and violate the terms of this agreement.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "If the carrier successfully recovers funds from a responsible third party, the proceeds are distributed according to a specific hierarchy. The carrier first deducts the expenses incurred during the recovery effort, including legal fees and investigation costs.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "Following the deduction of expenses, the policyholder is reimbursed for any deductible amounts previously absorbed. The remaining funds are then retained by the carrier up to the total amount of indemnity disbursed for the claim.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "Any surplus funds recovered beyond the carrier's disbursements and the policyholder's deductible will be remitted to the policyholder. This ensures that the recovery process does not result in an unintended windfall for the carrier.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "The carrier retains sole discretion over whether to initiate, continue, or abandon subrogation proceedings. The policyholder cannot compel the carrier to pursue a third party if the carrier determines the effort is not economically viable.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "In situations where the policyholder initiates their own recovery action against a third party, they must notify the carrier immediately. The carrier may elect to join the action to protect its financial interests.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "These recovery provisions apply equally to both property impairment claims and liability disbursements, ensuring a consistent approach to third-party accountability across all coverage parts.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1293,
+  "completion_tokens": 1759,
+  "elapsed_seconds": 19.961744792060927,
+  "request_fingerprint": "4209e7a74a7228bc63a3ebef7841e9cf7721ddd8dda042f33631d71d973e209f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "21dd35a2307d12411c0e9d2d12cabf8ef794681943840501d0f2580072e3a056",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "11/21/2024"
+  ],
+  "pages": [
+    70,
+    106,
+    134
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1670,
+  "completion_tokens": 361,
+  "elapsed_seconds": 6.393108041957021,
+  "record": {
+    "incident_number": "11/21/2024",
+    "reference_number": "LR25-V3875",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "Coverage question sent to policy services; diary extended pending the written response.",
+    "handler": "SUPV",
+    "unit_number": "",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

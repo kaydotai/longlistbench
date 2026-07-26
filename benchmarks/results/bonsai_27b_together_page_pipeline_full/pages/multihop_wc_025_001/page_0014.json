@@ -1,0 +1,75 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 14,
+  "page_sha256": "469ed2fd1aab8b878e5a80617878b9809aee26de3c0747cc2305d160b303ba1f",
+  "candidates": [
+    {
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 04/01/2027",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "WC 00 03 13",
+      "form_title": "Massachusetts State Amendatory Endorsement",
+      "lob": "MA",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "184,316.0",
+      "class_code": "9082",
+      "classification": "Restaurant NOC",
+      "edition_date": "07 23",
+      "endorsement_effective_date": "",
+      "estimated_premium": "2,119.0",
+      "form_number": "WC 00 03 13",
+      "form_title": "Massachusetts State Amendatory Endorsement",
+      "lob": "MA",
+      "materiality": "",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 04/01/2027",
+      "state": "state",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "184,316.0",
+      "class_code": "9082",
+      "classification": "Restaurant NOC",
+      "clause_scope": "clause scope",
+      "clause_text": "employer must post notice, procedures, etc.",
+      "clause_title": "classification and rating reference",
+      "clause_type": "disputes regarding classification assignment",
+      "edition_date": "07 23",
+      "estimated_premium": "2,119.0",
+      "form_number": "WC 00 03 13",
+      "form_title": "Massachusetts State Amendatory Endorsement",
+      "lob": "MA",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 04/01/2027",
+      "state": "state",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1021,
+  "completion_tokens": 538,
+  "elapsed_seconds": 6.109182375017554,
+  "request_fingerprint": "e9735ff3948a83e25353432c1950c795cb9bf0071d559981ab1a25c2764a42c4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,30 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "page_number": 67,
+  "page_sha256": "0049bce51e7a6fb9b5d81f33b88e28d4121c8029c41a3ad0d9819dadeec19cb4",
+  "candidates": [
+    {
+      "incident_number": "03/03/2024",
+      "reference_number": "SUB-054-01",
+      "status": "Review"
+    },
+    {
+      "incident_number": "03/05/2024",
+      "reference_number": "SUB-054-02",
+      "status": "Diary",
+      "ded": {
+        "reserve": 235,
+        "paid": 235,
+        "recovered": 0,
+        "total_incurred": 21165.0
+      }
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1480,
+  "completion_tokens": 330,
+  "elapsed_seconds": 4.4421703750267625,
+  "request_fingerprint": "039036788eea20214a9c12c3e1f69d04bdaa5a2177428653eed9a80907770915",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

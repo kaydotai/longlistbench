@@ -1,0 +1,47 @@
+{
+  "sample": "ifta_tax_summary_001",
+  "fingerprint": "551e6be252952baf592e8ad02bd162d4c2d97109bb4532fd4f7ffe1e46451e5b",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "VA",
+    "DI"
+  ],
+  "pages": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "attempts": 1,
+  "prompt_tokens": 61621,
+  "completion_tokens": 186,
+  "elapsed_seconds": 29.937477416009642,
+  "record": {
+    "fuel_type": "DI",
+    "jurisdiction": "VA",
+    "gallons_purchased": 38313,
+    "interest_due": 0,
+    "net_taxable_gallons": 38313,
+    "surtax_due": 0.5645,
+    "tax_due_refund": 21627.69,
+    "tax_rate": 2300.18,
+    "taxable_gallons": 38313,
+    "taxable_miles": 233417,
+    "total_due_refund": 23927.87,
+    "total_miles": 234292
+  }
+}

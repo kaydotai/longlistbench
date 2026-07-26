@@ -1,0 +1,83 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 33,
+  "page_sha256": "4153c4fe69d32ae21d30ce144d46fbb66c9bc74665e6478b7a183db22c269761",
+  "candidates": [
+    {
+      "building_number": "001",
+      "classification": "Accounts Receivable",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "form_number": "BPF0426",
+      "policy_period": "04/01/2026 to 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "endorsement_effective_date": "BPF0426 ED. 12 23",
+      "location_number": "04/01/2026",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "clause_text": "A. Scheduled Premises And Coverage",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "B. This form applies to Accounts Receivable at Location 002, Building 001, subject to the $235,000 limit and $5,000 deductible shown in the declarations.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "C. Form BPF 04 26 edition 12 23 must be read with the premises schedule and the Scheduled Limit valuation entry.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "D. The rights and duties established under this agreement are specific to the named insured designated on the declarations. These rights cannot be transferred, sold, or assigned to another entity without the express written authorization of the carrier.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "E. If the policyholder attempts to assign the policy without consent, the assignment is considered void, and the carrier's obligations remain solely with the original named insured. This restriction prevents the unauthorized transfer of risk to ununderwritten entities.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "F. In the event the named insured is an individual and passes away during the policy period, the rights and duties temporarily transfer to a legal representative. This transfer is strictly limited to actions necessary to maintain the property and settle outstanding affairs.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "G. Any modifications to the terms, conditions, or schedules of this agreement must be executed through a formal written endorsement issued by the carrier. Verbal agreements or informal communications with producers do not alter the policy language.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "H. The first named insured listed on the declarations is authorized to request changes to the policy on behalf of all other insured parties. The carrier will direct all correspondence, endorsements, and administrative notices to this primary individual or entity.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "I. When a change request results in a modification of the risk profile, the carrier will calculate any corresponding adjustment to the premium. Additional premiums must be remitted promptly to ensure the continuation of the revised terms.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "J. If a change results in a reduction of exposure, the carrier will process a return premium in accordance with the applicable rating rules. Return premiums are typically credited to the policyholder's billing account.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "K. The carrier may periodically update its standard forms and endorsements to reflect regulatory changes or internal guidelines. If these updates broaden coverage without an additional premium charge, the broadened terms will automatically apply to this agreement.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "L. However, if form updates restrict coverage, the carrier will not apply them mid-term. Such restrictions will only be introduced at the time of policy renewal, accompanied by the required statutory notices.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "M. The policyholder is responsible for reviewing all issued endorsements to ensure they accurately reflect the requested changes and do not inadvertently conflict with the intended scope of the agreement.",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1264,
+  "completion_tokens": 1704,
+  "elapsed_seconds": 19.370199375087395,
+  "request_fingerprint": "eaaa9e430b90ecce8d52b7ab53db867fc3261306756d0b77c2c68875e294c18d",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

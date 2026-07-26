@@ -1,0 +1,64 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "d32d5bf51aef5bee723bd0df32f7cb5b2fffeca40d80af7951a99395ed5f35ce",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "SUB-019-11"
+  ],
+  "pages": [
+    26
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1507,
+  "completion_tokens": 361,
+  "elapsed_seconds": 6.096795874997042,
+  "record": {
+    "incident_number": "SUB-019-11",
+    "reference_number": "LR24-T7711",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "Diary",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "03/23/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

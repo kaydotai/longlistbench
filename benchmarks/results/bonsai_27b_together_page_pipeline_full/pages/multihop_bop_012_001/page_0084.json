@@ -1,0 +1,62 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 84,
+  "page_sha256": "b56c13763100f27b68981b5049bbeb744da62b8b7c08ef4aa4ecd6a633b2cbfb",
+  "candidates": [
+    {
+      "building_number": "001",
+      "classification": "Accounts Receivable",
+      "form_number": "BPF 04 26",
+      "form_title": "ACCOUNTS RECEIVABLE COVERAGE ENDORSEMENT",
+      "limit": "175000",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "premises_address": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "premises_address": "001",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "premises_address": "001",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPF 04 26",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "edition_date": "06/15/2026",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1048,
+  "completion_tokens": 687,
+  "elapsed_seconds": 8.18969604105223,
+  "request_fingerprint": "585317bb7ef40e6e94bb3e4ec3f30ae15e1a334976c2ae68c49593fd63c4130d",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

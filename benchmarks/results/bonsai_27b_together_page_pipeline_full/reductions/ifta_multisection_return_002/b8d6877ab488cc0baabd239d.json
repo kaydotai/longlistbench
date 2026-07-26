@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "b8d6877ab488cc0baabd239d7178ff65a0ab922023540763e9a5cb6279d113f3",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "30",
+    "Iowa",
+    "IA"
+  ],
+  "pages": [
+    71
+  ],
+  "attempts": 1,
+  "prompt_tokens": 806,
+  "completion_tokens": 198,
+  "elapsed_seconds": 2.90236254199408,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "IA",
+    "jurisdiction": "Iowa",
+    "quarter": "",
+    "return_id": "30",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": 18386,
+    "surtax_due": 0,
+    "tax_due_refund": 10983.8,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.5974,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 10983.8,
+    "total_miles": 0
+  }
+}

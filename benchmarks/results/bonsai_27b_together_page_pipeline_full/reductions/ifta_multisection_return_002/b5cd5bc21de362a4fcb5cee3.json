@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "b5cd5bc21de362a4fcb5cee3702aed3f91eb44a119f7fa27999339bf315faa36",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2024-Q2-90-006",
+    "MD",
+    "DI"
+  ],
+  "pages": [
+    35
+  ],
+  "attempts": 1,
+  "prompt_tokens": 801,
+  "completion_tokens": 221,
+  "elapsed_seconds": 4.171404124936089,
+  "record": {
+    "filing_type": "Quarterly",
+    "fuel_type": "DI",
+    "jurisdiction": "MD",
+    "quarter": "Q2",
+    "return_id": "RTN-2024-Q2-90-006",
+    "filing_year": 2024,
+    "interest_due": 0,
+    "net_gallons": 35149,
+    "surtax_due": 0,
+    "tax_due_refund": 19944.66,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.5649,
+    "taxable_gallons": 35149,
+    "taxable_miles": 0,
+    "total_due_refund": 19944.66,
+    "total_miles": 0
+  }
+}

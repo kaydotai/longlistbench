@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_tax_inquiry_001",
+  "fingerprint": "05e6a47a57c108582270a69043dc8fc18d8a251fccff5e8e9d8efc357f78e324",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    1,
+    "Jurisdiction Schedule Detail",
+    "42"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 369,
+  "completion_tokens": 59,
+  "elapsed_seconds": 0.8682436249218881,
+  "record": {
+    "field": "42",
+    "section": "Jurisdiction Schedule Detail",
+    "value": "WY taxable distance: 2,411 miles",
+    "page": 1
+  }
+}

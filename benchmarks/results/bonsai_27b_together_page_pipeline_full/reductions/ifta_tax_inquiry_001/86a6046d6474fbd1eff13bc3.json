@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_tax_inquiry_001",
+  "fingerprint": "86a6046d6474fbd1eff13bc371848b3350ddc7e9514893d0cb0c86a2ce931c1a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    1,
+    "Jurisdiction Schedule Detail",
+    "21"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 368,
+  "completion_tokens": 57,
+  "elapsed_seconds": 2.467615957953967,
+  "record": {
+    "field": "21",
+    "section": "Jurisdiction Schedule Detail",
+    "value": "MO taxable distance 2,054 miles",
+    "page": 1
+  }
+}

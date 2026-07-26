@@ -1,0 +1,44 @@
+{
+  "sample": "loss_run_external_003",
+  "page_number": 35,
+  "page_sha256": "0412a3791e8e126b55f21a96bbb33c61518240bace13429e2235d9a447f72b9a",
+  "candidates": [
+    {
+      "claim_number": "00928453-10244",
+      "claim_status": "Closed",
+      "claimant": "Alder Logistics Repair",
+      "date_of_loss": "05/02/22",
+      "date_reported": "05/05/22",
+      "description": "property damage reported at a private receiving yard",
+      "effective_date": "09/16/21",
+      "policy_number": "SC00928453"
+    },
+    {
+      "claim_number": "00928453-10245",
+      "claim_status": "Open",
+      "claimant": "Bayline Warehouse",
+      "date_of_loss": "05/09/22",
+      "date_reported": "05/17/22",
+      "description": "towing and storage reimbursement requested after disablement; coverage was accepted subject to deductible application",
+      "claim_reserves": 7.198
+    },
+    {
+      "claim_number": "00928453-10246",
+      "claim_status": "Pending",
+      "claimant": "Canyon Fleet Body",
+      "date_of_loss": "05/16/22",
+      "date_reported": "05/29/22",
+      "description": "fuel-island scrape reported during yard maneuver"
+    },
+    {
+      "policy_number": "09/16/21 - 09/16/22"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 832,
+  "completion_tokens": 459,
+  "elapsed_seconds": 9.728819290990941,
+  "request_fingerprint": "0f9ae5f1db0270329f92fe8de9b97aa16b31c3ba957ef09da941ac94a255378f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

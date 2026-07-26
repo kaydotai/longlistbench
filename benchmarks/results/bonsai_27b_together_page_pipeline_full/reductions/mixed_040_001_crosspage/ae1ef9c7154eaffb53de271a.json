@@ -1,0 +1,64 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "ae1ef9c7154eaffb53de271a7c01201056f3651db5753e70d11825b5639eeae1",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "73277-Q"
+  ],
+  "pages": [
+    61
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1496,
+  "completion_tokens": 351,
+  "elapsed_seconds": 5.1647464169654995,
+  "record": {
+    "incident_number": "73277-Q",
+    "reference_number": "LR23-J7091",
+    "company_name": "Delta Express LLC",
+    "division": "",
+    "coverage_type": "",
+    "status": "Closed",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

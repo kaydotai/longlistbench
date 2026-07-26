@@ -1,0 +1,65 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "a61a7472fee9b895bb76fda46485b13bdd9326663c18781295ad9934d4a20f65",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR24-E7603"
+  ],
+  "pages": [
+    10,
+    42
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1690,
+  "completion_tokens": 367,
+  "elapsed_seconds": 6.347092958982103,
+  "record": {
+    "incident_number": "LR24-E7603",
+    "reference_number": "",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "Supervisor reviewed the current file status and returned the activity to the examiner queue.",
+    "handler": "CLERK",
+    "unit_number": "",
+    "date_of_loss": "03/05/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

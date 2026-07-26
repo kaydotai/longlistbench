@@ -1,0 +1,58 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 7,
+  "page_sha256": "e1e9054fc14dd97fa374d751c8526298720f4def4f97d7a5fafd99cc0b98248a",
+  "candidates": [
+    {
+      "building_number": "001",
+      "edition_date": "04/01/2026",
+      "form_number": "BPA6205",
+      "form_title": "BUSINESSOWNERS COVERAGE FORM",
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPA6205",
+      "form_title": "BUSINESSOWNERS COVERAGE FORM",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "policy_number": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "clause_text": "THIS ENDORSEMENT CHANGES THE POLICY. PLEASE READ IT CAREFULLY.",
+      "clause_title": "MAINE AMENDATORY PROVISIONS",
+      "clause_type": "AMENDATORY ENDORSEMENT",
+      "edition_date": "04/01/2026",
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 915,
+  "completion_tokens": 599,
+  "elapsed_seconds": 8.159785624942742,
+  "request_fingerprint": "110d4baa7f1214257405cb99528095a0d2d0f7730dcc63c8dca294c2aba3e436",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,56 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 113,
+  "page_sha256": "35def0fb36ed42dc1c62ca980f971dbd3393972c1465e488ab6e513fa6100a34",
+  "candidates": [
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings at Location 5",
+      "coverage_part": "All",
+      "edition_date": "04/01/2026",
+      "endorsement_effective_date": "05/20/2026",
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "form_number": "CG 21 67",
+      "limit": "$100,000",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026",
+      "premium": "$1,457",
+      "territory": "012",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "policy_number": "LG695378",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "CG 21 67",
+      "policy_number": "LG695378",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "97047",
+      "edition_date": "04/01/2026",
+      "endorsement_effective_date": "05/20/2026",
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "form_number": "CG 21 67",
+      "named_insured": "LG695378",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "policy_number": "LG695378",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "97047",
+      "policy_number": "LG695378",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1616,
+  "completion_tokens": 610,
+  "elapsed_seconds": 10.028418333036825,
+  "request_fingerprint": "908ae0424ad2e4d847a4719b70ef2a299de36bedd01c7713bd365cd8d7149c8a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

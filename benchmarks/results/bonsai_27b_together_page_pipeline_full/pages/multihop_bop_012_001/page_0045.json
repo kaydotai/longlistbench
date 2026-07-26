@@ -1,0 +1,55 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 45,
+  "page_sha256": "4d996663aed1ce827a106121947558a897fd26c78bd3703c64ceb0c9fe14b48d",
+  "candidates": [
+    {
+      "building_number": "001",
+      "business_income_basis": "12 Months",
+      "classification": "Building",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "business_income_basis": "12 Months",
+      "classification": "Business Personal Property",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "clause_scope": "001",
+      "clause_text": "For Location 001, Building 001, Building, read BPF 00 13 edition 12 23 as the controlling limitation provision. This provision applies only to Location 001, Building 001, Building when BPF 00 13 edition 12 23 is attached to the policy.",
+      "clause_title": "SCHEDULED PREMISES LIMITATION",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_scope": "002",
+      "clause_text": "BPF 00 13 edition 06 21 contains a condition provision for Location 002, Building 001, Business Personal Property. The scheduled limit of $75,000 and deductible of $5,000 apply to Location 002, Building 001, Business Personal Property under form BPF 00 13 edition 06 21.",
+      "clause_title": "LIMIT AND DEDUCTIBLE APPLICATION",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "003",
+      "clause_scope": "003",
+      "clause_text": "For Location 002, Building 001, Business Personal Property, read BPF 00 13 edition 06 21 as the controlling condition provision. The insured must keep records supporting the Replacement Cost valuation basis, 90% coinsurance entry, and 12 Months business income basis for Location 002, Building 001, Business Personal Property.",
+      "clause_title": "VALUATION RECORDS REQUIREMENT",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1544,
+  "completion_tokens": 859,
+  "elapsed_seconds": 11.626002458040603,
+  "request_fingerprint": "6fa960cad48c2b82908862e4531e1ada5193b22fb60bb647847e15b680443998",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

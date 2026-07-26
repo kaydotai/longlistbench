@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "fac161b2347d0c00fa73129a36e2a55a02f63e7c0a9d9e2a828eb5fe0c627a64",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-012",
+    "Ohio",
+    "DI"
+  ],
+  "pages": [
+    70
+  ],
+  "attempts": 1,
+  "prompt_tokens": 750,
+  "completion_tokens": 205,
+  "elapsed_seconds": 2.860146041959524,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Ohio",
+    "quarter": "",
+    "return_id": "RTN-2026-Q4-90-012",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": 21451,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.5117,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

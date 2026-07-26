@@ -1,0 +1,31 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "731a2e20ec57d7a9815ebbe10f00b2ec7e692b0c015047f69bdf82c65df22fb3",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "TX",
+    "DIESEL"
+  ],
+  "pages": [
+    6
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2415,
+  "completion_tokens": 180,
+  "elapsed_seconds": 3.31604441604577,
+  "record": {
+    "fuel_type": "DIESEL",
+    "jurisdiction": "TX",
+    "gallons_purchased": 37526,
+    "interest_due": 0.0,
+    "net_taxable_gallons": 37526,
+    "surtax_due": 2910.44,
+    "tax_due_refund": 30143.06,
+    "tax_rate": 0.7257,
+    "taxable_gallons": 37526,
+    "taxable_miles": 0,
+    "total_due_refund": 30143.06,
+    "total_miles": 0
+  }
+}

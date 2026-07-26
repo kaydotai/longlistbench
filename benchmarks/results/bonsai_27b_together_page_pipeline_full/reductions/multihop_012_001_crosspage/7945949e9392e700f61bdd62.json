@@ -1,0 +1,65 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "7945949e9392e700f61bdd6227174294a1b3824d01df7921ba3af00e81d3825b",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "L24A6859"
+  ],
+  "pages": [
+    23,
+    28
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1548,
+  "completion_tokens": 350,
+  "elapsed_seconds": 6.545213374891318,
+  "record": {
+    "incident_number": "L24A6859",
+    "reference_number": "",
+    "company_name": "Burke Hauling Co",
+    "division": "General - IL",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "Coverage issue referred",
+    "policy_state": "",
+    "cause_code": "IL",
+    "description": "",
+    "handler": "",
+    "unit_number": "",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

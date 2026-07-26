@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "278c75afd507587a0e525316ead8923f8b75211fc523fd8713201b82a62a1f10",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-012",
+    "Nevada",
+    "DI"
+  ],
+  "pages": [
+    70
+  ],
+  "attempts": 1,
+  "prompt_tokens": 752,
+  "completion_tokens": 205,
+  "elapsed_seconds": 4.106119416072033,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Nevada",
+    "quarter": "",
+    "return_id": "RTN-2026-Q4-90-012",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": 23093,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.6673,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 81,
+  "page_sha256": "a5a913e9177c469371c5cf8ba6125b198b711e38ddc7587043fbb5c8f19be991",
+  "candidates": [
+    {
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "location_number": "3",
+      "state": "policy_clause_item",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "annual_payroll": "policy_form_item",
+      "form_title": "policy_premium_item",
+      "policy_number": "policy_endorsement_item",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "location_number": "3",
+      "policy_period": "MA",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "WC 00 00 01 A 07 23",
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "premium_basis": "policy_clause_item",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "wc_class_code_item",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_clause_item"
+    },
+    {
+      "annual_payroll": "policy_endorsement_item",
+      "state": "policy_location_item",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "form_title": "policy_premium_item",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1035,
+  "completion_tokens": 791,
+  "elapsed_seconds": 10.435804583015852,
+  "request_fingerprint": "7c9b12e826ffefdab7f9a34935a9e103eccc17d4a5fd7b75490cd8ded1368abf",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,129 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 70,
+  "page_sha256": "6b51e19a8b6d66d5f1d570dbedc4abb926934dcc83b909634a2566a1aefef2dc",
+  "candidates": [
+    {
+      "class_code": "41670",
+      "classification": "Restaurants - with sales of alcoholic beverages",
+      "exposure": "Gross sales of 200,180",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "16916",
+      "classification": "Contractors - subcontracted work",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "territory": "007",
+      "record_type": "policy_location_item"
+    },
+    {
+      "territory": "007",
+      "record_type": "policy_location_item"
+    },
+    {
+      "territory": "012",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "09 21",
+      "form_title": "Commercial General Liability",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04 13",
+      "form_title": "Commercial General Liability",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04 13",
+      "form_title": "Commercial General Liability",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "09 21",
+      "form_title": "Commercial General Liability",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04 13",
+      "form_title": "Commercial General Liability",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "41670",
+      "exclusion_name": "Designated Professional Services",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "41670",
+      "clause_scope": "limitation",
+      "form_number": "CG 20 37",
+      "form_title": "Commercial General Liability",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "16916",
+      "clause_scope": "condition",
+      "form_number": "CG 21 06",
+      "form_title": "Commercial General Liability",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "41670",
+      "clause_scope": "limitation",
+      "form_number": "CG 20 37",
+      "form_title": "Commercial General Liability",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "41670",
+      "clause_scope": "limitation",
+      "form_number": "CG 20 37",
+      "form_title": "Commercial General Liability",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "41670",
+      "clause_scope": "exclusion",
+      "form_number": "CG 20 37",
+      "form_title": "Commercial General Liability",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "91560",
+      "clause_scope": "condition",
+      "form_number": "CG 21 67",
+      "form_title": "Commercial General Liability",
+      "policy_period": "012",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "91560",
+      "form_title": "Commercial General Liability",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1982,
+  "completion_tokens": 1630,
+  "elapsed_seconds": 21.03219795797486,
+  "request_fingerprint": "5557fab9c5eea42b78f3cc3e5a63c4dc3796d643160166350707ed018dbfa7f7",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

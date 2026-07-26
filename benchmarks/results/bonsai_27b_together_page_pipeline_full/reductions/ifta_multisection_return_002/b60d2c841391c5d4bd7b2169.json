@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "b60d2c841391c5d4bd7b216995b135d1ea6d9cf02bdc2b3b535b449cd8ef9552",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-008",
+    "Alabama",
+    "DI"
+  ],
+  "pages": [
+    47
+  ],
+  "attempts": 1,
+  "prompt_tokens": 745,
+  "completion_tokens": 226,
+  "elapsed_seconds": 3.7954279999248683,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "Alabama",
+    "jurisdiction": "Q4",
+    "quarter": "RTN-2026-Q4-90-008",
+    "return_id": "}, {",
+    "filing_year": 2026,
+    "interest_due": 30734,
+    "net_gallons": 0,
+    "surtax_due": 0.3593,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

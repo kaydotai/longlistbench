@@ -1,0 +1,44 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 4,
+  "page_sha256": "32e6cceaba471bef939c513aedd021abda8e650485ba42d927894e07a5868d3a",
+  "candidates": [
+    {
+      "class_code": "COM",
+      "classification": "Separation of Insureds",
+      "clause_scope": "None",
+      "clause_text": "All insureds have independent duties in the event of an incident, claim, or legal proceeding.",
+      "clause_title": "CGL-SIA-09",
+      "clause_type": "Endorsement",
+      "named_insured": "Juniper Crown Casualty",
+      "policy_number": "LG695378",
+      "policy_period": "policy_premium_item",
+      "territory": "policy_location_item",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "CGL-SIA-09",
+      "classification": "COM",
+      "clause_type": "Juniper Gate Learning Center, LLC",
+      "edition_date": "LG695378",
+      "exclusion_name": "04/01/2026 to 04/01/2027",
+      "form_title": "policy_form_item",
+      "limit": "policy_endorsement_item",
+      "limit_type": "policy_clause_item",
+      "lob": "policy_location_item",
+      "location_number": "policy_premium_item",
+      "named_insured": "policy_clause_item",
+      "policy_number": "policy_premium_item",
+      "policy_period": "policy_form_item",
+      "territory": "policy_endorsement_item",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1348,
+  "completion_tokens": 394,
+  "elapsed_seconds": 6.824638582998887,
+  "request_fingerprint": "c5ba8b031855efbda96ac52a1ddbc162ed867ef39335a67d59f526f5218a2b9a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

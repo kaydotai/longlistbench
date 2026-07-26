@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "fingerprint": "33d37b5044e007792939ebfd2eda1dabe7d359d73262517987abc2644045401d",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Quarterly Return 20",
+    "WA"
+  ],
+  "pages": [
+    21
+  ],
+  "attempts": 1,
+  "prompt_tokens": 735,
+  "completion_tokens": 150,
+  "elapsed_seconds": 2.36037808295805,
+  "record": {
+    "jurisdiction": "WA",
+    "schedule": "Quarterly Return 20",
+    "surcharge": "Y",
+    "distance_miles": 29848,
+    "interest_due": null,
+    "net_taxable_volume": 5314,
+    "tax_due_credit": null,
+    "tax_paid_volume": 0,
+    "tax_rate": 0.474,
+    "taxable_distance_miles": 29848,
+    "taxable_volume": 5314,
+    "total_due": null
+  }
+}

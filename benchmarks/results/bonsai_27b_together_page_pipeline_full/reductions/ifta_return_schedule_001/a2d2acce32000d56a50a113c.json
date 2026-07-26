@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "fingerprint": "a2d2acce32000d56a50a113c2e8d8d08f124de57f68862c8a950468250a3551f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Quarterly Return 0",
+    "Non-IFTA"
+  ],
+  "pages": [
+    1
+  ],
+  "attempts": 1,
+  "prompt_tokens": 721,
+  "completion_tokens": 132,
+  "elapsed_seconds": 3.2791629580315202,
+  "record": {
+    "jurisdiction": "Non-IFTA",
+    "schedule": "Quarterly Return 0",
+    "surcharge": "N",
+    "distance_miles": 0,
+    "interest_due": null,
+    "net_taxable_volume": 0,
+    "tax_due_credit": null,
+    "tax_paid_volume": 0,
+    "tax_rate": null,
+    "taxable_distance_miles": 0,
+    "taxable_volume": 0,
+    "total_due": 0
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 37,
+  "page_sha256": "d4ad6ded6b4e7513b848690bf20d8f9bc9c9c7750396a0bb36174af27d7727b0",
+  "candidates": [
+    {
+      "building_number": "001",
+      "classification": "Additional Insured by Contract",
+      "coverage": "$100,000",
+      "deductible": "$5,000",
+      "edition_date": "06 21",
+      "form_number": "BPF 12 09",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "edition_date": "06 21",
+      "form_number": "BPF 12 09",
+      "policy_number": "QB814260",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1294,
+  "completion_tokens": 233,
+  "elapsed_seconds": 3.01419829193037,
+  "request_fingerprint": "9cd4a830efef7af2445c89cc6e50c56ea9e3ee164f46839a702335def4c10656",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

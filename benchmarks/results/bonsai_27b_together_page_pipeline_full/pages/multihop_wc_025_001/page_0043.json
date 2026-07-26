@@ -1,0 +1,88 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 43,
+  "page_sha256": "6140e8eb8471ddc325d641a2852ee175e18933a8bb5a6ed7aea27cd62d7f51e2",
+  "candidates": [
+    {
+      "annual_payroll": "391534",
+      "class_code": "9015",
+      "classification": "Building operations by owner",
+      "edition_date": "07 23",
+      "endorsement_effective_date": "04/01/2026",
+      "estimated_premium": "11197",
+      "experience_mod": "1.04",
+      "form_number": "WC 00 00 00 C",
+      "form_title": "Premium Audit and Remuneration Conditions",
+      "governing_class": "NH",
+      "lob": "1",
+      "location_number": "null",
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "Manual Rate",
+      "premium_basis": "null",
+      "schedule_credit_debit": "NH",
+      "state": "",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "classification": "Building operations by owner",
+      "location_number": "1",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "",
+      "form_number": "WC 00 00 00 C",
+      "form_title": "WC 00 00 00 C 07 23",
+      "lob": "NH",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "2026",
+      "form_number": "WC 00 00 00 C",
+      "form_title": "WC 00 00 00 C 07 23",
+      "lob": "NH",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "391534",
+      "class_code": "9015",
+      "classification": "Building operations by owner",
+      "lob": "Blue Kettle Food Service, LLC",
+      "state": "",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "391534",
+      "class_code": "9015",
+      "experience_mod": "1.04",
+      "lob": "NH",
+      "location_number": "1",
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "policy_period": "Manual Rate",
+      "premium": "2.86",
+      "premium_basis": "11197",
+      "schedule_credit_debit": "null",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "391534",
+      "class_code": "9015",
+      "classification": "Building operations by owner",
+      "clause_scope": "normal business hours. This form applies to Building operations by owner in NH, class 9015, at Location 1. The information page shows estimated remuneration of $391,534, manual rate 2.86, experience modification 1.04, and estimated premium $11,197.",
+      "form_title": "Blue Kettle Food Service, LLC",
+      "state": "",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1031,
+  "completion_tokens": 490,
+  "elapsed_seconds": 5.472695166943595,
+  "request_fingerprint": "b4fcd9c4074de3a1c3aca9ecfebf0451437a0dd826cf2ad6ddfa2357d633aae2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

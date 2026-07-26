@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "755c5612377929fc6abdb797fc8efff0860db5066cd9d5f5972267920ea387a6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "subtotal",
+    "297"
+  ],
+  "pages": [
+    31
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 72,
+  "elapsed_seconds": 2.3169645000016317,
+  "record": {
+    "state": "297",
+    "vehicle": "subtotal",
+    "identified_miles": 0,
+    "total_miles": 117101.6,
+    "unidentified_miles": 983.8
+  }
+}

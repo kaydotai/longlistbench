@@ -1,0 +1,66 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "9a64b6d7aec7c3bb36e6795b0d114712d50b88c839e22aad780862c11fa9ee75",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "3/25/2024"
+  ],
+  "pages": [
+    35
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1754,
+  "completion_tokens": 536,
+  "elapsed_seconds": 7.081994915963151,
+  "record": {
+    "incident_number": "3/25/2024",
+    "reference_number": "",
+    "company_name": "Joshuaborrough Freight",
+    "division": "Summit",
+    "coverage_type": "Commercial Auto",
+    "status": "",
+    "policy_number": "L23A7440",
+    "policy_state": "LR24-U3335",
+    "cause_code": "Not Listed",
+    "description": "Claimants are listed below. This is the claim file for reference: LR24-U3335. Policy No. L23A7440. State: CO. Division: Summit. Coverage: Commercial Auto. Handler: Records Dept. Unit: 35. Cause Code: Not Listed. Date Reported: 10/15/2024. Loss State: CO. Adjuster Notes: Not Listed. BI: 0. PD: 50. LAE: 500. Ded: 1000. Claimants: 1. This record pertains to the listed claim file.",
+    "handler": "Records Dept.",
+    "unit_number": "35",
+    "date_of_loss": "",
+    "loss_state": "CO",
+    "date_reported": "10/15/2024",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "Not Listed",
+    "claimants": [
+      ""
+    ],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 50,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 500,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 1000,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

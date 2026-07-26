@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "d6e4b08049ec7a636981aa7f396bf46937e3508070c2167c480c674b321fdaba",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-012",
+    "Utah",
+    "DI"
+  ],
+  "pages": [
+    70
+  ],
+  "attempts": 1,
+  "prompt_tokens": 751,
+  "completion_tokens": 204,
+  "elapsed_seconds": 4.071901625022292,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Utah",
+    "quarter": "",
+    "return_id": "RTN-2026-Q4-90-012",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": -20154,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.4545,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "b12cb5887f55052818429cbf0f571592f60be60ebc77d8e9dc4fb32b4d2a0723",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "864128"
+  ],
+  "pages": [
+    5
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1650,
+  "completion_tokens": 347,
+  "elapsed_seconds": 4.751036458997987,
+  "record": {
+    "incident_number": "864128",
+    "reference_number": "",
+    "company_name": "",
+    "division": "Great Dane",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 2018,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 110
+    },
+    "pd": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 6
+    },
+    "lae": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 0,
+      "total_incurred": 12
+    },
+    "ded": {
+      "reserve": 12,
+      "paid": 1,
+      "recovered": 12,
+      "total_incurred": 0
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "fingerprint": "2e95e0e955b81ef9e579b6d57b8a84671e0940dff115b41ccbf80f47e8f5980a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Quarterly Return 14",
+    "IN"
+  ],
+  "pages": [
+    15
+  ],
+  "attempts": 1,
+  "prompt_tokens": 734,
+  "completion_tokens": 148,
+  "elapsed_seconds": 2.3869694579625502,
+  "record": {
+    "jurisdiction": "IN",
+    "schedule": "Quarterly Return 14",
+    "surcharge": "N",
+    "distance_miles": 5590,
+    "interest_due": 5590,
+    "net_taxable_volume": 909,
+    "tax_due_credit": null,
+    "tax_paid_volume": 0,
+    "tax_rate": 0.6585,
+    "taxable_distance_miles": 598,
+    "taxable_volume": 0,
+    "total_due": null
+  }
+}

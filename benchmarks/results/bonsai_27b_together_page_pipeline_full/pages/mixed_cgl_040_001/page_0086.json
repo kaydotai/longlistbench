@@ -1,0 +1,92 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 86,
+  "page_sha256": "cd8d659938c8119192c85248a1fabb0240f0c0870f7487af4a2ae89ef6abb05a",
+  "candidates": [
+    {
+      "class_code": "41670",
+      "classification": "Restaurants - with sales of alcoholic beverages",
+      "edition_date": "19",
+      "exclusion_name": "Data Privacy Violation",
+      "form_number": "CG 20 10",
+      "form_title": "CG 20 10 edition 12",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "16916",
+      "classification": "Contractors - subcontracted work",
+      "form_number": "CG 20 37",
+      "form_title": "CG 20 37 edition 09 21",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "form_number": "CG 21 06",
+      "form_title": "CG 21 06 edition 01 24",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "edition_date": "19",
+      "form_number": "CG 20 10",
+      "form_title": "CG 20 10 edition 12",
+      "schedule_source": "09 21",
+      "record_type": "policy_form_item"
+    },
+    {
+      "form_number": "CG 21 06",
+      "form_title": "CG 21 06 edition 01 24",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "41670",
+      "classification": "Restaurants - with sales of alcoholic beverages",
+      "exclusion_name": "Data Privacy Violation",
+      "limit": "CG 20 10",
+      "limit_type": "CG 20 10 edition 12",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "exclusion_name": "Designated Professional Services",
+      "limit": "CG 21 06",
+      "limit_type": "CG 21 06 edition 01 24",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "41670",
+      "classification": "Restaurants - with sales of alcoholic beverages",
+      "clause_scope": "limitation",
+      "edition_date": "19",
+      "form_number": "CG 20 10",
+      "form_title": "CG 20 10 edition 12",
+      "territory": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "16916",
+      "classification": "Contractors - subcontracted work",
+      "clause_scope": "condition",
+      "form_number": "CG 20 37",
+      "form_title": "CG 20 37 edition 09 21",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "clause_scope": "condition",
+      "form_number": "CG 21 06",
+      "form_title": "CG 21 06 edition 01 24",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1992,
+  "completion_tokens": 1117,
+  "elapsed_seconds": 13.725175708066672,
+  "request_fingerprint": "cfdeccba9a6a33787a4e66c2671b5bde6408707209ffd8352c67149c92edf2ee",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

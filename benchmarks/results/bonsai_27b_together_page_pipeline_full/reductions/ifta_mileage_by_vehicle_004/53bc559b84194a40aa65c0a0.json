@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "53bc559b84194a40aa65c0a02d93b05801bf20421a70f28bb03c789785274fac",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Nebraska",
+    "2238"
+  ],
+  "pages": [
+    60
+  ],
+  "attempts": 1,
+  "prompt_tokens": 346,
+  "completion_tokens": 73,
+  "elapsed_seconds": 1.7861155830323696,
+  "record": {
+    "state": "2238",
+    "vehicle": "Nebraska",
+    "identified_miles": 5904.8,
+    "total_miles": 5904.8,
+    "unidentified_miles": 0
+  }
+}

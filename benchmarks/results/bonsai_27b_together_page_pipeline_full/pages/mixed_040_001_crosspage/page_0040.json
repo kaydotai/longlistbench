@@ -1,0 +1,50 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "page_number": 40,
+  "page_sha256": "67b0f33a9a39b29ed071d6a07f000e211938477eff181052b70ab1e7b20d5b56",
+  "candidates": [
+    {
+      "incident_number": "NR25-2555",
+      "reference_number": "NY",
+      "company_name": "07/09/2024",
+      "division": "06/02/2024",
+      "coverage_type": "576153",
+      "status": "Supervisor review",
+      "policy_number": "Broker reporting desk",
+      "policy_state": "Secure portal",
+      "cause_code": "Requested",
+      "description": "The reporting contact advised that the scheduled vehicle was involved in a low-speed maneuver at a customer location. Photographs and the incident exchange form were requested.\n\nImmediate handling: The intake unit created the file, requested available supporting records, and routed the notice for policy and assignment review.",
+      "bi": {
+        "reserve": 1,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      },
+      "pd": {
+        "reserve": 100000,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      },
+      "lae": {
+        "reserve": 0,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      },
+      "ded": {
+        "reserve": 50000,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      }
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 549,
+  "completion_tokens": 415,
+  "elapsed_seconds": 4.6046981669496745,
+  "request_fingerprint": "8b247f2bf4eea6e00886c3cd3f1b9fad07020e5bb2374f4036926657e42f5dd8",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,62 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "abd776a86dc1cce1651fa43e69463ae1f2439c34864a909f4b0303e9948a9036",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "864128"
+  ],
+  "pages": [
+    5
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1993,
+  "completion_tokens": 353,
+  "elapsed_seconds": 14.489420125028118,
+  "record": {
+    "incident_number": "864128",
+    "reference_number": "",
+    "company_name": "Great Dane",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": "2018",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 2018,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 110
+    },
+    "pd": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 6
+    },
+    "lae": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 0,
+      "total_incurred": 12
+    },
+    "ded": {
+      "reserve": 12,
+      "paid": 1,
+      "recovered": 12,
+      "total_incurred": 0
+    }
+  }
+}

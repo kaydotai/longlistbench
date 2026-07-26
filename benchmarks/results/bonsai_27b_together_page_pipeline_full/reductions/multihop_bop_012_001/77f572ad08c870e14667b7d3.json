@@ -1,0 +1,41 @@
+{
+  "sample": "multihop_bop_012_001",
+  "fingerprint": "77f572ad08c870e14667b7d37c0537e29c6b1d43964901fff17f4a393a701d83",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "policy_clause_item",
+  "identity": [
+    "policy_clause_item",
+    "PINECREST PRINT COOPERATIVE, LLC",
+    "BPF 12 09",
+    "SCHEDULED PREMISES LIMITATION",
+    "The policy applies the following condition provision under BPF 12 09 edition 01 20 to Location 002, Building 001, Additional Insured by Contract. The scheduled limit of $300,000 and deductible of $5,000 apply to Location 002, Building 001, Additional Insured by Contract under form BPF 12 09 edition 01 20.",
+    "Limit and Deductible Application"
+  ],
+  "pages": [
+    49
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1105,
+  "completion_tokens": 496,
+  "elapsed_seconds": 7.891509333043359,
+  "record": {
+    "record_type": "policy_clause_item",
+    "building_number": "001",
+    "clause_scope": "SCHEDULED PREMISES LIMITATION",
+    "clause_text": "For Location 002, Building 001, Additional Insured by Contract, read BPF 12 09 edition 01 20 as the controlling limitation provision. This provision applies only to Location 002, Building 001, Additional Insured by Contract when BPF 12 09 edition 01 20 is attached to the policy.",
+    "clause_title": "Limit and Deductible Application",
+    "clause_type": "The policy applies the following condition provision under BPF 12 09 edition 01 20 to Location 002, Building 001, Additional Insured by Contract. The scheduled limit of $300,000 and deductible of $5,000 apply to Location 002, Building 001, Additional Insured by Contract under form BPF 12 09 edition 01 20.",
+    "coverage": "Valuation Records Requirement",
+    "deductible": "BPF 12 09 edition 01 20 contains a condition provision for Location 002, Building 001, Additional Insured by Contract. The insured must keep records supporting the Status Grant valuation basis, 80% coinsurance entry, and Ordinary Payroll 90 Days business income basis for Location 002, Building 001, Additional Insured by Contract.",
+    "edition_date": "BPF 12 09",
+    "form_number": "BPF 12 09",
+    "form_title": "01 20",
+    "limit": "5000",
+    "lob": "300000",
+    "location_number": "002",
+    "named_insured": "002",
+    "policy_number": "PINECREST PRINT COOPERATIVE, LLC",
+    "policy_period": "QB814260"
+  }
+}

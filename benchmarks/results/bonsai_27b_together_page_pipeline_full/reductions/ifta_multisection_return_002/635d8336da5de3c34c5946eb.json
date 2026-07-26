@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "635d8336da5de3c34c5946eb1793eecac4a8b1a627c4336f1f7cb7ce83ea559a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-008",
+    "Indiana",
+    "DI"
+  ],
+  "pages": [
+    47
+  ],
+  "attempts": 1,
+  "prompt_tokens": 745,
+  "completion_tokens": 200,
+  "elapsed_seconds": 4.309414750081487,
+  "record": {
+    "filing_type": "",
+    "fuel_type": "DI",
+    "jurisdiction": "Indiana",
+    "quarter": "Q4",
+    "return_id": "RTN-2026-Q4-90-008",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": 14342,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.7607,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

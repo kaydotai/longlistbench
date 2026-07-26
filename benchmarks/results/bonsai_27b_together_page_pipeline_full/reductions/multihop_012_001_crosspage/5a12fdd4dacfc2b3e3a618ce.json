@@ -1,0 +1,64 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "5a12fdd4dacfc2b3e3a618ce0a919ee6bba814d321ec80fbbd92ccd12911bcab",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "CV-104076"
+  ],
+  "pages": [
+    58
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1622,
+  "completion_tokens": 359,
+  "elapsed_seconds": 4.335771125042811,
+  "record": {
+    "incident_number": "CV-104076",
+    "reference_number": "L24A3974",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "In force on reported date",
+    "policy_number": "",
+    "policy_state": "AR",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 35,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 35.0
+    }
+  }
+}

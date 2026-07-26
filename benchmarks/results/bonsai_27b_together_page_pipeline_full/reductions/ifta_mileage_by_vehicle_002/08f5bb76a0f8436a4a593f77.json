@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "08f5bb76a0f8436a4a593f77eb76230b776d7fd8dbe3a9726b81c5803908c213",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "9748",
+    "Utah"
+  ],
+  "pages": [
+    34
+  ],
+  "attempts": 1,
+  "prompt_tokens": 346,
+  "completion_tokens": 73,
+  "elapsed_seconds": 2.445778499939479,
+  "record": {
+    "state": "Utah",
+    "vehicle": "9748",
+    "identified_miles": 0,
+    "total_miles": 2456.7,
+    "unidentified_miles": 2456.7
+  }
+}

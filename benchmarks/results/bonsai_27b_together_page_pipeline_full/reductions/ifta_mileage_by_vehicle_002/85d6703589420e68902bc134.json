@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "85d6703589420e68902bc134efe479ae46ea25eb67fa1a0f33e3eb0c9202f802",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "8657",
+    "Colorado"
+  ],
+  "pages": [
+    12
+  ],
+  "attempts": 1,
+  "prompt_tokens": 359,
+  "completion_tokens": 72,
+  "elapsed_seconds": 1.6076681660488248,
+  "record": {
+    "state": "Colorado",
+    "vehicle": "8657",
+    "identified_miles": 3.3,
+    "total_miles": 381.4,
+    "unidentified_miles": 378.1
+  }
+}

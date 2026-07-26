@@ -1,0 +1,67 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "2ef275298010a2dd1a8416682ccc8a8a5be211bedbd1c0546a0c4b7e0757ed13",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR23-A3482"
+  ],
+  "pages": [
+    10,
+    25,
+    42,
+    75
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1920,
+  "completion_tokens": 421,
+  "elapsed_seconds": 6.576996166957542,
+  "record": {
+    "incident_number": "LR23-A3482",
+    "reference_number": "2570107",
+    "company_name": "FIRST NOTIFICATION OF LOSS",
+    "division": "",
+    "coverage_type": "",
+    "status": "Supervisor review",
+    "policy_number": "P103603",
+    "policy_state": "AR",
+    "cause_code": "",
+    "description": "At customer location, the vehicle was involved in a low-speed maneuver",
+    "handler": "Records",
+    "unit_number": "",
+    "date_of_loss": "10/19/2024",
+    "loss_state": "",
+    "date_reported": "535394",
+    "agency": "07/08/2024",
+    "insured": "",
+    "driver_name": "07/02/2024",
+    "adjuster_notes": "Recovery unit",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

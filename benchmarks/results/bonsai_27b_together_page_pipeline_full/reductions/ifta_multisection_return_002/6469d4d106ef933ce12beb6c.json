@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "6469d4d106ef933ce12beb6cbdbaf3f5f2430f12badf3415be0e5a6e45e290b9",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-012",
+    "Georgia",
+    "DI"
+  ],
+  "pages": [
+    70
+  ],
+  "attempts": 1,
+  "prompt_tokens": 750,
+  "completion_tokens": 209,
+  "elapsed_seconds": 3.9609170838957652,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Georgia",
+    "quarter": "",
+    "return_id": "RTN-2026-Q4-90-012",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": 36268,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.6299,
+    "taxable_gallons": 36268,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

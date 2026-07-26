@@ -1,0 +1,32 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "page_number": 58,
+  "page_sha256": "572fb63586a4bac22187a64e60d5b4fefef5b696ab4b9670339e4b912adf4dab",
+  "candidates": [
+    {
+      "incident_number": "CV-104076",
+      "reference_number": "L23A7440",
+      "status": "Verification pending",
+      "policy_state": "TX"
+    },
+    {
+      "incident_number": "CV-104076",
+      "reference_number": "L24A3974",
+      "status": "In force on reported date",
+      "policy_state": "AR",
+      "ded": {
+        "reserve": 35,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 35.0
+      }
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 668,
+  "completion_tokens": 307,
+  "elapsed_seconds": 4.213110707933083,
+  "request_fingerprint": "b36392db96d9f232a45c4d7d91ab6d66e2373caf2bc3393c788e7f45b6d133b2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

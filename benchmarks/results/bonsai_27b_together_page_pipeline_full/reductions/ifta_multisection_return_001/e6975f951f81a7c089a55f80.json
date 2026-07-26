@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "e6975f951f81a7c089a55f809feb9d765db2186cf02e50f22e11a4c549981731",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "2023-Q1-86-009",
+    "New Jersey",
+    "DI"
+  ],
+  "pages": [
+    52
+  ],
+  "attempts": 1,
+  "prompt_tokens": 815,
+  "completion_tokens": 219,
+  "elapsed_seconds": 4.261635666945949,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "DI",
+    "jurisdiction": "New Jersey",
+    "quarter": "Q1",
+    "return_id": "2023-Q1-86-009",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 17042,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 4780,
+    "tax_rate": 0.2819,
+    "taxable_gallons": 17042,
+    "taxable_miles": 475264,
+    "total_due_refund": 0,
+    "total_miles": 475264
+  }
+}

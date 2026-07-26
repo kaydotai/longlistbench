@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_003",
+  "fingerprint": "5d91ee2f075eff1ea33a4fda3e21277c2773dfa6bad8dcd321e60c806b7d253b",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "3424.9",
+    "Pennsylvania"
+  ],
+  "pages": [
+    24
+  ],
+  "attempts": 1,
+  "prompt_tokens": 360,
+  "completion_tokens": 77,
+  "elapsed_seconds": 1.4305578750791028,
+  "record": {
+    "state": "Pennsylvania",
+    "vehicle": "3424.9",
+    "identified_miles": 0.0,
+    "total_miles": 3424.9,
+    "unidentified_miles": 3424.9
+  }
+}

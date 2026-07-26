@@ -1,0 +1,67 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "6562e246bdec3e0b28addf65e4f17b527cdb6f6b9fb3f24142545abb6f63c569",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR23-W5452"
+  ],
+  "pages": [
+    10,
+    42,
+    71,
+    75
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1783,
+  "completion_tokens": 370,
+  "elapsed_seconds": 6.5907874159747735,
+  "record": {
+    "incident_number": "LR23-W5452",
+    "reference_number": "",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "Repair documentation received and routed for review of labor rates and prior damage.",
+    "handler": "RECOV",
+    "unit_number": null,
+    "date_of_loss": "03/02/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": "Quintero, Hector",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

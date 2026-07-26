@@ -1,0 +1,74 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 18,
+  "page_sha256": "8febde91f8e2852212b489117fee52bf2af1d95e66cdc4524390f5480a835d76",
+  "candidates": [
+    {
+      "annual_payroll": "234108",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "edition_date": "2026-04-01",
+      "estimated_premium": "6695",
+      "experience_mod": "1.04",
+      "form_number": "WC 04 03 06",
+      "location_number": "2.86",
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "location_number": "2",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "2026-04-01",
+      "form_number": "WC 04 03 06",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "234108",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "edition_date": "2026-04-01",
+      "estimated_premium": "6695",
+      "form_number": "WC 04 03 06",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "234108",
+      "class_code": "8810",
+      "experience_mod": "1.04",
+      "location_number": "2",
+      "manual_rate": "2.86",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "premium": "6695",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "234108",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "edition_date": "2026-04-01",
+      "form_number": "WC 04 03 06",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1017,
+  "completion_tokens": 692,
+  "elapsed_seconds": 8.065766583080404,
+  "request_fingerprint": "3975123a350cc2a2ce3530bab42392398044500838d3bcf95483fd226ec62551",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

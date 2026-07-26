@@ -1,0 +1,80 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "page_number": 73,
+  "page_sha256": "9b0334a027cbe76f4a4d2afca44c1ff50122ee9b53e8a3a9fcab904076cfedaa",
+  "candidates": [
+    {
+      "incident_number": "02/03/2024",
+      "reference_number": "9:07",
+      "company_name": "LR25-V6840",
+      "division": "RECOV",
+      "coverage_type": "null",
+      "status": "null",
+      "policy_number": "null",
+      "policy_state": "null",
+      "cause_code": "null",
+      "description": "null",
+      "handler": "null",
+      "unit_number": "null",
+      "date_of_loss": "null",
+      "loss_state": "null",
+      "date_reported": "null",
+      "agency": "null",
+      "insured": "null",
+      "driver_name": "null",
+      "adjuster_notes": "null",
+      "claimants": [
+        "03/05/2024",
+        "10:14",
+        "LR23-U6460",
+        "EXAM",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null",
+        "null"
+      ],
+      "bi": {
+        "reserve": 556.35,
+        "paid": 0.0,
+        "recovered": 0.0,
+        "total_incurred": 920.0
+      },
+      "pd": {
+        "reserve": 556.35,
+        "paid": 0.0,
+        "recovered": 0.0,
+        "total_incurred": 920.0
+      },
+      "lae": {
+        "reserve": 556.35,
+        "paid": 0.0,
+        "recovered": 0.0,
+        "total_incurred": 920.0
+      },
+      "ded": {
+        "reserve": 556.35,
+        "paid": 0.0,
+        "recovered": 0.0,
+        "total_incurred": 920.0
+      }
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1052,
+  "completion_tokens": 543,
+  "elapsed_seconds": 6.713190333917737,
+  "request_fingerprint": "bc6264598a59aa258b4322c84fcc70ae411f223a002aba264128cebecef37453",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

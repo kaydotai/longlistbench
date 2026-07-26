@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "7539189317149f0a390a5eaae85afbbbac6a97fe05f8dbb5928941bbeb5c1ab8",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2025-Q3-90-011",
+    "Michigan",
+    "DI"
+  ],
+  "pages": [
+    64
+  ],
+  "attempts": 1,
+  "prompt_tokens": 758,
+  "completion_tokens": 207,
+  "elapsed_seconds": 4.171784749953076,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Michigan",
+    "quarter": "Q3",
+    "return_id": "RTN-2025-Q3-90-011",
+    "filing_year": 2025,
+    "interest_due": 0,
+    "net_gallons": -29493,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.387,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

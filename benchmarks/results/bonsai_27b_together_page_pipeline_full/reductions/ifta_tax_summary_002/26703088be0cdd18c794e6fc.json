@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "26703088be0cdd18c794e6fc5c369b3fd240c7a2c748918b0dfd490b5295c580",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "DE",
+    "diesel"
+  ],
+  "pages": [
+    32
+  ],
+  "attempts": 1,
+  "prompt_tokens": 671,
+  "completion_tokens": 169,
+  "elapsed_seconds": 2.5574494999600574,
+  "record": {
+    "fuel_type": "diesel",
+    "jurisdiction": "DE",
+    "gallons_purchased": 27456,
+    "interest_due": 0,
+    "net_taxable_gallons": 27456,
+    "surtax_due": 0.0,
+    "tax_due_refund": 0.0,
+    "tax_rate": 0.2752,
+    "taxable_gallons": 27456,
+    "taxable_miles": 0,
+    "total_due_refund": 7555.89,
+    "total_miles": 0
+  }
+}

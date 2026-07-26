@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "f703baac5f5d5bea9a22e3ae2dba2afaedf3329f7d82fc20240212bf5979a32e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "30,470",
+    "WY"
+  ],
+  "pages": [
+    34
+  ],
+  "attempts": 1,
+  "prompt_tokens": 631,
+  "completion_tokens": 164,
+  "elapsed_seconds": 2.5905217089457437,
+  "record": {
+    "fuel_type": "WY",
+    "jurisdiction": "30,470",
+    "gallons_purchased": 0,
+    "interest_due": 0,
+    "net_taxable_gallons": 0,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_rate": 0.2395,
+    "taxable_gallons": 30470,
+    "taxable_miles": 0,
+    "total_due_refund": 415.99,
+    "total_miles": 771355
+  }
+}

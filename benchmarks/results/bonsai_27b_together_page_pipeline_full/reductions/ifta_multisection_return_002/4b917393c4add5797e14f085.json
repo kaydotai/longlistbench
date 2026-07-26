@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "4b917393c4add5797e14f08534a9fd40297523c24435a2aa4e620c38ef37d7d5",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2025-Q3-90-011",
+    "Texas",
+    "DI"
+  ],
+  "pages": [
+    64
+  ],
+  "attempts": 1,
+  "prompt_tokens": 759,
+  "completion_tokens": 206,
+  "elapsed_seconds": 4.304644542047754,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Texas",
+    "quarter": "Q3",
+    "return_id": "RTN-2025-Q3-90-011",
+    "filing_year": 2025,
+    "interest_due": 0,
+    "net_gallons": 12021,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.6595,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

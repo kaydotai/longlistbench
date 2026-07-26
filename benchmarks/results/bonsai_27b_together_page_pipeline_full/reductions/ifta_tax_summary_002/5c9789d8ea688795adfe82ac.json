@@ -1,0 +1,34 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "5c9789d8ea688795adfe82ac264b9004f47ed70747ad7ad30c927eda6a443c40",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "KY",
+    " Diesel"
+  ],
+  "pages": [
+    4,
+    10
+  ],
+  "attempts": 1,
+  "prompt_tokens": 726,
+  "completion_tokens": 165,
+  "elapsed_seconds": 3.984716249979101,
+  "record": {
+    "fuel_type": " Diesel",
+    "jurisdiction": "KY",
+    "gallons_purchased": 10887,
+    "interest_due": 8092,
+    "net_taxable_gallons": 10887,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_rate": 0.6055,
+    "taxable_gallons": 10887,
+    "taxable_miles": 0,
+    "total_due_refund": 4539.09,
+    "total_miles": 0
+  }
+}

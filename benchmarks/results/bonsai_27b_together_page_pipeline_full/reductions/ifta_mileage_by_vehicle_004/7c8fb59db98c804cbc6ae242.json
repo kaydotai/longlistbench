@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "7c8fb59db98c804cbc6ae242412b0187fbe8a888e3cc5cd2c69fc94b10f56d0c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Virginia",
+    "2238"
+  ],
+  "pages": [
+    60
+  ],
+  "attempts": 1,
+  "prompt_tokens": 360,
+  "completion_tokens": 76,
+  "elapsed_seconds": 1.6817534998990595,
+  "record": {
+    "state": "2238",
+    "vehicle": "Virginia",
+    "identified_miles": 1151.0,
+    "total_miles": 1466.9,
+    "unidentified_miles": 315.9
+  }
+}

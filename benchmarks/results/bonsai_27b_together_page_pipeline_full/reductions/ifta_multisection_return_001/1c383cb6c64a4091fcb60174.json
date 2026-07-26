@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "1c383cb6c64a4091fcb60174faa5959103c0bd0d4e710422f15975901d6fcd4e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2025-Q3-86-007",
+    "West Virginia",
+    "DI"
+  ],
+  "pages": [
+    40
+  ],
+  "attempts": 1,
+  "prompt_tokens": 790,
+  "completion_tokens": 211,
+  "elapsed_seconds": 3.615186291979626,
+  "record": {
+    "filing_type": "",
+    "fuel_type": "DI",
+    "jurisdiction": "West Virginia",
+    "quarter": "",
+    "return_id": "RTN-2025-Q3-86-007",
+    "filing_year": 2025,
+    "interest_due": 0,
+    "net_gallons": 14195,
+    "surtax_due": 0,
+    "tax_due_refund": 7402.69,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.5215,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 7402.69,
+    "total_miles": 0
+  }
+}

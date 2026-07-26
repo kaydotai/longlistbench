@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "f7460ac895776d4e5ef6e2bf38a4496e15b2e1cf504345264b15d29284731a68",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "09/17/2024"
+  ],
+  "pages": [
+    70,
+    106,
+    134
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1671,
+  "completion_tokens": 366,
+  "elapsed_seconds": 6.454356333008036,
+  "record": {
+    "incident_number": "09/17/2024",
+    "reference_number": "LR24-R5829",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "Reserve review completed. No authority change was requested on this activity entry.",
+    "handler": "EXAM",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

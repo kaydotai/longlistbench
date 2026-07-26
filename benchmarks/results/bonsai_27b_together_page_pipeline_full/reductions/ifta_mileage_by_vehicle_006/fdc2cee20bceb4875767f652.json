@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "fdc2cee20bceb4875767f652dcfcb3804f175dce3df83c4e8c3e1a2c58944a6f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Maryland",
+    "1744"
+  ],
+  "pages": [
+    16
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 77,
+  "elapsed_seconds": 1.5636754159349948,
+  "record": {
+    "state": "1744",
+    "vehicle": "Maryland",
+    "identified_miles": 4819.1,
+    "total_miles": 5187.8,
+    "unidentified_miles": 368.7
+  }
+}

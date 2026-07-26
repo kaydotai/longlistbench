@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_tax_inquiry_001",
+  "fingerprint": "b94f09649b93c969c0f09b52ead9c4ab4fbc58f979f364d72ce5bc4bc64ed49e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    1,
+    "Jurisdiction Schedule Detail",
+    "05"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 368,
+  "completion_tokens": 58,
+  "elapsed_seconds": 1.420348875108175,
+  "record": {
+    "field": "05",
+    "section": "Jurisdiction Schedule Detail",
+    "value": "CO taxable distance: 1,782 miles",
+    "page": 1
+  }
+}

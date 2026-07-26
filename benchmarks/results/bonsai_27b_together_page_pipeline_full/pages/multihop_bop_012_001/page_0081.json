@@ -1,0 +1,78 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 81,
+  "page_sha256": "c7be4090f4669852414e5673aa9413fbf51728378b681713c2eb0304966766dc",
+  "candidates": [
+    {
+      "building_number": "002",
+      "coverage": "Business Income and Extra Expense",
+      "deductible": "10,000",
+      "edition_date": "03/15/2026",
+      "form_number": "BPF 04 39",
+      "limit": "125,000",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026/04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026/04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPF0439",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026/04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "002",
+      "coverage": "Business Income and Extra Expense",
+      "deductible": "10,000",
+      "edition_date": "03/15/2026",
+      "endorsement_effective_date": "04/01/2027",
+      "form_number": "BPF 04 39",
+      "limit": "125,000",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026/04/01/2027",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026/04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "002",
+      "clause_title": "Business Income and Extra Expense ENDORSEMENT",
+      "clause_type": "endorsement",
+      "coverage": "Business Income and Extra Expense",
+      "deductible": "10,000",
+      "edition_date": "03/15/2026",
+      "form_number": "BPF 04 39",
+      "limit": "125,000",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026/04/01/2027",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1061,
+  "completion_tokens": 812,
+  "elapsed_seconds": 8.86039654200431,
+  "request_fingerprint": "a34124c4d1a8c866a20f297c370f6836ce3531c8f165caa18ae3dd6b767f6b49",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

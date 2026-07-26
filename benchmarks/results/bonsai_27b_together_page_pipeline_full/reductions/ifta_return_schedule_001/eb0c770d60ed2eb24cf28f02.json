@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "fingerprint": "eb0c770d60ed2eb24cf28f021a9f2e310166277923932001f56c169ffede98ac",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Y",
+    "KY"
+  ],
+  "pages": [
+    2
+  ],
+  "attempts": 1,
+  "prompt_tokens": 709,
+  "completion_tokens": 144,
+  "elapsed_seconds": 3.3358722920529544,
+  "record": {
+    "jurisdiction": "KY",
+    "schedule": "Y",
+    "surcharge": "32,255",
+    "distance_miles": 0,
+    "interest_due": 5681,
+    "net_taxable_volume": 0,
+    "tax_due_credit": 0.6388,
+    "tax_paid_volume": 0,
+    "tax_rate": null,
+    "taxable_distance_miles": 0,
+    "taxable_volume": 364856,
+    "total_due": null
+  }
+}

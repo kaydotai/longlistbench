@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "8a5f477e4ae5b9e415368562dc86d26d7d9a16371ce9bbf4ca6a9d1b2080b8f7",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2025-Q3-86-007",
+    "Tennessee",
+    "DI"
+  ],
+  "pages": [
+    40
+  ],
+  "attempts": 1,
+  "prompt_tokens": 789,
+  "completion_tokens": 213,
+  "elapsed_seconds": 4.375276583014056,
+  "record": {
+    "filing_type": "",
+    "fuel_type": "DI",
+    "jurisdiction": "Tennessee",
+    "quarter": "",
+    "return_id": "RTN-2025-Q3-86-007",
+    "filing_year": 2025,
+    "interest_due": 0.0,
+    "net_gallons": 15840,
+    "surtax_due": 0.0,
+    "tax_due_refund": 9409.58,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.568,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 9409.58,
+    "total_miles": 0
+  }
+}

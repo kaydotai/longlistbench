@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_tax_inquiry_001",
+  "fingerprint": "8cbc9e361ae2b26a9e0e1a9ae53a552fe7cd4727c11f60e78315f0832f0f5edf",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    1,
+    "Jurisdiction Schedule Detail",
+    "04"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 368,
+  "completion_tokens": 58,
+  "elapsed_seconds": 2.476273708976805,
+  "record": {
+    "field": "04",
+    "section": "Jurisdiction Schedule Detail",
+    "value": "CA taxable distance, 1,765 miles",
+    "page": 1
+  }
+}

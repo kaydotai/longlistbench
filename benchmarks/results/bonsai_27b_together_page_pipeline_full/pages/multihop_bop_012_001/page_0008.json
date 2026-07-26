@@ -1,0 +1,58 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 8,
+  "page_sha256": "74b5f173b793051962562f430fc9edf461ca64f58e553fff9b8ad2aefca1e31b",
+  "candidates": [
+    {
+      "building_number": "002",
+      "coverage": "Outdoor Property",
+      "deductible": "1,000",
+      "form_number": "BPF 04 28",
+      "form_title": "INSPECTIONS, SURVEYS, AND RISK CONTROL",
+      "limit": "200,000",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "BPF 04 28",
+      "form_title": "INSPECTIONS, SURVEYS, AND RISK CONTROL",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "002",
+      "policy_number": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_period": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1222,
+  "completion_tokens": 644,
+  "elapsed_seconds": 8.77425741602201,
+  "request_fingerprint": "44ed989e12b6c93e0dc2316682d5370e995acb1246262e5b7d3ac37496b8731a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

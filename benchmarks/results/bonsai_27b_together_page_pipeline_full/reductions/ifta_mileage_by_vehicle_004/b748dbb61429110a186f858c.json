@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "b748dbb61429110a186f858c7b66c8182719bf7970959e7ceeda3dc2c606aa0d",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "572",
+    "North Dakota"
+  ],
+  "pages": [
+    7
+  ],
+  "attempts": 1,
+  "prompt_tokens": 359,
+  "completion_tokens": 76,
+  "elapsed_seconds": 1.5130816670134664,
+  "record": {
+    "state": "North Dakota",
+    "vehicle": "572",
+    "identified_miles": 3901.5,
+    "total_miles": 4273.7,
+    "unidentified_miles": 372.2
+  }
+}

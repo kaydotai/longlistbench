@@ -1,0 +1,64 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "a61ac9d7fb5c84d21cfd42ad85a10a96da8db09e87a72f23c9b6dc244653b076",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#51073-W"
+  ],
+  "pages": [
+    4
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1704,
+  "completion_tokens": 425,
+  "elapsed_seconds": 7.583815874997526,
+  "record": {
+    "incident_number": "#51073-W",
+    "reference_number": "LR24-C7440",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "Open",
+    "policy_number": "L24A2383",
+    "policy_state": "",
+    "cause_code": "RER",
+    "description": "Loss was entered for OH with a loss date of 08/31/2024 and report date 09/06/2024.",
+    "handler": "",
+    "unit_number": "642217",
+    "date_of_loss": "08/31/2024",
+    "loss_state": "OH",
+    "date_reported": "09/06/2024",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 8,
+      "paid": 25,
+      "recovered": 0,
+      "total_incurred": 33
+    },
+    "ded": {
+      "reserve": 14,
+      "paid": 8,
+      "recovered": 0,
+      "total_incurred": 22
+    }
+  }
+}

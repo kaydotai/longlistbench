@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "6dad6f9f688f0b20a098bc8a0b765d94fef414d1120569d806cf86930a732d36",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "9519",
+    "Idaho"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 359,
+  "completion_tokens": 76,
+  "elapsed_seconds": 1.458374583045952,
+  "record": {
+    "state": "Idaho",
+    "vehicle": "9519",
+    "identified_miles": 6141.2,
+    "total_miles": 6196.5,
+    "unidentified_miles": 55.3
+  }
+}

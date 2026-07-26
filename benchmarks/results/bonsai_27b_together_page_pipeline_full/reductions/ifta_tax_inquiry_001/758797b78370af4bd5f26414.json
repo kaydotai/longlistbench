@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_tax_inquiry_001",
+  "fingerprint": "758797b78370af4bd5f26414dc2f8f2bfeeed9c856f4850512385472e3ba470e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    1,
+    "Jurisdiction Schedule Detail",
+    "01"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 368,
+  "completion_tokens": 58,
+  "elapsed_seconds": 1.5869960829149932,
+  "record": {
+    "field": "01",
+    "section": "Jurisdiction Schedule Detail",
+    "value": "AL taxable distance: 1,714 miles",
+    "page": 1
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "e3e8f9e7339f3c19124d968559ef9d15e22a3a280510b0845bc71296e0a6182e",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "SUB-010-22"
+  ],
+  "pages": [
+    17
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2915,
+  "completion_tokens": 552,
+  "elapsed_seconds": 10.898472249973565,
+  "record": {
+    "incident_number": "SUB-010-22",
+    "reference_number": "LR25-N2876",
+    "company_name": "SUBROGATION",
+    "division": "DIARY EXTRACT",
+    "coverage_type": "Subrogation module",
+    "status": "Open",
+    "policy_number": "ACCT-110947",
+    "policy_state": "Review",
+    "cause_code": null,
+    "description": "Closed no recovery",
+    "handler": "03/18/2024",
+    "unit_number": null,
+    "date_of_loss": "03/18/2024",
+    "loss_state": "Diary follow-up",
+    "date_reported": "03/02/2024",
+    "agency": null,
+    "insured": "SUBROGATION",
+    "driver_name": null,
+    "adjuster_notes": "Routing note. Recoveries are compared with financial ledger and claim detail pages before any account-level recovery credit is applied.",
+    "claimants": [
+      "LR25-N2876",
+      "LR25-Y5262"
+    ],
+    "bi": {
+      "reserve": 10726.0,
+      "paid": 10726.0,
+      "recovered": 0.0,
+      "total_incurred": 10726.0
+    },
+    "pd": {
+      "reserve": 10726.0,
+      "paid": 10726.0,
+      "recovered": 0.0,
+      "total_incurred": 10726.0
+    },
+    "lae": {
+      "reserve": 10726.0,
+      "paid": 10726.0,
+      "recovered": 0.0,
+      "total_incurred": 10726.0
+    },
+    "ded": {
+      "reserve": 10726.0,
+      "paid": 10726.0,
+      "recovered": 0.0,
+      "total_incurred": 10726.0
+    }
+  }
+}

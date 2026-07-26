@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "2d4bf93fddfa0926682ec14c2535e3ed77e25f9b63af2d250767b784969ab24a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-004",
+    "0.2483",
+    "DI"
+  ],
+  "pages": [
+    23
+  ],
+  "attempts": 1,
+  "prompt_tokens": 779,
+  "completion_tokens": 212,
+  "elapsed_seconds": 3.434435708099045,
+  "record": {
+    "filing_type": "Kansas",
+    "fuel_type": "DI",
+    "jurisdiction": "0.2483",
+    "quarter": "Q4",
+    "return_id": "RTN-2026-Q4-90-004",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": 21592,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 21592,
+    "taxable_miles": 0,
+    "total_due_refund": 5361.29,
+    "total_miles": 0
+  }
+}

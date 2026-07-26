@@ -1,0 +1,35 @@
+{
+  "sample": "loss_run_external_003",
+  "fingerprint": "70ca223ba74354567094b033309c2be4af388b9c821b874b5e685b86023b79d4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Claim Number"
+  ],
+  "pages": [
+    44
+  ],
+  "attempts": 1,
+  "prompt_tokens": 707,
+  "completion_tokens": 165,
+  "elapsed_seconds": 1.9659768750425428,
+  "record": {
+    "adjuster": "Claim Report",
+    "claim_number": "Claim Number",
+    "claim_reported": "Claimed",
+    "claim_status": "Date",
+    "claimant": "Claim Status",
+    "date_closed": "Claim Paid",
+    "date_of_loss": "Claim Recovered",
+    "date_reported": "Claim Reserves",
+    "description": "Effective Date",
+    "driver": "Date Loss",
+    "effective_date": "Date Reported",
+    "policy_number": "Description",
+    "claim_paid": 0,
+    "claim_recovered": 0,
+    "claim_reserves": 0
+  }
+}

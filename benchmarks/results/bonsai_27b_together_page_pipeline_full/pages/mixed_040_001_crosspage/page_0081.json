@@ -1,0 +1,62 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "page_number": 81,
+  "page_sha256": "4a4b87162784f8460f733ef9f3e5c9ccc4b03320a478d7fc85905cbec06d0019",
+  "candidates": [
+    {
+      "incident_number": "LR23-U6460",
+      "reference_number": "",
+      "company_name": "North Jessicamouth Transport",
+      "division": "",
+      "coverage_type": "",
+      "status": "",
+      "policy_number": "L24A7833",
+      "policy_state": "",
+      "cause_code": "",
+      "description": "",
+      "handler": "",
+      "unit_number": "",
+      "date_of_loss": "",
+      "loss_state": "",
+      "date_reported": "",
+      "agency": "",
+      "insured": "",
+      "driver_name": "",
+      "adjuster_notes": "",
+      "claimants": [],
+      "bi": {
+        "reserve": 111,
+        "paid": 110,
+        "recovered": 110,
+        "total_incurred": 12250
+      },
+      "pd": {
+        "reserve": 111,
+        "paid": 111,
+        "recovered": 110,
+        "total_incurred": 12490
+      },
+      "lae": {
+        "reserve": 110,
+        "paid": 110,
+        "recovered": 110,
+        "total_incurred": 11900
+      },
+      "ded": {
+        "reserve": 110,
+        "paid": 106,
+        "recovered": 110,
+        "total_incurred": 11837
+      }
+    },
+    {},
+    {}
+  ],
+  "attempts": 1,
+  "prompt_tokens": 455,
+  "completion_tokens": 661,
+  "elapsed_seconds": 7.859660999965854,
+  "request_fingerprint": "b9370a13090c680d03bf7143bd1881b3b6ec7d6ca7e0bc9e2965a7e5c1263127",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

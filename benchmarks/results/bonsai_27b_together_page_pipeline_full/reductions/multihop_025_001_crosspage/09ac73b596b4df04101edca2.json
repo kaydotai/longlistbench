@@ -1,0 +1,67 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "09ac73b596b4df04101edca2ff63e38ec5aa8ebd58c9ebb121f9692971cdba83",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR25-F3832"
+  ],
+  "pages": [
+    28,
+    42,
+    71,
+    75
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1755,
+  "completion_tokens": 407,
+  "elapsed_seconds": 8.285427124937996,
+  "record": {
+    "incident_number": "LR25-F3832",
+    "reference_number": "11/01/2024",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "Assigned",
+    "policy_number": "",
+    "policy_state": "OH",
+    "cause_code": null,
+    "description": "The vehicle left the roadway during adverse conditions. Towing documentation and an inspection estimate were requested before the next file review.",
+    "handler": "SUPV",
+    "unit_number": "475575",
+    "date_of_loss": "04/04/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": "Requested",
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": "Nichols, Harrell and Miller",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

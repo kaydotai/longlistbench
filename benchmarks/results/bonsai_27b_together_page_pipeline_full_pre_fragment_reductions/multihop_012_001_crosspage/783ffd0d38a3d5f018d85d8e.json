@@ -1,0 +1,62 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "783ffd0d38a3d5f018d85d8e2a58ced45f962975672cb24919b253cf77dbc72c",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "711177"
+  ],
+  "pages": [
+    5
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1993,
+  "completion_tokens": 360,
+  "elapsed_seconds": 11.0749764170032,
+  "record": {
+    "incident_number": "711177",
+    "reference_number": "",
+    "company_name": "Mack",
+    "division": "Mack",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "2016",
+    "policy_state": "IL",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": "FLATBED",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 2016,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 110
+    },
+    "pd": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 6
+    },
+    "lae": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 0,
+      "total_incurred": 12
+    },
+    "ded": {
+      "reserve": 12,
+      "paid": 1,
+      "recovered": 12,
+      "total_incurred": 0
+    }
+  }
+}

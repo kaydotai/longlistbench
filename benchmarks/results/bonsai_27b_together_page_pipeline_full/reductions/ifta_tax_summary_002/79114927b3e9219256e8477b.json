@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "79114927b3e9219256e8477b1526a6bb60137263f7e90894cdc1f30f30126dbd",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "WY",
+    "diesel"
+  ],
+  "pages": [
+    32
+  ],
+  "attempts": 1,
+  "prompt_tokens": 669,
+  "completion_tokens": 167,
+  "elapsed_seconds": 4.022406792035326,
+  "record": {
+    "fuel_type": "diesel",
+    "jurisdiction": "WY",
+    "gallons_purchased": 8521,
+    "interest_due": 0.0,
+    "net_taxable_gallons": 8521,
+    "surtax_due": 0.0,
+    "tax_due_refund": 0.0,
+    "tax_rate": 0.3099,
+    "taxable_gallons": 8521,
+    "taxable_miles": 0,
+    "total_due_refund": 2640.66,
+    "total_miles": 0
+  }
+}

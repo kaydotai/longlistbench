@@ -1,0 +1,70 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 5,
+  "page_sha256": "b1c2d2f09341f9f21e354e739592f50f0f950f69d675fc3f62d8d3d15c3cbe16",
+  "candidates": [
+    {
+      "annual_payroll": "77,560",
+      "class_code": "5190",
+      "classification": "Electrical wiring within buildings",
+      "estimated_premium": "$2,218",
+      "experience_mod": "1.04",
+      "schedule_credit_debit": "MA",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "5190",
+      "classification": "Electrical wiring within buildings",
+      "location_number": "4",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "WC 04 03 06 01 15",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "WC 04 03 06 edition 01 15",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "77,560",
+      "class_code": "5190",
+      "classification": "Electrical wiring within buildings",
+      "estimated_premium": "$2,218",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "77,560",
+      "class_code": "5190",
+      "experience_mod": "1.04",
+      "location_number": "4",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "premium": "$2,218",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "77,560",
+      "class_code": "5190",
+      "classification": "Electrical wiring within buildings",
+      "clause_text": "CANCELLATION AND NONRENEWAL PROVISIONS",
+      "clause_title": "This form is part of the policy and must be read with the declarations and endorsements",
+      "clause_type": "Informational Notice",
+      "estimated_premium": "$2,218",
+      "policy_number": "Blue Kettle Food Service, LLC",
+      "policy_period": "YW700400",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 1025,
+  "completion_tokens": 425,
+  "elapsed_seconds": 115.64446999994107,
+  "request_fingerprint": "125eda5f5b7403e62263e06f522659e37a2845620f627a139cf2a3af0d92fb5b",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

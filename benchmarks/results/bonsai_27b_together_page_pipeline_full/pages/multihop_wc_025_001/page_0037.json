@@ -1,0 +1,78 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 37,
+  "page_sha256": "e051b22c1a9259e70cf33d39b708c755616508529162da9ccb0341dc2eddd70a",
+  "candidates": [
+    {
+      "annual_payroll": "323,486",
+      "class_code": "CT / 8810",
+      "classification": "Clerical office employees",
+      "estimated_premium": "$20,120",
+      "experience_mod": "1.04",
+      "form_number": "WC 00 03 13 07 23",
+      "lob": "5",
+      "location_number": "6.22",
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_number": "2026-04-01 00:00:00 | 2027-04-01 00:00:00",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "CT / 8810",
+      "classification": "Clerical office employees",
+      "location_number": "5",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "2026-04-01 00:00:00 | 2027-04-01 00:00:00",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "2025-12-01T00:00:00",
+      "form_number": "WC 00 03 13 07 23",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "2026-04-01 00:00:00 | 2027-04-01 00:00:00",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "323,486",
+      "class_code": "CT / 8810",
+      "experience_mod": "6.22",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "2026-04-01 00:00:00 | 2027-04-01 00:00:00",
+      "premium": "$20,120",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "CT / 8810",
+      "classification": "Clerical office employees",
+      "clause_scope": "all legal notices, demands, or administrative correspondence related to the injury immediately upon receipt.",
+      "clause_text": "The employer must forward all legal notices, demands, or administrative correspondence related to the injury immediately upon receipt.",
+      "clause_type": "2025-12-01T00:00:00",
+      "form_title": "Blue Kettle Food Service, LLC",
+      "lob": "YW700400",
+      "named_insured": "2026-04-01 00:00:00 | 2027-04-01 00:00:00",
+      "state": "interference with our subrogation rights or investigation processes constitutes a material breach of the contract conditions",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "CT / 8810",
+      "classification": "Clerical office employees",
+      "clause_scope": "The employer must facilitate interviews with witnesses, supervisors, and the injured worker to establish the facts of the incident.",
+      "clause_text": "The employer must facilitate interviews with witnesses, supervisors, and the injured worker to establish the facts of the incident.",
+      "form_number": "Blue Kettle Food Service, LLC",
+      "form_title": "YW700400",
+      "lob": "2026-04-01 00:00:00 | 2027-04-01 00:00:00",
+      "policy_period": "Failure to report injuries within the statutory timeframe may result in administrative fines, which are the sole responsibility of the employer.",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1025,
+  "completion_tokens": 1051,
+  "elapsed_seconds": 14.175754584022798,
+  "request_fingerprint": "afd8f3b2c27e229fa4a6ed18386760f4f9bf2d864b60a92cf64f2dc4f00d3ab2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

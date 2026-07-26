@@ -1,0 +1,42 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 19,
+  "page_sha256": "14a2e6f95c40a67c97abf5fcb3573d133aa5985550facce57b2585a232d04dac",
+  "candidates": [
+    {
+      "building_number": "002",
+      "class_code": "5531",
+      "classification": "Contractor - interior finishing operation",
+      "deductible": "$10,000",
+      "location_number": "001",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "class_code": "5531",
+      "classification": "Contractor - interior finishing operation",
+      "location_number": "001",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "BPF 04 39",
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1810,
+  "completion_tokens": 456,
+  "elapsed_seconds": 5.627567374962382,
+  "request_fingerprint": "cc7ec3f5511b69f6d8c35fc463367a0c4af18cbc8d135390f0914e73621d83f6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

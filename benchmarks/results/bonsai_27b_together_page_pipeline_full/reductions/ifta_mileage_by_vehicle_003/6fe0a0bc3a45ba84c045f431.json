@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_003",
+  "fingerprint": "6fe0a0bc3a45ba84c045f4318af5aa38e9c30887dd370a30a188c6ef69d08361",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1,733.8",
+    "Arkansas"
+  ],
+  "pages": [
+    64
+  ],
+  "attempts": 1,
+  "prompt_tokens": 350,
+  "completion_tokens": 76,
+  "elapsed_seconds": 1.4570702920900658,
+  "record": {
+    "state": "Arkansas",
+    "vehicle": "1,733.8",
+    "identified_miles": 0,
+    "total_miles": 1733.8,
+    "unidentified_miles": 1733.8
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "264518a1bd4a7c1625cbcfe50dd7e6b753b40774fa0825bb32c3feff9789744e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "NY",
+    "Diesel"
+  ],
+  "pages": [
+    28
+  ],
+  "attempts": 1,
+  "prompt_tokens": 612,
+  "completion_tokens": 151,
+  "elapsed_seconds": 2.2807570419972762,
+  "record": {
+    "fuel_type": "Diesel",
+    "jurisdiction": "NY",
+    "gallons_purchased": 0,
+    "interest_due": 0,
+    "net_taxable_gallons": 8143,
+    "surtax_due": 0.7282,
+    "tax_due_refund": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 6518,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "9318a3a5419d06564153f1389a38ef52d7e51ceb90b4f43f28e821859a4db15a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-012",
+    "Pennsylvania",
+    "DI"
+  ],
+  "pages": [
+    70
+  ],
+  "attempts": 1,
+  "prompt_tokens": 750,
+  "completion_tokens": 211,
+  "elapsed_seconds": 4.241818250040524,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Pennsylvania",
+    "quarter": "",
+    "return_id": "RTN-2026-Q4-90-012",
+    "filing_year": 2026,
+    "interest_due": 0.0,
+    "net_gallons": 6447,
+    "surtax_due": 0.0,
+    "tax_due_refund": 0.0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.5539,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0.0,
+    "total_miles": 0
+  }
+}

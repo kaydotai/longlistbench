@@ -1,0 +1,55 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 10,
+  "page_sha256": "d8f55ef466b41b2c91ae080bdbac441aff45a54ec48f833ab63db0f4facaabe2",
+  "candidates": [
+    {
+      "building_number": "001",
+      "coverage": "Hired and Non-Owned Auto",
+      "location_number": "001",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "001",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "BPA7108",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "001",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "coverage": "Hired and Non-Owned Auto",
+      "location_number": "001",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 932,
+  "completion_tokens": 572,
+  "elapsed_seconds": 7.205120542086661,
+  "request_fingerprint": "a32e4204aa0561e9823085ea0ffdafc703ab5ef0c4c942a3ec61f1b4f6c1e7b4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

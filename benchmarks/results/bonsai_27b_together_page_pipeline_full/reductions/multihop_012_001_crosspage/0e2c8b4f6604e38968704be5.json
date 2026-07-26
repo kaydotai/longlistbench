@@ -1,0 +1,66 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "0e2c8b4f6604e38968704be5bd416551123463eb5cac0d8d657383ad9bad10bc",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR24-Y9188"
+  ],
+  "pages": [
+    7,
+    13,
+    43
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2004,
+  "completion_tokens": 409,
+  "elapsed_seconds": 7.888657959061675,
+  "record": {
+    "incident_number": "LR24-Y9188",
+    "reference_number": "UNIT 2021 IN 899532",
+    "company_name": "Inspection Date 11/22/2024",
+    "division": "Repair Estimate",
+    "coverage_type": "REPAIR FACILITY ATTACHMENT",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "Reserve review completed. No authority change was requested on this activity entry.",
+    "handler": "RECOV",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "12/23/2024",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

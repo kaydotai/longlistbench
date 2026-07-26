@@ -1,0 +1,63 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "page_number": 65,
+  "page_sha256": "a4cd04c7c7b5a2896081a5d50a1a09e133b9e41e2acb7616a5283dfc1586c2fb",
+  "candidates": [
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "OK",
+      "net_gallons": 25197,
+      "surtax_due": 11633.45,
+      "tax_rate": 0.4617
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "GA",
+      "net_gallons": 8295,
+      "surtax_due": 5925.12,
+      "tax_rate": 0.7143
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "VA",
+      "net_gallons": 20277,
+      "surtax_due": 10229.75,
+      "tax_rate": 0.5045
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "TN",
+      "net_gallons": 33420,
+      "surtax_due": 9775.35,
+      "tax_rate": 0.2925
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "MD",
+      "net_gallons": 34447,
+      "surtax_due": 17075.38,
+      "tax_rate": 0.4957
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "WV",
+      "net_gallons": -14730,
+      "surtax_due": -10144.55,
+      "tax_rate": 0.6887
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "NC",
+      "net_gallons": 1327,
+      "surtax_due": 749.36,
+      "tax_rate": 0.5647
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 784,
+  "completion_tokens": 638,
+  "elapsed_seconds": 9.88357162498869,
+  "request_fingerprint": "7f8775d180e1884aecc8b94833cc43e9f25436d862209b878039d9fd08827157",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

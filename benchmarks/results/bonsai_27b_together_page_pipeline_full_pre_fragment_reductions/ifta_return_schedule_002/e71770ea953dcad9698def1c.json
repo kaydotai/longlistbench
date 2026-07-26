@@ -1,0 +1,43 @@
+{
+  "sample": "ifta_return_schedule_002",
+  "fingerprint": "e71770ea953dcad9698def1c9552ae1db20d318a6292c1d200058f5cbd8f76db",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "N",
+    "TX"
+  ],
+  "pages": [
+    5,
+    9,
+    11,
+    14,
+    17,
+    22,
+    23,
+    24,
+    27,
+    31,
+    34,
+    35,
+    36
+  ],
+  "attempts": 1,
+  "prompt_tokens": 41615,
+  "completion_tokens": 167,
+  "elapsed_seconds": 34.497676624916494,
+  "record": {
+    "jurisdiction": "TX",
+    "schedule": "N",
+    "surcharge": "31,060",
+    "distance_miles": 31060,
+    "interest_due": 0,
+    "net_taxable_volume": 5196,
+    "tax_due_credit": 2268.05,
+    "tax_paid_volume": 223,
+    "tax_rate": 0.4365,
+    "taxable_distance_miles": 31049,
+    "taxable_volume": 5419,
+    "total_due": 2268.05
+  }
+}

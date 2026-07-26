@@ -1,0 +1,65 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "b2c3375b486adec3042f086c85076908a54bae54cc8265bcd92198b78ee42046",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "49735-G"
+  ],
+  "pages": [
+    6,
+    64
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1632,
+  "completion_tokens": 387,
+  "elapsed_seconds": 5.498344207997434,
+  "record": {
+    "incident_number": "49735-G",
+    "reference_number": "LR23-H4855",
+    "company_name": "Titan Hauling Group",
+    "division": "",
+    "coverage_type": "",
+    "status": "Closed",
+    "policy_number": "L24A8307",
+    "policy_state": "Closed",
+    "cause_code": "",
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "10/05/2024",
+    "loss_state": "CA",
+    "date_reported": "10/09/2024",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

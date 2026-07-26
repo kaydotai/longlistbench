@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "9c8b9208d80d837a501f79a491066f98dd7854363181a3154b4d3657b8ce01b4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1"
+  ],
+  "pages": [
+    68
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1470,
+  "completion_tokens": 344,
+  "elapsed_seconds": 6.521091834059916,
+  "record": {
+    "incident_number": "1",
+    "reference_number": "Remove and install front bumper assembly",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "",
+    "handler": "",
+    "unit_number": "",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [
+      "None"
+    ],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

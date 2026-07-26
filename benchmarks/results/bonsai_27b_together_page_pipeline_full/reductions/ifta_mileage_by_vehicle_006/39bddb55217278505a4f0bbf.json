@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "39bddb55217278505a4f0bbfbcb4f5f247b78883cd41e48fec69f91b5e5b1191",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Alabama",
+    "1598"
+  ],
+  "pages": [
+    5
+  ],
+  "attempts": 1,
+  "prompt_tokens": 358,
+  "completion_tokens": 75,
+  "elapsed_seconds": 2.024335084017366,
+  "record": {
+    "state": "1598",
+    "vehicle": "Alabama",
+    "identified_miles": 5089.7,
+    "total_miles": 5185.4,
+    "unidentified_miles": 95.7
+  }
+}

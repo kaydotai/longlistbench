@@ -1,0 +1,108 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 80,
+  "page_sha256": "9c35e2f3461d9cd96bdc471c630ad63f236996605f72c206598bd313a78a152d",
+  "candidates": [
+    {
+      "class_code": "47103",
+      "classification": "Printing operations",
+      "coverage_part": "Commercial General Liability",
+      "edition_date": "01 24",
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "exposure": "Payroll of 620,198",
+      "exposure_basis": "Payroll",
+      "form_number": "CG 21",
+      "form_title": "CG 21 67",
+      "limit": "1000000",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "47103",
+      "classification": "Printing operations",
+      "record_type": "policy_location_item"
+    },
+    {
+      "class_code": "10010",
+      "classification": "Mercantile - food or beverage stores",
+      "record_type": "policy_location_item"
+    },
+    {
+      "class_code": "41670",
+      "classification": "Restaurants - with sales of alcoholic beverages",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "01 24",
+      "form_title": "CG 21 67",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "12 19",
+      "form_title": "CG 24 26",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "12 19",
+      "form_title": "CG 24 04",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "47103",
+      "classification": "Printing operations",
+      "edition_date": "01 24",
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "10010",
+      "classification": "Mercantile - food or beverage stores",
+      "edition_date": "12 19",
+      "exclusion_name": "PFAS Exclusion",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "41670",
+      "classification": "Restaurants - with sales of alcoholic beverages",
+      "edition_date": "12 19",
+      "exclusion_name": "Silica or Silica-Related Dust Exclusion",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "47103",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "10010",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "41670",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "47103",
+      "classification": "Printing operations",
+      "clause_text": "THE PERSONAL AND ADVERTISING INJURY LIMIT OF $1,000,000 APPLIES WITH THE COMMERCIAL GENERAL LIABILITY COVERAGE PART FOR LOCATION 4, CLASS 47103, TERRITORY 003, RATED ON PAYROLL OF 620,198, AND DOES NOT INCREASE ANOTHER AGGREGATE.",
+      "edition_date": "01 24",
+      "limit_type": "1000000",
+      "policy_period": "003",
+      "territory": "47103",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "47103",
+      "classification": "Printing operations",
+      "clause_text": "DESIGNATED PROFESSIONAL SERVICES EXCLUSION PROVISION AND FORM CG 21 67 EDITION 01 24 CONTROL BEFORE ANY CONFLICTING SUMMARY ENTRY FOR LOCATION 4, CLASS 47103, TERRITORY 003.",
+      "edition_date": "01 24",
+      "policy_number": "003",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 1991,
+  "completion_tokens": 1315,
+  "elapsed_seconds": 124.3470327090472,
+  "request_fingerprint": "1852340411a518693b0cb86e17b775aa396251aecc40c2800b0638af1f3f9615",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

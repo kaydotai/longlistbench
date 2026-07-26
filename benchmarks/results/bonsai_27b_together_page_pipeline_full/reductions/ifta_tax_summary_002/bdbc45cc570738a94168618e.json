@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "bdbc45cc570738a94168618e50711ed5e9cb78318d404cfa5306211f3dcda1b0",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "18,773",
+    "WV"
+  ],
+  "pages": [
+    34
+  ],
+  "attempts": 1,
+  "prompt_tokens": 616,
+  "completion_tokens": 160,
+  "elapsed_seconds": 2.6094323329161853,
+  "record": {
+    "fuel_type": "WV",
+    "jurisdiction": "18,773",
+    "gallons_purchased": 0,
+    "interest_due": 0,
+    "net_taxable_gallons": 0,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_rate": 0.5719,
+    "taxable_gallons": 18773,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 1073628
+  }
+}

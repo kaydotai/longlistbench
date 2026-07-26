@@ -1,0 +1,45 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 10,
+  "page_sha256": "48ad56b7c5b3499fc35b2bd68bb1c8b5bbee32045206278a8664abb769449973",
+  "candidates": [
+    {
+      "classification": "Clerical office employees",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "location_number": "4",
+      "record_type": "policy_location_item"
+    },
+    {
+      "record_type": "policy_form_item"
+    },
+    {
+      "policy_number": "Blue Kettle Food Service, LLC",
+      "policy_period": "YW700400",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "139137",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "lob": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "state": "CT",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1014,
+  "completion_tokens": 341,
+  "elapsed_seconds": 4.176655000075698,
+  "request_fingerprint": "61c4bc3d2baa6b9f0d861ca09d2ffd1d2f491cf2623961a5b441ec8d5b25997e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

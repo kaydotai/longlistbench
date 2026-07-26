@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "fingerprint": "d8b134ec5ff6578805dd4cb466dafe1f5b4437ef4a617854b8383b52ea259f7c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Quarterly Return 0",
+    "WV"
+  ],
+  "pages": [
+    1
+  ],
+  "attempts": 1,
+  "prompt_tokens": 739,
+  "completion_tokens": 150,
+  "elapsed_seconds": 4.320747874910012,
+  "record": {
+    "jurisdiction": "WV",
+    "schedule": "Quarterly Return 0",
+    "surcharge": "Y",
+    "distance_miles": 23196,
+    "interest_due": null,
+    "net_taxable_volume": 3386,
+    "tax_due_credit": null,
+    "tax_paid_volume": 0,
+    "tax_rate": null,
+    "taxable_distance_miles": 23181,
+    "taxable_volume": 3386,
+    "total_due": 1308.69
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "c7d033f7360083cc0964d7ef52b91a0dd4cd1441bf1d741dab0b4ba89a2b9605",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "03/05/2024"
+  ],
+  "pages": [
+    67,
+    70,
+    106,
+    110,
+    123,
+    134
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2103,
+  "completion_tokens": 414,
+  "elapsed_seconds": 7.941734624910168,
+  "record": {
+    "incident_number": "03/05/2024",
+    "reference_number": "SUB-054-02",
+    "company_name": "LR24-U6690",
+    "division": "",
+    "coverage_type": "Closed no recovery",
+    "status": "Open",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "Coverage question sent to policy services; diary extended pending the written response.",
+    "handler": "CLERK",
+    "unit_number": "2024-03-05",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": "Medical invoice image indexed. Coding review is pending before payment consideration.",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 235,
+      "paid": 235,
+      "recovered": 0,
+      "total_incurred": 21165.0
+    }
+  }
+}

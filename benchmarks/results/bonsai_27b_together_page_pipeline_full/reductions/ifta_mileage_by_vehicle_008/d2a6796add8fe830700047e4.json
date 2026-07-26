@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_008",
+  "fingerprint": "d2a6796add8fe830700047e493305ad54b6bdc852791a7a6419729b3c5ee3137",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1014",
+    "New Mexico"
+  ],
+  "pages": [
+    51
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 73,
+  "elapsed_seconds": 1.749438041006215,
+  "record": {
+    "state": "New Mexico",
+    "vehicle": "1014",
+    "identified_miles": 6403.2,
+    "total_miles": 6403.2,
+    "unidentified_miles": 0
+  }
+}

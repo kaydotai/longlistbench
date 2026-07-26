@@ -1,0 +1,51 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 77,
+  "page_sha256": "0246190b1cf012e5838e5a7cc8c021f733aa336a9180fc2a3ba34d32f3929868",
+  "candidates": [
+    {
+      "annual_payroll": "$485,364",
+      "class_code": "9015",
+      "classification": "Building operations by owner",
+      "location_number": "4",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "9015",
+      "classification": "Building operations by owner",
+      "location_number": "4",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04 21",
+      "form_number": "WC 04 03 06",
+      "form_title": "WC 04 03 06 edition 04 21",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "$485,364",
+      "class_code": "9015",
+      "classification": "Building operations by owner",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "$485,364",
+      "class_code": "9015",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "$485,364",
+      "class_code": "9015",
+      "classification": "Building operations by owner",
+      "edition_date": "Form WC 04 03 06 edition 04 21",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 993,
+  "completion_tokens": 379,
+  "elapsed_seconds": 4.453192041022703,
+  "request_fingerprint": "e3a057d2dcf72d79275a766ebf7d8fbf2eca45bfff568cb9a30dd0e781229884",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

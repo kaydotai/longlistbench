@@ -1,0 +1,72 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 39,
+  "page_sha256": "37560eda6212a8812098d46f20e290ebff5ba551be1bc5735c40e775eba8009c",
+  "candidates": [
+    {
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "form_number": "WC 04 03 06 01 15",
+      "lob": "2",
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_number": "04/01/2026 - 04/01/2027",
+      "schedule_credit_debit": "MA",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "location_number": "2",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "state": "MA",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "WC 04 03 06 01 15",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "form_number": "WC 04 03 06 01 15",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "state": "MA",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "8742",
+      "location_number": "2",
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_number": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "clause_scope": "The Discount is applied only after the manual premium has been adjusted by the experience modification factor and any schedule rating credits",
+      "clause_text": "Volume-Based Premium Discount Endorsement",
+      "clause_type": "Form WC 04 03 06 01 15",
+      "estimated_premium": "Blue Kettle Food Service, LLC",
+      "form_number": "YW700400",
+      "form_title": "04/01/2026 - 04/01/2027",
+      "policy_number": "MA",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 1013,
+  "completion_tokens": 839,
+  "elapsed_seconds": 111.5126549169654,
+  "request_fingerprint": "393a25a72d56863171ebfdf9adb963d9148d5cbd023626fc43bd71d659f77e8f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

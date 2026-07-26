@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "80a41bc76d7de70da505a291fef4fffa7a5400f663cc7463d1e9943809abb0cd",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "South Carolina",
+    "118"
+  ],
+  "pages": [
+    1
+  ],
+  "attempts": 1,
+  "prompt_tokens": 356,
+  "completion_tokens": 72,
+  "elapsed_seconds": 2.155808708979748,
+  "record": {
+    "state": "118",
+    "vehicle": "South Carolina",
+    "identified_miles": 705.3,
+    "total_miles": 705.3,
+    "unidentified_miles": 0.0
+  }
+}

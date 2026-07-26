@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "6710e725013c4f63ff461a22e7c7c925a51242bd2faaf2911594ef8920597623",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2023-Q1-90-005",
+    "Minnesota",
+    "DI"
+  ],
+  "pages": [
+    28
+  ],
+  "attempts": 1,
+  "prompt_tokens": 709,
+  "completion_tokens": 204,
+  "elapsed_seconds": 2.9731432500993833,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Minnesota",
+    "quarter": "",
+    "return_id": "RTN-2023-Q1-90-005",
+    "filing_year": 2023,
+    "interest_due": 0.0,
+    "net_gallons": 0,
+    "surtax_due": 0.0,
+    "tax_due_refund": 0.0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.0,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0.0,
+    "total_miles": 0
+  }
+}

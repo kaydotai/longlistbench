@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "5669d73bec54777c238b7db8aa3f174ac9d670b43ec4d1c6d179ce6066dedfd7",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-004",
+    "0.7392",
+    "DI"
+  ],
+  "pages": [
+    23
+  ],
+  "attempts": 1,
+  "prompt_tokens": 781,
+  "completion_tokens": 216,
+  "elapsed_seconds": 3.6647302500205114,
+  "record": {
+    "filing_type": "Arkansas",
+    "fuel_type": "DI",
+    "jurisdiction": "0.7392",
+    "quarter": "Q4",
+    "return_id": "RTN-2026-Q4-90-004",
+    "filing_year": 2026,
+    "interest_due": 0,
+    "net_gallons": 15931,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 15931,
+    "taxable_miles": 0,
+    "total_due_refund": 11874.19,
+    "total_miles": 0
+  }
+}

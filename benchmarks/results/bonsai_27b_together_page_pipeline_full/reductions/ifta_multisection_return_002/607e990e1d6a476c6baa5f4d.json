@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "607e990e1d6a476c6baa5f4da46ad89ccd705a5cebe1613d92fe84c87d125d06",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "IA",
+    "2026",
+    "RTN-2026-Q4-90-012"
+  ],
+  "pages": [
+    68
+  ],
+  "attempts": 1,
+  "prompt_tokens": 764,
+  "completion_tokens": 213,
+  "elapsed_seconds": 3.9602947499370202,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "RTN-2026-Q4-90-012",
+    "jurisdiction": "2026",
+    "quarter": "Iowa",
+    "return_id": "IA",
+    "filing_year": 114429,
+    "interest_due": 113949,
+    "net_gallons": 18386,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "sample": "vehicle_schedule_sparse_001",
+  "fingerprint": "fc312b4a962420459cd4a770dda2d282805ed6a1406595a17be323ae060c3968",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "6379"
+  ],
+  "pages": [
+    2
+  ],
+  "attempts": 1,
+  "prompt_tokens": 404,
+  "completion_tokens": 78,
+  "elapsed_seconds": 2.0258799999719486,
+  "record": {
+    "body_type": "T",
+    "company_vehicle_number": "",
+    "make": "Volvo",
+    "model": "TRAILER",
+    "plate_number": "",
+    "veh_number": "6379",
+    "year": 2023
+  }
+}

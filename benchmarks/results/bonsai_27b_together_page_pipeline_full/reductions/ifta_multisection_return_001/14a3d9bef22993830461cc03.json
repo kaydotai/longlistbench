@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "14a3d9bef22993830461cc036c4d00bc409f0aae0061f12f62132d5bd3957864",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "2023-Q1-86-009",
+    "Utah",
+    "DI"
+  ],
+  "pages": [
+    52
+  ],
+  "attempts": 1,
+  "prompt_tokens": 810,
+  "completion_tokens": 214,
+  "elapsed_seconds": 3.9310977921122685,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "DI",
+    "jurisdiction": "Utah",
+    "quarter": "Q1",
+    "return_id": "2023-Q1-86-009",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 2629,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 262,
+    "tax_rate": 0.3718,
+    "taxable_gallons": 2629,
+    "taxable_miles": 97688,
+    "total_due_refund": 0,
+    "total_miles": 97688
+  }
+}

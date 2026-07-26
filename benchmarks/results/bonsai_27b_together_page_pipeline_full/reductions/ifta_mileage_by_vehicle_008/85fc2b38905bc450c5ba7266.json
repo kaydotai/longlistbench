@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_008",
+  "fingerprint": "85fc2b38905bc450c5ba7266dcbe9071db9afe5cba0586bd329854d392bf06e6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1014",
+    "Oklahoma"
+  ],
+  "pages": [
+    51
+  ],
+  "attempts": 1,
+  "prompt_tokens": 362,
+  "completion_tokens": 74,
+  "elapsed_seconds": 2.074011291959323,
+  "record": {
+    "state": "Oklahoma",
+    "vehicle": "1014",
+    "identified_miles": 3729.0,
+    "total_miles": 3729.0,
+    "unidentified_miles": 0
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "page_number": 110,
+  "page_sha256": "5ffb5d2824525a7e2dde2d3584a5c6bf9378c792631b9bb8623a29416e706558",
+  "candidates": [
+    {
+      "incident_number": "02/03/2024",
+      "reference_number": "LR26-B8860"
+    },
+    {
+      "incident_number": "03/05/2024",
+      "reference_number": "LR25-V7729",
+      "ded": {
+        "reserve": 14,
+        "paid": 18,
+        "recovered": 82,
+        "total_incurred": 218
+      }
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1082,
+  "completion_tokens": 315,
+  "elapsed_seconds": 3.645265208091587,
+  "request_fingerprint": "923be66ef841c239c0b043d00f18b8b5793daee7c55b67cbec0965013a88755b",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

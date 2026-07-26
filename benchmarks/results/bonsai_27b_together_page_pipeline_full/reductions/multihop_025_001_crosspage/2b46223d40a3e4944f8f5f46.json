@@ -1,0 +1,67 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "2b46223d40a3e4944f8f5f4626dea9ddec333eeb2547d1333adf0507e81e3bf2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR23-G2381"
+  ],
+  "pages": [
+    10,
+    33,
+    42,
+    96
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1844,
+  "completion_tokens": 386,
+  "elapsed_seconds": 6.917068875045516,
+  "record": {
+    "incident_number": "LR23-G2381",
+    "reference_number": "2019 IN 637538",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "Medical invoice image indexed. Coding review is pending before payment consideration.",
+    "handler": "RECOV",
+    "unit_number": "",
+    "date_of_loss": "02/03/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 28154.6,
+      "recovered": 0,
+      "total_incurred": 28154.6
+    }
+  }
+}

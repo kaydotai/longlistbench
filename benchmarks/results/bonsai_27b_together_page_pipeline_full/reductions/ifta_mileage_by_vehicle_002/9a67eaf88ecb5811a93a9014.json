@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "9a67eaf88ecb5811a93a9014bdcc796ae90250262dd8cb5bdec8b1a43e02b8c7",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Nevada",
+    "897"
+  ],
+  "pages": [
+    6
+  ],
+  "attempts": 1,
+  "prompt_tokens": 360,
+  "completion_tokens": 73,
+  "elapsed_seconds": 1.3079836249817163,
+  "record": {
+    "state": "Nevada",
+    "vehicle": "897",
+    "identified_miles": 4539.8,
+    "total_miles": 4539.8,
+    "unidentified_miles": 0
+  }
+}

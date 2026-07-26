@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "604b3f0541a290b9312c5e6ecbf7a71283068e463f72ef79744bd51da4629f69",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR23-Q2555"
+  ],
+  "pages": [
+    48,
+    97,
+    137
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1609,
+  "completion_tokens": 364,
+  "elapsed_seconds": 5.9658730829833075,
+  "record": {
+    "incident_number": "LR23-Q2555",
+    "reference_number": "LR24-Y7329",
+    "company_name": "Rogers Hauling Inc",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "L24A2021",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

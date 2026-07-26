@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "a805fb6091ecbca33503fcbfa8460e522fe4919bf1bec1098d2a50545b639610",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Missouri",
+    "2291"
+  ],
+  "pages": [
+    43
+  ],
+  "attempts": 1,
+  "prompt_tokens": 346,
+  "completion_tokens": 68,
+  "elapsed_seconds": 2.034190958016552,
+  "record": {
+    "state": "2291",
+    "vehicle": "Missouri",
+    "identified_miles": 5.4685,
+    "total_miles": 0,
+    "unidentified_miles": 0
+  }
+}

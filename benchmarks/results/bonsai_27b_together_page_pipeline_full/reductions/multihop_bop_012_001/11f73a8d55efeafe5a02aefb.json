@@ -1,0 +1,41 @@
+{
+  "sample": "multihop_bop_012_001",
+  "fingerprint": "11f73a8d55efeafe5a02aefbbccf4e9c0a7d1eab0e37ddbce5c7903d396db94a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "policy_clause_item",
+  "identity": [
+    "policy_clause_item",
+    "04/01/2026 - 04/01/2027",
+    "BPF 14 19",
+    "A. This endorsement applies to PFAS Exclusion shown for the scheduled premises below. B. The premises reference for this endorsement is Location 001, Building 002. C. The scheduled form is BPF 14 19 edition 01 20, subject to the terms below. D. The limit shown for the affected scheduled coverage is $50,000; the deductible shown is $10,000. E. The valuation or rating basis shown for the scheduled coverage is Exclusion Applies. F. This endorsement does not change any other scheduled premises unless another schedule expressly states that it applies. G. The declarations, coverage form, forms schedule, endorsement schedule and premium schedule must be read together before applying this endorsement. H. A binder, certificate, producer request, invoice, audit worksheet or loss-control note does not change this endorsement unless a revised endorsement is issued. I. If a location, building, coverage, form number or effective date differs between schedules, the later and more specific endorsement controls for that scheduled item. J. The insured must keep occupancy records, valuation worksheets, lease agreements, payroll records, sales records and equipment schedules that support the scheduled entry. K. Any premium adjustment arising from this endorsement is shown in the premium summary or later billing notice and does not expand the applicable limit. L. This endorsement applies separately to each premises, coverage and form reference identified in the schedule unless the endorsement states otherwise. ALL OTHER TERMS AND CONDITIONS OF THIS POLICY REMAIN UNCHANGED.",
+    "PFAS Exclusion",
+    "endorsement"
+  ],
+  "pages": [
+    89
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1207,
+  "completion_tokens": 597,
+  "elapsed_seconds": 6.96465341700241,
+  "record": {
+    "record_type": "policy_clause_item",
+    "building_number": "002",
+    "clause_scope": "A. This endorsement applies to PFAS Exclusion shown for the scheduled premises below. B. The premises reference for this endorsement is Location 001, Building 002. C. The scheduled form is BPF 14 19 edition 01 20, subject to the terms below. D. The limit shown for the affected scheduled coverage is $50,000; the deductible shown is $10,000. E. The valuation or rating basis shown for the scheduled coverage is Exclusion Applies. F. This endorsement does not change any other scheduled premises unless another schedule expressly states that it applies. G. The declarations, coverage form, forms schedule, endorsement schedule and premium schedule must be read together before applying this endorsement. H. A binder, certificate, producer request, invoice, audit worksheet or loss-control note does not change this endorsement unless a revised endorsement is issued. I. If a location, building, coverage, form number or effective date differs between schedules, the later and more specific endorsement controls for that scheduled item. J. The insured must keep occupancy records, valuation worksheets, lease agreements, payroll records, sales records and equipment schedules that support the scheduled entry. K. Any premium adjustment arising from this endorsement is shown in the premium summary or later billing notice and does not expand the applicable limit. L. This endorsement applies separately to each premises, coverage and form reference identified in the schedule unless the endorsement states otherwise. ALL OTHER TERMS AND CONDITIONS OF THIS POLICY REMAIN UNCHANGED.",
+    "clause_text": "PFAS Exclusion",
+    "clause_title": "endorsement",
+    "clause_type": "PFAS Exclusion",
+    "coverage": "$10,000",
+    "deductible": "04/01/2026",
+    "edition_date": "BPF1419",
+    "form_number": "BPF 14 19",
+    "form_title": "$50,000",
+    "limit": "001",
+    "lob": "001",
+    "location_number": "PINECREST PRINT COOPERATIVE, LLC",
+    "named_insured": "QB814260",
+    "policy_number": "04/01/2026 - 04/01/2027",
+    "policy_period": "location_number: 001, building_number: 002, policy_number: QB814260, premium_basis: 035.41"
+  }
+}

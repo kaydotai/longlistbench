@@ -1,0 +1,41 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 4,
+  "page_sha256": "f9a7e80b179d4936a57162ce68556a8de55845fea93af892556ec2e8b2fc54a1",
+  "candidates": [
+    {
+      "building_number": "002",
+      "classification": "Business Income and Extra Expense",
+      "deductible": "10000",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026-04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "BPF0439",
+      "policy_number": "QB814260",
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1301,
+  "completion_tokens": 481,
+  "elapsed_seconds": 6.727743291994557,
+  "request_fingerprint": "bb0d263f8e5e8bccd58e4e6b163f16ab19021fb678216489a4d071cbb1d8ceb3",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

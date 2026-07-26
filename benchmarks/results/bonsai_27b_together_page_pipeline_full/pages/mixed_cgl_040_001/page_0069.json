@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 69,
+  "page_sha256": "0c86c713071a50094a26430e94cb720769a2c9d29aa0bf3d5522761ac12a92ce",
+  "candidates": [
+    {
+      "class_code": "18435",
+      "classification": "Auto repair or service shops",
+      "coverage_part": "Commercial General Liability",
+      "edition_date": "04/01/2026",
+      "exclusion_name": "Silica or Silica-Related Dust Exclusion",
+      "form_number": "CG 24 04",
+      "location_number": "LG695378",
+      "products_completed_ops_rate": "][class_code, class_code, coverage_part, edition_date, endorsement_effective_date, exclusion_name, exposure, exposure_basis, form_number, form_title, limit, limit_type, lob, location_number, named_insured, policy_number, policy_period, premium, products_completed_ops_rate, rate, territory]",
+      "rate": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]",
+      "territory": "policy_location_item",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]",
+      "classification": "policy_form_item",
+      "coverage_part": "policy_endorsement_item",
+      "edition_date": "policy_premium_item",
+      "endorsement_effective_date": "policy_clause_item",
+      "exclusion_name": "policy_premium_item",
+      "exposure": "policy_clause_item",
+      "exposure_basis": "policy_location_item",
+      "form_number": "policy_form_item",
+      "form_title": "policy_endorsement_item",
+      "limit": "policy_premium_item",
+      "limit_type": "policy_clause_item",
+      "lob": "policy_location_item",
+      "location_number": "policy_form_item",
+      "named_insured": "policy_endorsement_item",
+      "policy_number": "policy_premium_item",
+      "policy_period": "policy_clause_item",
+      "premium": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]",
+      "products_completed_ops_rate": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]",
+      "rate": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]",
+      "territory": "[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "record_type": "policy_location_item"
+    },
+    {
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1999,
+  "completion_tokens": 895,
+  "elapsed_seconds": 13.94885908300057,
+  "request_fingerprint": "9c2ee9212b09d931e419641a13edf5e723eb71e20f1dd7e1720865fd7288c22d",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

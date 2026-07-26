@@ -1,0 +1,53 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 87,
+  "page_sha256": "94763d93d07d29c34c3a1ba76b5178a7ebc52a6b6f1fd10bbc7ab8e45fd5b13b",
+  "candidates": [
+    {
+      "form_number": "WC 00 03 13 01 15",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "location_number": "4",
+      "record_type": "policy_location_item"
+    },
+    {
+      "lob": "Blue Kettle Food Service, LLC",
+      "record_type": "policy_form_item"
+    },
+    {
+      "form_title": "WC 00 03 13",
+      "lob": "Blue Kettle Food Service, LLC",
+      "record_type": "policy_form_item"
+    },
+    {
+      "form_number": "WC 00 03 13",
+      "form_title": "Blue Kettle Food Service, LLC",
+      "record_type": "policy_form_item"
+    },
+    {
+      "form_number": "WC 00 03 13",
+      "form_title": "Blue Kettle Food Service, LLC",
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "classification": "Clerical office employees",
+      "estimated_premium": "Clerical office employees in CT, class 8810, at Location 4. The information page shows estimated remuneration of $594,857, manual rate 0.42, experience modification 1.04, and estimated premium $2,498.",
+      "state": "Argent Birch Employers Liability YW700400",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1030,
+  "completion_tokens": 341,
+  "elapsed_seconds": 5.77357029193081,
+  "request_fingerprint": "95caacb941beed57471322d445f37997ab9de5d39b6834dec8b2428ce8755d0c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

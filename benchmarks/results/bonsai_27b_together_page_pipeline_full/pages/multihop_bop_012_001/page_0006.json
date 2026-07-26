@@ -1,0 +1,46 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 6,
+  "page_sha256": "2d23ea791ae6f5b7b10cf54a8e2156429b4a1436a6afa4342da52d04afbe03fe",
+  "candidates": [
+    {
+      "building_number": "001",
+      "edition_date": "04/01/2026",
+      "form_number": "BPA7104",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026-04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "001",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026-04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPA7104",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026-04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "location_number": "001",
+      "named_insured": "Pinecrest Print Cooperative, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026-04/01/2027",
+      "record_type": "policy_premium_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 916,
+  "completion_tokens": 464,
+  "elapsed_seconds": 4.683244375046343,
+  "request_fingerprint": "484ee6c73f7b9849bf78357a2e98111711e5b312d11465c6488de8b7263515f1",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

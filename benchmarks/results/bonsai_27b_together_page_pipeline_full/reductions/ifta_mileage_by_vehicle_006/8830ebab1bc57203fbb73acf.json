@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "8830ebab1bc57203fbb73acf1048a6442149e8e3f6b1c464447c01ef3f2c7f94",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Kentucky",
+    "168"
+  ],
+  "pages": [
+    10
+  ],
+  "attempts": 1,
+  "prompt_tokens": 358,
+  "completion_tokens": 67,
+  "elapsed_seconds": 1.551209416007623,
+  "record": {
+    "state": "168",
+    "vehicle": "Kentucky",
+    "identified_miles": 0,
+    "total_miles": 4628.1,
+    "unidentified_miles": 0
+  }
+}

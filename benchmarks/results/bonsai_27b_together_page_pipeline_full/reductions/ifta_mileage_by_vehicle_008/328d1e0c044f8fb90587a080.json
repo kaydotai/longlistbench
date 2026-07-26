@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_008",
+  "fingerprint": "328d1e0c044f8fb90587a08090252f1a510bbd4848a83abeca09f15341499947",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Louisiana",
+    "8834"
+  ],
+  "pages": [
+    13
+  ],
+  "attempts": 1,
+  "prompt_tokens": 344,
+  "completion_tokens": 72,
+  "elapsed_seconds": 1.9177613339852542,
+  "record": {
+    "state": "Louisiana",
+    "vehicle": "8834",
+    "identified_miles": 61.6,
+    "total_miles": 61.6,
+    "unidentified_miles": 61.6
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "page_number": 44,
+  "page_sha256": "8a2e2b0ceefb3aaaab0535cec22ecf4cce7f208e3b189b3b02fa46f75d0391bd",
+  "candidates": [
+    {
+      "incident_number": "CV-105713",
+      "reference_number": "L23A9350",
+      "coverage_type": "In force on reported date",
+      "policy_state": "FL"
+    },
+    {
+      "reference_number": "L24A7763",
+      "policy_state": "NY"
+    },
+    {
+      "incident_number": "L23A1604",
+      "policy_state": "TX"
+    },
+    {
+      "incident_number": "L24A4836",
+      "policy_state": "CA"
+    },
+    {
+      "reference_number": "L23A9350",
+      "policy_state": "FL"
+    },
+    {
+      "incident_number": "L23A8269",
+      "policy_state": "MO"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 813,
+  "completion_tokens": 695,
+  "elapsed_seconds": 105.26942816702649,
+  "request_fingerprint": "35ce7176d5e091d4fbcece21ccf444ab130876058e1f5ade98b9b16f2b2e0139",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

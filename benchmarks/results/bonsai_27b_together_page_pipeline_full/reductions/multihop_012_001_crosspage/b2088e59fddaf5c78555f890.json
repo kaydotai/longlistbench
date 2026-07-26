@@ -1,0 +1,66 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "b2088e59fddaf5c78555f890927e2f3fb725af0450faa1ca9cf7a1f0e66fcba9",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR24-Q4011"
+  ],
+  "pages": [
+    7,
+    13,
+    40
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2396,
+  "completion_tokens": 395,
+  "elapsed_seconds": 7.601111041964032,
+  "record": {
+    "incident_number": "LR24-Q4011",
+    "reference_number": "",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "Coverage question sent to policy services; diary extended pending the written response. Medical invoice image indexed. Coding review is pending before payment consideration. REPAIR ESTIMATE",
+    "handler": "CLERK",
+    "unit_number": "2023 PB 616211",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "03/05/2024",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

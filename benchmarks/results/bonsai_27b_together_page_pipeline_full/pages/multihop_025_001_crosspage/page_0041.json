@@ -1,0 +1,44 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "page_number": 41,
+  "page_sha256": "68479a89989e2ed71e226a759042d096667a1cac0d5d6cb533e7fe5ed4e9b59b",
+  "candidates": [
+    {
+      "incident_number": "L24A7887",
+      "company_name": "Jacobshire Cargo",
+      "division": "General",
+      "policy_state": "CA",
+      "bi": {
+        "reserve": 0,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      },
+      "pd": {
+        "reserve": 0,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      },
+      "lae": {
+        "reserve": 0,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      },
+      "ded": {
+        "reserve": 0,
+        "paid": 0,
+        "recovered": 0,
+        "total_incurred": 0
+      }
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 762,
+  "completion_tokens": 404,
+  "elapsed_seconds": 4.955283708055504,
+  "request_fingerprint": "4ce6ce0178494c25fa9f2d78434c571dc66314b0c46c7cc7573ac932be4b57a0",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,46 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 50,
+  "page_sha256": "aceaab995e136bbe5f2cccb1d5f3a3322b58097399f12e9485e6145437c94a68",
+  "candidates": [
+    {
+      "building_number": "002",
+      "coverage": "$50,000",
+      "deductible": "$10,000",
+      "edition_date": "01 20",
+      "form_number": "BPF 14 19",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "coverage": "$100,000",
+      "deductible": "$10,000",
+      "edition_date": "04 24",
+      "form_number": "BPF 04 67",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "clause_scope": "condition provision",
+      "clause_text": "BPF 14 19 edition 01 20 contains a condition provision for Location 001, Building 002, PFAS Exclusion. The scheduled limit of $50,000 and deductible of $10,000 apply to Location 001, Building 002, PFAS Exclusion under form BPF 14 19 edition 01 20. The insured must keep records supporting the Exclusion Applies valuation basis, 90% coinsurance entry, and Actual Loss Sustained business income basis for Location 001, Building 002, PFAS Exclusion. If schedules conflict for Location 001, Building 002, PFAS Exclusion, form BPF 14 19 edition 01 20 and any endorsement with a later effective date control the $50,000 limit and $10,000 deductible.",
+      "clause_title": "Schedule Clause",
+      "clause_type": "BPF 14 19",
+      "coverage": "01 20",
+      "deductible": "$10,000",
+      "lob": "QB814260",
+      "location_number": "04/01/2026",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1601,
+  "completion_tokens": 650,
+  "elapsed_seconds": 7.9986292499816045,
+  "request_fingerprint": "312f7129fa502a7a9734093ff9641b24f2ae1b2a6967c26a43ce14efd3abfa05",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

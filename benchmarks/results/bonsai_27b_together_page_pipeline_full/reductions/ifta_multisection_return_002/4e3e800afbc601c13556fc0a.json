@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "4e3e800afbc601c13556fc0ae8911ee4b41255bf412674d993de0a1b15cb5d4f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "DI",
+    "New York",
+    "22"
+  ],
+  "pages": [
+    40
+  ],
+  "attempts": 1,
+  "prompt_tokens": 717,
+  "completion_tokens": 184,
+  "elapsed_seconds": 4.2189685420598835,
+  "record": {
+    "filing_type": "return",
+    "fuel_type": "22",
+    "jurisdiction": "New York",
+    "quarter": "2025 Q3",
+    "return_id": "DI",
+    "filing_year": -7389,
+    "interest_due": 0,
+    "net_gallons": 0,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "6dfc8170eb65536ea2d8405c9694a8cdaefcd467b09417221bb40fca2e97771c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1150",
+    "Oregon"
+  ],
+  "pages": [
+    7
+  ],
+  "attempts": 1,
+  "prompt_tokens": 359,
+  "completion_tokens": 72,
+  "elapsed_seconds": 2.051469250000082,
+  "record": {
+    "state": "Oregon",
+    "vehicle": "1150",
+    "identified_miles": 3170.6,
+    "total_miles": 3170.6,
+    "unidentified_miles": 0
+  }
+}

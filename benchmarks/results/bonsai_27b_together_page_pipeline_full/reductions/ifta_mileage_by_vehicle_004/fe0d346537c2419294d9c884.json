@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "fe0d346537c2419294d9c88485de12333b7cab4c1c3ec33e7156fae2993ae498",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "North Carolina",
+    "1951"
+  ],
+  "pages": [
+    63
+  ],
+  "attempts": 1,
+  "prompt_tokens": 346,
+  "completion_tokens": 73,
+  "elapsed_seconds": 1.377125957980752,
+  "record": {
+    "state": "North Carolina",
+    "vehicle": "1951",
+    "identified_miles": 0,
+    "total_miles": 5806.4,
+    "unidentified_miles": 5806.4
+  }
+}

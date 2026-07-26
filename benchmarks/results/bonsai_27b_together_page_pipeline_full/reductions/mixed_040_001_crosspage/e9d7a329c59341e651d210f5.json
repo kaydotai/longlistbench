@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "e9d7a329c59341e651d210f5d5b0ef2dae99d54231cab207339997e7466a37bf",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#62350-N"
+  ],
+  "pages": [
+    17,
+    71,
+    86
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1642,
+  "completion_tokens": 363,
+  "elapsed_seconds": 5.573198541998863,
+  "record": {
+    "incident_number": "#62350-N",
+    "reference_number": "LR26-G9484",
+    "company_name": "Liberty Cargo LLC",
+    "division": "",
+    "coverage_type": "",
+    "status": "Open",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "03/06/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

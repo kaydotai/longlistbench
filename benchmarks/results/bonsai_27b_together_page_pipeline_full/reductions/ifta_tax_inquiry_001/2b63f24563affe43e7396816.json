@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_tax_inquiry_001",
+  "fingerprint": "2b63f24563affe43e7396816858da9f77c2cc987ae11ea1e85f782cbf24bbadc",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    388201,
+    "Tax Return Information",
+    "TAX RETURN INQUIRY"
+  ],
+  "pages": [
+    1
+  ],
+  "attempts": 1,
+  "prompt_tokens": 653,
+  "completion_tokens": 57,
+  "elapsed_seconds": 2.472018125001341,
+  "record": {
+    "field": "TAX RETURN INQUIRY",
+    "section": "Tax Return Information",
+    "value": "Account No.",
+    "page": 388201
+  }
+}

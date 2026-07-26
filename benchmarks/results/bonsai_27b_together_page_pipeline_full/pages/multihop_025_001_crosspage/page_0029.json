@@ -1,0 +1,44 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "page_number": 29,
+  "page_sha256": "b76ce28d94e61112cdaf3ebaecb6e2680791c865b297d9904cdd0ff2c0d8ce62",
+  "candidates": [
+    {
+      "incident_number": "incident_number",
+      "reference_number": "reference_number",
+      "company_name": "company_name",
+      "division": "division",
+      "coverage_type": "coverage_type",
+      "status": "status",
+      "policy_number": "policy_number",
+      "policy_state": "policy_state",
+      "cause_code": "cause_code",
+      "description": "description",
+      "handler": "handler",
+      "unit_number": "unit_number",
+      "date_of_loss": "date_of_loss",
+      "loss_state": "loss_state",
+      "date_reported": "date_reported",
+      "agency": "agency",
+      "insured": "insured",
+      "driver_name": "driver_name",
+      "adjuster_notes": "adjuster_notes",
+      "claimants": [
+        "claimants"
+      ]
+    },
+    {
+      "incident_number": "#78387-S",
+      "reference_number": "LR23-D9003",
+      "status": "Closed",
+      "insured": "West Andreaport Hauling"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 750,
+  "completion_tokens": 278,
+  "elapsed_seconds": 3.690176667063497,
+  "request_fingerprint": "999f4c833e776c33a8769515af8bfee4025ed7613bcdf3834ff25ac32c6ff7cf",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

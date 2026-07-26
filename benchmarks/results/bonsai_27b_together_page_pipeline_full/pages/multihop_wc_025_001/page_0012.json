@@ -1,0 +1,103 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 12,
+  "page_sha256": "dc510cfc27fdb019e846715b9421ce5891a7de57826190916a8cf7a6cf621f70",
+  "candidates": [
+    {
+      "annual_payroll": "158051",
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "estimated_premium": "6875",
+      "form_number": "WC 04 03 06 01 15",
+      "form_title": "Workers Compensation and Employers Liability",
+      "location_number": "1",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "schedule_credit_debit": "MA",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "location_number": "1",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "state": "MA",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "WC 04 03 06 01 15",
+      "form_title": "Workers Compensation and Employers Liability",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "158051",
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "estimated_premium": "6875",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "state": "MA",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "158051",
+      "class_code": "8742",
+      "location_number": "1",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "premium": "6875",
+      "state": "MA",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "158051",
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "clause_scope": "full text of clause A",
+      "clause_text": "text of clause A description",
+      "lob": "04/01/2026",
+      "named_insured": "WC 04 03 06 01 15",
+      "policy_number": "Workers Compensation and Employers Liability",
+      "policy_period": "Blue Kettle Food Service, LLC",
+      "state": "YW700400",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "annual_payroll": "158051",
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "clause_scope": "full text of clause B",
+      "clause_text": "text of clause B description",
+      "lob": "04/01/2026",
+      "named_insured": "WC 04 03 06 01 15",
+      "policy_number": "Workers Compensation and Employers Liability",
+      "policy_period": "Blue Kettle Food Service, LLC",
+      "state": "YW700400",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "annual_payroll": "158051",
+      "class_code": "8742",
+      "classification": "Outside salespersons",
+      "clause_scope": "full text of clause C",
+      "clause_text": "text of clause C description",
+      "lob": "04/01/2026",
+      "named_insured": "WC 04 03 06 01 15",
+      "policy_number": "Workers Compensation and Employers Liability",
+      "policy_period": "Blue Kettle Food Service, LLC",
+      "state": "YW700400",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1020,
+  "completion_tokens": 962,
+  "elapsed_seconds": 10.77342820900958,
+  "request_fingerprint": "5d58f5082d69a530d9f7f0e571a1ecc10f2a9a571f656a7d69a11c7aa72a443c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

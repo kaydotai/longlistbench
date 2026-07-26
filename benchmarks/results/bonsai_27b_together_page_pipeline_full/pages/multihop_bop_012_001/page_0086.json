@@ -1,0 +1,40 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 86,
+  "page_sha256": "775c6454e2ec8a426d4f1182a71629b7e7727956a7e14e71e3944304f941f5ee",
+  "candidates": [
+    {
+      "building_number": "002",
+      "location_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPF 04 91",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "002",
+      "coverage": "Water Back-Up",
+      "deductible": "1,000",
+      "edition_date": "04 24",
+      "endorsement_effective_date": "08/15/2026",
+      "form_number": "BPF 04 91",
+      "form_title": "WATER BACK-UP AND SUMP OVERFLOW ENDORSEMENT",
+      "limit": "235,000",
+      "location_number": "002",
+      "policy_period": "PINECREST PRINT COOPERATIVE, LLC",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1053,
+  "completion_tokens": 347,
+  "elapsed_seconds": 3.7847680000122637,
+  "request_fingerprint": "24b83d5c8ebc937b1e38896cd6e9da2f2d6d688a1bdbc630e33e8658bef313ed",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

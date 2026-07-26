@@ -1,0 +1,51 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 63,
+  "page_sha256": "9b375ca42c7b23e191374706e0a06832911ea858e6d2dd662c6a43450ec79a87",
+  "candidates": [
+    {
+      "building_number": "001",
+      "coverage": "$225,000",
+      "deductible": "$5,000",
+      "edition_date": "06 21",
+      "form_number": "BPF 00 13",
+      "lob": "001",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "001",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "06 21",
+      "form_number": "BPF 00 13",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "limit": "06 21",
+      "named_insured": "001",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "edition_date": "06 21",
+      "form_number": "BPF 00 13",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 1561,
+  "completion_tokens": 353,
+  "elapsed_seconds": 96.76616174995434,
+  "request_fingerprint": "20016d19b060f2eb542d59b78e1f1fb6ecfd924eea470078ce38e12e288ff3dd",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

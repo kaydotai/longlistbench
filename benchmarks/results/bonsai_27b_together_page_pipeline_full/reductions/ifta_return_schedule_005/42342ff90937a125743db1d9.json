@@ -1,0 +1,48 @@
+{
+  "sample": "ifta_return_schedule_005",
+  "fingerprint": "42342ff90937a125743db1d921be5df02098ecaa882d17023680b27666cd2a22",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "N",
+    "IL"
+  ],
+  "pages": [
+    1,
+    5,
+    6,
+    7,
+    11,
+    12,
+    18,
+    23,
+    27,
+    28,
+    30,
+    31,
+    33,
+    35,
+    37,
+    42
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2003,
+  "completion_tokens": 162,
+  "elapsed_seconds": 7.697730416082777,
+  "record": {
+    "jurisdiction": "IL",
+    "schedule": "N",
+    "surcharge": "45700",
+    "distance_miles": 45681,
+    "interest_due": 6973,
+    "net_taxable_volume": 0,
+    "tax_due_credit": null,
+    "tax_paid_volume": 6973,
+    "tax_rate": 0.3527,
+    "taxable_distance_miles": 45017,
+    "taxable_volume": 7891,
+    "total_due": 2459.38
+  }
+}

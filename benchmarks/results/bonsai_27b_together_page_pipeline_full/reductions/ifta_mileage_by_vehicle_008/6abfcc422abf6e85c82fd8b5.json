@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_008",
+  "fingerprint": "6abfcc422abf6e85c82fd8b551054087fe5ada07a1aaa7a9c9891c3dc15c486d",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Arizona",
+    "8834"
+  ],
+  "pages": [
+    13
+  ],
+  "attempts": 1,
+  "prompt_tokens": 359,
+  "completion_tokens": 74,
+  "elapsed_seconds": 1.5614940419327468,
+  "record": {
+    "state": "8834",
+    "vehicle": "Arizona",
+    "identified_miles": 452.5,
+    "total_miles": 827.7,
+    "unidentified_miles": 375.2
+  }
+}

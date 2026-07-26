@@ -1,0 +1,64 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "24b396461b774016ed8db7ce9e972719409d60478d4bf70e6ddafb7b8aefd527",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "399841"
+  ],
+  "pages": [
+    5
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1650,
+  "completion_tokens": 379,
+  "elapsed_seconds": 7.311433291994035,
+  "record": {
+    "incident_number": "399841",
+    "reference_number": "",
+    "company_name": "",
+    "division": "Peterbilt",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 2014.0,
+      "paid": 1.0,
+      "recovered": 1.0,
+      "total_incurred": 110.0
+    },
+    "pd": {
+      "reserve": 1.0,
+      "paid": 1.0,
+      "recovered": 1.0,
+      "total_incurred": 6.0
+    },
+    "lae": {
+      "reserve": 1.0,
+      "paid": 1.0,
+      "recovered": 0.0,
+      "total_incurred": 12.0
+    },
+    "ded": {
+      "reserve": 12.0,
+      "paid": 1.0,
+      "recovered": 12.0,
+      "total_incurred": 0.0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "b6e60aeaf478c6722e62d4f671ef719569bab005da28d0d34376c41deb66121b",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2024-Q2-90-002",
+    "South Carolina",
+    "DI"
+  ],
+  "pages": [
+    11
+  ],
+  "attempts": 1,
+  "prompt_tokens": 737,
+  "completion_tokens": 205,
+  "elapsed_seconds": 3.5319562499644235,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "DI",
+    "jurisdiction": "South Carolina",
+    "quarter": "Q2",
+    "return_id": "RTN-2024-Q2-90-002",
+    "filing_year": 2024,
+    "interest_due": 0,
+    "net_gallons": 19329,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.5214,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

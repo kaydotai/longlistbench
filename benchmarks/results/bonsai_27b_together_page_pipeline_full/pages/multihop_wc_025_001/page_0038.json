@@ -1,0 +1,79 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 38,
+  "page_sha256": "e711cd8e37696e74db00a22140d964f4c5688eb4330c66540cd730878fc721ff",
+  "candidates": [
+    {
+      "annual_payroll": "333913",
+      "class_code": "8017",
+      "classification": "Retail store - all employees",
+      "estimated_premium": "$1,402",
+      "form_number": "WC 00 03 13 07 23",
+      "named_insured": "0.42",
+      "premium_basis": "CT",
+      "schedule_credit_debit": "1",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8017",
+      "classification": "Retail store - all employees",
+      "location_number": "1",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "state": "CT",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "07 23",
+      "form_number": "WC 00 03 13 07 23",
+      "form_title": "SUBROGATION AND RECOVERY ADMINISTRATION",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "333913",
+      "class_code": "8017",
+      "classification": "Retail store - all employees",
+      "estimated_premium": "$1,402",
+      "form_number": "WC 00 03 13 07 23",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "state": "CT",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "333913",
+      "class_code": "8017",
+      "location_number": "1",
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_number": "04/01/2026 - 04/01/2027",
+      "policy_period": "$1,402",
+      "schedule_credit_debit": "CT",
+      "state": "0.42",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "333913",
+      "class_code": "8017",
+      "classification": "Retail store - all employees",
+      "form_title": "Blue Kettle Food Service, LLC",
+      "lob": "YW700400",
+      "named_insured": "04/01/2026 - 04/01/2027",
+      "policy_number": "CT",
+      "policy_period": "1",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 1028,
+  "completion_tokens": 788,
+  "elapsed_seconds": 113.96817787503824,
+  "request_fingerprint": "51ff144c1a233ed118bdc233aae4645004c1f35b4c47d245c8c885dcfa6ed3d7",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_005",
+  "fingerprint": "40eda2fe1f12fc9ed36980f3eabb62243ac57121f11e218903ebda75049a7dec",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "39.3",
+    "Indiana"
+  ],
+  "pages": [
+    70
+  ],
+  "attempts": 1,
+  "prompt_tokens": 344,
+  "completion_tokens": 68,
+  "elapsed_seconds": 0.9986920829396695,
+  "record": {
+    "state": "Indiana",
+    "vehicle": "39.3",
+    "identified_miles": 0,
+    "total_miles": 39.3,
+    "unidentified_miles": 39.3
+  }
+}

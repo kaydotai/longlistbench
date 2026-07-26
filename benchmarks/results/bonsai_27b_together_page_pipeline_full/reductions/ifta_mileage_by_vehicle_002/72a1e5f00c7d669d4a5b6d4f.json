@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "72a1e5f00c7d669d4a5b6d4fb27bd1689ffe4910734577956e8b211f524fc2f0",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Illinois",
+    "297"
+  ],
+  "pages": [
+    31
+  ],
+  "attempts": 1,
+  "prompt_tokens": 345,
+  "completion_tokens": 72,
+  "elapsed_seconds": 2.1469937911024317,
+  "record": {
+    "state": "297",
+    "vehicle": "Illinois",
+    "identified_miles": 0,
+    "total_miles": 3302.7,
+    "unidentified_miles": 3302.7
+  }
+}

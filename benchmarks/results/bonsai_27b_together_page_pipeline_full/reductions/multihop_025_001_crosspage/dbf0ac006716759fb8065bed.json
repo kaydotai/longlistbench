@@ -1,0 +1,65 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "dbf0ac006716759fb8065bedbda41e0ce8d55def8e9af2e49f3fb25d442c6293",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#55625-Q"
+  ],
+  "pages": [
+    5,
+    85
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1648,
+  "completion_tokens": 392,
+  "elapsed_seconds": 7.093170959036797,
+  "record": {
+    "incident_number": "#55625-Q",
+    "reference_number": "LR23-W5452",
+    "company_name": "West Andreaport Hauling",
+    "division": "",
+    "coverage_type": "",
+    "status": "OPEN",
+    "policy_number": "L23A8269",
+    "policy_state": "NC",
+    "cause_code": "ROL",
+    "description": "",
+    "handler": "",
+    "unit_number": "534450",
+    "date_of_loss": "04/01/2023",
+    "loss_state": "",
+    "date_reported": "04/18/2023",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

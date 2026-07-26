@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "3965fd225dab8ae95a1a014e9e8fa7786aaf141a387acd871fa3245e429e7f47",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "No.",
+    "2024 Q2",
+    "International Fuel Tax Agreement Return"
+  ],
+  "pages": [
+    9
+  ],
+  "attempts": 1,
+  "prompt_tokens": 807,
+  "completion_tokens": 213,
+  "elapsed_seconds": 4.1844312499742955,
+  "record": {
+    "filing_type": "Schedule A continued",
+    "fuel_type": "International Fuel Tax Agreement Return",
+    "jurisdiction": "2024 Q2",
+    "quarter": "2024",
+    "return_id": "No.",
+    "filing_year": 36,
+    "interest_due": 172.042,
+    "net_gallons": 171667,
+    "surtax_due": 22567,
+    "tax_due_refund": 39.827,
+    "tax_paid_gallons": 1,
+    "tax_rate": 1,
+    "taxable_gallons": 19,
+    "taxable_miles": 19,
+    "total_due_refund": 19,
+    "total_miles": 19
+  }
+}

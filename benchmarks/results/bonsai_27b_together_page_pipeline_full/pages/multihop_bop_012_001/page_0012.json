@@ -1,0 +1,50 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 12,
+  "page_sha256": "2fa2cfaf7568d7a1b9b926f398274b6d39a89040ca0d0d90b5aaebf100351182",
+  "candidates": [
+    {
+      "building_number": "002",
+      "coverage": "PFAS Exclusion",
+      "deductible": "$10,000",
+      "edition_date": "04/01/2026",
+      "form_number": "BPF1419",
+      "limit": "$50,000",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPF 14 19",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "002",
+      "clause_scope": "Universal Administrative Framework",
+      "clause_text": "The provisions contained herein apply universally across all attached schedules, coverage parts, and amendatory documents unless explicitly superseded by a specific endorsement.",
+      "clause_title": "General Administration and Conformity Provisions",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1275,
+  "completion_tokens": 560,
+  "elapsed_seconds": 7.030264292028733,
+  "request_fingerprint": "e2305d61fb6ca8d29b0cedcbd3e1967e36a4f6967b31a020900ccdb20905a8fc",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

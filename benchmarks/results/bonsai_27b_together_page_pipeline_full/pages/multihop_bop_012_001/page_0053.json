@@ -1,0 +1,123 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 53,
+  "page_sha256": "eb19b36cdaf40cd49be314026a13aad3f14bb3204e8d39a23982d2b438d954f5",
+  "candidates": [
+    {
+      "building_number": "001",
+      "business_income_basis": "Business Income Basis",
+      "classification": "Employee Dishonesty",
+      "coinsurance": "90% coinsurance entry",
+      "deductible": "1,000",
+      "limit": "210,000",
+      "lob": "Employee Dishonesty",
+      "location_number": "001",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "business_income_basis": "Actual Loss Sustained business income basis",
+      "classification": "Employee Dishonesty",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "lob": "Employee Dishonesty",
+      "location_number": "001",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "lob": "Accounts Receivable",
+      "location_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "premium_basis": "001",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "premium_basis": "002",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "premium_basis": "002",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "premium_basis": "002",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "premium_basis": "002",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "premium_basis": "002",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "clause_text": "The following condition provision under BPF 15 18 edition 06 21 applies to Location 001, Building 001, Employee Dishonesty. If schedules conflict for Location 001, Building 001, Employee Dishonesty, form BPF 15 18 edition 06 21 and any endorsement with a later effective date control the $210,000 limit and $1,000 deductible.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "001",
+      "clause_text": "The scheduled limit of $210,000 and deductible of $1,000 apply to Location 001, Building 001, Employee Dishonesty under form BPF 15 18 edition 06 21.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "001",
+      "policy_period": "002",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "policy_period": "002",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "policy_period": "002",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "policy_period": "002",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1574,
+  "completion_tokens": 1697,
+  "elapsed_seconds": 20.25059800001327,
+  "request_fingerprint": "46d9a832dda9faa0b618244429fb969268433c973278a17d37ed7f01f899186b",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

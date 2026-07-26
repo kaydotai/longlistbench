@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "83b82ead9c1ae28ebebb20791d069fb10779bfa92b1e6ef5799452f83c246ad2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "2440",
+    "Montana"
+  ],
+  "pages": [
+    61
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 73,
+  "elapsed_seconds": 1.7998513339553028,
+  "record": {
+    "state": "Montana",
+    "vehicle": "2440",
+    "identified_miles": 3812.4,
+    "total_miles": 3812.4,
+    "unidentified_miles": 0
+  }
+}

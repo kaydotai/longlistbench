@@ -1,0 +1,44 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 27,
+  "page_sha256": "edc916a1ea98ebf636449ea2703b55c94a93bd47899ce1e5b22425118872138c",
+  "candidates": [
+    {
+      "building_number": "002",
+      "deductible": "10000",
+      "edition_date": "01 20",
+      "form_number": "BPF 14 19",
+      "form_title": "BPF EXCLUSION",
+      "limit": "50000",
+      "location_number": "001",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "01 20",
+      "form_number": "BPF 14 19",
+      "form_title": "BPF EXCLUSION",
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "form_number": "BPF1419",
+      "form_title": "BPF EXCLUSION",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1618,
+  "completion_tokens": 477,
+  "elapsed_seconds": 5.829872624948621,
+  "request_fingerprint": "1e0f17edd3a8dda301f336bd3033c6d10dce93fffd473591b63a4d2d2e46ac2a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

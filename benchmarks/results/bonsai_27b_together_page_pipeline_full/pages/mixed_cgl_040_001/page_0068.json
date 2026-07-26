@@ -1,0 +1,118 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 68,
+  "page_sha256": "5ad0cfab49e656c079293ae992c86eb66f2c427fc18cd50eefbb51c04b88d32a",
+  "candidates": [
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "coverage_part": "Commercial General Liability",
+      "exclusion_name": "Employment-Related Practices Exclusion",
+      "form_number": "CG 21 06",
+      "form_title": "CG 21 06",
+      "limit": "$1,000,000",
+      "location_number": "Location 4",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "territory": "003",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "form_number": "CG 21 67",
+      "form_title": "CG 21 67",
+      "location_number": "Location 5",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "territory": "012",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "61217",
+      "classification": "Buildings or premises - office",
+      "exclusion_name": "PFAS Exclusion",
+      "form_number": "CG 24 26",
+      "form_title": "CG 24 26",
+      "location_number": "Location 6",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "territory": "003",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "edition_date": "09 21",
+      "form_number": "CG 21 06",
+      "form_title": "CG 21 06",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04 13",
+      "form_number": "CG 21 67",
+      "form_title": "CG 21 67",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "12 19",
+      "form_number": "CG 24 26",
+      "form_title": "CG 24 26",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "exclusion_name": "Employment-Related Practices Exclusion",
+      "form_number": "CG 21 06",
+      "form_title": "CG 21 06",
+      "materiality": "Location 4",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "form_number": "CG 21 67",
+      "form_title": "CG 21 67",
+      "materiality": "Location 5",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "61217",
+      "classification": "Buildings or premises - office",
+      "exclusion_name": "PFAS Exclusion",
+      "form_number": "CG 24 26",
+      "form_title": "CG 24 26",
+      "materiality": "Location 6",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "91560",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "91560",
+      "form_number": "CG 21 06",
+      "form_title": "CG 21 06",
+      "location_number": "Location 4",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "territory": "003",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1946,
+  "completion_tokens": 956,
+  "elapsed_seconds": 11.521882957895286,
+  "request_fingerprint": "6e7c45a7e415a61cc6a7956d1a3d0ecd930e841addff96807fafc6dff6324aa6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

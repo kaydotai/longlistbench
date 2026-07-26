@@ -1,0 +1,65 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "c4bf31addda99389f8e2d964d9d27aeccf53b4d95f7527d1bebcc396e26f6b37",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#92443-W"
+  ],
+  "pages": [
+    4,
+    89
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1780,
+  "completion_tokens": 431,
+  "elapsed_seconds": 7.653190292068757,
+  "record": {
+    "incident_number": "#92443-W",
+    "reference_number": "LR26-N8324",
+    "company_name": "Eagle Cargo Group",
+    "division": "",
+    "coverage_type": "",
+    "status": "Closed",
+    "policy_number": "L23A3418",
+    "policy_state": "",
+    "cause_code": "CGO",
+    "description": "Loss was entered for OH with a loss date of 10/31/2023 and report date 11/29/2023.",
+    "handler": "",
+    "unit_number": "611131",
+    "date_of_loss": "10/31/2023",
+    "loss_state": "OH",
+    "date_reported": "11/29/2023",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 4,
+      "paid": 31,
+      "recovered": 0,
+      "total_incurred": 35
+    },
+    "ded": {
+      "reserve": 14,
+      "paid": 12,
+      "recovered": 0,
+      "total_incurred": 26
+    }
+  }
+}

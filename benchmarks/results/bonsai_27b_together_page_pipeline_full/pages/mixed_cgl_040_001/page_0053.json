@@ -1,0 +1,45 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 53,
+  "page_sha256": "839d0c41630a11a20ce0077254955344e6e36d74570ab7c5fb21ed540cc683e8",
+  "candidates": [
+    {
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026 | 04/01/2027",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 | 04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 | 04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026 | 04/01/2027",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026 | 04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "clause_title": "SEPARATION OF INSUREDS AND ADDITIONAL INSURED OPERATION",
+      "lob": "LG695378",
+      "location_number": "04/01/2026 | 04/01/2027",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1475,
+  "completion_tokens": 632,
+  "elapsed_seconds": 8.293855583062395,
+  "request_fingerprint": "5d435739b8d563714f9d3ed6ed9097919f33c4e7fb17e679ecc191c86063bb98",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,57 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 31,
+  "page_sha256": "54072033e4f8848d7ab79fe668c6b71720964ff40d95ee3bf94b203812387e62",
+  "candidates": [
+    {
+      "building_number": "002",
+      "coverage": "Equipment Breakdown",
+      "deductible": "5,000",
+      "form_number": "BPF 04 62",
+      "limit": "200,000",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "location_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPF 04 62",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "002",
+      "coverage": "Equipment Breakdown",
+      "endorsement_effective_date": "04 24",
+      "named_insured": "002",
+      "policy_period": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "002",
+      "location_number": "002",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "002",
+      "clause_title": "Concealment, Misrepresentation, And Fraud",
+      "deductible": "5,000",
+      "edition_date": "04/01/2026",
+      "form_number": "BPF0462",
+      "limit": "200,000",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1228,
+  "completion_tokens": 544,
+  "elapsed_seconds": 6.510986125096679,
+  "request_fingerprint": "f9149064f1231d02572445f75008668f0fbd2699b88ca1516b97e66852e72d9f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,58 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 79,
+  "page_sha256": "b5c9a4385ae7312aac8e1d97e98c4d2883773f943c5947cd3b9cacaf0cc296db",
+  "candidates": [
+    {
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "form_number": "WC 00 03 13 04 21",
+      "location_number": "1",
+      "policy_number": "04/01/2026",
+      "schedule_credit_debit": "CT",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "location_number": "1",
+      "policy_period": "04/01/2026",
+      "state": "CT",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "WC 00 03 13 04 21",
+      "policy_period": "04/01/2026",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "WC 00 03 13",
+      "policy_period": "04/01/2026",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "8810",
+      "policy_period": "04/01/2026",
+      "premium": "$5,774",
+      "state": "CT",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "clause_text": "At the conclusion of the policy period, a final computation determines the exact premium owed based on actual exposures. The employer must maintain complete and accurate ledgers detailing all wages, bonuses, commissions, and substitute compensation provided to workers.",
+      "clause_title": "B. At the conclusion of the policy period",
+      "policy_period": "CT",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 1029,
+  "completion_tokens": 650,
+  "elapsed_seconds": 109.57167583296541,
+  "request_fingerprint": "7d48ba14bf2df703c8b6c39c9181c30a575e1bbe9c117723a4ff6139447467a6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,67 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "page_number": 39,
+  "page_sha256": "65dae72bea8de73136a007407d5e56ee63410c7655c39dc00da26d4b93e74a4c",
+  "candidates": [
+    {
+      "incident_number": "IMAGED DOCUMENT INVENTORY",
+      "reference_number": "",
+      "company_name": "DOCUMENT INVENTORY",
+      "division": "",
+      "coverage_type": "",
+      "status": "",
+      "policy_number": "",
+      "policy_state": "",
+      "cause_code": "",
+      "description": "",
+      "handler": "",
+      "unit_number": "",
+      "date_of_loss": "",
+      "loss_state": "",
+      "date_reported": "",
+      "agency": "",
+      "insured": "Imaging system print",
+      "driver_name": "CONTROL IMG-107248",
+      "adjuster_notes": "",
+      "claimants": [
+        "032-0001",
+        "LR23-U3468",
+        "Coverage inquiry",
+        "02/06/2024",
+        "Outgoing",
+        "Indexed"
+      ],
+      "bi": {
+        "reserve": 12,
+        "paid": 12,
+        "recovered": 12,
+        "total_incurred": 12
+      },
+      "pd": {
+        "reserve": 12,
+        "paid": 12,
+        "recovered": 12,
+        "total_incurred": 12
+      },
+      "lae": {
+        "reserve": 12,
+        "paid": 12,
+        "recovered": 12,
+        "total_incurred": 12
+      },
+      "ded": {
+        "reserve": 12,
+        "paid": 12,
+        "recovered": 12,
+        "total_incurred": 12
+      }
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1720,
+  "completion_tokens": 431,
+  "elapsed_seconds": 5.903895791969262,
+  "request_fingerprint": "288fcf7056597c13f98af4599aa4187a9ef3d3c28be7566e9c9dbdf524f2d99b",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

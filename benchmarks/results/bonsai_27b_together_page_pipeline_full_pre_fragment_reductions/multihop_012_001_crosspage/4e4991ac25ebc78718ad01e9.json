@@ -1,0 +1,62 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "4e4991ac25ebc78718ad01e95fc69f49b25b40d4ef6965b050cb6bfdae5de949",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "773126"
+  ],
+  "pages": [
+    5
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1993,
+  "completion_tokens": 352,
+  "elapsed_seconds": 14.474559084046632,
+  "record": {
+    "incident_number": "773126",
+    "reference_number": "",
+    "company_name": "Kenworth",
+    "division": "Kenworth",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "OH",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 2020,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 110
+    },
+    "pd": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 1,
+      "total_incurred": 6
+    },
+    "lae": {
+      "reserve": 1,
+      "paid": 1,
+      "recovered": 0,
+      "total_incurred": 12
+    },
+    "ded": {
+      "reserve": 12,
+      "paid": 1,
+      "recovered": 12,
+      "total_incurred": 0
+    }
+  }
+}

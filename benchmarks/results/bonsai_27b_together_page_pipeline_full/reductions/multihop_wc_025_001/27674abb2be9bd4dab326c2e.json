@@ -1,0 +1,33 @@
+{
+  "sample": "multihop_wc_025_001",
+  "fingerprint": "27674abb2be9bd4dab326c2ebf67ae7182a5539ad43efe878446a6c70433bfec",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "policy_location_item",
+  "identity": [
+    "policy_location_item",
+    "YW700400",
+    "Massachusetts",
+    "Location 3",
+    "9082"
+  ],
+  "pages": [
+    95
+  ],
+  "attempts": 1,
+  "prompt_tokens": 581,
+  "completion_tokens": 145,
+  "elapsed_seconds": 1.885619292035699,
+  "record": {
+    "record_type": "policy_location_item",
+    "class_code": "9082",
+    "classification": "Restaurant NOC",
+    "governing_class": "",
+    "lob": "Massachusetts",
+    "location_number": "Location 3",
+    "named_insured": "Blue Kettle Food Service, LLC",
+    "policy_number": "YW700400",
+    "policy_period": "04/01/2026 – 04/01/2027",
+    "state": "Massachusetts"
+  }
+}

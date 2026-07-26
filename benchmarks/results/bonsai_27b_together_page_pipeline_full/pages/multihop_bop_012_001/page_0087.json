@@ -1,0 +1,52 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 87,
+  "page_sha256": "3f5173755376a254324a3e615b074a4f45a402900855da2b619a2b749f31c92a",
+  "candidates": [
+    {
+      "building_number": "001",
+      "coverage": "$275,000",
+      "deductible": "$10,000",
+      "form_number": "BPF 04 47",
+      "form_title": "Hired and Non-Owned Auto Liability Endorsement",
+      "limit": "$275,000",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "valuation": "Liability Limit",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "record_type": "policy_location_item"
+    },
+    {
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "endorsement_effective_date": "001",
+      "form_title": "QB814260",
+      "policy_period": "20180026-24",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "clause_text": "ALL OTHER TERMS AND CONDITIONS OF THIS POLICY REMAIN UNCHANGED",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1064,
+  "completion_tokens": 533,
+  "elapsed_seconds": 6.2448987499810755,
+  "request_fingerprint": "d56d3616da60b0b04108da0bf474f519e3c1811c4ea0667071e6fb0c3a5e4fd2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

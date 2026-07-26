@@ -1,0 +1,145 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 84,
+  "page_sha256": "b2960b611a3a6df55af55cec03c9c811a490ceeede146d4a802260ff70ff1a19",
+  "candidates": [
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "coverage_part": "1",
+      "edition_date": "01 24",
+      "exclusion_name": "Silica or Silica-Related Dust Exclusion",
+      "form_number": "CG 20 37",
+      "location_number": "4",
+      "policy_number": "001",
+      "territory": "11.2714519996511766.89",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "exclusion_name": "Data Privacy Violation Exclusion",
+      "form_number": "CG 21 06",
+      "location_number": "5",
+      "policy_number": "003",
+      "territory": "11.2714519996511766.89",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "61217",
+      "classification": "Buildings or premises - office",
+      "exclusion_name": "Employment-Related Practices Exclusion",
+      "form_number": "CG 21 67",
+      "location_number": "6",
+      "policy_number": "007",
+      "territory": "11.2714519996511766.89",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "policy_period": "4",
+      "record_type": "policy_location_item"
+    },
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "policy_period": "5",
+      "record_type": "policy_location_item"
+    },
+    {
+      "class_code": "61217",
+      "classification": "Buildings or premises - office",
+      "policy_period": "6",
+      "record_type": "policy_location_item"
+    },
+    {
+      "form_number": "01 24",
+      "record_type": "policy_form_item"
+    },
+    {
+      "form_number": "09 21",
+      "record_type": "policy_form_item"
+    },
+    {
+      "form_number": "09 21",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "form_title": "Silica or Silica-Related Dust Exclusion",
+      "limit": "CG 20 37",
+      "limit_type": "01 24",
+      "policy_number": "4",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "form_title": "Data Privacy Violation Exclusion",
+      "limit": "CG 21 06",
+      "limit_type": "09 21",
+      "policy_number": "5",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "61217",
+      "classification": "Buildings or premises - office",
+      "form_title": "Employment-Related Practices Exclusion",
+      "limit": "CG 21 67",
+      "limit_type": "09 21",
+      "policy_number": "6",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "91560",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "97047",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "61217",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "clause_text": "The Concrete construction operation applies at Location 4, class 91560, territory 001 only when the declarations show the same exposure basis.",
+      "limit_type": "4",
+      "policy_number": "001",
+      "policy_period": "11.2714519996511766.89",
+      "territory": "91560, 001",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "edition_date": "Property owners - commercial buildings operation applies at Location 5, class 97047, territory 003 only when the declarations show the same exposure basis.",
+      "limit_type": "5",
+      "policy_number": "003",
+      "policy_period": "11.2714519996511766.89",
+      "territory": "97047, 003",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "61217",
+      "classification": "Buildings or premises - office",
+      "edition_date": "Buildings or premises - office operation applies at Location 6, class 61217, territory 007 only when the declarations show the same exposure basis.",
+      "limit_type": "6",
+      "policy_number": "007",
+      "policy_period": "11.2714519996511766.89",
+      "territory": "61217, 007",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2011,
+  "completion_tokens": 1814,
+  "elapsed_seconds": 20.0813362080371,
+  "request_fingerprint": "5f03928ea467875d52ed0c84221ce356990e980463c4cd1fb66a628ad464f0d4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

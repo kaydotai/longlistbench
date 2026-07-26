@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "72825a7f304483b550938c29fa2ce9cb1be500016a9ef31d486ab3b40e5d5ded",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "2023-Q1-86-009",
+    "Ohio",
+    "DI"
+  ],
+  "pages": [
+    52
+  ],
+  "attempts": 1,
+  "prompt_tokens": 813,
+  "completion_tokens": 215,
+  "elapsed_seconds": 2.7632917090086266,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "DI",
+    "jurisdiction": "Ohio",
+    "quarter": "Q1",
+    "return_id": "2023-Q1-86-009",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 26550,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 5282,
+    "tax_rate": 0.214,
+    "taxable_gallons": 26550,
+    "taxable_miles": 495854,
+    "total_due_refund": 0,
+    "total_miles": 501651
+  }
+}

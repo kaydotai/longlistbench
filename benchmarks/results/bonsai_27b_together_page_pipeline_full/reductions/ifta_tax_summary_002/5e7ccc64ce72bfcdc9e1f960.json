@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "5e7ccc64ce72bfcdc9e1f9602f53d81ed8589e8d5281e55e8c1ee12ba493aaa6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "24,355",
+    "NY"
+  ],
+  "pages": [
+    34
+  ],
+  "attempts": 1,
+  "prompt_tokens": 629,
+  "completion_tokens": 164,
+  "elapsed_seconds": 2.6507422080030665,
+  "record": {
+    "fuel_type": "NY",
+    "jurisdiction": "24,355",
+    "gallons_purchased": 0,
+    "interest_due": 0,
+    "net_taxable_gallons": 0,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_rate": 0.3471,
+    "taxable_gallons": 24355,
+    "taxable_miles": 0,
+    "total_due_refund": 79.41,
+    "total_miles": 853303
+  }
+}

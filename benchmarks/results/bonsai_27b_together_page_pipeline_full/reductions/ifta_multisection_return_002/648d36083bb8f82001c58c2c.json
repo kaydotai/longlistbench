@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "648d36083bb8f82001c58c2c48aead875a506e147f8d10e2a640c36860fdcff2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2025-Q3-90-011",
+    "Arizona",
+    "DI"
+  ],
+  "pages": [
+    64
+  ],
+  "attempts": 1,
+  "prompt_tokens": 759,
+  "completion_tokens": 208,
+  "elapsed_seconds": 4.274773917044513,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Arizona",
+    "quarter": "Q3",
+    "return_id": "RTN-2025-Q3-90-011",
+    "filing_year": 2025,
+    "interest_due": 0,
+    "net_gallons": 10557,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.7277,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

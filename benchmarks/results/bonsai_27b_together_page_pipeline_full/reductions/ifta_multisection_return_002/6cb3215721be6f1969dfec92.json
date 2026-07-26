@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "6cb3215721be6f1969dfec92389102d5e670393e5840ca234260a7fbb74c2e27",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2025-Q3-90-011",
+    "California",
+    "DI"
+  ],
+  "pages": [
+    64
+  ],
+  "attempts": 1,
+  "prompt_tokens": 759,
+  "completion_tokens": 207,
+  "elapsed_seconds": 2.6408102499553934,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "California",
+    "quarter": "Q3",
+    "return_id": "RTN-2025-Q3-90-011",
+    "filing_year": 2025,
+    "interest_due": 0,
+    "net_gallons": 16138,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.6834,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

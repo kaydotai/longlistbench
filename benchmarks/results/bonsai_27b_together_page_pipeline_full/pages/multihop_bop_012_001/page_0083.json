@@ -1,0 +1,73 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 83,
+  "page_sha256": "8b50f58a1cb05f8dfc774d4b0ce97b401d8b6a9081449aef5db36d7bdde9b92e",
+  "candidates": [
+    {
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "premises_address": "04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "05/15/2026",
+      "form_number": "BPF 15 18",
+      "form_title": "Employee Dishonesty",
+      "lob": "175,000",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "schedule_source": "04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "coverage": "175,000",
+      "deductible": "2,500",
+      "edition_date": "06 21",
+      "endorsement_effective_date": "05/15/2026",
+      "form_number": "BPF 15 18",
+      "form_title": "Employee Dishonesty",
+      "limit": "001",
+      "lob": "PINECREST PRINT COOPERATIVE, LLC",
+      "location_number": "QB814260",
+      "named_insured": "04/01/2026",
+      "policy_number": "04/01/2027",
+      "policy_period": "",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "policy_number": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_period": "QB814260",
+      "premium": "04/01/2026",
+      "premium_basis": "04/01/2027",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "clause_scope": "BPF1518 ED. 06 21",
+      "clause_text": "04/01/2026",
+      "clause_title": "05/15/2026",
+      "clause_type": "06 21",
+      "coverage": "Employee Dishonesty",
+      "deductible": "2,500",
+      "edition_date": "175,000",
+      "form_number": "001",
+      "form_title": "PINECREST PRINT COOPERATIVE, LLC",
+      "limit": "QB814260",
+      "lob": "04/01/2026",
+      "location_number": "04/01/2027",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "2701",
+      "policy_period": "",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1056,
+  "completion_tokens": 435,
+  "elapsed_seconds": 4.812241084058769,
+  "request_fingerprint": "ec23e42ab3a130029328976cb5b4e38acfde02df300d7900187e8a3ffccf886a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

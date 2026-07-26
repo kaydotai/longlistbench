@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "b8de733404a528eb5fff2367fabead37cc8b0a5c16d862d2b03ed9d175ed8db9",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2025-Q3-86-007",
+    "North Carolina",
+    "DI"
+  ],
+  "pages": [
+    40
+  ],
+  "attempts": 1,
+  "prompt_tokens": 788,
+  "completion_tokens": 214,
+  "elapsed_seconds": 4.267326875007711,
+  "record": {
+    "filing_type": "",
+    "fuel_type": "DI",
+    "jurisdiction": "North Carolina",
+    "quarter": "",
+    "return_id": "RTN-2025-Q3-86-007",
+    "filing_year": 2025,
+    "interest_due": 0.0,
+    "net_gallons": 24671,
+    "surtax_due": 0.0,
+    "tax_due_refund": 9703.1,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.3933,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 9703.1,
+    "total_miles": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "c9d65afaa6c1ef838bb5d9a50070a90067ea78905bc57aaed53d6fea08eda693",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR24-E4447"
+  ],
+  "pages": [
+    5,
+    108,
+    119
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1723,
+  "completion_tokens": 411,
+  "elapsed_seconds": 7.478604875039309,
+  "record": {
+    "incident_number": "LR24-E4447",
+    "reference_number": "L23A2992",
+    "company_name": "Northline Fleet Repair",
+    "division": "283448",
+    "coverage_type": "No. EST-109015",
+    "status": "Open",
+    "policy_number": "",
+    "policy_state": "Preliminary estimate",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": "2024 PB 283448",
+    "date_of_loss": "06/07/2024",
+    "loss_state": "",
+    "date_reported": "08/19/2023",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "5cd308ad4526a1a938f3ee13daefd31b98cea60f78b377b02413299afad90a23",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2023-Q1-90-013",
+    "Florida",
+    "DI"
+  ],
+  "pages": [
+    77
+  ],
+  "attempts": 1,
+  "prompt_tokens": 801,
+  "completion_tokens": 227,
+  "elapsed_seconds": 4.17958124994766,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Florida",
+    "quarter": "2023 Q1",
+    "return_id": "RTN-2023-Q1-90-013",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 42457,
+    "surtax_due": 0,
+    "tax_due_refund": 17759.76,
+    "tax_paid_gallons": 93914,
+    "tax_rate": 0.4183,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 18698.9,
+    "total_miles": 0
+  }
+}

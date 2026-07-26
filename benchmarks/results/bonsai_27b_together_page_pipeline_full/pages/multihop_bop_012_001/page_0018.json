@@ -1,0 +1,40 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 18,
+  "page_sha256": "2b302b66377b1e318f054b4d1735b70caac8909e338468207ee5817ea427188a",
+  "candidates": [
+    {
+      "building_number": "001",
+      "class_code": "4167",
+      "classification": "Restaurant or cafe",
+      "coinsurance": "80%",
+      "coverage": "$60,000",
+      "deductible": "$1,000",
+      "edition_date": "12 23",
+      "form_number": "BPF0013",
+      "form_title": "BUSINESSOWNERS COVERAGE FORM - BUILDING PROVISIONS",
+      "limit": "$60,000",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "edition_date": "12 23",
+      "form_number": "BPF0013",
+      "form_title": "BUSINESSOWNERS COVERAGE FORM - BUILDING PROVISIONS",
+      "policy_number": "QB814260",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1820,
+  "completion_tokens": 349,
+  "elapsed_seconds": 4.338824040954933,
+  "request_fingerprint": "e1d6359ee1f764dfb1e790638feba733882d1405edec743b64c0cc862cbad826",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "d349c8799584f3f95248c144bb7564a3ae268d3f03a5e7794b7b9292f983fad4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Ohio",
+    "111"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 358,
+  "completion_tokens": 73,
+  "elapsed_seconds": 1.5113157499581575,
+  "record": {
+    "state": "111",
+    "vehicle": "Ohio",
+    "identified_miles": 4382.9,
+    "total_miles": 4382.9,
+    "unidentified_miles": 0.0
+  }
+}

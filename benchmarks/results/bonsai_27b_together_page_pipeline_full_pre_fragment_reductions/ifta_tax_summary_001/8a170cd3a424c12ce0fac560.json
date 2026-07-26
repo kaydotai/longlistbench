@@ -1,0 +1,47 @@
+{
+  "sample": "ifta_tax_summary_001",
+  "fingerprint": "8a170cd3a424c12ce0fac56017381992c5f5139025791bba5786dd11a136714d",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "NC",
+    "DI"
+  ],
+  "pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "attempts": 1,
+  "prompt_tokens": 61605,
+  "completion_tokens": 179,
+  "elapsed_seconds": 76.98243375006132,
+  "record": {
+    "fuel_type": "DI",
+    "jurisdiction": "NC",
+    "gallons_purchased": 33412,
+    "interest_due": 0,
+    "net_taxable_gallons": -14490,
+    "surtax_due": 0,
+    "tax_due_refund": -7398.59,
+    "tax_rate": 0.5106,
+    "taxable_gallons": 230039,
+    "taxable_miles": 230802,
+    "total_due_refund": -7398.59,
+    "total_miles": 230802
+  }
+}

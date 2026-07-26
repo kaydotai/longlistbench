@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "dbc716c297ccc1e7e793220d5fd0c91cd4fa9143caf161dee7a88d4d2e2b1e97",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "2023-Q1-86-009",
+    "New Mexico",
+    "DI"
+  ],
+  "pages": [
+    52
+  ],
+  "attempts": 1,
+  "prompt_tokens": 816,
+  "completion_tokens": 220,
+  "elapsed_seconds": 3.3668783330358565,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "DI",
+    "jurisdiction": "New Mexico",
+    "quarter": "Q1",
+    "return_id": "2023-Q1-86-009",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 20246,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 23524,
+    "tax_rate": 0.4589,
+    "taxable_gallons": 20246,
+    "taxable_miles": 343189,
+    "total_due_refund": 0,
+    "total_miles": 343189
+  }
+}

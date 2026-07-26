@@ -1,0 +1,83 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "page_number": 17,
+  "page_sha256": "5afaa7dc68a105e2b34251606fc182530ac547202880f5193f6123284f4d7b5e",
+  "candidates": [
+    {
+      "filing_type": "International Fuel Tax Agreement Return",
+      "fuel_type": "DI",
+      "jurisdiction": "South Dakota",
+      "net_gallons": 36341,
+      "tax_due_refund": 9572.22,
+      "tax_rate": 0.2634
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "Kansas",
+      "net_gallons": 3340,
+      "tax_due_refund": 873.08,
+      "taxable_gallons": 0,
+      "total_due_refund": 3.89
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "Mississippi",
+      "net_gallons": 20950,
+      "tax_due_refund": 11874.46,
+      "taxable_gallons": 0,
+      "total_due_refund": 0
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "West Virginia",
+      "net_gallons": 4261,
+      "tax_due_refund": 1544.19,
+      "taxable_gallons": 0,
+      "total_due_refund": 0
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "Kentucky",
+      "net_gallons": 1674,
+      "tax_due_refund": 1071.69,
+      "taxable_gallons": 0,
+      "total_due_refund": 0
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "Virginia",
+      "net_gallons": 24775,
+      "tax_due_refund": 7434.98,
+      "total_due_refund": 418.59
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "Arizona",
+      "net_gallons": 8886,
+      "tax_due_refund": 2581.38,
+      "taxable_gallons": 0,
+      "total_due_refund": 0
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "South Carolina",
+      "net_gallons": 36254,
+      "tax_due_refund": 9070.75,
+      "total_due_refund": 149.53
+    },
+    {
+      "fuel_type": "DI",
+      "jurisdiction": "Nevada",
+      "net_gallons": 24449,
+      "tax_due_refund": 5513.25,
+      "total_due_refund": 96.89
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 898,
+  "completion_tokens": 804,
+  "elapsed_seconds": 10.898573374957778,
+  "request_fingerprint": "3349cd9ece64f9e0f589710acac027ba803af151c1d15adfe629e3a4ddd29b85",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

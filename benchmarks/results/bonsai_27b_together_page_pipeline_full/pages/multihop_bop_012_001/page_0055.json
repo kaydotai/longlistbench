@@ -1,0 +1,134 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 55,
+  "page_sha256": "c06671f6d349a49a8eab47b4396800890adbaf600dcd1253c838669542d64cab",
+  "candidates": [
+    {
+      "building_number": "001",
+      "business_income_basis": "Business Income Basis",
+      "class_code": "423",
+      "classification": "Business Income",
+      "coinsurance": "90%",
+      "coverage": "Liability",
+      "edition_date": "03/04/2017",
+      "form_number": "BPA 05-17",
+      "form_title": "Business Income",
+      "limit": "$60,000",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "premium": "$787.00",
+      "valuation": "$30,000",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "business_income_basis": "Business Income Basis",
+      "class_code": "423",
+      "classification": "Business Income",
+      "coinsurance": "90%",
+      "coverage": "Liability",
+      "edition_date": "05/15/2019",
+      "form_number": "BPA 05-19",
+      "form_title": "Business Income",
+      "limit": "$100,000",
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "premium": "$778.00",
+      "valuation": "$30,000",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "03/04/2017",
+      "form_number": "BPA 05-17",
+      "form_title": "Business Income",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "schedule_source": "04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "05/15/2019",
+      "form_number": "BPA 05-19",
+      "form_title": "Business Income",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "schedule_source": "04/01/2027",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "lob": "04/01/2026",
+      "location_number": "01 20",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "002",
+      "lob": "04/01/2026",
+      "location_number": "06 21",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "premium": "$787.00",
+      "premium_basis": "Scheduled",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026",
+      "premium": "$778.00",
+      "premium_basis": "Scheduled",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "clause_scope": "Scheduled Premises Limitation",
+      "clause_text": "This provision applies only to Location 001, Building 001, Hired and Non-Owned Auto when BPF 04 47 edition 01 20 is attached to the policy.",
+      "clause_title": "BPF 04 47",
+      "clause_type": "BPF 04 47",
+      "coverage": "$60,000",
+      "deductible": "$5,000",
+      "edition_date": "01 20",
+      "form_number": "BPF 04 47",
+      "form_title": "Schedule Limitation for Location",
+      "lob": "001",
+      "location_number": "PINECREST PRINT COOPERATIVE, LLC",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026",
+      "policy_period": "002",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1619,
+  "completion_tokens": 1266,
+  "elapsed_seconds": 13.896622708067298,
+  "request_fingerprint": "24af34fb0a4ed0a4b8d9f9f56fe65cc59c872f714bc4443d1f6ff2a81d8ac139",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

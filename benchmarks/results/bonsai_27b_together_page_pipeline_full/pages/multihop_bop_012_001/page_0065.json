@@ -1,0 +1,86 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 65,
+  "page_sha256": "053b31206bf00182e77238765afb01139b8a1dcecaaba9204002269c59cf1087",
+  "candidates": [
+    {
+      "building_number": "001",
+      "classification": "Employee Dishonesty",
+      "coinsurance": "90% coinsurance entry",
+      "coverage": "60000",
+      "deductible": "10000",
+      "edition_date": "12/23",
+      "form_number": "BPF 15 18",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "classification": "Accounts Receivable",
+      "coinsurance": "90% coinsurance entry",
+      "coverage": "100000",
+      "deductible": "500",
+      "edition_date": "06/21",
+      "form_number": "BPF 04 26",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "001",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "002",
+      "record_type": "policy_location_item"
+    },
+    {
+      "schedule_source": "BPC4401 ED. 05-24",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "policy_number": "001",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "policy_number": "001",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "clause_title": "161. SCHEDULED PREMISES LIMITATION",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 04/01/2027",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "001",
+      "clause_title": "162. LIMIT AND DEDUCTIBLE APPLICATION",
+      "limit": "60000",
+      "named_insured": "001",
+      "policy_period": "QB814260",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "001",
+      "clause_title": "163. VALUATION RECORDS REQUIREMENT",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "policy_period": "class_code",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1574,
+  "completion_tokens": 953,
+  "elapsed_seconds": 11.668320957920514,
+  "request_fingerprint": "abd9bcac6df99e81c439bc532391c22307a12e42fd50552fac524b80b295b584",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

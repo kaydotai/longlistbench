@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "3f48656852c36b380ff21f55a4b97ff4e25cc7da7890da143432e7c96cd632fe",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR26-K7275"
+  ],
+  "pages": [
+    5,
+    108,
+    132
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1675,
+  "completion_tokens": 394,
+  "elapsed_seconds": 10.959676791913807,
+  "record": {
+    "incident_number": "LR26-K7275",
+    "reference_number": "2023 VL 689920",
+    "company_name": "Summit Heavy Vehicle Repair",
+    "division": "689920",
+    "coverage_type": "RER",
+    "status": "Closed",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "08/17/2023",
+    "loss_state": "SUPV",
+    "date_reported": "09/02/2023",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "sample": "vehicle_schedule_sparse_002",
+  "fingerprint": "1ef90d1aa1b8d19a54f806881ab8c2d895050200a70f39740badad9b8d43e169",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "TRACTOR"
+  ],
+  "pages": [
+    4,
+    5,
+    8,
+    9,
+    21
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2009,
+  "completion_tokens": 78,
+  "elapsed_seconds": 1.9309742499608546,
+  "record": {
+    "body_type": "TKTR",
+    "company_vehicle_number": "1864",
+    "make": "",
+    "model": "",
+    "plate_number": "Freightliner",
+    "veh_number": "TRACTOR",
+    "year": 424
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "af34b3056b97fa979c0f197d4dacb17d3d61bff2aab3422ffddb09ad2c216674",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Washington",
+    "875"
+  ],
+  "pages": [
+    18
+  ],
+  "attempts": 1,
+  "prompt_tokens": 344,
+  "completion_tokens": 66,
+  "elapsed_seconds": 2.1128339590504766,
+  "record": {
+    "state": "875",
+    "vehicle": "Washington",
+    "identified_miles": 0,
+    "total_miles": 3483.8,
+    "unidentified_miles": 0
+  }
+}

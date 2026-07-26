@@ -1,0 +1,189 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "page_number": 18,
+  "page_sha256": "700b558e241570bd0c0e09956e3e702373f0cfa1478ee078203f48c248e34143",
+  "candidates": [
+    {
+      "jurisdiction": "LA",
+      "surcharge": "N",
+      "distance_miles": 8577,
+      "net_taxable_volume": 1620,
+      "tax_rate": 0.2756,
+      "taxable_distance_miles": 8577
+    },
+    {
+      "jurisdiction": "MD",
+      "surcharge": "Y",
+      "distance_miles": 32416,
+      "net_taxable_volume": 5672,
+      "tax_due_credit": 13506,
+      "tax_paid_volume": -7834,
+      "tax_rate": 0.4955,
+      "taxable_distance_miles": 32408
+    },
+    {
+      "jurisdiction": "NY",
+      "surcharge": "N",
+      "distance_miles": 31506,
+      "net_taxable_volume": 4764,
+      "tax_rate": 0.1194,
+      "taxable_distance_miles": 31506
+    },
+    {
+      "jurisdiction": "WA",
+      "surcharge": "Y",
+      "distance_miles": 4087,
+      "net_taxable_volume": 697,
+      "tax_rate": 0.4881,
+      "taxable_distance_miles": 4087
+    },
+    {
+      "jurisdiction": "MT",
+      "surcharge": "N",
+      "distance_miles": 8263,
+      "net_taxable_volume": 1538,
+      "tax_due_credit": 1853,
+      "tax_paid_volume": -315,
+      "tax_rate": 0.3204,
+      "taxable_distance_miles": 8210
+    },
+    {
+      "jurisdiction": "OK",
+      "surcharge": "N",
+      "distance_miles": 12854,
+      "net_taxable_volume": 1933,
+      "tax_rate": 0.2411,
+      "taxable_distance_miles": 12814
+    },
+    {
+      "jurisdiction": "OH",
+      "surcharge": "N",
+      "distance_miles": 29109,
+      "net_taxable_volume": 4383,
+      "tax_due_credit": 12986,
+      "tax_paid_volume": -8603,
+      "tax_rate": 0.2412,
+      "taxable_distance_miles": 29109
+    },
+    {
+      "jurisdiction": "MN",
+      "surcharge": "Y",
+      "distance_miles": 27252,
+      "net_taxable_volume": 4816,
+      "tax_rate": 0.6228,
+      "taxable_distance_miles": 27252
+    },
+    {
+      "jurisdiction": "IA",
+      "surcharge": "N",
+      "distance_miles": 19540,
+      "net_taxable_volume": 2951,
+      "tax_rate": 0.2541,
+      "taxable_distance_miles": 19533
+    },
+    {
+      "jurisdiction": "KS",
+      "surcharge": "N",
+      "distance_miles": 3436,
+      "net_taxable_volume": 553,
+      "tax_rate": 0.1731,
+      "taxable_distance_miles": 3436
+    },
+    {
+      "jurisdiction": "WY",
+      "surcharge": "Y",
+      "distance_miles": 4219,
+      "net_taxable_volume": 721,
+      "tax_rate": 0.4564,
+      "taxable_distance_miles": 4180
+    },
+    {
+      "jurisdiction": "NC",
+      "surcharge": "Y",
+      "distance_miles": 16862,
+      "net_taxable_volume": 2780,
+      "tax_rate": 0.7111,
+      "taxable_distance_miles": 16823
+    },
+    {
+      "jurisdiction": "WV",
+      "surcharge": "N",
+      "distance_miles": 3847,
+      "net_taxable_volume": 607,
+      "tax_rate": 0.3896,
+      "taxable_distance_miles": 3847
+    },
+    {
+      "jurisdiction": "CA",
+      "surcharge": "Y",
+      "distance_miles": 10542,
+      "net_taxable_volume": 1547,
+      "tax_rate": 0.2287,
+      "taxable_distance_miles": 10542
+    },
+    {
+      "jurisdiction": "TN",
+      "surcharge": "N",
+      "distance_miles": 27282,
+      "net_taxable_volume": 4253,
+      "tax_rate": 0.297,
+      "taxable_distance_miles": 27282
+    },
+    {
+      "jurisdiction": "NV",
+      "surcharge": "N",
+      "distance_miles": 23665,
+      "net_taxable_volume": 4494,
+      "tax_due_credit": 1665,
+      "tax_paid_volume": 2829,
+      "tax_rate": 0.4908,
+      "taxable_distance_miles": 23665
+    },
+    {
+      "jurisdiction": "OR",
+      "surcharge": "Y",
+      "distance_miles": 3316,
+      "net_taxable_volume": 498,
+      "tax_rate": 0.1306,
+      "taxable_distance_miles": 3289
+    },
+    {
+      "jurisdiction": "AR",
+      "surcharge": "Y",
+      "distance_miles": 17397,
+      "net_taxable_volume": 3109,
+      "tax_rate": 0.3524,
+      "taxable_distance_miles": 17397
+    },
+    {
+      "jurisdiction": "IL",
+      "surcharge": "Y",
+      "distance_miles": 24565,
+      "net_taxable_volume": 3951,
+      "tax_rate": 0.5738,
+      "taxable_distance_miles": 24565
+    },
+    {
+      "jurisdiction": "KY",
+      "surcharge": "N",
+      "distance_miles": 10753,
+      "net_taxable_volume": 1806,
+      "tax_rate": 0.6511,
+      "taxable_distance_miles": 10753
+    },
+    {
+      "jurisdiction": "Non-IFTA",
+      "surcharge": "N",
+      "distance_miles": 0,
+      "net_taxable_volume": 0,
+      "taxable_distance_miles": 0
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1875,
+  "completion_tokens": 1022,
+  "elapsed_seconds": 16.996839666971937,
+  "request_fingerprint": "36a85df00b3576bfaebbb4a619218550ba863a051644d92e7eeef1b4abce64e7",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

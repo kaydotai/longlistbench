@@ -1,0 +1,65 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "dbc92dd7193c8c3158b0c0f29a97c70968b7576735f94858fbd86de2495b9894",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "SUB-010-01"
+  ],
+  "pages": [
+    17
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2915,
+  "completion_tokens": 587,
+  "elapsed_seconds": 19.758075166027993,
+  "record": {
+    "incident_number": "SUB-010-01",
+    "reference_number": "LR24-D5744",
+    "company_name": "SUBROGATION DIARY EXTRACT",
+    "division": "RECOVERY UNIT DIARY",
+    "coverage_type": "Subrogation module",
+    "status": "Review",
+    "policy_number": "ACCT-110947",
+    "policy_state": "03/31/2024",
+    "cause_code": "Carrier tender",
+    "description": "Diary Date 03/03/2024 File # SUB-010-01 Reference LR24-D5744 Action Carrier tender Status Review Recovery Est. $12,411.00",
+    "handler": "Diary note. The extract includes open and closed recovery activity. Some references are archival rows used by the claims team for reconciliation.",
+    "unit_number": "Routing note. Recoveries are compared with the financial ledger and claim detail pages before any account-level recovery credit is applied.",
+    "date_of_loss": "03/03/2024",
+    "loss_state": "SUB-010-01",
+    "date_reported": "LR24-D5744",
+    "agency": "Action Carrier tender",
+    "insured": "03/03/2024",
+    "driver_name": "SUB-010-01",
+    "adjuster_notes": "Reference LR24-D5744",
+    "claimants": [
+      "$12,411.00",
+      "03/03/2024"
+    ],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 12411,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "page_number": 101,
+  "page_sha256": "e55bdb91f3a72351af89b6efcdf07a4e4f289f5b4dd7269ad0f15487279b3847",
+  "candidates": [
+    {
+      "incident_number": "LR24-C3112",
+      "reference_number": "294027",
+      "status": "Pending verification",
+      "description": "The vehicle left the roadway during adverse conditions.",
+      "handler": "Driver supervisor",
+      "date_of_loss": "01/26/2024",
+      "loss_state": "NY",
+      "date_reported": "02/02/2024"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 550,
+  "completion_tokens": 163,
+  "elapsed_seconds": 2.083741708076559,
+  "request_fingerprint": "10cf9d2471a91be8846e64080b883097d0864c60b07674ca483bf111f1862f9f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

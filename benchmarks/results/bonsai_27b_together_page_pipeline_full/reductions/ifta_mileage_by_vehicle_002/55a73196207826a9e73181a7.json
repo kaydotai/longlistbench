@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "55a73196207826a9e73181a799761d151daa2709ec685f8758728e5aecb081dd",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Minnesota",
+    "2291"
+  ],
+  "pages": [
+    43
+  ],
+  "attempts": 1,
+  "prompt_tokens": 345,
+  "completion_tokens": 67,
+  "elapsed_seconds": 1.6001685840310529,
+  "record": {
+    "state": "2291",
+    "vehicle": "Minnesota",
+    "identified_miles": 2.2344,
+    "total_miles": 0,
+    "unidentified_miles": 0
+  }
+}

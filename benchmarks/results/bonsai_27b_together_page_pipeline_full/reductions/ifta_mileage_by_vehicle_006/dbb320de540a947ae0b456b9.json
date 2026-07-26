@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "dbb320de540a947ae0b456b9748184c0b1205de7adffb376343976afe6fc9ca6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "111",
+    "California"
+  ],
+  "pages": [
+    2
+  ],
+  "attempts": 1,
+  "prompt_tokens": 356,
+  "completion_tokens": 70,
+  "elapsed_seconds": 1.618937375023961,
+  "record": {
+    "state": "California",
+    "vehicle": "111",
+    "identified_miles": 0.0,
+    "total_miles": 2210.6,
+    "unidentified_miles": 0.0
+  }
+}

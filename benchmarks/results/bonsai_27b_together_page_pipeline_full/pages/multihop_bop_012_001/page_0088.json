@@ -1,0 +1,71 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 88,
+  "page_sha256": "f5a03a16bbdc1c2fd996dba4370023b613262fe9926771ec4cf823d3f1a24c88",
+  "candidates": [
+    {
+      "building_number": "001",
+      "coverage": "Additional Insured by Contract",
+      "deductible": "$5,000",
+      "edition_date": "10/15/2026",
+      "form_number": "BPF 12 09",
+      "limit": "$300,000",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "10/15/2026",
+      "form_number": "BPF 12 09",
+      "policy_number": "QB814260",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "coverage": "Additional Insured by Contract",
+      "deductible": "$5,000",
+      "edition_date": "10/15/2026",
+      "form_number": "BPF 12 09",
+      "limit": "$300,000",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "clause_text": "This endorsement applies to Additional Insured by Contract shown for the scheduled premises below.",
+      "clause_title": "Additional Insured by Contract",
+      "clause_type": "Endorsement",
+      "coverage": "Additional Insured by Contract",
+      "deductible": "$5,000",
+      "edition_date": "10/15/2026",
+      "form_number": "BPF 12 09",
+      "limit": "$300,000",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "The limit shown for the affected scheduled coverage is $300,000; the deductible shown is $5,000.",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1054,
+  "completion_tokens": 727,
+  "elapsed_seconds": 7.7081949160201475,
+  "request_fingerprint": "8ef7f1afde9191bc471dae4b45b462120e8bd7013c0de9587d7c922bd1120605",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

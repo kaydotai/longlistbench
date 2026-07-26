@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "404fd5eb188806ea1a4d39c676d22fcf2c09cae3e7412d48f5ca00fce1cb2758",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "WA",
+    "Diesel"
+  ],
+  "pages": [
+    28
+  ],
+  "attempts": 1,
+  "prompt_tokens": 614,
+  "completion_tokens": 153,
+  "elapsed_seconds": 2.2065085829235613,
+  "record": {
+    "fuel_type": "Diesel",
+    "jurisdiction": "WA",
+    "gallons_purchased": 0,
+    "interest_due": 0,
+    "net_taxable_gallons": 25728,
+    "surtax_due": 0.6803,
+    "tax_due_refund": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 19186,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

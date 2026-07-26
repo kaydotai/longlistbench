@@ -1,0 +1,147 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 73,
+  "page_sha256": "6fe43b415ee519b0c9a6a7c1cd1ccca4c058e2cf599097d371422e349adf533b",
+  "candidates": [
+    {
+      "class_code": "16916",
+      "classification": "Contractors - subcontracted work",
+      "exclusion_name": "Employment-Related Practices Exclusion",
+      "exposure": "Employment basis",
+      "exposure_basis": "CG 21 67",
+      "form_number": "CG 21 67 edition 01 24",
+      "lob": "1",
+      "location_number": "JCC 116 (05-24)",
+      "named_insured": "LG695378",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "91560",
+      "classification": "Concrete construction",
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "exposure_basis": "CG 24 26",
+      "form_number": "CG 24 26 edition 01 24",
+      "lob": "2",
+      "location_number": "JCC 116 (05-24)",
+      "named_insured": "LG695378",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "exclusion_name": "PFAS Exclusion",
+      "exposure_basis": "CG 24 04",
+      "form_number": "CG 24 04 edition 12 19",
+      "lob": "3",
+      "location_number": "JCC 116 (05-24)",
+      "named_insured": "LG695378",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "location_number": "1",
+      "record_type": "policy_location_item"
+    },
+    {
+      "location_number": "2",
+      "record_type": "policy_location_item"
+    },
+    {
+      "location_number": "3",
+      "record_type": "policy_location_item"
+    },
+    {
+      "exclusion_name": "Employment-Related Practices Exclusion",
+      "form_number": "CG 21 67",
+      "form_title": "CG 21 67 edition 01 24",
+      "policy_number": "1",
+      "record_type": "policy_form_item"
+    },
+    {
+      "exclusion_name": "Designated Professional Services Exclusion",
+      "form_number": "CG 24 26",
+      "form_title": "CG 24 26 edition 01 24",
+      "policy_number": "2",
+      "record_type": "policy_form_item"
+    },
+    {
+      "exclusion_name": "PFAS Exclusion",
+      "form_number": "CG 24 04",
+      "form_title": "CG 24 04 edition 12 19",
+      "policy_number": "3",
+      "record_type": "policy_form_item"
+    },
+    {
+      "class_code": "16916",
+      "form_number": "CG 21 67",
+      "form_title": "CG 21 67 edition 01 24",
+      "location_number": "1",
+      "materiality": "JCC 116 (05-24)",
+      "named_insured": "LG695378",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "91560",
+      "form_number": "CG 24 26",
+      "form_title": "CG 24 26 edition 01 24",
+      "location_number": "2",
+      "materiality": "JCC 116 (05-24)",
+      "named_insured": "LG695378",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "class_code": "97047",
+      "form_number": "CG 24 04",
+      "form_title": "CG 24 04 edition 12 19",
+      "location_number": "3",
+      "materiality": "JCC 116 (05-24)",
+      "named_insured": "LG695378",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "location_number": "1",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "location_number": "2",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "location_number": "3",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "class_code": "16916",
+      "clause_text": "Contractor - subcontracted work operation",
+      "clause_title": "SECTION 73 - CLASSIFICATION AND TERRITORY LIMITATION A.",
+      "limit_type": "1",
+      "lob": "JCC 116 (05-24)",
+      "location_number": "LG695378",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "91560",
+      "clause_text": "Concrete construction operation",
+      "clause_title": "SECTION 73 - CLASSIFICATION AND TERRITORY LIMITATION",
+      "limit_type": "2",
+      "lob": "JCC 116 (05-24)",
+      "location_number": "LG695378",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "97047",
+      "clause_text": "Property owners - commercial buildings operation",
+      "clause_title": "SECTION 81 - CLASSIFICATION AND TERRITORY LIMITATION",
+      "limit_type": "3",
+      "lob": "JCC 116 (05-24)",
+      "location_number": "LG695378",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1959,
+  "completion_tokens": 1150,
+  "elapsed_seconds": 13.674977208022028,
+  "request_fingerprint": "747a9de62cb1e226ec0d3b51efba458e25503ab52b491728ab1b618831dbe0f6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

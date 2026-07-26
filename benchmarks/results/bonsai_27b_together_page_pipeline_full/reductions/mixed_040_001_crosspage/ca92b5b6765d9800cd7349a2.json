@@ -1,0 +1,64 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "ca92b5b6765d9800cd7349a2088de1c4c8d7fcf8ef61c5095915a30ffbed7fc1",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#56929-H"
+  ],
+  "pages": [
+    4
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1704,
+  "completion_tokens": 425,
+  "elapsed_seconds": 11.518837708048522,
+  "record": {
+    "incident_number": "#56929-H",
+    "reference_number": "LR24-X2021",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "Closed",
+    "policy_number": "L24A8977",
+    "policy_state": "",
+    "cause_code": "IMD",
+    "description": "Loss was entered for FL with a loss date of 05/02/2024 and report date 05/26/2024.",
+    "handler": "",
+    "unit_number": "858788",
+    "date_of_loss": "05/02/2024",
+    "loss_state": "FL",
+    "date_reported": "05/26/2024",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 4,
+      "paid": 30,
+      "recovered": 0,
+      "total_incurred": 34
+    },
+    "ded": {
+      "reserve": 14,
+      "paid": 8,
+      "recovered": 0,
+      "total_incurred": 22
+    }
+  }
+}

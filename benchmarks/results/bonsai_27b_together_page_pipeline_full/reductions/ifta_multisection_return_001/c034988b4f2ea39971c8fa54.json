@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "c034988b4f2ea39971c8fa543e7a5820aee7fcc09e738b15b472d7c7e823fca4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "2023-Q1-86-009",
+    "Louisiana",
+    "DI"
+  ],
+  "pages": [
+    52
+  ],
+  "attempts": 1,
+  "prompt_tokens": 816,
+  "completion_tokens": 220,
+  "elapsed_seconds": 4.05653866706416,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "DI",
+    "jurisdiction": "Louisiana",
+    "quarter": "Q1",
+    "return_id": "2023-Q1-86-009",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 19773,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 17734,
+    "tax_rate": 0.5895,
+    "taxable_gallons": 19773,
+    "taxable_miles": 391379,
+    "total_due_refund": 0,
+    "total_miles": 391379
+  }
+}

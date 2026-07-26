@@ -1,0 +1,64 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "5fd32e81dcba0532de8a2c930b4d75c72fe8e87e451d575aa4719a4cc270d505",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "80734-Y"
+  ],
+  "pages": [
+    6
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1557,
+  "completion_tokens": 385,
+  "elapsed_seconds": 5.547934375004843,
+  "record": {
+    "incident_number": "80734-Y",
+    "reference_number": "LR24-C3112",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "BKD",
+    "policy_number": "L24A3641",
+    "policy_state": "Open",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "01/26/2024",
+    "loss_state": "NY",
+    "date_reported": "02/02/2024",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

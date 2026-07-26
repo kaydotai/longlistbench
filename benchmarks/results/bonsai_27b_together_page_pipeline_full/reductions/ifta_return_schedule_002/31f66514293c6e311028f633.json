@@ -1,0 +1,48 @@
+{
+  "sample": "ifta_return_schedule_002",
+  "fingerprint": "31f66514293c6e311028f6337ef9a396396fe4a612ffbf2837148691ce12be56",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "N",
+    "WY"
+  ],
+  "pages": [
+    1,
+    4,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    21,
+    23,
+    30,
+    31,
+    36
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2252,
+  "completion_tokens": 126,
+  "elapsed_seconds": 4.881280040950514,
+  "record": {
+    "jurisdiction": "WY",
+    "schedule": "N",
+    "surcharge": "",
+    "distance_miles": 0,
+    "interest_due": 0,
+    "net_taxable_volume": 0,
+    "tax_due_credit": null,
+    "tax_paid_volume": 0,
+    "tax_rate": 0,
+    "taxable_distance_miles": 0,
+    "taxable_volume": 0,
+    "total_due": 0
+  }
+}

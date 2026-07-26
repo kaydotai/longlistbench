@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "81005c38479ce66d0de827ee2884ec906077f3877d95ca00a42e4fbf212a8dc7",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "WI",
+    "WI"
+  ],
+  "pages": [
+    14
+  ],
+  "attempts": 1,
+  "prompt_tokens": 595,
+  "completion_tokens": 148,
+  "elapsed_seconds": 2.739834791980684,
+  "record": {
+    "fuel_type": "WI",
+    "jurisdiction": "WI",
+    "gallons_purchased": 0,
+    "interest_due": 0,
+    "net_taxable_gallons": 27887,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_rate": 0.5928,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

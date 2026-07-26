@@ -1,0 +1,67 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "9c35279e8fd4247298fa573602856869bb45cdb51a733896bede002533be5de5",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR25-R8111"
+  ],
+  "pages": [
+    10,
+    42,
+    54,
+    75
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1796,
+  "completion_tokens": 374,
+  "elapsed_seconds": 5.7548092500073835,
+  "record": {
+    "incident_number": "LR25-R8111",
+    "reference_number": "L24A7763",
+    "company_name": "Salinas Transport LLC",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "Initial contact attempt documented; callback window entered for the assigned examiner.",
+    "handler": "SUPV",
+    "unit_number": "",
+    "date_of_loss": "02/27/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

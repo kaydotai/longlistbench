@@ -1,0 +1,48 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 104,
+  "page_sha256": "9983cbeebfb01a6b24d778fa16efbe1d616262af88820e398ff9902582f06ee8",
+  "candidates": [
+    {
+      "annual_payroll": "45136",
+      "class_code": "8810",
+      "classification": "null",
+      "edition_date": "null",
+      "endorsement_effective_date": "null",
+      "estimated_premium": "189",
+      "experience_mod": "null",
+      "form_number": "null",
+      "form_title": "null",
+      "governing_class": "null",
+      "lob": "ARGENT BIRCH EMPLOYERS | WORKERS COMPENSATION AND EMPLOYERS LIABILITY",
+      "location_number": "LOC 1",
+      "manual_rate": "null",
+      "named_insured": "null",
+      "policy_number": "null",
+      "policy_period": "null",
+      "premium_basis": "null",
+      "schedule_credit_debit": "CT",
+      "state": "54124",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8017",
+      "classification": "Loc 2",
+      "governing_class": "null",
+      "lob": "null",
+      "location_number": "LOC 2",
+      "named_insured": "ARGENT BIRCH EMPLOYERS | WORKERS COMPENSATION AND EMPLOYERS LIABILITY",
+      "policy_number": "null",
+      "policy_period": "null",
+      "state": "CT",
+      "record_type": "policy_location_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1364,
+  "completion_tokens": 267,
+  "elapsed_seconds": 3.377262500114739,
+  "request_fingerprint": "9d4aae1de22534c7188c5eb1d54345e2657e399597ed246d5294354a41b4ab70",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

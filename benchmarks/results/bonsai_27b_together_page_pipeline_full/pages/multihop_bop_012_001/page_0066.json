@@ -1,0 +1,76 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 66,
+  "page_sha256": "6dd8c427c8b61c1a47d5a8147a4e5900f2279cfe43fa7a9b9bfbc68ace257093",
+  "candidates": [
+    {
+      "building_number": "002",
+      "business_income_basis": "Actual Loss Sustained",
+      "class_code": "5",
+      "classification": "OUTDOOR PROPERTY",
+      "coverage": "001",
+      "form_number": "BPF 04 28",
+      "limit": "100000",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "business_income_basis": "Actual Loss Sustained",
+      "form_number": "BPF 04 91",
+      "limit": "150000",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "BPC4401",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "002",
+      "edition_date": "06 21",
+      "form_number": "BPF 04 28",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "002",
+      "edition_date": "01 20",
+      "form_number": "BPF 04 91",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "For Location 001, Building 002, Outdoor Property, read BPF 04 28 edition 06 21 as the controlling limitation provision.\nThis provision applies only to Location 001, Building 002, Outdoor Property when BPF 04 28 edition 06 21 is attached to the policy.",
+      "clause_title": "SCHEDULED PREMISES LIMITATION",
+      "edition_date": "06 21",
+      "form_number": "BPF 04 28",
+      "location_number": "001",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_text": "For Location 002, Building 002, Water Back-Up, read BPF 04 91 edition 01 20 as the controlling condition provision.\nThe insured must keep records supporting the Scheduled Limit valuation basis, 90% coinsurance entry, and Actual Loss Sustained business income basis for Location 002, Building 002, Water Back-Up.",
+      "clause_title": "VALUATION RECORDS REQUIREMENT",
+      "edition_date": "01 20",
+      "form_number": "BPF 04 91",
+      "location_number": "002",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1563,
+  "completion_tokens": 886,
+  "elapsed_seconds": 10.749373249942437,
+  "request_fingerprint": "c68e62fdabc315e44fcb2d138448dee78549517a5379e5a583ce75bda9753274",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

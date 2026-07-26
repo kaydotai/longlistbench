@@ -1,0 +1,43 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 20,
+  "page_sha256": "0e0a5cd6258f23279061c518b1aab5c6a939941cfa338cb1352d71046b3d0ffb",
+  "candidates": [
+    {
+      "building_number": "002",
+      "class_code": "7391",
+      "classification": "Property management",
+      "edition_date": "ED. 12 23",
+      "form_number": "BPF 04 62",
+      "location_number": "Location 002",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "ED. 12 23",
+      "form_number": "BPF 04 62",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "002",
+      "form_number": "BPF 04 62",
+      "form_title": "BPF 04 62",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1878,
+  "completion_tokens": 259,
+  "elapsed_seconds": 3.08828129095491,
+  "request_fingerprint": "6047b7f20d52c26dc8df00f6478ef608687c9fa3714fb327788fd1bee3350cb3",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

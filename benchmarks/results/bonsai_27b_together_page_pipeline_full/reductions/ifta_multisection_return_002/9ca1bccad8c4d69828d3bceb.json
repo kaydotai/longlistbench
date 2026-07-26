@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "9ca1bccad8c4d69828d3bcebc6b02d0ac926f8e9459625e14c173d6761c3b8e4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2026-Q4-90-012",
+    "Idaho",
+    "DI"
+  ],
+  "pages": [
+    70
+  ],
+  "attempts": 1,
+  "prompt_tokens": 749,
+  "completion_tokens": 212,
+  "elapsed_seconds": 4.2415624998975545,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Idaho",
+    "quarter": "",
+    "return_id": "RTN-2026-Q4-90-012",
+    "filing_year": 2026,
+    "interest_due": 0.0,
+    "net_gallons": 377,
+    "surtax_due": 0.0,
+    "tax_due_refund": 0.0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.2625,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0.0,
+    "total_miles": 0
+  }
+}

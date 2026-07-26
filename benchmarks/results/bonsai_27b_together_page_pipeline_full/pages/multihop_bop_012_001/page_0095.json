@@ -1,0 +1,63 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 95,
+  "page_sha256": "91c88446b1245a5e727fa035f79865b91171078cb1104e698d091c70cafd812c",
+  "candidates": [
+    {
+      "building_number": "001",
+      "business_income_basis": "null",
+      "class_code": "null",
+      "classification": "Business Personal Property",
+      "coinsurance": "null",
+      "coverage": "$250,000",
+      "deductible": "$1,000",
+      "edition_date": "01 20",
+      "form_number": "BPF 00 13",
+      "form_title": "null",
+      "limit": "$250,000",
+      "lob": "null",
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "01 20",
+      "form_number": "BPF 00 13",
+      "form_title": "TRANSFERS OF RIGHTS AND POLICY CHANGES",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "002",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "clause_text": "This restriction prevents the unauthorized transfer of risk to ununderwritten entities.",
+      "clause_title": "E",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1263,
+  "completion_tokens": 415,
+  "elapsed_seconds": 5.227600209065713,
+  "request_fingerprint": "6909c1c361a460f56161565a10459ab75394846335c08012f377cedd61245895",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

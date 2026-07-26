@@ -1,0 +1,44 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 107,
+  "page_sha256": "51e4659fd600b4a4a5c69feef9cd1ec28c547cc8fca0a0b399c48ca1d30e1114",
+  "candidates": [
+    {
+      "form_number": "GL-EA-400",
+      "form_title": "DEFENSE EXPENSE ALLOCATION AND CLAIM ADMINISTRATION",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "record_type": "policy_location_item"
+    },
+    {
+      "schedule_source": "GL-EA-400",
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "clause_text": "DEFENSE EXPENSE ALLOCATION AND CLAIM ADMINISTRATION",
+      "clause_type": "GL-EA-400",
+      "form_number": "This section details the financial frameworks concerning the administration of legal expenses and the allocation of associated administrative costs. The costs associated with investigating and defending a qualified liability demand are classified as allocated loss adjustment expenses. These allocated expenses typically include attorney fees, court filing costs, expert witness retainers, and specialized forensic investigation charges. Unless explicitly modified by a separate schedule, the payment of these allocated loss adjustment expenses does not reduce the available liability limit. We will fund the necessary premiums for appeal bonds or bonds required to release property attachments associated with the defended litigation.",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "clause_text": "DEFENSE EXPENSE ALLOCATION AND CLAIM ADMINISTRATION",
+      "clause_type": "GL-EA-400",
+      "form_number": "However, our obligation to fund these bond premiums is strictly limited to the portion of the bond that corresponds to the available limit. We are under no obligation to furnish the actual bond or provide collateral to secure the issuance of any required financial guarantees. Any administrative expenses incurred by our internal claims personnel during the routine handling of the file are not charged to your organization. If a judicial verdict is rendered against your enterprise, we will manage the calculation and payment of applicable post-judgment interest. Our responsibility for post-judgment interest applies only to the portion of the judgment that falls within the available scheduled limit. This interest obligation ceases immediately once we have paid, offered to pay, or deposited our respective portion of the judgment with the court. In scenarios involving multiple protected entities, the allocation of defense expenses requires careful administrative coordination and oversight. If both your organization and an additional scheduled entity are named in the same lawsuit, we will typically appoint a single defense firm. The appointment of unified counsel is designed to streamline the defense strategy and minimize redundant legal expenditures during the proceedings. If a legally recognized conflict of interest prevents unified representation, we will allocate separate counsel for each protected entity.",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1369,
+  "completion_tokens": 924,
+  "elapsed_seconds": 11.28863858396653,
+  "request_fingerprint": "3964befc19b4cdeccf751c0a387835a7509ddcd4193d71b9ced246966abd1a32",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,73 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "3cd6d8f84e4670ebfb9c52a228caecfebb76a4a506b23eef99cbf83c33379531",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR25-A6572"
+  ],
+  "pages": [
+    7,
+    9,
+    13,
+    36
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2047,
+  "completion_tokens": 422,
+  "elapsed_seconds": 8.220438291900791,
+  "record": {
+    "incident_number": "LR25-A6572",
+    "reference_number": "NULL",
+    "company_name": "NULL",
+    "division": "NULL",
+    "coverage_type": "NULL",
+    "status": "NULL",
+    "policy_number": "NULL",
+    "policy_state": "NULL",
+    "cause_code": "NULL",
+    "description": "Recovery potential reviewed after liability discussion; follow-up remains open.",
+    "handler": "RECOV",
+    "unit_number": "NULL",
+    "date_of_loss": "NULL",
+    "loss_state": "NULL",
+    "date_reported": "06/11/2024",
+    "agency": "NULL",
+    "insured": "NULL",
+    "driver_name": "NULL",
+    "adjuster_notes": "NULL",
+    "claimants": [
+      "NULL",
+      "NULL",
+      "NULL",
+      "NULL",
+      "NULL"
+    ],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

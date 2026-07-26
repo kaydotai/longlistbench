@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "9e4d84734876a534f5f150ebebde4ef26b0ee73093169e96734bc500be203cc8",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1150",
+    "Georgia"
+  ],
+  "pages": [
+    6
+  ],
+  "attempts": 1,
+  "prompt_tokens": 360,
+  "completion_tokens": 68,
+  "elapsed_seconds": 1.2979107500286773,
+  "record": {
+    "state": "Georgia",
+    "vehicle": "1150",
+    "identified_miles": 0,
+    "total_miles": 6943,
+    "unidentified_miles": 6943
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "sample": "loss_run_external_003",
+  "page_number": 38,
+  "page_sha256": "5faf84bf4880b86d11b5a1c0921733f0134bae99115358093126ae60d6a551a8",
+  "candidates": [
+    {
+      "claim_number": "00928457-10264",
+      "claim_status": "Pending",
+      "claimant": "Harbor Medical Supply",
+      "date_of_loss": "12/10/20",
+      "date_reported": "12/29/20",
+      "description": "reefer unit service call included in repair estimate; subrogation diary was retained for follow-up",
+      "policy_number": "SC00928457",
+      "claim_paid": 20288.4,
+      "claim_recovered": 0.0,
+      "claim_reserves": 79256.25
+    },
+    {
+      "claim_number": "00928457-10265",
+      "claim_status": "Closed",
+      "claimant": "Grove Street Produce",
+      "date_closed": "08/23/21",
+      "date_of_loss": "12/17/20",
+      "date_reported": "01/10/21",
+      "description": "loading bay bollard contact reported by warehouse staff",
+      "driver": "Zion L. Nolan",
+      "policy_number": "SC00928457",
+      "claim_paid": 4555.58,
+      "claim_recovered": 806.0,
+      "claim_reserves": 0.0
+    },
+    {
+      "claim_number": "00928457-10266",
+      "claim_status": "Open",
+      "claimant": "Grove Street Produce",
+      "date_of_loss": "12/24/20",
+      "date_reported": "01/22/21",
+      "description": "side-swipe contact reported near an interstate ramp; rental and downtime amounts were still being reconciled",
+      "driver": "Finley H. Benton",
+      "policy_number": "SC00928457",
+      "claim_paid": 9530.5,
+      "claim_recovered": 0.0,
+      "claim_reserves": 87514.79
+    },
+    {
+      "claim_number": "00928457-10267",
+      "claim_status": "Reopened",
+      "claimant": "Quarry Road Terminal",
+      "date_closed": "10/08/21",
+      "date_of_loss": "12/31/20",
+      "date_reported": "02/03/21",
+      "description": "cargo load shifted during an abrupt traffic stop",
+      "driver": "Vaughn K. Aldridge",
+      "policy_number": "SC00928457",
+      "claim_paid": 21306.45,
+      "claim_recovered": 0.0,
+      "claim_reserves": 91643.75
+    },
+    {
+      "claim_number": "00928457-10268",
+      "claim_status": "Closed",
+      "claimant": "Palisade Container",
+      "date_closed": "04/04/21",
+      "date_of_loss": "01/07/21",
+      "date_reported": "02/15/21",
+      "description": "windshield and cowl damage attributed to road debris",
+      "policy_number": "SC00928457",
+      "claim_paid": 13066.86,
+      "claim_recovered": 0.0,
+      "claim_reserves": 0.0
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1146,
+  "completion_tokens": 748,
+  "elapsed_seconds": 8.345317333005369,
+  "request_fingerprint": "4d17f50fb83e63769eb34274f8278875208848547a1d84759b5138f284a07b13",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

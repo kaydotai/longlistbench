@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "f8d7a027c3f02be539a34e5bbc6cb8393ced2aa2a3a9bcbc46bf540f04c7c921",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "NJ",
+    "40,956"
+  ],
+  "pages": [
+    12
+  ],
+  "attempts": 1,
+  "prompt_tokens": 618,
+  "completion_tokens": 153,
+  "elapsed_seconds": 2.776143749943003,
+  "record": {
+    "fuel_type": "",
+    "jurisdiction": "NJ",
+    "gallons_purchased": 0,
+    "interest_due": 0,
+    "net_taxable_gallons": 12827,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_rate": 0.3132,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 12827.42,
+    "total_miles": 0
+  }
+}

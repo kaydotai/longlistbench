@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "fingerprint": "7a27ae7f805307eaf5550c5d439cd1e6fc662d49267a5768ab2de625b3f6b4c5",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Quarterly Return 20",
+    "AZ"
+  ],
+  "pages": [
+    21
+  ],
+  "attempts": 1,
+  "prompt_tokens": 738,
+  "completion_tokens": 148,
+  "elapsed_seconds": 2.7122758750338107,
+  "record": {
+    "jurisdiction": "AZ",
+    "schedule": "Quarterly Return 20",
+    "surcharge": "Y",
+    "distance_miles": 31889,
+    "interest_due": null,
+    "net_taxable_volume": 5146,
+    "tax_due_credit": null,
+    "tax_paid_volume": 205,
+    "tax_rate": 0.7482,
+    "taxable_distance_miles": 31889,
+    "taxable_volume": 0,
+    "total_due": null
+  }
+}

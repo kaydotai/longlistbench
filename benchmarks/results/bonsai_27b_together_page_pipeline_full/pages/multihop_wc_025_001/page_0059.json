@@ -1,0 +1,46 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 59,
+  "page_sha256": "988a26ddb1ecefcaa58ef8223efb01598ca9a425bc0cd678d4253d3e9510e27a",
+  "candidates": [
+    {
+      "annual_payroll": "$223,415",
+      "class_code": "5606",
+      "classification": "Contractor executive supervisor",
+      "clause_text": "The annual payroll of $223,415 for VT class 5606, Location 1 is an estimate and is subject to audit after the policy period.",
+      "clause_title": "REMINERATION AUDIT",
+      "clause_type": "condition",
+      "lob": "Location 1",
+      "named_insured": "YW700400",
+      "policy_number": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "annual_payroll": "$223,415",
+      "class_code": "5606",
+      "classification": "Contractor executive supervisor",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "annual_payroll": "$234,108",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "named_insured": "Location 2",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "annual_payroll": "$239,729",
+      "class_code": "8017",
+      "classification": "Retail store - all employees",
+      "named_insured": "Location 3",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1839,
+  "completion_tokens": 342,
+  "elapsed_seconds": 4.294191916938871,
+  "request_fingerprint": "c37fafc7ba3a3baee90d47357c523c7c65c7072bdbc1f494fa9c3b520b2c167c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

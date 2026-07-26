@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "bd42821fff2f3006f25d0f9e87002b71d0ba47a0864700f79414f8426d2c37dc",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "CT",
+    "2026",
+    "RTN-2026-Q4-90-012"
+  ],
+  "pages": [
+    68
+  ],
+  "attempts": 1,
+  "prompt_tokens": 764,
+  "completion_tokens": 211,
+  "elapsed_seconds": 4.23315383400768,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "RTN-2026-Q4-90-012",
+    "jurisdiction": "Connecticut",
+    "quarter": "2026",
+    "return_id": "CT",
+    "filing_year": 121287,
+    "interest_due": 120923,
+    "net_gallons": 19087,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

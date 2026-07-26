@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "06c4e3a978f94a161f45896dbf7db5b67e639abfa2995d8df47f186c42b5b495",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "New York",
+    "2061"
+  ],
+  "pages": [
+    42
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 77,
+  "elapsed_seconds": 2.0490822920110077,
+  "record": {
+    "state": "2061",
+    "vehicle": "New York",
+    "identified_miles": 2829.8,
+    "total_miles": 3036.0,
+    "unidentified_miles": 206.2
+  }
+}

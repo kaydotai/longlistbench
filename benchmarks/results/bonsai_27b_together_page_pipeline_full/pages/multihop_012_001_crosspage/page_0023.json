@@ -1,0 +1,43 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "page_number": 23,
+  "page_sha256": "256e8e682f0546f88b5fcb4ef50e82a204f7edd0245bef2f83e1d50cf236a274",
+  "candidates": [
+    {
+      "incident_number": "CV-104148",
+      "coverage_type": "Verification pending",
+      "status": "Coverage issue referred",
+      "policy_state": "CA"
+    },
+    {
+      "incident_number": "L23A1604",
+      "status": "Coverage issue referred",
+      "policy_state": "OH"
+    },
+    {
+      "incident_number": "L24A9905",
+      "policy_state": "CA"
+    },
+    {
+      "incident_number": "L24A7575",
+      "status": "Coverage issue referred",
+      "policy_state": "OK"
+    },
+    {
+      "incident_number": "L24A6859",
+      "policy_number": "Coverage issue referred",
+      "cause_code": "IL"
+    },
+    {
+      "incident_number": "L23A7440",
+      "cause_code": "TX"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 819,
+  "completion_tokens": 381,
+  "elapsed_seconds": 4.882866709027439,
+  "request_fingerprint": "f45dfa855483395c2043fdd8df3ac1266c83b8fc8324d5ef8bb617dd4d0ee2e0",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

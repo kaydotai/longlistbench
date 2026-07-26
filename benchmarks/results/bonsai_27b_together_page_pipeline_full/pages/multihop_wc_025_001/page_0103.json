@@ -1,0 +1,83 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 103,
+  "page_sha256": "7daf3b843a1730d7f1e34df83bcb9f269ff70a30248ad034f5a04a1d085a9fe4",
+  "candidates": [
+    {
+      "annual_payroll": "50,000",
+      "class_code": "WC-NP-2000",
+      "classification": "Workers Compensation and Employers Liability",
+      "edition_date": "04/01/2026",
+      "endorsement_effective_date": "04/01/2026",
+      "form_number": "Y-2000",
+      "lob": "Blue Kettle Food Service, LLC",
+      "location_number": "YW700400",
+      "manual_rate": "2026-04-01 to 2027-04-01",
+      "schedule_credit_debit": "CA",
+      "state": "partial_row_fields_annotated",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "governing_class": "Workers Compensation",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "2026-04-01 to 2027-04-01",
+      "state": "CA",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "form_number": "Y-2000",
+      "lob": "Workers Compensation",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "2026-04-01 to 2027-04-01",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04/01/2026",
+      "endorsement_effective_date": "04/01/2026",
+      "estimated_premium": "50,000",
+      "form_number": "Y-2000",
+      "lob": "Workers Compensation",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "2026-04-01 to 2027-04-01",
+      "state": "CA",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "manual_rate": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_number": "2026-04-01 to 2027-04-01",
+      "state": "CA",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "1.3.9.5",
+      "class_code": "WC-NP-2000",
+      "classification": "Workers Compensation and Employers Liability",
+      "clause_scope": "All",
+      "clause_text": "The policy requires the insured to comply with all applicable laws and regulations.",
+      "clause_title": "General Clause",
+      "clause_type": "Standard",
+      "edition_date": "04/01/2026",
+      "estimated_premium": "50,000",
+      "form_number": "Y-2000",
+      "form_title": "Workers Compensation",
+      "lob": "Blue Kettle Food Service, LLC",
+      "named_insured": "YW700400",
+      "policy_number": "2026-04-01 to 2027-04-01",
+      "policy_period": "CA",
+      "state": "policy_clause_item [clause_scope, clause_text] not available in the OCR output",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 793,
+  "completion_tokens": 847,
+  "elapsed_seconds": 10.91960908297915,
+  "request_fingerprint": "d6652c2dbd713e0e3e3200b0a2c5d40e07c2865bbf8ca760162d023225c18788",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

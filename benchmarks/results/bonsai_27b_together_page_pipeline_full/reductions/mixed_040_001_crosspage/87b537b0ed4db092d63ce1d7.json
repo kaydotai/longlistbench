@@ -1,0 +1,65 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "87b537b0ed4db092d63ce1d71647a3e9d7b1401cfb58c7857a48f733b068badb",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#86657-S"
+  ],
+  "pages": [
+    4,
+    17
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1767,
+  "completion_tokens": 427,
+  "elapsed_seconds": 7.607566874939948,
+  "record": {
+    "incident_number": "#86657-S",
+    "reference_number": "LR25-V7729",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "Closed",
+    "policy_number": "L24A5916",
+    "policy_state": "",
+    "cause_code": "ROL",
+    "description": "Loss was entered for CA with a loss date of 06/28/2023 and report date 07/23/2023.",
+    "handler": "",
+    "unit_number": "333046",
+    "date_of_loss": "06/28/2023",
+    "loss_state": "CA",
+    "date_reported": "07/23/2023",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 8,
+      "paid": 25,
+      "recovered": 0,
+      "total_incurred": 33
+    },
+    "ded": {
+      "reserve": 14,
+      "paid": 8,
+      "recovered": 0,
+      "total_incurred": 22
+    }
+  }
+}

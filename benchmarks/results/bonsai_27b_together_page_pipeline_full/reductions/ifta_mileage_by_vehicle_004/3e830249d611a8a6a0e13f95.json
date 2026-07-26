@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "3e830249d611a8a6a0e13f959fc25bd095c61ef538f8f272ee30a52b0fed3810",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Florida",
+    "1951"
+  ],
+  "pages": [
+    63
+  ],
+  "attempts": 1,
+  "prompt_tokens": 345,
+  "completion_tokens": 72,
+  "elapsed_seconds": 1.4040377910714597,
+  "record": {
+    "state": "Florida",
+    "vehicle": "1951",
+    "identified_miles": 4612.4,
+    "total_miles": 4612.4,
+    "unidentified_miles": 0
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "fingerprint": "0dca5434fc3e1b7dd4839f36b37ff1f7e4cb7d658312e81cc9b8bb960e989f91",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "2023-Q1-86-009",
+    "Connecticut",
+    "DI"
+  ],
+  "pages": [
+    52
+  ],
+  "attempts": 1,
+  "prompt_tokens": 815,
+  "completion_tokens": 217,
+  "elapsed_seconds": 3.9615649160696194,
+  "record": {
+    "filing_type": "DI",
+    "fuel_type": "DI",
+    "jurisdiction": "Connecticut",
+    "quarter": "Q1",
+    "return_id": "2023-Q1-86-009",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": -10719,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_paid_gallons": 4008,
+    "tax_rate": 0.3739,
+    "taxable_gallons": -10719,
+    "taxable_miles": -400762,
+    "total_due_refund": 0,
+    "total_miles": -400762
+  }
+}

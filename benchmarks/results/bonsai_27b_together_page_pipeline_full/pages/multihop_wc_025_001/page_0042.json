@@ -1,0 +1,34 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 42,
+  "page_sha256": "67a5c834abce05b5c00426f522790354aca35ea82cad3a40e8ad38e059ca4700",
+  "candidates": [
+    {
+      "schedule_credit_debit": "null",
+      "state": "null",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "record_type": "policy_location_item"
+    },
+    {
+      "record_type": "policy_form_item"
+    },
+    {
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1028,
+  "completion_tokens": 444,
+  "elapsed_seconds": 6.800858416012488,
+  "request_fingerprint": "e3ff1efed4fbbcbea0449799bd79e9fe0da17b5c5f7ced34fd24b705debed4cf",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

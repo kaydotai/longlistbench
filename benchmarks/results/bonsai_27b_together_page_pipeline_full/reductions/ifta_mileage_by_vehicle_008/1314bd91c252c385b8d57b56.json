@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_008",
+  "fingerprint": "1314bd91c252c385b8d57b56c851f67bd10b09c0cd3e3c82bc7b135df8529bd5",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "413.5",
+    "West Virginia"
+  ],
+  "pages": [
+    20
+  ],
+  "attempts": 1,
+  "prompt_tokens": 359,
+  "completion_tokens": 75,
+  "elapsed_seconds": 1.6488606670172885,
+  "record": {
+    "state": "West Virginia",
+    "vehicle": "413.5",
+    "identified_miles": 48.5,
+    "total_miles": 365.0,
+    "unidentified_miles": 316.5
+  }
+}

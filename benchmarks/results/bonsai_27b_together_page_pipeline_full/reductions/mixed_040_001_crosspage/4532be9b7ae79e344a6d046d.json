@@ -1,0 +1,66 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "4532be9b7ae79e344a6d046d77952d8fb583bd856c661fb3a44f64a66bffcc86",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR24-D5744"
+  ],
+  "pages": [
+    98,
+    108,
+    128
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1753,
+  "completion_tokens": 380,
+  "elapsed_seconds": 4.84891133394558,
+  "record": {
+    "incident_number": "LR24-D5744",
+    "reference_number": "2023 KW 741721",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "Prior-carrier note conflicts with the current roster; use the active roster before closing.",
+    "handler": "Recovery",
+    "unit_number": "EXAM",
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "03/07/2024",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

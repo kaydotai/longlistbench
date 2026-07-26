@@ -1,0 +1,57 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 75,
+  "page_sha256": "8e3d7bf22e092649210cd16fe126f966114b2efda1bd5055f641416b45dbdc8f",
+  "candidates": [
+    {
+      "annual_payroll": "463529",
+      "class_code": "9082",
+      "classification": "Restaurant NOC",
+      "form_number": "WC 00 03 13",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "9082",
+      "classification": "Restaurant NOC",
+      "location_number": "2",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04/21",
+      "form_number": "WC 00 03 13",
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "463529",
+      "class_code": "9082",
+      "classification": "Restaurant NOC",
+      "lob": "Massachusetts State Amendatory Endorsement",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "463529",
+      "class_code": "9082",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "463529",
+      "class_code": "9082",
+      "classification": "Restaurant NOC",
+      "clause_scope": "1. Classification And Rating Reference",
+      "clause_text": "The employer must post the official notice to employees regarding their rights and the procedures for obtaining medical treatment.",
+      "estimated_premium": "Form WC 00 03 13",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1022,
+  "completion_tokens": 385,
+  "elapsed_seconds": 4.483842915971763,
+  "request_fingerprint": "6130153356d7e4f13272a0958978c7943d9714ad74fcbe69c24106669c93c381",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

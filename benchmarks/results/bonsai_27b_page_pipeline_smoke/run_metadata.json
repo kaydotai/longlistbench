@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-07-26T03:37:23.336747+00:00",
+  "runner": "run_bonsai_page_evaluation.py",
+  "model_key": "bonsai_27b_page_pipeline",
+  "model_id": "prism-ml/Ternary-Bonsai-27B-mlx-2bit",
+  "transcript": "ocr",
+  "sample_statuses": {
+    "driver_mvr_packet_001": 0
+  },
+  "samples": {
+    "driver_mvr_packet_001": {
+      "sample": "driver_mvr_packet_001",
+      "template": "driver_mvr_request_and_roster",
+      "transcript": "ocr",
+      "page_count": 17,
+      "predicted_count": 260,
+      "reduction_count": 41,
+      "prompt_tokens": 118905,
+      "completion_tokens": 28495,
+      "extraction_time": 2137.402629542048,
+      "prediction_file": "driver_mvr_packet_001_ocr_bonsai_27b_page_pipeline_predicted.json",
+      "prediction_sha256": "b35c9bef3aa71a1d7ad0476e08c5025c61a3b3b9ab1954447dff49772b642d9c",
+      "transcript_sha256": "dcf4e931b0c1e6e12761a9377cb927da92293a8e4b58a1a5922e474f007438b9"
+    }
+  }
+}

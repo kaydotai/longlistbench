@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "ea001883bb777ffe76136fd81ae483d87e04477b05885577a1fc986f41ca179c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2023-Q1-90-013",
+    "Maryland",
+    "DI"
+  ],
+  "pages": [
+    77
+  ],
+  "attempts": 1,
+  "prompt_tokens": 801,
+  "completion_tokens": 229,
+  "elapsed_seconds": 4.121579459053464,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Maryland",
+    "quarter": "2023 Q1",
+    "return_id": "RTN-2023-Q1-90-013",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 15263,
+    "surtax_due": 0,
+    "tax_due_refund": 5589.31,
+    "tax_paid_gallons": 11106,
+    "tax_rate": 0.3662,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 5700.37,
+    "total_miles": 0
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_return_schedule_001",
+  "fingerprint": "2715e8b324701583e0b4b7aa60899b1bb9e1cff8c68e70303d4110788f0ede71",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Quarterly Return 20",
+    "NY"
+  ],
+  "pages": [
+    21
+  ],
+  "attempts": 1,
+  "prompt_tokens": 739,
+  "completion_tokens": 149,
+  "elapsed_seconds": 2.554112375015393,
+  "record": {
+    "jurisdiction": "NY",
+    "schedule": "Quarterly Return 20",
+    "surcharge": "N",
+    "distance_miles": 28729,
+    "interest_due": null,
+    "net_taxable_volume": 5364,
+    "tax_due_credit": null,
+    "tax_paid_volume": 9942,
+    "tax_rate": 0.1311,
+    "taxable_distance_miles": 28729,
+    "taxable_volume": 0,
+    "total_due": null
+  }
+}

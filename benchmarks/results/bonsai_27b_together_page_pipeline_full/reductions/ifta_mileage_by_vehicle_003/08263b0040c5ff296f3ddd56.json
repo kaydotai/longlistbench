@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_003",
+  "fingerprint": "08263b0040c5ff296f3ddd56e37b125c9e7a665576ca4fea3ac903b331d97d1c",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "6,108.7",
+    "Kansas"
+  ],
+  "pages": [
+    30
+  ],
+  "attempts": 1,
+  "prompt_tokens": 363,
+  "completion_tokens": 79,
+  "elapsed_seconds": 1.7960455419961363,
+  "record": {
+    "state": "Kansas",
+    "vehicle": "6,108.7",
+    "identified_miles": 6437.6,
+    "total_miles": 6437.6,
+    "unidentified_miles": 328.9
+  }
+}

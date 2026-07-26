@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_003",
+  "fingerprint": "95ccd7324fe05e36400a1b2cf29fbd2dca512129a96c10d6fd405ed801e71ed6",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "3,844.9",
+    "Michigan"
+  ],
+  "pages": [
+    30
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 74,
+  "elapsed_seconds": 1.727152333012782,
+  "record": {
+    "state": "Michigan",
+    "vehicle": "3,844.9",
+    "identified_miles": 0.0,
+    "total_miles": 3844.9,
+    "unidentified_miles": 0.0
+  }
+}

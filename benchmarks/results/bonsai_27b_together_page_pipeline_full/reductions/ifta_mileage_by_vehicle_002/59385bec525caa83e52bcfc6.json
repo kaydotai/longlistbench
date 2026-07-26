@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "59385bec525caa83e52bcfc68cb53f8117b45358aaf842c962ba0a4d43b3a7b4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Delaware",
+    "1281"
+  ],
+  "pages": [
+    45
+  ],
+  "attempts": 1,
+  "prompt_tokens": 362,
+  "completion_tokens": 73,
+  "elapsed_seconds": 1.234031334053725,
+  "record": {
+    "state": "1281",
+    "vehicle": "Delaware",
+    "identified_miles": 0,
+    "total_miles": 1022.9,
+    "unidentified_miles": 1022.9
+  }
+}

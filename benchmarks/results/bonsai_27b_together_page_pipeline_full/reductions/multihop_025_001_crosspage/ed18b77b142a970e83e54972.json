@@ -1,0 +1,67 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "ed18b77b142a970e83e54972eb050f0cdb9cce7718462d5d731e8458225c37c5",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR23-D3447"
+  ],
+  "pages": [
+    27,
+    42,
+    71,
+    75
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1828,
+  "completion_tokens": 373,
+  "elapsed_seconds": 7.704882959020324,
+  "record": {
+    "incident_number": "LR23-D3447",
+    "reference_number": "",
+    "company_name": "",
+    "division": "",
+    "coverage_type": "",
+    "status": "EXAM",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "Recovery potential reviewed after liability discussion; follow-up remains open.",
+    "handler": "CLERK",
+    "unit_number": null,
+    "date_of_loss": "05/06/2024",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": "Gaines, Julian",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

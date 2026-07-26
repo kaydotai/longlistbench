@@ -1,0 +1,33 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "b4c9551ff48799543d29d891f29358caf700abcb9351817792a7db9ac8725c4e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "WV",
+    "DIESEL"
+  ],
+  "pages": [
+    6
+  ],
+  "attempts": 1,
+  "prompt_tokens": 611,
+  "completion_tokens": 158,
+  "elapsed_seconds": 3.725181791000068,
+  "record": {
+    "fuel_type": "DIESEL",
+    "jurisdiction": "WV",
+    "gallons_purchased": 14205,
+    "interest_due": 0,
+    "net_taxable_gallons": 14205,
+    "surtax_due": 0,
+    "tax_due_refund": 0,
+    "tax_rate": 0.736,
+    "taxable_gallons": 14205,
+    "taxable_miles": 0,
+    "total_due_refund": 0,
+    "total_miles": 0
+  }
+}

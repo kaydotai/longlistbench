@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "ac13c6924560b2bb39c5787a7b152e91fbfa90a209cd417a58f59ad32fd7a2ee",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Tennessee",
+    "875"
+  ],
+  "pages": [
+    18
+  ],
+  "attempts": 1,
+  "prompt_tokens": 345,
+  "completion_tokens": 72,
+  "elapsed_seconds": 1.4292180829215795,
+  "record": {
+    "state": "Tennessee",
+    "vehicle": "875",
+    "identified_miles": 6493.2,
+    "total_miles": 6493.2,
+    "unidentified_miles": 0
+  }
+}

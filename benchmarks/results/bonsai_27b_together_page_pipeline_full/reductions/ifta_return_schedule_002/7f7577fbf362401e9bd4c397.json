@@ -1,0 +1,45 @@
+{
+  "sample": "ifta_return_schedule_002",
+  "fingerprint": "7f7577fbf362401e9bd4c39782be2026992b3e2a74b2fe8fffb3d95d426e6078",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "N",
+    "NJ"
+  ],
+  "pages": [
+    3,
+    4,
+    9,
+    10,
+    13,
+    17,
+    22,
+    23,
+    25,
+    29,
+    34,
+    35,
+    36
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1997,
+  "completion_tokens": 158,
+  "elapsed_seconds": 4.873739375034347,
+  "record": {
+    "jurisdiction": "NJ",
+    "schedule": "N",
+    "surcharge": "79.0",
+    "distance_miles": 32707,
+    "interest_due": 610,
+    "net_taxable_volume": 1293,
+    "tax_due_credit": 152.44,
+    "tax_paid_volume": 0,
+    "tax_rate": 0.1179,
+    "taxable_distance_miles": 7638,
+    "taxable_volume": 0,
+    "total_due": 152.44
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_008",
+  "fingerprint": "181cf5cadcd7d4000b5ebbde0f8da56b2db59bf3a2e162bf2c84c9add1809721",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "654",
+    "Mississippi"
+  ],
+  "pages": [
+    40
+  ],
+  "attempts": 1,
+  "prompt_tokens": 360,
+  "completion_tokens": 72,
+  "elapsed_seconds": 2.0225320419995114,
+  "record": {
+    "state": "Mississippi",
+    "vehicle": "654",
+    "identified_miles": 3886.4,
+    "total_miles": 3886.4,
+    "unidentified_miles": 0
+  }
+}

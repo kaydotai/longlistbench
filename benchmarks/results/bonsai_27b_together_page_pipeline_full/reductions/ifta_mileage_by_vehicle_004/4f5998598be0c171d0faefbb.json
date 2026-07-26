@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "4f5998598be0c171d0faefbba8fd3ec7f30c459edf57f8de8d60788a79ca802f",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1830",
+    "Connecticut"
+  ],
+  "pages": [
+    50
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 77,
+  "elapsed_seconds": 1.7432528749341145,
+  "record": {
+    "state": "Connecticut",
+    "vehicle": "1830",
+    "identified_miles": 6886.4,
+    "total_miles": 7119.0,
+    "unidentified_miles": 232.6
+  }
+}

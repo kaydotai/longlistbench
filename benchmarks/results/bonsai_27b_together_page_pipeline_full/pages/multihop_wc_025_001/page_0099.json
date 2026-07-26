@@ -1,0 +1,67 @@
+{
+  "sample": "multihop_wc_025_001",
+  "page_number": 99,
+  "page_sha256": "3ff6a0c10d65c30e458326a8d79dd7c649a3b4bd05731fd4b25878348d32b9d5",
+  "candidates": [
+    {
+      "annual_payroll": "686739",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "estimated_premium": "19640",
+      "location_number": "2",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "wc_class_code_item"
+    },
+    {
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "location_number": "2",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_location_item"
+    },
+    {
+      "record_type": "policy_form_item"
+    },
+    {
+      "annual_payroll": "686739",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "estimated_premium": "19640",
+      "form_title": "Form WC 00 00 01 A 04 21",
+      "policy_number": "Blue Kettle Food Service, LLC",
+      "policy_period": "YW700400",
+      "state": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "annual_payroll": "686739",
+      "class_code": "8810",
+      "location_number": "2",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "premium": "19640",
+      "record_type": "policy_premium_item"
+    },
+    {
+      "annual_payroll": "686739",
+      "class_code": "8810",
+      "classification": "Clerical office employees",
+      "clause_text": "The employer must post the official notice to employees regarding their rights and the procedures for obtaining medical treatment.",
+      "estimated_premium": "19640",
+      "form_title": "Form WC 00 00 01 A 04 21",
+      "named_insured": "Blue Kettle Food Service, LLC",
+      "policy_number": "YW700400",
+      "policy_period": "04/01/2026 - 04/01/2027",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1018,
+  "completion_tokens": 737,
+  "elapsed_seconds": 10.537901249947026,
+  "request_fingerprint": "ed0abc6153dedb1e9b76aaf8a73f9e6ca6d396caaa17e67f54d6ed0cf3a5505e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

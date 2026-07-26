@@ -1,0 +1,44 @@
+{
+  "sample": "multihop_bop_012_001",
+  "fingerprint": "156fbad7a252b9ebd6225042cd3620a424867763d5dde92836acef95f45b04dc",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "bop_coverage_item",
+  "identity": [
+    "bop_coverage_item",
+    "QB814260",
+    "001",
+    "001",
+    "423",
+    "Liability"
+  ],
+  "pages": [
+    55
+  ],
+  "attempts": 1,
+  "prompt_tokens": 943,
+  "completion_tokens": 255,
+  "elapsed_seconds": 6.33228733309079,
+  "record": {
+    "record_type": "bop_coverage_item",
+    "building_number": "001",
+    "business_income_basis": "Business Income Basis",
+    "class_code": "423",
+    "classification": "Business Income",
+    "coinsurance": "90%",
+    "coverage": "Liability",
+    "deductible": "",
+    "edition_date": "03/04/2017",
+    "form_number": "BPA 05-17",
+    "form_title": "Business Income",
+    "limit": "$60,000",
+    "lob": "",
+    "location_number": "001",
+    "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+    "policy_number": "QB814260",
+    "policy_period": "04/01/2026",
+    "premises_address": "",
+    "premium": "$787.00",
+    "valuation": "$30,000"
+  }
+}

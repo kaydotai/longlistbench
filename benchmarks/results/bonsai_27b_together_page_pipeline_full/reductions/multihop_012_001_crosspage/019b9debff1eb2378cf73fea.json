@@ -1,0 +1,65 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "019b9debff1eb2378cf73fea48200e9378ff1a2b43a989770de5eceb08f26558",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#71633-X"
+  ],
+  "pages": [
+    33,
+    59
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1622,
+  "completion_tokens": 359,
+  "elapsed_seconds": 4.935581375029869,
+  "record": {
+    "incident_number": "#71633-X",
+    "reference_number": "LR24-Y8238",
+    "company_name": "Eagle Cargo LLC",
+    "division": "",
+    "coverage_type": "",
+    "status": "Open",
+    "policy_number": "",
+    "policy_state": "",
+    "cause_code": null,
+    "description": "",
+    "handler": "",
+    "unit_number": null,
+    "date_of_loss": "",
+    "loss_state": "",
+    "date_reported": "",
+    "agency": null,
+    "insured": "",
+    "driver_name": null,
+    "adjuster_notes": null,
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 3,
+      "paid": 0,
+      "recovered": 1130.0,
+      "total_incurred": 0.0
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "sample": "ifta_multisection_return_001",
+  "page_number": 23,
+  "page_sha256": "5b417becc85ad1dcb537ad4e9fedbab7a04b27a102706d2e8e3d4db470d5baac",
+  "candidates": [
+    {
+      "filing_type": "2026 Q4",
+      "fuel_type": "DI",
+      "jurisdiction": "Illinois",
+      "quarter": "None",
+      "return_id": "RTN-2026-Q4-86-004",
+      "filing_year": 2026,
+      "net_gallons": 23078,
+      "tax_rate": 0.6392
+    },
+    {
+      "jurisdiction": "Tennessee",
+      "interest_due": 19051,
+      "tax_rate": 0.6126
+    },
+    {
+      "jurisdiction": "Virginia",
+      "interest_due": 30593,
+      "tax_rate": 0.6819
+    },
+    {
+      "jurisdiction": "West Virginia",
+      "interest_due": 31671,
+      "tax_rate": 0.7503
+    },
+    {
+      "jurisdiction": "Nebraska",
+      "interest_due": 41349,
+      "tax_rate": 0.4329
+    },
+    {
+      "jurisdiction": "Arkansas",
+      "interest_due": 19467,
+      "tax_rate": 0.2223
+    },
+    {
+      "jurisdiction": "Kentucky",
+      "interest_due": -9541,
+      "tax_rate": 0.6225
+    },
+    {
+      "jurisdiction": "Oregon",
+      "interest_due": 6719,
+      "tax_rate": 0.6602
+    },
+    {
+      "jurisdiction": "Wisconsin",
+      "interest_due": 4448,
+      "tax_rate": 0.5932
+    },
+    {
+      "jurisdiction": "Nevada",
+      "interest_due": -5864,
+      "tax_rate": 0.5176
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 979,
+  "completion_tokens": 337,
+  "elapsed_seconds": 7.016583999968134,
+  "request_fingerprint": "c9fe5fafe3f89f9d6b8d89f83939b015024747e417b7cae1a5fa09d6f3548a8a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

@@ -1,0 +1,102 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 59,
+  "page_sha256": "d166810aee83191d13e69a7edcc27b8a3145d7f1891eacbea92821f7d08ada9e",
+  "candidates": [
+    {
+      "building_number": "001",
+      "business_income_basis": "80% coinsurance entry, and 12 Months business income basis",
+      "form_number": "BPF 15 18",
+      "location_number": "001",
+      "named_insured": "PINECREST PRINT COOPERATIVE, LLC",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "business_income_basis": "Actual Loss Sustained business income basis",
+      "form_number": "BPF 04 26",
+      "location_number": "002",
+      "named_insured": "null",
+      "policy_number": "QB814260",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "001",
+      "named_insured": "null",
+      "policy_number": "QB814260",
+      "record_type": "policy_location_item"
+    },
+    {
+      "building_number": "001",
+      "location_number": "002",
+      "named_insured": "null",
+      "policy_number": "QB814260",
+      "record_type": "policy_location_item"
+    },
+    {
+      "edition_date": "04 24",
+      "form_number": "BPF 15 18",
+      "policy_number": "QB814260",
+      "record_type": "policy_form_item"
+    },
+    {
+      "edition_date": "04 24",
+      "form_number": "BPF 04 26",
+      "policy_number": "QB814260",
+      "record_type": "policy_form_item"
+    },
+    {
+      "building_number": "001",
+      "form_number": "BPF 15 18",
+      "location_number": "001",
+      "named_insured": "null",
+      "policy_number": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "building_number": "002",
+      "form_number": "BPF 04 26",
+      "location_number": "002",
+      "named_insured": "null",
+      "policy_number": "QB814260",
+      "record_type": "policy_endorsement_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "record_type": "policy_premium_item"
+    },
+    {
+      "building_number": "001",
+      "clause_scope": "Employee Dishonesty",
+      "deductible": "500",
+      "form_number": "BPF 15 18",
+      "limit": "260,000",
+      "location_number": "001",
+      "named_insured": "null",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "building_number": "002",
+      "clause_scope": "Accounts Receivable",
+      "deductible": "2,500",
+      "form_number": "BPF 04 26",
+      "limit": "275,000",
+      "location_number": "002",
+      "named_insured": "null",
+      "policy_number": "QB814260",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1575,
+  "completion_tokens": 810,
+  "elapsed_seconds": 9.283580541028641,
+  "request_fingerprint": "f0b88d69c66916bbf3fa5b99ac6ef6408bfc7bc65c653907097e7b041e8fc9c4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

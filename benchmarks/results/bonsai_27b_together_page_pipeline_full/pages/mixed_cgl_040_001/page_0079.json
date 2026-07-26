@@ -1,0 +1,96 @@
+{
+  "sample": "mixed_cgl_040_001",
+  "page_number": 79,
+  "page_sha256": "c118d9a708e7b05f6f0dbd044359fe4bb5d4a1b96ccc100bf4e587119bf7882f",
+  "candidates": [
+    {
+      "class_code": "97047",
+      "classification": "Property owners - commercial buildings",
+      "edition_date": "01 24",
+      "form_number": "CG 20 10",
+      "limit": "$1,000,000",
+      "location_number": "1",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026-04/01/2027",
+      "territory": "001",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "61217",
+      "classification": "Buildings or premises - office",
+      "edition_date": "01 24",
+      "form_number": "CG 20 37",
+      "location_number": "2",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026-04/01/2027",
+      "territory": "007",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "18435",
+      "edition_date": "09 21",
+      "form_number": "CG 21 06",
+      "location_number": "3",
+      "policy_number": "LG695378",
+      "policy_period": "04/01/2026-04/01/2027",
+      "territory": "007",
+      "record_type": "cgl_exposure_item"
+    },
+    {
+      "class_code": "97047",
+      "clause_scope": "limitation",
+      "edition_date": "01 24",
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "001",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "61217",
+      "edition_date": "01 24",
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "18435",
+      "edition_date": "09 21",
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "97047",
+      "edition_date": "01 24",
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "001",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "61217",
+      "edition_date": "01 24",
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    },
+    {
+      "class_code": "18435",
+      "edition_date": "09 21",
+      "named_insured": "LG695378",
+      "policy_number": "04/01/2026-04/01/2027",
+      "policy_period": "007",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2007,
+  "completion_tokens": 841,
+  "elapsed_seconds": 10.336669333977625,
+  "request_fingerprint": "291ad44071cb0a8a6397721729f22fde17be97c954ea80539f0a35accbb25b52",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

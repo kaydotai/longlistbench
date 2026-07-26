@@ -1,0 +1,69 @@
+{
+  "sample": "multihop_025_001_crosspage",
+  "fingerprint": "709dd2859091dac5f10974aeba0b06fcec453cece0818f553b31a838f67508d2",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "LR24-T2330"
+  ],
+  "pages": [
+    10,
+    42,
+    59,
+    67,
+    71,
+    75
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2035,
+  "completion_tokens": 436,
+  "elapsed_seconds": 9.316803290974349,
+  "record": {
+    "incident_number": "LR24-T2330",
+    "reference_number": "06/20/2023",
+    "company_name": "Fleet contact",
+    "division": "787801",
+    "coverage_type": "2022 KW 787801",
+    "status": "Supervisor review",
+    "policy_number": "",
+    "policy_state": "TN",
+    "cause_code": "",
+    "description": "The loss was reported after a roadway incident involving the insured unit and another vehicle. Liability remains undetermined pending statements and scene documentation.",
+    "handler": "SUPV",
+    "unit_number": "",
+    "date_of_loss": "06/15/2023",
+    "loss_state": "01/10/2024",
+    "date_reported": "Requested",
+    "agency": "Fleet contact",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "Lowell, Hector",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

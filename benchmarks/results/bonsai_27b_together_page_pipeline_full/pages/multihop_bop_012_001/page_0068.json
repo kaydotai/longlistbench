@@ -1,0 +1,46 @@
+{
+  "sample": "multihop_bop_012_001",
+  "page_number": 68,
+  "page_sha256": "d3259ab37b0eb9bd7417f5fd17d456045c69680737136ef4997306514e629ca0",
+  "candidates": [
+    {
+      "building_number": "002",
+      "business_income_basis": "12 Months business income basis",
+      "class_code": "0621",
+      "classification": "BPF 04 67 edition 06 21",
+      "coverage": "$250,000",
+      "deductible": "$1,000",
+      "edition_date": "04/01/2026",
+      "form_number": "BPF 04 67",
+      "lob": "002",
+      "location_number": "PINECREST PRINT COOPERATIVE, LLC",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026 - 04/01/2027",
+      "record_type": "bop_coverage_item"
+    },
+    {
+      "building_number": "002",
+      "clause_scope": "Ordinary Payroll Limitation",
+      "clause_text": "BPF 04 67 edition 06 21 contains a limitation provision for Location 002, Building 002, Ordinary Payroll Limitation.\nThis provision applies only to Location 002, Building 002, Ordinary Payroll Limitation when BPF 04 67 edition 06 21 is attached to the policy.",
+      "clause_title": "SCHEDULED PREMISES LIMITATION",
+      "clause_type": "limitation",
+      "coverage": "$250,000",
+      "deductible": "$1,000",
+      "edition_date": "04/01/2026",
+      "form_number": "BPF 04 67",
+      "lob": "002",
+      "location_number": "PINECREST PRINT COOPERATIVE, LLC",
+      "named_insured": "QB814260",
+      "policy_number": "04/01/2026 - 04/01/2027",
+      "policy_period": "policy_premium_item",
+      "record_type": "policy_clause_item"
+    }
+  ],
+  "attempts": 2,
+  "prompt_tokens": 1595,
+  "completion_tokens": 505,
+  "elapsed_seconds": 97.69682487496175,
+  "request_fingerprint": "7c1252cdb3b7c5578b1d270c7660e69cc57229e41acaa8b44b500c529b5dce74",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

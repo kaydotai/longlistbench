@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "ae9c4e22127e0a722f17884b91b4b57ee186868a596e1c17085e30de85221fff",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2023-Q1-90-013",
+    "South Dakota",
+    "DI"
+  ],
+  "pages": [
+    77
+  ],
+  "attempts": 1,
+  "prompt_tokens": 787,
+  "completion_tokens": 225,
+  "elapsed_seconds": 3.935427000047639,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "South Dakota",
+    "quarter": "2023 Q1",
+    "return_id": "RTN-2023-Q1-90-013",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 42474,
+    "surtax_due": 0,
+    "tax_due_refund": 23012.41,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.5418,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 23012.41,
+    "total_miles": 0
+  }
+}

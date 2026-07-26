@@ -1,0 +1,48 @@
+{
+  "sample": "loss_run_external_003",
+  "page_number": 31,
+  "page_sha256": "407a7d7829e9cea1abe0a4df311596c2a6005f77a98f76b40d723367fb009a42",
+  "candidates": [
+    {
+      "adjuster": "00928448-10216",
+      "claim_number": "Tamarack Freight",
+      "claim_reported": "CLAIM REPORTED: 11/01/21",
+      "claim_status": "Closed",
+      "claimant": "02/15/22",
+      "date_closed": "08/30/21",
+      "date_of_loss": "None",
+      "date_reported": "None",
+      "description": "None",
+      "driver": "None",
+      "effective_date": "08/30/21",
+      "policy_number": "SC00928448",
+      "claim_paid": 1542.52,
+      "claim_recovered": 0,
+      "claim_reserves": 0
+    },
+    {
+      "adjuster": "00928448-10217",
+      "claim_number": "Stonebridge Foods",
+      "claim_reported": "CLAIM REPORTED: 11/13/21",
+      "claim_status": "Open",
+      "claimant": "None",
+      "date_closed": "08/30/21",
+      "date_of_loss": "02/08/21",
+      "date_reported": "None",
+      "description": "None",
+      "driver": "None",
+      "effective_date": "08/30/21",
+      "policy_number": "SC00928448",
+      "claim_paid": 1972.25,
+      "claim_recovered": 0,
+      "claim_reserves": 69193.15
+    }
+  ],
+  "attempts": 1,
+  "prompt_tokens": 782,
+  "completion_tokens": 199,
+  "elapsed_seconds": 2.7928054590011016,
+  "request_fingerprint": "791f1c0d477d271a375c01ed05351bf68c8ed9e94b0d49d47d108586896b6094",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1"
+}

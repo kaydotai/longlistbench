@@ -1,0 +1,84 @@
+{
+  "sample": "mixed_040_001_crosspage",
+  "fingerprint": "ddb3cc91f3c18d56a7680d4e3b1d3c29b8c83fe43be3c97cf084260625af40ca",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "L23A9239"
+  ],
+  "pages": [
+    116
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1702,
+  "completion_tokens": 537,
+  "elapsed_seconds": 9.439278208999895,
+  "record": {
+    "incident_number": "L23A9239",
+    "reference_number": "",
+    "company_name": "",
+    "division": "Verification pending",
+    "coverage_type": "",
+    "status": "",
+    "policy_number": "",
+    "policy_state": "MO",
+    "cause_code": "",
+    "description": "",
+    "handler": "",
+    "unit_number": "Policy system",
+    "date_of_loss": "",
+    "loss_state": "CV-110926",
+    "date_reported": "",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [
+      "L24A2383",
+      "CV-110926",
+      "PA",
+      "Provider confirmation",
+      "Verification pending",
+      "03/05/2024",
+      "CV-110926",
+      "PA",
+      "Provider confirmation",
+      "In force on reported date",
+      "CV-110926",
+      "CA",
+      "2024-01-05",
+      "CV-110926",
+      "CV-110926",
+      "Provider confirmation",
+      "CV-110926",
+      "CV-110926",
+      "CV-110926"
+    ],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

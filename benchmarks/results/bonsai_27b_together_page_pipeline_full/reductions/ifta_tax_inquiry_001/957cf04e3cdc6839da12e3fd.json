@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_tax_inquiry_001",
+  "fingerprint": "957cf04e3cdc6839da12e3fdcd9e47d4d19dfac7f1d8325dec304edf522739a4",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    1,
+    "Jurisdiction Schedule Detail",
+    "03"
+  ],
+  "pages": [
+    3
+  ],
+  "attempts": 1,
+  "prompt_tokens": 368,
+  "completion_tokens": 50,
+  "elapsed_seconds": 1.222124292049557,
+  "record": {
+    "field": "03",
+    "section": "Jurisdiction Schedule Detail",
+    "value": "AR taxable distance",
+    "page": 3
+  }
+}

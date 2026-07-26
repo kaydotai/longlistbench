@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "008c44831af441f37321a6f860d495b64bb856ce75dcb5637cbcc7df1c2163ee",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "New Jersey",
+    "7515"
+  ],
+  "pages": [
+    32
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 77,
+  "elapsed_seconds": 2.1002470419043675,
+  "record": {
+    "state": "7515",
+    "vehicle": "New Jersey",
+    "identified_miles": 3143.7,
+    "total_miles": 3514.7,
+    "unidentified_miles": 371.0
+  }
+}

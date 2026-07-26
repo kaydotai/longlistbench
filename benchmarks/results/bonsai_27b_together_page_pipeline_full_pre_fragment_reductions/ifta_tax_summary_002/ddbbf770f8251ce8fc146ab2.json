@@ -1,0 +1,31 @@
+{
+  "sample": "ifta_tax_summary_002",
+  "fingerprint": "ddbbf770f8251ce8fc146ab292fe63e6590d4c6c74d078e4d07e13a26ef89c10",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "AZ",
+    "DIESEL"
+  ],
+  "pages": [
+    6
+  ],
+  "attempts": 1,
+  "prompt_tokens": 2415,
+  "completion_tokens": 178,
+  "elapsed_seconds": 4.199208165984601,
+  "record": {
+    "fuel_type": "DIESEL",
+    "jurisdiction": "AZ",
+    "gallons_purchased": 28479,
+    "interest_due": 0,
+    "net_taxable_gallons": 28479,
+    "surtax_due": 1305.73,
+    "tax_due_refund": 13937.62,
+    "tax_rate": 0.4894,
+    "taxable_gallons": 28479,
+    "taxable_miles": 0,
+    "total_due_refund": 15243.35,
+    "total_miles": 0
+  }
+}

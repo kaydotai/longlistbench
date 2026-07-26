@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_006",
+  "fingerprint": "5ac565d4d9776dbe7bbd2e84adedd020587719fc164ee2481c3eb8b6f8ee666a",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Wyoming",
+    "3805"
+  ],
+  "pages": [
+    38
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 73,
+  "elapsed_seconds": 2.2985165829304606,
+  "record": {
+    "state": "Wyoming",
+    "vehicle": "3805",
+    "identified_miles": 6900.8,
+    "total_miles": 6900.8,
+    "unidentified_miles": 0
+  }
+}

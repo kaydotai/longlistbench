@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_008",
+  "fingerprint": "ffcdf869eaeaa49901864e6e0d720742fb3303a33f6964b74b4275c7c9d03933",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "1014",
+    "Wisconsin"
+  ],
+  "pages": [
+    51
+  ],
+  "attempts": 1,
+  "prompt_tokens": 361,
+  "completion_tokens": 73,
+  "elapsed_seconds": 2.270627834019251,
+  "record": {
+    "state": "Wisconsin",
+    "vehicle": "1014",
+    "identified_miles": 3995.5,
+    "total_miles": 3995.5,
+    "unidentified_miles": 0
+  }
+}

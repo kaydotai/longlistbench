@@ -1,0 +1,65 @@
+{
+  "sample": "multihop_012_001_crosspage",
+  "fingerprint": "be2d8df2b327c8ffee9c7dab58c1e64b0d393e113835ac84ff86bf571441e8c8",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "#68478-V"
+  ],
+  "pages": [
+    4,
+    6
+  ],
+  "attempts": 1,
+  "prompt_tokens": 1644,
+  "completion_tokens": 389,
+  "elapsed_seconds": 6.9113327079685405,
+  "record": {
+    "incident_number": "#68478-V",
+    "reference_number": "LR24-Q4011",
+    "company_name": "Griffinborough Cargo",
+    "division": "",
+    "coverage_type": "ROL",
+    "status": "Open",
+    "policy_number": "L24A7575",
+    "policy_state": "",
+    "cause_code": "",
+    "description": "",
+    "handler": "",
+    "unit_number": "616211",
+    "date_of_loss": "06/16/2024",
+    "loss_state": "OK",
+    "date_reported": "07/04/2024",
+    "agency": "",
+    "insured": "",
+    "driver_name": "",
+    "adjuster_notes": "",
+    "claimants": [],
+    "bi": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "pd": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "lae": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    },
+    "ded": {
+      "reserve": 0,
+      "paid": 0,
+      "recovered": 0,
+      "total_incurred": 0
+    }
+  }
+}

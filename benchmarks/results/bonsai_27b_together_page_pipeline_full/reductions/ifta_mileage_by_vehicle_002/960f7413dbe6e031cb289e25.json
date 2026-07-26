@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_002",
+  "fingerprint": "960f7413dbe6e031cb289e2570ea1704d6a438f11b50f1cd123bbcabf597eb1e",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Iowa",
+    "118"
+  ],
+  "pages": [
+    1
+  ],
+  "attempts": 1,
+  "prompt_tokens": 357,
+  "completion_tokens": 69,
+  "elapsed_seconds": 2.0331228339346126,
+  "record": {
+    "state": "118",
+    "vehicle": "Iowa",
+    "identified_miles": 0,
+    "total_miles": 6490.1,
+    "unidentified_miles": 0.0
+  }
+}

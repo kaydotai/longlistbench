@@ -1,0 +1,38 @@
+{
+  "sample": "ifta_multisection_return_002",
+  "fingerprint": "af868bb6bbb07c1c92f59a0113d1f3d4cec8dcf7c57661f2e134bb2d097ed741",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "RTN-2023-Q1-90-013",
+    "Colorado",
+    "DI"
+  ],
+  "pages": [
+    77
+  ],
+  "attempts": 1,
+  "prompt_tokens": 783,
+  "completion_tokens": 223,
+  "elapsed_seconds": 4.0461584579898044,
+  "record": {
+    "filing_type": "International Fuel Tax Agreement Return",
+    "fuel_type": "DI",
+    "jurisdiction": "Colorado",
+    "quarter": "2023 Q1",
+    "return_id": "RTN-2023-Q1-90-013",
+    "filing_year": 2023,
+    "interest_due": 0,
+    "net_gallons": 3616,
+    "surtax_due": 0,
+    "tax_due_refund": 2555.79,
+    "tax_paid_gallons": 0,
+    "tax_rate": 0.7068,
+    "taxable_gallons": 0,
+    "taxable_miles": 0,
+    "total_due_refund": 2555.79,
+    "total_miles": 0
+  }
+}

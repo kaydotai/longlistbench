@@ -1,0 +1,26 @@
+{
+  "sample": "ifta_mileage_by_vehicle_004",
+  "fingerprint": "8a3eb57e481fc97fef69aff304c56e983ce6a35ae8016729725ad78a0fdde9fd",
+  "model_id": "Prism-ML/Ternary-Bonsai-27B",
+  "endpoint": "https://api.together.xyz/v1",
+  "record_type": "record",
+  "identity": [
+    "record",
+    "Texas",
+    "8832"
+  ],
+  "pages": [
+    32
+  ],
+  "attempts": 1,
+  "prompt_tokens": 360,
+  "completion_tokens": 71,
+  "elapsed_seconds": 1.3429657079977915,
+  "record": {
+    "state": "8832",
+    "vehicle": "Texas",
+    "identified_miles": 0,
+    "total_miles": 3332.8,
+    "unidentified_miles": 144.5
+  }
+}
