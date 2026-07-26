@@ -241,6 +241,20 @@ MODELS = {
         setup_fn=_setup_offline_only_model,
         extract_fn=_extract_offline_only_model,
     ),
+    'bonsai_27b_page_pipeline': ModelConfig(
+        name='Ternary Bonsai 27B (Page Map-Reduce, local)',
+        provider='PrismML/PagePipeline',
+        model_id='prism-ml/Ternary-Bonsai-27B-mlx-2bit',
+        setup_fn=_setup_offline_only_model,
+        extract_fn=_extract_offline_only_model,
+    ),
+    'bonsai_27b_together_page_pipeline': ModelConfig(
+        name='Ternary Bonsai 27B (Page Map-Reduce, Together)',
+        provider='PrismML/Together/PagePipeline',
+        model_id='Prism-ML/Ternary-Bonsai-27B',
+        setup_fn=_setup_offline_only_model,
+        extract_fn=_extract_offline_only_model,
+    ),
     'claude_opus48': ModelConfig(
         name='Claude Opus 4.8 (Claude Code CLI Agentic, xhigh)',
         provider='Anthropic/Claude Code',
@@ -442,9 +456,50 @@ def _load_saved_result_metadata(
     output_dir: Path,
     previous_report_path: Path | None = None,
 ) -> dict[tuple[str, str, str], dict]:
-    """Recover timing/token/cost metadata from existing reports when predictions are reused."""
+    """Recover timing/token/cost metadata when saved predictions are reused."""
     lookup: dict[tuple[str, str, str], dict] = {}
     current_report_path = output_dir / "evaluation_report.json"
+
+    run_metadata_path = output_dir / "run_metadata.json"
+    if run_metadata_path.exists():
+        try:
+            run_metadata = json.loads(
+                run_metadata_path.read_text(encoding="utf-8")
+            )
+            model_key = run_metadata.get("model_key")
+            default_transcript = run_metadata.get("transcript", "ocr")
+            samples = run_metadata.get("samples", {})
+            if isinstance(model_key, str) and isinstance(samples, dict):
+                for sample_key, sample_metadata in samples.items():
+                    if not isinstance(sample_metadata, dict):
+                        continue
+                    prompt_tokens = sample_metadata.get("prompt_tokens")
+                    completion_tokens = sample_metadata.get("completion_tokens")
+                    tokens = None
+                    if isinstance(prompt_tokens, int) and isinstance(
+                        completion_tokens, int
+                    ):
+                        tokens = {
+                            "input_tokens": prompt_tokens,
+                            "output_tokens": completion_tokens,
+                            "total_tokens": prompt_tokens + completion_tokens,
+                        }
+                    _remember_saved_result_metadata(
+                        lookup,
+                        {
+                            "model": model_key,
+                            "sample": sample_metadata.get("sample", sample_key),
+                            "transcript": sample_metadata.get(
+                                "transcript", default_transcript
+                            ),
+                            "extraction_time": sample_metadata.get(
+                                "extraction_time"
+                            ),
+                            "tokens": tokens,
+                        },
+                    )
+        except Exception:
+            pass
 
     report_paths: list[Path] = [current_report_path]
     if previous_report_path is not None:
