@@ -834,6 +834,14 @@ class EvaluatorRegressionTests(unittest.TestCase):
         models_action = next(action for action in parser._actions if action.dest == "models")
         self.assertEqual(set(models_action.choices), set(evaluate_models.MODELS))
 
+    def test_reducto_predictions_have_an_offline_scorer_key(self) -> None:
+        config = evaluate_models.MODELS["reducto_deep_extract"]
+
+        self.assertEqual(config.provider, "Reducto")
+        self.assertEqual(config.model_id, "v3")
+        with self.assertRaisesRegex(RuntimeError, "offline scoring"):
+            config.setup_fn()
+
 
 if __name__ == "__main__":
     unittest.main()

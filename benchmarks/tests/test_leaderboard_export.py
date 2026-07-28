@@ -105,6 +105,79 @@ def test_bonsai_run_is_labeled_local_and_together_ai(tmp_path: Path) -> None:
     assert models[0]["harness"] == "Local + Together AI"
 
 
+def test_credit_pricing_does_not_become_a_zero_token_price() -> None:
+    assert export_leaderboard_space.combined_token_price(None, None) is None
+    assert export_leaderboard_space.format_token_price(None) == "n/a"
+
+
+def test_cost_chart_omits_runs_without_token_pricing() -> None:
+    chart = export_leaderboard_space.build_cost_chart(
+        [
+            {
+                "model": "GPT-5.6-Sol",
+                "combined_token_price": 35,
+                "input_token_price": 5,
+                "output_token_price": 30,
+                "exact_record_recall": 0.9788,
+            },
+            {
+                "model": "Reducto Deep Extract v3",
+                "combined_token_price": None,
+                "input_token_price": None,
+                "output_token_price": None,
+                "exact_record_recall": 0.9598,
+            },
+        ]
+    )
+
+    assert "GPT-5.6-Sol" in chart
+    assert "Reducto Deep Extract v3" not in chart
+
+
+def test_unpriced_table_cells_are_marked_as_missing_sort_values() -> None:
+    data = {
+        "results": [
+            {
+                "model": "GPT-5.6-Sol",
+                "harness": "Codex CLI",
+                "effort": "xhigh",
+                "run_date": "2026-07-21",
+                "protocol": "Agentic CLI",
+                "combined_token_price": 35,
+                "exact_record_recall": 0.9788,
+                "complete_documents": 8,
+                "total_samples": 32,
+                "structural_exact_recall": 0.938,
+                "scale_control_exact_recall": 0.995,
+                "weighted_f1": 0.9938,
+                "documents": [],
+            },
+            {
+                "model": "Deep Extract v3",
+                "harness": "Reducto",
+                "effort": "targeted fields",
+                "run_date": "2026-07-25",
+                "protocol": "Raw PDF",
+                "combined_token_price": None,
+                "exact_record_recall": 0.9598,
+                "complete_documents": 16,
+                "total_samples": 32,
+                "structural_exact_recall": 0.859,
+                "scale_control_exact_recall": 1.0,
+                "weighted_f1": 0.9879,
+                "documents": [],
+            }
+        ]
+    }
+
+    html = export_leaderboard_space.build_html(data)
+
+    assert (
+        "data-column='combined_token_price' data-sort-value='' "
+        "data-sort-missing='true'>n/a</td>"
+    ) in html
+
+
 @pytest.mark.parametrize(
     ("details", "message"),
     [

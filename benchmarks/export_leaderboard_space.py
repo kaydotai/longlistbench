@@ -52,6 +52,30 @@ RUNS = (
         "output_token_price": 30.0,
     },
     {
+        "run_dir": "reducto_deep_extract_v3_targeted_prompt",
+        "key": "reducto_deep_extract",
+        "harness": "Reducto",
+        "model": "Deep Extract v3 (targeted prompt)",
+        "protocol": "Raw PDF · targeted prompt · 3,108 credits",
+        "input_token_price": None,
+        "output_token_price": None,
+        "effort": "targeted fields",
+        "requested_model": "v3",
+        "cli_version": "Reducto API",
+    },
+    {
+        "run_dir": "reducto_deep_extract_v3_strict_contract",
+        "key": "reducto_deep_extract",
+        "harness": "Reducto",
+        "model": "Deep Extract v3 (strict contract)",
+        "protocol": "Raw PDF · strict contract · 3,099 credits",
+        "input_token_price": None,
+        "output_token_price": None,
+        "effort": "identical contract",
+        "requested_model": "v3",
+        "cli_version": "Reducto API",
+    },
+    {
         "run_dir": "bonsai_27b_together_page_pipeline_full",
         "key": "bonsai_27b_together_page_pipeline",
         "harness": "Local + Together AI",
@@ -127,6 +151,12 @@ def pct(value: float, digits: int = 1) -> str:
     return f"{100 * value:.{digits}f}"
 
 
+def combined_token_price(input_price: float | None, output_price: float | None) -> float | None:
+    if input_price is None or output_price is None:
+        return None
+    return input_price + output_price
+
+
 def summarize_document_results(details: list[dict]) -> list[dict]:
     documents = []
     for detail in details:
@@ -159,7 +189,10 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "protocol": m["protocol"],
             "input_token_price": m["input_token_price"],
             "output_token_price": m["output_token_price"],
-            "combined_token_price": m["input_token_price"] + m["output_token_price"],
+            "combined_token_price": combined_token_price(
+                m["input_token_price"],
+                m["output_token_price"],
+            ),
             "exact_record_recall": s["exact_record_recall"],
             "exact_record_precision": s["exact_record_precision"],
             "exact_record_f1": s["exact_record_f1"],
@@ -184,8 +217,8 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
         "version": RELEASE_VERSION,
         "dataset": dataset_meta,
         "protocol": (
-            "OCR-conditioned extraction on one dataset. Agentic CLI runs used repository-denied "
-            "sandboxes; Bonsai used page extraction plus reduction. Protocols are labeled separately."
+            "All rows use the same dataset and scorer. Agentic CLI and Bonsai runs consume released "
+            "OCR transcripts; Reducto Deep Extract runs on raw PDFs. Protocols are labeled separately."
         ),
         "results": rows,
     }
@@ -195,7 +228,14 @@ def money(value: float) -> str:
     return f"${value:.0f}" if value.is_integer() else f"${value:g}"
 
 
+def format_token_price(value: float | None) -> str:
+    if value is None:
+        return "n/a"
+    return "$0 local" if value == 0 else f"{money(value)}/M"
+
+
 def build_cost_chart(results: list[dict]) -> str:
+    results = [row for row in results if row["combined_token_price"] is not None]
     width = 920
     height = 312
     left = 48
@@ -283,7 +323,9 @@ def build_html(data: dict) -> str:
     rows_html = []
     for rank, result in enumerate(results, 1):
         combined = result["combined_token_price"]
-        price_label = "$0 local" if combined == 0 else f"{money(combined)}/M"
+        price_label = format_token_price(combined)
+        price_sort_value = "" if combined is None else combined
+        price_sort_missing = " data-sort-missing='true'" if combined is None else ""
         row_class = " class='winner'" if rank == 1 else ""
         leader_badge = "<span class='leader-badge'>Leader</span>" if rank == 1 else ""
         documents = result.get("documents", [])
@@ -320,7 +362,7 @@ def build_html(data: dict) -> str:
             f"<div class='configuration-actions'><span class='protocol'>{result['protocol']}</span>"
             f"{details_button}</div></td>"
             f"<td class='numeric price' data-column='combined_token_price' "
-            f"data-sort-value='{combined}'>{price_label}</td>"
+            f"data-sort-value='{price_sort_value}'{price_sort_missing}>{price_label}</td>"
             f"<td class='numeric primary' data-column='exact_record_recall' "
             f"data-sort-value='{result['exact_record_recall']}'>"
             f"{pct(result['exact_record_recall'])}%</td>"
@@ -804,9 +846,9 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
       <div class="chart-head">
         <div>
           <h3 id="cost-chart-title">Accuracy × token price</h3>
-          <p>Exact-record recall against blended list price per 1M tokens.</p>
+          <p>Exact-record recall against blended list price per 1M tokens. Token-priced runs only.</p>
         </div>
-        <div class="chart-key">Current leader</div>
+        <div class="chart-key">Token-priced runs</div>
       </div>
       <div class="chart-viewport">{chart_html}</div>
     </div>
@@ -834,7 +876,7 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
                 </button>
                 <button class="definition-button" type="button" aria-label="Explain token price"
                   aria-expanded="false" data-metric-title="Token price"
-                  data-metric-definition="Blended input plus output list price per 1M tokens. Local excludes hardware and power.">i</button>
+                  data-metric-definition="Blended input plus output list price per 1M tokens. Local excludes hardware and power; n/a indicates a non-token pricing model.">i</button>
               </div>
             </th>
             <th class="numeric" aria-sort="descending">
@@ -1002,8 +1044,13 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
     const rows = Array.from(tbody.querySelectorAll("[data-result-row]"));
     closeDetails();
     rows.sort((leftRow, rightRow) => {{
-      const left = leftRow.querySelector('[data-column="' + key + '"]').dataset.sortValue;
-      const right = rightRow.querySelector('[data-column="' + key + '"]').dataset.sortValue;
+      const leftCell = leftRow.querySelector('[data-column="' + key + '"]');
+      const rightCell = rightRow.querySelector('[data-column="' + key + '"]');
+      const left = leftCell.dataset.sortValue;
+      const right = rightCell.dataset.sortValue;
+      const leftMissing = leftCell.dataset.sortMissing === "true";
+      const rightMissing = rightCell.dataset.sortMissing === "true";
+      if (leftMissing !== rightMissing) return leftMissing ? 1 : -1;
       const comparison = type === "number"
         ? Number(left) - Number(right)
         : collator.compare(left, right);
