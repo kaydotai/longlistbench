@@ -18,6 +18,7 @@ from demo.bonsai_extract.app import (
     erase_llama_prompt_cache,
     extract_pdf_page_text,
 )
+from demo.bonsai_extract.pdf_page import ingest_first_pdf_page
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,20 @@ LA
 Accidents 0
 Moving violations None
 """
+
+
+def test_uploaded_pdf_ingestion_returns_first_page_text_layout_and_preview() -> None:
+    """Ingestion must isolate the first uploaded PDF page and its geometry."""
+
+    page = ingest_first_pdf_page(SAMPLE_PDF.read_bytes())
+
+    assert page.text.startswith("ATTN: SAFETY OPERATIONS")
+    assert "Report of Services Provided" in page.text
+    assert "ROSA NGUYEN" not in page.text
+    assert page.width == pytest.approx(594.96)
+    assert page.height == pytest.approx(841.92)
+    assert any(word.text == "ATTN:" for word in page.words)
+    assert page.preview_png.startswith(b"\x89PNG\r\n\x1a\n")
 
 
 def _sample_page_text(_pdf_bytes: bytes, page_number: int) -> str:
