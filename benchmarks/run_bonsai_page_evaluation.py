@@ -688,6 +688,21 @@ def build_page_prompt(contract: PublicContract, page: Page) -> str:
         f"[{', '.join(_page_fields(contract, record_type))}]"
         for record_type in contract.required_fields
     )
+    guidance = ""
+    if contract.template == "driver_mvr_request_and_roster":
+        guidance = """
+Driver MVR field rules:
+- "mvr_run_date": copy the date printed after "Run" in the record heading.
+- "accidents_last_5_years": copy the value from the "Accidents" row. Preserve
+  a printed zero as the string "0".
+- "mvr_violations": copy the value from the "Moving violations" row; the printed word "None" is a string value, not null.
+- "date_of_birth": copy the complete value after "DATE OF BIRTH" exactly,
+  including every date component and separator.
+- "date_hired": use only a date explicitly labeled as hired or hire date.
+  If neither label appears on the page, date_hired must be null. Never substitute the run date or date of birth for date_hired.
+- Keep every output value in its exact column. Use null for a missing column;
+  never shift a later visible value into an earlier missing column.
+"""
     return f"""Extract target record evidence from exactly one OCR page.
 
 Return every target row visible on the page. Also return partial rows when this
@@ -699,6 +714,7 @@ guess. Ignore summaries, totals, instructions, and unrelated tables.
 
 Output groups and exact row column order:
 {groups}
+{guidance}
 
 Return only the schema-constrained JSON object, minified on one line.
 

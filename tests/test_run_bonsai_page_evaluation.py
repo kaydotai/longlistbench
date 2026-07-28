@@ -77,6 +77,30 @@ def test_public_contract_builds_compact_strict_page_rows() -> None:
     ]
 
 
+def test_mvr_page_prompt_maps_activity_and_run_date_labels() -> None:
+    contract = runner.contract_for_template("driver_mvr_request_and_roster")
+    page = runner.Page(
+        number=10,
+        text=(
+            "# Page 10\n"
+            "Run 01/21/2026\n"
+            "Accidents,0\n"
+            "Moving violations,None\n"
+        ),
+    )
+
+    prompt = runner.build_page_prompt(contract, page)
+
+    assert '"mvr_run_date": copy the date printed after "Run"' in prompt
+    assert '"accidents_last_5_years": copy the value from the "Accidents" row' in prompt
+    assert '"mvr_violations": copy the value from the "Moving violations" row' in prompt
+    assert 'the printed word "None" is a string value, not null' in prompt
+    assert '"date_of_birth": copy the complete value after "DATE OF BIRTH"' in prompt
+    assert '"date_hired": use only a date explicitly labeled as hired or hire date' in prompt
+    assert "If neither label appears on the page, date_hired must be null." in prompt
+    assert "Never substitute the run date or date of birth for date_hired." in prompt
+
+
 def test_compact_page_rows_decode_to_named_candidates_and_omit_nulls() -> None:
     contract = runner.contract_for_template("driver_mvr_request_and_roster")
 

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+  <title>Local document extraction</title>
+  <style>
+    :root {
+      --ink: #171714;
+      --paper: #f6f5f1;
+      --white: #fffefb;
+      --panel: #ebeae5;
+      --line: #d6d5cf;
+      --muted: #77776f;
+      --yellow: #f2d857;
+      --blue: #78b9d2;
+      --green: #58a66b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    button { font: inherit; }
+
+    .app {
+      width: 100vw;
+      height: 100vh;
+      min-width: 1024px;
+      display: grid;
+      grid-template-rows: 60px minmax(0, 1fr);
+      background: var(--paper);
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(300px, 1fr) auto;
+      align-items: center;
+      gap: 22px;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .file {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .file-icon {
+      width: 28px;
+      height: 33px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: #9a4c41;
+      background: white;
+      font: 750 8px/1 "SFMono-Regular", Consolas, monospace;
+    }
+
+    .file-copy {
+      min-width: 0;
+    }
+
+    .file-copy strong,
+    .file-copy span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .file-copy strong {
+      font-size: 12px;
+    }
+
+    .file-copy span {
+      margin-top: 4px;
+      color: var(--muted);
+      font: 650 8px/1 "SFMono-Regular", Consolas, monospace;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .local,
+    .throughput {
+      height: 33px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      white-space: nowrap;
+    }
+
+    .local {
+      border-color: #dbc655;
+      background: var(--yellow);
+      font-size: 10px;
+      font-weight: 770;
+    }
+
+    .local i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .throughput {
+      color: var(--muted);
+      font: 650 8px/1 "SFMono-Regular", Consolas, monospace;
+    }
+
+    .throughput b {
+      color: var(--ink);
+      font-size: 10px;
+    }
+
+    .model-name {
+      margin-right: 3px;
+      padding-right: 9px;
+      border-right: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 9px;
+      font-weight: 760;
+    }
+
+    .replay {
+      height: 33px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--ink);
+      color: white;
+      font-size: 10px;
+      font-weight: 730;
+      cursor: pointer;
+    }
+
+    [hidden] { display: none !important; }
+
+    .content {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .drop-screen,
+    .workspace {
+      position: absolute;
+      inset: 0;
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .drop-screen {
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(242, 216, 87, .1), transparent 27%),
+        var(--paper);
+    }
+
+    .drop-zone {
+      width: min(520px, 48vw);
+      min-height: 292px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      padding: 34px;
+      border: 1px dashed #aaa9a1;
+      border-radius: 16px;
+      background: rgba(255, 254, 251, .78);
+      text-align: center;
+      outline: none;
+      transition: border-color .25s ease, background .25s ease, transform .25s ease;
+    }
+
+    .drop-zone.dragging,
+    .drop-zone:focus-visible {
+      border-color: #c0a60d;
+      background: rgba(242, 216, 87, .13);
+      transform: scale(1.012);
+    }
+
+    .drop-icon {
+      width: 54px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--white);
+      box-shadow: 0 10px 24px rgba(23, 23, 20, .08);
+      color: #9a4c41;
+      font: 780 10px/1 "SFMono-Regular", Consolas, monospace;
+    }
+
+    .drop-zone h1 {
+      margin: 22px 0 0;
+      font-size: 29px;
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .drop-zone p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .drop-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .choose {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 740;
+      cursor: pointer;
+    }
+
+    .choose {
+      border: 0;
+      background: var(--ink);
+      color: white;
+    }
+
+    .drop-private {
+      margin-top: 14px;
+      color: var(--muted);
+      font: 650 8px/1 "SFMono-Regular", Consolas, monospace;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .drop-error {
+      min-height: 14px;
+      margin-top: 10px;
+      color: #9a4c41;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .workspace {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 58fr) minmax(420px, 42fr);
+      z-index: 1;
+      opacity: 0;
+      transform: scale(.99);
+      pointer-events: none;
+    }
+
+    .app.processing .drop-screen {
+      opacity: 0;
+      transform: scale(.985);
+      pointer-events: none;
+    }
+
+    .app.processing .workspace {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    .source {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 1fr;
+      border-right: 1px solid var(--line);
+      background: #e7e6e1;
+    }
+
+    .document-stage {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 10px 30px;
+    }
+
+    .page {
+      position: relative;
+      height: min(88vh, 630px);
+      aspect-ratio: 594.96 / 841.92;
+      overflow: hidden;
+      border: 1px solid #d7d6d0;
+      background: white;
+      box-shadow: 0 14px 34px rgba(23, 23, 20, .12);
+      opacity: 0;
+      transform: translateY(8px) scale(.985);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .page.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .page img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .highlight {
+      position: absolute;
+      opacity: 0;
+      border: 1px solid #439abb;
+      border-radius: 2px;
+      background: rgba(120, 185, 210, .13);
+      box-shadow: 0 0 0 2px rgba(120, 185, 210, .1);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: opacity .35s ease, transform .65s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .highlight.visible {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    /* pdftotext -bbox · page 10 · 594.96 × 841.92 pt; 2 pt x / 1.5 pt y padding */
+    .h-name { left: 9.71%; top: 28.30%; width: 14.23%; height: 1.82%; }
+    .h-dob { left: 51.29%; top: 28.30%; width: 9.92%; height: 1.82%; }
+    .h-class { left: 72.80%; top: 28.30%; width: 1.90%; height: 1.82%; }
+    .h-license { left: 30.86%; top: 40.06%; width: 14.55%; height: 1.82%; }
+    .h-state { left: 9.71%; top: 40.06%; width: 2.93%; height: 1.82%; }
+    .h-accidents { left: 34.40%; top: 50.49%; width: 1.70%; height: 1.82%; }
+    .h-violations { left: 34.40%; top: 54.76%; width: 5.09%; height: 1.82%; }
+    .h-run { left: 61.03%; top: 16.28%; width: 9.92%; height: 1.82%; }
+
+    .scan {
+      position: absolute;
+      left: 3%;
+      right: 3%;
+      top: 18%;
+      height: 2px;
+      opacity: 0;
+      background: linear-gradient(90deg, transparent, var(--yellow) 24%, var(--yellow) 76%, transparent);
+      box-shadow: 0 0 15px rgba(242, 216, 87, .9);
+    }
+
+    .page.scanning .scan {
+      opacity: 1;
+      animation: scanPage 2.8s ease-in-out infinite alternate;
+    }
+
+    .candidate {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 90px 1fr;
+      background: var(--paper);
+    }
+
+    .candidate-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 19px;
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .candidate-title span,
+    .candidate-title strong {
+      display: block;
+    }
+
+    .candidate-title span {
+      color: var(--muted);
+      font: 750 8px/1 "SFMono-Regular", Consolas, monospace;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .candidate-title strong {
+      min-height: 24px;
+      margin-top: 8px;
+      font-size: 23px;
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+
+    .json {
+      min-height: 0;
+      padding: 15px 19px;
+      overflow: hidden;
+    }
+
+    .brace {
+      color: var(--muted);
+      font: 500 18px/1 "SFMono-Regular", Consolas, monospace;
+    }
+
+    .json-fields {
+      margin: 7px 0 7px 14px;
+      border-left: 1px solid var(--line);
+    }
+
+    .json-row {
+      min-height: 42px;
+      display: grid;
+      grid-template-columns: minmax(132px, .85fr) minmax(160px, 1.15fr);
+      align-items: center;
+      gap: 13px;
+      padding: 0 11px 0 14px;
+      border-bottom: 1px solid #e0dfda;
+      opacity: .24;
+      transform: translateX(6px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    .json-row.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .json-key,
+    .json-value {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: "SFMono-Regular", Consolas, monospace;
+    }
+
+    .json-key {
+      color: #7c598f;
+      font-size: 9px;
+    }
+
+    .json-value {
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .json-row.missing .json-value {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .json-value.streaming::after {
+      content: "";
+      display: inline-block;
+      width: 1px;
+      height: 12px;
+      margin-left: 3px;
+      vertical-align: -2px;
+      background: var(--ink);
+      animation: cursorBlink .62s steps(1) infinite;
+    }
+
+    .json-row:not(.visible) .json-value {
+      color: transparent;
+    }
+
+    .json-row:not(.visible) .json-value::after {
+      content: "";
+      display: block;
+      width: 58%;
+      height: 6px;
+      border-radius: 3px;
+      background: #deddd7;
+    }
+
+    @keyframes scanPage {
+      from { top: 18%; }
+      to { top: 63%; }
+    }
+
+    @keyframes breathe {
+      50% { opacity: .55; transform: scale(.85); }
+    }
+
+    @keyframes cursorBlink {
+      50% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media (max-height: 700px) {
+      .app { grid-template-rows: 55px minmax(0, 1fr); }
+      .page { height: min(84vh, 600px); }
+      .candidate { grid-template-rows: 78px 1fr; }
+      .json { padding-block: 9px; }
+      .json-row { min-height: 36px; }
+      .drop-zone { min-height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <header class="topbar">
+      <div class="file">
+        <div class="file-icon">PDF</div>
+        <div class="file-copy">
+          <strong id="file-name">No document</strong>
+          <span id="file-status">Drop a PDF to begin</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="throughput"><span class="model-name" id="model-name">Ternary Bonsai 27B</span>Prefill <b id="prefill-rate">— tok/s</b> · Decode <b id="decode-rate">— tok/s</b></div>
+        <div class="local"><i></i>Inference · M4 Pro · 48 GB</div>
+        <button class="replay" id="replay" hidden>Reset</button>
+      </div>
+    </header>
+
+    <section class="content">
+      <div class="drop-screen">
+        <div class="drop-zone" id="drop-zone" role="button" tabindex="0" aria-label="Drop or choose a PDF">
+          <div class="drop-icon">PDF</div>
+          <h1>Drop a PDF</h1>
+          <p>Drag the benchmark document here to start extraction.</p>
+          <div class="drop-actions">
+            <button class="choose" id="choose">Choose PDF</button>
+          </div>
+          <input id="file-input" type="file" accept="application/pdf,.pdf" hidden>
+          <div class="drop-private">Processed privately on this Mac</div>
+          <div class="drop-error" id="drop-error"></div>
+        </div>
+      </div>
+
+      <section class="workspace">
+        <section class="source">
+          <div class="document-stage">
+            <div class="page" id="page">
+              <img src="/page-10.png" alt="Certified Employer Driving Record for Rosa Nguyen">
+              <div class="highlight h-name" data-highlight="0"></div>
+              <div class="highlight h-dob" data-highlight="1"></div>
+              <div class="highlight h-class" data-highlight="2"></div>
+              <div class="highlight h-license" data-highlight="3"></div>
+              <div class="highlight h-state" data-highlight="4"></div>
+              <div class="highlight h-accidents" data-highlight="5"></div>
+              <div class="highlight h-violations" data-highlight="6"></div>
+              <div class="highlight h-run" data-highlight="7"></div>
+              <div class="scan"></div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="candidate">
+          <div class="candidate-head">
+            <div class="candidate-title">
+              <span>EXTRACTED RECORD · STRICT JSON</span>
+              <strong id="candidate-name">Waiting for output</strong>
+            </div>
+          </div>
+
+          <div class="json">
+            <div class="brace">{</div>
+            <div class="json-fields">
+              <div class="json-row" data-field="date_hired"><span class="json-key">"date_hired"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="date_of_birth"><span class="json-key">"date_of_birth"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="license_class"><span class="json-key">"license_class"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="license_number"><span class="json-key">"license_number"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="mvr_run_date"><span class="json-key">"mvr_run_date"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="name"><span class="json-key">"name"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="state_licensed"><span class="json-key">"state_licensed"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="accidents_last_5_years"><span class="json-key">"accidents_last_5_years"</span><span class="json-value"></span></div>
+              <div class="json-row" data-field="mvr_violations"><span class="json-key">"mvr_violations"</span><span class="json-value"></span></div>
+            </div>
+            <div class="brace">}</div>
+          </div>
+        </aside>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const app = document.getElementById("app");
+    const page = document.getElementById("page");
+    const replay = document.getElementById("replay");
+    const dropZone = document.getElementById("drop-zone");
+    const dropError = document.getElementById("drop-error");
+    const choose = document.getElementById("choose");
+    const fileInput = document.getElementById("file-input");
+    const fileName = document.getElementById("file-name");
+    const fileStatus = document.getElementById("file-status");
+    const candidateName = document.getElementById("candidate-name");
+    const prefillRate = document.getElementById("prefill-rate");
+    const decodeRate = document.getElementById("decode-rate");
+    const modelName = document.getElementById("model-name");
+    const rows = [...document.querySelectorAll(".json-row")];
+    const rowsByField = new Map(rows.map(row => [row.dataset.field, row]));
+    const highlights = [...document.querySelectorAll(".highlight")];
+    const fieldHighlights = {
+      name: [0],
+      date_of_birth: [1],
+      license_class: [2],
+      license_number: [3],
+      state_licensed: [4],
+      accidents_last_5_years: [5],
+      mvr_violations: [6],
+      mvr_run_date: [7]
+    };
+    let runController = null;
+
+    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    function prettyModelName(modelId) {
+      if (!modelId) return "Ternary Bonsai 27B";
+      return modelId
+        .split("/")
+        .pop()
+        .replace("-mlx-2bit", "")
+        .replaceAll("-", " ");
+    }
+
+    function resetRunState() {
+      if (runController) runController.abort();
+      runController = null;
+      page.classList.remove("visible", "scanning");
+      rows.forEach(row => {
+        row.classList.remove("visible", "missing");
+        const value = row.querySelector(".json-value");
+        value.textContent = "";
+        value.classList.remove("streaming");
+      });
+      highlights.forEach(highlight => highlight.classList.remove("visible"));
+      candidateName.textContent = "Waiting for output";
+      prefillRate.textContent = "— tok/s";
+      decodeRate.textContent = "— tok/s";
+      modelName.textContent = "Ternary Bonsai 27B";
+    }
+
+    function resetToDrop() {
+      resetRunState();
+      app.classList.remove("processing");
+      fileName.textContent = "No document";
+      fileStatus.textContent = "Drop a PDF to begin";
+      replay.hidden = true;
+      dropError.textContent = "";
+      fileInput.value = "";
+    }
+
+    function showError(message) {
+      resetRunState();
+      app.classList.remove("processing");
+      replay.hidden = true;
+      fileStatus.textContent = "Extraction stopped";
+      dropError.textContent = message;
+    }
+
+    async function streamField(field, rawValue) {
+      const row = rowsByField.get(field);
+      if (!row) return;
+      const value = row.querySelector(".json-value");
+      const isMissing = rawValue === null;
+      const finalValue = isMissing ? "Not found" : JSON.stringify(rawValue);
+      row.classList.add("visible");
+      row.classList.toggle("missing", isMissing);
+      value.classList.add("streaming");
+      if (!isMissing) {
+        (fieldHighlights[field] || []).forEach(index => {
+          highlights[index].classList.add("visible");
+        });
+      }
+
+      for (let cursor = 1; cursor <= finalValue.length; cursor += 1) {
+        value.textContent = finalValue.slice(0, cursor);
+        if (field === "name" && !isMissing) {
+          candidateName.textContent =
+            finalValue.slice(1, Math.max(1, cursor - 1)) || "Decoding…";
+        }
+        await wait(Math.max(25, 280 / finalValue.length));
+      }
+      value.classList.remove("streaming");
+      if (field === "name" && !isMissing) {
+        candidateName.textContent = String(rawValue);
+      }
+    }
+
+    async function startRun(file) {
+      if (
+        !file ||
+        (!file.name.toLowerCase().endsWith(".pdf") &&
+          file.type !== "application/pdf")
+      ) {
+        dropError.textContent = "Choose a PDF document.";
+        return;
+      }
+
+      resetRunState();
+      runController = new AbortController();
+      const controller = runController;
+      dropError.textContent = "";
+      fileName.textContent = file.name;
+      fileStatus.textContent = "Page 10 of 17 · preparing strict JSON";
+      candidateName.textContent = "Running local model";
+      replay.hidden = false;
+      app.classList.add("processing");
+      await wait(120);
+      page.classList.add("visible", "scanning");
+      fileStatus.textContent = "Extracting locally · no data leaves this Mac";
+
+      try {
+        const response = await fetch("/api/extract?page=10", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/pdf",
+            "X-Filename": file.name
+          },
+          body: file,
+          signal: controller.signal
+        });
+        if (!response.ok) {
+          const result = await response.json();
+          throw new Error(result.error || `HTTP ${response.status}`);
+        }
+        if (!response.body) {
+          throw new Error("This browser did not expose the response stream.");
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        let fieldCount = 0;
+        let completeResult = null;
+        const streamedFields = new Set();
+
+        async function handleEvent(event) {
+          if (event.type === "started") {
+            modelName.textContent = prettyModelName(event.model_id);
+            candidateName.textContent = "Streaming fields";
+            fileStatus.textContent =
+              "PDF text read locally · receiving strict JSON";
+            return;
+          }
+          if (event.type === "field") {
+            if (streamedFields.has(event.field)) return;
+            streamedFields.add(event.field);
+            fieldCount += 1;
+            fileStatus.textContent =
+              `Streaming field ${fieldCount} · ${event.field}`;
+            await streamField(event.field, event.value);
+            await wait(90);
+            return;
+          }
+          if (event.type === "error") {
+            throw new Error(event.error || "Local inference failed.");
+          }
+          if (event.type === "complete") {
+            completeResult = event.result;
+          }
+        }
+
+        while (true) {
+          const {value, done} = await reader.read();
+          buffer += decoder.decode(value || new Uint8Array(), {stream: !done});
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+          for (const line of lines) {
+            if (line.trim()) await handleEvent(JSON.parse(line));
+          }
+          if (done) break;
+        }
+        if (buffer.trim()) await handleEvent(JSON.parse(buffer));
+        if (!completeResult?.candidates?.length) {
+          throw new Error("The model returned no extracted record for page 10.");
+        }
+
+        for (const [field, value] of Object.entries(completeResult.candidates[0])) {
+          if (
+            value !== null &&
+            rowsByField.has(field) &&
+            !streamedFields.has(field)
+          ) {
+            streamedFields.add(field);
+            fieldCount += 1;
+            fileStatus.textContent =
+              `Finishing field ${fieldCount} · ${field}`;
+            await streamField(field, value);
+            await wait(90);
+          }
+        }
+
+        page.classList.remove("scanning");
+        prefillRate.textContent =
+          `${Number(completeResult.prefill_tokens_per_second).toFixed(1)} tok/s`;
+        decodeRate.textContent =
+          `${Number(completeResult.decode_tokens_per_second).toFixed(1)} tok/s`;
+        modelName.textContent = prettyModelName(completeResult.model_id);
+        candidateName.textContent =
+          completeResult.candidates[0].name || `${fieldCount} fields returned`;
+        fileStatus.textContent =
+          `Extracted · ${Number(completeResult.elapsed_seconds).toFixed(2)} seconds`;
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          showError(error.message || "Local inference failed.");
+        }
+      } finally {
+        if (runController === controller) runController = null;
+      }
+    }
+
+    function handleFiles(files) {
+      startRun(files && files[0]);
+    }
+
+    ["dragenter", "dragover"].forEach(type => {
+      dropZone.addEventListener(type, event => {
+        event.preventDefault();
+        dropZone.classList.add("dragging");
+      });
+    });
+    ["dragleave", "drop"].forEach(type => {
+      dropZone.addEventListener(type, event => {
+        event.preventDefault();
+        dropZone.classList.remove("dragging");
+      });
+    });
+    dropZone.addEventListener("drop", event => handleFiles(event.dataTransfer.files));
+    dropZone.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        fileInput.click();
+      }
+    });
+    choose.addEventListener("click", event => {
+      event.stopPropagation();
+      fileInput.click();
+    });
+    fileInput.addEventListener("change", event => handleFiles(event.target.files));
+    replay.addEventListener("click", resetToDrop);
+    resetToDrop();
+  </script>
+</body>
+</html>
