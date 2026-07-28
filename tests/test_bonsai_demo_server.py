@@ -5,6 +5,7 @@ from html.parser import HTMLParser
 from http import HTTPStatus
 import json
 from pathlib import Path
+import shutil
 import subprocess
 from types import SimpleNamespace
 
@@ -54,6 +55,7 @@ _VALID_BBOX_LAYOUT = """<html><body><doc>
 </doc></body></html>"""
 
 
+@pytest.mark.skipif(shutil.which("pdfinfo") is None, reason="pdfinfo is not installed")
 def test_bundled_rosa_sample_upload_is_a_one_page_pdf() -> None:
     """The recommended upload must be a self-contained Rosa MVR record."""
 
@@ -195,6 +197,10 @@ def _mock_poppler(
     monkeypatch.setattr(pdf_page.subprocess, "run", fake_run)
 
 
+@pytest.mark.skipif(
+    shutil.which("pdftotext") is None or shutil.which("pdftocairo") is None,
+    reason="PDF ingestion tools are not installed",
+)
 def test_uploaded_pdf_ingestion_returns_first_page_text_layout_and_preview() -> None:
     """Ingestion must isolate the first uploaded PDF page and its geometry."""
 
