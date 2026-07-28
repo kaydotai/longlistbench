@@ -5,6 +5,7 @@ from html.parser import HTMLParser
 from http import HTTPStatus
 from pathlib import Path
 import shutil
+import subprocess
 from types import SimpleNamespace
 
 import pytest
@@ -18,6 +19,7 @@ from demo.bonsai_extract.app import (
     erase_llama_prompt_cache,
     extract_pdf_page_text,
 )
+from demo.bonsai_extract import pdf_page
 from demo.bonsai_extract.pdf_page import ingest_first_pdf_page
 
 
@@ -40,6 +42,46 @@ Accidents 0
 Moving violations None
 """
 
+_VALID_BBOX_LAYOUT = """<html><body><doc>
+<page width="10" height="20"><word xMin="1" yMin="2" xMax="3" yMax="4">FIRST</word></page>
+</doc></body></html>"""
+
+
+def _mock_poppler(
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    text: str = "FIRST PAGE",
+    layout: str | None = _VALID_BBOX_LAYOUT,
+    raw_returncode: int = 0,
+    bbox_returncode: int = 0,
+    render_returncode: int = 0,
+) -> None:
+    """Replace external Poppler processes with deterministic file outputs."""
+
+    def fake_run(
+        command: list[str],
+        *,
+        stdout: int,
+        stderr: int,
+        check: bool,
+    ) -> subprocess.CompletedProcess[bytes]:
+        if command[0] == "pdftotext" and "-raw" in command:
+            if raw_returncode == 0:
+                Path(command[-1]).write_text(text, encoding="utf-8")
+            return subprocess.CompletedProcess(command, raw_returncode)
+        if command[0] == "pdftotext" and "-bbox-layout" in command:
+            if bbox_returncode == 0 and layout is not None:
+                Path(command[-1]).write_text(layout, encoding="utf-8")
+            return subprocess.CompletedProcess(command, bbox_returncode)
+        if command[0] == "pdftocairo":
+            if render_returncode == 0:
+                Path(f"{command[-1]}.png").write_bytes(b"\x89PNG\r\n\x1a\n")
+            return subprocess.CompletedProcess(command, render_returncode)
+        raise AssertionError(f"Unexpected Poppler command: {command}")
+
+    monkeypatch.setattr(pdf_page.shutil, "which", lambda program: program)
+    monkeypatch.setattr(pdf_page.subprocess, "run", fake_run)
+
 
 def test_uploaded_pdf_ingestion_returns_first_page_text_layout_and_preview() -> None:
     """Ingestion must isolate the first uploaded PDF page and its geometry."""
@@ -52,7 +94,89 @@ def test_uploaded_pdf_ingestion_returns_first_page_text_layout_and_preview() -> 
     assert page.width == pytest.approx(594.96)
     assert page.height == pytest.approx(841.92)
     assert any(word.text == "ATTN:" for word in page.words)
+    attn = next(word for word in page.words if word.text == "ATTN:")
+    assert attn.x_min == pytest.approx(0.520485, abs=1e-6)
+    assert attn.y_min == pytest.approx(0.182558, abs=1e-6)
+    assert attn.x_max == pytest.approx(0.567778, abs=1e-6)
+    assert attn.y_max == pytest.approx(0.195825, abs=1e-6)
+    assert all(
+        0.0 <= coordinate <= 1.0
+        for word in page.words
+        for coordinate in (word.x_min, word.y_min, word.x_max, word.y_max)
+    )
     assert page.preview_png.startswith(b"\x89PNG\r\n\x1a\n")
+
+
+def test_pdf_ingestion_rejects_invalid_pdf_bytes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Invalid input must fail at the first Poppler read boundary."""
+
+    _mock_poppler(monkeypatch, raw_returncode=1)
+
+    with pytest.raises(
+        ValueError,
+        match=r"^Could not read the first page of this PDF\.$",
+    ):
+        ingest_first_pdf_page(b"not a PDF")
+
+
+def test_pdf_ingestion_rejects_first_page_without_embedded_text(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Textless first pages must not proceed to geometry or rendering."""
+
+    _mock_poppler(monkeypatch, text="\n\f")
+
+    with pytest.raises(
+        ValueError,
+        match=r"^The first page has no extractable text\.$",
+    ):
+        ingest_first_pdf_page(b"%PDF")
+
+
+@pytest.mark.parametrize("layout", ["not XHTML", None])
+def test_pdf_ingestion_rejects_malformed_or_missing_bbox_layout(
+    monkeypatch: pytest.MonkeyPatch,
+    layout: str | None,
+) -> None:
+    """Malformed or absent bbox output must not produce partial geometry."""
+
+    _mock_poppler(monkeypatch, layout=layout)
+
+    with pytest.raises(
+        ValueError,
+        match=r"^The first page has no usable layout\.$",
+    ):
+        ingest_first_pdf_page(b"%PDF")
+
+
+def test_pdf_ingestion_rejects_render_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A failed page preview must return a concise rendering error."""
+
+    _mock_poppler(monkeypatch, render_returncode=1)
+
+    with pytest.raises(
+        ValueError,
+        match=r"^Could not render the first PDF page\.$",
+    ):
+        ingest_first_pdf_page(b"%PDF")
+
+
+def test_pdf_ingestion_rejects_missing_poppler_tools(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Local deployments must receive a concise dependency error."""
+
+    monkeypatch.setattr(pdf_page.shutil, "which", lambda _program: None)
+
+    with pytest.raises(
+        ValueError,
+        match=r"^PDF ingestion tools are unavailable\.$",
+    ):
+        ingest_first_pdf_page(b"%PDF")
 
 
 def _sample_page_text(_pdf_bytes: bytes, page_number: int) -> str:

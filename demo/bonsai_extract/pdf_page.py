@@ -127,13 +127,15 @@ def _parse_layout(layout_path: Path) -> tuple[float, float, tuple[PageWord, ...]
         page = next(_elements_named(root, "page"))
         width = float(page.attrib["width"])
         height = float(page.attrib["height"])
+        if width <= 0 or height <= 0:
+            raise ValueError("The first page has no usable layout.")
         words = tuple(
             PageWord(
                 text="".join(word.itertext()).strip(),
-                x_min=float(word.attrib["xMin"]),
-                y_min=float(word.attrib["yMin"]),
-                x_max=float(word.attrib["xMax"]),
-                y_max=float(word.attrib["yMax"]),
+                x_min=float(word.attrib["xMin"]) / width,
+                y_min=float(word.attrib["yMin"]) / height,
+                x_max=float(word.attrib["xMax"]) / width,
+                y_max=float(word.attrib["yMax"]) / height,
             )
             for word in _elements_named(page, "word")
             if "".join(word.itertext()).strip()
@@ -141,11 +143,12 @@ def _parse_layout(layout_path: Path) -> tuple[float, float, tuple[PageWord, ...]
     except (
         ElementTree.ParseError,
         KeyError,
+        OSError,
         StopIteration,
         ValueError,
     ) as exc:
         raise ValueError("The first page has no usable layout.") from exc
-    if width <= 0 or height <= 0 or not words:
+    if not words:
         raise ValueError("The first page has no usable layout.")
     return width, height, words
 
