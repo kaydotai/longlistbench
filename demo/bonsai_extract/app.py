@@ -5,10 +5,12 @@ from __future__ import annotations
 
 import argparse
 import base64
+from contextlib import closing
 import json
 import mimetypes
 import os
 import re
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -33,6 +35,119 @@ SAMPLE_TEMPLATE = "driver_mvr_request_and_roster"
 INDEX_HTML = Path(__file__).with_name("index.html")
 DEFAULT_OUTPUT_DIR = ROOT / "demo_runs" / "bonsai_extract"
 MAX_UPLOAD_BYTES = 2 * 1024 * 1024
+LOOPBACK_HOSTS = frozenset({"127.0.0.1", "localhost", "::1"})
+DEMO_MVR_FIELD_GUIDANCE = """
+Driver MVR field rules:
+- "mvr_run_date": copy the date printed after "Run" in the record heading.
+- "accidents_last_5_years": copy the value from the "Accidents" row. Preserve
+  a printed zero as the string "0".
+- "mvr_violations": copy the value from the "Moving violations" row; the printed word "None" is a string value, not null.
+- "date_of_birth": copy the complete value after "DATE OF BIRTH" exactly,
+  including every date component and separator.
+- "date_hired": use only a date explicitly labeled as hired or hire date.
+  If neither label appears on the page, date_hired must be null. Never substitute the run date or date of birth for date_hired.
+- Keep every output value in its exact column. Use null for a missing column;
+  never shift a later visible value into an earlier missing column.
+"""
+
+
+def build_demo_page_prompt(
+    contract: runner.PublicContract,
+    page: runner.Page,
+) -> str:
+    """Add live-demo extraction guidance without changing benchmark prompts."""
+
+    prompt = runner.build_page_prompt(contract, page)
+    return prompt.replace(
+        "\n\nReturn only the schema-constrained JSON object",
+        (
+            f"\n{DEMO_MVR_FIELD_GUIDANCE}\n"
+            "\nReturn only the schema-constrained JSON object"
+        ),
+        1,
+    )
+
+
+def _loopback_authority(
+    value: str,
+    *,
+    is_origin: bool,
+) -> tuple[str, int] | None:
+    try:
+        parsed = urllib.parse.urlsplit(value if is_origin else f"//{value}")
+        if is_origin:
+            if (
+                parsed.scheme != "http"
+                or not parsed.netloc
+                or parsed.path
+                or parsed.query
+                or parsed.fragment
+            ):
+                return None
+        elif parsed.path or parsed.query or parsed.fragment:
+            return None
+        if parsed.username is not None or parsed.password is not None:
+            return None
+        hostname = parsed.hostname
+        port = parsed.port
+    except ValueError:
+        return None
+    if hostname is None:
+        return None
+    hostname = hostname.casefold()
+    if hostname not in LOOPBACK_HOSTS:
+        return None
+    return hostname, port if port is not None else 80
+
+
+def _request_authority_is_allowed(
+    host: str,
+    origin: str | None,
+) -> bool:
+    host_authority = _loopback_authority(host, is_origin=False)
+    if host_authority is None:
+        return False
+    if origin is None:
+        return True
+    return _loopback_authority(origin, is_origin=True) == host_authority
+
+
+class ExtractionConflictError(RuntimeError):
+    """Raised when the single local inference slot is already in use."""
+
+
+class _GuardedEventStream(Iterator[dict[str, Any]]):
+    """Release a single-flight guard when a stream ends or is closed."""
+
+    def __init__(
+        self,
+        events: Iterator[dict[str, Any]],
+        release: Callable[[], None],
+    ) -> None:
+        self._events = events
+        self._release = release
+        self._closed = False
+
+    def __iter__(self) -> _GuardedEventStream:
+        return self
+
+    def __next__(self) -> dict[str, Any]:
+        try:
+            return next(self._events)
+        except BaseException:
+            self.close()
+            raise
+
+    def close(self) -> None:
+        if self._closed:
+            return
+        self._closed = True
+        try:
+            close = getattr(self._events, "close", None)
+            if close is not None:
+                close()
+        finally:
+            self._release()
 
 
 def erase_llama_prompt_cache(
@@ -146,27 +261,46 @@ class DemoExtractionService:
             self.cache_clearer = lambda: erase_llama_prompt_cache(
                 self.client.endpoint
             )
+        self._run_guard = threading.Lock()
 
     def extract_pdf(self, pdf_bytes: bytes) -> dict[str, Any]:
-        uploaded_page = self.page_ingestor(pdf_bytes)
-        page = self._runner_page(uploaded_page)
-        self.cache_clearer()
-        checkpoints = runner.extract_pages(
-            sample=SAMPLE_ID,
-            pages=[page],
-            contract=runner.contract_for_template(SAMPLE_TEMPLATE),
-            client=self.client,
-            output_dir=self.output_dir,
-            resume=False,
-            validation_attempts=1,
-        )
-        return self._browser_result(checkpoints[0])
+        self._acquire_run_guard()
+        try:
+            uploaded_page = self.page_ingestor(pdf_bytes)
+            page = self._runner_page(uploaded_page)
+            self.cache_clearer()
+            checkpoints = runner.extract_pages(
+                sample=SAMPLE_ID,
+                pages=[page],
+                contract=runner.contract_for_template(SAMPLE_TEMPLATE),
+                client=self.client,
+                output_dir=self.output_dir,
+                resume=False,
+                validation_attempts=1,
+            )
+            return self._browser_result(checkpoints[0])
+        finally:
+            self._run_guard.release()
 
     def stream_pdf(self, pdf_bytes: bytes) -> Iterator[dict[str, Any]]:
-        uploaded_page = self.page_ingestor(pdf_bytes)
-        page = self._runner_page(uploaded_page)
-        self.cache_clearer()
-        return self._stream_page(page, uploaded_page)
+        self._acquire_run_guard()
+        try:
+            uploaded_page = self.page_ingestor(pdf_bytes)
+            page = self._runner_page(uploaded_page)
+            self.cache_clearer()
+            return _GuardedEventStream(
+                self._stream_page(page, uploaded_page),
+                self._run_guard.release,
+            )
+        except BaseException:
+            self._run_guard.release()
+            raise
+
+    def _acquire_run_guard(self) -> None:
+        if not self._run_guard.acquire(blocking=False):
+            raise ExtractionConflictError(
+                "Another extraction is already running."
+            )
 
     @staticmethod
     def _runner_page(uploaded_page: UploadedPage) -> runner.Page:
@@ -196,7 +330,7 @@ class DemoExtractionService:
             for field in contract.required_fields["record"]
             if field != "record_type"
         )
-        prompt = runner.build_page_prompt(contract, page)
+        prompt = build_demo_page_prompt(contract, page)
         response_format = runner.page_response_format(contract)
         request: dict[str, Any] = {
             "model": self.client.model_id,
@@ -217,54 +351,56 @@ class DemoExtractionService:
         completion_tokens = 0
         prefill_tokens_per_second = 0.0
         decode_tokens_per_second = 0.0
-        stream = self.client.api.chat.completions.create(**request)
-        for chunk in stream:
-            usage = getattr(chunk, "usage", None)
-            if usage is not None:
-                prompt_tokens = int(
-                    getattr(usage, "prompt_tokens", 0) or 0
-                )
-                completion_tokens = int(
-                    getattr(usage, "completion_tokens", 0) or 0
-                )
-            timings = getattr(chunk, "timings", None)
-            if timings is None:
-                timings = (getattr(chunk, "model_extra", None) or {}).get(
-                    "timings"
-                )
-            if timings is not None:
-                if isinstance(timings, dict):
-                    prefill_tokens_per_second = float(
-                        timings.get("prompt_per_second", 0) or 0
+        with closing(
+            self.client.api.chat.completions.create(**request)
+        ) as stream:
+            for chunk in stream:
+                usage = getattr(chunk, "usage", None)
+                if usage is not None:
+                    prompt_tokens = int(
+                        getattr(usage, "prompt_tokens", 0) or 0
                     )
-                    decode_tokens_per_second = float(
-                        timings.get("predicted_per_second", 0) or 0
+                    completion_tokens = int(
+                        getattr(usage, "completion_tokens", 0) or 0
                     )
-                else:
-                    prefill_tokens_per_second = float(
-                        getattr(timings, "prompt_per_second", 0) or 0
+                timings = getattr(chunk, "timings", None)
+                if timings is None:
+                    timings = (getattr(chunk, "model_extra", None) or {}).get(
+                        "timings"
                     )
-                    decode_tokens_per_second = float(
-                        getattr(timings, "predicted_per_second", 0) or 0
-                    )
-            choices = getattr(chunk, "choices", None) or []
-            if not choices:
-                continue
-            content = getattr(choices[0].delta, "content", None)
-            if not content:
-                continue
-            content_parts.append(content)
-            for field_event in decoder.feed(content):
-                event = {"type": "field", **field_event}
-                if field_event["value"] is not None:
-                    rectangle = locate_field_value(
-                        uploaded_page,
-                        field_event["field"],
-                        field_event["value"],
-                    )
-                    if rectangle is not None:
-                        event["rectangle"] = rectangle
-                yield event
+                if timings is not None:
+                    if isinstance(timings, dict):
+                        prefill_tokens_per_second = float(
+                            timings.get("prompt_per_second", 0) or 0
+                        )
+                        decode_tokens_per_second = float(
+                            timings.get("predicted_per_second", 0) or 0
+                        )
+                    else:
+                        prefill_tokens_per_second = float(
+                            getattr(timings, "prompt_per_second", 0) or 0
+                        )
+                        decode_tokens_per_second = float(
+                            getattr(timings, "predicted_per_second", 0) or 0
+                        )
+                choices = getattr(chunk, "choices", None) or []
+                if not choices:
+                    continue
+                content = getattr(choices[0].delta, "content", None)
+                if not content:
+                    continue
+                content_parts.append(content)
+                for field_event in decoder.feed(content):
+                    event = {"type": "field", **field_event}
+                    if field_event["value"] is not None:
+                        rectangle = locate_field_value(
+                            uploaded_page,
+                            field_event["field"],
+                            field_event["value"],
+                        )
+                        if rectangle is not None:
+                            event["rectangle"] = rectangle
+                    yield event
 
         payload = json.loads("".join(content_parts))
         candidates = runner._validate_candidates(payload, contract)
@@ -364,8 +500,10 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
             return
 
         origin = self.headers.get("Origin")
-        expected_origin = f"http://{self.headers.get('Host', '')}"
-        if origin and origin != expected_origin:
+        if not _request_authority_is_allowed(
+            self.headers.get("Host", ""),
+            origin,
+        ):
             self._send_json(
                 HTTPStatus.FORBIDDEN,
                 {"error": "Cross-origin extraction requests are not allowed."},
@@ -400,6 +538,8 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
         pdf_bytes = self.rfile.read(content_length)
         try:
             events = self.extraction_service.stream_pdf(pdf_bytes)
+        except ExtractionConflictError as exc:
+            self._send_json(HTTPStatus.CONFLICT, {"error": str(exc)})
         except ValueError as exc:
             self._send_json(HTTPStatus.BAD_REQUEST, {"error": str(exc)})
         except Exception as exc:
@@ -414,15 +554,15 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
                 },
             )
         else:
-            self.send_response(HTTPStatus.OK)
-            self.send_header(
-                "Content-Type",
-                "application/x-ndjson; charset=utf-8",
-            )
-            self.send_header("Cache-Control", "no-store")
-            self.send_header("Connection", "close")
-            self.end_headers()
             try:
+                self.send_response(HTTPStatus.OK)
+                self.send_header(
+                    "Content-Type",
+                    "application/x-ndjson; charset=utf-8",
+                )
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Connection", "close")
+                self.end_headers()
                 for event in events:
                     body = (
                         json.dumps(event, ensure_ascii=False) + "\n"
@@ -447,6 +587,10 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
                     self.wfile.flush()
                 except (BrokenPipeError, ConnectionResetError):
                     pass
+            finally:
+                close = getattr(events, "close", None)
+                if close is not None:
+                    close()
 
     def _send_health(self) -> None:
         try:

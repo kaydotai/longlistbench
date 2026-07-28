@@ -77,7 +77,7 @@ def test_public_contract_builds_compact_strict_page_rows() -> None:
     ]
 
 
-def test_mvr_page_prompt_maps_activity_and_run_date_labels() -> None:
+def test_generic_mvr_page_prompt_has_no_demo_specific_field_guidance() -> None:
     contract = runner.contract_for_template("driver_mvr_request_and_roster")
     page = runner.Page(
         number=10,
@@ -91,14 +91,9 @@ def test_mvr_page_prompt_maps_activity_and_run_date_labels() -> None:
 
     prompt = runner.build_page_prompt(contract, page)
 
-    assert '"mvr_run_date": copy the date printed after "Run"' in prompt
-    assert '"accidents_last_5_years": copy the value from the "Accidents" row' in prompt
-    assert '"mvr_violations": copy the value from the "Moving violations" row' in prompt
-    assert 'the printed word "None" is a string value, not null' in prompt
-    assert '"date_of_birth": copy the complete value after "DATE OF BIRTH"' in prompt
-    assert '"date_hired": use only a date explicitly labeled as hired or hire date' in prompt
-    assert "If neither label appears on the page, date_hired must be null." in prompt
-    assert "Never substitute the run date or date of birth for date_hired." in prompt
+    assert "Driver MVR field rules:" not in prompt
+    assert '"mvr_run_date": copy the date printed after "Run"' not in prompt
+    assert '"date_hired": use only a date explicitly labeled as hired' not in prompt
 
 
 def test_compact_page_rows_decode_to_named_candidates_and_omit_nulls() -> None:

@@ -3,12 +3,20 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from math import hypot
+from math import ceil, hypot, isfinite
 from pathlib import Path
 import shutil
 import subprocess
 from tempfile import TemporaryDirectory
 import xml.etree.ElementTree as ElementTree
+
+
+POPPLER_TIMEOUT_SECONDS = 15
+PREVIEW_DPI = 150
+# Roughly seven A4 pages at 150 DPI; generous for normal documents while
+# bounding memory used by a malicious or malformed first-page canvas.
+MAX_PREVIEW_PIXELS = 16_000_000
+PDF_POINTS_PER_INCH = 72
 
 
 @dataclass(frozen=True)
@@ -185,6 +193,10 @@ def ingest_first_pdf_page(pdf_bytes: bytes) -> UploadedPage:
             "Could not read the first-page layout.",
         )
         width, height, words = _parse_layout(layout_path)
+        preview_width = ceil(width * PREVIEW_DPI / PDF_POINTS_PER_INCH)
+        preview_height = ceil(height * PREVIEW_DPI / PDF_POINTS_PER_INCH)
+        if preview_width * preview_height > MAX_PREVIEW_PIXELS:
+            raise ValueError("The first PDF page is too large to preview.")
 
         _run_poppler(
             [
@@ -196,7 +208,7 @@ def ingest_first_pdf_page(pdf_bytes: bytes) -> UploadedPage:
                 "-png",
                 "-singlefile",
                 "-r",
-                "150",
+                str(PREVIEW_DPI),
                 str(pdf_path),
                 str(preview_root),
             ],
@@ -221,7 +233,10 @@ def _run_poppler(command: list[str], message: str) -> None:
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             check=False,
+            timeout=POPPLER_TIMEOUT_SECONDS,
         )
+    except subprocess.TimeoutExpired as exc:
+        raise ValueError("PDF processing timed out.") from exc
     except OSError as exc:
         raise ValueError("PDF ingestion tools are unavailable.") from exc
     if completed.returncode != 0:
@@ -234,7 +249,12 @@ def _parse_layout(layout_path: Path) -> tuple[float, float, tuple[PageWord, ...]
         page = next(_elements_named(root, "page"))
         width = float(page.attrib["width"])
         height = float(page.attrib["height"])
-        if width <= 0 or height <= 0:
+        if (
+            not isfinite(width)
+            or not isfinite(height)
+            or width <= 0
+            or height <= 0
+        ):
             raise ValueError("The first page has no usable layout.")
         words = tuple(
             PageWord(

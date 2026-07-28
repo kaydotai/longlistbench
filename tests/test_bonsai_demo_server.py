@@ -3,15 +3,18 @@ from __future__ import annotations
 from email.message import Message
 from html.parser import HTMLParser
 from http import HTTPStatus
+import io
 import json
 from pathlib import Path
 import shutil
 import subprocess
+import threading
 from types import SimpleNamespace
 
 import pytest
 
 from benchmarks import run_bonsai_page_evaluation as runner
+from demo.bonsai_extract import app as demo_app
 from demo.bonsai_extract.app import (
     CompactRowStreamDecoder,
     DemoExtractionService,
@@ -178,7 +181,9 @@ def _mock_poppler(
         stdout: int,
         stderr: int,
         check: bool,
+        timeout: float,
     ) -> subprocess.CompletedProcess[bytes]:
+        assert timeout == 15
         if command[0] == "pdftotext" and "-raw" in command:
             if raw_returncode == 0:
                 Path(command[-1]).write_text(text, encoding="utf-8")
@@ -293,6 +298,93 @@ def test_pdf_ingestion_rejects_missing_poppler_tools(
     with pytest.raises(
         ValueError,
         match=r"^PDF ingestion tools are unavailable\.$",
+    ):
+        ingest_first_pdf_page(b"%PDF")
+
+
+def test_pdf_ingestion_reports_poppler_timeout(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A wedged Poppler process must terminate with a concise client error."""
+
+    def time_out(
+        command: list[str],
+        *,
+        stdout: int,
+        stderr: int,
+        check: bool,
+        timeout: float | None = None,
+    ) -> subprocess.CompletedProcess[bytes]:
+        raise subprocess.TimeoutExpired(command, timeout)
+
+    monkeypatch.setattr(pdf_page.shutil, "which", lambda program: program)
+    monkeypatch.setattr(pdf_page.subprocess, "run", time_out)
+
+    with pytest.raises(
+        ValueError,
+        match=r"^PDF processing timed out\.$",
+    ):
+        ingest_first_pdf_page(b"%PDF")
+
+
+def test_pdf_ingestion_rejects_oversize_page_before_rendering(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Pathological page dimensions must not reach the PNG renderer."""
+
+    layout = """<html><body><doc>
+    <page width="100000" height="100000">
+      <word xMin="1" yMin="2" xMax="3" yMax="4">FIRST</word>
+    </page>
+    </doc></body></html>"""
+    commands: list[list[str]] = []
+
+    def fake_run(
+        command: list[str],
+        *,
+        stdout: int,
+        stderr: int,
+        check: bool,
+        timeout: float | None = None,
+    ) -> subprocess.CompletedProcess[bytes]:
+        commands.append(command)
+        if command[0] == "pdftotext" and "-raw" in command:
+            Path(command[-1]).write_text("FIRST PAGE", encoding="utf-8")
+        elif command[0] == "pdftotext" and "-bbox-layout" in command:
+            Path(command[-1]).write_text(layout, encoding="utf-8")
+        elif command[0] == "pdftocairo":
+            raise AssertionError("oversize pages must not be rendered")
+        return subprocess.CompletedProcess(command, 0)
+
+    monkeypatch.setattr(pdf_page.shutil, "which", lambda program: program)
+    monkeypatch.setattr(pdf_page.subprocess, "run", fake_run)
+
+    with pytest.raises(
+        ValueError,
+        match=r"^The first PDF page is too large to preview\.$",
+    ):
+        ingest_first_pdf_page(b"%PDF")
+
+    assert all(command[0] != "pdftocairo" for command in commands)
+
+
+@pytest.mark.parametrize("dimension", ["nan", "inf", "-inf"])
+def test_pdf_ingestion_rejects_non_finite_page_dimensions(
+    monkeypatch: pytest.MonkeyPatch,
+    dimension: str,
+) -> None:
+    """Non-finite bbox dimensions must produce the concise layout error."""
+
+    layout = f"""<html><body><doc>
+    <page width="{dimension}" height="20">
+      <word xMin="1" yMin="2" xMax="3" yMax="4">FIRST</word>
+    </page>
+    </doc></body></html>"""
+    _mock_poppler(monkeypatch, layout=layout)
+
+    with pytest.raises(
+        ValueError,
+        match=r"^The first page has no usable layout\.$",
     ):
         ingest_first_pdf_page(b"%PDF")
 
@@ -638,6 +730,19 @@ def test_compact_row_decoder_handles_comma_in_the_next_chunk() -> None:
     ]
 
 
+def test_demo_prompt_keeps_mvr_field_guidance() -> None:
+    contract = runner.contract_for_template("driver_mvr_request_and_roster")
+    page = runner.Page(number=1, text="# Page 1\nRun 01/21/2026\n")
+
+    prompt = demo_app.build_demo_page_prompt(contract, page)
+
+    assert "Driver MVR field rules:" in prompt
+    assert '"mvr_run_date": copy the date printed after "Run"' in prompt
+    assert '"accidents_last_5_years": copy the value from the "Accidents" row' in prompt
+    assert '"mvr_violations": copy the value from the "Moving violations" row' in prompt
+    assert '"date_hired": use only a date explicitly labeled as hired' in prompt
+
+
 def test_streaming_service_emits_first_page_preview_and_rectangles(
     tmp_path: Path,
 ) -> None:
@@ -665,6 +770,9 @@ def test_streaming_service_emits_first_page_preview_and_rectangles(
         "include_usage": True
     }
     assert client.completions.requests[0]["temperature"] == 0
+    prompt = client.completions.requests[0]["messages"][0]["content"]
+    assert "Driver MVR field rules:" in prompt
+    assert '"mvr_run_date": copy the date printed after "Run"' in prompt
     field_events = [event for event in remaining if event["type"] == "field"]
     assert [(event["field"], event["value"]) for event in field_events] == [
         ("date_hired", "01/21/2026"),
@@ -735,6 +843,315 @@ def test_streaming_service_clears_prompt_cache_before_inference(
     assert order[:2] == ["cache", "inference"]
 
 
+def test_service_rejects_overlapping_runs_without_touching_shared_state(
+    tmp_path: Path,
+) -> None:
+    ingested: list[bytes] = []
+    cache_clears: list[str] = []
+    client = _FakeStreamingBonsaiClient()
+
+    def ingest(pdf_bytes: bytes) -> UploadedPage:
+        ingested.append(pdf_bytes)
+        return _uploaded_page()
+
+    service = DemoExtractionService(
+        root=ROOT,
+        output_dir=tmp_path,
+        client=client,
+        page_ingestor=ingest,
+        cache_clearer=lambda: cache_clears.append("cache"),
+    )
+
+    active_events = service.stream_pdf(b"first")
+    assert next(active_events)["type"] == "started"
+
+    with pytest.raises(
+        demo_app.ExtractionConflictError,
+        match=r"^Another extraction is already running\.$",
+    ):
+        service.stream_pdf(b"overlapping stream")
+    with pytest.raises(
+        demo_app.ExtractionConflictError,
+        match=r"^Another extraction is already running\.$",
+    ):
+        service.extract_pdf(b"overlapping extraction")
+
+    assert ingested == [b"first"]
+    assert cache_clears == ["cache"]
+    assert client.completions.requests == []
+
+    active_events.close()
+    replacement_events = service.stream_pdf(b"after close")
+    assert next(replacement_events)["type"] == "started"
+    replacement_events.close()
+    assert ingested == [b"first", b"after close"]
+    assert cache_clears == ["cache", "cache"]
+
+
+def test_service_rejects_a_run_from_another_request_thread(
+    tmp_path: Path,
+) -> None:
+    inference_started = threading.Event()
+    finish_inference = threading.Event()
+
+    class _BlockingCompletions(_FakeStreamingCompletions):
+        def create(self, **kwargs):
+            inference_started.set()
+            if not finish_inference.wait(timeout=2):
+                raise AssertionError("test did not release inference")
+            yield from super().create(**kwargs)
+
+    client = _FakeStreamingBonsaiClient()
+    client.completions = _BlockingCompletions()
+    client.api.chat.completions = client.completions
+    service = DemoExtractionService(
+        root=ROOT,
+        output_dir=tmp_path,
+        client=client,
+        page_ingestor=lambda _pdf_bytes: _uploaded_page(),
+        cache_clearer=lambda: None,
+    )
+    errors: list[BaseException] = []
+
+    def run_first_request() -> None:
+        try:
+            list(service.stream_pdf(b"first"))
+        except BaseException as exc:
+            errors.append(exc)
+
+    request_thread = threading.Thread(target=run_first_request)
+    request_thread.start()
+    assert inference_started.wait(timeout=2)
+
+    with pytest.raises(
+        demo_app.ExtractionConflictError,
+        match=r"^Another extraction is already running\.$",
+    ):
+        service.stream_pdf(b"overlapping")
+
+    finish_inference.set()
+    request_thread.join(timeout=2)
+    assert not request_thread.is_alive()
+    assert errors == []
+
+
+def test_service_releases_single_flight_guard_after_stream_exception(
+    tmp_path: Path,
+) -> None:
+    client = _FakeStreamingBonsaiClient()
+    service = DemoExtractionService(
+        root=ROOT,
+        output_dir=tmp_path,
+        client=client,
+        page_ingestor=lambda _pdf_bytes: _uploaded_page(),
+        cache_clearer=lambda: None,
+    )
+    original_stream_page = service._stream_page
+    attempts = 0
+
+    def fail_once(page, uploaded_page):
+        nonlocal attempts
+        attempts += 1
+        if attempts == 1:
+            yield {"type": "started"}
+            raise RuntimeError("stream failed")
+        yield from original_stream_page(page, uploaded_page)
+
+    service._stream_page = fail_once
+
+    events = service.stream_pdf(b"first")
+    assert next(events) == {"type": "started"}
+    with pytest.raises(RuntimeError, match="stream failed"):
+        next(events)
+
+    assert list(service.stream_pdf(b"second"))[-1]["type"] == "complete"
+
+
+def test_service_releases_single_flight_guard_after_extract_exception(
+    tmp_path: Path,
+) -> None:
+    attempts = 0
+
+    def ingest(_pdf_bytes: bytes) -> UploadedPage:
+        nonlocal attempts
+        attempts += 1
+        if attempts == 1:
+            raise ValueError("invalid first upload")
+        return _uploaded_page()
+
+    service = DemoExtractionService(
+        root=ROOT,
+        output_dir=tmp_path,
+        client=_FakeStreamingBonsaiClient(),
+        page_ingestor=ingest,
+        cache_clearer=lambda: None,
+    )
+
+    with pytest.raises(ValueError, match="invalid first upload"):
+        service.extract_pdf(b"first")
+
+    replacement_events = service.stream_pdf(b"second")
+    assert next(replacement_events)["type"] == "started"
+    replacement_events.close()
+
+
+def test_closing_event_stream_closes_upstream_before_releasing_guard(
+    tmp_path: Path,
+) -> None:
+    order: list[str] = []
+
+    class _TrackedUpstream:
+        def __init__(self) -> None:
+            self._sent = False
+
+        def __iter__(self):
+            return self
+
+        def __next__(self):
+            if self._sent:
+                raise StopIteration
+            self._sent = True
+            return SimpleNamespace(
+                choices=[
+                    SimpleNamespace(
+                        delta=SimpleNamespace(
+                            content='{"rows":[["01/21/2026"'
+                        )
+                    )
+                ],
+                usage=None,
+            )
+
+        def close(self) -> None:
+            order.append("upstream close")
+
+    upstream = _TrackedUpstream()
+    completions = SimpleNamespace(create=lambda **_kwargs: upstream)
+    client = SimpleNamespace(
+        model_id=runner.DEFAULT_MODEL_ID,
+        endpoint=runner.DEFAULT_ENDPOINT,
+        request_extra_body=runner.DEFAULT_REQUEST_EXTRA_BODY,
+        api=SimpleNamespace(
+            chat=SimpleNamespace(completions=completions)
+        ),
+    )
+
+    def ingest(_pdf_bytes: bytes) -> UploadedPage:
+        order.append("ingest")
+        return _uploaded_page()
+
+    service = DemoExtractionService(
+        root=ROOT,
+        output_dir=tmp_path,
+        client=client,
+        page_ingestor=ingest,
+        cache_clearer=lambda: None,
+    )
+
+    events = service.stream_pdf(b"first")
+    assert next(events)["type"] == "started"
+    assert next(events) == {
+        "type": "field",
+        "field": "date_hired",
+        "value": "01/21/2026",
+    }
+    events.close()
+
+    replacement = service.stream_pdf(b"replacement")
+    replacement.close()
+
+    assert order == ["ingest", "upstream close", "ingest"]
+
+
+def test_extract_endpoint_reports_single_flight_conflict() -> None:
+    class _BusyService:
+        def stream_pdf(self, _pdf_bytes: bytes):
+            raise demo_app.ExtractionConflictError(
+                "Another extraction is already running."
+            )
+
+    handler = object.__new__(DemoRequestHandler)
+    handler.path = "/api/extract"
+    handler.headers = Message()
+    handler.headers["Host"] = "127.0.0.1:8765"
+    handler.headers["Content-Type"] = "application/pdf"
+    handler.headers["Content-Length"] = "4"
+    handler.rfile = io.BytesIO(b"%PDF")
+    handler.server = SimpleNamespace(extraction_service=_BusyService())
+    responses: list[tuple[HTTPStatus, dict]] = []
+    handler._send_json = lambda status, payload: responses.append(
+        (status, payload)
+    )
+
+    handler.do_POST()
+
+    assert responses == [
+        (
+            HTTPStatus.CONFLICT,
+            {"error": "Another extraction is already running."},
+        )
+    ]
+
+
+@pytest.mark.parametrize("disconnect_at", ["headers", "body"])
+def test_extract_endpoint_closes_stream_after_client_disconnect(
+    disconnect_at: str,
+) -> None:
+    class _TrackedEvents:
+        def __init__(self) -> None:
+            self.closed = False
+            self._sent = False
+
+        def __iter__(self):
+            return self
+
+        def __next__(self):
+            if self._sent:
+                raise StopIteration
+            self._sent = True
+            return {"type": "started"}
+
+        def close(self) -> None:
+            self.closed = True
+
+    class _DisconnectingWriter:
+        def write(self, _body: bytes) -> None:
+            if disconnect_at == "body":
+                raise BrokenPipeError
+            raise AssertionError("body write must not run after header disconnect")
+
+        def flush(self) -> None:
+            raise AssertionError("flush must not run after a broken pipe")
+
+    events = _TrackedEvents()
+    handler = object.__new__(DemoRequestHandler)
+    handler.path = "/api/extract"
+    handler.headers = Message()
+    handler.headers["Host"] = "localhost:8765"
+    handler.headers["Content-Type"] = "application/pdf"
+    handler.headers["Content-Length"] = "4"
+    handler.rfile = io.BytesIO(b"%PDF")
+    handler.wfile = _DisconnectingWriter()
+    handler.server = SimpleNamespace(
+        extraction_service=SimpleNamespace(
+            stream_pdf=lambda _pdf_bytes: events
+        )
+    )
+    handler.send_response = lambda _status: None
+    handler.send_header = lambda _key, _value: None
+
+    def end_headers() -> None:
+        if disconnect_at == "headers":
+            raise BrokenPipeError
+
+    handler.end_headers = end_headers
+    handler.log_message = lambda _format, *_args: None
+
+    handler.do_POST()
+
+    assert events.closed is True
+
+
 def test_prompt_cache_clear_erases_the_llama_slot(monkeypatch) -> None:
     captured: dict[str, object] = {}
 
@@ -791,12 +1208,24 @@ def test_extract_endpoint_rejects_cross_origin_requests() -> None:
     ]
 
 
-def test_extract_endpoint_requires_pdf_content_type() -> None:
+@pytest.mark.parametrize(
+    ("host", "origin"),
+    [
+        ("127.0.0.1:8765", "http://127.0.0.1:8765"),
+        ("localhost:8765", None),
+        ("[::1]:8765", "http://[::1]:8765"),
+    ],
+)
+def test_extract_endpoint_accepts_only_loopback_request_authorities(
+    host: str,
+    origin: str | None,
+) -> None:
     handler = object.__new__(DemoRequestHandler)
     handler.path = "/api/extract"
     handler.headers = Message()
-    handler.headers["Host"] = "127.0.0.1:8765"
-    handler.headers["Origin"] = "http://127.0.0.1:8765"
+    handler.headers["Host"] = host
+    if origin is not None:
+        handler.headers["Origin"] = origin
     handler.headers["Content-Type"] = "text/plain"
     responses: list[tuple[HTTPStatus, dict]] = []
     handler._send_json = lambda status, payload: responses.append(
@@ -809,6 +1238,40 @@ def test_extract_endpoint_requires_pdf_content_type() -> None:
         (
             HTTPStatus.UNSUPPORTED_MEDIA_TYPE,
             {"error": "Upload an application/pdf document."},
+        )
+    ]
+
+
+@pytest.mark.parametrize(
+    ("host", "origin"),
+    [
+        ("demo.attacker.example:8765", None),
+        ("127.0.0.1:8765", "http://localhost:8765"),
+        ("localhost:8765", "http://localhost:9999"),
+    ],
+)
+def test_extract_endpoint_rejects_non_loopback_or_mismatched_authorities(
+    host: str,
+    origin: str | None,
+) -> None:
+    handler = object.__new__(DemoRequestHandler)
+    handler.path = "/api/extract"
+    handler.headers = Message()
+    handler.headers["Host"] = host
+    if origin is not None:
+        handler.headers["Origin"] = origin
+    handler.headers["Content-Type"] = "text/plain"
+    responses: list[tuple[HTTPStatus, dict]] = []
+    handler._send_json = lambda status, payload: responses.append(
+        (status, payload)
+    )
+
+    handler.do_POST()
+
+    assert responses == [
+        (
+            HTTPStatus.FORBIDDEN,
+            {"error": "Cross-origin extraction requests are not allowed."},
         )
     ]
 

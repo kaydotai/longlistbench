@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 
@@ -24,9 +25,17 @@ def test_demo_runtime_preflight_requires_every_pdf_ingestion_tool() -> None:
     """The launcher must reject missing tools needed for uploaded PDF previews."""
 
     script = RUN_SCRIPT.read_text(encoding="utf-8")
+    require_loop = re.search(
+        (
+            r"for\s+command\s+in\s+(?P<commands>[^;]+);\s*do\s+"
+            r'require_command\s+"\$command"\s+done'
+        ),
+        script,
+    )
 
-    assert "pdftotext" in script
-    assert "pdftocairo" in script
+    assert require_loop is not None
+    required_commands = set(require_loop.group("commands").split())
+    assert {"pdftotext", "pdftocairo"} <= required_commands
 
 
 def test_single_demo_script_stays_demo_only() -> None:
