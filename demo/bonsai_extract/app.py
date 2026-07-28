@@ -4,13 +4,11 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
+import base64
 import json
 import mimetypes
 import os
 import re
-import shutil
-import subprocess
 import time
 import urllib.error
 import urllib.parse
@@ -22,21 +20,19 @@ from collections.abc import Iterator
 from typing import Any, Callable
 
 from benchmarks import run_bonsai_page_evaluation as runner
+from demo.bonsai_extract.pdf_page import (
+    UploadedPage,
+    ingest_first_pdf_page,
+    locate_field_value,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
 SAMPLE_ID = "driver_mvr_packet_001"
 SAMPLE_TEMPLATE = "driver_mvr_request_and_roster"
-SAMPLE_PDF = ROOT / "data" / "pdfs" / f"{SAMPLE_ID}.pdf"
-SAMPLE_METADATA = ROOT / "data" / "metadata" / f"{SAMPLE_ID}.json"
 INDEX_HTML = Path(__file__).with_name("index.html")
-PAGE_IMAGE = Path(__file__).with_name("assets") / f"{SAMPLE_ID}_page_10.png"
 DEFAULT_OUTPUT_DIR = ROOT / "demo_runs" / "bonsai_extract"
 MAX_UPLOAD_BYTES = 2 * 1024 * 1024
-
-
-class UnsupportedDocumentError(ValueError):
-    """Raised when the uploaded file is not the bundled demo document."""
 
 
 def erase_llama_prompt_cache(
@@ -61,44 +57,6 @@ def erase_llama_prompt_cache(
         raise RuntimeError(
             "Could not clear the local llama.cpp prompt cache."
         ) from exc
-
-
-def extract_pdf_page_text(pdf_bytes: bytes, page_number: int) -> str:
-    """Extract one page's embedded text directly from the uploaded PDF bytes."""
-
-    executable = shutil.which("pdftotext")
-    if executable is None:
-        raise RuntimeError("pdftotext is required for local PDF ingestion")
-    completed = subprocess.run(
-        [
-            executable,
-            "-f",
-            str(page_number),
-            "-l",
-            str(page_number),
-            "-raw",
-            "-",
-            "-",
-        ],
-        input=pdf_bytes,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
-    if completed.returncode != 0:
-        error = completed.stderr.decode("utf-8", errors="replace").strip()
-        raise ValueError(f"Could not read page {page_number} from the PDF: {error}")
-    page_text = (
-        completed.stdout.decode("utf-8", errors="replace")
-        .replace("\f", "")
-        .strip()
-    )
-    if not page_text:
-        raise ValueError(
-            f"Page {page_number} has no embedded text; a real OCR or vision "
-            "stage is required for scanned PDFs"
-        )
-    return page_text
 
 
 class CompactRowStreamDecoder:
@@ -164,7 +122,7 @@ class CompactRowStreamDecoder:
 
 
 class DemoExtractionService:
-    """Validate a demo PDF and execute the repository's real page pipeline."""
+    """Ingest an uploaded first page and execute the page pipeline."""
 
     def __init__(
         self,
@@ -172,19 +130,12 @@ class DemoExtractionService:
         root: Path = ROOT,
         output_dir: Path = DEFAULT_OUTPUT_DIR,
         client: Any | None = None,
-        page_text_extractor: Callable[[bytes, int], str] = extract_pdf_page_text,
+        page_ingestor: Callable[[bytes], UploadedPage] = ingest_first_pdf_page,
         cache_clearer: Callable[[], None] | None = None,
     ) -> None:
         self.root = root
         self.output_dir = output_dir
-        self.sample_pdf = root / "data" / "pdfs" / f"{SAMPLE_ID}.pdf"
-        self.sample_metadata = (
-            root / "data" / "metadata" / f"{SAMPLE_ID}.json"
-        )
-        metadata = json.loads(self.sample_metadata.read_text(encoding="utf-8"))
-        self.expected_pdf_sha256 = metadata["artifacts"]["pdf_sha256"]
-        self.page_count = int(metadata["pdf_page_count"])
-        self.page_text_extractor = page_text_extractor
+        self.page_ingestor = page_ingestor
         self.client = client or runner.BonsaiClient(
             endpoint=runner.DEFAULT_ENDPOINT,
             model_id=runner.DEFAULT_MODEL_ID,
@@ -196,13 +147,9 @@ class DemoExtractionService:
                 self.client.endpoint
             )
 
-    def extract_pdf(
-        self,
-        pdf_bytes: bytes,
-        *,
-        page_number: int,
-    ) -> dict[str, Any]:
-        page, actual_sha256 = self._validated_page(pdf_bytes, page_number)
+    def extract_pdf(self, pdf_bytes: bytes) -> dict[str, Any]:
+        uploaded_page = self.page_ingestor(pdf_bytes)
+        page = self._runner_page(uploaded_page)
         self.cache_clearer()
         checkpoints = runner.extract_pages(
             sample=SAMPLE_ID,
@@ -213,50 +160,34 @@ class DemoExtractionService:
             resume=False,
             validation_attempts=1,
         )
-        return self._browser_result(checkpoints[0], actual_sha256)
+        return self._browser_result(checkpoints[0])
 
-    def stream_pdf(
-        self,
-        pdf_bytes: bytes,
-        *,
-        page_number: int,
-    ) -> Iterator[dict[str, Any]]:
-        page, actual_sha256 = self._validated_page(pdf_bytes, page_number)
+    def stream_pdf(self, pdf_bytes: bytes) -> Iterator[dict[str, Any]]:
+        uploaded_page = self.page_ingestor(pdf_bytes)
+        page = self._runner_page(uploaded_page)
         self.cache_clearer()
-        return self._stream_page(page, actual_sha256)
+        return self._stream_page(page, uploaded_page)
 
-    def _validated_page(
-        self,
-        pdf_bytes: bytes,
-        page_number: int,
-    ) -> tuple[runner.Page, str]:
-        actual_sha256 = hashlib.sha256(pdf_bytes).hexdigest()
-        if actual_sha256 != self.expected_pdf_sha256:
-            raise UnsupportedDocumentError(
-                "This demo currently accepts only the bundled demo PDF."
-            )
-
-        if page_number < 1 or page_number > self.page_count:
-            raise ValueError(
-                f"page {page_number} is not present in the uploaded PDF"
-            )
-        page_text = self.page_text_extractor(pdf_bytes, page_number)
-        page = runner.Page(
-            number=page_number,
-            text=f"# Page {page_number}\n\n{page_text}\n",
+    @staticmethod
+    def _runner_page(uploaded_page: UploadedPage) -> runner.Page:
+        return runner.Page(
+            number=1,
+            text=f"# Page 1\n\n{uploaded_page.text}\n",
         )
-        return page, actual_sha256
 
     def _stream_page(
         self,
         page: runner.Page,
-        actual_sha256: str,
+        uploaded_page: UploadedPage,
     ) -> Iterator[dict[str, Any]]:
         yield {
             "type": "started",
             "model_id": self.client.model_id,
             "page_number": page.number,
-            "source": "embedded_pdf_text",
+            "preview_data_url": (
+                "data:image/png;base64,"
+                + base64.b64encode(uploaded_page.preview_png).decode("ascii")
+            ),
         }
 
         contract = runner.contract_for_template(SAMPLE_TEMPLATE)
@@ -324,7 +255,16 @@ class DemoExtractionService:
                 continue
             content_parts.append(content)
             for field_event in decoder.feed(content):
-                yield {"type": "field", **field_event}
+                event = {"type": "field", **field_event}
+                if field_event["value"] is not None:
+                    rectangle = locate_field_value(
+                        uploaded_page,
+                        field_event["field"],
+                        field_event["value"],
+                    )
+                    if rectangle is not None:
+                        event["rectangle"] = rectangle
+                yield event
 
         payload = json.loads("".join(content_parts))
         candidates = runner._validate_candidates(payload, contract)
@@ -370,18 +310,16 @@ class DemoExtractionService:
         )
         yield {
             "type": "complete",
-            "result": self._browser_result(checkpoint, actual_sha256),
+            "result": self._browser_result(checkpoint),
         }
 
     @staticmethod
     def _browser_result(
         checkpoint: dict[str, Any],
-        actual_sha256: str,
     ) -> dict[str, Any]:
         elapsed_seconds = float(checkpoint.get("elapsed_seconds") or 0)
         completion_tokens = int(checkpoint.get("completion_tokens") or 0)
         result = dict(checkpoint)
-        result["pdf_sha256"] = actual_sha256
         result["output_tokens_per_second"] = (
             completion_tokens / elapsed_seconds if elapsed_seconds > 0 else 0
         )
@@ -411,10 +349,6 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
         route = urllib.parse.urlparse(self.path).path
         if route == "/":
             self._send_file(INDEX_HTML, "text/html; charset=utf-8")
-        elif route == "/sample.pdf":
-            self._send_file(SAMPLE_PDF, "application/pdf")
-        elif route == "/page-10.png":
-            self._send_file(PAGE_IMAGE, "image/png")
         elif route == "/api/health":
             self._send_health()
         else:
@@ -463,27 +397,9 @@ class DemoRequestHandler(BaseHTTPRequestHandler):
             )
             return
 
-        query = urllib.parse.parse_qs(parsed.query)
-        try:
-            page_number = int(query.get("page", ["10"])[0])
-        except ValueError:
-            self._send_json(
-                HTTPStatus.BAD_REQUEST,
-                {"error": "The page parameter must be an integer."},
-            )
-            return
-
         pdf_bytes = self.rfile.read(content_length)
         try:
-            events = self.extraction_service.stream_pdf(
-                pdf_bytes,
-                page_number=page_number,
-            )
-        except UnsupportedDocumentError as exc:
-            self._send_json(
-                HTTPStatus.UNPROCESSABLE_ENTITY,
-                {"error": str(exc)},
-            )
+            events = self.extraction_service.stream_pdf(pdf_bytes)
         except ValueError as exc:
             self._send_json(HTTPStatus.BAD_REQUEST, {"error": str(exc)})
         except Exception as exc:

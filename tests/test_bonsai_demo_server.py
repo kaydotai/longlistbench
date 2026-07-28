@@ -4,7 +4,6 @@ from email.message import Message
 from html.parser import HTMLParser
 from http import HTTPStatus
 from pathlib import Path
-import shutil
 import subprocess
 from types import SimpleNamespace
 
@@ -15,9 +14,7 @@ from demo.bonsai_extract.app import (
     CompactRowStreamDecoder,
     DemoExtractionService,
     DemoRequestHandler,
-    UnsupportedDocumentError,
     erase_llama_prompt_cache,
-    extract_pdf_page_text,
 )
 from demo.bonsai_extract import pdf_page
 from demo.bonsai_extract.pdf_page import (
@@ -59,6 +56,23 @@ def _matcher_page(words: tuple[PageWord, ...]) -> UploadedPage:
         height=1,
         words=words,
         preview_png=b"PNG",
+    )
+
+
+def _uploaded_page() -> UploadedPage:
+    """Return a first-page fixture with an anchorable extracted name."""
+
+    return UploadedPage(
+        text=SAMPLE_PAGE_TEXT,
+        width=612,
+        height=792,
+        words=(
+            PageWord("FULL", 0.10, 0.20, 0.17, 0.22),
+            PageWord("NAME", 0.18, 0.20, 0.25, 0.22),
+            PageWord("ROSA", 0.31, 0.24, 0.37, 0.26),
+            PageWord("NGUYEN", 0.38, 0.24, 0.47, 0.26),
+        ),
+        preview_png=b"\x89PNG\r\n\x1a\npreview",
     )
 
 
@@ -257,11 +271,6 @@ def test_pdf_ingestion_rejects_missing_poppler_tools(
         ingest_first_pdf_page(b"%PDF")
 
 
-def _sample_page_text(_pdf_bytes: bytes, page_number: int) -> str:
-    assert page_number == 10
-    return SAMPLE_PAGE_TEXT
-
-
 class _ButtonParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
@@ -447,7 +456,7 @@ def test_compact_row_decoder_handles_comma_in_the_next_chunk() -> None:
     ]
 
 
-def test_streaming_service_emits_fields_before_the_completed_result(
+def test_streaming_service_emits_first_page_preview_and_rectangles(
     tmp_path: Path,
 ) -> None:
     client = _FakeStreamingBonsaiClient()
@@ -455,17 +464,16 @@ def test_streaming_service_emits_fields_before_the_completed_result(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
-        page_text_extractor=_sample_page_text,
+        page_ingestor=lambda _pdf_bytes: _uploaded_page(),
         cache_clearer=lambda: None,
     )
 
-    events = service.stream_pdf(SAMPLE_PDF.read_bytes(), page_number=10)
-    assert next(events) == {
-        "type": "started",
-        "model_id": runner.DEFAULT_MODEL_ID,
-        "page_number": 10,
-        "source": "embedded_pdf_text",
-    }
+    events = service.stream_pdf(b"arbitrary uploaded PDF bytes")
+    started = next(events)
+    assert started["type"] == "started"
+    assert started["model_id"] == runner.DEFAULT_MODEL_ID
+    assert started["page_number"] == 1
+    assert started["preview_data_url"].startswith("data:image/png;base64,")
     assert client.completions.requests == []
 
     remaining = list(events)
@@ -488,6 +496,13 @@ def test_streaming_service_emits_fields_before_the_completed_result(
         ("accidents_last_5_years", None),
         ("mvr_violations", None),
     ]
+    name_event = next(event for event in field_events if event["field"] == "name")
+    assert name_event["rectangle"] == {
+        "left": pytest.approx(0.31),
+        "top": pytest.approx(0.24),
+        "width": pytest.approx(0.16),
+        "height": pytest.approx(0.02),
+    }
     assert remaining[-1]["type"] == "complete"
     result = remaining[-1]["result"]
     assert result["prompt_tokens"] == 382
@@ -495,6 +510,29 @@ def test_streaming_service_emits_fields_before_the_completed_result(
     assert result["prefill_tokens_per_second"] == 91.2
     assert result["decode_tokens_per_second"] == 15.8
     assert result["candidates"][0]["name"] == "ROSA NGUYEN"
+
+
+def test_streaming_service_passes_arbitrary_pdf_bytes_to_the_ingestor(
+    tmp_path: Path,
+) -> None:
+    received: list[bytes] = []
+    client = _FakeStreamingBonsaiClient()
+
+    def ingest(pdf_bytes: bytes) -> UploadedPage:
+        received.append(pdf_bytes)
+        return _uploaded_page()
+
+    service = DemoExtractionService(
+        root=ROOT,
+        output_dir=tmp_path,
+        client=client,
+        page_ingestor=ingest,
+        cache_clearer=lambda: None,
+    )
+
+    list(service.stream_pdf(b"any valid-or-invalid document bytes"))
+
+    assert received == [b"any valid-or-invalid document bytes"]
 
 
 def test_streaming_service_clears_prompt_cache_before_inference(
@@ -506,11 +544,11 @@ def test_streaming_service_clears_prompt_cache_before_inference(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
-        page_text_extractor=_sample_page_text,
+        page_ingestor=lambda _pdf_bytes: _uploaded_page(),
         cache_clearer=lambda: order.append("cache"),
     )
 
-    list(service.stream_pdf(SAMPLE_PDF.read_bytes(), page_number=10))
+    list(service.stream_pdf(b"uploaded bytes"))
 
     assert order[:2] == ["cache", "inference"]
 
@@ -551,7 +589,7 @@ def test_prompt_cache_clear_erases_the_llama_slot(monkeypatch) -> None:
 
 def test_extract_endpoint_rejects_cross_origin_requests() -> None:
     handler = object.__new__(DemoRequestHandler)
-    handler.path = "/api/extract?page=10"
+    handler.path = "/api/extract"
     handler.headers = Message()
     handler.headers["Host"] = "127.0.0.1:8765"
     handler.headers["Origin"] = "https://example.com"
@@ -573,7 +611,7 @@ def test_extract_endpoint_rejects_cross_origin_requests() -> None:
 
 def test_extract_endpoint_requires_pdf_content_type() -> None:
     handler = object.__new__(DemoRequestHandler)
-    handler.path = "/api/extract?page=10"
+    handler.path = "/api/extract"
     handler.headers = Message()
     handler.headers["Host"] = "127.0.0.1:8765"
     handler.headers["Origin"] = "http://127.0.0.1:8765"
@@ -602,94 +640,67 @@ def test_non_streaming_service_clears_prompt_cache_before_inference(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
-        page_text_extractor=_sample_page_text,
+        page_ingestor=lambda _pdf_bytes: _uploaded_page(),
         cache_clearer=lambda: order.append("cache"),
     )
 
-    service.extract_pdf(SAMPLE_PDF.read_bytes(), page_number=10)
+    service.extract_pdf(b"uploaded bytes")
 
     assert order[:2] == ["cache", "inference"]
-
-
-def test_exact_bundled_pdf_is_required_before_inference(tmp_path: Path) -> None:
-    order: list[str] = []
-    client = _FakeBonsaiClient(order=order)
-    service = DemoExtractionService(
-        root=ROOT,
-        output_dir=tmp_path,
-        client=client,
-        cache_clearer=lambda: order.append("cache"),
-    )
-
-    with pytest.raises(UnsupportedDocumentError, match="bundled demo PDF"):
-        service.extract_pdf(SAMPLE_PDF.read_bytes() + b"changed", page_number=10)
-
-    assert client.prompts == []
-    assert order == []
-
-
-@pytest.mark.skipif(
-    shutil.which("pdftotext") is None,
-    reason="Poppler is a documented runtime prerequisite",
-)
-def test_pdf_page_text_is_extracted_from_the_uploaded_document() -> None:
-    page_text = extract_pdf_page_text(
-        SAMPLE_PDF.read_bytes(),
-        page_number=10,
-    )
-
-    assert "Certified Employer Driving Record" in page_text
-    assert "ROSA NGUYEN" in page_text
-    assert "Run 01/21/2026" in page_text
-    assert "DATE OF BIRTH\n05/10/1978" in page_text
-    assert "Accidents 0" in page_text
-    assert "Moving violations None" in page_text
 
 
 def test_service_uses_fresh_pdf_text_instead_of_cached_transcript(
     tmp_path: Path,
 ) -> None:
     client = _FakeBonsaiClient()
-    calls: list[tuple[bytes, int]] = []
+    calls: list[bytes] = []
 
-    def extract_page(pdf_bytes: bytes, page_number: int) -> str:
-        calls.append((pdf_bytes, page_number))
-        return "FRESH PDF PAGE\nAccidents 0\nMoving violations None"
+    def ingest(pdf_bytes: bytes) -> UploadedPage:
+        calls.append(pdf_bytes)
+        page = _uploaded_page()
+        return UploadedPage(
+            text="FRESH PDF PAGE\nAccidents 0\nMoving violations None",
+            width=page.width,
+            height=page.height,
+            words=page.words,
+            preview_png=page.preview_png,
+        )
 
     service = DemoExtractionService(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
-        page_text_extractor=extract_page,
+        page_ingestor=ingest,
         cache_clearer=lambda: None,
     )
 
-    service.extract_pdf(SAMPLE_PDF.read_bytes(), page_number=10)
+    uploaded_bytes = b"fresh bytes"
+    service.extract_pdf(uploaded_bytes)
 
-    assert calls == [(SAMPLE_PDF.read_bytes(), 10)]
+    assert calls == [uploaded_bytes]
     assert "FRESH PDF PAGE" in client.prompts[0]
     assert "MOTOR VEHICLE RECORDS BUREAU" not in client.prompts[0]
 
 
-def test_page_10_runs_through_existing_page_pipeline(tmp_path: Path) -> None:
+def test_first_page_runs_through_existing_page_pipeline(tmp_path: Path) -> None:
     client = _FakeBonsaiClient()
     service = DemoExtractionService(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
-        page_text_extractor=_sample_page_text,
+        page_ingestor=lambda _pdf_bytes: _uploaded_page(),
         cache_clearer=lambda: None,
     )
 
-    result = service.extract_pdf(SAMPLE_PDF.read_bytes(), page_number=10)
+    result = service.extract_pdf(b"uploaded bytes")
 
     assert len(client.prompts) == 1
-    assert "# Page 10" in client.prompts[0]
+    assert "# Page 1" in client.prompts[0]
     assert "ROSA NGUYEN" in client.prompts[0]
     assert "05/10/1978" in client.prompts[0]
-    assert "# Page 11" not in client.prompts[0]
+    assert "# Page 2" not in client.prompts[0]
     assert result["sample"] == "driver_mvr_packet_001"
-    assert result["page_number"] == 10
+    assert result["page_number"] == 1
     assert result["candidates"] == [
         {
             "date_hired": "01/21/2026",
@@ -714,21 +725,6 @@ def test_page_10_runs_through_existing_page_pipeline(tmp_path: Path) -> None:
         tmp_path
         / "pages"
         / "driver_mvr_packet_001"
-        / "page_0010.json"
+        / "page_0001.json"
     )
     assert checkpoint.is_file()
-
-
-def test_unsupported_page_is_rejected_without_inference(tmp_path: Path) -> None:
-    client = _FakeBonsaiClient()
-    service = DemoExtractionService(
-        root=ROOT,
-        output_dir=tmp_path,
-        client=client,
-        cache_clearer=lambda: None,
-    )
-
-    with pytest.raises(ValueError, match="page 99"):
-        service.extract_pdf(SAMPLE_PDF.read_bytes(), page_number=99)
-
-    assert client.prompts == []
