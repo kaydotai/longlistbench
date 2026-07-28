@@ -309,7 +309,6 @@
 
     .page {
       position: relative;
-      height: min(88vh, 630px);
       overflow: hidden;
       border: 1px solid #d7d6d0;
       background: white;
@@ -596,6 +595,7 @@
   <script>
     const app = document.getElementById("app");
     const page = document.getElementById("page");
+    const documentStage = document.querySelector(".document-stage");
     const pageImage = document.getElementById("page-image");
     const highlightLayer = document.getElementById("highlight-layer");
     const replay = document.getElementById("replay");
@@ -624,6 +624,24 @@
         .replaceAll("-", " ");
     }
 
+    function fitPreviewToStage() {
+      if (!pageImage.naturalWidth || !pageImage.naturalHeight) return;
+      const stageStyle = getComputedStyle(documentStage);
+      const availableWidth = documentStage.clientWidth -
+        parseFloat(stageStyle.paddingLeft) - parseFloat(stageStyle.paddingRight);
+      const availableHeight = documentStage.clientHeight -
+        parseFloat(stageStyle.paddingTop) - parseFloat(stageStyle.paddingBottom);
+      const scale = Math.min(
+        availableWidth / pageImage.naturalWidth,
+        availableHeight / pageImage.naturalHeight
+      );
+
+      page.style.width = `${pageImage.naturalWidth * scale}px`;
+      page.style.height = `${pageImage.naturalHeight * scale}px`;
+      page.style.aspectRatio =
+        `${pageImage.naturalWidth} / ${pageImage.naturalHeight}`;
+    }
+
     function resetRunState() {
       if (runController) runController.abort();
       runController = null;
@@ -636,6 +654,8 @@
       });
       highlightLayer.replaceChildren();
       pageImage.removeAttribute("src");
+      page.style.removeProperty("width");
+      page.style.removeProperty("height");
       page.style.removeProperty("aspect-ratio");
       candidateName.textContent = "Waiting for output";
       prefillRate.textContent = "— tok/s";
@@ -746,8 +766,7 @@
             pageImage.addEventListener(
               "load",
               () => {
-                page.style.aspectRatio =
-                  `${pageImage.naturalWidth} / ${pageImage.naturalHeight}`;
+                fitPreviewToStage();
                 page.classList.add("visible", "scanning");
               },
               {once: true}
@@ -827,6 +846,8 @@
     function handleFiles(files) {
       startRun(files && files[0]);
     }
+
+    window.addEventListener("resize", fitPreviewToStage);
 
     ["dragenter", "dragover"].forEach(type => {
       dropZone.addEventListener(type, event => {

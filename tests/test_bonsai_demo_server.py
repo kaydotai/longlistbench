@@ -549,11 +549,18 @@ def test_demo_ui_renders_non_a4_preview_rectangles_and_reset() -> None:
         page.wait_for_function(
             "document.getElementById('page').classList.contains('visible')"
         )
+        page.wait_for_timeout(800)
         rendered = page.evaluate(
             """() => {
+              const stage = document.querySelector(".document-stage").getBoundingClientRect();
+              const page = document.getElementById("page").getBoundingClientRect();
               const highlight = document.querySelector(".highlight");
+              const highlightRect = highlight.getBoundingClientRect();
               return {
                 aspectRatio: document.getElementById("page").style.aspectRatio,
+                stage: {left: stage.left, top: stage.top, right: stage.right, bottom: stage.bottom},
+                page: {left: page.left, top: page.top, right: page.right, bottom: page.bottom, width: page.width, height: page.height},
+                highlightRect: {left: highlightRect.left, top: highlightRect.top, right: highlightRect.right, bottom: highlightRect.bottom},
                 highlight: {
                   left: highlight.style.left,
                   top: highlight.style.top,
@@ -579,6 +586,19 @@ def test_demo_ui_renders_non_a4_preview_rectangles_and_reset() -> None:
         "width": "50%",
         "height": "12.5%",
     }
+    assert rendered["page"]["left"] >= rendered["stage"]["left"] - 1
+    assert rendered["page"]["top"] >= rendered["stage"]["top"] - 1
+    assert rendered["page"]["right"] <= rendered["stage"]["right"] + 1
+    assert rendered["page"]["bottom"] <= rendered["stage"]["bottom"] + 1
+    assert rendered["page"]["width"] / rendered["page"]["height"] == pytest.approx(2, abs=0.02)
+    assert rendered["highlightRect"]["left"] >= rendered["page"]["left"] - 1
+    assert rendered["highlightRect"]["top"] >= rendered["page"]["top"] - 1
+    assert rendered["highlightRect"]["right"] <= rendered["page"]["right"] + 1
+    assert rendered["highlightRect"]["bottom"] <= rendered["page"]["bottom"] + 1
+    assert rendered["highlightRect"]["left"] >= rendered["stage"]["left"] - 1
+    assert rendered["highlightRect"]["top"] >= rendered["stage"]["top"] - 1
+    assert rendered["highlightRect"]["right"] <= rendered["stage"]["right"] + 1
+    assert rendered["highlightRect"]["bottom"] <= rendered["stage"]["bottom"] + 1
     assert reset == {"highlights": 0, "previewSource": None}
 
 
