@@ -118,7 +118,7 @@ git commit -m "Add dynamic first-page PDF ingestion"
 - Modify: `tests/test_bonsai_demo_server.py`
 
 **Interfaces:**
-- Consumes: `PageWord`, page width, and page height from Task 1.
+- Consumes: `PageWord` coordinates already normalized to `0.0..1.0` by Task 1.
 - Produces: `locate_field_value(page: UploadedPage, field: str, value: object) -> dict[str, float] | None`.
 - Rectangle keys are `left`, `top`, `width`, and `height`, each normalized to the inclusive range `0.0..1.0`.
 
@@ -173,7 +173,7 @@ Normalize whitespace and case only. Find contiguous word sequences matching the
 field value. For fields with labels, find matching label sequences and choose
 the value occurrence with the smallest Euclidean distance from a label center,
 preferring values below or to the right of the label. Union the chosen value
-word boxes and normalize by the Poppler page dimensions.
+word boxes directly; do not divide the already-normalized coordinates again.
 
 - [ ] **Step 4: Run matcher and ingestion tests**
 
