@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import hypot
 from pathlib import Path
 import shutil
 import subprocess
@@ -26,6 +27,112 @@ class UploadedPage:
     height: float
     words: tuple[PageWord, ...]
     preview_png: bytes
+
+
+FIELD_LABELS = {
+    "name": ("FULL NAME",),
+    "date_of_birth": ("DATE OF BIRTH",),
+    "license_class": ("LICENSE CLASS",),
+    "license_number": ("LICENSE NUMBER",),
+    "state_licensed": ("JURISDICTION",),
+    "accidents_last_5_years": ("Accidents",),
+    "mvr_violations": ("Moving violations",),
+    "mvr_run_date": ("Run",),
+}
+
+
+def locate_field_value(
+    page: UploadedPage,
+    field: str,
+    value: object,
+) -> dict[str, float] | None:
+    """Locate an extracted value using its field label as a semantic anchor."""
+
+    if value is None or field not in FIELD_LABELS:
+        return None
+
+    value_terms = _normalized_terms(str(value))
+    if not value_terms:
+        return None
+
+    value_matches = _find_word_sequences(page.words, value_terms)
+    if not value_matches:
+        return None
+
+    label_matches = [
+        match
+        for label in FIELD_LABELS[field]
+        for match in _find_word_sequences(page.words, _normalized_terms(label))
+    ]
+    if not label_matches:
+        return None
+
+    value_words = min(
+        value_matches,
+        key=lambda candidate: min(
+            _anchor_distance_score(candidate, label)
+            for label in label_matches
+        ),
+    )
+    left = min(word.x_min for word in value_words)
+    top = min(word.y_min for word in value_words)
+    right = max(word.x_max for word in value_words)
+    bottom = max(word.y_max for word in value_words)
+    return {
+        "left": max(0.0, min(left, 1.0)),
+        "top": max(0.0, min(top, 1.0)),
+        "width": max(0.0, min(right, 1.0) - max(0.0, min(left, 1.0))),
+        "height": max(0.0, min(bottom, 1.0) - max(0.0, min(top, 1.0))),
+    }
+
+
+def _normalized_terms(text: str) -> tuple[str, ...]:
+    normalized = _normalized_text(text)
+    return tuple(normalized.split(" ")) if normalized else ()
+
+
+def _normalized_text(text: str) -> str:
+    return " ".join(text.split()).casefold()
+
+
+def _find_word_sequences(
+    words: tuple[PageWord, ...],
+    terms: tuple[str, ...],
+) -> list[tuple[PageWord, ...]]:
+    if not terms:
+        return []
+    normalized_words = tuple(_normalized_text(word.text) for word in words)
+    return [
+        words[index : index + len(terms)]
+        for index in range(len(words) - len(terms) + 1)
+        if normalized_words[index : index + len(terms)] == terms
+    ]
+
+
+def _anchor_distance_score(
+    value_words: tuple[PageWord, ...],
+    label_words: tuple[PageWord, ...],
+) -> tuple[bool, float]:
+    value_center = _word_sequence_center(value_words)
+    label_center = _word_sequence_center(label_words)
+    is_below_or_right = (
+        value_center[1] >= label_center[1]
+        or value_center[0] >= label_center[0]
+    )
+    return (
+        not is_below_or_right,
+        hypot(
+            value_center[0] - label_center[0],
+            value_center[1] - label_center[1],
+        ),
+    )
+
+
+def _word_sequence_center(words: tuple[PageWord, ...]) -> tuple[float, float]:
+    return (
+        (min(word.x_min for word in words) + max(word.x_max for word in words)) / 2,
+        (min(word.y_min for word in words) + max(word.y_max for word in words)) / 2,
+    )
 
 
 def ingest_first_pdf_page(pdf_bytes: bytes) -> UploadedPage:

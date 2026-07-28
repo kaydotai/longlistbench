@@ -20,7 +20,12 @@ from demo.bonsai_extract.app import (
     extract_pdf_page_text,
 )
 from demo.bonsai_extract import pdf_page
-from demo.bonsai_extract.pdf_page import ingest_first_pdf_page
+from demo.bonsai_extract.pdf_page import (
+    PageWord,
+    UploadedPage,
+    ingest_first_pdf_page,
+    locate_field_value,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,6 +50,79 @@ Moving violations None
 _VALID_BBOX_LAYOUT = """<html><body><doc>
 <page width="10" height="20"><word xMin="1" yMin="2" xMax="3" yMax="4">FIRST</word></page>
 </doc></body></html>"""
+
+
+def _matcher_page(words: tuple[PageWord, ...]) -> UploadedPage:
+    return UploadedPage(
+        text="synthetic page",
+        width=1,
+        height=1,
+        words=words,
+        preview_png=b"PNG",
+    )
+
+
+def test_rectangle_matcher_prefers_value_nearest_its_semantic_label() -> None:
+    page = _matcher_page(
+        (
+            PageWord("LA", 0.25, 0.10, 0.31, 0.12),
+            PageWord("J100", 0.32, 0.10, 0.38, 0.12),
+            PageWord("200", 0.39, 0.10, 0.43, 0.12),
+            PageWord("300", 0.44, 0.10, 0.48, 0.12),
+            PageWord("LICENSE", 0.10, 0.36, 0.20, 0.38),
+            PageWord("NUMBER", 0.21, 0.36, 0.30, 0.38),
+            PageWord("LA", 0.31, 0.40, 0.36, 0.42),
+            PageWord("J100", 0.37, 0.40, 0.42, 0.42),
+            PageWord("200", 0.43, 0.40, 0.47, 0.42),
+            PageWord("300", 0.48, 0.40, 0.50, 0.42),
+        )
+    )
+
+    rect = locate_field_value(page, "license_number", "LA J100 200 300")
+
+    assert rect == {
+        "left": pytest.approx(0.31),
+        "top": pytest.approx(0.40),
+        "width": pytest.approx(0.19),
+        "height": pytest.approx(0.02),
+    }
+    assert locate_field_value(page, "date_hired", None) is None
+    assert locate_field_value(page, "name", "NOT PRESENT") is None
+
+
+@pytest.mark.parametrize(
+    ("field", "label", "value", "value_words"),
+    [
+        ("name", "FULL NAME", "ROSA NGUYEN", ("ROSA", "NGUYEN")),
+        ("date_of_birth", "DATE OF BIRTH", "05/10/1978", ("05/10/1978",)),
+        ("license_class", "LICENSE CLASS", "A", ("A",)),
+        ("state_licensed", "JURISDICTION", "LA", ("LA",)),
+        ("accidents_last_5_years", "Accidents", "0", ("0",)),
+        ("mvr_violations", "Moving violations", "None", ("None",)),
+        ("mvr_run_date", "Run", "01/21/2026", ("01/21/2026",)),
+    ],
+)
+def test_rectangle_matcher_uses_each_field_label_as_an_anchor(
+    field: str,
+    label: str,
+    value: str,
+    value_words: tuple[str, ...],
+) -> None:
+    label_words = tuple(label.split())
+    words = tuple(
+        PageWord(word, 0.10 + index * 0.08, 0.20, 0.17 + index * 0.08, 0.22)
+        for index, word in enumerate(label_words)
+    ) + tuple(
+        PageWord(word, 0.31 + index * 0.08, 0.30, 0.37 + index * 0.08, 0.32)
+        for index, word in enumerate(value_words)
+    )
+
+    assert locate_field_value(_matcher_page(words), field, value) == {
+        "left": pytest.approx(0.31),
+        "top": pytest.approx(0.30),
+        "width": pytest.approx(0.06 + (len(value_words) - 1) * 0.08),
+        "height": pytest.approx(0.02),
+    }
 
 
 def _mock_poppler(
