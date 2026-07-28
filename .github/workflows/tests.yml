@@ -26,9 +26,6 @@ jobs:
           -r benchmarks/requirements.txt
           -r benchmarks/requirements-hf.txt
 
-      - name: Install Playwright Chromium
-        run: python -m playwright install --with-deps chromium
-
       - name: Run tests
         run: python -m pytest -q
 
