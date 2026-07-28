@@ -4,6 +4,7 @@ from email.message import Message
 from html.parser import HTMLParser
 from http import HTTPStatus
 from pathlib import Path
+import shutil
 from types import SimpleNamespace
 
 import pytest
@@ -22,6 +23,26 @@ from demo.bonsai_extract.app import (
 ROOT = Path(__file__).resolve().parents[1]
 SAMPLE_PDF = ROOT / "data" / "pdfs" / "driver_mvr_packet_001.pdf"
 DEMO_HTML = ROOT / "demo" / "bonsai_extract" / "index.html"
+SAMPLE_PAGE_TEXT = """Certified Employer Driving Record
+Run 01/21/2026
+FULL NAME
+ROSA NGUYEN
+DATE OF BIRTH
+05/10/1978
+LICENSE CLASS
+A
+LICENSE NUMBER
+LA J100 200 300
+JURISDICTION
+LA
+Accidents 0
+Moving violations None
+"""
+
+
+def _sample_page_text(_pdf_bytes: bytes, page_number: int) -> str:
+    assert page_number == 10
+    return SAMPLE_PAGE_TEXT
 
 
 class _ButtonParser(HTMLParser):
@@ -217,6 +238,7 @@ def test_streaming_service_emits_fields_before_the_completed_result(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
+        page_text_extractor=_sample_page_text,
         cache_clearer=lambda: None,
     )
 
@@ -267,6 +289,7 @@ def test_streaming_service_clears_prompt_cache_before_inference(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
+        page_text_extractor=_sample_page_text,
         cache_clearer=lambda: order.append("cache"),
     )
 
@@ -362,6 +385,7 @@ def test_non_streaming_service_clears_prompt_cache_before_inference(
         root=ROOT,
         output_dir=tmp_path,
         client=client,
+        page_text_extractor=_sample_page_text,
         cache_clearer=lambda: order.append("cache"),
     )
 
@@ -387,6 +411,10 @@ def test_exact_bundled_pdf_is_required_before_inference(tmp_path: Path) -> None:
     assert order == []
 
 
+@pytest.mark.skipif(
+    shutil.which("pdftotext") is None,
+    reason="Poppler is a documented runtime prerequisite",
+)
 def test_pdf_page_text_is_extracted_from_the_uploaded_document() -> None:
     page_text = extract_pdf_page_text(
         SAMPLE_PDF.read_bytes(),
@@ -432,6 +460,7 @@ def test_page_10_runs_through_existing_page_pipeline(tmp_path: Path) -> None:
         root=ROOT,
         output_dir=tmp_path,
         client=client,
+        page_text_extractor=_sample_page_text,
         cache_clearer=lambda: None,
     )
 
