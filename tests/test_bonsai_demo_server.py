@@ -28,6 +28,10 @@ from demo.bonsai_extract.pdf_page import (
 
 ROOT = Path(__file__).resolve().parents[1]
 SAMPLE_PDF = ROOT / "data" / "pdfs" / "driver_mvr_packet_001.pdf"
+DEMO_UPLOAD_PDF = ROOT / "demo" / "bonsai_extract" / "assets" / "driver_mvr_record_001.pdf"
+REMOVED_DEMO_UPLOAD_PNG = (
+    ROOT / "demo" / "bonsai_extract" / "assets" / "driver_mvr_packet_001_page_10.png"
+)
 DEMO_HTML = ROOT / "demo" / "bonsai_extract" / "index.html"
 SAMPLE_PAGE_TEXT = """Certified Employer Driving Record
 Run 01/21/2026
@@ -48,6 +52,21 @@ Moving violations None
 _VALID_BBOX_LAYOUT = """<html><body><doc>
 <page width="10" height="20"><word xMin="1" yMin="2" xMax="3" yMax="4">FIRST</word></page>
 </doc></body></html>"""
+
+
+def test_bundled_rosa_sample_upload_is_a_one_page_pdf() -> None:
+    """The recommended upload must be a self-contained Rosa MVR record."""
+
+    assert DEMO_UPLOAD_PDF.read_bytes().startswith(b"%PDF")
+    pdf_info = subprocess.run(
+        ["pdfinfo", str(DEMO_UPLOAD_PDF)],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    assert "Pages:           1" in pdf_info.stdout
+    assert not REMOVED_DEMO_UPLOAD_PNG.exists()
 
 
 def _matcher_page(words: tuple[PageWord, ...]) -> UploadedPage:

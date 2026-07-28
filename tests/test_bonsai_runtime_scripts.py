@@ -20,6 +20,15 @@ def test_single_demo_script_owns_setup_and_runtime() -> None:
     assert "-m demo.bonsai_extract.app" in script
 
 
+def test_demo_runtime_preflight_requires_every_pdf_ingestion_tool() -> None:
+    """The launcher must reject missing tools needed for uploaded PDF previews."""
+
+    script = RUN_SCRIPT.read_text(encoding="utf-8")
+
+    assert "pdftotext" in script
+    assert "pdftocairo" in script
+
+
 def test_single_demo_script_stays_demo_only() -> None:
     script = RUN_SCRIPT.read_text(encoding="utf-8")
 
@@ -60,3 +69,4 @@ def test_readme_documents_one_command_demo() -> None:
     assert "about 6.7 GB" in readme
     assert "brew install python cmake poppler" in readme
     assert "Press Ctrl-C" in readme
+    assert "demo/bonsai_extract/assets/driver_mvr_record_001.pdf" in readme

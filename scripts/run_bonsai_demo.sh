@@ -43,7 +43,7 @@ cleanup() {
 trap cleanup EXIT
 trap 'exit 130' INT TERM
 
-for command in python3 git cmake curl pdftotext open; do
+for command in python3 git cmake curl pdftotext pdftocairo open; do
     require_command "$command"
 done
 
@@ -158,7 +158,7 @@ done
 
 DEMO_URL="http://127.0.0.1:$DEMO_PORT/"
 echo "Demo ready: $DEMO_URL"
-echo "Drop data/pdfs/driver_mvr_packet_001.pdf into the page."
+echo "Drop demo/bonsai_extract/assets/driver_mvr_record_001.pdf into the page."
 echo "Press Ctrl-C to stop both local processes."
 open "$DEMO_URL"
 

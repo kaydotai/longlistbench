@@ -33,9 +33,9 @@ python benchmarks/ocr_claims_pdfs.py \
 
 ## Local Bonsai extraction demo
 
-This small macOS demo runs Ternary Bonsai 27B locally, reads one page of
-embedded text from the bundled driver MVR PDF, and streams the schema fields
-into a browser UI. It was tested on an M4 Pro with 48 GB of unified memory.
+This small macOS demo runs Ternary Bonsai 27B locally, reads embedded text from
+an uploaded PDF's first page, and streams the schema fields into a browser UI.
+It was tested on an M4 Pro with 48 GB of unified memory.
 
 Install Python and the two native system prerequisites:
 
@@ -51,8 +51,9 @@ Then run one script from the repository root:
 
 On the first run, the script creates an isolated Python environment, builds the
 pinned Metal llama.cpp server, and downloads the model weights (about 6.7 GB).
-It then opens the demo. Drop
-`data/pdfs/driver_mvr_packet_001.pdf` into the page to start extraction.
+It then opens the demo. Drop the included one-page Rosa MVR record,
+`demo/bonsai_extract/assets/driver_mvr_record_001.pdf`, into the page to start
+extraction.
 
 Everything runs on the Mac. Before every extraction, the app clears the
 llama.cpp prompt slot so the displayed prefill speed is a fresh measurement.
