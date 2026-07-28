@@ -433,16 +433,17 @@ def test_demo_upload_screen_does_not_offer_disk_sample_bypass() -> None:
     assert not any(button["id"] == "sample" for button in parser.buttons)
 
 
-def test_demo_highlights_use_normalized_pdf_text_coordinates() -> None:
+def test_demo_ui_uses_uploaded_first_page_and_dynamic_rectangles() -> None:
     html = DEMO_HTML.read_text(encoding="utf-8")
 
-    assert "pdftotext -bbox · page 10 · 594.96 × 841.92 pt" in html
-    assert "aspect-ratio: 594.96 / 841.92;" in html
-    assert ".h-name { left: 9.71%; top: 28.30%;" in html
-    assert ".h-license { left: 30.86%; top: 40.06%;" in html
-    assert ".h-state { left: 9.71%; top: 40.06%;" in html
-    assert ".h-accidents { left: 34.40%; top: 50.49%;" in html
-    assert ".h-violations { left: 34.40%; top: 54.76%;" in html
+    assert 'id="page-image"' in html
+    assert 'id="highlight-layer"' in html
+    assert 'src="/page-10.png"' not in html
+    assert ".h-name" not in html
+    assert "fieldHighlights" not in html
+    assert 'fetch("/api/extract",' in html
+    assert "preview_data_url" in html
+    assert "event.rectangle" in html
 
 
 def test_compact_row_decoder_handles_comma_in_the_next_chunk() -> None:

@@ -332,6 +332,12 @@
       object-fit: contain;
     }
 
+    #highlight-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
     .highlight {
       position: absolute;
       opacity: 0;
@@ -348,16 +354,6 @@
       opacity: 1;
       transform: scaleX(1);
     }
-
-    /* pdftotext -bbox · page 10 · 594.96 × 841.92 pt; 2 pt x / 1.5 pt y padding */
-    .h-name { left: 9.71%; top: 28.30%; width: 14.23%; height: 1.82%; }
-    .h-dob { left: 51.29%; top: 28.30%; width: 9.92%; height: 1.82%; }
-    .h-class { left: 72.80%; top: 28.30%; width: 1.90%; height: 1.82%; }
-    .h-license { left: 30.86%; top: 40.06%; width: 14.55%; height: 1.82%; }
-    .h-state { left: 9.71%; top: 40.06%; width: 2.93%; height: 1.82%; }
-    .h-accidents { left: 34.40%; top: 50.49%; width: 1.70%; height: 1.82%; }
-    .h-violations { left: 34.40%; top: 54.76%; width: 5.09%; height: 1.82%; }
-    .h-run { left: 61.03%; top: 16.28%; width: 9.92%; height: 1.82%; }
 
     .scan {
       position: absolute;
@@ -563,15 +559,8 @@
         <section class="source">
           <div class="document-stage">
             <div class="page" id="page">
-              <img src="/page-10.png" alt="Certified Employer Driving Record for Rosa Nguyen">
-              <div class="highlight h-name" data-highlight="0"></div>
-              <div class="highlight h-dob" data-highlight="1"></div>
-              <div class="highlight h-class" data-highlight="2"></div>
-              <div class="highlight h-license" data-highlight="3"></div>
-              <div class="highlight h-state" data-highlight="4"></div>
-              <div class="highlight h-accidents" data-highlight="5"></div>
-              <div class="highlight h-violations" data-highlight="6"></div>
-              <div class="highlight h-run" data-highlight="7"></div>
+              <img id="page-image" alt="Uploaded PDF first page">
+              <div id="highlight-layer"></div>
               <div class="scan"></div>
             </div>
           </div>
@@ -608,6 +597,8 @@
   <script>
     const app = document.getElementById("app");
     const page = document.getElementById("page");
+    const pageImage = document.getElementById("page-image");
+    const highlightLayer = document.getElementById("highlight-layer");
     const replay = document.getElementById("replay");
     const dropZone = document.getElementById("drop-zone");
     const dropError = document.getElementById("drop-error");
@@ -621,17 +612,6 @@
     const modelName = document.getElementById("model-name");
     const rows = [...document.querySelectorAll(".json-row")];
     const rowsByField = new Map(rows.map(row => [row.dataset.field, row]));
-    const highlights = [...document.querySelectorAll(".highlight")];
-    const fieldHighlights = {
-      name: [0],
-      date_of_birth: [1],
-      license_class: [2],
-      license_number: [3],
-      state_licensed: [4],
-      accidents_last_5_years: [5],
-      mvr_violations: [6],
-      mvr_run_date: [7]
-    };
     let runController = null;
 
     const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -655,7 +635,8 @@
         value.textContent = "";
         value.classList.remove("streaming");
       });
-      highlights.forEach(highlight => highlight.classList.remove("visible"));
+      highlightLayer.replaceChildren();
+      pageImage.removeAttribute("src");
       candidateName.textContent = "Waiting for output";
       prefillRate.textContent = "— tok/s";
       decodeRate.textContent = "— tok/s";
@@ -680,6 +661,17 @@
       dropError.textContent = message;
     }
 
+    function addHighlight(rectangle) {
+      const highlight = document.createElement("div");
+      highlight.className = "highlight";
+      highlight.style.left = `${rectangle.left * 100}%`;
+      highlight.style.top = `${rectangle.top * 100}%`;
+      highlight.style.width = `${rectangle.width * 100}%`;
+      highlight.style.height = `${rectangle.height * 100}%`;
+      highlightLayer.append(highlight);
+      requestAnimationFrame(() => highlight.classList.add("visible"));
+    }
+
     async function streamField(field, rawValue) {
       const row = rowsByField.get(field);
       if (!row) return;
@@ -689,23 +681,21 @@
       row.classList.add("visible");
       row.classList.toggle("missing", isMissing);
       value.classList.add("streaming");
-      if (!isMissing) {
-        (fieldHighlights[field] || []).forEach(index => {
-          highlights[index].classList.add("visible");
-        });
-      }
-
       for (let cursor = 1; cursor <= finalValue.length; cursor += 1) {
         value.textContent = finalValue.slice(0, cursor);
-        if (field === "name" && !isMissing) {
-          candidateName.textContent =
-            finalValue.slice(1, Math.max(1, cursor - 1)) || "Decoding…";
+        if (!isMissing) {
+          if (field === "name") {
+            candidateName.textContent =
+              finalValue.slice(1, Math.max(1, cursor - 1)) || "Decoding…";
+          }
         }
         await wait(Math.max(25, 280 / finalValue.length));
       }
       value.classList.remove("streaming");
-      if (field === "name" && !isMissing) {
-        candidateName.textContent = String(rawValue);
+      if (!isMissing) {
+        if (field === "name") {
+          candidateName.textContent = String(rawValue);
+        }
       }
     }
 
@@ -724,16 +714,12 @@
       const controller = runController;
       dropError.textContent = "";
       fileName.textContent = file.name;
-      fileStatus.textContent = "Page 10 of 17 · preparing strict JSON";
+      fileStatus.textContent = "Preparing first page · strict JSON";
       candidateName.textContent = "Running local model";
       replay.hidden = false;
       app.classList.add("processing");
-      await wait(120);
-      page.classList.add("visible", "scanning");
-      fileStatus.textContent = "Extracting locally · no data leaves this Mac";
-
       try {
-        const response = await fetch("/api/extract?page=10", {
+        const response = await fetch("/api/extract", {
           method: "POST",
           headers: {
             "Content-Type": "application/pdf",
@@ -761,13 +747,19 @@
           if (event.type === "started") {
             modelName.textContent = prettyModelName(event.model_id);
             candidateName.textContent = "Streaming fields";
-            fileStatus.textContent =
-              "PDF text read locally · receiving strict JSON";
+            pageImage.addEventListener(
+              "load",
+              () => page.classList.add("visible", "scanning"),
+              {once: true}
+            );
+            pageImage.src = event.preview_data_url;
+            fileStatus.textContent = "Page 1";
             return;
           }
           if (event.type === "field") {
             if (streamedFields.has(event.field)) return;
             streamedFields.add(event.field);
+            if (event.rectangle) addHighlight(event.rectangle);
             fieldCount += 1;
             fileStatus.textContent =
               `Streaming field ${fieldCount} · ${event.field}`;
@@ -795,7 +787,7 @@
         }
         if (buffer.trim()) await handleEvent(JSON.parse(buffer));
         if (!completeResult?.candidates?.length) {
-          throw new Error("The model returned no extracted record for page 10.");
+          throw new Error("The model returned no extracted record for page 1.");
         }
 
         for (const [field, value] of Object.entries(completeResult.candidates[0])) {
