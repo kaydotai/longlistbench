@@ -310,7 +310,6 @@
     .page {
       position: relative;
       height: min(88vh, 630px);
-      aspect-ratio: 594.96 / 841.92;
       overflow: hidden;
       border: 1px solid #d7d6d0;
       background: white;
@@ -637,6 +636,7 @@
       });
       highlightLayer.replaceChildren();
       pageImage.removeAttribute("src");
+      page.style.removeProperty("aspect-ratio");
       candidateName.textContent = "Waiting for output";
       prefillRate.textContent = "— tok/s";
       decodeRate.textContent = "— tok/s";
@@ -700,11 +700,7 @@
     }
 
     async function startRun(file) {
-      if (
-        !file ||
-        (!file.name.toLowerCase().endsWith(".pdf") &&
-          file.type !== "application/pdf")
-      ) {
+      if (!file) {
         dropError.textContent = "Choose a PDF document.";
         return;
       }
@@ -749,7 +745,11 @@
             candidateName.textContent = "Streaming fields";
             pageImage.addEventListener(
               "load",
-              () => page.classList.add("visible", "scanning"),
+              () => {
+                page.style.aspectRatio =
+                  `${pageImage.naturalWidth} / ${pageImage.naturalHeight}`;
+                page.classList.add("visible", "scanning");
+              },
               {once: true}
             );
             pageImage.src = event.preview_data_url;

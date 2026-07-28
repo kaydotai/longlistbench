@@ -3,6 +3,7 @@ from __future__ import annotations
 from email.message import Message
 from html.parser import HTMLParser
 from http import HTTPStatus
+import json
 from pathlib import Path
 import subprocess
 from types import SimpleNamespace
@@ -444,6 +445,141 @@ def test_demo_ui_uses_uploaded_first_page_and_dynamic_rectangles() -> None:
     assert 'fetch("/api/extract",' in html
     assert "preview_data_url" in html
     assert "event.rectangle" in html
+
+
+def test_demo_ui_sends_uploaded_pdf_without_filename_or_browser_mime() -> None:
+    """The server, rather than browser file metadata, validates uploaded PDFs."""
+
+    from playwright.sync_api import sync_playwright
+
+    html = DEMO_HTML.read_text(encoding="utf-8").replace(
+        "</head>",
+        """
+  <script>
+    window.__extractRequest = null;
+    window.fetch = async (url, options) => {
+      window.__extractRequest = {url, options};
+      return {ok: false, json: async () => ({error: "Rejected by test server"})};
+    };
+  </script>
+</head>""",
+    )
+
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch()
+        page = browser.new_page()
+        page.set_content(html)
+        page.evaluate(
+            """async () => {
+              await startRun(new File(["%PDF"], "uploaded-document", {type: ""}));
+            }"""
+        )
+        request = page.evaluate("window.__extractRequest")
+        browser.close()
+
+    assert request["url"] == "/api/extract"
+    assert request["options"]["headers"]["Content-Type"] == "application/pdf"
+
+
+def test_demo_ui_renders_non_a4_preview_rectangles_and_reset() -> None:
+    """A preview's intrinsic dimensions keep normalized overlays aligned."""
+
+    from playwright.sync_api import sync_playwright
+
+    preview_data_url = (
+        "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22"
+        "%20width%3D%221200%22%20height%3D%22600%22%3E%3C/svg%3E"
+    )
+    events = [
+        {
+            "type": "started",
+            "model_id": "mlx-community/Bonsai-27B-mlx-2bit",
+            "preview_data_url": preview_data_url,
+        },
+        {
+            "type": "field",
+            "field": "name",
+            "value": "Rosa",
+            "rectangle": {
+                "left": 0.125,
+                "top": 0.25,
+                "width": 0.5,
+                "height": 0.125,
+            },
+        },
+        {
+            "type": "complete",
+            "result": {
+                "candidates": [{"name": "Rosa"}],
+                "prefill_tokens_per_second": 1,
+                "decode_tokens_per_second": 1,
+                "elapsed_seconds": 1,
+                "model_id": "mlx-community/Bonsai-27B-mlx-2bit",
+            },
+        },
+    ]
+    stream_lines = json.dumps([json.dumps(event) for event in events])
+    html = DEMO_HTML.read_text(encoding="utf-8").replace(
+        "</head>",
+        f"""
+  <script>
+    const streamLines = {stream_lines};
+    window.fetch = async () => ({{
+      ok: true,
+      body: new ReadableStream({{
+        start(controller) {{
+          controller.enqueue(new TextEncoder().encode(streamLines.join("\\n") + "\\n"));
+          controller.close();
+        }}
+      }})
+    }});
+  </script>
+</head>""",
+    )
+
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch()
+        page = browser.new_page()
+        page.set_content(html)
+        page.evaluate(
+            """async () => {
+              await startRun(new File(["%PDF"], "uploaded-document", {type: ""}));
+            }"""
+        )
+        page.wait_for_function(
+            "document.getElementById('page').classList.contains('visible')"
+        )
+        rendered = page.evaluate(
+            """() => {
+              const highlight = document.querySelector(".highlight");
+              return {
+                aspectRatio: document.getElementById("page").style.aspectRatio,
+                highlight: {
+                  left: highlight.style.left,
+                  top: highlight.style.top,
+                  width: highlight.style.width,
+                  height: highlight.style.height,
+                },
+              };
+            }"""
+        )
+        page.evaluate("resetRunState()")
+        reset = page.evaluate(
+            """() => ({
+              highlights: document.querySelectorAll(".highlight").length,
+              previewSource: document.getElementById("page-image").getAttribute("src"),
+            })"""
+        )
+        browser.close()
+
+    assert rendered["aspectRatio"] == "1200 / 600"
+    assert rendered["highlight"] == {
+        "left": "12.5%",
+        "top": "25%",
+        "width": "50%",
+        "height": "12.5%",
+    }
+    assert reset == {"highlights": 0, "previewSource": None}
 
 
 def test_compact_row_decoder_handles_comma_in_the_next_chunk() -> None:
