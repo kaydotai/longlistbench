@@ -33,19 +33,23 @@
 
 - [ ] **Step 1: Write failing ingestion tests**
 
-Add tests that call `ingest_first_pdf_page` with the new one-page sample and assert:
+Add tests that call `ingest_first_pdf_page` with the existing multi-page packet
+and assert that only its first page is returned:
 
 ```python
-page = ingest_first_pdf_page(DEMO_PDF.read_bytes())
-assert page.text.startswith("MOTOR VEHICLE RECORDS BUREAU")
-assert "ROSA NGUYEN" in page.text
+page = ingest_first_pdf_page(SAMPLE_PDF.read_bytes())
+assert page.text.startswith("ATTN: SAFETY OPERATIONS")
+assert "Report of Services Provided" in page.text
+assert "ROSA NGUYEN" not in page.text
 assert page.width == pytest.approx(594.96)
 assert page.height == pytest.approx(841.92)
-assert any(word.text == "ROSA" for word in page.words)
+assert any(word.text == "ATTN:" for word in page.words)
 assert page.preview_png.startswith(b"\x89PNG\r\n\x1a\n")
 ```
 
-Add a two-page fixture test proving only page 1 text and words are returned.
+The absence of `ROSA NGUYEN`, which appears on page 10, proves that ingestion
+does not leak text from later pages. Task 5 creates and verifies the one-page
+Rosa demo PDF.
 
 - [ ] **Step 2: Run the tests and verify RED**
 
