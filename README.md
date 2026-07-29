@@ -1,6 +1,8 @@
 # LongListBench
 
-[Hugging Face dataset](https://huggingface.co/datasets/kaydotai/LongListBench) | [Leaderboard](https://huggingface.co/spaces/kaydotai/LongListBench-Leaderboard) | [Release v2.2.1](https://github.com/kaydotai/longlistbench/releases/tag/v2.2.1)
+[![DOI](https://img.shields.io/badge/DOI-10.57967%2Fhf%2F9768-blue)](https://doi.org/10.57967/hf/9768)
+
+[Paper](https://huggingface.co/datasets/kaydotai/LongListBench/blob/main/longlistbench.pdf) | [Hugging Face dataset](https://huggingface.co/datasets/kaydotai/LongListBench) | [Leaderboard](https://huggingface.co/spaces/kaydotai/LongListBench-Leaderboard) | [Release v2.2.1](https://github.com/kaydotai/longlistbench/releases/tag/v2.2.1)
 
 Benchmark for long-list entity extraction from complex semi-structured business PDFs, including dense layouts, OCR transcripts, and long-range cross-page evidence.
 
@@ -72,6 +74,12 @@ By default this writes an ignored local package to `dist/huggingface/longlistben
 HF_REPO_ID=your-org/your-dataset make hf-export
 ```
 
+Publishing to `kaydotai/LongListBench` is automated: the `Dataset Publish` workflow rebuilds the
+package whenever `data/`, `benchmarks/results/`, the export script, or `VERSION` changes, and
+uploads it on `main`. Pull requests build the package and attach the generated card as an artifact
+without uploading. Use the workflow's manual trigger to republish without a source change. Local
+`make hf-export` remains available for inspecting the package before it ships.
+
 The exported Hugging Face configs are:
 
 | Config | Contents |
@@ -114,6 +122,7 @@ directory to `RUNS` in `benchmarks/export_leaderboard_space.py`, then rebuild an
 
 - **Version**: see `VERSION`.
 - **Citation metadata**: see `CITATION.cff`.
+- **DOI**: [10.57967/hf/9768](https://doi.org/10.57967/hf/9768) (Hugging Face dataset release, includes the paper PDF).
 
 ## Benchmark Overview
 

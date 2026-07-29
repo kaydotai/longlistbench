@@ -17,6 +17,7 @@ except ImportError:
 
 
 DEFAULT_REPO_ID = "kaydotai/LongListBench"
+DATASET_DOI = "10.57967/hf/9768"
 RELEASE_VERSION = (Path(__file__).resolve().parent.parent / "VERSION").read_text(encoding="utf-8").strip()
 DEFAULT_BASELINE_REPORTS = (
     Path(__file__).resolve().parent / "results" / "codex_gpt56_sol_full_current_ocr_v2" / "evaluation_report.json",
@@ -767,6 +768,7 @@ Some structured-report families are parser-friendly by design and serve as scale
   year         = {{2026}},
   version      = {{{RELEASE_VERSION}}},
   howpublished = {{Hugging Face dataset}},
+  doi          = {{{DATASET_DOI}}},
   url          = {{https://huggingface.co/datasets/{repo_id}}}
 }}
 ```
