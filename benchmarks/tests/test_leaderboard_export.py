@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 from unittest.mock import patch
+from xml.etree import ElementTree
 
 import pytest
 
@@ -21,6 +22,20 @@ def _write_run(
     report = {
         "dataset": {"manifest_sha256": manifest},
         "model_stats": {key: {"total_samples": samples, "total_rows": rows}},
+        "detailed_results": [
+            {
+                "sample": f"sample_{index:03d}",
+                "tier": "core_operations",
+                "metrics": {
+                    "ground_truth_count": 1,
+                    "predicted_count": 1,
+                    "exact_record_recall": 1.0,
+                    "f1": 1.0,
+                    "complete_document": True,
+                },
+            }
+            for index in range(samples)
+        ],
     }
     metadata = {
         "requested_model": key,
@@ -34,8 +49,24 @@ def _write_run(
 
 def test_load_runs_rejects_mixed_dataset_manifests(tmp_path: Path) -> None:
     runs = (
-        ("run-a", "model_a", "Harness A", "Model A"),
-        ("run-b", "model_b", "Harness B", "Model B"),
+        {
+            "run_dir": "run-a",
+            "key": "model_a",
+            "harness": "Harness A",
+            "model": "Model A",
+            "protocol": "Agentic CLI",
+            "input_token_price": 1.0,
+            "output_token_price": 2.0,
+        },
+        {
+            "run_dir": "run-b",
+            "key": "model_b",
+            "harness": "Harness B",
+            "model": "Model B",
+            "protocol": "Agentic CLI",
+            "input_token_price": 1.0,
+            "output_token_price": 2.0,
+        },
     )
     _write_run(tmp_path, "run-a", "model_a", manifest="a" * 64)
     _write_run(tmp_path, "run-b", "model_b", manifest="b" * 64)
@@ -57,3 +88,272 @@ def test_prepare_output_requires_explicit_overwrite(tmp_path: Path) -> None:
     export_leaderboard_space.prepare_output(output, overwrite=True)
     assert output.is_dir()
     assert list(output.iterdir()) == []
+
+
+def test_bonsai_run_is_labeled_local_and_together_ai(tmp_path: Path) -> None:
+    bonsai_run = next(run for run in export_leaderboard_space.RUNS if run["model"] == "Bonsai 27B")
+    _write_run(
+        tmp_path,
+        bonsai_run["run_dir"],
+        bonsai_run["key"],
+        manifest="a" * 64,
+    )
+
+    with patch.object(export_leaderboard_space, "RUNS", (bonsai_run,)):
+        models, _ = export_leaderboard_space.load_runs(tmp_path)
+
+    assert models[0]["harness"] == "Local + Together AI"
+
+
+@pytest.mark.parametrize(
+    ("details", "message"),
+    [
+        (None, "missing detailed_results"),
+        ([], "expected 32 unique documents"),
+        (
+            [
+                {
+                    "sample": "duplicate",
+                    "tier": "core_operations",
+                    "metrics": {},
+                }
+            ]
+            * 32,
+            "expected 32 unique documents",
+        ),
+    ],
+)
+def test_load_runs_requires_one_unique_document_result_per_sample(
+    tmp_path: Path,
+    details: list[dict] | None,
+    message: str,
+) -> None:
+    run = export_leaderboard_space.RUNS[0]
+    _write_run(tmp_path, run["run_dir"], run["key"], manifest="a" * 64)
+    report_path = tmp_path / run["run_dir"] / "evaluation_report.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    if details is None:
+        del report["detailed_results"]
+    else:
+        report["detailed_results"] = details
+    report_path.write_text(json.dumps(report), encoding="utf-8")
+
+    with patch.object(export_leaderboard_space, "RUNS", (run,)):
+        with pytest.raises(ValueError, match=message):
+            export_leaderboard_space.load_runs(tmp_path)
+
+
+def test_summarize_document_results_keeps_only_comparable_metrics() -> None:
+    details = [
+        {
+            "sample": "driver_mvr_packet_001",
+            "tier": "core_operations",
+            "metrics": {
+                "ground_truth_count": 260,
+                "predicted_count": 230,
+                "exact_record_recall": 0.7153846154,
+                "f1": 0.8687643899,
+                "complete_document": False,
+                "missing_ids": ["do-not-export"],
+                "extra_ids": ["do-not-export"],
+            },
+        }
+    ]
+
+    assert export_leaderboard_space.summarize_document_results(details) == [
+        {
+            "sample": "driver_mvr_packet_001",
+            "tier": "core_operations",
+            "gold_records": 260,
+            "predicted_records": 230,
+            "exact_record_recall": 0.7153846154,
+            "field_f1": 0.8687643899,
+            "complete_document": False,
+        }
+    ]
+
+
+def test_cost_chart_has_no_local_price_band() -> None:
+    chart = export_leaderboard_space.build_cost_chart(
+        [
+            {
+                "model": "Bonsai 27B",
+                "combined_token_price": 0,
+                "input_token_price": 0,
+                "output_token_price": 0,
+                "exact_record_recall": 0.1674,
+            }
+        ]
+    )
+
+    assert "local-band" not in chart
+
+
+def test_cost_chart_uses_compact_points() -> None:
+    chart = export_leaderboard_space.build_cost_chart(
+        [
+            {
+                "model": "Bonsai 27B",
+                "combined_token_price": 0,
+                "input_token_price": 0,
+                "output_token_price": 0,
+                "exact_record_recall": 0.1674,
+            }
+        ]
+    )
+
+    assert "r='6'" in chart
+    assert "r='9'" not in chart
+
+
+def test_cost_chart_keeps_axis_margins_compact() -> None:
+    chart = export_leaderboard_space.build_cost_chart(
+        [
+            {
+                "model": "Bonsai 27B",
+                "combined_token_price": 0,
+                "input_token_price": 0,
+                "output_token_price": 0,
+                "exact_record_recall": 0.1674,
+            }
+        ]
+    )
+    svg = ElementTree.fromstring(chart)
+    _, _, width, height = map(float, svg.attrib["viewBox"].split())
+    baseline = next(element for element in svg if element.attrib.get("class") == "axis-line")
+    x_axis_title = next(
+        element for element in svg if element.text == "Blended $ / 1M tokens"
+    )
+    plot_left = float(baseline.attrib["x1"])
+    plot_bottom = float(baseline.attrib["y1"])
+    title_y = float(x_axis_title.attrib["y"])
+
+    assert plot_left / width <= 0.065
+    assert (title_y - plot_bottom) / height <= 0.15
+
+
+def test_cost_chart_labels_are_compact_and_show_only_model_score() -> None:
+    chart = export_leaderboard_space.build_cost_chart(
+        [
+            {
+                "model": "GPT-5.6-Sol",
+                "combined_token_price": 35,
+                "input_token_price": 5,
+                "output_token_price": 30,
+                "exact_record_recall": 0.9788,
+            },
+            {
+                "model": "Bonsai 27B",
+                "combined_token_price": 0,
+                "input_token_price": 0,
+                "output_token_price": 0,
+                "exact_record_recall": 0.1674,
+            },
+            {
+                "model": "Claude Opus 4.8",
+                "combined_token_price": 30,
+                "input_token_price": 5,
+                "output_token_price": 25,
+                "exact_record_recall": 0.9771,
+            },
+        ]
+    )
+
+    assert "class='point-meta'>97.88%</text>" in chart
+    assert "class='point-meta'>16.74%</text>" in chart
+    assert "class='point-model'>Opus 4.8</text>" in chart
+    assert "data-model='Claude Opus 4.8'" in chart
+    assert "$35/M" not in chart
+    assert "$0 token fee" not in chart
+
+
+def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
+    def result(
+        model: str,
+        *,
+        exact: float,
+        price: float,
+        protocol: str = "Agentic CLI",
+    ) -> dict:
+        return {
+            "model": model,
+            "harness": "Test harness",
+            "effort": "xhigh",
+            "run_date": "2026-07-26",
+            "protocol": protocol,
+            "combined_token_price": price,
+            "input_token_price": price / 6,
+            "output_token_price": price * 5 / 6,
+            "exact_record_recall": exact,
+            "complete_documents": 1,
+            "total_samples": 32,
+            "structural_exact_recall": exact - 0.05,
+            "scale_control_exact_recall": exact + 0.01,
+            "weighted_f1": min(1, exact + 0.01),
+            "documents": [
+                {
+                    "sample": "driver_mvr_packet_001",
+                    "tier": "core_operations",
+                    "gold_records": 260,
+                    "predicted_records": 230,
+                    "exact_record_recall": exact,
+                    "field_f1": min(1, exact + 0.01),
+                    "complete_document": False,
+                }
+            ],
+        }
+
+    data = {
+        "benchmark": "LongListBench",
+        "version": "v2.2.1",
+        "dataset": {"total_samples": 32, "total_rows": 29_599},
+        "protocol": "Mixed protocol",
+        "results": [
+            result("GPT-5.6-Sol", exact=0.9788, price=35),
+            result("Bonsai 27B", exact=0.1674, price=0, protocol="Page pipeline"),
+        ],
+    }
+
+    html = export_leaderboard_space.build_html(data)
+
+    assert '<body class="leaderboard-space">' in html
+    assert "<title>LongListBench Leaderboard</title>" in html
+    assert '<main class="shell">\n  <section class="chart-section"' in html
+    assert "<header" not in html
+    assert 'class="overview"' not in html
+    assert 'font-family: "Suisse Intl", "Helvetica Neue", Arial, sans-serif' in html
+    assert "kay.ai" not in html.lower()
+    assert "/ research" not in html.lower()
+    assert ">kay<" not in html.lower()
+    assert "Every row." not in html
+    assert "Accuracy × token price" in html
+    assert "Blended $ / 1M tokens</text>" in html
+    assert "INPUT + OUTPUT LIST PRICE" not in html
+    assert "mobile-scroll-hint" not in html
+    assert "cost-chart" in html
+    assert "GPT-5.6-Sol" in html
+    assert "Bonsai 27B" in html
+    assert "section-heading" not in html
+    assert "Same dataset. Different protocol." not in html
+    assert "Agentic CLI runs used repository-denied sandboxes." not in html
+    assert 'data-sortable-table' in html
+    assert 'data-sort-key="combined_token_price"' in html
+    assert 'data-sort-key="exact_record_recall"' in html
+    assert 'aria-sort="descending"' in html
+    assert html.count('class="details-button"') == 2
+    assert html.count("class='detail-row'") == 2
+    assert "driver_mvr_packet_001" in html
+    assert "Gold records" in html
+    assert "Predicted" in html
+    assert "Field F1" in html
+    assert "aria-expanded='false'" in html
+    assert " hidden>" in html
+    assert 'tbody.querySelectorAll("[data-result-row]")' in html
+    assert '<details class="metric-guide">' not in html
+    assert "metric-grid" not in html
+    assert html.count('class="definition-button"') == 6
+    assert 'id="metric-definition-popover"' in html
+    assert 'aria-label="Explain token price"' in html
+    assert 'aria-label="Explain field F1"' in html
+    assert "function showDefinition(button) {\n    closeDetails();" in html
+    assert "function toggleDetails(button) {\n    closeDefinition();" in html

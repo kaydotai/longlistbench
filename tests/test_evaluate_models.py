@@ -647,6 +647,45 @@ class EvaluatorRegressionTests(unittest.TestCase):
         self.assertEqual(results[0].tokens["input_tokens"], 100)
         self.assertEqual(results[0].cost_usd, 0.00123)
 
+    def test_saved_evaluation_loads_bonsai_run_metadata(self) -> None:
+        results_dir = Path(tempfile.mkdtemp())
+        sample = "driver_mvr_packet_001"
+        model_key = "bonsai_27b_together_page_pipeline"
+        (results_dir / "run_metadata.json").write_text(
+            json.dumps(
+                {
+                    "model_key": model_key,
+                    "transcript": "ocr",
+                    "samples": {
+                        sample: {
+                            "sample": sample,
+                            "transcript": "ocr",
+                            "extraction_time": 12.5,
+                            "prompt_tokens": 100,
+                            "completion_tokens": 25,
+                        }
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        metadata = evaluate_models._load_saved_result_metadata(
+            output_dir=results_dir,
+        )
+
+        self.assertEqual(
+            metadata[(sample, "ocr", model_key)],
+            {
+                "extraction_time": 12.5,
+                "tokens": {
+                    "input_tokens": 100,
+                    "output_tokens": 25,
+                    "total_tokens": 125,
+                },
+            },
+        )
+
     def test_resume_preserves_saved_cost_metadata(self) -> None:
         claims_dir = Path(tempfile.mkdtemp())
         results_dir = Path(tempfile.mkdtemp())
