@@ -105,6 +105,91 @@ def test_bonsai_run_is_labeled_local_and_together_ai(tmp_path: Path) -> None:
     assert models[0]["harness"] == "Local + Together AI"
 
 
+def test_derives_complete_claude_api_equivalent_cost() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {"cost_source": "claude_api_equivalent"},
+        {
+            "samples": {
+                "sample-a": {"estimated_api_cost_usd": 1.25},
+                "sample-b": {"estimated_api_cost_usd": 2.75},
+            }
+        },
+        expected_samples=2,
+    )
+
+    assert cost == {
+        "full_run_cost_usd": 4.0,
+        "full_run_cost_source": "claude_cli_estimate",
+        "full_run_cost_explanation": (
+            "Sum of 2 Claude Code API-equivalent estimates; subscription billing may differ."
+        ),
+    }
+
+
+def test_rejects_partial_claude_cost_metadata() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {"cost_source": "claude_api_equivalent"},
+        {
+            "samples": {
+                "sample-a": {"estimated_api_cost_usd": 1.25},
+                "sample-b": {},
+            }
+        },
+        expected_samples=2,
+    )
+
+    assert cost["full_run_cost_usd"] is None
+    assert cost["full_run_cost_source"] == "usage_unavailable"
+    assert cost["full_run_cost_explanation"].count(". ") == 0
+
+
+def test_converts_reducto_credits_at_standard_list_rate() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {"cost_source": "reducto_credits"},
+        {"total_credits": 3108.0628225},
+        expected_samples=32,
+    )
+
+    assert cost["full_run_cost_usd"] == pytest.approx(46.6209423375)
+    assert cost["full_run_cost_source"] == "reducto_standard_list"
+    assert "3,108.063 credits" in cost["full_run_cost_explanation"]
+    assert "$0.015/credit" in cost["full_run_cost_explanation"]
+    assert cost["full_run_cost_explanation"].count(". ") == 0
+
+
+def test_marks_bonsai_as_free_hosted_run() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {"cost_source": "hosted_free"},
+        {},
+        expected_samples=32,
+    )
+
+    assert cost == {
+        "full_run_cost_usd": 0.0,
+        "full_run_cost_source": "together_free_hosted",
+        "full_run_cost_explanation": (
+            "Together hosted this run on an endpoint advertised as free on 2026-07-28; "
+            "no dollar charge was recorded."
+        ),
+    }
+
+
+def test_marks_subscription_run_without_usage_as_unavailable() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {"cost_source": "unavailable"},
+        {},
+        expected_samples=32,
+    )
+
+    assert cost == {
+        "full_run_cost_usd": None,
+        "full_run_cost_source": "usage_unavailable",
+        "full_run_cost_explanation": (
+            "Cost unavailable because this subscription run did not preserve token or dollar usage."
+        ),
+    }
+
+
 def test_credit_pricing_does_not_become_a_zero_token_price() -> None:
     assert export_leaderboard_space.combined_token_price(None, None) is None
     assert export_leaderboard_space.format_token_price(None) == "n/a"

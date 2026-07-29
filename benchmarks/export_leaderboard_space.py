@@ -13,6 +13,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 RELEASE_VERSION = "v" + (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
 DEFAULT_OUTPUT = REPO_ROOT / "dist" / "huggingface" / "leaderboard_space"
+REDUCTO_CREDIT_PRICE_USD = 0.015
+PRICING_OBSERVED_DATE = "2026-07-28"
 
 RUNS = (
     {
@@ -21,8 +23,7 @@ RUNS = (
         "harness": "Codex CLI",
         "model": "GPT-5.6-Sol",
         "protocol": "Agentic CLI",
-        "input_token_price": 5.0,
-        "output_token_price": 30.0,
+        "cost_source": "unavailable",
     },
     {
         "run_dir": "claude_opus48_full_current_ocr_v2",
@@ -30,8 +31,7 @@ RUNS = (
         "harness": "Claude Code",
         "model": "Claude Opus 4.8",
         "protocol": "Agentic CLI",
-        "input_token_price": 5.0,
-        "output_token_price": 25.0,
+        "cost_source": "claude_api_equivalent",
     },
     {
         "run_dir": "claude_fable5_full_current_ocr_v2",
@@ -39,8 +39,7 @@ RUNS = (
         "harness": "Claude Code",
         "model": "Claude Fable 5",
         "protocol": "Agentic CLI",
-        "input_token_price": 10.0,
-        "output_token_price": 50.0,
+        "cost_source": "claude_api_equivalent",
     },
     {
         "run_dir": "codex_full_current_ocr_v2",
@@ -48,8 +47,7 @@ RUNS = (
         "harness": "Codex CLI",
         "model": "GPT-5.5",
         "protocol": "Agentic CLI",
-        "input_token_price": 5.0,
-        "output_token_price": 30.0,
+        "cost_source": "unavailable",
     },
     {
         "run_dir": "reducto_deep_extract_v3_targeted_prompt",
@@ -57,8 +55,7 @@ RUNS = (
         "harness": "Reducto",
         "model": "Deep Extract v3 (targeted prompt)",
         "protocol": "Raw PDF · targeted prompt · 3,108 credits",
-        "input_token_price": None,
-        "output_token_price": None,
+        "cost_source": "reducto_credits",
         "effort": "targeted fields",
         "requested_model": "v3",
         "cli_version": "Reducto API",
@@ -69,8 +66,7 @@ RUNS = (
         "harness": "Reducto",
         "model": "Deep Extract v3 (strict contract)",
         "protocol": "Raw PDF · strict contract · 3,099 credits",
-        "input_token_price": None,
-        "output_token_price": None,
+        "cost_source": "reducto_credits",
         "effort": "identical contract",
         "requested_model": "v3",
         "cli_version": "Reducto API",
@@ -81,14 +77,86 @@ RUNS = (
         "harness": "Local + Together AI",
         "model": "Bonsai 27B",
         "protocol": "Page pipeline",
-        "input_token_price": 0.0,
-        "output_token_price": 0.0,
+        "cost_source": "hosted_free",
         "effort": "page pipeline",
         "requested_model": "Prism-ML/Ternary-Bonsai-27B",
         "cli_version": "Together API",
     },
 )
 SPACE_FILENAMES = ("README.md", "index.html", "leaderboard_data.json")
+
+
+def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> dict:
+    source = run.get("cost_source", "unavailable")
+    if source == "claude_api_equivalent":
+        samples = metadata.get("samples")
+        if not isinstance(samples, dict) or len(samples) != expected_samples:
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the released Claude metadata lacks a complete "
+                    "per-document estimate set."
+                ),
+            }
+        estimates = [sample.get("estimated_api_cost_usd") for sample in samples.values()]
+        if any(not isinstance(value, (int, float)) for value in estimates):
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the released Claude metadata lacks a complete "
+                    "per-document estimate set."
+                ),
+            }
+        return {
+            "full_run_cost_usd": float(sum(estimates)),
+            "full_run_cost_source": "claude_cli_estimate",
+            "full_run_cost_explanation": (
+                f"Sum of {expected_samples} Claude Code API-equivalent estimates; "
+                "subscription billing may differ."
+            ),
+        }
+    if source == "reducto_credits":
+        credits = metadata.get("total_credits")
+        if not isinstance(credits, (int, float)):
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the released Reducto metadata does not include "
+                    "total credits."
+                ),
+            }
+        full_run_cost = float(credits) * REDUCTO_CREDIT_PRICE_USD
+        return {
+            "full_run_cost_usd": full_run_cost,
+            "full_run_cost_source": "reducto_standard_list",
+            "full_run_cost_explanation": (
+                f"{credits:,.3f} credits × ${REDUCTO_CREDIT_PRICE_USD:.3f}/credit = "
+                f"${full_run_cost:.2f} at Reducto's {PRICING_OBSERVED_DATE} Standard list rate; "
+                "free or negotiated pricing may differ."
+            ),
+        }
+    if source == "hosted_free":
+        return {
+            "full_run_cost_usd": 0.0,
+            "full_run_cost_source": "together_free_hosted",
+            "full_run_cost_explanation": (
+                f"Together hosted this run on an endpoint advertised as free on "
+                f"{PRICING_OBSERVED_DATE}; no dollar charge was recorded."
+            ),
+        }
+    if source == "unavailable":
+        return {
+            "full_run_cost_usd": None,
+            "full_run_cost_source": "usage_unavailable",
+            "full_run_cost_explanation": (
+                "Cost unavailable because this subscription run did not preserve token or "
+                "dollar usage."
+            ),
+        }
+    raise ValueError(f"Unsupported cost source: {source}")
 
 
 def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
@@ -127,13 +195,13 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
                 f"manifest={manifest}, shape={shape}; "
                 f"expected manifest={expected_manifest}, shape={expected_shape}"
             )
+        cost = derive_full_run_cost(run, meta, stats["total_samples"])
         models.append({
             "key": key,
             "harness": run["harness"],
             "model": run["model"],
             "protocol": run["protocol"],
-            "input_token_price": run["input_token_price"],
-            "output_token_price": run["output_token_price"],
+            **cost,
             "requested_model": run.get("requested_model", meta.get("requested_model", meta.get("model_id"))),
             "effort": run.get("effort", meta.get("effort", "default")),
             "cli_version": run.get(
