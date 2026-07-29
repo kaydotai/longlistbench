@@ -716,11 +716,11 @@ th[aria-sort="descending"] .sort-arrow {{ color: var(--ink); }}
 tbody > tr[data-result-row] {{ transition: background-color .16s ease; }}
 tbody > tr[data-result-row]:hover {{ background: rgba(255,255,255,.68); }}
 td.metric-best {{
-  background: linear-gradient(105deg, rgba(255,225,0,.55) 0%, rgba(255,246,174,.72) 48%, rgba(255,225,0,.10) 100%);
+  background: rgba(255,225,0,.16);
   font-weight: 600;
 }}
 tbody > tr[data-result-row]:hover > td.metric-best {{
-  background: linear-gradient(105deg, rgba(255,225,0,.68) 0%, rgba(255,246,174,.84) 48%, rgba(255,225,0,.18) 100%);
+  background: rgba(255,225,0,.24);
 }}
 .configuration {{ min-width: 270px; }}
 .model-line {{ display: flex; align-items: center; gap: 8px; }}
