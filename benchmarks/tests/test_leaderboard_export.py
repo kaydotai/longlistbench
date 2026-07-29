@@ -578,6 +578,57 @@ def test_summarize_document_results_keeps_only_comparable_metrics() -> None:
     ]
 
 
+def test_prompt_templates_render_below_document_table_and_are_escaped() -> None:
+    result = {
+        "model": "Prompt Model",
+        "harness": "Test harness",
+        "effort": "xhigh",
+        "run_date": "2026-07-29",
+        "protocol": "Agentic CLI",
+        "full_run_cost_usd": None,
+        "full_run_cost_source": "usage_unavailable",
+        "full_run_cost_explanation": "Usage unavailable.",
+        "exact_record_recall": 1.0,
+        "complete_documents": 1,
+        "total_samples": 1,
+        "structural_exact_recall": 1.0,
+        "scale_control_exact_recall": 1.0,
+        "weighted_f1": 1.0,
+        "prompt_note": "Historical <condition>.",
+        "prompt_templates": [
+            {
+                "title": "Agent <task>",
+                "template": (
+                    "Read {{FIELD_CONTRACT}}.\n"
+                    "Never emit <script>alert(1)</script>."
+                ),
+            }
+        ],
+        "documents": [
+            {
+                "sample": "sample-a",
+                "gold_records": 1,
+                "predicted_records": 1,
+                "exact_record_recall": 1.0,
+                "field_f1": 1.0,
+                "complete_document": True,
+            }
+        ],
+    }
+
+    html = export_leaderboard_space.build_html({"results": [result]})
+
+    assert html.index("class='document-table'") < html.index("class='prompt-panel'")
+    assert "Historical &lt;condition&gt;." in html
+    assert "Agent &lt;task&gt;" in html
+    assert (
+        "Read {{FIELD_CONTRACT}}.\n"
+        "Never emit &lt;script&gt;alert(1)&lt;/script&gt;."
+    ) in html
+    assert "<script>alert(1)</script>" not in html
+    assert "class='prompt-scroll'" in html
+
+
 def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
     def result(
         model: str,
@@ -592,6 +643,15 @@ def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
             "effort": "xhigh",
             "run_date": "2026-07-26",
             "protocol": protocol,
+            "prompt_note": (
+                "Repository-denied agentic run over released OCR transcripts."
+            ),
+            "prompt_templates": [
+                {
+                    "title": "Agent task prompt",
+                    "template": "Extract {{DOCUMENT_OCR}}.",
+                }
+            ],
             "full_run_cost_usd": cost,
             "full_run_cost_source": "test" if cost is not None else "usage_unavailable",
             "full_run_cost_explanation": (
@@ -673,6 +733,8 @@ def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
     assert ".rank {" not in html
     assert html.count('class="details-button"') == 2
     assert html.count("class='detail-row'") == 2
+    assert html.count("class='prompt-panel'") == 2
+    assert html.count("Prompt template") == 2
     assert "driver_mvr_packet_001" in html
     assert "Gold records" in html
     assert "Predicted" in html

@@ -440,6 +440,26 @@ def metric_leaders(results: list[dict]) -> dict[str, set[int]]:
     return leaders
 
 
+def render_prompt_templates(result: dict) -> str:
+    templates = result.get("prompt_templates") or []
+    if not templates:
+        return ""
+    note = html_module.escape(result.get("prompt_note", ""))
+    blocks = "".join(
+        "<section class='prompt-template'>"
+        f"<strong>{html_module.escape(item['title'])}</strong>"
+        "<div class='prompt-scroll'><pre><code>"
+        f"{html_module.escape(item['template'])}"
+        "</code></pre></div></section>"
+        for item in templates
+    )
+    return (
+        "<section class='prompt-panel'>"
+        "<div class='prompt-panel-heading'><strong>Prompt template</strong>"
+        f"<span>{note}</span></div>{blocks}</section>"
+    )
+
+
 def build_html(data: dict) -> str:
     results = data["results"]
     leaders = metric_leaders(results)
@@ -467,6 +487,8 @@ def build_html(data: dict) -> str:
             return " metric-best" if result_index in leaders[metric] else ""
 
         documents = result.get("documents", [])
+        prompt_templates_html = render_prompt_templates(result)
+        has_details = bool(documents or prompt_templates_html)
         details_id = f"result-details-{rank}"
         details_button = (
             f'<button class="details-button" type="button" aria-expanded=\'false\' '
@@ -474,7 +496,7 @@ def build_html(data: dict) -> str:
             f"aria-label='Show document details for {result['model']}'>"
             "<span data-details-label>Details</span>"
             "<span class='details-symbol' aria-hidden='true'>+</span></button>"
-            if documents
+            if has_details
             else ""
         )
         document_rows = "".join(
@@ -489,6 +511,15 @@ def build_html(data: dict) -> str:
             f"{'Complete' if document['complete_document'] else 'Incomplete'}</span></td>"
             "</tr>"
             for document in documents
+        )
+        document_table_html = (
+            "<div class='document-scroll'><table class='document-table'>"
+            "<thead><tr><th>Document</th><th class='numeric'>Gold records</th>"
+            "<th class='numeric'>Predicted</th><th class='numeric'>Exact recall</th>"
+            "<th class='numeric'>Field F1</th><th>Complete</th></tr></thead>"
+            f"<tbody>{document_rows}</tbody></table></div>"
+            if documents
+            else ""
         )
         rows_html.append(
             f"<tr data-result-row data-original-rank='{rank}' data-details-row='{details_id}'>"
@@ -528,12 +559,8 @@ def build_html(data: dict) -> str:
                 "<td colspan='7'><div class='detail-panel'>"
                 "<div class='detail-panel-heading'>"
                 f"<strong>{result['model']}</strong><span>{len(documents)} documents</span></div>"
-                "<div class='document-scroll'><table class='document-table'>"
-                "<thead><tr><th>Document</th><th class='numeric'>Gold records</th>"
-                "<th class='numeric'>Predicted</th><th class='numeric'>Exact recall</th>"
-                "<th class='numeric'>Field F1</th><th>Complete</th></tr></thead>"
-                f"<tbody>{document_rows}</tbody></table></div></div></td></tr>"
-                if documents
+                f"{document_table_html}{prompt_templates_html}</div></td></tr>"
+                if has_details
                 else ""
             )
         )
@@ -806,6 +833,43 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
 }}
 .document-status.complete {{ color: var(--ink); }}
 .document-status.complete::before {{ background: var(--signal); }}
+.prompt-panel {{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}}
+.prompt-panel-heading {{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}}
+.prompt-panel-heading strong,
+.prompt-template > strong {{
+  font-size: 12px;
+  font-weight: 600;
+}}
+.prompt-panel-heading span {{
+  color: var(--muted);
+  font-size: 11px;
+}}
+.prompt-template + .prompt-template {{ margin-top: 12px; }}
+.prompt-scroll {{
+  max-height: 320px;
+  margin-top: 6px;
+  overflow: auto;
+  border: 1px solid #cfccc4;
+  border-radius: 10px;
+  background: rgba(255,255,255,.72);
+}}
+.prompt-scroll pre {{
+  margin: 0;
+  padding: 13px 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: 11px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+}}
 .numeric {{ text-align: right; font-variant-numeric: tabular-nums; }}
 .price {{ font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }}
 .cost-cell {{
