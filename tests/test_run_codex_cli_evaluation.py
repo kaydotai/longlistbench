@@ -12,6 +12,20 @@ def test_status_summary_fails_when_any_sample_fails() -> None:
     assert not runner._all_statuses_succeeded([("a", "error: invalid JSON")])
 
 
+def test_usage_backed_resumes_are_reported_as_completed() -> None:
+    statuses = [("measured", "skip"), ("legacy", "skip"), ("failed", "timeout")]
+    metadata = {
+        "measured": {"usage": {"input_tokens": 100}},
+        "legacy": {"observed_model": "gpt-5.5"},
+    }
+
+    assert runner._normalize_usage_backed_statuses(statuses, metadata) == [
+        ("measured", 0),
+        ("legacy", "skip"),
+        ("failed", "timeout"),
+    ]
+
+
 def test_run_codex_uses_requested_model_and_effort(tmp_path, monkeypatch) -> None:
     (tmp_path / "prompt.md").write_text("extract", encoding="utf-8")
     captured = {}
@@ -32,6 +46,7 @@ def test_run_codex_uses_requested_model_and_effort(tmp_path, monkeypatch) -> Non
 
     assert status == 0
     assert output == "ok"
+    assert "--json" in captured["cmd"]
     assert captured["cmd"][captured["cmd"].index("-m") + 1] == "gpt-5.6-sol"
     assert 'model_reasoning_effort="xhigh"' in captured["cmd"]
 
@@ -89,6 +104,72 @@ def test_codex_log_header_requires_model_and_effort() -> None:
     assert runner._parse_codex_log_header("OpenAI Codex v0.144.4\nmodel: gpt-5.6-sol\n") is None
     assert runner._cli_versions_match("v0.144.4", "codex-cli 0.144.4")
     assert not runner._cli_versions_match("v0.143.0", "codex-cli 0.144.4")
+
+
+def test_codex_json_metadata_sums_completed_turn_usage() -> None:
+    log = "\n".join(
+        [
+            '{"type":"thread.started","thread_id":"thread-123"}',
+            "non-json diagnostic output",
+            (
+                '{"type":"turn.completed","usage":{"input_tokens":100,'
+                '"cached_input_tokens":40,"cache_write_input_tokens":5,'
+                '"output_tokens":12,"reasoning_output_tokens":7}}'
+            ),
+            (
+                '{"type":"turn.completed","usage":{"input_tokens":80,'
+                '"cached_input_tokens":30,"output_tokens":9,'
+                '"reasoning_output_tokens":4}}'
+            ),
+        ]
+    )
+
+    metadata = runner._parse_codex_json_metadata(
+        log,
+        requested_model="gpt-5.6-sol",
+        requested_effort="xhigh",
+        runtime_version="codex-cli 0.145.0",
+    )
+
+    assert metadata == {
+        "cli_version": "codex-cli 0.145.0",
+        "observed_model": "gpt-5.6-sol",
+        "observed_effort": "xhigh",
+        "provenance_source": "codex_json_events_and_invocation",
+        "completed_turn_count": 2,
+        "usage": {
+            "input_tokens": 180,
+            "cached_input_tokens": 70,
+            "cache_write_input_tokens": 5,
+            "output_tokens": 21,
+            "reasoning_output_tokens": 11,
+        },
+        "thread_id": "thread-123",
+    }
+
+
+def test_aggregate_codex_usage_counts_only_measured_samples() -> None:
+    assert runner._aggregate_codex_usage(
+        {
+            "measured": {
+                "usage": {
+                    "input_tokens": 100,
+                    "cached_input_tokens": 40,
+                    "cache_write_input_tokens": 5,
+                    "output_tokens": 12,
+                    "reasoning_output_tokens": 7,
+                }
+            },
+            "legacy": {"observed_model": "gpt-5.5"},
+        }
+    ) == {
+        "measured_sample_count": 1,
+        "input_tokens": 100,
+        "cached_input_tokens": 40,
+        "cache_write_input_tokens": 5,
+        "output_tokens": 12,
+        "reasoning_output_tokens": 7,
+    }
 
 
 def test_resume_requires_matching_input_and_prediction_hashes(tmp_path) -> None:
