@@ -72,9 +72,13 @@ RUNS = (
         "harness": "Codex CLI",
         "model": "GPT-5.5",
         "protocol": "Agentic CLI",
-        "cost_source": "unavailable",
+        "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
         "prompt_note": AGENTIC_PROMPT_NOTE,
+        "cost_metadata_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt55_20260729/usage_summary.json"
+        ),
     },
     {
         "run_dir": "reducto_deep_extract_v3_targeted_prompt",
