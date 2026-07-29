@@ -155,6 +155,19 @@ def test_converts_reducto_credits_at_standard_list_rate() -> None:
     assert cost["full_run_cost_explanation"].count(". ") == 0
 
 
+def test_reducto_protocol_labels_keep_credit_usage_in_cost_hint_only() -> None:
+    protocols = {
+        run["model"]: run["protocol"]
+        for run in export_leaderboard_space.RUNS
+        if run["harness"] == "Reducto"
+    }
+
+    assert protocols == {
+        "Deep Extract v3 (targeted prompt)": "Raw PDF · targeted prompt",
+        "Deep Extract v3 (strict contract)": "Raw PDF · strict contract",
+    }
+
+
 def test_marks_bonsai_as_free_hosted_run() -> None:
     cost = export_leaderboard_space.derive_full_run_cost(
         {"cost_source": "hosted_free"},
