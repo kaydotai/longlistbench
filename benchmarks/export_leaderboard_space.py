@@ -271,7 +271,10 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "by_stressor": s["by_stressor"],
             "documents": summarize_document_results(m["detailed_results"]),
         })
-    rows.sort(key=lambda r: r["exact_record_recall"], reverse=True)
+    rows.sort(
+        key=lambda r: (r["complete_documents"], r["exact_record_recall"]),
+        reverse=True,
+    )
     return {
         "benchmark": "LongListBench",
         "version": RELEASE_VERSION,
@@ -814,22 +817,22 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
                   data-metric-definition="Cost for all 32 documents using the best available run evidence; per-row hints explain each basis.">i</button>
               </div>
             </th>
-            <th class="numeric" aria-sort="descending">
+            <th class="numeric" aria-sort="none">
               <div class="column-actions">
                 <button class="sort-button" type="button" data-sort-key="exact_record_recall"
                   data-sort-type="number" data-default-direction="descending">
-                  Exact recall <span class="sort-arrow" aria-hidden="true">↓</span>
+                  Exact recall <span class="sort-arrow" aria-hidden="true">↕</span>
                 </button>
                 <button class="definition-button" type="button" aria-label="Explain exact recall"
                   aria-expanded="false" data-metric-title="Exact recall"
                   data-metric-definition="Exact matched gold records divided by all gold records. Every normalized field in a record must match.">i</button>
               </div>
             </th>
-            <th class="numeric" aria-sort="none">
+            <th class="numeric" aria-sort="descending">
               <div class="column-actions">
                 <button class="sort-button" type="button" data-sort-key="complete_documents"
                   data-sort-type="number" data-default-direction="descending">
-                  Complete docs <span class="sort-arrow" aria-hidden="true">↕</span>
+                  Complete docs <span class="sort-arrow" aria-hidden="true">↓</span>
                 </button>
                 <button class="definition-button" type="button" aria-label="Explain complete documents"
                   aria-expanded="false" data-metric-title="Complete documents"

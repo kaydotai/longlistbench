@@ -200,6 +200,58 @@ def test_marks_subscription_run_without_usage_as_unavailable() -> None:
     }
 
 
+def test_build_data_sorts_complete_documents_then_exact_recall_descending() -> None:
+    def model(name: str, *, complete: int, exact: float) -> dict:
+        return {
+            "harness": "Test harness",
+            "model": name,
+            "requested_model": name,
+            "effort": "xhigh",
+            "cli_version": "test-cli",
+            "run_date": "2026-07-28",
+            "protocol": "Agentic CLI",
+            "full_run_cost_usd": None,
+            "full_run_cost_source": "usage_unavailable",
+            "full_run_cost_explanation": "Usage unavailable.",
+            "stats": {
+                "exact_record_recall": exact,
+                "exact_record_precision": exact,
+                "exact_record_f1": exact,
+                "complete_documents": complete,
+                "total_samples": 32,
+                "complete_document_rate": complete / 32,
+                "weighted_f1": exact,
+                "weighted_recall": exact,
+                "by_evaluation_role": {
+                    "structural_challenge": {"exact_record_recall": exact},
+                    "scale_control": {"exact_record_recall": exact},
+                },
+                "total_rows": 100,
+                "total_exact_record_matches": round(exact * 100),
+                "errors": [],
+                "by_tier": {},
+                "by_complexity_regime": {},
+                "by_stressor": {},
+            },
+            "detailed_results": [],
+        }
+
+    data = export_leaderboard_space.build_data(
+        [
+            model("few-complete-high-recall", complete=8, exact=0.99),
+            model("tie-low-recall", complete=16, exact=0.89),
+            model("tie-high-recall", complete=16, exact=0.96),
+        ],
+        {"total_samples": 32},
+    )
+
+    assert [result["model"] for result in data["results"]] == [
+        "tie-high-recall",
+        "tie-low-recall",
+        "few-complete-high-recall",
+    ]
+
+
 def test_formats_full_run_cost_in_usd() -> None:
     assert export_leaderboard_space.format_full_run_cost(44.86076025) == "$44.86"
     assert export_leaderboard_space.format_full_run_cost(0.0) == "$0.00"
@@ -519,7 +571,17 @@ def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
     assert 'data-sortable-table' in html
     assert 'data-sort-key="full_run_cost_usd"' in html
     assert 'data-sort-key="exact_record_recall"' in html
-    assert 'aria-sort="descending"' in html
+    assert (
+        '<th class="numeric" aria-sort="descending">\n'
+        '              <div class="column-actions">\n'
+        '                <button class="sort-button" type="button" '
+        'data-sort-key="complete_documents"'
+    ) in html
+    assert (
+        'data-sort-key="complete_documents"\n'
+        '                  data-sort-type="number" data-default-direction="descending">\n'
+        '                  Complete docs <span class="sort-arrow" aria-hidden="true">↓</span>'
+    ) in html
     assert "<th>Rank</th>" not in html
     assert "data-rank-cell" not in html
     assert "<td colspan='7'>" in html
