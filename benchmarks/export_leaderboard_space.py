@@ -24,7 +24,11 @@ RUNS = (
         "harness": "Codex CLI",
         "model": "GPT-5.6-Sol",
         "protocol": "Agentic CLI",
-        "cost_source": "unavailable",
+        "cost_source": "codex_api_equivalent",
+        "cost_metadata_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_sol_20260729/usage_summary.json"
+        ),
     },
     {
         "run_dir": "claude_opus48_full_current_ocr_v2",
@@ -89,6 +93,35 @@ SPACE_FILENAMES = ("README.md", "index.html", "leaderboard_data.json")
 
 def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> dict:
     source = run.get("cost_source", "unavailable")
+    if source == "codex_api_equivalent":
+        measurement = metadata.get("measured_cost")
+        dataset = metadata.get("dataset")
+        api_equivalent = (
+            measurement.get("api_equivalent_usd")
+            if isinstance(measurement, dict)
+            else None
+        )
+        if (
+            not isinstance(dataset, dict)
+            or dataset.get("documents") != expected_samples
+            or not isinstance(api_equivalent, (int, float))
+        ):
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the independent Codex cost measurement is "
+                    "incomplete."
+                ),
+            }
+        return {
+            "full_run_cost_usd": float(api_equivalent),
+            "full_run_cost_source": "codex_api_equivalent",
+            "full_run_cost_explanation": (
+                f"${api_equivalent:.2f} API-equivalent cost from the independent cost "
+                "measurement; the leaderboard accuracy remains the released run."
+            ),
+        }
     if source == "claude_api_equivalent":
         samples = metadata.get("samples")
         if not isinstance(samples, dict) or len(samples) != expected_samples:
@@ -196,7 +229,12 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
                 f"manifest={manifest}, shape={shape}; "
                 f"expected manifest={expected_manifest}, shape={expected_shape}"
             )
-        cost = derive_full_run_cost(run, meta, stats["total_samples"])
+        cost_metadata = meta
+        if cost_metadata_path := run.get("cost_metadata_path"):
+            cost_metadata = json.loads(
+                Path(cost_metadata_path).read_text(encoding="utf-8")
+            )
+        cost = derive_full_run_cost(run, cost_metadata, stats["total_samples"])
         models.append({
             "key": key,
             "harness": run["harness"],

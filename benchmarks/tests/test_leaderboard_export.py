@@ -200,6 +200,22 @@ def test_marks_subscription_run_without_usage_as_unavailable() -> None:
     }
 
 
+def test_sol_row_uses_api_equivalent_cost_from_independent_measurement() -> None:
+    models, dataset_meta = export_leaderboard_space.load_runs(
+        export_leaderboard_space.RESULTS_DIR
+    )
+    sol = next(model for model in models if model["model"] == "GPT-5.6-Sol")
+
+    assert sol["full_run_cost_usd"] == pytest.approx(33.460299)
+    assert sol["full_run_cost_source"] == "codex_api_equivalent"
+    assert "independent cost measurement" in sol["full_run_cost_explanation"]
+
+    html = export_leaderboard_space.build_html(
+        export_leaderboard_space.build_data(models, dataset_meta)
+    )
+    assert "<span class='cost-value'>$33.46</span>" in html
+
+
 def test_build_data_sorts_complete_documents_then_exact_recall_descending() -> None:
     def model(name: str, *, complete: int, exact: float) -> dict:
         return {
