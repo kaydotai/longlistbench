@@ -462,7 +462,6 @@ def build_html(data: dict) -> str:
         )
         rows_html.append(
             f"<tr data-result-row data-original-rank='{rank}' data-details-row='{details_id}'>"
-            f"<td class='rank' data-rank-cell>#{rank}</td>"
             f"<td class='configuration' data-column='configuration' "
             f"data-sort-value='{result['model'].casefold()}'><div class='model-line'>"
             f"<strong>{result['model']}</strong></div>"
@@ -496,7 +495,7 @@ def build_html(data: dict) -> str:
             "</tr>"
             + (
                 f"<tr class='detail-row' id='{details_id}' data-detail-for='{rank}' hidden>"
-                "<td colspan='8'><div class='detail-panel'>"
+                "<td colspan='7'><div class='detail-panel'>"
                 "<div class='detail-panel-heading'>"
                 f"<strong>{result['model']}</strong><span>{len(documents)} documents</span></div>"
                 "<div class='document-scroll'><table class='document-table'>"
@@ -722,11 +721,6 @@ td.metric-best {{
 }}
 tbody > tr[data-result-row]:hover > td.metric-best {{
   background: rgba(255,225,0,.24);
-}}
-.rank {{
-  width: 54px;
-  color: var(--muted);
-  font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
 }}
 .configuration {{ min-width: 270px; }}
 .model-line {{ display: flex; align-items: center; gap: 8px; }}
@@ -980,7 +974,6 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
       <table data-sortable-table>
         <thead>
           <tr>
-            <th>Rank</th>
             <th aria-sort="none">
               <div class="column-actions">
                 <button class="sort-button" type="button" data-sort-key="configuration"

@@ -632,6 +632,10 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
     assert 'data-sort-key="full_run_cost_usd"' in html
     assert 'data-sort-key="exact_record_recall"' in html
     assert 'aria-sort="descending"' in html
+    assert "<th>Rank</th>" not in html
+    assert "data-rank-cell" not in html
+    assert "<td colspan='7'>" in html
+    assert ".rank {" not in html
     assert html.count('class="details-button"') == 2
     assert html.count("class='detail-row'") == 2
     assert "driver_mvr_packet_001" in html
