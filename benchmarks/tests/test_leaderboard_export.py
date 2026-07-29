@@ -388,12 +388,12 @@ def test_table_highlights_metric_leaders_without_an_overall_leader() -> None:
     assert html.count(" metric-best'") == 12
     assert "td.metric-best {" in html
     assert (
-        "background: linear-gradient(120deg, rgba(255,225,0,.28) 0%, "
-        "rgba(255,246,174,.50) 52%, rgba(255,225,0,.08) 100%);"
+        "background: linear-gradient(105deg, rgba(255,225,0,.55) 0%, "
+        "rgba(255,246,174,.72) 48%, rgba(255,225,0,.10) 100%);"
     ) in html
     assert (
-        "background: linear-gradient(120deg, rgba(255,225,0,.38) 0%, "
-        "rgba(255,246,174,.62) 52%, rgba(255,225,0,.14) 100%);"
+        "background: linear-gradient(105deg, rgba(255,225,0,.68) 0%, "
+        "rgba(255,246,174,.84) 48%, rgba(255,225,0,.18) 100%);"
     ) in html
     assert "background: rgba(255,225,0,.16);" not in html
     assert ">Leader</span>" not in html
