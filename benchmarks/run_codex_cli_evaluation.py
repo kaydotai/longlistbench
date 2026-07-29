@@ -220,6 +220,19 @@ def _all_statuses_succeeded(statuses: list[tuple[str, int | str]]) -> bool:
     return bool(statuses) and all(status in (0, "skip", "attest") for _sample, status in statuses)
 
 
+def _normalize_usage_backed_statuses(
+    statuses: list[tuple[str, int | str]],
+    sample_metadata: dict[str, dict],
+) -> list[tuple[str, int | str]]:
+    normalized = []
+    for sample, status in statuses:
+        metadata = sample_metadata.get(sample) or {}
+        if status == "skip" and isinstance(metadata.get("usage"), dict):
+            status = 0
+        normalized.append((sample, status))
+    return normalized
+
+
 def run_codex(
     workspace: Path,
     repo_root: Path,
@@ -726,6 +739,7 @@ def main() -> int:
         status_order = {sample: index for index, sample in enumerate(samples)}
         statuses.sort(key=lambda item: status_order.get(item[0], len(status_order)))
 
+    statuses = _normalize_usage_backed_statuses(statuses, sample_metadata)
     (output_dir / "per_sample_status.tsv").write_text(
         "sample\tstatus\n" + "\n".join(f"{sample}\t{status}" for sample, status in statuses) + "\n",
         encoding="utf-8",

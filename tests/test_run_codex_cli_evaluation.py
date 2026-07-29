@@ -12,6 +12,20 @@ def test_status_summary_fails_when_any_sample_fails() -> None:
     assert not runner._all_statuses_succeeded([("a", "error: invalid JSON")])
 
 
+def test_usage_backed_resumes_are_reported_as_completed() -> None:
+    statuses = [("measured", "skip"), ("legacy", "skip"), ("failed", "timeout")]
+    metadata = {
+        "measured": {"usage": {"input_tokens": 100}},
+        "legacy": {"observed_model": "gpt-5.5"},
+    }
+
+    assert runner._normalize_usage_backed_statuses(statuses, metadata) == [
+        ("measured", 0),
+        ("legacy", "skip"),
+        ("failed", "timeout"),
+    ]
+
+
 def test_run_codex_uses_requested_model_and_effort(tmp_path, monkeypatch) -> None:
     (tmp_path / "prompt.md").write_text("extract", encoding="utf-8")
     captured = {}
