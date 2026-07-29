@@ -235,6 +235,7 @@ def run_codex(
         sandbox_profile(repo_root, extra_denied_paths),
         "codex",
         "exec",
+        "--json",
         "--ephemeral",
         "--skip-git-repo-check",
         "-m",
@@ -324,7 +325,12 @@ def run_sample(
             log_path = logs_dir / f"{sample}_{transcript}_{model_key}.log"
             if not log_path.is_file():
                 return sample, "invalid_attestation: missing Codex log", None
-            observed = _parse_codex_log_header(log_path.read_text(encoding="utf-8"))
+            observed = _parse_codex_log_metadata(
+                log_path.read_text(encoding="utf-8"),
+                requested_model=model,
+                requested_effort=effort,
+                runtime_version=runtime_version,
+            )
             if observed is None:
                 return sample, "invalid_attestation: missing Codex model provenance", None
             if observed["observed_model"] != model or observed["observed_effort"] != effort:
@@ -355,7 +361,12 @@ def run_sample(
             encoding="utf-8",
         )
         if status == 0:
-            observed = _parse_codex_log_header(log)
+            observed = _parse_codex_log_metadata(
+                log,
+                requested_model=model,
+                requested_effort=effort,
+                runtime_version=runtime_version,
+            )
             if observed is None:
                 return sample, "invalid_result: missing Codex model provenance", None
             if observed["observed_model"] != model or observed["observed_effort"] != effort:
@@ -402,6 +413,75 @@ def _parse_codex_log_header(log: str) -> dict[str, str] | None:
     }
 
 
+_CODEX_USAGE_KEYS = (
+    "input_tokens",
+    "cached_input_tokens",
+    "cache_write_input_tokens",
+    "output_tokens",
+    "reasoning_output_tokens",
+)
+
+
+def _parse_codex_json_metadata(
+    log: str,
+    *,
+    requested_model: str,
+    requested_effort: str,
+    runtime_version: str,
+) -> dict | None:
+    usage = {key: 0 for key in _CODEX_USAGE_KEYS}
+    thread_id = None
+    completed_turn_count = 0
+    for line in log.splitlines():
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(event, dict):
+            continue
+        if event.get("type") == "thread.started":
+            thread_id = event.get("thread_id")
+        if event.get("type") != "turn.completed":
+            continue
+        turn_usage = event.get("usage")
+        if not isinstance(turn_usage, dict):
+            continue
+        completed_turn_count += 1
+        for key in _CODEX_USAGE_KEYS:
+            value = turn_usage.get(key, 0)
+            if isinstance(value, int) and value >= 0:
+                usage[key] += value
+
+    if completed_turn_count == 0:
+        return None
+    metadata = {
+        "cli_version": runtime_version,
+        "observed_model": requested_model,
+        "observed_effort": requested_effort,
+        "provenance_source": "codex_json_events_and_invocation",
+        "completed_turn_count": completed_turn_count,
+        "usage": usage,
+    }
+    if isinstance(thread_id, str) and thread_id:
+        metadata["thread_id"] = thread_id
+    return metadata
+
+
+def _parse_codex_log_metadata(
+    log: str,
+    *,
+    requested_model: str,
+    requested_effort: str,
+    runtime_version: str,
+) -> dict | None:
+    return _parse_codex_log_header(log) or _parse_codex_json_metadata(
+        log,
+        requested_model=requested_model,
+        requested_effort=requested_effort,
+        runtime_version=runtime_version,
+    )
+
+
 def _cli_versions_match(observed: str, runtime: str) -> bool:
     observed_number = re.search(r"\d+(?:\.\d+)+", observed)
     runtime_number = re.search(r"\d+(?:\.\d+)+", runtime)
@@ -416,17 +496,46 @@ def _audit_codex_log_headers(
     output_dir: Path,
     transcript: str,
     model_key: str,
-) -> dict[str, dict[str, str]]:
+    *,
+    requested_model: str,
+    requested_effort: str,
+    runtime_version: str,
+) -> dict[str, dict]:
     logs_dir = output_dir / "logs"
     suffix = f"_{transcript}_{model_key}.log"
-    audit: dict[str, dict[str, str]] = {}
+    audit: dict[str, dict] = {}
     if not logs_dir.exists():
         return audit
     for path in sorted(logs_dir.glob(f"*{suffix}")):
-        header = _parse_codex_log_header(path.read_text(encoding="utf-8"))
+        header = _parse_codex_log_metadata(
+            path.read_text(encoding="utf-8"),
+            requested_model=requested_model,
+            requested_effort=requested_effort,
+            runtime_version=runtime_version,
+        )
         if header is not None:
             audit[path.name.removesuffix(suffix)] = header
     return audit
+
+
+def _aggregate_codex_usage(samples: dict[str, dict]) -> dict | None:
+    totals = {key: 0 for key in _CODEX_USAGE_KEYS}
+    measured_sample_count = 0
+    for metadata in samples.values():
+        usage = metadata.get("usage")
+        if not isinstance(usage, dict):
+            continue
+        measured_sample_count += 1
+        for key in _CODEX_USAGE_KEYS:
+            value = usage.get(key, 0)
+            if isinstance(value, int) and value >= 0:
+                totals[key] += value
+    if measured_sample_count == 0:
+        return None
+    return {
+        "measured_sample_count": measured_sample_count,
+        **totals,
+    }
 
 
 def _load_run_metadata(output_dir: Path) -> dict:
@@ -475,7 +584,15 @@ def _write_run_metadata(
     runtime_version: str | None = None,
     extra_denied_paths: list[Path] | None = None,
 ) -> None:
-    observed = _audit_codex_log_headers(output_dir, transcript, model_key)
+    effective_runtime_version = runtime_version or _codex_cli_version() or "unknown"
+    observed = _audit_codex_log_headers(
+        output_dir,
+        transcript,
+        model_key,
+        requested_model=requested_model,
+        requested_effort=effort,
+        runtime_version=effective_runtime_version,
+    )
     for sample, metadata in (sample_metadata or {}).items():
         observed[sample] = {**observed.get(sample, {}), **metadata}
     payload = {
@@ -485,7 +602,7 @@ def _write_run_metadata(
         "requested_model": requested_model,
         "effort": effort,
         "transcript": transcript,
-        "cli_version_observed_at_metadata_write": runtime_version or _codex_cli_version(),
+        "cli_version_observed_at_metadata_write": effective_runtime_version,
         "authentication": "Codex subscription; credentials are not stored",
         "additional_denied_paths": _metadata_denied_path_labels(
             repo_root,
@@ -494,6 +611,9 @@ def _write_run_metadata(
         "sample_statuses": {sample: status for sample, status in statuses},
         "samples": observed,
     }
+    usage_totals = _aggregate_codex_usage(observed)
+    if usage_totals is not None:
+        payload["usage_totals"] = usage_totals
     (output_dir / RUN_METADATA_FILE).write_text(
         json.dumps(payload, indent=2) + "\n",
         encoding="utf-8",
