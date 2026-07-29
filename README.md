@@ -31,6 +31,34 @@ python benchmarks/ocr_claims_pdfs.py \
   --model gemini-3.5-flash
 ```
 
+## Local Bonsai extraction demo
+
+This small macOS demo runs Ternary Bonsai 27B locally, reads embedded text from
+an uploaded PDF's first page, and streams the schema fields into a browser UI.
+It was tested on an M4 Pro with 48 GB of unified memory.
+
+Install Python and the two native system prerequisites:
+
+```bash
+brew install python cmake poppler
+```
+
+Then run one script from the repository root:
+
+```bash
+./scripts/run_bonsai_demo.sh
+```
+
+On the first run, the script creates an isolated Python environment, builds the
+pinned Metal llama.cpp server, and downloads the model weights (about 6.7 GB).
+It then opens the demo. Drop the included one-page Rosa MVR record,
+`demo/bonsai_extract/assets/driver_mvr_record_001.pdf`, into the page to start
+extraction.
+
+Everything runs on the Mac. Before every extraction, the app clears the
+llama.cpp prompt slot so the displayed prefill speed is a fresh measurement.
+Press Ctrl-C in the terminal to stop both local processes.
+
 ## Reproducibility
 
 Convenience targets are provided via the repository root `Makefile`:
