@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
 from unittest.mock import patch
-from xml.etree import ElementTree
 
 import pytest
 
@@ -245,28 +244,6 @@ def test_metric_leaders_include_all_ties_at_displayed_precision() -> None:
     }
 
 
-def test_cost_chart_omits_runs_without_full_run_cost() -> None:
-    chart = export_leaderboard_space.build_cost_chart(
-        [
-            {
-                "model": "GPT-5.6-Sol",
-                "full_run_cost_usd": None,
-                "full_run_cost_explanation": "Usage was not preserved.",
-                "exact_record_recall": 0.9788,
-            },
-            {
-                "model": "Deep Extract v3 (targeted prompt)",
-                "full_run_cost_usd": 46.62,
-                "full_run_cost_explanation": "Credits converted at the Standard list rate.",
-                "exact_record_recall": 0.9598,
-            },
-        ]
-    )
-
-    assert "GPT-5.6-Sol" not in chart
-    assert "Deep Extract v3 (targeted prompt)" in chart
-
-
 def test_unpriced_table_cells_are_marked_as_missing_sort_values() -> None:
     data = {
         "results": [
@@ -464,113 +441,7 @@ def test_summarize_document_results_keeps_only_comparable_metrics() -> None:
     ]
 
 
-def test_cost_chart_has_no_local_price_band() -> None:
-    chart = export_leaderboard_space.build_cost_chart(
-        [
-            {
-                "model": "Bonsai 27B",
-                "full_run_cost_usd": 0,
-                "full_run_cost_explanation": "No dollar charge was recorded.",
-                "exact_record_recall": 0.1674,
-            }
-        ]
-    )
-
-    assert "local-band" not in chart
-
-
-def test_cost_chart_uses_compact_points() -> None:
-    chart = export_leaderboard_space.build_cost_chart(
-        [
-            {
-                "model": "Bonsai 27B",
-                "full_run_cost_usd": 0,
-                "full_run_cost_explanation": "No dollar charge was recorded.",
-                "exact_record_recall": 0.1674,
-            }
-        ]
-    )
-
-    assert "r='6'" in chart
-    assert "r='9'" not in chart
-
-
-def test_cost_chart_keeps_axis_margins_compact() -> None:
-    chart = export_leaderboard_space.build_cost_chart(
-        [
-            {
-                "model": "Bonsai 27B",
-                "full_run_cost_usd": 0,
-                "full_run_cost_explanation": "No dollar charge was recorded.",
-                "exact_record_recall": 0.1674,
-            }
-        ]
-    )
-    svg = ElementTree.fromstring(chart)
-    _, _, width, height = map(float, svg.attrib["viewBox"].split())
-    baseline = next(element for element in svg if element.attrib.get("class") == "axis-line")
-    x_axis_title = next(
-        element for element in svg if element.text == "Full-run cost (USD)"
-    )
-    plot_left = float(baseline.attrib["x1"])
-    plot_bottom = float(baseline.attrib["y1"])
-    title_y = float(x_axis_title.attrib["y"])
-
-    assert plot_left / width <= 0.065
-    assert (title_y - plot_bottom) / height <= 0.15
-
-
-def test_cost_chart_labels_are_compact_and_show_only_model_score() -> None:
-    chart = export_leaderboard_space.build_cost_chart(
-        [
-            {
-                "model": "Deep Extract v3 (targeted prompt)",
-                "full_run_cost_usd": 46.62,
-                "full_run_cost_explanation": "Credits converted at the Standard list rate.",
-                "exact_record_recall": 0.961,
-            },
-            {
-                "model": "Bonsai 27B",
-                "full_run_cost_usd": 0,
-                "full_run_cost_explanation": "No dollar charge was recorded.",
-                "exact_record_recall": 0.1674,
-            },
-            {
-                "model": "Claude Opus 4.8",
-                "full_run_cost_usd": 44.86,
-                "full_run_cost_explanation": "Sum of Claude Code API-equivalent estimates.",
-                "exact_record_recall": 0.9771,
-            },
-        ]
-    )
-
-    assert "class='point-meta'>96.10% · $46.62</text>" in chart
-    assert "class='point-meta'>16.74% · $0.00</text>" in chart
-    assert "class='point-model'>Opus 4.8</text>" in chart
-    assert "data-model='Claude Opus 4.8'" in chart
-    assert (
-        "<title>Claude Opus 4.8: 97.71% exact recall at $44.86; "
-        "Sum of Claude Code API-equivalent estimates.</title>"
-    ) in chart
-
-
-def test_cost_chart_rounds_dynamic_axis_to_next_25_dollars() -> None:
-    chart = export_leaderboard_space.build_cost_chart(
-        [
-            {
-                "model": "Claude Fable 5",
-                "full_run_cost_usd": 102.84,
-                "full_run_cost_explanation": "Sum of API-equivalent estimates.",
-                "exact_record_recall": 0.951,
-            }
-        ]
-    )
-
-    assert "class='axis-tick'>$125</text>" in chart
-    assert "class='axis-tick'>$150</text>" not in chart
-
-
-def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
+def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
     def result(
         model: str,
         *,
@@ -625,7 +496,7 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
 
     assert '<body class="leaderboard-space">' in html
     assert "<title>LongListBench Leaderboard</title>" in html
-    assert '<main class="shell">\n  <section class="chart-section"' in html
+    assert '<main class="shell">\n  <section class="leaderboard-section"' in html
     assert "<header" not in html
     assert 'class="overview"' not in html
     assert 'font-family: "Suisse Intl", "Helvetica Neue", Arial, sans-serif' in html
@@ -633,12 +504,13 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
     assert "/ research" not in html.lower()
     assert ">kay<" not in html.lower()
     assert "Every row." not in html
-    assert "Accuracy × full-run cost" in html
-    assert "Full-run cost (USD)</text>" in html
-    assert "1 priced run shown · 1 run omitted because cost usage is unavailable" in html
+    assert "Accuracy × full-run cost" not in html
+    assert "Full-run cost (USD)</text>" not in html
+    assert "priced run shown" not in html
+    assert ".leaderboard-section { padding-top: 12px; }" in html
     assert "INPUT + OUTPUT LIST PRICE" not in html
     assert "mobile-scroll-hint" not in html
-    assert "cost-chart" in html
+    assert "cost-chart" not in html
     assert "GPT-5.6-Sol" in html
     assert "Bonsai 27B" in html
     assert "section-heading" not in html

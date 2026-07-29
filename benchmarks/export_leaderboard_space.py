@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import html as html_module
 import json
-import math
 import shutil
 from pathlib import Path
 
@@ -323,93 +322,6 @@ def metric_leaders(results: list[dict]) -> dict[str, set[int]]:
     return leaders
 
 
-def build_cost_chart(results: list[dict]) -> str:
-    results = [row for row in results if row["full_run_cost_usd"] is not None]
-    width = 920
-    height = 312
-    left = 48
-    right = 898
-    top = 18
-    bottom = 252
-    plot_width = right - left
-    plot_height = bottom - top
-    max_cost = max((row["full_run_cost_usd"] for row in results), default=0.0)
-    axis_max = max(25, math.ceil(max_cost / 25) * 25)
-
-    def x_pos(cost: float) -> float:
-        return left + (cost / axis_max) * plot_width
-
-    def y_pos(score: float) -> float:
-        return bottom - score * plot_height
-
-    y_grid = []
-    for percent in (0, 25, 50, 75, 100):
-        y = y_pos(percent / 100)
-        y_grid.append(
-            f"<line x1='{left}' x2='{right}' y1='{y:.1f}' y2='{y:.1f}' class='grid-line'/>"
-            f"<text x='{left - 8}' y='{y + 3:.1f}' text-anchor='end' class='axis-tick'>{percent}%</text>"
-        )
-
-    x_grid = []
-    for value in range(0, axis_max + 1, 25):
-        x = x_pos(value)
-        x_grid.append(
-            f"<line x1='{x:.1f}' x2='{x:.1f}' y1='{top}' y2='{bottom}' class='grid-line vertical'/>"
-            f"<text x='{x:.1f}' y='{bottom + 19}' text-anchor='middle' class='axis-tick'>${value}</text>"
-        )
-
-    known_labels = {
-        "Claude Opus 4.8": (-18, 32, "end"),
-        "Claude Fable 5": (-14, 38, "end"),
-        "Deep Extract v3 (targeted prompt)": (18, 50, "start"),
-        "Deep Extract v3 (strict contract)": (18, 64, "start"),
-        "Bonsai 27B": (18, -20, "start"),
-    }
-    point_html = []
-    for index, row in enumerate(results):
-        cost = row["full_run_cost_usd"]
-        x = x_pos(cost)
-        y = y_pos(row["exact_record_recall"])
-        dx, dy, anchor = known_labels.get(
-            row["model"],
-            (16 if index % 2 == 0 else -16, 24 + index * 8, "start" if index % 2 == 0 else "end"),
-        )
-        label_x = x + dx
-        label_y = y + dy
-        display_model = html_module.escape(row["model"].removeprefix("Claude "))
-        model_attribute = html_module.escape(row["model"], quote=True)
-        explanation = html_module.escape(row["full_run_cost_explanation"])
-        classes = ["point"]
-        if cost == 0:
-            classes.append("local")
-        point_html.append(
-            f"<g class='{' '.join(classes)}' data-model='{model_attribute}'>"
-            f"<title>{html_module.escape(row['model'])}: "
-            f"{pct(row['exact_record_recall'], 2)}% exact recall at "
-            f"{format_full_run_cost(cost)}; {explanation}</title>"
-            f"<line x1='{x:.1f}' y1='{y:.1f}' x2='{label_x:.1f}' y2='{label_y - 8:.1f}' class='label-line'/>"
-            f"<circle cx='{x:.1f}' cy='{y:.1f}' r='6'/>"
-            f"<text x='{label_x:.1f}' y='{label_y:.1f}' text-anchor='{anchor}' class='point-model'>{display_model}</text>"
-            f"<text x='{label_x:.1f}' y='{label_y + 14:.1f}' text-anchor='{anchor}' class='point-meta'>"
-            f"{pct(row['exact_record_recall'], 2)}% · {format_full_run_cost(cost)}</text>"
-            "</g>"
-        )
-
-    return (
-        f"<svg class='cost-chart' viewBox='0 0 {width} {height}' role='img' "
-        "aria-label='Exact-record recall versus full-run cost in US dollars'>"
-        f"{''.join(y_grid)}{''.join(x_grid)}"
-        f"<line x1='{left}' x2='{right}' y1='{bottom}' y2='{bottom}' class='axis-line'/>"
-        f"<text x='{(left + right) / 2:.1f}' y='{height - 14}' text-anchor='middle' class='axis-title'>"
-        "Full-run cost (USD)</text>"
-        f"<text x='8' y='{(top + bottom) / 2:.1f}' text-anchor='middle' class='axis-title' "
-        f"transform='rotate(-90 8 {(top + bottom) / 2:.1f})'>"
-        "EXACT-RECORD RECALL →</text>"
-        f"{''.join(point_html)}"
-        "</svg>"
-    )
-
-
 def build_html(data: dict) -> str:
     results = data["results"]
     leaders = metric_leaders(results)
@@ -508,16 +420,6 @@ def build_html(data: dict) -> str:
             )
         )
 
-    chart_html = build_cost_chart(results)
-    priced_count = sum(result["full_run_cost_usd"] is not None for result in results)
-    omitted_count = len(results) - priced_count
-    priced_run_label = "run" if priced_count == 1 else "runs"
-    omitted_run_label = "run" if omitted_count == 1 else "runs"
-    chart_summary = (
-        f"{priced_count} priced {priced_run_label} shown · {omitted_count} "
-        f"{omitted_run_label} omitted because cost usage is unavailable"
-    )
-
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -570,68 +472,7 @@ a:focus-visible {{ outline: 3px solid var(--signal); outline-offset: 3px; }}
   width: min(1280px, calc(100% - 32px));
   margin: 0 auto;
 }}
-.chart-section {{ padding-top: 12px; }}
-.chart-card {{
-  padding: 20px 22px 18px;
-  border-radius: 26px;
-  background: var(--surface);
-}}
-.chart-head {{
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 24px;
-}}
-.chart-head h3 {{
-  margin: 0;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: -.025em;
-}}
-.chart-head p {{ margin: 4px 0 0; color: var(--muted); font-size: 13px; }}
-.chart-key {{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  border-radius: 7px;
-  background: rgba(255,255,255,.58);
-  color: var(--muted);
-  font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .03em;
-  white-space: nowrap;
-}}
-.chart-key::before {{
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--signal);
-}}
-.chart-viewport {{ overflow-x: auto; overscroll-behavior-inline: contain; }}
-.cost-chart {{
-  width: 100%;
-  height: auto;
-  min-width: 900px;
-  display: block;
-  margin-top: 12px;
-  overflow: visible;
-}}
-.grid-line {{ stroke: #d8d5ce; stroke-width: 1; }}
-.grid-line.vertical {{ stroke-dasharray: 2 6; }}
-.axis-line {{ stroke: #aaa69e; stroke-width: 1; }}
-.axis-tick, .axis-title, .point-meta {{
-  fill: #77756f;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}}
-.axis-tick {{ font-size: 10px; }}
-.axis-title {{ font-size: 9px; letter-spacing: .06em; }}
-.point circle {{ fill: var(--ink); stroke: var(--surface); stroke-width: 3; }}
-.point.local circle {{ fill: var(--paper); stroke: var(--ink); }}
-.label-line {{ stroke: #8c8982; stroke-width: 1; }}
-.point-model {{ fill: var(--ink); font-size: 11px; font-weight: 600; }}
-.point-meta {{ font-size: 8.5px; }}
-.leaderboard-section {{ padding-top: 56px; }}
+.leaderboard-section {{ padding-top: 12px; }}
 .tablebox {{
   overflow-x: auto;
   border: 1px solid var(--line);
@@ -935,15 +776,8 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   from {{ opacity: 0; transform: translateY(10px); }}
   to {{ opacity: 1; transform: none; }}
 }}
-.chart-card {{ animation: enter .5s ease both; }}
 @media (max-width: 820px) {{
   .shell {{ width: min(100% - 20px, 1280px); }}
-  .chart-card {{ padding: 16px 12px 14px; border-radius: 20px; }}
-  .chart-head {{ align-items: start; }}
-  .chart-key {{ flex: 0 0 auto; }}
-  .chart-viewport {{ margin-right: -16px; padding-right: 16px; }}
-  .cost-chart {{ min-width: 760px; }}
-  .leaderboard-section {{ padding-top: 48px; }}
   .submit-panel {{ margin-top: 48px; padding: 22px 18px; grid-template-columns: 1fr; }}
   .submit-panel .button {{ justify-self: start; }}
   .site-footer {{ flex-direction: column; }}
@@ -956,19 +790,6 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
 </head>
 <body class="leaderboard-space">
 <main class="shell">
-  <section class="chart-section" aria-labelledby="cost-chart-title">
-    <div class="chart-card">
-      <div class="chart-head">
-        <div>
-          <h3 id="cost-chart-title">Accuracy × full-run cost</h3>
-          <p>{chart_summary}</p>
-        </div>
-        <div class="chart-key">Full-run cost</div>
-      </div>
-      <div class="chart-viewport">{chart_html}</div>
-    </div>
-  </section>
-
   <section class="leaderboard-section" id="results">
     <div class="tablebox">
       <table data-sortable-table>
