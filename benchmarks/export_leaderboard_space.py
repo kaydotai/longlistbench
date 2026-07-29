@@ -19,11 +19,16 @@ PRICING_OBSERVED_DATE = "2026-07-28"
 PROMPT_TEMPLATE_DIR = REPO_ROOT / "benchmarks" / "leaderboard_prompts"
 
 AGENTIC_PROMPT_TEMPLATES = (
-    {"title": "Agent task prompt", "filename": "agentic_cli_task.txt"},
+    {"title": "Task prompt — exact", "filename": "agentic_cli_task.txt"},
     {
-        "title": "Per-document field contract",
+        "title": "Field contract template — separate per-document input",
         "filename": "generated_field_contract.txt",
     },
+)
+AGENTIC_PROMPT_NOTE = (
+    "Repository-denied agentic run over released OCR transcripts. "
+    "Generic operations and policy samples received a generated field contract; "
+    "claim samples received the published incident JSON Schema."
 )
 
 RUNS = (
@@ -35,7 +40,7 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
-        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
+        "prompt_note": AGENTIC_PROMPT_NOTE,
         "cost_metadata_path": (
             REPO_ROOT
             / "benchmarks/cost_measurements/gpt56_sol_20260729/usage_summary.json"
@@ -49,7 +54,7 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "claude_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
-        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
+        "prompt_note": AGENTIC_PROMPT_NOTE,
     },
     {
         "run_dir": "claude_fable5_full_current_ocr_v2",
@@ -59,7 +64,7 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "claude_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
-        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
+        "prompt_note": AGENTIC_PROMPT_NOTE,
     },
     {
         "run_dir": "codex_full_current_ocr_v2",
@@ -69,7 +74,7 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "unavailable",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
-        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
+        "prompt_note": AGENTIC_PROMPT_NOTE,
     },
     {
         "run_dir": "reducto_deep_extract_v3_targeted_prompt",

@@ -232,6 +232,26 @@ def test_load_runs_bakes_prompt_templates_into_export_data() -> None:
     assert strict["prompt_note"] == "Primary Reducto comparison condition."
 
 
+def test_agentic_prompt_panel_distinguishes_task_prompt_from_contract_input() -> None:
+    run = next(
+        run
+        for run in export_leaderboard_space.RUNS
+        if run["model"] == "GPT-5.6-Sol"
+    )
+
+    html = export_leaderboard_space.render_prompt_templates(
+        {
+            "prompt_note": run["prompt_note"],
+            "prompt_templates": export_leaderboard_space.load_prompt_templates(run),
+        }
+    )
+
+    assert "Task prompt — exact" in html
+    assert "Field contract template — separate per-document input" in html
+    assert "claim samples received the published incident JSON Schema" in html
+    assert "Agent task prompt" not in html
+
+
 def test_marks_bonsai_as_free_hosted_run() -> None:
     cost = export_leaderboard_space.derive_full_run_cost(
         {"cost_source": "hosted_free"},
