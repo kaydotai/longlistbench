@@ -1,0 +1,24 @@
+Output JSON shape:
+{ "records": [ ... ] }
+
+General requirements:
+- Extract every target record visible in the document.
+- Use the exact field names below; do not invent fields that are not listed.
+{{RECORD_TYPE_REQUIREMENT}}
+- If a listed field is not visible for a record, use an empty string.
+- Preserve identifiers, dates, codes, locations, limits, rates, totals, names, and premiums exactly as shown.
+- Do not deduplicate repeated records unless they are exact duplicate rows for the same item.
+
+Allowed record groups and fields:
+{{ALLOWED_RECORD_GROUPS_AND_FIELDS}}
+
+All allowed fields:
+{{ALL_ALLOWED_FIELDS}}
+
+Target-scope rules:
+- Extract records that match the listed fields, not every nearby note, notice, subtotal, or support table.
+- Keep each field to its own value; do not include neighboring labels or carried-over header text.
+- For tables split across pages or sections, preserve the inherited row context needed to complete each record.
+- For policy packets, extract scheduled locations, classifications, coverages, forms, endorsements, material clauses, rating rows, and premium rows that match the allowed fields.
+- For operations documents, extract one record per target table row or section-row combination matching the allowed fields.
+{{CONDITIONAL_SCOPE_RULES}}

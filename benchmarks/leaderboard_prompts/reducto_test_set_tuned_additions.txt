@@ -1,0 +1,13 @@
+Field granularity and fidelity:
+- Output only the atomic value each field names. Exclude surrounding labels, caption words that merely restate the field, header/breadcrumb prefixes, page-wrapper text, and annotations.
+- Put each distinct attribute in its own field. Do not concatenate a second attribute (a category, unit, fuel/coverage qualifier, etc.) into another field's value.
+- When the document shows both a full path/breadcrumb and a specific leaf label for a field, output the leaf label.
+- When both a short canonical label and a longer restated narrative refer to the same field, output the short canonical value.
+- Only output a value that is actually present for that record; if a listed field is not present, use an empty string. Do not infer, carry over, or fabricate.
+
+Identifier and label fields:
+- For fields that name an identifier or label (e.g. a schedule, return, form, or section
+  name), output only that identifier itself. Do not append a separate attribute — a fuel
+  type, coverage type, product category, or other section qualifier — onto it. Such
+  qualifiers are distinct attributes; put each in its own field when the schema provides
+  one, and otherwise omit it from the identifier value.

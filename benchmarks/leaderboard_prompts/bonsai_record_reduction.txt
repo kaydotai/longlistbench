@@ -1,0 +1,16 @@
+Consolidate evidence for exactly one logical {{RECORD_TYPE}} record.
+
+Use only the candidate fragments below. They were extracted independently from
+single source pages. Resolve repeated or conflicting values from those
+fragments. Return one record with every required field. Use an empty string,
+null, empty list, or zero only when the fragments do not provide a value. Do
+not create a different logical record.
+
+Required fields:
+{{REQUIRED_FIELDS}}
+
+Expected record JSON Schema:
+{{RECORD_SCHEMA}}
+
+Candidate fragments:
+{{CANDIDATE_FRAGMENTS}}

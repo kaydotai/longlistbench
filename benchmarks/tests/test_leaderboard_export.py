@@ -46,6 +46,32 @@ def _write_run(
     (target / "run_metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
 
 
+def test_every_configured_run_has_non_empty_prompt_templates() -> None:
+    for run in export_leaderboard_space.RUNS:
+        templates = export_leaderboard_space.load_prompt_templates(run)
+        assert templates
+        assert all(set(template) == {"title", "template"} for template in templates)
+        assert all(template["title"].strip() for template in templates)
+        assert all(template["template"].strip() for template in templates)
+
+
+def test_prompt_loader_rejects_missing_and_empty_files(tmp_path: Path) -> None:
+    missing = {
+        "model": "Missing",
+        "prompt_templates": ({"title": "Task", "filename": "missing.txt"},),
+    }
+    with pytest.raises(ValueError, match="Missing.*missing.txt"):
+        export_leaderboard_space.load_prompt_templates(missing, tmp_path)
+
+    (tmp_path / "empty.txt").write_text(" \n", encoding="utf-8")
+    empty = {
+        "model": "Empty",
+        "prompt_templates": ({"title": "Task", "filename": "empty.txt"},),
+    }
+    with pytest.raises(ValueError, match="Empty.*empty.txt.*empty"):
+        export_leaderboard_space.load_prompt_templates(empty, tmp_path)
+
+
 def test_load_runs_rejects_mixed_dataset_manifests(tmp_path: Path) -> None:
     runs = (
         {

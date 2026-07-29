@@ -16,6 +16,15 @@ RELEASE_VERSION = "v" + (REPO_ROOT / "VERSION").read_text(encoding="utf-8").stri
 DEFAULT_OUTPUT = REPO_ROOT / "dist" / "huggingface" / "leaderboard_space"
 REDUCTO_CREDIT_PRICE_USD = 0.015
 PRICING_OBSERVED_DATE = "2026-07-28"
+PROMPT_TEMPLATE_DIR = REPO_ROOT / "benchmarks" / "leaderboard_prompts"
+
+AGENTIC_PROMPT_TEMPLATES = (
+    {"title": "Agent task prompt", "filename": "agentic_cli_task.txt"},
+    {
+        "title": "Per-document field contract",
+        "filename": "generated_field_contract.txt",
+    },
+)
 
 RUNS = (
     {
@@ -25,6 +34,7 @@ RUNS = (
         "model": "GPT-5.6-Sol",
         "protocol": "Agentic CLI",
         "cost_source": "codex_api_equivalent",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
         "cost_metadata_path": (
             REPO_ROOT
             / "benchmarks/cost_measurements/gpt56_sol_20260729/usage_summary.json"
@@ -37,6 +47,7 @@ RUNS = (
         "model": "Claude Opus 4.8",
         "protocol": "Agentic CLI",
         "cost_source": "claude_api_equivalent",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
     },
     {
         "run_dir": "claude_fable5_full_current_ocr_v2",
@@ -45,6 +56,7 @@ RUNS = (
         "model": "Claude Fable 5",
         "protocol": "Agentic CLI",
         "cost_source": "claude_api_equivalent",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
     },
     {
         "run_dir": "codex_full_current_ocr_v2",
@@ -53,6 +65,7 @@ RUNS = (
         "model": "GPT-5.5",
         "protocol": "Agentic CLI",
         "cost_source": "unavailable",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
     },
     {
         "run_dir": "reducto_deep_extract_v3_targeted_prompt",
@@ -61,6 +74,16 @@ RUNS = (
         "model": "Deep Extract v3 (targeted prompt)",
         "protocol": "Raw PDF · targeted prompt",
         "cost_source": "reducto_credits",
+        "prompt_templates": (
+            {
+                "title": "Generated field contract",
+                "filename": "generated_field_contract.txt",
+            },
+            {
+                "title": "Test-set-tuned additions",
+                "filename": "reducto_test_set_tuned_additions.txt",
+            },
+        ),
         "effort": "targeted fields",
         "requested_model": "v3",
         "cli_version": "Reducto API",
@@ -72,6 +95,12 @@ RUNS = (
         "model": "Deep Extract v3 (strict contract)",
         "protocol": "Raw PDF · strict contract",
         "cost_source": "reducto_credits",
+        "prompt_templates": (
+            {
+                "title": "Generated field contract",
+                "filename": "generated_field_contract.txt",
+            },
+        ),
         "effort": "identical contract",
         "requested_model": "v3",
         "cli_version": "Reducto API",
@@ -83,12 +112,49 @@ RUNS = (
         "model": "Bonsai 27B",
         "protocol": "Page pipeline",
         "cost_source": "hosted_free",
+        "prompt_templates": (
+            {
+                "title": "Page extraction",
+                "filename": "bonsai_page_extraction.txt",
+            },
+            {
+                "title": "Record reduction",
+                "filename": "bonsai_record_reduction.txt",
+            },
+        ),
         "effort": "page pipeline",
         "requested_model": "Prism-ML/Ternary-Bonsai-27B",
         "cli_version": "Together API",
     },
 )
 SPACE_FILENAMES = ("README.md", "index.html", "leaderboard_data.json")
+
+
+def load_prompt_templates(
+    run: dict,
+    prompt_dir: Path | None = None,
+) -> list[dict[str, str]]:
+    source_dir = PROMPT_TEMPLATE_DIR if prompt_dir is None else prompt_dir
+    loaded = []
+    for template_config in run.get("prompt_templates", ()):
+        filename = template_config["filename"]
+        path = source_dir / filename
+        try:
+            template = path.read_text(encoding="utf-8").rstrip()
+        except OSError as error:
+            raise ValueError(
+                f"{run['model']} prompt template {filename} could not be read"
+            ) from error
+        if not template.strip():
+            raise ValueError(
+                f"{run['model']} prompt template {filename} is empty"
+            )
+        loaded.append(
+            {"title": template_config["title"], "template": template}
+        )
+    if not loaded:
+        raise ValueError(f"{run['model']} has no prompt templates configured")
+    return loaded
 
 
 def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> dict:
