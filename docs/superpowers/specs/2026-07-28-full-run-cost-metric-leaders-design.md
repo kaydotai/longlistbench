@@ -12,8 +12,8 @@ best displayed value in each metric.
 
 This change affects the static leaderboard exporter, its generated
 `leaderboard_data.json` and `index.html`, and exporter tests. It does not alter
-saved predictions, evaluation reports, benchmark scores, or the ranking order.
-It does not fabricate costs for runs whose usage was not preserved.
+saved predictions, evaluation reports, benchmark scores, or the default result
+order. It does not fabricate costs for runs whose usage was not preserved.
 
 ## Full-Run Cost Model
 
@@ -56,8 +56,9 @@ definition must be one concise sentence at most. The column definition will
 state that the value covers all 32 documents and uses the best available cost
 evidence for each run.
 
-The table retains rank numbers and its default exact-recall ordering. It will
-not declare an overall winner:
+The table removes the rank column because no single ordering captures all
+metric and cost tradeoffs, while retaining its default exact-recall ordering.
+It will not declare an overall winner:
 
 - Remove the `Leader` badge.
 - Remove the winner-row background and accent border.
@@ -76,8 +77,8 @@ Ties are determined at the precision shown to users: two decimal places for
 USD costs, one decimal place for percentages, and exact integer counts for
 complete documents. All displayed ties receive the same subtle highlighted
 cell treatment. This prevents two visibly identical values from receiving
-different styling because of hidden decimal precision. Rank and configuration
-cells are never highlighted.
+different styling because of hidden decimal precision. Configuration cells
+are never highlighted.
 
 The highlight follows the supplied cell-coloring reference but uses the
 leaderboard's existing palette: a quiet `--signal`-derived yellow fill on the

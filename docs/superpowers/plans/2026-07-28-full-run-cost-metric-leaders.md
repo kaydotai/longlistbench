@@ -16,7 +16,7 @@
 - Claude cost equals the complete sum of all per-sample `estimated_api_cost_usd` values and is unavailable if any sample cost is missing.
 - Bonsai is `$0.00` for the hosted Together endpoint advertised as free, not a local run.
 - Highlight all ties at displayed precision using the existing yellow signal palette.
-- Keep the default exact-recall ordering and rank numbers, but remove all overall-leader treatments.
+- Keep the default exact-recall ordering, remove the rank column, and retain no overall-leader treatments.
 - Do not push the branch.
 
 ---
@@ -313,3 +313,56 @@ git log -5 --oneline --decorate
 Expected: no whitespace errors, only the user's unrelated untracked paths
 remain, and the implementation commits are local on
 `codex/add-reducto-results`.
+
+---
+
+### Task 5: Remove the rank column
+
+**Files:**
+- Modify: `benchmarks/tests/test_leaderboard_export.py`
+- Modify: `benchmarks/export_leaderboard_space.py`
+
+**Interfaces:**
+- Consumes: the existing ordered leaderboard result rows.
+- Produces: the same sortable table without a visible ordinal rank column.
+
+- [ ] **Step 1: Write a failing rank-removal regression test**
+
+Build the existing two-result HTML fixture and assert that its table has seven
+column headers, no `Rank` header, no `data-rank-cell`, and detail rows use
+`colspan='7'`; keep the existing assertions for default exact-recall ordering.
+
+- [ ] **Step 2: Run the focused test and verify the expected failure**
+
+Run:
+
+```bash
+.venv/bin/python -m pytest benchmarks/tests/test_leaderboard_export.py -q
+```
+
+Expected: failure because the current HTML still renders the rank header,
+rank cells, and eight-column detail rows.
+
+- [ ] **Step 3: Remove only visible rank presentation**
+
+Delete the rank header, each result row's rank cell, and the obsolete `.rank`
+CSS rule; change detail-row `colspan` from `8` to `7`. Keep the internal
+`data-original-rank` stable-sort key, details IDs, and exact-recall result
+ordering unchanged.
+
+- [ ] **Step 4: Run focused and full verification**
+
+Run:
+
+```bash
+.venv/bin/python -m pytest benchmarks/tests/test_leaderboard_export.py -q
+.venv/bin/python -m pytest -q
+```
+
+Expected: all tests pass with only the known third-party deprecation warning.
+
+- [ ] **Step 5: Regenerate and verify in the browser**
+
+Regenerate the leaderboard, reload `http://127.0.0.1:8765/`, and confirm the
+rank column is absent, sorting and details still work, and the console has no
+errors.
