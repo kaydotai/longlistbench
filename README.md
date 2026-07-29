@@ -74,6 +74,12 @@ By default this writes an ignored local package to `dist/huggingface/longlistben
 HF_REPO_ID=your-org/your-dataset make hf-export
 ```
 
+Publishing to `kaydotai/LongListBench` is automated: the `Dataset Publish` workflow rebuilds the
+package whenever `data/`, `benchmarks/results/`, the export script, or `VERSION` changes, and
+uploads it on `main`. Pull requests build the package and attach the generated card as an artifact
+without uploading. Use the workflow's manual trigger to republish without a source change. Local
+`make hf-export` remains available for inspecting the package before it ships.
+
 The exported Hugging Face configs are:
 
 | Config | Contents |
