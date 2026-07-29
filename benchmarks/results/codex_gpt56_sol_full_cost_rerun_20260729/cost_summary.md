@@ -33,14 +33,15 @@ subscription, so it does not have a directly attributable per-run USD invoice.
 
 At standard API list prices, the same measured token totals correspond to:
 
-- `$33.460299` if every model request used short-context pricing.
-- At most `$62.762748` if every model request used long-context pricing.
+`$33.460299`
 
-GPT-5.6-Sol requests with more than 272K input tokens receive long-context
-pricing. Codex JSONL reports aggregate usage for the complete agent turn rather
-than each internal model request, so the exact API-equivalent value cannot be
-reconstructed from this run. The USD figures are a bounded comparison, not the
-actual subscription charge.
+This uses short-context pricing. Codex CLI 0.145.0 caps the GPT-5.6-Sol active
+context at 272K tokens and compacts the thread before it exceeds that window.
+The API long-context surcharge applies only when a single request has more than
+272K input tokens, so it cannot apply to this Codex run. Codex JSONL usage is
+cumulative across the agent turn; cumulative input can exceed 272K without any
+individual request entering long-context pricing. The USD figure is an API
+list-price equivalent, not the actual subscription charge.
 
 ## Distribution
 
@@ -97,9 +98,13 @@ Most expensive documents:
 - Field micro-F1: 99.7562%
 - Field macro-F1: 99.7092%
 
-The released GPT-5.6-Sol run remains the public baseline. This independent
-rerun is retained as a cost and stochasticity measurement rather than silently
-replacing the released predictions.
+The released GPT-5.6-Sol run remains the public baseline. It recovered 28,971
+records (97.8783%) and completed 8/32 documents. This independent rerun
+recovered 29,279 records (98.9189%) and also completed 8/32 documents. Of the
+308 additional exact matches, 298 came from policy packets, whose exact-record
+recall changed from 73.3% to 95.5%. This is agent-strategy variance on the
+hardest family, not a scorer change. The measured cost belongs to this rerun
+and must not be attached to the released predictions.
 
 ## Verification
 
@@ -111,5 +116,6 @@ OK: evaluation_report.json matches saved predictions + golden data
 Rate cards:
 
 - https://learn.chatgpt.com/docs/pricing
+- https://learn.chatgpt.com/docs/changelog
 - https://developers.openai.com/api/docs/pricing
 - https://developers.openai.com/api/docs/models/gpt-5.6-sol

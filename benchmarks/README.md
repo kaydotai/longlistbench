@@ -208,11 +208,15 @@ The current full-corpus results use the same repository-denied OCR protocol. GPT
 
 An independent GPT-5.6-Sol full-corpus rerun on July 29, 2026 records Codex
 JSONL token usage for cost analysis. It consumed 836.51 ChatGPT credits across
-32 documents, equivalent to 28.26 credits per 1,000 target records and 47.18
-credits per 100 PDF pages. At standard short-context API list prices, those
-normalizations are $1.13 per 1,000 records and $1.89 per 100 pages. The rerun
-reached 98.9% exact-record recall and 8/32 complete documents, so its costs must
-not be attached to the released 97.9% leaderboard row. See
+32 documents, equivalent to $33.46 at standard API list prices, 28.26 credits
+per 1,000 target records, and 47.18 credits per 100 PDF pages. The API
+equivalent uses short-context pricing because Codex CLI caps the active
+GPT-5.6-Sol context at 272K tokens; cumulative agent-turn usage does not trigger
+the API surcharge for individual requests above 272K input tokens. The rerun
+reached 98.9% exact-record recall and 8/32 complete documents, versus 97.9% and
+8/32 in the released run. Policy packets account for 298 of the 308 additional
+exact matches, showing agent-strategy variance on the hardest family. The
+measured cost belongs only to the rerun. See
 `benchmarks/results/codex_gpt56_sol_full_cost_rerun_20260729/`.
 
 The strongest separation is on heterogeneous policy records. Sparse driver/MVR enrichment is near ceiling, but only Fable 5 joins all report details without emitting separate report-only rows. A tagged stressor therefore need not reduce every agent's accuracy. The scorer canonicalizes case, whitespace, dates, decimals, accounting negatives, documented domain-label equivalents, visible `Unit` prefixes in vehicle identifiers, and `Quarter Return`/`Quarterly Return` heading aliases. It preserves extra heading context as an error. Treat single-sample probe folders as older diagnostics unless rerun against the current manifest.
