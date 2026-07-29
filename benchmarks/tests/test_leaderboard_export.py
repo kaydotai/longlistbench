@@ -81,6 +81,8 @@ def test_load_runs_rejects_mixed_dataset_manifests(tmp_path: Path) -> None:
             "model": "Model A",
             "protocol": "Agentic CLI",
             "cost_source": "unavailable",
+            "prompt_templates": export_leaderboard_space.AGENTIC_PROMPT_TEMPLATES,
+            "prompt_note": "Test prompt condition.",
         },
         {
             "run_dir": "run-b",
@@ -89,6 +91,8 @@ def test_load_runs_rejects_mixed_dataset_manifests(tmp_path: Path) -> None:
             "model": "Model B",
             "protocol": "Agentic CLI",
             "cost_source": "unavailable",
+            "prompt_templates": export_leaderboard_space.AGENTIC_PROMPT_TEMPLATES,
+            "prompt_note": "Test prompt condition.",
         },
     )
     _write_run(tmp_path, "run-a", "model_a", manifest="a" * 64)
@@ -180,17 +184,52 @@ def test_converts_reducto_credits_at_standard_list_rate() -> None:
     assert cost["full_run_cost_explanation"].count(". ") == 0
 
 
-def test_reducto_protocol_labels_keep_credit_usage_in_cost_hint_only() -> None:
-    protocols = {
-        run["model"]: run["protocol"]
+def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
+    rows = {
+        run["model"]: (run["protocol"], run["prompt_note"])
         for run in export_leaderboard_space.RUNS
         if run["harness"] == "Reducto"
     }
 
-    assert protocols == {
-        "Deep Extract v3 (targeted prompt)": "Raw PDF · targeted prompt",
-        "Deep Extract v3 (strict contract)": "Raw PDF · strict contract",
+    assert rows == {
+        "Deep Extract v3 (test-set tuned)": (
+            "Raw PDF · test-set tuned",
+            "Test-set tuned after observing benchmark failure modes.",
+        ),
+        "Deep Extract v3 (strict contract)": (
+            "Raw PDF · strict contract",
+            "Primary Reducto comparison condition.",
+        ),
     }
+
+
+def test_load_runs_bakes_prompt_templates_into_export_data() -> None:
+    models, dataset_meta = export_leaderboard_space.load_runs(
+        export_leaderboard_space.RESULTS_DIR
+    )
+    data = export_leaderboard_space.build_data(models, dataset_meta)
+
+    assert all(result["prompt_templates"] for result in data["results"])
+    tuned = next(
+        result
+        for result in data["results"]
+        if result["model"] == "Deep Extract v3 (test-set tuned)"
+    )
+    strict = next(
+        result
+        for result in data["results"]
+        if result["model"] == "Deep Extract v3 (strict contract)"
+    )
+    tuned_text = "\n".join(
+        template["template"] for template in tuned["prompt_templates"]
+    )
+    strict_text = "\n".join(
+        template["template"] for template in strict["prompt_templates"]
+    )
+    assert "Field granularity and fidelity:" in tuned_text
+    assert "Identifier and label fields:" in tuned_text
+    assert "Field granularity and fidelity:" not in strict_text
+    assert strict["prompt_note"] == "Primary Reducto comparison condition."
 
 
 def test_marks_bonsai_as_free_hosted_run() -> None:
@@ -250,9 +289,13 @@ def test_build_data_sorts_complete_documents_then_exact_recall_descending() -> N
             "requested_model": name,
             "effort": "xhigh",
             "cli_version": "test-cli",
-            "run_date": "2026-07-28",
-            "protocol": "Agentic CLI",
-            "full_run_cost_usd": None,
+                "run_date": "2026-07-28",
+                "protocol": "Agentic CLI",
+                "prompt_templates": [
+                    {"title": "Agent task prompt", "template": "Extract records."}
+                ],
+                "prompt_note": "Test prompt condition.",
+                "full_run_cost_usd": None,
             "full_run_cost_source": "usage_unavailable",
             "full_run_cost_explanation": "Usage unavailable.",
             "stats": {

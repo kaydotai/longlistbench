@@ -35,6 +35,7 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
         "cost_metadata_path": (
             REPO_ROOT
             / "benchmarks/cost_measurements/gpt56_sol_20260729/usage_summary.json"
@@ -48,6 +49,7 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "claude_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
     },
     {
         "run_dir": "claude_fable5_full_current_ocr_v2",
@@ -57,6 +59,7 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "claude_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
     },
     {
         "run_dir": "codex_full_current_ocr_v2",
@@ -66,13 +69,14 @@ RUNS = (
         "protocol": "Agentic CLI",
         "cost_source": "unavailable",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": "Repository-denied agentic run over released OCR transcripts.",
     },
     {
         "run_dir": "reducto_deep_extract_v3_targeted_prompt",
         "key": "reducto_deep_extract",
         "harness": "Reducto",
-        "model": "Deep Extract v3 (targeted prompt)",
-        "protocol": "Raw PDF · targeted prompt",
+        "model": "Deep Extract v3 (test-set tuned)",
+        "protocol": "Raw PDF · test-set tuned",
         "cost_source": "reducto_credits",
         "prompt_templates": (
             {
@@ -84,6 +88,7 @@ RUNS = (
                 "filename": "reducto_test_set_tuned_additions.txt",
             },
         ),
+        "prompt_note": "Test-set tuned after observing benchmark failure modes.",
         "effort": "targeted fields",
         "requested_model": "v3",
         "cli_version": "Reducto API",
@@ -101,6 +106,7 @@ RUNS = (
                 "filename": "generated_field_contract.txt",
             },
         ),
+        "prompt_note": "Primary Reducto comparison condition.",
         "effort": "identical contract",
         "requested_model": "v3",
         "cli_version": "Reducto API",
@@ -122,6 +128,7 @@ RUNS = (
                 "filename": "bonsai_record_reduction.txt",
             },
         ),
+        "prompt_note": "Two-stage page pipeline over released OCR transcripts.",
         "effort": "page pipeline",
         "requested_model": "Prism-ML/Ternary-Bonsai-27B",
         "cli_version": "Together API",
@@ -306,6 +313,8 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
             "harness": run["harness"],
             "model": run["model"],
             "protocol": run["protocol"],
+            "prompt_templates": load_prompt_templates(run),
+            "prompt_note": run["prompt_note"],
             **cost,
             "requested_model": run.get("requested_model", meta.get("requested_model", meta.get("model_id"))),
             "effort": run.get("effort", meta.get("effort", "default")),
@@ -354,6 +363,8 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "cli_version": m["cli_version"],
             "run_date": m["run_date"],
             "protocol": m["protocol"],
+            "prompt_templates": m["prompt_templates"],
+            "prompt_note": m["prompt_note"],
             "full_run_cost_usd": m["full_run_cost_usd"],
             "full_run_cost_source": m["full_run_cost_source"],
             "full_run_cost_explanation": m["full_run_cost_explanation"],
