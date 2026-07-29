@@ -206,18 +206,15 @@ Saved reports under `benchmarks/results/` may refer to earlier corpus versions. 
 
 The current full-corpus results use the same repository-denied OCR protocol. GPT-5.6-Sol recovers 97.9% of target records exactly and completes 8/32 documents; Fable 5 recovers 95.1% exactly and completes 9/32. On the 19 structural-challenge documents, exact-record recall is 93.8% and 84.0%; on the 13 scale controls it is 99.5% for both. Field micro-F1 remains a partial-credit diagnostic at 99.4% and 96.8%. Both runs cover 29,599 targets with zero execution errors. GPT-5.5 reaches 94.5% exact recall and 4/32 complete documents; Opus 4.8 reaches 97.7% and 7/32.
 
-An independent GPT-5.6-Sol full-corpus rerun on July 29, 2026 records Codex
-JSONL token usage for cost analysis. It consumed 836.51 ChatGPT credits across
-32 documents, equivalent to $33.46 at standard API list prices, 28.26 credits
-per 1,000 target records, and 47.18 credits per 100 PDF pages. The API
-equivalent uses short-context pricing because Codex CLI caps the active
-GPT-5.6-Sol context at 272K tokens; cumulative agent-turn usage does not trigger
-the API surcharge for individual requests above 272K input tokens. The rerun
-reached 98.9% exact-record recall and 8/32 complete documents, versus 97.9% and
-8/32 in the released run. Policy packets account for 298 of the 308 additional
-exact matches, showing agent-strategy variance on the hardest family. The
-measured cost belongs only to the rerun. See
-`benchmarks/results/codex_gpt56_sol_full_cost_rerun_20260729/`.
+An independent GPT-5.6-Sol full-corpus execution on July 29, 2026 records
+Codex JSONL token usage for representative cost analysis. It consumed 836.51
+ChatGPT credits across 32 documents, equivalent to $33.46 at standard API list
+prices, 28.26 credits per 1,000 target records, and 47.18 credits per 100 PDF
+pages. Short-context pricing applies because Codex CLI caps the active
+GPT-5.6-Sol context at 272K tokens. This measurement is not an accuracy result:
+the released 97.9% run above remains the sole canonical GPT-5.6-Sol baseline,
+and its exact cost is unavailable. See
+`benchmarks/cost_measurements/gpt56_sol_20260729/`.
 
 The strongest separation is on heterogeneous policy records. Sparse driver/MVR enrichment is near ceiling, but only Fable 5 joins all report details without emitting separate report-only rows. A tagged stressor therefore need not reduce every agent's accuracy. The scorer canonicalizes case, whitespace, dates, decimals, accounting negatives, documented domain-label equivalents, visible `Unit` prefixes in vehicle identifiers, and `Quarter Return`/`Quarterly Return` heading aliases. It preserves extra heading context as an error. Treat single-sample probe folders as older diagnostics unless rerun against the current manifest.
 

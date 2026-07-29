@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "run_role": "cost_measurement",
+  "canonical_result": false,
+  "note": "Independent full-corpus execution retained only for representative token and cost measurement; it is not an accuracy baseline or leaderboard result.",
+  "generated_at": "2026-07-29T12:09:26.030478+00:00",
+  "runner": "run_codex_cli_evaluation.py",
+  "runtime": "codex-cli 0.145.0",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "input_condition": "ocr",
+  "dataset": {
+    "manifest_sha256": "ccf1881c256e9b5a2f575e73061d6fd40cfe763dc446bc873fc63cedd0019133",
+    "documents": 32,
+    "target_records": 29599,
+    "pdf_pages": 1773
+  },
+  "context_pricing": {
+    "codex_context_window_tokens": 272000,
+    "api_long_context_threshold_input_tokens": 272000,
+    "pricing_tier": "short_context",
+    "rationale": "Codex caps the active context at 272K total tokens, so no individual request can exceed the API surcharge threshold of more than 272K input tokens."
+  },
+  "measured_usage": {
+    "measured_sample_count": 32,
+    "input_tokens": 28960107,
+    "cached_input_tokens": 26590208,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 277190,
+    "reasoning_output_tokens": 127310,
+    "uncached_input_tokens": 2369899
+  },
+  "pricing": {
+    "chatgpt_credits_per_million_tokens": {
+      "uncached_input": 125.0,
+      "cached_input": 12.5,
+      "output": 750.0
+    },
+    "api_usd_per_million_tokens": {
+      "uncached_input": 5.0,
+      "cached_input": 0.5,
+      "cache_write_input": 6.25,
+      "output": 30.0
+    }
+  },
+  "measured_cost": {
+    "chatgpt_credits": 836.507475,
+    "api_equivalent_usd": 33.460299,
+    "actual_subscription_charge_usd": null
+  },
+  "per_document_usage": {
+    "driver_mvr_packet_001": {
+      "input_tokens": 260374,
+      "cached_input_tokens": 232448,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3337,
+      "reasoning_output_tokens": 1406
+    },
+    "driver_mvr_packet_002": {
+      "input_tokens": 381013,
+      "cached_input_tokens": 333312,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7604,
+      "reasoning_output_tokens": 3973
+    },
+    "driver_mvr_packet_003": {
+      "input_tokens": 309143,
+      "cached_input_tokens": 256256,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4635,
+      "reasoning_output_tokens": 1823
+    },
+    "driver_schedule_sparse_001": {
+      "input_tokens": 243185,
+      "cached_input_tokens": 204032,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2513,
+      "reasoning_output_tokens": 695
+    },
+    "ifta_mileage_by_vehicle_001": {
+      "input_tokens": 396969,
+      "cached_input_tokens": 343552,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4767,
+      "reasoning_output_tokens": 2453
+    },
+    "ifta_mileage_by_vehicle_002": {
+      "input_tokens": 499748,
+      "cached_input_tokens": 447488,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6573,
+      "reasoning_output_tokens": 3331
+    },
+    "ifta_mileage_by_vehicle_003": {
+      "input_tokens": 546970,
+      "cached_input_tokens": 482560,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5327,
+      "reasoning_output_tokens": 2868
+    },
+    "ifta_mileage_by_vehicle_004": {
+      "input_tokens": 446561,
+      "cached_input_tokens": 394496,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8085,
+      "reasoning_output_tokens": 3703
+    },
+    "ifta_mileage_by_vehicle_005": {
+      "input_tokens": 470957,
+      "cached_input_tokens": 414976,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6652,
+      "reasoning_output_tokens": 3034
+    },
+    "ifta_mileage_by_vehicle_006": {
+      "input_tokens": 419833,
+      "cached_input_tokens": 350976,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4510,
+      "reasoning_output_tokens": 2017
+    },
+    "ifta_mileage_by_vehicle_007": {
+      "input_tokens": 343510,
+      "cached_input_tokens": 297728,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4442,
+      "reasoning_output_tokens": 1978
+    },
+    "ifta_mileage_by_vehicle_008": {
+      "input_tokens": 488987,
+      "cached_input_tokens": 444672,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5099,
+      "reasoning_output_tokens": 2280
+    },
+    "ifta_multisection_return_001": {
+      "input_tokens": 765708,
+      "cached_input_tokens": 691456,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6218,
+      "reasoning_output_tokens": 2561
+    },
+    "ifta_multisection_return_002": {
+      "input_tokens": 1144266,
+      "cached_input_tokens": 1070080,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7069,
+      "reasoning_output_tokens": 3372
+    },
+    "ifta_return_schedule_001": {
+      "input_tokens": 1198046,
+      "cached_input_tokens": 1109248,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8056,
+      "reasoning_output_tokens": 3409
+    },
+    "ifta_return_schedule_002": {
+      "input_tokens": 1290843,
+      "cached_input_tokens": 1226240,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 9432,
+      "reasoning_output_tokens": 4302
+    },
+    "ifta_return_schedule_005": {
+      "input_tokens": 913097,
+      "cached_input_tokens": 842240,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 7651,
+      "reasoning_output_tokens": 3222
+    },
+    "ifta_tax_inquiry_001": {
+      "input_tokens": 255754,
+      "cached_input_tokens": 212224,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3742,
+      "reasoning_output_tokens": 1666
+    },
+    "ifta_tax_inquiry_002": {
+      "input_tokens": 282659,
+      "cached_input_tokens": 239616,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3798,
+      "reasoning_output_tokens": 2104
+    },
+    "ifta_tax_summary_001": {
+      "input_tokens": 334713,
+      "cached_input_tokens": 294912,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 2983,
+      "reasoning_output_tokens": 950
+    },
+    "ifta_tax_summary_002": {
+      "input_tokens": 341943,
+      "cached_input_tokens": 288768,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5492,
+      "reasoning_output_tokens": 2322
+    },
+    "loss_run_external_001": {
+      "input_tokens": 2157749,
+      "cached_input_tokens": 2045696,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 18607,
+      "reasoning_output_tokens": 8678
+    },
+    "loss_run_external_002": {
+      "input_tokens": 2865327,
+      "cached_input_tokens": 2733312,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 16610,
+      "reasoning_output_tokens": 6924
+    },
+    "loss_run_external_003": {
+      "input_tokens": 2684672,
+      "cached_input_tokens": 2559488,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 16733,
+      "reasoning_output_tokens": 7931
+    },
+    "mixed_040_001_crosspage": {
+      "input_tokens": 1067164,
+      "cached_input_tokens": 975104,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 13856,
+      "reasoning_output_tokens": 5447
+    },
+    "mixed_cgl_040_001": {
+      "input_tokens": 2106088,
+      "cached_input_tokens": 1998848,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 23634,
+      "reasoning_output_tokens": 13444
+    },
+    "multihop_012_001_crosspage": {
+      "input_tokens": 463492,
+      "cached_input_tokens": 389632,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11700,
+      "reasoning_output_tokens": 4092
+    },
+    "multihop_025_001_crosspage": {
+      "input_tokens": 929086,
+      "cached_input_tokens": 849664,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11705,
+      "reasoning_output_tokens": 4267
+    },
+    "multihop_bop_012_001": {
+      "input_tokens": 2108268,
+      "cached_input_tokens": 1998592,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 19146,
+      "reasoning_output_tokens": 10436
+    },
+    "multihop_wc_025_001": {
+      "input_tokens": 2045803,
+      "cached_input_tokens": 1791488,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 17499,
+      "reasoning_output_tokens": 9157
+    },
+    "vehicle_schedule_sparse_001": {
+      "input_tokens": 390591,
+      "cached_input_tokens": 336640,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 3514,
+      "reasoning_output_tokens": 1068
+    },
+    "vehicle_schedule_sparse_002": {
+      "input_tokens": 807588,
+      "cached_input_tokens": 734464,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6201,
+      "reasoning_output_tokens": 2397
+    }
+  }
+}
