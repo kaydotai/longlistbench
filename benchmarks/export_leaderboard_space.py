@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import html as html_module
 import json
+import math
 import shutil
 from pathlib import Path
 
@@ -219,12 +221,6 @@ def pct(value: float, digits: int = 1) -> str:
     return f"{100 * value:.{digits}f}"
 
 
-def combined_token_price(input_price: float | None, output_price: float | None) -> float | None:
-    if input_price is None or output_price is None:
-        return None
-    return input_price + output_price
-
-
 def summarize_document_results(details: list[dict]) -> list[dict]:
     documents = []
     for detail in details:
@@ -255,12 +251,9 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "cli_version": m["cli_version"],
             "run_date": m["run_date"],
             "protocol": m["protocol"],
-            "input_token_price": m["input_token_price"],
-            "output_token_price": m["output_token_price"],
-            "combined_token_price": combined_token_price(
-                m["input_token_price"],
-                m["output_token_price"],
-            ),
+            "full_run_cost_usd": m["full_run_cost_usd"],
+            "full_run_cost_source": m["full_run_cost_source"],
+            "full_run_cost_explanation": m["full_run_cost_explanation"],
             "exact_record_recall": s["exact_record_recall"],
             "exact_record_precision": s["exact_record_precision"],
             "exact_record_f1": s["exact_record_f1"],
@@ -292,18 +285,46 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
     }
 
 
-def money(value: float) -> str:
-    return f"${value:.0f}" if value.is_integer() else f"${value:g}"
-
-
-def format_token_price(value: float | None) -> str:
+def format_full_run_cost(value: float | None) -> str:
     if value is None:
         return "n/a"
-    return "$0 local" if value == 0 else f"{money(value)}/M"
+    return f"${value:.2f}"
+
+
+DISPLAYED_METRICS = {
+    "full_run_cost_usd": ("min", lambda value: round(value, 2)),
+    "exact_record_recall": ("max", lambda value: round(value * 100, 1)),
+    "complete_documents": ("max", int),
+    "structural_exact_recall": ("max", lambda value: round(value * 100, 1)),
+    "scale_control_exact_recall": ("max", lambda value: round(value * 100, 1)),
+    "weighted_f1": ("max", lambda value: round(value * 100, 1)),
+}
+
+
+def metric_leaders(results: list[dict]) -> dict[str, set[int]]:
+    leaders: dict[str, set[int]] = {}
+    for metric, (direction, display_value) in DISPLAYED_METRICS.items():
+        candidates = [
+            (index, display_value(row[metric]))
+            for index, row in enumerate(results)
+            if row.get(metric) is not None
+        ]
+        if not candidates:
+            leaders[metric] = set()
+            continue
+        best_value = (
+            min(value for _, value in candidates)
+            if direction == "min"
+            else max(value for _, value in candidates)
+        )
+        leaders[metric] = {
+            index for index, value in candidates if value == best_value
+        }
+    return leaders
 
 
 def build_cost_chart(results: list[dict]) -> str:
-    results = [row for row in results if row["combined_token_price"] is not None]
+    results = [row for row in results if row["full_run_cost_usd"] is not None]
     width = 920
     height = 312
     left = 48
@@ -312,10 +333,11 @@ def build_cost_chart(results: list[dict]) -> str:
     bottom = 252
     plot_width = right - left
     plot_height = bottom - top
-    max_price = max(60.0, *(row["combined_token_price"] for row in results))
+    max_cost = max((row["full_run_cost_usd"] for row in results), default=0.0)
+    axis_max = max(25, math.ceil(max_cost / 25) * 25)
 
-    def x_pos(price: float) -> float:
-        return left + (price / max_price) * plot_width
+    def x_pos(cost: float) -> float:
+        return left + (cost / axis_max) * plot_width
 
     def y_pos(score: float) -> float:
         return bottom - score * plot_height
@@ -329,7 +351,7 @@ def build_cost_chart(results: list[dict]) -> str:
         )
 
     x_grid = []
-    for value in (0, 15, 30, 45, 60):
+    for value in range(0, axis_max + 1, 25):
         x = x_pos(value)
         x_grid.append(
             f"<line x1='{x:.1f}' x2='{x:.1f}' y1='{top}' y2='{bottom}' class='grid-line vertical'/>"
@@ -337,16 +359,16 @@ def build_cost_chart(results: list[dict]) -> str:
         )
 
     known_labels = {
-        "GPT-5.6-Sol": (16, 24, "start"),
-        "GPT-5.5": (16, 58, "start"),
-        "Claude Opus 4.8": (-18, 26, "end"),
+        "Claude Opus 4.8": (-18, 32, "end"),
         "Claude Fable 5": (-14, 38, "end"),
+        "Deep Extract v3 (targeted prompt)": (18, 50, "start"),
+        "Deep Extract v3 (strict contract)": (18, 64, "start"),
         "Bonsai 27B": (18, -20, "start"),
     }
     point_html = []
-    leader_model = max(results, key=lambda row: row["exact_record_recall"])["model"]
     for index, row in enumerate(results):
-        x = x_pos(row["combined_token_price"])
+        cost = row["full_run_cost_usd"]
+        x = x_pos(cost)
         y = y_pos(row["exact_record_recall"])
         dx, dy, anchor = known_labels.get(
             row["model"],
@@ -354,30 +376,32 @@ def build_cost_chart(results: list[dict]) -> str:
         )
         label_x = x + dx
         label_y = y + dy
-        combined = row["combined_token_price"]
-        display_model = row["model"].removeprefix("Claude ")
+        display_model = html_module.escape(row["model"].removeprefix("Claude "))
+        model_attribute = html_module.escape(row["model"], quote=True)
+        explanation = html_module.escape(row["full_run_cost_explanation"])
         classes = ["point"]
-        if row["model"] == leader_model:
-            classes.append("leader")
-        if combined == 0:
+        if cost == 0:
             classes.append("local")
         point_html.append(
-            f"<g class='{' '.join(classes)}' data-model='{row['model']}'>"
+            f"<g class='{' '.join(classes)}' data-model='{model_attribute}'>"
+            f"<title>{html_module.escape(row['model'])}: "
+            f"{pct(row['exact_record_recall'], 2)}% exact recall at "
+            f"{format_full_run_cost(cost)}; {explanation}</title>"
             f"<line x1='{x:.1f}' y1='{y:.1f}' x2='{label_x:.1f}' y2='{label_y - 8:.1f}' class='label-line'/>"
             f"<circle cx='{x:.1f}' cy='{y:.1f}' r='6'/>"
             f"<text x='{label_x:.1f}' y='{label_y:.1f}' text-anchor='{anchor}' class='point-model'>{display_model}</text>"
             f"<text x='{label_x:.1f}' y='{label_y + 14:.1f}' text-anchor='{anchor}' class='point-meta'>"
-            f"{pct(row['exact_record_recall'], 2)}%</text>"
+            f"{pct(row['exact_record_recall'], 2)}% · {format_full_run_cost(cost)}</text>"
             "</g>"
         )
 
     return (
         f"<svg class='cost-chart' viewBox='0 0 {width} {height}' role='img' "
-        "aria-label='Exact-record recall versus blended token price per 1M tokens'>"
+        "aria-label='Exact-record recall versus full-run cost in US dollars'>"
         f"{''.join(y_grid)}{''.join(x_grid)}"
         f"<line x1='{left}' x2='{right}' y1='{bottom}' y2='{bottom}' class='axis-line'/>"
         f"<text x='{(left + right) / 2:.1f}' y='{height - 14}' text-anchor='middle' class='axis-title'>"
-        "Blended $ / 1M tokens</text>"
+        "Full-run cost (USD)</text>"
         f"<text x='8' y='{(top + bottom) / 2:.1f}' text-anchor='middle' class='axis-title' "
         f"transform='rotate(-90 8 {(top + bottom) / 2:.1f})'>"
         "EXACT-RECORD RECALL →</text>"
@@ -388,14 +412,30 @@ def build_cost_chart(results: list[dict]) -> str:
 
 def build_html(data: dict) -> str:
     results = data["results"]
+    leaders = metric_leaders(results)
     rows_html = []
     for rank, result in enumerate(results, 1):
-        combined = result["combined_token_price"]
-        price_label = format_token_price(combined)
-        price_sort_value = "" if combined is None else combined
-        price_sort_missing = " data-sort-missing='true'" if combined is None else ""
-        row_class = " class='winner'" if rank == 1 else ""
-        leader_badge = "<span class='leader-badge'>Leader</span>" if rank == 1 else ""
+        result_index = rank - 1
+        full_run_cost = result["full_run_cost_usd"]
+        cost_label = format_full_run_cost(full_run_cost)
+        cost_sort_value = "" if full_run_cost is None else full_run_cost
+        cost_sort_missing = " data-sort-missing='true'" if full_run_cost is None else ""
+        model_attribute = html_module.escape(result["model"], quote=True)
+        cost_explanation = html_module.escape(
+            result["full_run_cost_explanation"],
+            quote=True,
+        )
+        cost_button = (
+            '<button class="definition-button cost-definition-button" type="button" '
+            f'aria-label="Explain full-run cost for {model_attribute}" '
+            'aria-expanded="false" '
+            f'data-metric-title="Full-run cost · {model_attribute}" '
+            f'data-metric-definition="{cost_explanation}">i</button>'
+        )
+
+        def best_class(metric: str) -> str:
+            return " metric-best" if result_index in leaders[metric] else ""
+
         documents = result.get("documents", [])
         details_id = f"result-details-{rank}"
         details_button = (
@@ -421,29 +461,37 @@ def build_html(data: dict) -> str:
             for document in documents
         )
         rows_html.append(
-            f"<tr{row_class} data-result-row data-original-rank='{rank}' data-details-row='{details_id}'>"
+            f"<tr data-result-row data-original-rank='{rank}' data-details-row='{details_id}'>"
             f"<td class='rank' data-rank-cell>#{rank}</td>"
             f"<td class='configuration' data-column='configuration' "
             f"data-sort-value='{result['model'].casefold()}'><div class='model-line'>"
-            f"<strong>{result['model']}</strong>{leader_badge}</div>"
+            f"<strong>{result['model']}</strong></div>"
             f"<span>{result['harness']} · {result['effort']} · {result['run_date']}</span>"
             f"<div class='configuration-actions'><span class='protocol'>{result['protocol']}</span>"
             f"{details_button}</div></td>"
-            f"<td class='numeric price' data-column='combined_token_price' "
-            f"data-sort-value='{price_sort_value}'{price_sort_missing}>{price_label}</td>"
-            f"<td class='numeric primary' data-column='exact_record_recall' "
+            f"<td class='numeric price{best_class('full_run_cost_usd')}' "
+            "data-column='full_run_cost_usd' "
+            f"data-sort-value='{cost_sort_value}'{cost_sort_missing}>"
+            f"<span class='cost-cell'><span class='cost-value'>{cost_label}</span>"
+            f"{cost_button}</span></td>"
+            f"<td class='numeric{best_class('exact_record_recall')}' "
+            "data-column='exact_record_recall' "
             f"data-sort-value='{result['exact_record_recall']}'>"
             f"{pct(result['exact_record_recall'])}%</td>"
-            f"<td class='numeric' data-column='complete_documents' "
+            f"<td class='numeric{best_class('complete_documents')}' "
+            "data-column='complete_documents' "
             f"data-sort-value='{result['complete_documents']}'>"
             f"{result['complete_documents']}/{result['total_samples']}</td>"
-            f"<td class='numeric' data-column='structural_exact_recall' "
+            f"<td class='numeric{best_class('structural_exact_recall')}' "
+            "data-column='structural_exact_recall' "
             f"data-sort-value='{result['structural_exact_recall']}'>"
             f"{pct(result['structural_exact_recall'])}%</td>"
-            f"<td class='numeric' data-column='scale_control_exact_recall' "
+            f"<td class='numeric{best_class('scale_control_exact_recall')}' "
+            "data-column='scale_control_exact_recall' "
             f"data-sort-value='{result['scale_control_exact_recall']}'>"
             f"{pct(result['scale_control_exact_recall'])}%</td>"
-            f"<td class='numeric' data-column='weighted_f1' "
+            f"<td class='numeric{best_class('weighted_f1')}' "
+            "data-column='weighted_f1' "
             f"data-sort-value='{result['weighted_f1']}'>{pct(result['weighted_f1'])}%</td>"
             "</tr>"
             + (
@@ -462,6 +510,14 @@ def build_html(data: dict) -> str:
         )
 
     chart_html = build_cost_chart(results)
+    priced_count = sum(result["full_run_cost_usd"] is not None for result in results)
+    omitted_count = len(results) - priced_count
+    priced_run_label = "run" if priced_count == 1 else "runs"
+    omitted_run_label = "run" if omitted_count == 1 else "runs"
+    chart_summary = (
+        f"{priced_count} priced {priced_run_label} shown · {omitted_count} "
+        f"{omitted_run_label} omitted because cost usage is unavailable"
+    )
 
     return f"""<!doctype html>
 <html lang="en">
@@ -572,7 +628,6 @@ a:focus-visible {{ outline: 3px solid var(--signal); outline-offset: 3px; }}
 .axis-tick {{ font-size: 10px; }}
 .axis-title {{ font-size: 9px; letter-spacing: .06em; }}
 .point circle {{ fill: var(--ink); stroke: var(--surface); stroke-width: 3; }}
-.point.leader circle {{ fill: var(--signal); stroke: var(--ink); stroke-width: 2.5; }}
 .point.local circle {{ fill: var(--paper); stroke: var(--ink); }}
 .label-line {{ stroke: #8c8982; stroke-width: 1; }}
 .point-model {{ fill: var(--ink); font-size: 11px; font-weight: 600; }}
@@ -661,11 +716,13 @@ th[aria-sort="descending"] .sort-arrow {{ color: var(--ink); }}
 }}
 tbody > tr[data-result-row] {{ transition: background-color .16s ease; }}
 tbody > tr[data-result-row]:hover {{ background: rgba(255,255,255,.68); }}
-tbody > tr.winner {{
-  background: linear-gradient(90deg, rgba(255,225,0,.22), rgba(255,225,0,.06) 46%, transparent);
+td.metric-best {{
+  background: rgba(255,225,0,.16);
+  font-weight: 600;
 }}
-tbody > tr.winner:hover {{ background: linear-gradient(90deg, rgba(255,225,0,.3), rgba(255,225,0,.1) 46%, transparent); }}
-tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
+tbody > tr[data-result-row]:hover > td.metric-best {{
+  background: rgba(255,225,0,.24);
+}}
 .rank {{
   width: 54px;
   color: var(--muted);
@@ -674,15 +731,6 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
 .configuration {{ min-width: 270px; }}
 .model-line {{ display: flex; align-items: center; gap: 8px; }}
 .model-line strong {{ font-size: 15px; font-weight: 600; }}
-.leader-badge {{
-  padding: 3px 6px;
-  border-radius: 4px;
-  background: var(--signal);
-  color: #292929;
-  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}}
 .configuration > span:not(.protocol) {{
   display: block;
   margin-top: 2px;
@@ -807,7 +855,12 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
 .document-status.complete::before {{ background: var(--signal); }}
 .numeric {{ text-align: right; font-variant-numeric: tabular-nums; }}
 .price {{ font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }}
-.primary {{ font-size: 17px; font-weight: 600; }}
+.cost-cell {{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}}
 .metric-popover {{
   position: fixed;
   z-index: 50;
@@ -913,10 +966,10 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
     <div class="chart-card">
       <div class="chart-head">
         <div>
-          <h3 id="cost-chart-title">Accuracy × token price</h3>
-          <p>Exact-record recall against blended list price per 1M tokens. Token-priced runs only.</p>
+          <h3 id="cost-chart-title">Accuracy × full-run cost</h3>
+          <p>{chart_summary}</p>
         </div>
-        <div class="chart-key">Token-priced runs</div>
+        <div class="chart-key">Full-run cost</div>
       </div>
       <div class="chart-viewport">{chart_html}</div>
     </div>
@@ -938,13 +991,13 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
             </th>
             <th class="numeric" aria-sort="none">
               <div class="column-actions">
-                <button class="sort-button" type="button" data-sort-key="combined_token_price"
+                <button class="sort-button" type="button" data-sort-key="full_run_cost_usd"
                   data-sort-type="number" data-default-direction="ascending">
-                  Token price <span class="sort-arrow" aria-hidden="true">↕</span>
+                  Full-run cost <span class="sort-arrow" aria-hidden="true">↕</span>
                 </button>
-                <button class="definition-button" type="button" aria-label="Explain token price"
-                  aria-expanded="false" data-metric-title="Token price"
-                  data-metric-definition="Blended input plus output list price per 1M tokens. Local excludes hardware and power; n/a indicates a non-token pricing model.">i</button>
+                <button class="definition-button" type="button" aria-label="Explain full-run cost"
+                  aria-expanded="false" data-metric-title="Full-run cost"
+                  data-metric-definition="Cost for all 32 documents using the best available run evidence; per-row hints explain each basis.">i</button>
               </div>
             </th>
             <th class="numeric" aria-sort="descending">

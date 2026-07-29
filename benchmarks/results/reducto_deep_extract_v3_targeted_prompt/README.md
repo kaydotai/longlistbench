@@ -13,9 +13,8 @@ in `reducto_longlistbench_results.zip`.
   additional atomic-value, field-granularity, and identifier-label guidance.
 - Scoring: the saved predictions are replayed through LongListBench's
   reference evaluator.
-- Pricing: 3,108.063 Reducto credits across 1,773 processed pages. A dollar or
-  per-token price was not supplied, so the leaderboard reports token price as
-  unavailable.
+- Pricing: 3,108.063 Reducto credits across 1,773 processed pages, converted
+  to $46.62 at the $0.015/credit Standard list rate observed on 2026-07-28.
 
 The `ocr` segment in prediction filenames and report transcript fields is an
 offline-scorer compatibility label; Reducto consumed raw PDFs, not the released

@@ -55,8 +55,7 @@ def test_load_runs_rejects_mixed_dataset_manifests(tmp_path: Path) -> None:
             "harness": "Harness A",
             "model": "Model A",
             "protocol": "Agentic CLI",
-            "input_token_price": 1.0,
-            "output_token_price": 2.0,
+            "cost_source": "unavailable",
         },
         {
             "run_dir": "run-b",
@@ -64,8 +63,7 @@ def test_load_runs_rejects_mixed_dataset_manifests(tmp_path: Path) -> None:
             "harness": "Harness B",
             "model": "Model B",
             "protocol": "Agentic CLI",
-            "input_token_price": 1.0,
-            "output_token_price": 2.0,
+            "cost_source": "unavailable",
         },
     )
     _write_run(tmp_path, "run-a", "model_a", manifest="a" * 64)
@@ -190,33 +188,70 @@ def test_marks_subscription_run_without_usage_as_unavailable() -> None:
     }
 
 
-def test_credit_pricing_does_not_become_a_zero_token_price() -> None:
-    assert export_leaderboard_space.combined_token_price(None, None) is None
-    assert export_leaderboard_space.format_token_price(None) == "n/a"
+def test_formats_full_run_cost_in_usd() -> None:
+    assert export_leaderboard_space.format_full_run_cost(44.86076025) == "$44.86"
+    assert export_leaderboard_space.format_full_run_cost(0.0) == "$0.00"
+    assert export_leaderboard_space.format_full_run_cost(None) == "n/a"
 
 
-def test_cost_chart_omits_runs_without_token_pricing() -> None:
+def test_metric_leaders_include_all_ties_at_displayed_precision() -> None:
+    results = [
+        {
+            "full_run_cost_usd": 44.864,
+            "exact_record_recall": 0.99414,
+            "complete_documents": 16,
+            "structural_exact_recall": 0.9384,
+            "scale_control_exact_recall": 0.9951,
+            "weighted_f1": 0.994157,
+        },
+        {
+            "full_run_cost_usd": 44.863,
+            "exact_record_recall": 0.99381,
+            "complete_documents": 16,
+            "structural_exact_recall": 0.9380,
+            "scale_control_exact_recall": 1.0,
+            "weighted_f1": 0.99381,
+        },
+        {
+            "full_run_cost_usd": None,
+            "exact_record_recall": 0.9598,
+            "complete_documents": 15,
+            "structural_exact_recall": 0.859,
+            "scale_control_exact_recall": 1.0,
+            "weighted_f1": 0.9879,
+        },
+    ]
+
+    assert export_leaderboard_space.metric_leaders(results) == {
+        "full_run_cost_usd": {0, 1},
+        "exact_record_recall": {0, 1},
+        "complete_documents": {0, 1},
+        "structural_exact_recall": {0, 1},
+        "scale_control_exact_recall": {1, 2},
+        "weighted_f1": {0, 1},
+    }
+
+
+def test_cost_chart_omits_runs_without_full_run_cost() -> None:
     chart = export_leaderboard_space.build_cost_chart(
         [
             {
                 "model": "GPT-5.6-Sol",
-                "combined_token_price": 35,
-                "input_token_price": 5,
-                "output_token_price": 30,
+                "full_run_cost_usd": None,
+                "full_run_cost_explanation": "Usage was not preserved.",
                 "exact_record_recall": 0.9788,
             },
             {
-                "model": "Reducto Deep Extract v3",
-                "combined_token_price": None,
-                "input_token_price": None,
-                "output_token_price": None,
+                "model": "Deep Extract v3 (targeted prompt)",
+                "full_run_cost_usd": 46.62,
+                "full_run_cost_explanation": "Credits converted at the Standard list rate.",
                 "exact_record_recall": 0.9598,
             },
         ]
     )
 
-    assert "GPT-5.6-Sol" in chart
-    assert "Reducto Deep Extract v3" not in chart
+    assert "GPT-5.6-Sol" not in chart
+    assert "Deep Extract v3 (targeted prompt)" in chart
 
 
 def test_unpriced_table_cells_are_marked_as_missing_sort_values() -> None:
@@ -228,7 +263,11 @@ def test_unpriced_table_cells_are_marked_as_missing_sort_values() -> None:
                 "effort": "xhigh",
                 "run_date": "2026-07-21",
                 "protocol": "Agentic CLI",
-                "combined_token_price": 35,
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because this run did not preserve dollar usage."
+                ),
                 "exact_record_recall": 0.9788,
                 "complete_documents": 8,
                 "total_samples": 32,
@@ -243,7 +282,11 @@ def test_unpriced_table_cells_are_marked_as_missing_sort_values() -> None:
                 "effort": "targeted fields",
                 "run_date": "2026-07-25",
                 "protocol": "Raw PDF",
-                "combined_token_price": None,
+                "full_run_cost_usd": 46.62,
+                "full_run_cost_source": "reducto_standard_list",
+                "full_run_cost_explanation": (
+                    "Credits converted at Reducto's Standard list rate."
+                ),
                 "exact_record_recall": 0.9598,
                 "complete_documents": 16,
                 "total_samples": 32,
@@ -258,9 +301,83 @@ def test_unpriced_table_cells_are_marked_as_missing_sort_values() -> None:
     html = export_leaderboard_space.build_html(data)
 
     assert (
-        "data-column='combined_token_price' data-sort-value='' "
-        "data-sort-missing='true'>n/a</td>"
+        "data-column='full_run_cost_usd' data-sort-value='' "
+        "data-sort-missing='true'"
     ) in html
+    assert "<span class='cost-value'>n/a</span>" in html
+    assert html.count('class="definition-button cost-definition-button"') == 2
+    assert 'aria-label="Explain full-run cost for GPT-5.6-Sol"' in html
+
+
+def test_table_highlights_metric_leaders_without_an_overall_leader() -> None:
+    def result(
+        model: str,
+        *,
+        exact: float,
+        cost: float | None,
+        complete: int,
+        structural: float,
+        scale: float,
+        field_f1: float,
+    ) -> dict:
+        return {
+            "model": model,
+            "harness": "Test harness",
+            "effort": "xhigh",
+            "run_date": "2026-07-26",
+            "protocol": "Agentic CLI",
+            "full_run_cost_usd": cost,
+            "full_run_cost_source": "test",
+            "full_run_cost_explanation": f"Recorded full-run cost for {model}.",
+            "exact_record_recall": exact,
+            "complete_documents": complete,
+            "total_samples": 32,
+            "structural_exact_recall": structural,
+            "scale_control_exact_recall": scale,
+            "weighted_f1": field_f1,
+            "documents": [],
+        }
+
+    data = {
+        "results": [
+            result(
+                "Model A",
+                exact=0.99414,
+                cost=44.864,
+                complete=16,
+                structural=0.9384,
+                scale=0.9951,
+                field_f1=0.994157,
+            ),
+            result(
+                "Model B",
+                exact=0.99381,
+                cost=44.863,
+                complete=16,
+                structural=0.9380,
+                scale=1.0,
+                field_f1=0.99381,
+            ),
+            result(
+                "Model C",
+                exact=0.9598,
+                cost=None,
+                complete=15,
+                structural=0.859,
+                scale=1.0,
+                field_f1=0.9879,
+            ),
+        ]
+    }
+
+    html = export_leaderboard_space.build_html(data)
+
+    assert html.count(" metric-best'") == 12
+    assert "td.metric-best {" in html
+    assert ">Leader</span>" not in html
+    assert "leader-badge" not in html
+    assert "tr.winner" not in html
+    assert "point leader" not in html
 
 
 @pytest.mark.parametrize(
@@ -336,9 +453,8 @@ def test_cost_chart_has_no_local_price_band() -> None:
         [
             {
                 "model": "Bonsai 27B",
-                "combined_token_price": 0,
-                "input_token_price": 0,
-                "output_token_price": 0,
+                "full_run_cost_usd": 0,
+                "full_run_cost_explanation": "No dollar charge was recorded.",
                 "exact_record_recall": 0.1674,
             }
         ]
@@ -352,9 +468,8 @@ def test_cost_chart_uses_compact_points() -> None:
         [
             {
                 "model": "Bonsai 27B",
-                "combined_token_price": 0,
-                "input_token_price": 0,
-                "output_token_price": 0,
+                "full_run_cost_usd": 0,
+                "full_run_cost_explanation": "No dollar charge was recorded.",
                 "exact_record_recall": 0.1674,
             }
         ]
@@ -369,9 +484,8 @@ def test_cost_chart_keeps_axis_margins_compact() -> None:
         [
             {
                 "model": "Bonsai 27B",
-                "combined_token_price": 0,
-                "input_token_price": 0,
-                "output_token_price": 0,
+                "full_run_cost_usd": 0,
+                "full_run_cost_explanation": "No dollar charge was recorded.",
                 "exact_record_recall": 0.1674,
             }
         ]
@@ -380,7 +494,7 @@ def test_cost_chart_keeps_axis_margins_compact() -> None:
     _, _, width, height = map(float, svg.attrib["viewBox"].split())
     baseline = next(element for element in svg if element.attrib.get("class") == "axis-line")
     x_axis_title = next(
-        element for element in svg if element.text == "Blended $ / 1M tokens"
+        element for element in svg if element.text == "Full-run cost (USD)"
     )
     plot_left = float(baseline.attrib["x1"])
     plot_bottom = float(baseline.attrib["y1"])
@@ -394,35 +508,50 @@ def test_cost_chart_labels_are_compact_and_show_only_model_score() -> None:
     chart = export_leaderboard_space.build_cost_chart(
         [
             {
-                "model": "GPT-5.6-Sol",
-                "combined_token_price": 35,
-                "input_token_price": 5,
-                "output_token_price": 30,
-                "exact_record_recall": 0.9788,
+                "model": "Deep Extract v3 (targeted prompt)",
+                "full_run_cost_usd": 46.62,
+                "full_run_cost_explanation": "Credits converted at the Standard list rate.",
+                "exact_record_recall": 0.961,
             },
             {
                 "model": "Bonsai 27B",
-                "combined_token_price": 0,
-                "input_token_price": 0,
-                "output_token_price": 0,
+                "full_run_cost_usd": 0,
+                "full_run_cost_explanation": "No dollar charge was recorded.",
                 "exact_record_recall": 0.1674,
             },
             {
                 "model": "Claude Opus 4.8",
-                "combined_token_price": 30,
-                "input_token_price": 5,
-                "output_token_price": 25,
+                "full_run_cost_usd": 44.86,
+                "full_run_cost_explanation": "Sum of Claude Code API-equivalent estimates.",
                 "exact_record_recall": 0.9771,
             },
         ]
     )
 
-    assert "class='point-meta'>97.88%</text>" in chart
-    assert "class='point-meta'>16.74%</text>" in chart
+    assert "class='point-meta'>96.10% · $46.62</text>" in chart
+    assert "class='point-meta'>16.74% · $0.00</text>" in chart
     assert "class='point-model'>Opus 4.8</text>" in chart
     assert "data-model='Claude Opus 4.8'" in chart
-    assert "$35/M" not in chart
-    assert "$0 token fee" not in chart
+    assert (
+        "<title>Claude Opus 4.8: 97.71% exact recall at $44.86; "
+        "Sum of Claude Code API-equivalent estimates.</title>"
+    ) in chart
+
+
+def test_cost_chart_rounds_dynamic_axis_to_next_25_dollars() -> None:
+    chart = export_leaderboard_space.build_cost_chart(
+        [
+            {
+                "model": "Claude Fable 5",
+                "full_run_cost_usd": 102.84,
+                "full_run_cost_explanation": "Sum of API-equivalent estimates.",
+                "exact_record_recall": 0.951,
+            }
+        ]
+    )
+
+    assert "class='axis-tick'>$125</text>" in chart
+    assert "class='axis-tick'>$150</text>" not in chart
 
 
 def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
@@ -430,7 +559,7 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
         model: str,
         *,
         exact: float,
-        price: float,
+        cost: float | None,
         protocol: str = "Agentic CLI",
     ) -> dict:
         return {
@@ -439,9 +568,13 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
             "effort": "xhigh",
             "run_date": "2026-07-26",
             "protocol": protocol,
-            "combined_token_price": price,
-            "input_token_price": price / 6,
-            "output_token_price": price * 5 / 6,
+            "full_run_cost_usd": cost,
+            "full_run_cost_source": "test" if cost is not None else "usage_unavailable",
+            "full_run_cost_explanation": (
+                f"Recorded full-run cost for {model}."
+                if cost is not None
+                else "Cost unavailable because usage was not preserved."
+            ),
             "exact_record_recall": exact,
             "complete_documents": 1,
             "total_samples": 32,
@@ -467,8 +600,8 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
         "dataset": {"total_samples": 32, "total_rows": 29_599},
         "protocol": "Mixed protocol",
         "results": [
-            result("GPT-5.6-Sol", exact=0.9788, price=35),
-            result("Bonsai 27B", exact=0.1674, price=0, protocol="Page pipeline"),
+            result("GPT-5.6-Sol", exact=0.9788, cost=None),
+            result("Bonsai 27B", exact=0.1674, cost=0, protocol="Page pipeline"),
         ],
     }
 
@@ -484,8 +617,9 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
     assert "/ research" not in html.lower()
     assert ">kay<" not in html.lower()
     assert "Every row." not in html
-    assert "Accuracy × token price" in html
-    assert "Blended $ / 1M tokens</text>" in html
+    assert "Accuracy × full-run cost" in html
+    assert "Full-run cost (USD)</text>" in html
+    assert "1 priced run shown · 1 run omitted because cost usage is unavailable" in html
     assert "INPUT + OUTPUT LIST PRICE" not in html
     assert "mobile-scroll-hint" not in html
     assert "cost-chart" in html
@@ -495,7 +629,7 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
     assert "Same dataset. Different protocol." not in html
     assert "Agentic CLI runs used repository-denied sandboxes." not in html
     assert 'data-sortable-table' in html
-    assert 'data-sort-key="combined_token_price"' in html
+    assert 'data-sort-key="full_run_cost_usd"' in html
     assert 'data-sort-key="exact_record_recall"' in html
     assert 'aria-sort="descending"' in html
     assert html.count('class="details-button"') == 2
@@ -510,8 +644,9 @@ def test_build_html_starts_with_cost_chart_and_has_no_page_header() -> None:
     assert '<details class="metric-guide">' not in html
     assert "metric-grid" not in html
     assert html.count('class="definition-button"') == 6
+    assert html.count('class="definition-button cost-definition-button"') == 2
     assert 'id="metric-definition-popover"' in html
-    assert 'aria-label="Explain token price"' in html
+    assert 'aria-label="Explain full-run cost"' in html
     assert 'aria-label="Explain field F1"' in html
     assert "function showDefinition(button) {\n    closeDetails();" in html
     assert "function toggleDetails(button) {\n    closeDefinition();" in html
