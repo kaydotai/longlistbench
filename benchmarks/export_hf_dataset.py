@@ -554,7 +554,7 @@ configs:
 
 # LongListBench
 
-[Paper](https://huggingface.co/datasets/{repo_id}/blob/main/longlistbench.pdf) | [GitHub](https://github.com/kaydotai/longlistbench) | [Release v{RELEASE_VERSION}](https://github.com/kaydotai/longlistbench/releases/tag/v{RELEASE_VERSION})
+[Paper](https://huggingface.co/datasets/{repo_id}/blob/main/longlistbench.pdf) | [Leaderboard](https://huggingface.co/spaces/kaydotai/LongListBench-Leaderboard) | [GitHub](https://github.com/kaydotai/longlistbench) | [Release v{RELEASE_VERSION}](https://github.com/kaydotai/longlistbench/releases/tag/v{RELEASE_VERSION})
 
 **Developed by [Kay.ai](https://kay.ai).**
 

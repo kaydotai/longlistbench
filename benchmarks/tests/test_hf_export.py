@@ -287,6 +287,10 @@ class HuggingFaceExportTests(unittest.TestCase):
         self.assertIn("[Akhil Mehta](https://orcid.org/0009-0001-0134-2905)", card)
         self.assertIn("and Vishal Rohra", card)
         self.assertIn("[Release v2.2.1]", card)
+        self.assertIn(
+            "[Leaderboard](https://huggingface.co/spaces/kaydotai/LongListBench-Leaderboard)",
+            card,
+        )
         self.assertNotIn("[Paper source]", card)
         self.assertIn("Records/doc range", card)
         self.assertIn("| `core_operations` |", card)
