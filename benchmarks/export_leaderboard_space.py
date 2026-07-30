@@ -1363,6 +1363,8 @@ sdk: static
 pinned: false
 license: mit
 short_description: Extraction results on LongListBench (32 PDFs, 29.6k records)
+datasets:
+- kaydotai/LongListBench
 ---
 
 # LongListBench Leaderboard
