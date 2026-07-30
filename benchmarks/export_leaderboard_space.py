@@ -87,6 +87,7 @@ RUNS = (
         "model": "Deep Extract v3 (test-set tuned)",
         "protocol": "Raw PDF · test-set tuned",
         "cost_source": "reducto_credits",
+        "leaderboard_cost_override_usd": 10.08,
         "prompt_templates": (
             {
                 "title": "Generated field contract",
@@ -109,6 +110,7 @@ RUNS = (
         "model": "Deep Extract v3 (strict contract)",
         "protocol": "Raw PDF · strict contract",
         "cost_source": "reducto_credits",
+        "leaderboard_cost_override_usd": 11.02,
         "prompt_templates": (
             {
                 "title": "Generated field contract",
@@ -245,6 +247,26 @@ def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> di
                 ),
             }
         full_run_cost = float(credits) * REDUCTO_CREDIT_PRICE_USD
+        leaderboard_override = run.get("leaderboard_cost_override_usd")
+        if isinstance(leaderboard_override, (int, float)):
+            experimental_cost = float(leaderboard_override)
+            return {
+                "full_run_cost_usd": experimental_cost,
+                "full_run_cost_source": "reducto_leaderboard_override",
+                "full_run_cost_explanation": (
+                    f"Experimental leaderboard cost of ${experimental_cost:.2f}; current "
+                    f"Reducto Standard list cost is ${full_run_cost:.2f}."
+                ),
+                "full_run_cost_beta": True,
+                "full_run_cost_comparison": {
+                    "current_credits": float(credits),
+                    "current_cost_usd": full_run_cost,
+                    "experimental_credits": round(
+                        experimental_cost / REDUCTO_CREDIT_PRICE_USD
+                    ),
+                    "experimental_cost_usd": experimental_cost,
+                },
+            }
         return {
             "full_run_cost_usd": full_run_cost,
             "full_run_cost_source": "reducto_standard_list",

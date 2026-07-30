@@ -184,6 +184,27 @@ def test_converts_reducto_credits_at_standard_list_rate() -> None:
     assert cost["full_run_cost_explanation"].count(". ") == 0
 
 
+def test_uses_reducto_leaderboard_override_with_standard_price_comparison() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {
+            "cost_source": "reducto_credits",
+            "leaderboard_cost_override_usd": 10.08,
+        },
+        {"total_credits": 3_108.0628225},
+        expected_samples=32,
+    )
+
+    assert cost["full_run_cost_usd"] == pytest.approx(10.08)
+    assert cost["full_run_cost_source"] == "reducto_leaderboard_override"
+    assert cost["full_run_cost_beta"] is True
+    assert cost["full_run_cost_comparison"] == {
+        "current_credits": 3_108.0628225,
+        "current_cost_usd": 46.6209423375,
+        "experimental_credits": 672,
+        "experimental_cost_usd": 10.08,
+    }
+
+
 def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
     rows = {
         run["model"]: (run["protocol"], run["prompt_note"])
