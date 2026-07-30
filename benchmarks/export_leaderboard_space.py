@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import html as html_module
 import json
 import shutil
 from pathlib import Path
@@ -13,6 +14,22 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
 RELEASE_VERSION = "v" + (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
 DEFAULT_OUTPUT = REPO_ROOT / "dist" / "huggingface" / "leaderboard_space"
+REDUCTO_CREDIT_PRICE_USD = 0.015
+PRICING_OBSERVED_DATE = "2026-07-28"
+PROMPT_TEMPLATE_DIR = REPO_ROOT / "benchmarks" / "leaderboard_prompts"
+
+AGENTIC_PROMPT_TEMPLATES = (
+    {"title": "Task prompt — exact", "filename": "agentic_cli_task.txt"},
+    {
+        "title": "Field contract template — separate per-document input",
+        "filename": "generated_field_contract.txt",
+    },
+)
+AGENTIC_PROMPT_NOTE = (
+    "Repository-denied agentic run over released OCR transcripts. "
+    "Generic operations and policy samples received a generated field contract; "
+    "claim samples received the published incident JSON Schema."
+)
 
 RUNS = (
     {
@@ -21,8 +38,13 @@ RUNS = (
         "harness": "Codex CLI",
         "model": "GPT-5.6-Sol",
         "protocol": "Agentic CLI",
-        "input_token_price": 5.0,
-        "output_token_price": 30.0,
+        "cost_source": "codex_api_equivalent",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
+        "cost_metadata_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_sol_20260729/usage_summary.json"
+        ),
     },
     {
         "run_dir": "claude_opus48_full_current_ocr_v2",
@@ -30,8 +52,9 @@ RUNS = (
         "harness": "Claude Code",
         "model": "Claude Opus 4.8",
         "protocol": "Agentic CLI",
-        "input_token_price": 5.0,
-        "output_token_price": 25.0,
+        "cost_source": "claude_api_equivalent",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
     },
     {
         "run_dir": "claude_fable5_full_current_ocr_v2",
@@ -39,8 +62,9 @@ RUNS = (
         "harness": "Claude Code",
         "model": "Claude Fable 5",
         "protocol": "Agentic CLI",
-        "input_token_price": 10.0,
-        "output_token_price": 50.0,
+        "cost_source": "claude_api_equivalent",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
     },
     {
         "run_dir": "codex_full_current_ocr_v2",
@@ -48,8 +72,53 @@ RUNS = (
         "harness": "Codex CLI",
         "model": "GPT-5.5",
         "protocol": "Agentic CLI",
-        "input_token_price": 5.0,
-        "output_token_price": 30.0,
+        "cost_source": "codex_api_equivalent",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
+        "cost_metadata_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt55_20260729/usage_summary.json"
+        ),
+    },
+    {
+        "run_dir": "reducto_deep_extract_v3_targeted_prompt",
+        "key": "reducto_deep_extract",
+        "harness": "Reducto",
+        "model": "Deep Extract v3 (test-set tuned)",
+        "protocol": "Raw PDF · test-set tuned",
+        "cost_source": "reducto_credits",
+        "prompt_templates": (
+            {
+                "title": "Generated field contract",
+                "filename": "generated_field_contract.txt",
+            },
+            {
+                "title": "Test-set-tuned additions",
+                "filename": "reducto_test_set_tuned_additions.txt",
+            },
+        ),
+        "prompt_note": "Test-set tuned after observing benchmark failure modes.",
+        "effort": "targeted fields",
+        "requested_model": "v3",
+        "cli_version": "Reducto API",
+    },
+    {
+        "run_dir": "reducto_deep_extract_v3_strict_contract",
+        "key": "reducto_deep_extract",
+        "harness": "Reducto",
+        "model": "Deep Extract v3 (strict contract)",
+        "protocol": "Raw PDF · strict contract",
+        "cost_source": "reducto_credits",
+        "prompt_templates": (
+            {
+                "title": "Generated field contract",
+                "filename": "generated_field_contract.txt",
+            },
+        ),
+        "prompt_note": "Primary Reducto comparison condition.",
+        "effort": "identical contract",
+        "requested_model": "v3",
+        "cli_version": "Reducto API",
     },
     {
         "run_dir": "bonsai_27b_together_page_pipeline_full",
@@ -57,14 +126,153 @@ RUNS = (
         "harness": "Local + Together AI",
         "model": "Bonsai 27B",
         "protocol": "Page pipeline",
-        "input_token_price": 0.0,
-        "output_token_price": 0.0,
+        "cost_source": "hosted_free",
+        "prompt_templates": (
+            {
+                "title": "Page extraction",
+                "filename": "bonsai_page_extraction.txt",
+            },
+            {
+                "title": "Record reduction",
+                "filename": "bonsai_record_reduction.txt",
+            },
+        ),
+        "prompt_note": "Two-stage page pipeline over released OCR transcripts.",
         "effort": "page pipeline",
         "requested_model": "Prism-ML/Ternary-Bonsai-27B",
         "cli_version": "Together API",
     },
 )
 SPACE_FILENAMES = ("README.md", "index.html", "leaderboard_data.json")
+
+
+def load_prompt_templates(
+    run: dict,
+    prompt_dir: Path | None = None,
+) -> list[dict[str, str]]:
+    source_dir = PROMPT_TEMPLATE_DIR if prompt_dir is None else prompt_dir
+    loaded = []
+    for template_config in run.get("prompt_templates", ()):
+        filename = template_config["filename"]
+        path = source_dir / filename
+        try:
+            template = path.read_text(encoding="utf-8").rstrip()
+        except OSError as error:
+            raise ValueError(
+                f"{run['model']} prompt template {filename} could not be read"
+            ) from error
+        if not template.strip():
+            raise ValueError(
+                f"{run['model']} prompt template {filename} is empty"
+            )
+        loaded.append(
+            {"title": template_config["title"], "template": template}
+        )
+    if not loaded:
+        raise ValueError(f"{run['model']} has no prompt templates configured")
+    return loaded
+
+
+def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> dict:
+    source = run.get("cost_source", "unavailable")
+    if source == "codex_api_equivalent":
+        measurement = metadata.get("measured_cost")
+        dataset = metadata.get("dataset")
+        api_equivalent = (
+            measurement.get("api_equivalent_usd")
+            if isinstance(measurement, dict)
+            else None
+        )
+        if (
+            not isinstance(dataset, dict)
+            or dataset.get("documents") != expected_samples
+            or not isinstance(api_equivalent, (int, float))
+        ):
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the independent Codex cost measurement is "
+                    "incomplete."
+                ),
+            }
+        return {
+            "full_run_cost_usd": float(api_equivalent),
+            "full_run_cost_source": "codex_api_equivalent",
+            "full_run_cost_explanation": (
+                f"${api_equivalent:.2f} API-equivalent cost from the independent cost "
+                "measurement; the leaderboard accuracy remains the released run."
+            ),
+        }
+    if source == "claude_api_equivalent":
+        samples = metadata.get("samples")
+        if not isinstance(samples, dict) or len(samples) != expected_samples:
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the released Claude metadata lacks a complete "
+                    "per-document estimate set."
+                ),
+            }
+        estimates = [sample.get("estimated_api_cost_usd") for sample in samples.values()]
+        if any(not isinstance(value, (int, float)) for value in estimates):
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the released Claude metadata lacks a complete "
+                    "per-document estimate set."
+                ),
+            }
+        return {
+            "full_run_cost_usd": float(sum(estimates)),
+            "full_run_cost_source": "claude_cli_estimate",
+            "full_run_cost_explanation": (
+                f"Sum of {expected_samples} Claude Code API-equivalent estimates; "
+                "subscription billing may differ."
+            ),
+        }
+    if source == "reducto_credits":
+        credits = metadata.get("total_credits")
+        if not isinstance(credits, (int, float)):
+            return {
+                "full_run_cost_usd": None,
+                "full_run_cost_source": "usage_unavailable",
+                "full_run_cost_explanation": (
+                    "Cost unavailable because the released Reducto metadata does not include "
+                    "total credits."
+                ),
+            }
+        full_run_cost = float(credits) * REDUCTO_CREDIT_PRICE_USD
+        return {
+            "full_run_cost_usd": full_run_cost,
+            "full_run_cost_source": "reducto_standard_list",
+            "full_run_cost_explanation": (
+                f"{credits:,.3f} credits × ${REDUCTO_CREDIT_PRICE_USD:.3f}/credit = "
+                f"${full_run_cost:.2f} at Reducto's {PRICING_OBSERVED_DATE} Standard list rate; "
+                "free or negotiated pricing may differ."
+            ),
+        }
+    if source == "hosted_free":
+        return {
+            "full_run_cost_usd": 0.0,
+            "full_run_cost_source": "together_free_hosted",
+            "full_run_cost_explanation": (
+                f"Together hosted this run on an endpoint advertised as free on "
+                f"{PRICING_OBSERVED_DATE}; no dollar charge was recorded."
+            ),
+        }
+    if source == "unavailable":
+        return {
+            "full_run_cost_usd": None,
+            "full_run_cost_source": "usage_unavailable",
+            "full_run_cost_explanation": (
+                "Cost unavailable because this subscription run did not preserve token or "
+                "dollar usage."
+            ),
+        }
+    raise ValueError(f"Unsupported cost source: {source}")
 
 
 def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
@@ -103,13 +311,20 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
                 f"manifest={manifest}, shape={shape}; "
                 f"expected manifest={expected_manifest}, shape={expected_shape}"
             )
+        cost_metadata = meta
+        if cost_metadata_path := run.get("cost_metadata_path"):
+            cost_metadata = json.loads(
+                Path(cost_metadata_path).read_text(encoding="utf-8")
+            )
+        cost = derive_full_run_cost(run, cost_metadata, stats["total_samples"])
         models.append({
             "key": key,
             "harness": run["harness"],
             "model": run["model"],
             "protocol": run["protocol"],
-            "input_token_price": run["input_token_price"],
-            "output_token_price": run["output_token_price"],
+            "prompt_templates": load_prompt_templates(run),
+            "prompt_note": run["prompt_note"],
+            **cost,
             "requested_model": run.get("requested_model", meta.get("requested_model", meta.get("model_id"))),
             "effort": run.get("effort", meta.get("effort", "default")),
             "cli_version": run.get(
@@ -157,9 +372,11 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "cli_version": m["cli_version"],
             "run_date": m["run_date"],
             "protocol": m["protocol"],
-            "input_token_price": m["input_token_price"],
-            "output_token_price": m["output_token_price"],
-            "combined_token_price": m["input_token_price"] + m["output_token_price"],
+            "prompt_templates": m["prompt_templates"],
+            "prompt_note": m["prompt_note"],
+            "full_run_cost_usd": m["full_run_cost_usd"],
+            "full_run_cost_source": m["full_run_cost_source"],
+            "full_run_cost_explanation": m["full_run_cost_explanation"],
             "exact_record_recall": s["exact_record_recall"],
             "exact_record_precision": s["exact_record_precision"],
             "exact_record_f1": s["exact_record_f1"],
@@ -178,115 +395,109 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "by_stressor": s["by_stressor"],
             "documents": summarize_document_results(m["detailed_results"]),
         })
-    rows.sort(key=lambda r: r["exact_record_recall"], reverse=True)
+    rows.sort(
+        key=lambda r: (r["complete_documents"], r["exact_record_recall"]),
+        reverse=True,
+    )
     return {
         "benchmark": "LongListBench",
         "version": RELEASE_VERSION,
         "dataset": dataset_meta,
         "protocol": (
-            "OCR-conditioned extraction on one dataset. Agentic CLI runs used repository-denied "
-            "sandboxes; Bonsai used page extraction plus reduction. Protocols are labeled separately."
+            "All rows use the same dataset and scorer. Agentic CLI and Bonsai runs consume released "
+            "OCR transcripts; Reducto Deep Extract runs on raw PDFs. Protocols are labeled separately."
         ),
         "results": rows,
     }
 
 
-def money(value: float) -> str:
-    return f"${value:.0f}" if value.is_integer() else f"${value:g}"
+def format_full_run_cost(value: float | None) -> str:
+    if value is None:
+        return "n/a"
+    return f"${value:.2f}"
 
 
-def build_cost_chart(results: list[dict]) -> str:
-    width = 920
-    height = 312
-    left = 48
-    right = 898
-    top = 18
-    bottom = 252
-    plot_width = right - left
-    plot_height = bottom - top
-    max_price = max(60.0, *(row["combined_token_price"] for row in results))
+DISPLAYED_METRICS = {
+    "full_run_cost_usd": ("min", lambda value: round(value, 2)),
+    "exact_record_recall": ("max", lambda value: round(value * 100, 1)),
+    "complete_documents": ("max", int),
+    "structural_exact_recall": ("max", lambda value: round(value * 100, 1)),
+    "scale_control_exact_recall": ("max", lambda value: round(value * 100, 1)),
+    "weighted_f1": ("max", lambda value: round(value * 100, 1)),
+}
 
-    def x_pos(price: float) -> float:
-        return left + (price / max_price) * plot_width
 
-    def y_pos(score: float) -> float:
-        return bottom - score * plot_height
-
-    y_grid = []
-    for percent in (0, 25, 50, 75, 100):
-        y = y_pos(percent / 100)
-        y_grid.append(
-            f"<line x1='{left}' x2='{right}' y1='{y:.1f}' y2='{y:.1f}' class='grid-line'/>"
-            f"<text x='{left - 8}' y='{y + 3:.1f}' text-anchor='end' class='axis-tick'>{percent}%</text>"
+def metric_leaders(results: list[dict]) -> dict[str, set[int]]:
+    leaders: dict[str, set[int]] = {}
+    for metric, (direction, display_value) in DISPLAYED_METRICS.items():
+        candidates = [
+            (index, display_value(row[metric]))
+            for index, row in enumerate(results)
+            if row.get(metric) is not None
+        ]
+        if not candidates:
+            leaders[metric] = set()
+            continue
+        best_value = (
+            min(value for _, value in candidates)
+            if direction == "min"
+            else max(value for _, value in candidates)
         )
+        leaders[metric] = {
+            index for index, value in candidates if value == best_value
+        }
+    return leaders
 
-    x_grid = []
-    for value in (0, 15, 30, 45, 60):
-        x = x_pos(value)
-        x_grid.append(
-            f"<line x1='{x:.1f}' x2='{x:.1f}' y1='{top}' y2='{bottom}' class='grid-line vertical'/>"
-            f"<text x='{x:.1f}' y='{bottom + 19}' text-anchor='middle' class='axis-tick'>${value}</text>"
-        )
 
-    known_labels = {
-        "GPT-5.6-Sol": (16, 24, "start"),
-        "GPT-5.5": (16, 58, "start"),
-        "Claude Opus 4.8": (-18, 26, "end"),
-        "Claude Fable 5": (-14, 38, "end"),
-        "Bonsai 27B": (18, -20, "start"),
-    }
-    point_html = []
-    leader_model = max(results, key=lambda row: row["exact_record_recall"])["model"]
-    for index, row in enumerate(results):
-        x = x_pos(row["combined_token_price"])
-        y = y_pos(row["exact_record_recall"])
-        dx, dy, anchor = known_labels.get(
-            row["model"],
-            (16 if index % 2 == 0 else -16, 24 + index * 8, "start" if index % 2 == 0 else "end"),
-        )
-        label_x = x + dx
-        label_y = y + dy
-        combined = row["combined_token_price"]
-        display_model = row["model"].removeprefix("Claude ")
-        classes = ["point"]
-        if row["model"] == leader_model:
-            classes.append("leader")
-        if combined == 0:
-            classes.append("local")
-        point_html.append(
-            f"<g class='{' '.join(classes)}' data-model='{row['model']}'>"
-            f"<line x1='{x:.1f}' y1='{y:.1f}' x2='{label_x:.1f}' y2='{label_y - 8:.1f}' class='label-line'/>"
-            f"<circle cx='{x:.1f}' cy='{y:.1f}' r='6'/>"
-            f"<text x='{label_x:.1f}' y='{label_y:.1f}' text-anchor='{anchor}' class='point-model'>{display_model}</text>"
-            f"<text x='{label_x:.1f}' y='{label_y + 14:.1f}' text-anchor='{anchor}' class='point-meta'>"
-            f"{pct(row['exact_record_recall'], 2)}%</text>"
-            "</g>"
-        )
-
+def render_prompt_templates(result: dict) -> str:
+    templates = result.get("prompt_templates") or []
+    if not templates:
+        return ""
+    note = html_module.escape(result.get("prompt_note", ""))
+    blocks = "".join(
+        "<section class='prompt-template'>"
+        f"<strong>{html_module.escape(item['title'])}</strong>"
+        "<div class='prompt-scroll'><pre><code>"
+        f"{html_module.escape(item['template'])}"
+        "</code></pre></div></section>"
+        for item in templates
+    )
     return (
-        f"<svg class='cost-chart' viewBox='0 0 {width} {height}' role='img' "
-        "aria-label='Exact-record recall versus blended token price per 1M tokens'>"
-        f"{''.join(y_grid)}{''.join(x_grid)}"
-        f"<line x1='{left}' x2='{right}' y1='{bottom}' y2='{bottom}' class='axis-line'/>"
-        f"<text x='{(left + right) / 2:.1f}' y='{height - 14}' text-anchor='middle' class='axis-title'>"
-        "Blended $ / 1M tokens</text>"
-        f"<text x='8' y='{(top + bottom) / 2:.1f}' text-anchor='middle' class='axis-title' "
-        f"transform='rotate(-90 8 {(top + bottom) / 2:.1f})'>"
-        "EXACT-RECORD RECALL →</text>"
-        f"{''.join(point_html)}"
-        "</svg>"
+        "<section class='prompt-panel'>"
+        "<div class='prompt-panel-heading'><strong>Prompt template</strong>"
+        f"<span>{note}</span></div>{blocks}</section>"
     )
 
 
 def build_html(data: dict) -> str:
     results = data["results"]
+    leaders = metric_leaders(results)
     rows_html = []
     for rank, result in enumerate(results, 1):
-        combined = result["combined_token_price"]
-        price_label = "$0 local" if combined == 0 else f"{money(combined)}/M"
-        row_class = " class='winner'" if rank == 1 else ""
-        leader_badge = "<span class='leader-badge'>Leader</span>" if rank == 1 else ""
+        result_index = rank - 1
+        full_run_cost = result["full_run_cost_usd"]
+        cost_label = format_full_run_cost(full_run_cost)
+        cost_sort_value = "" if full_run_cost is None else full_run_cost
+        cost_sort_missing = " data-sort-missing='true'" if full_run_cost is None else ""
+        model_attribute = html_module.escape(result["model"], quote=True)
+        cost_explanation = html_module.escape(
+            result["full_run_cost_explanation"],
+            quote=True,
+        )
+        cost_button = (
+            '<button class="definition-button cost-definition-button" type="button" '
+            f'aria-label="Explain full-run cost for {model_attribute}" '
+            'aria-expanded="false" '
+            f'data-metric-title="Full-run cost · {model_attribute}" '
+            f'data-metric-definition="{cost_explanation}">i</button>'
+        )
+
+        def best_class(metric: str) -> str:
+            return " metric-best" if result_index in leaders[metric] else ""
+
         documents = result.get("documents", [])
+        prompt_templates_html = render_prompt_templates(result)
+        has_details = bool(documents or prompt_templates_html)
         details_id = f"result-details-{rank}"
         details_button = (
             f'<button class="details-button" type="button" aria-expanded=\'false\' '
@@ -294,7 +505,7 @@ def build_html(data: dict) -> str:
             f"aria-label='Show document details for {result['model']}'>"
             "<span data-details-label>Details</span>"
             "<span class='details-symbol' aria-hidden='true'>+</span></button>"
-            if documents
+            if has_details
             else ""
         )
         document_rows = "".join(
@@ -310,48 +521,58 @@ def build_html(data: dict) -> str:
             "</tr>"
             for document in documents
         )
+        document_table_html = (
+            "<div class='document-scroll'><table class='document-table'>"
+            "<thead><tr><th>Document</th><th class='numeric'>Gold records</th>"
+            "<th class='numeric'>Predicted</th><th class='numeric'>Exact recall</th>"
+            "<th class='numeric'>Field F1</th><th>Complete</th></tr></thead>"
+            f"<tbody>{document_rows}</tbody></table></div>"
+            if documents
+            else ""
+        )
         rows_html.append(
-            f"<tr{row_class} data-result-row data-original-rank='{rank}' data-details-row='{details_id}'>"
-            f"<td class='rank' data-rank-cell>#{rank}</td>"
+            f"<tr data-result-row data-original-rank='{rank}' data-details-row='{details_id}'>"
             f"<td class='configuration' data-column='configuration' "
             f"data-sort-value='{result['model'].casefold()}'><div class='model-line'>"
-            f"<strong>{result['model']}</strong>{leader_badge}</div>"
+            f"<strong>{result['model']}</strong></div>"
             f"<span>{result['harness']} · {result['effort']} · {result['run_date']}</span>"
             f"<div class='configuration-actions'><span class='protocol'>{result['protocol']}</span>"
             f"{details_button}</div></td>"
-            f"<td class='numeric price' data-column='combined_token_price' "
-            f"data-sort-value='{combined}'>{price_label}</td>"
-            f"<td class='numeric primary' data-column='exact_record_recall' "
+            f"<td class='numeric price{best_class('full_run_cost_usd')}' "
+            "data-column='full_run_cost_usd' "
+            f"data-sort-value='{cost_sort_value}'{cost_sort_missing}>"
+            f"<span class='cost-cell'><span class='cost-value'>{cost_label}</span>"
+            f"{cost_button}</span></td>"
+            f"<td class='numeric{best_class('exact_record_recall')}' "
+            "data-column='exact_record_recall' "
             f"data-sort-value='{result['exact_record_recall']}'>"
             f"{pct(result['exact_record_recall'])}%</td>"
-            f"<td class='numeric' data-column='complete_documents' "
+            f"<td class='numeric{best_class('complete_documents')}' "
+            "data-column='complete_documents' "
             f"data-sort-value='{result['complete_documents']}'>"
             f"{result['complete_documents']}/{result['total_samples']}</td>"
-            f"<td class='numeric' data-column='structural_exact_recall' "
+            f"<td class='numeric{best_class('structural_exact_recall')}' "
+            "data-column='structural_exact_recall' "
             f"data-sort-value='{result['structural_exact_recall']}'>"
             f"{pct(result['structural_exact_recall'])}%</td>"
-            f"<td class='numeric' data-column='scale_control_exact_recall' "
+            f"<td class='numeric{best_class('scale_control_exact_recall')}' "
+            "data-column='scale_control_exact_recall' "
             f"data-sort-value='{result['scale_control_exact_recall']}'>"
             f"{pct(result['scale_control_exact_recall'])}%</td>"
-            f"<td class='numeric' data-column='weighted_f1' "
+            f"<td class='numeric{best_class('weighted_f1')}' "
+            "data-column='weighted_f1' "
             f"data-sort-value='{result['weighted_f1']}'>{pct(result['weighted_f1'])}%</td>"
             "</tr>"
             + (
                 f"<tr class='detail-row' id='{details_id}' data-detail-for='{rank}' hidden>"
-                "<td colspan='8'><div class='detail-panel'>"
+                "<td colspan='7'><div class='detail-panel'>"
                 "<div class='detail-panel-heading'>"
                 f"<strong>{result['model']}</strong><span>{len(documents)} documents</span></div>"
-                "<div class='document-scroll'><table class='document-table'>"
-                "<thead><tr><th>Document</th><th class='numeric'>Gold records</th>"
-                "<th class='numeric'>Predicted</th><th class='numeric'>Exact recall</th>"
-                "<th class='numeric'>Field F1</th><th>Complete</th></tr></thead>"
-                f"<tbody>{document_rows}</tbody></table></div></div></td></tr>"
-                if documents
+                f"{document_table_html}{prompt_templates_html}</div></td></tr>"
+                if has_details
                 else ""
             )
         )
-
-    chart_html = build_cost_chart(results)
 
     return f"""<!doctype html>
 <html lang="en">
@@ -405,69 +626,7 @@ a:focus-visible {{ outline: 3px solid var(--signal); outline-offset: 3px; }}
   width: min(1280px, calc(100% - 32px));
   margin: 0 auto;
 }}
-.chart-section {{ padding-top: 12px; }}
-.chart-card {{
-  padding: 20px 22px 18px;
-  border-radius: 26px;
-  background: var(--surface);
-}}
-.chart-head {{
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 24px;
-}}
-.chart-head h3 {{
-  margin: 0;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: -.025em;
-}}
-.chart-head p {{ margin: 4px 0 0; color: var(--muted); font-size: 13px; }}
-.chart-key {{
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  border-radius: 7px;
-  background: rgba(255,255,255,.58);
-  color: var(--muted);
-  font: 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .03em;
-  white-space: nowrap;
-}}
-.chart-key::before {{
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--signal);
-}}
-.chart-viewport {{ overflow-x: auto; overscroll-behavior-inline: contain; }}
-.cost-chart {{
-  width: 100%;
-  height: auto;
-  min-width: 900px;
-  display: block;
-  margin-top: 12px;
-  overflow: visible;
-}}
-.grid-line {{ stroke: #d8d5ce; stroke-width: 1; }}
-.grid-line.vertical {{ stroke-dasharray: 2 6; }}
-.axis-line {{ stroke: #aaa69e; stroke-width: 1; }}
-.axis-tick, .axis-title, .point-meta {{
-  fill: #77756f;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}}
-.axis-tick {{ font-size: 10px; }}
-.axis-title {{ font-size: 9px; letter-spacing: .06em; }}
-.point circle {{ fill: var(--ink); stroke: var(--surface); stroke-width: 3; }}
-.point.leader circle {{ fill: var(--signal); stroke: var(--ink); stroke-width: 2.5; }}
-.point.local circle {{ fill: var(--paper); stroke: var(--ink); }}
-.label-line {{ stroke: #8c8982; stroke-width: 1; }}
-.point-model {{ fill: var(--ink); font-size: 11px; font-weight: 600; }}
-.point-meta {{ font-size: 8.5px; }}
-.leaderboard-section {{ padding-top: 56px; }}
+.leaderboard-section {{ padding-top: 12px; }}
 .tablebox {{
   overflow-x: auto;
   border: 1px solid var(--line);
@@ -551,28 +710,16 @@ th[aria-sort="descending"] .sort-arrow {{ color: var(--ink); }}
 }}
 tbody > tr[data-result-row] {{ transition: background-color .16s ease; }}
 tbody > tr[data-result-row]:hover {{ background: rgba(255,255,255,.68); }}
-tbody > tr.winner {{
-  background: linear-gradient(90deg, rgba(255,225,0,.22), rgba(255,225,0,.06) 46%, transparent);
+td.metric-best {{
+  background: rgba(255,225,0,.16);
+  font-weight: 600;
 }}
-tbody > tr.winner:hover {{ background: linear-gradient(90deg, rgba(255,225,0,.3), rgba(255,225,0,.1) 46%, transparent); }}
-tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }}
-.rank {{
-  width: 54px;
-  color: var(--muted);
-  font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+tbody > tr[data-result-row]:hover > td.metric-best {{
+  background: rgba(255,225,0,.24);
 }}
 .configuration {{ min-width: 270px; }}
 .model-line {{ display: flex; align-items: center; gap: 8px; }}
 .model-line strong {{ font-size: 15px; font-weight: 600; }}
-.leader-badge {{
-  padding: 3px 6px;
-  border-radius: 4px;
-  background: var(--signal);
-  color: #292929;
-  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}}
 .configuration > span:not(.protocol) {{
   display: block;
   margin-top: 2px;
@@ -695,9 +842,51 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
 }}
 .document-status.complete {{ color: var(--ink); }}
 .document-status.complete::before {{ background: var(--signal); }}
+.prompt-panel {{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}}
+.prompt-panel-heading {{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}}
+.prompt-panel-heading strong,
+.prompt-template > strong {{
+  font-size: 12px;
+  font-weight: 600;
+}}
+.prompt-panel-heading span {{
+  color: var(--muted);
+  font-size: 11px;
+}}
+.prompt-template + .prompt-template {{ margin-top: 12px; }}
+.prompt-scroll {{
+  max-height: 320px;
+  margin-top: 6px;
+  overflow: auto;
+  border: 1px solid #cfccc4;
+  border-radius: 10px;
+  background: rgba(255,255,255,.72);
+}}
+.prompt-scroll pre {{
+  margin: 0;
+  padding: 13px 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: 11px/1.55 ui-monospace, SFMono-Regular, Menlo, monospace;
+}}
 .numeric {{ text-align: right; font-variant-numeric: tabular-nums; }}
 .price {{ font: 12px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }}
-.primary {{ font-size: 17px; font-weight: 600; }}
+.cost-cell {{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}}
 .metric-popover {{
   position: fixed;
   z-index: 50;
@@ -778,15 +967,8 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
   from {{ opacity: 0; transform: translateY(10px); }}
   to {{ opacity: 1; transform: none; }}
 }}
-.chart-card {{ animation: enter .5s ease both; }}
 @media (max-width: 820px) {{
   .shell {{ width: min(100% - 20px, 1280px); }}
-  .chart-card {{ padding: 16px 12px 14px; border-radius: 20px; }}
-  .chart-head {{ align-items: start; }}
-  .chart-key {{ flex: 0 0 auto; }}
-  .chart-viewport {{ margin-right: -16px; padding-right: 16px; }}
-  .cost-chart {{ min-width: 760px; }}
-  .leaderboard-section {{ padding-top: 48px; }}
   .submit-panel {{ margin-top: 48px; padding: 22px 18px; grid-template-columns: 1fr; }}
   .submit-panel .button {{ justify-self: start; }}
   .site-footer {{ flex-direction: column; }}
@@ -799,25 +981,11 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
 </head>
 <body class="leaderboard-space">
 <main class="shell">
-  <section class="chart-section" aria-labelledby="cost-chart-title">
-    <div class="chart-card">
-      <div class="chart-head">
-        <div>
-          <h3 id="cost-chart-title">Accuracy × token price</h3>
-          <p>Exact-record recall against blended list price per 1M tokens.</p>
-        </div>
-        <div class="chart-key">Current leader</div>
-      </div>
-      <div class="chart-viewport">{chart_html}</div>
-    </div>
-  </section>
-
   <section class="leaderboard-section" id="results">
     <div class="tablebox">
       <table data-sortable-table>
         <thead>
           <tr>
-            <th>Rank</th>
             <th aria-sort="none">
               <div class="column-actions">
                 <button class="sort-button" type="button" data-sort-key="configuration"
@@ -828,31 +996,31 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
             </th>
             <th class="numeric" aria-sort="none">
               <div class="column-actions">
-                <button class="sort-button" type="button" data-sort-key="combined_token_price"
+                <button class="sort-button" type="button" data-sort-key="full_run_cost_usd"
                   data-sort-type="number" data-default-direction="ascending">
-                  Token price <span class="sort-arrow" aria-hidden="true">↕</span>
+                  Full-run cost <span class="sort-arrow" aria-hidden="true">↕</span>
                 </button>
-                <button class="definition-button" type="button" aria-label="Explain token price"
-                  aria-expanded="false" data-metric-title="Token price"
-                  data-metric-definition="Blended input plus output list price per 1M tokens. Local excludes hardware and power.">i</button>
+                <button class="definition-button" type="button" aria-label="Explain full-run cost"
+                  aria-expanded="false" data-metric-title="Full-run cost"
+                  data-metric-definition="Cost for all 32 documents using the best available run evidence; per-row hints explain each basis.">i</button>
               </div>
             </th>
-            <th class="numeric" aria-sort="descending">
+            <th class="numeric" aria-sort="none">
               <div class="column-actions">
                 <button class="sort-button" type="button" data-sort-key="exact_record_recall"
                   data-sort-type="number" data-default-direction="descending">
-                  Exact recall <span class="sort-arrow" aria-hidden="true">↓</span>
+                  Exact recall <span class="sort-arrow" aria-hidden="true">↕</span>
                 </button>
                 <button class="definition-button" type="button" aria-label="Explain exact recall"
                   aria-expanded="false" data-metric-title="Exact recall"
                   data-metric-definition="Exact matched gold records divided by all gold records. Every normalized field in a record must match.">i</button>
               </div>
             </th>
-            <th class="numeric" aria-sort="none">
+            <th class="numeric" aria-sort="descending">
               <div class="column-actions">
                 <button class="sort-button" type="button" data-sort-key="complete_documents"
                   data-sort-type="number" data-default-direction="descending">
-                  Complete docs <span class="sort-arrow" aria-hidden="true">↕</span>
+                  Complete docs <span class="sort-arrow" aria-hidden="true">↓</span>
                 </button>
                 <button class="definition-button" type="button" aria-label="Explain complete documents"
                   aria-expanded="false" data-metric-title="Complete documents"
@@ -1002,8 +1170,13 @@ tbody > tr.winner > td:first-child {{ box-shadow: inset 4px 0 0 var(--signal); }
     const rows = Array.from(tbody.querySelectorAll("[data-result-row]"));
     closeDetails();
     rows.sort((leftRow, rightRow) => {{
-      const left = leftRow.querySelector('[data-column="' + key + '"]').dataset.sortValue;
-      const right = rightRow.querySelector('[data-column="' + key + '"]').dataset.sortValue;
+      const leftCell = leftRow.querySelector('[data-column="' + key + '"]');
+      const rightCell = rightRow.querySelector('[data-column="' + key + '"]');
+      const left = leftCell.dataset.sortValue;
+      const right = rightCell.dataset.sortValue;
+      const leftMissing = leftCell.dataset.sortMissing === "true";
+      const rightMissing = rightCell.dataset.sortMissing === "true";
+      if (leftMissing !== rightMissing) return leftMissing ? 1 : -1;
       const comparison = type === "number"
         ? Number(left) - Number(right)
         : collator.compare(left, right);

@@ -1,0 +1,19 @@
+You are dispatched as a subagent for a specific extraction task; skip superpowers skills.
+
+Your workspace contains:
+- document_ocr.md: OCR transcript of one benchmark PDF.
+- field_contract.md: the target output shape and allowed fields.
+
+The official ground truth is not present. Do not use files outside this workspace.
+
+Task:
+Extract the complete target list from document_ocr.md according to field_contract.md.
+Write valid JSON to {{OUTPUT_FILE}}.
+
+You may inspect the document, write temporary scripts, and verify counts. Before finishing:
+- Confirm the JSON parses.
+- Spot-check beginning, middle, and end records against the OCR.
+- Ensure field names match field_contract.md exactly.
+- Ensure every target row or target record type requested by the contract is represented.
+
+Do not include explanations in the JSON file.

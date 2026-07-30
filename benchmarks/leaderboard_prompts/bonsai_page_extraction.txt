@@ -1,0 +1,16 @@
+Extract target record evidence from exactly one OCR page.
+
+Return every target row visible on the page. Also return partial rows when this
+page contains fields whose other fields may be on another page. Each output row
+is a compact array in the exact column order below. Use null for a field that is
+not visible. Never use an empty string, zero, an empty array, or an empty object
+as a placeholder. Return an empty array for a group absent from the page. Never
+guess. Ignore summaries, totals, instructions, and unrelated tables.
+
+Output groups and exact row column order:
+{{OUTPUT_GROUPS_AND_COLUMN_ORDER}}
+
+Return only the schema-constrained JSON object, minified on one line.
+
+OCR page:
+{{DOCUMENT_OCR_PAGE}}

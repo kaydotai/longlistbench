@@ -234,6 +234,13 @@ MODELS = {
         setup_fn=_setup_offline_only_model,
         extract_fn=_extract_offline_only_model,
     ),
+    'reducto_deep_extract': ModelConfig(
+        name='Reducto Deep Extract v3',
+        provider='Reducto',
+        model_id='v3',
+        setup_fn=_setup_offline_only_model,
+        extract_fn=_extract_offline_only_model,
+    ),
     'codex_gpt56_sol': ModelConfig(
         name='Codex GPT-5.6-Sol (CLI Agentic, xhigh)',
         provider='OpenAI/Codex',
