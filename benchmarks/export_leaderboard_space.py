@@ -399,6 +399,8 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "full_run_cost_usd": m["full_run_cost_usd"],
             "full_run_cost_source": m["full_run_cost_source"],
             "full_run_cost_explanation": m["full_run_cost_explanation"],
+            "full_run_cost_beta": m.get("full_run_cost_beta", False),
+            "full_run_cost_comparison": m.get("full_run_cost_comparison"),
             "exact_record_recall": s["exact_record_recall"],
             "exact_record_precision": s["exact_record_precision"],
             "exact_record_f1": s["exact_record_f1"],
@@ -506,12 +508,45 @@ def build_html(data: dict) -> str:
             result["full_run_cost_explanation"],
             quote=True,
         )
+        comparison = result.get("full_run_cost_comparison")
+        comparison_template = ""
+        comparison_hint = ""
+        comparison_button_attribute = ""
+        if comparison:
+            comparison_id = f"pricing-comparison-{rank}"
+            comparison_hint = (
+                "<span class='pricing-comparison'>"
+                f"Standard ${REDUCTO_CREDIT_PRICE_USD:.3f}/credit</span>"
+            )
+            comparison_template = (
+                f"<template id='{comparison_id}'>"
+                "<div class='pricing-comparison-popover'>"
+                "<p>Experimental leaderboard pricing compared with Reducto Standard.</p>"
+                "<table class='pricing-comparison-table'>"
+                "<thead><tr><th>Pricing</th><th class='numeric'>Credits</th>"
+                "<th class='numeric'>Full run</th></tr></thead><tbody>"
+                "<tr><th scope='row'>Current Standard</th>"
+                f"<td class='numeric'>{comparison['current_credits']:,.3f}</td>"
+                f"<td class='numeric'>{format_full_run_cost(comparison['current_cost_usd'])}</td>"
+                "</tr><tr class='experimental'><th scope='row'>Experimental</th>"
+                f"<td class='numeric'>≈{comparison['experimental_credits']:,}</td>"
+                f"<td class='numeric'>{format_full_run_cost(comparison['experimental_cost_usd'])}</td>"
+                "</tr></tbody></table></div></template>"
+            )
+            comparison_button_attribute = (
+                f" data-popover-template='{comparison_id}'"
+            )
+        beta_badge = (
+            "<span class='beta-badge'>beta</span>"
+            if result.get("full_run_cost_beta")
+            else ""
+        )
         cost_button = (
             '<button class="definition-button cost-definition-button" type="button" '
             f'aria-label="Explain full-run cost for {model_attribute}" '
             'aria-expanded="false" '
             f'data-metric-title="Full-run cost · {model_attribute}" '
-            f'data-metric-definition="{cost_explanation}">i</button>'
+            f'data-metric-definition="{cost_explanation}"{comparison_button_attribute}>i</button>'
         )
 
         def best_class(metric: str) -> str:
@@ -564,7 +599,7 @@ def build_html(data: dict) -> str:
             "data-column='full_run_cost_usd' "
             f"data-sort-value='{cost_sort_value}'{cost_sort_missing}>"
             f"<span class='cost-cell'><span class='cost-value'>{cost_label}</span>"
-            f"{cost_button}</span></td>"
+            f"{beta_badge}{comparison_hint}{cost_button}{comparison_template}</span></td>"
             f"<td class='numeric{best_class('exact_record_recall')}' "
             "data-column='exact_record_recall' "
             f"data-sort-value='{result['exact_record_recall']}'>"
@@ -909,6 +944,20 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   justify-content: flex-end;
   gap: 6px;
 }}
+.beta-badge {{
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: var(--signal);
+  color: var(--black);
+  font: 8px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}}
+.pricing-comparison {{
+  color: var(--muted);
+  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  white-space: nowrap;
+}}
 .metric-popover {{
   position: fixed;
   z-index: 50;
@@ -943,10 +992,40 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   font-size: 15px;
   font-weight: 600;
 }}
-.metric-popover p {{
+.metric-popover-copy {{
   margin: 5px 0 0;
+}}
+.metric-popover-copy > p {{
+  margin: 0;
   font-size: 12px;
   line-height: 1.5;
+}}
+.pricing-comparison-table {{
+  width: 100%;
+  min-width: 0;
+  margin-top: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 6px;
+  color: rgba(255,255,255,.74);
+  font-size: 10px;
+}}
+.pricing-comparison-table th,
+.pricing-comparison-table td {{
+  padding: 7px 8px;
+  border-top: 1px solid rgba(255,255,255,.14);
+}}
+.pricing-comparison-table thead th {{
+  border-top: 0;
+  color: rgba(255,255,255,.5);
+  background: transparent;
+  font: 8px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+}}
+.pricing-comparison-table tbody th {{ font-weight: 400; }}
+.pricing-comparison-table tbody tr.experimental th,
+.pricing-comparison-table tbody tr.experimental td {{
+  background: var(--signal);
+  color: var(--black);
+  font-weight: 600;
 }}
 .submit-panel {{
   margin: 56px 0 20px;
@@ -1108,7 +1187,7 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   aria-modal="false" tabindex="-1" hidden>
   <span class="metric-popover-label">Metric definition</span>
   <strong></strong>
-  <p></p>
+  <div class="metric-popover-copy"></div>
 </div>
 <script>
 (() => {{
@@ -1120,7 +1199,7 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   const detailButtons = Array.from(table.querySelectorAll(".details-button"));
   const popover = document.querySelector("#metric-definition-popover");
   const popoverTitle = popover.querySelector("strong");
-  const popoverCopy = popover.querySelector("p");
+  const popoverCopy = popover.querySelector(".metric-popover-copy");
   const collator = new Intl.Collator(undefined, {{ numeric: true, sensitivity: "base" }});
   let activeDefinitionButton = null;
 
@@ -1166,7 +1245,15 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
     }}
     closeDefinition();
     popoverTitle.textContent = button.dataset.metricTitle;
-    popoverCopy.textContent = button.dataset.metricDefinition;
+    const template = button.dataset.popoverTemplate
+      ? document.getElementById(button.dataset.popoverTemplate)
+      : null;
+    popoverCopy.replaceChildren();
+    if (template) {{
+      popoverCopy.appendChild(template.content.cloneNode(true));
+    }} else {{
+      popoverCopy.textContent = button.dataset.metricDefinition;
+    }}
     popover.setAttribute("aria-label", button.dataset.metricTitle + " definition");
     popover.hidden = false;
     const anchor = button.getBoundingClientRect();

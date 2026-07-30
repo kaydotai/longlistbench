@@ -205,6 +205,86 @@ def test_uses_reducto_leaderboard_override_with_standard_price_comparison() -> N
     }
 
 
+def test_uses_reducto_strict_contract_override_with_approximately_735_credits() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {
+            "cost_source": "reducto_credits",
+            "leaderboard_cost_override_usd": 11.02,
+        },
+        {"total_credits": 3_108.0628225},
+        expected_samples=32,
+    )
+
+    assert cost["full_run_cost_usd"] == pytest.approx(11.02)
+    assert cost["full_run_cost_comparison"]["experimental_credits"] == 735
+
+
+def test_renders_reducto_beta_cost_with_standard_price_comparison() -> None:
+    model = {
+        "harness": "Reducto",
+        "model": "Deep Extract v3 (test-set tuned)",
+        "requested_model": "v3",
+        "effort": "targeted fields",
+        "cli_version": "Reducto API",
+        "run_date": "2026-07-28",
+        "protocol": "Raw PDF · test-set tuned",
+        "prompt_templates": [
+            {"title": "Generated field contract", "template": "Extract records."}
+        ],
+        "prompt_note": "Test-set tuned after observing benchmark failure modes.",
+        "full_run_cost_usd": 10.08,
+        "full_run_cost_source": "reducto_leaderboard_override",
+        "full_run_cost_explanation": (
+            "Experimental leaderboard cost of $10.08; current Reducto Standard list "
+            "cost is $46.62."
+        ),
+        "full_run_cost_beta": True,
+        "full_run_cost_comparison": {
+            "current_credits": 3_108.0628225,
+            "current_cost_usd": 46.6209423375,
+            "experimental_credits": 672,
+            "experimental_cost_usd": 10.08,
+        },
+        "stats": {
+            "exact_record_recall": 1.0,
+            "exact_record_precision": 1.0,
+            "exact_record_f1": 1.0,
+            "complete_documents": 32,
+            "total_samples": 32,
+            "complete_document_rate": 1.0,
+            "weighted_f1": 1.0,
+            "weighted_recall": 1.0,
+            "by_evaluation_role": {
+                "structural_challenge": {"exact_record_recall": 1.0},
+                "scale_control": {"exact_record_recall": 1.0},
+            },
+            "total_rows": 29_599,
+            "total_exact_record_matches": 29_599,
+            "errors": [],
+            "by_tier": {},
+            "by_complexity_regime": {},
+            "by_stressor": {},
+        },
+        "detailed_results": [],
+    }
+
+    data = export_leaderboard_space.build_data([model], {"total_samples": 32})
+    html = export_leaderboard_space.build_html(data)
+
+    assert data["results"][0]["full_run_cost_beta"] is True
+    assert "<span class='beta-badge'>beta</span>" in html
+    assert "class='pricing-comparison'" in html
+    assert "$0.015/credit" in html
+    assert "Current Standard" in html
+    assert "Experimental" in html
+    assert "3,108.063" in html
+    assert "≈672" in html
+    assert "$46.62" in html
+    assert "$10.08" in html
+    assert "data-popover-template='pricing-comparison-1'" in html
+    assert "<template id='pricing-comparison-1'>" in html
+
+
 def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
     rows = {
         run["model"]: (run["protocol"], run["prompt_note"])
