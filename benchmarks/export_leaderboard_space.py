@@ -510,21 +510,17 @@ def build_html(data: dict) -> str:
         )
         comparison = result.get("full_run_cost_comparison")
         comparison_template = ""
-        comparison_hint = ""
         comparison_button_attribute = ""
         if comparison:
             comparison_id = f"pricing-comparison-{rank}"
-            comparison_hint = (
-                "<span class='pricing-comparison'>"
-                f"Standard ${REDUCTO_CREDIT_PRICE_USD:.3f}/credit</span>"
-            )
             comparison_template = (
                 f"<template id='{comparison_id}'>"
                 "<div class='pricing-comparison-popover'>"
-                "<p>Experimental leaderboard pricing compared with Reducto Standard.</p>"
+                "<p class='pricing-comparison'>Current Reducto Standard rate: "
+                f"${REDUCTO_CREDIT_PRICE_USD:.3f}/credit (observed {PRICING_OBSERVED_DATE}).</p>"
                 "<table class='pricing-comparison-table'>"
                 "<thead><tr><th>Pricing</th><th class='numeric'>Credits</th>"
-                "<th class='numeric'>Full run</th></tr></thead><tbody>"
+                "<th class='numeric'>Full-run cost</th></tr></thead><tbody>"
                 "<tr><th scope='row'>Current Standard</th>"
                 f"<td class='numeric'>{comparison['current_credits']:,.3f}</td>"
                 f"<td class='numeric'>{format_full_run_cost(comparison['current_cost_usd'])}</td>"
@@ -599,7 +595,7 @@ def build_html(data: dict) -> str:
             "data-column='full_run_cost_usd' "
             f"data-sort-value='{cost_sort_value}'{cost_sort_missing}>"
             f"<span class='cost-cell'><span class='cost-value'>{cost_label}</span>"
-            f"{beta_badge}{comparison_hint}{cost_button}{comparison_template}</span></td>"
+            f"{beta_badge}{cost_button}{comparison_template}</span></td>"
             f"<td class='numeric{best_class('exact_record_recall')}' "
             "data-column='exact_record_recall' "
             f"data-sort-value='{result['exact_record_recall']}'>"
@@ -954,9 +950,8 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   text-transform: uppercase;
 }}
 .pricing-comparison {{
-  color: var(--muted);
-  font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  white-space: nowrap;
+  color: rgba(255,255,255,.74);
+  font: 10px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
 }}
 .metric-popover {{
   position: fixed;

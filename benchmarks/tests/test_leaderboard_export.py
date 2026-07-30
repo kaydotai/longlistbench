@@ -273,10 +273,18 @@ def test_renders_reducto_beta_cost_with_standard_price_comparison() -> None:
 
     assert data["results"][0]["full_run_cost_beta"] is True
     assert "<span class='beta-badge'>beta</span>" in html
-    assert "class='pricing-comparison'" in html
-    assert "$0.015/credit" in html
+    assert (
+        "<span class='cost-value'>$10.08</span>"
+        "<span class='beta-badge'>beta</span><button"
+    ) in html
+    assert "<span class='pricing-comparison'>" not in html
+    assert (
+        "<p class='pricing-comparison'>Current Reducto Standard rate: "
+        "$0.015/credit (observed 2026-07-28).</p>"
+    ) in html
     assert "Current Standard" in html
     assert "Experimental" in html
+    assert "Full-run cost" in html
     assert "3,108.063" in html
     assert "≈672" in html
     assert "$46.62" in html
