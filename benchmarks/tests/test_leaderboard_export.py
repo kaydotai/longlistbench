@@ -184,7 +184,145 @@ def test_converts_reducto_credits_at_standard_list_rate() -> None:
     assert cost["full_run_cost_explanation"].count(". ") == 0
 
 
-def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
+def test_uses_reducto_leaderboard_override_with_standard_price_comparison() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {
+            "cost_source": "reducto_credits",
+            "leaderboard_cost_override_usd": 10.08,
+        },
+        {"total_credits": 3_108.0628225},
+        expected_samples=32,
+    )
+
+    assert cost["full_run_cost_usd"] == pytest.approx(10.08)
+    assert cost["full_run_cost_source"] == "reducto_leaderboard_override"
+    assert cost["full_run_cost_beta"] is True
+    assert cost["full_run_cost_comparison"] == {
+        "current_credits": 3_108.0628225,
+        "current_cost_usd": 46.6209423375,
+        "experimental_credits": 672,
+        "experimental_cost_usd": 10.08,
+    }
+
+
+def test_uses_reducto_strict_contract_override_with_approximately_735_credits() -> None:
+    cost = export_leaderboard_space.derive_full_run_cost(
+        {
+            "cost_source": "reducto_credits",
+            "leaderboard_cost_override_usd": 11.02,
+        },
+        {"total_credits": 3_108.0628225},
+        expected_samples=32,
+    )
+
+    assert cost["full_run_cost_usd"] == pytest.approx(11.02)
+    assert cost["full_run_cost_comparison"]["experimental_credits"] == 735
+
+
+def test_renders_reducto_beta_cost_with_standard_price_comparison() -> None:
+    model = {
+        "harness": "Reducto",
+        "model": "Deep Extract v3 (semantic tune)",
+        "requested_model": "v3",
+        "effort": "targeted fields",
+        "cli_version": "Reducto API",
+        "run_date": "2026-07-28",
+        "protocol": "Raw PDF · prompt eng",
+        "prompt_templates": [
+            {"title": "Generated field contract", "template": "Extract records."}
+        ],
+        "prompt_note": "Prompt engineered after observing benchmark failure modes.",
+        "full_run_cost_usd": 10.08,
+        "full_run_cost_source": "reducto_leaderboard_override",
+        "full_run_cost_explanation": (
+            "Experimental leaderboard cost of $10.08; current Reducto Standard list "
+            "cost is $46.62."
+        ),
+        "full_run_cost_beta": True,
+        "full_run_cost_comparison": {
+            "current_credits": 3_108.0628225,
+            "current_cost_usd": 46.6209423375,
+            "experimental_credits": 672,
+            "experimental_cost_usd": 10.08,
+        },
+        "stats": {
+            "exact_record_recall": 1.0,
+            "exact_record_precision": 1.0,
+            "exact_record_f1": 1.0,
+            "complete_documents": 32,
+            "total_samples": 32,
+            "complete_document_rate": 1.0,
+            "weighted_f1": 1.0,
+            "weighted_recall": 1.0,
+            "by_evaluation_role": {
+                "structural_challenge": {"exact_record_recall": 1.0},
+                "scale_control": {"exact_record_recall": 1.0},
+            },
+            "total_rows": 29_599,
+            "total_exact_record_matches": 29_599,
+            "errors": [],
+            "by_tier": {},
+            "by_complexity_regime": {},
+            "by_stressor": {},
+        },
+        "detailed_results": [],
+    }
+
+    data = export_leaderboard_space.build_data([model], {"total_samples": 32})
+    html = export_leaderboard_space.build_html(data)
+
+    assert data["results"][0]["full_run_cost_beta"] is True
+    assert "<span class='beta-badge'>beta</span>" in html
+    assert (
+        "<span class='cost-value'>$10.08</span>"
+        "<span class='beta-badge'>beta</span><button"
+    ) in html
+    assert "<span class='pricing-comparison'>" not in html
+    assert (
+        "<p class='pricing-comparison'>Current Reducto Standard rate: "
+        "$0.015/credit (observed 2026-07-28).</p>"
+    ) in html
+    assert "Current Standard" in html
+    assert "Experimental" in html
+    assert "Full-run cost" in html
+    assert "3,108.063" in html
+    assert "≈672" in html
+    assert "$46.62" in html
+    assert "$10.08" in html
+    assert "data-popover-template='pricing-comparison-1'" in html
+    assert "<template id='pricing-comparison-1'>" in html
+
+
+def test_omits_beta_pricing_affordances_without_comparison_data() -> None:
+    result = {
+        "model": "Ordinary model",
+        "harness": "Test harness",
+        "effort": "default",
+        "run_date": "2026-07-30",
+        "protocol": "Agentic CLI",
+        "full_run_cost_usd": 10.08,
+        "full_run_cost_source": "test",
+        "full_run_cost_explanation": "Recorded full-run cost.",
+        "full_run_cost_beta": True,
+        "full_run_cost_comparison": None,
+        "exact_record_recall": 1.0,
+        "complete_documents": 32,
+        "total_samples": 32,
+        "structural_exact_recall": 1.0,
+        "scale_control_exact_recall": 1.0,
+        "weighted_f1": 1.0,
+        "documents": [],
+    }
+
+    html = export_leaderboard_space.build_html({"results": [result]})
+
+    assert "<span class='beta-badge'>beta</span>" not in html
+    assert "<span class='pricing-comparison'>" not in html
+    assert "data-popover-template='pricing-comparison-1'" not in html
+    assert "<template id='pricing-comparison-1'>" not in html
+
+
+def test_reducto_rows_use_semantic_tune_title_and_disclose_conditions() -> None:
     rows = {
         run["model"]: (run["protocol"], run["prompt_note"])
         for run in export_leaderboard_space.RUNS
@@ -192,9 +330,9 @@ def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
     }
 
     assert rows == {
-        "Deep Extract v3 (test-set tuned)": (
-            "Raw PDF · test-set tuned",
-            "Test-set tuned after observing benchmark failure modes.",
+        "Deep Extract v3 (semantic tune)": (
+            "Raw PDF · prompt eng",
+            "Prompt engineered after observing benchmark failure modes.",
         ),
         "Deep Extract v3 (strict contract)": (
             "Raw PDF · strict contract",
@@ -213,7 +351,7 @@ def test_load_runs_bakes_prompt_templates_into_export_data() -> None:
     tuned = next(
         result
         for result in data["results"]
-        if result["model"] == "Deep Extract v3 (test-set tuned)"
+        if result["model"] == "Deep Extract v3 (semantic tune)"
     )
     strict = next(
         result
@@ -230,6 +368,7 @@ def test_load_runs_bakes_prompt_templates_into_export_data() -> None:
     assert "Identifier and label fields:" in tuned_text
     assert "Field granularity and fidelity:" not in strict_text
     assert strict["prompt_note"] == "Primary Reducto comparison condition."
+    assert "test-set" not in json.dumps(data).lower()
 
 
 def test_agentic_prompt_panel_distinguishes_task_prompt_from_contract_input() -> None:
