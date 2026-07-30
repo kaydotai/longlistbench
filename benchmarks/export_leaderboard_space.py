@@ -538,7 +538,7 @@ def build_html(data: dict) -> str:
             )
         beta_badge = (
             "<span class='beta-badge'>beta</span>"
-            if result.get("full_run_cost_beta")
+            if comparison and result.get("full_run_cost_beta")
             else ""
         )
         cost_button = (

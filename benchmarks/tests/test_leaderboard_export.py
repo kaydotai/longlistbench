@@ -285,6 +285,35 @@ def test_renders_reducto_beta_cost_with_standard_price_comparison() -> None:
     assert "<template id='pricing-comparison-1'>" in html
 
 
+def test_omits_beta_pricing_affordances_without_comparison_data() -> None:
+    result = {
+        "model": "Ordinary model",
+        "harness": "Test harness",
+        "effort": "default",
+        "run_date": "2026-07-30",
+        "protocol": "Agentic CLI",
+        "full_run_cost_usd": 10.08,
+        "full_run_cost_source": "test",
+        "full_run_cost_explanation": "Recorded full-run cost.",
+        "full_run_cost_beta": True,
+        "full_run_cost_comparison": None,
+        "exact_record_recall": 1.0,
+        "complete_documents": 32,
+        "total_samples": 32,
+        "structural_exact_recall": 1.0,
+        "scale_control_exact_recall": 1.0,
+        "weighted_f1": 1.0,
+        "documents": [],
+    }
+
+    html = export_leaderboard_space.build_html({"results": [result]})
+
+    assert "<span class='beta-badge'>beta</span>" not in html
+    assert "<span class='pricing-comparison'>" not in html
+    assert "data-popover-template='pricing-comparison-1'" not in html
+    assert "<template id='pricing-comparison-1'>" not in html
+
+
 def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
     rows = {
         run["model"]: (run["protocol"], run["prompt_note"])
