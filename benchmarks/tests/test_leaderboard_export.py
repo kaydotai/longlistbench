@@ -222,7 +222,7 @@ def test_uses_reducto_strict_contract_override_with_approximately_735_credits() 
 def test_renders_reducto_beta_cost_with_standard_price_comparison() -> None:
     model = {
         "harness": "Reducto",
-        "model": "Deep Extract v3 (prompt eng)",
+        "model": "Deep Extract v3 (semantic tune)",
         "requested_model": "v3",
         "effort": "targeted fields",
         "cli_version": "Reducto API",
@@ -322,7 +322,7 @@ def test_omits_beta_pricing_affordances_without_comparison_data() -> None:
     assert "<template id='pricing-comparison-1'>" not in html
 
 
-def test_reducto_rows_use_prompt_eng_label_and_disclose_conditions() -> None:
+def test_reducto_rows_use_semantic_tune_title_and_disclose_conditions() -> None:
     rows = {
         run["model"]: (run["protocol"], run["prompt_note"])
         for run in export_leaderboard_space.RUNS
@@ -330,7 +330,7 @@ def test_reducto_rows_use_prompt_eng_label_and_disclose_conditions() -> None:
     }
 
     assert rows == {
-        "Deep Extract v3 (prompt eng)": (
+        "Deep Extract v3 (semantic tune)": (
             "Raw PDF · prompt eng",
             "Prompt engineered after observing benchmark failure modes.",
         ),
@@ -351,7 +351,7 @@ def test_load_runs_bakes_prompt_templates_into_export_data() -> None:
     tuned = next(
         result
         for result in data["results"]
-        if result["model"] == "Deep Extract v3 (prompt eng)"
+        if result["model"] == "Deep Extract v3 (semantic tune)"
     )
     strict = next(
         result

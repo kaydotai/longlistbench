@@ -84,7 +84,7 @@ RUNS = (
         "run_dir": "reducto_deep_extract_v3_targeted_prompt",
         "key": "reducto_deep_extract",
         "harness": "Reducto",
-        "model": "Deep Extract v3 (prompt eng)",
+        "model": "Deep Extract v3 (semantic tune)",
         "protocol": "Raw PDF · prompt eng",
         "cost_source": "reducto_credits",
         "leaderboard_cost_override_usd": 10.08,
