@@ -222,16 +222,16 @@ def test_uses_reducto_strict_contract_override_with_approximately_735_credits() 
 def test_renders_reducto_beta_cost_with_standard_price_comparison() -> None:
     model = {
         "harness": "Reducto",
-        "model": "Deep Extract v3 (test-set tuned)",
+        "model": "Deep Extract v3 (prompt eng)",
         "requested_model": "v3",
         "effort": "targeted fields",
         "cli_version": "Reducto API",
         "run_date": "2026-07-28",
-        "protocol": "Raw PDF · test-set tuned",
+        "protocol": "Raw PDF · prompt eng",
         "prompt_templates": [
             {"title": "Generated field contract", "template": "Extract records."}
         ],
-        "prompt_note": "Test-set tuned after observing benchmark failure modes.",
+        "prompt_note": "Prompt engineered after observing benchmark failure modes.",
         "full_run_cost_usd": 10.08,
         "full_run_cost_source": "reducto_leaderboard_override",
         "full_run_cost_explanation": (
@@ -322,7 +322,7 @@ def test_omits_beta_pricing_affordances_without_comparison_data() -> None:
     assert "<template id='pricing-comparison-1'>" not in html
 
 
-def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
+def test_reducto_rows_use_prompt_eng_label_and_disclose_conditions() -> None:
     rows = {
         run["model"]: (run["protocol"], run["prompt_note"])
         for run in export_leaderboard_space.RUNS
@@ -330,9 +330,9 @@ def test_reducto_rows_disclose_primary_and_test_set_tuned_conditions() -> None:
     }
 
     assert rows == {
-        "Deep Extract v3 (test-set tuned)": (
-            "Raw PDF · test-set tuned",
-            "Test-set tuned after observing benchmark failure modes.",
+        "Deep Extract v3 (prompt eng)": (
+            "Raw PDF · prompt eng",
+            "Prompt engineered after observing benchmark failure modes.",
         ),
         "Deep Extract v3 (strict contract)": (
             "Raw PDF · strict contract",
@@ -351,7 +351,7 @@ def test_load_runs_bakes_prompt_templates_into_export_data() -> None:
     tuned = next(
         result
         for result in data["results"]
-        if result["model"] == "Deep Extract v3 (test-set tuned)"
+        if result["model"] == "Deep Extract v3 (prompt eng)"
     )
     strict = next(
         result
@@ -368,6 +368,7 @@ def test_load_runs_bakes_prompt_templates_into_export_data() -> None:
     assert "Identifier and label fields:" in tuned_text
     assert "Field granularity and fidelity:" not in strict_text
     assert strict["prompt_note"] == "Primary Reducto comparison condition."
+    assert "test-set" not in json.dumps(data).lower()
 
 
 def test_agentic_prompt_panel_distinguishes_task_prompt_from_contract_input() -> None:
