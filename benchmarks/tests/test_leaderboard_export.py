@@ -3,6 +3,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
+from huggingface_hub import SpaceCard
 
 from benchmarks import export_leaderboard_space
 
@@ -115,6 +116,12 @@ def test_prepare_output_requires_explicit_overwrite(tmp_path: Path) -> None:
     export_leaderboard_space.prepare_output(output, overwrite=True)
     assert output.is_dir()
     assert list(output.iterdir()) == []
+
+
+def test_space_card_links_the_longlistbench_dataset() -> None:
+    card = SpaceCard(export_leaderboard_space.README)
+
+    assert card.data.get("datasets") == ["kaydotai/LongListBench"]
 
 
 def test_bonsai_run_is_labeled_local_and_together_ai(tmp_path: Path) -> None:
