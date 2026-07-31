@@ -7,14 +7,14 @@
 - Reasoning effort: `xhigh`
 - Protocol: one repository-denied, ephemeral Codex thread per document
 
-This was an independent execution retained for representative usage, cost, and
-quality diagnostics. It is not a released accuracy baseline and does not
-replace the canonical GPT-5.5 or GPT-5.6-Sol results. The repository retains
-the aggregate measurement, not a second exported prediction set.
+This preselected execution is the released GPT-5.6-Terra leaderboard run and
+its usage measurement. The repository retains its predictions and recomputable
+report under `benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/`.
 
 All 32 jobs completed on their first attempt. The checker independently
 recomputed the report from the saved predictions and ground truth before the
-aggregate was recorded.
+aggregate was recorded. Two later full-corpus repeats measure stochasticity;
+they did not determine which run appears on the leaderboard.
 
 ## Diagnostic quality
 
@@ -78,6 +78,12 @@ actual subscription charge.
 - Median: 8.632175 credits per document
 - Minimum: 2.929390 credits (`driver_schedule_sparse_001`)
 - Maximum: 33.116500 credits (`loss_run_external_001`)
+
+Across three matched runs, exact-record recall ranged from 94.5% to 98.1%,
+complete-document success ranged from 5/32 to 7/32, and API-equivalent cost
+ranged from $14.54 to $15.32. The median run reached 94.5% exact recall, 6/32
+complete documents, and cost $15.17. See
+`../gpt56_terra_replicates_20260801/` for the run-level summary.
 
 ## Size-normalized cost
 

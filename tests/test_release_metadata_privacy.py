@@ -7,6 +7,7 @@ RELEASE_RESULT_DIRS = (
     "claude_opus48_full_current_ocr_v2",
     "codex_full_current_ocr_v2",
     "codex_gpt56_sol_full_current_ocr_v2",
+    "codex_gpt56_terra_full_current_ocr_v2",
 )
 
 

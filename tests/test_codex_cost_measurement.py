@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from statistics import median
+from statistics import mean, median, stdev
 
 import pytest
 
@@ -25,7 +25,7 @@ def _credit_cost(payload: dict, usage: dict) -> float:
 
 
 @pytest.mark.parametrize(("model", "measurement_dir"), MEASUREMENTS.items())
-def test_codex_cost_measurement_is_noncanonical_and_reconciles(
+def test_codex_cost_measurement_reconciles(
     model: str, measurement_dir: Path
 ) -> None:
     payload = json.loads(
@@ -33,8 +33,12 @@ def test_codex_cost_measurement_is_noncanonical_and_reconciles(
     )
 
     assert payload["model"] == model
-    assert payload["run_role"] == "cost_measurement"
-    assert payload["canonical_result"] is False
+    if model == "gpt-5.6-terra":
+        assert payload["run_role"] == "leaderboard_and_cost_measurement"
+        assert payload["canonical_result"] is True
+    else:
+        assert payload["run_role"] == "cost_measurement"
+        assert payload["canonical_result"] is False
     assert payload["dataset"]["documents"] == 32
     assert len(payload["per_document_usage"]) == 32
     assert len(payload["per_document_input_hashes"]) == 32
@@ -161,7 +165,7 @@ def test_terra_measurement_is_input_matched_and_uses_terra_rates() -> None:
         14.5439308
     )
     assert terra["diagnostic_evaluation"] == {
-        "canonical_result": False,
+        "canonical_result": True,
         "report_timestamp": "2026-07-31T20:41:15.595652+00:00",
         "exact_record_recall": pytest.approx(0.944930571978783),
         "exact_record_precision": pytest.approx(0.9421295516556069),
@@ -181,7 +185,7 @@ def test_terra_measurement_is_input_matched_and_uses_terra_rates() -> None:
     for model, expected in expected_diagnostics.items():
         exact_recall, complete_documents, field_f1 = expected
         diagnostic = payloads[model]["diagnostic_evaluation"]
-        assert diagnostic["canonical_result"] is False
+        assert diagnostic["canonical_result"] is (model == "gpt-5.6-terra")
         assert diagnostic["exact_record_recall"] == pytest.approx(exact_recall)
         assert diagnostic["complete_documents"] == complete_documents
         assert diagnostic["field_micro_f1"] == pytest.approx(field_f1)
@@ -192,3 +196,69 @@ def test_terra_measurement_is_input_matched_and_uses_terra_rates() -> None:
             terra["measured_cost"]["chatgpt_credits"]
             < comparison["measured_cost"]["chatgpt_credits"]
         )
+
+
+def test_terra_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
+    payload = json.loads(
+        (
+            MEASUREMENT_ROOT
+            / "gpt56_terra_replicates_20260801/summary.json"
+        ).read_text(encoding="utf-8")
+    )
+    runs = payload["runs"]
+
+    assert payload["run_count"] == len(runs) == 3
+    assert payload["selection_policy"] == {
+        "leaderboard_run": "run_1",
+        "selected_before_repeats": True,
+        "best_of_n_selection": False,
+    }
+    assert [run["leaderboard_run"] for run in runs] == [True, False, False]
+    assert payload["dataset"]["input_fingerprints_match_across_runs"] is True
+    assert all(run["execution_errors"] == 0 for run in runs)
+
+    aggregates = payload["aggregate"]
+    for key in (
+        "exact_record_recall",
+        "complete_documents",
+        "field_micro_f1",
+        "input_tokens",
+        "output_tokens",
+        "api_equivalent_usd",
+    ):
+        values = [run[key] for run in runs]
+        assert aggregates[key]["median"] == pytest.approx(median(values))
+        assert aggregates[key]["mean"] == pytest.approx(mean(values))
+        assert aggregates[key]["min"] == min(values)
+        assert aggregates[key]["max"] == max(values)
+        assert aggregates[key]["sample_standard_deviation"] == pytest.approx(
+            stdev(values)
+        )
+
+    for run in runs:
+        credits = (
+            run["uncached_input_tokens"] * 50
+            + run["cached_input_tokens"] * 5
+            + run["output_tokens"] * 300
+        ) / 1_000_000
+        api_equivalent = (
+            run["uncached_input_tokens"] * 2
+            + run["cached_input_tokens"] * 0.2
+            + run["output_tokens"] * 12
+        ) / 1_000_000
+        assert run["chatgpt_credits"] == pytest.approx(credits)
+        assert run["api_equivalent_usd"] == pytest.approx(api_equivalent)
+
+    released_report = json.loads(
+        (
+            ROOT
+            / "benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/evaluation_report.json"
+        ).read_text(encoding="utf-8")
+    )
+    released = released_report["model_stats"]["codex_gpt56_terra"]
+    run_1 = runs[0]
+    assert run_1["exact_record_recall"] == pytest.approx(
+        released["exact_record_recall"]
+    )
+    assert run_1["complete_documents"] == released["complete_documents"]
+    assert run_1["field_micro_f1"] == pytest.approx(released["weighted_f1"])

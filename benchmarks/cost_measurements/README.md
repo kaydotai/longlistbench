@@ -1,16 +1,17 @@
 # Codex Full-Corpus Measurements
 
-These artifacts compare one independent GPT-5.5, GPT-5.6-Sol, and
-GPT-5.6-Terra execution on the same 32-document OCR corpus. The GPT-5.5 and Sol
-runs used Codex CLI 0.145.0 on July 29, 2026; Terra used CLI 0.146.0 on July 31.
-All used `xhigh` reasoning, four workers, one repository-denied ephemeral
-thread per document, identical prompts, field contracts, transcripts, and the
-same 272K context cap. Per-document input hashes match across all three runs.
+These artifacts compare GPT-5.5, GPT-5.6-Sol, and GPT-5.6-Terra on the same
+32-document OCR corpus. The GPT-5.5 and Sol measurements each use one Codex CLI
+0.145.0 run from July 29, 2026. Terra uses one preselected leaderboard run plus
+two stochasticity repeats on CLI 0.146.0 from July 31. All use `xhigh`
+reasoning, four workers, one repository-denied ephemeral thread per document,
+identical prompts, field contracts, transcripts, and the same 272K context cap.
+Per-document input hashes match across models and repeats.
 
-They are usage measurements with non-canonical quality diagnostics, not
-accuracy baselines. The prediction sets and evaluation reports are
-intentionally excluded; the released benchmark results remain the only
-canonical accuracy results.
+The GPT-5.5 and Sol artifacts are independent cost measurements with
+non-canonical quality diagnostics. Terra run 1 is both the released Terra
+leaderboard result and its usage measurement; its full predictions and report
+are retained under `benchmarks/results/`.
 
 ## Three-model result
 
@@ -49,8 +50,14 @@ It appended inherited fuel-band context to one 998-row schedule and paraphrased
 fields in the long-range claim packets. The secondary field score remains high,
 but the requested records are not exact.
 
-This is one independent execution per model. Agent tool paths are stochastic,
-and Terra used a newer CLI build, so the result supports a representative
-cost-quality observation, not a precise causal estimate of model-version
-effects. See the model-specific directories for per-document usage and cost
-calculations.
+Two additional Terra runs reached 94.5% and 98.1% exact-record recall, 7/32 and
+6/32 complete documents, and API-equivalent costs of $15.32 and $15.17. Across
+all three Terra runs, the median was 94.5% exact recall, 6/32 complete
+documents, and $15.17. The range demonstrates stochasticity; it is not used to
+replace the preselected leaderboard run.
+
+GPT-5.5 and Sol still have one independent execution each, and Terra used a
+newer CLI build. These results support representative cost-quality
+observations, not precise causal estimates of model-version effects. See the
+model-specific directories for per-document calculations and the Terra
+replicate summary.

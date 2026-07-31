@@ -252,16 +252,17 @@ OCR support should be interpreted at the affected-record and field level, not on
 
 Saved reports under `benchmarks/results/` should be treated as local run artifacts unless their manifest hash matches the current `data/manifest.json`. After replacing layouts, rerun OCR and evaluation before citing current-layout or current-model baselines. The current released dataset includes OCR transcripts for every PDF.
 
-The release includes four full-corpus repository-denied coding-agent runs under the same OCR input and field-contract protocol. Each result directory includes all 32 predictions, input and prediction fingerprints, and a report that can be checked offline.
+The repository includes five full-corpus repository-denied coding-agent runs under the same OCR input and field-contract protocol. Each result directory includes all 32 predictions, input and prediction fingerprints, and a report that can be checked offline. The paper compares GPT-5.6-Sol, Fable 5, GPT-5.5, and Opus 4.8; GPT-5.6-Terra is an additional leaderboard result.
 
 | Agent | Documents | Target records | Errors | Exact-record recall | Complete documents | Field micro-F1 | Field macro-F1 |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | Codex CLI `gpt-5.6-sol`, xhigh | 32 | 29,599 | 0 | 97.9% | 8/32 (25.0%) | 99.4% | 99.4% |
+| Codex CLI `gpt-5.6-terra`, xhigh | 32 | 29,599 | 0 | 94.5% | 5/32 (15.6%) | 99.0% | 98.4% |
 | Claude Code `claude-fable-5`, xhigh | 32 | 29,599 | 0 | 95.1% | 9/32 (28.1%) | 96.8% | 93.6% |
 | Codex CLI `gpt-5.5`, xhigh | 32 | 29,599 | 0 | 94.5% | 4/32 (12.5%) | 98.8% | 98.6% |
 | Claude Code `claude-opus-4-8`, xhigh | 32 | 29,599 | 0 | 97.7% | 7/32 (21.9%) | 99.4% | 99.3% |
 
-The latest saved results are under `benchmarks/results/codex_gpt56_sol_full_current_ocr_v2/` and `benchmarks/results/claude_fable5_full_current_ocr_v2/`; the GPT-5.5 and Opus 4.8 comparison runs remain available beside them.
+The latest saved results are under `benchmarks/results/codex_gpt56_sol_full_current_ocr_v2/`, `benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/`, and `benchmarks/results/claude_fable5_full_current_ocr_v2/`; the GPT-5.5 and Opus 4.8 comparison runs remain available beside them. Terra's preselected leaderboard run reached 94.5% exact recall and 5/32 complete documents. Across three matched Terra runs, exact recall ranged from 94.5% to 98.1% and complete-document success from 5/32 to 7/32.
 
 An exact record must match every normalized target field. Complete-document success requires the predicted and ground-truth record multisets to be identical, including duplicates and with no extra records. Record order is not scored. Field-pair F1 remains a secondary partial-credit diagnostic.
 

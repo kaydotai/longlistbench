@@ -47,6 +47,21 @@ RUNS = (
         ),
     },
     {
+        "run_dir": "codex_gpt56_terra_full_current_ocr_v2",
+        "key": "codex_gpt56_terra",
+        "harness": "Codex CLI",
+        "model": "GPT-5.6-Terra",
+        "protocol": "Agentic CLI",
+        "cost_source": "codex_api_equivalent",
+        "cost_measurement_relation": "same_run",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
+        "cost_metadata_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_terra_20260731/usage_summary.json"
+        ),
+    },
+    {
         "run_dir": "claude_opus48_full_current_ocr_v2",
         "key": "claude_opus48",
         "harness": "Claude Code",
@@ -198,13 +213,20 @@ def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> di
                     "incomplete."
                 ),
             }
+        if run.get("cost_measurement_relation") == "same_run":
+            explanation = (
+                f"${api_equivalent:.2f} API-equivalent cost derived from the same saved "
+                "full-corpus run."
+            )
+        else:
+            explanation = (
+                f"${api_equivalent:.2f} API-equivalent cost from the independent cost "
+                "measurement; the leaderboard accuracy remains the released run."
+            )
         return {
             "full_run_cost_usd": float(api_equivalent),
             "full_run_cost_source": "codex_api_equivalent",
-            "full_run_cost_explanation": (
-                f"${api_equivalent:.2f} API-equivalent cost from the independent cost "
-                "measurement; the leaderboard accuracy remains the released run."
-            ),
+            "full_run_cost_explanation": explanation,
         }
     if source == "claude_api_equivalent":
         samples = metadata.get("samples")

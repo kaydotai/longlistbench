@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "run_role": "cost_measurement",
-  "canonical_result": false,
-  "note": "Independent full-corpus execution retained for representative usage, cost, and non-canonical quality diagnostics; it does not replace a released accuracy baseline.",
+  "run_role": "leaderboard_and_cost_measurement",
+  "canonical_result": true,
+  "note": "Preselected full-corpus execution used for the released GPT-5.6-Terra leaderboard result and its measured usage and API-equivalent cost.",
   "generated_at": "2026-07-31T20:41:10.670248+00:00",
   "runner": "run_codex_cli_evaluation.py",
   "runtime": "codex-cli 0.146.0",
@@ -58,7 +58,7 @@
     "actual_subscription_charge_usd": null
   },
   "diagnostic_evaluation": {
-    "canonical_result": false,
+    "canonical_result": true,
     "report_timestamp": "2026-07-31T20:41:15.595652+00:00",
     "exact_record_recall": 0.944930571978783,
     "exact_record_precision": 0.9421295516556069,

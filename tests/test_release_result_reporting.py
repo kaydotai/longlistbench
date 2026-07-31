@@ -8,6 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT_PATHS = {
     "codex_gpt56_sol": ROOT
     / "benchmarks/results/codex_gpt56_sol_full_current_ocr_v2/evaluation_report.json",
+    "codex_gpt56_terra": ROOT
+    / "benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/evaluation_report.json",
     "claude_fable5": ROOT
     / "benchmarks/results/claude_fable5_full_current_ocr_v2/evaluation_report.json",
     "codex_gpt55": ROOT
@@ -17,6 +19,7 @@ REPORT_PATHS = {
 }
 RUN_EXPECTATIONS = {
     "codex_gpt56_sol": ("gpt-5.6-sol", "sample_statuses"),
+    "codex_gpt56_terra": ("gpt-5.6-terra", "sample_statuses"),
     "claude_fable5": ("claude-fable-5", "samples"),
     "codex_gpt55": ("gpt-5.5", "sample_statuses"),
     "claude_opus48": ("claude-opus-4-8", "samples"),
@@ -39,6 +42,10 @@ OVERALL_LABELS = {
         "Claude Code `claude-opus-4-8`, xhigh",
         "Claude Code, Opus 4.8 (xhigh)",
     ),
+}
+
+LEADERBOARD_ONLY_LABELS = {
+    "codex_gpt56_terra": "Codex CLI `gpt-5.6-terra`, xhigh",
 }
 
 PROBLEM_LABELS = {
@@ -193,6 +200,18 @@ def test_release_tables_match_saved_reports() -> None:
             f"{_tex_pct(model_stats['avg_f1'])} \\\\"
         )
         assert tex_row in results_tex
+
+    for key, readme_label in LEADERBOARD_ONLY_LABELS.items():
+        model_stats = stats[key]
+        readme_row = (
+            f"| {readme_label} | {total_samples} | {total_rows:,} | 0 | "
+            f"{_pct(model_stats['exact_record_recall'])} | "
+            f"{model_stats['complete_documents']}/{total_samples} "
+            f"({_pct(model_stats['complete_document_rate'])}) | "
+            f"{_pct(model_stats['weighted_f1'])} | "
+            f"{_pct(model_stats['avg_f1'])} |"
+        )
+        assert readme_row in readme
 
     sol = stats["codex_gpt56_sol"]
     fable = stats["claude_fable5"]
