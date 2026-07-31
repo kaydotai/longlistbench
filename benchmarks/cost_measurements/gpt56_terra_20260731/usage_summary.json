@@ -2,11 +2,11 @@
   "schema_version": 1,
   "run_role": "cost_measurement",
   "canonical_result": false,
-  "note": "Independent full-corpus execution retained only for representative token and cost measurement; it is not an accuracy baseline or leaderboard result.",
-  "generated_at": "2026-07-29T18:43:13.882531+00:00",
+  "note": "Independent full-corpus execution retained for representative usage, cost, and non-canonical quality diagnostics; it does not replace a released accuracy baseline.",
+  "generated_at": "2026-07-31T20:41:10.670248+00:00",
   "runner": "run_codex_cli_evaluation.py",
-  "runtime": "codex-cli 0.145.0",
-  "model": "gpt-5.5",
+  "runtime": "codex-cli 0.146.0",
+  "model": "gpt-5.6-terra",
   "reasoning_effort": "xhigh",
   "input_condition": "ocr",
   "execution_protocol": {
@@ -17,6 +17,8 @@
   },
   "dataset": {
     "manifest_sha256": "ccf1881c256e9b5a2f575e73061d6fd40cfe763dc446bc873fc63cedd0019133",
+    "git_sha": "a09a1edd135746dcc0c3e609a7a4c8bb21068807",
+    "git_dirty": false,
     "documents": 32,
     "target_records": 29599,
     "pdf_pages": 1773
@@ -29,267 +31,268 @@
   },
   "measured_usage": {
     "measured_sample_count": 32,
-    "input_tokens": 34343791,
-    "cached_input_tokens": 31581568,
+    "input_tokens": 31497125,
+    "cached_input_tokens": 29355264,
     "cache_write_input_tokens": 0,
-    "output_tokens": 463004,
-    "reasoning_output_tokens": 223331,
-    "uncached_input_tokens": 2762223
+    "output_tokens": 365763,
+    "reasoning_output_tokens": 186644,
+    "uncached_input_tokens": 2141861
   },
   "pricing": {
+    "effective_date": "2026-07-30",
     "chatgpt_credits_per_million_tokens": {
-      "uncached_input": 125,
-      "cached_input": 12.5,
-      "output": 750
+      "uncached_input": 50,
+      "cached_input": 5,
+      "output": 300
     },
     "api_usd_per_million_tokens": {
-      "uncached_input": 5,
-      "cached_input": 0.5,
-      "cache_write_input": null,
-      "output": 30
+      "uncached_input": 2,
+      "cached_input": 0.2,
+      "cache_write_input": 2.5,
+      "output": 12
     }
   },
   "measured_cost": {
-    "chatgpt_credits": 1087.300475,
-    "api_equivalent_usd": 43.492019,
+    "chatgpt_credits": 363.59827,
+    "api_equivalent_usd": 14.5439308,
     "actual_subscription_charge_usd": null
   },
   "diagnostic_evaluation": {
     "canonical_result": false,
-    "report_timestamp": "2026-07-29T18:43:18.231269+00:00",
-    "exact_record_recall": 0.9823980539883104,
-    "exact_record_precision": 0.9794859702900259,
-    "exact_record_f1": 0.9809398508922849,
-    "complete_documents": 6,
-    "field_micro_f1": 0.9958204060246313,
-    "field_macro_f1": 0.991037437164448,
+    "report_timestamp": "2026-07-31T20:41:15.595652+00:00",
+    "exact_record_recall": 0.944930571978783,
+    "exact_record_precision": 0.9421295516556069,
+    "exact_record_f1": 0.9435279829976724,
+    "complete_documents": 5,
+    "field_micro_f1": 0.990309003781141,
+    "field_macro_f1": 0.9842492055152464,
     "predicted_records": 29687,
     "execution_errors": 0
   },
   "per_document_usage": {
     "driver_mvr_packet_001": {
-      "input_tokens": 270211,
-      "cached_input_tokens": 218752,
+      "input_tokens": 312424,
+      "cached_input_tokens": 282112,
       "cache_write_input_tokens": 0,
-      "output_tokens": 7462,
-      "reasoning_output_tokens": 4175
+      "output_tokens": 5944,
+      "reasoning_output_tokens": 3274
     },
     "driver_mvr_packet_002": {
-      "input_tokens": 538636,
-      "cached_input_tokens": 466432,
+      "input_tokens": 336948,
+      "cached_input_tokens": 298752,
       "cache_write_input_tokens": 0,
-      "output_tokens": 14928,
-      "reasoning_output_tokens": 8464
+      "output_tokens": 6106,
+      "reasoning_output_tokens": 3047
     },
     "driver_mvr_packet_003": {
-      "input_tokens": 266546,
-      "cached_input_tokens": 234496,
+      "input_tokens": 310014,
+      "cached_input_tokens": 273152,
       "cache_write_input_tokens": 0,
-      "output_tokens": 8441,
-      "reasoning_output_tokens": 4968
+      "output_tokens": 6274,
+      "reasoning_output_tokens": 4240
     },
     "driver_schedule_sparse_001": {
-      "input_tokens": 168779,
-      "cached_input_tokens": 147072,
+      "input_tokens": 177851,
+      "cached_input_tokens": 156928,
       "cache_write_input_tokens": 0,
-      "output_tokens": 4959,
-      "reasoning_output_tokens": 1835
+      "output_tokens": 3662,
+      "reasoning_output_tokens": 1814
     },
     "ifta_mileage_by_vehicle_001": {
-      "input_tokens": 510204,
-      "cached_input_tokens": 453120,
+      "input_tokens": 424865,
+      "cached_input_tokens": 384256,
       "cache_write_input_tokens": 0,
-      "output_tokens": 10191,
-      "reasoning_output_tokens": 4614
+      "output_tokens": 7926,
+      "reasoning_output_tokens": 4424
     },
     "ifta_mileage_by_vehicle_002": {
-      "input_tokens": 1132858,
-      "cached_input_tokens": 1022848,
+      "input_tokens": 885089,
+      "cached_input_tokens": 809216,
       "cache_write_input_tokens": 0,
-      "output_tokens": 13114,
-      "reasoning_output_tokens": 7363
+      "output_tokens": 8670,
+      "reasoning_output_tokens": 4597
     },
     "ifta_mileage_by_vehicle_003": {
-      "input_tokens": 733781,
-      "cached_input_tokens": 639744,
+      "input_tokens": 692576,
+      "cached_input_tokens": 634624,
       "cache_write_input_tokens": 0,
-      "output_tokens": 11777,
-      "reasoning_output_tokens": 6744
+      "output_tokens": 9221,
+      "reasoning_output_tokens": 3971
     },
     "ifta_mileage_by_vehicle_004": {
-      "input_tokens": 1313927,
-      "cached_input_tokens": 1212032,
+      "input_tokens": 735576,
+      "cached_input_tokens": 672000,
       "cache_write_input_tokens": 0,
-      "output_tokens": 8059,
-      "reasoning_output_tokens": 3482
+      "output_tokens": 13977,
+      "reasoning_output_tokens": 7714
     },
     "ifta_mileage_by_vehicle_005": {
-      "input_tokens": 456819,
-      "cached_input_tokens": 355072,
+      "input_tokens": 427868,
+      "cached_input_tokens": 384256,
       "cache_write_input_tokens": 0,
-      "output_tokens": 9084,
-      "reasoning_output_tokens": 5182
+      "output_tokens": 6871,
+      "reasoning_output_tokens": 3545
     },
     "ifta_mileage_by_vehicle_006": {
-      "input_tokens": 631326,
-      "cached_input_tokens": 542080,
+      "input_tokens": 535273,
+      "cached_input_tokens": 469248,
       "cache_write_input_tokens": 0,
-      "output_tokens": 8873,
-      "reasoning_output_tokens": 4571
+      "output_tokens": 10031,
+      "reasoning_output_tokens": 6004
     },
     "ifta_mileage_by_vehicle_007": {
-      "input_tokens": 502850,
-      "cached_input_tokens": 455552,
+      "input_tokens": 426488,
+      "cached_input_tokens": 389120,
       "cache_write_input_tokens": 0,
-      "output_tokens": 11714,
-      "reasoning_output_tokens": 7619
+      "output_tokens": 9844,
+      "reasoning_output_tokens": 4852
     },
     "ifta_mileage_by_vehicle_008": {
-      "input_tokens": 357438,
-      "cached_input_tokens": 312320,
+      "input_tokens": 461621,
+      "cached_input_tokens": 419072,
       "cache_write_input_tokens": 0,
-      "output_tokens": 8341,
-      "reasoning_output_tokens": 3791
+      "output_tokens": 4811,
+      "reasoning_output_tokens": 2345
     },
     "ifta_multisection_return_001": {
-      "input_tokens": 764548,
-      "cached_input_tokens": 692096,
+      "input_tokens": 660209,
+      "cached_input_tokens": 594176,
       "cache_write_input_tokens": 0,
-      "output_tokens": 11604,
-      "reasoning_output_tokens": 6600
+      "output_tokens": 6830,
+      "reasoning_output_tokens": 3543
     },
     "ifta_multisection_return_002": {
-      "input_tokens": 1076680,
-      "cached_input_tokens": 978432,
+      "input_tokens": 674638,
+      "cached_input_tokens": 623872,
       "cache_write_input_tokens": 0,
-      "output_tokens": 14582,
-      "reasoning_output_tokens": 6878
+      "output_tokens": 9833,
+      "reasoning_output_tokens": 5353
     },
     "ifta_return_schedule_001": {
-      "input_tokens": 508854,
-      "cached_input_tokens": 442752,
+      "input_tokens": 517306,
+      "cached_input_tokens": 473856,
       "cache_write_input_tokens": 0,
-      "output_tokens": 13599,
-      "reasoning_output_tokens": 6580
+      "output_tokens": 5657,
+      "reasoning_output_tokens": 2321
     },
     "ifta_return_schedule_002": {
-      "input_tokens": 1188175,
-      "cached_input_tokens": 1071360,
+      "input_tokens": 748910,
+      "cached_input_tokens": 678400,
       "cache_write_input_tokens": 0,
-      "output_tokens": 11078,
-      "reasoning_output_tokens": 5833
+      "output_tokens": 10232,
+      "reasoning_output_tokens": 5704
     },
     "ifta_return_schedule_005": {
-      "input_tokens": 1105951,
-      "cached_input_tokens": 1027072,
+      "input_tokens": 1248159,
+      "cached_input_tokens": 1165056,
       "cache_write_input_tokens": 0,
-      "output_tokens": 15950,
-      "reasoning_output_tokens": 6043
+      "output_tokens": 9403,
+      "reasoning_output_tokens": 4646
     },
     "ifta_tax_inquiry_001": {
-      "input_tokens": 393726,
-      "cached_input_tokens": 339456,
+      "input_tokens": 215520,
+      "cached_input_tokens": 188416,
       "cache_write_input_tokens": 0,
-      "output_tokens": 6325,
-      "reasoning_output_tokens": 2515
+      "output_tokens": 2997,
+      "reasoning_output_tokens": 1444
     },
     "ifta_tax_inquiry_002": {
-      "input_tokens": 241904,
-      "cached_input_tokens": 210944,
+      "input_tokens": 154199,
+      "cached_input_tokens": 133632,
       "cache_write_input_tokens": 0,
-      "output_tokens": 6694,
-      "reasoning_output_tokens": 3882
+      "output_tokens": 5245,
+      "reasoning_output_tokens": 2937
     },
     "ifta_tax_summary_001": {
-      "input_tokens": 386160,
-      "cached_input_tokens": 309888,
+      "input_tokens": 788678,
+      "cached_input_tokens": 733184,
       "cache_write_input_tokens": 0,
-      "output_tokens": 5209,
-      "reasoning_output_tokens": 2330
+      "output_tokens": 6348,
+      "reasoning_output_tokens": 2749
     },
     "ifta_tax_summary_002": {
-      "input_tokens": 186217,
-      "cached_input_tokens": 158976,
+      "input_tokens": 396406,
+      "cached_input_tokens": 358656,
       "cache_write_input_tokens": 0,
-      "output_tokens": 7760,
-      "reasoning_output_tokens": 4028
+      "output_tokens": 5471,
+      "reasoning_output_tokens": 2756
     },
     "loss_run_external_001": {
-      "input_tokens": 4255869,
-      "cached_input_tokens": 4077312,
+      "input_tokens": 3823544,
+      "cached_input_tokens": 3682560,
       "cache_write_input_tokens": 0,
-      "output_tokens": 36474,
-      "reasoning_output_tokens": 12475
+      "output_tokens": 25515,
+      "reasoning_output_tokens": 11975
     },
     "loss_run_external_002": {
-      "input_tokens": 3224084,
-      "cached_input_tokens": 3091072,
+      "input_tokens": 3195747,
+      "cached_input_tokens": 3067648,
       "cache_write_input_tokens": 0,
-      "output_tokens": 26293,
-      "reasoning_output_tokens": 10872
+      "output_tokens": 22951,
+      "reasoning_output_tokens": 11038
     },
     "loss_run_external_003": {
-      "input_tokens": 3019549,
-      "cached_input_tokens": 2896128,
+      "input_tokens": 2646923,
+      "cached_input_tokens": 2539264,
       "cache_write_input_tokens": 0,
-      "output_tokens": 29423,
-      "reasoning_output_tokens": 14921
+      "output_tokens": 25627,
+      "reasoning_output_tokens": 12392
     },
     "mixed_040_001_crosspage": {
-      "input_tokens": 1226630,
-      "cached_input_tokens": 1103488,
+      "input_tokens": 1276134,
+      "cached_input_tokens": 1182208,
       "cache_write_input_tokens": 0,
-      "output_tokens": 20865,
-      "reasoning_output_tokens": 9338
+      "output_tokens": 17606,
+      "reasoning_output_tokens": 7780
     },
     "mixed_cgl_040_001": {
-      "input_tokens": 2649039,
-      "cached_input_tokens": 2493824,
+      "input_tokens": 2257349,
+      "cached_input_tokens": 2121984,
       "cache_write_input_tokens": 0,
-      "output_tokens": 28865,
-      "reasoning_output_tokens": 12420
+      "output_tokens": 28408,
+      "reasoning_output_tokens": 15659
     },
     "multihop_012_001_crosspage": {
-      "input_tokens": 1449815,
-      "cached_input_tokens": 1320320,
+      "input_tokens": 649875,
+      "cached_input_tokens": 577024,
       "cache_write_input_tokens": 0,
-      "output_tokens": 20582,
-      "reasoning_output_tokens": 8317
+      "output_tokens": 11444,
+      "reasoning_output_tokens": 3786
     },
     "multihop_025_001_crosspage": {
-      "input_tokens": 1131587,
-      "cached_input_tokens": 1022336,
+      "input_tokens": 760456,
+      "cached_input_tokens": 684288,
       "cache_write_input_tokens": 0,
-      "output_tokens": 21264,
-      "reasoning_output_tokens": 9989
+      "output_tokens": 15486,
+      "reasoning_output_tokens": 5278
     },
     "multihop_bop_012_001": {
-      "input_tokens": 2119745,
-      "cached_input_tokens": 2002176,
+      "input_tokens": 2140313,
+      "cached_input_tokens": 1965056,
       "cache_write_input_tokens": 0,
-      "output_tokens": 28407,
-      "reasoning_output_tokens": 17124
+      "output_tokens": 25650,
+      "reasoning_output_tokens": 15837
     },
     "multihop_wc_025_001": {
-      "input_tokens": 1584618,
-      "cached_input_tokens": 1436032,
+      "input_tokens": 2504072,
+      "cached_input_tokens": 2393856,
       "cache_write_input_tokens": 0,
-      "output_tokens": 23082,
-      "reasoning_output_tokens": 12307
+      "output_tokens": 23895,
+      "reasoning_output_tokens": 14120
     },
     "vehicle_schedule_sparse_001": {
-      "input_tokens": 461351,
-      "cached_input_tokens": 412416,
+      "input_tokens": 250929,
+      "cached_input_tokens": 218112,
       "cache_write_input_tokens": 0,
-      "output_tokens": 8224,
-      "reasoning_output_tokens": 3108
+      "output_tokens": 6219,
+      "reasoning_output_tokens": 3232
     },
     "vehicle_schedule_sparse_002": {
-      "input_tokens": 485914,
-      "cached_input_tokens": 435968,
+      "input_tokens": 861165,
+      "cached_input_tokens": 801280,
       "cache_write_input_tokens": 0,
-      "output_tokens": 9781,
-      "reasoning_output_tokens": 4963
+      "output_tokens": 7609,
+      "reasoning_output_tokens": 4267
     }
   },
   "per_document_input_hashes": {

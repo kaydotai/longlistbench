@@ -10,6 +10,7 @@ MEASUREMENT_ROOT = ROOT / "benchmarks/cost_measurements"
 MEASUREMENTS = {
     "gpt-5.5": MEASUREMENT_ROOT / "gpt55_20260729",
     "gpt-5.6-sol": MEASUREMENT_ROOT / "gpt56_sol_20260729",
+    "gpt-5.6-terra": MEASUREMENT_ROOT / "gpt56_terra_20260731",
 }
 
 
@@ -125,3 +126,69 @@ def test_gpt56_measurement_uses_fewer_tokens_and_credits_than_gpt55() -> None:
 
     assert cheaper_documents == 26
     assert median(paired_ratios) == pytest.approx(0.7686415416)
+
+
+def test_terra_measurement_is_input_matched_and_uses_terra_rates() -> None:
+    payloads = {
+        model: json.loads(
+            (measurement_dir / "usage_summary.json").read_text(encoding="utf-8")
+        )
+        for model, measurement_dir in MEASUREMENTS.items()
+    }
+    terra = payloads["gpt-5.6-terra"]
+
+    assert terra["per_document_input_hashes"] == payloads["gpt-5.5"][
+        "per_document_input_hashes"
+    ]
+    assert terra["per_document_input_hashes"] == payloads["gpt-5.6-sol"][
+        "per_document_input_hashes"
+    ]
+    assert terra["pricing"]["effective_date"] == "2026-07-30"
+    assert terra["pricing"]["chatgpt_credits_per_million_tokens"] == {
+        "uncached_input": 50,
+        "cached_input": 5,
+        "output": 300,
+    }
+    assert terra["pricing"]["api_usd_per_million_tokens"] == {
+        "uncached_input": 2,
+        "cached_input": 0.2,
+        "cache_write_input": 2.5,
+        "output": 12,
+    }
+
+    assert terra["measured_cost"]["chatgpt_credits"] == pytest.approx(363.59827)
+    assert terra["measured_cost"]["api_equivalent_usd"] == pytest.approx(
+        14.5439308
+    )
+    assert terra["diagnostic_evaluation"] == {
+        "canonical_result": False,
+        "report_timestamp": "2026-07-31T20:41:15.595652+00:00",
+        "exact_record_recall": pytest.approx(0.944930571978783),
+        "exact_record_precision": pytest.approx(0.9421295516556069),
+        "exact_record_f1": pytest.approx(0.9435279829976724),
+        "complete_documents": 5,
+        "field_micro_f1": pytest.approx(0.990309003781141),
+        "field_macro_f1": pytest.approx(0.9842492055152464),
+        "predicted_records": 29687,
+        "execution_errors": 0,
+    }
+
+    expected_diagnostics = {
+        "gpt-5.5": (0.9823980539883104, 6, 0.9958204060246313),
+        "gpt-5.6-sol": (0.989188823946755, 8, 0.9975621008668625),
+        "gpt-5.6-terra": (0.944930571978783, 5, 0.990309003781141),
+    }
+    for model, expected in expected_diagnostics.items():
+        exact_recall, complete_documents, field_f1 = expected
+        diagnostic = payloads[model]["diagnostic_evaluation"]
+        assert diagnostic["canonical_result"] is False
+        assert diagnostic["exact_record_recall"] == pytest.approx(exact_recall)
+        assert diagnostic["complete_documents"] == complete_documents
+        assert diagnostic["field_micro_f1"] == pytest.approx(field_f1)
+
+    for comparison_model in ("gpt-5.5", "gpt-5.6-sol"):
+        comparison = payloads[comparison_model]
+        assert (
+            terra["measured_cost"]["chatgpt_credits"]
+            < comparison["measured_cost"]["chatgpt_credits"]
+        )
