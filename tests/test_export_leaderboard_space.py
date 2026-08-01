@@ -1,3 +1,5 @@
+import pytest
+
 from benchmarks import export_leaderboard_space
 
 
@@ -19,4 +21,25 @@ def test_terra_leaderboard_entry_uses_preselected_run_and_same_run_cost() -> Non
     assert terra["full_run_cost_source"] == "codex_api_equivalent"
     assert terra["full_run_cost_explanation"] == (
         "$14.54 API-equivalent cost derived from the same saved full-corpus run."
+    )
+
+
+def test_luna_leaderboard_entry_uses_preselected_run_and_same_run_cost() -> None:
+    models, dataset = export_leaderboard_space.load_runs(
+        export_leaderboard_space.RESULTS_DIR
+    )
+    luna = next(model for model in models if model["key"] == "codex_gpt56_luna")
+
+    assert dataset["manifest_sha256"] == (
+        "ccf1881c256e9b5a2f575e73061d6fd40cfe763dc446bc873fc63cedd0019133"
+    )
+    assert luna["requested_model"] == "gpt-5.6-luna"
+    assert luna["effort"] == "xhigh"
+    assert luna["stats"]["exact_record_recall"] == 0.9807425926551573
+    assert luna["stats"]["total_samples"] == 32
+    assert luna["stats"]["complete_documents"] == 5
+    assert luna["full_run_cost_usd"] == pytest.approx(11.8196662)
+    assert luna["full_run_cost_source"] == "codex_api_equivalent"
+    assert luna["full_run_cost_explanation"] == (
+        "$11.82 API-equivalent cost derived from the same saved full-corpus run."
     )

@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "xhigh",
+  "runtime": "codex-cli 0.146.0",
+  "input_condition": "ocr",
+  "run_count": 3,
+  "selection_policy": {
+    "leaderboard_run": "run_1",
+    "selected_before_repeats": true,
+    "best_of_n_selection": false
+  },
+  "dataset": {
+    "manifest_sha256": "ccf1881c256e9b5a2f575e73061d6fd40cfe763dc446bc873fc63cedd0019133",
+    "documents": 32,
+    "target_records": 29599,
+    "pdf_pages": 1773,
+    "input_fingerprints_match_across_runs": true
+  },
+  "execution_protocol": {
+    "worker_count": 4,
+    "thread_scope": "one_ephemeral_thread_per_document",
+    "repository_denied": true,
+    "ground_truth_available_to_agent": false,
+    "all_document_jobs_first_attempt_success": true
+  },
+  "pricing": {
+    "effective_date": "2026-08-01",
+    "chatgpt_credits_per_million_tokens": {
+      "uncached_input": 5,
+      "cached_input": 0.5,
+      "output": 30
+    },
+    "api_usd_per_million_tokens": {
+      "uncached_input": 1,
+      "cached_input": 0.1,
+      "cache_write_input": 1.25,
+      "output": 6
+    }
+  },
+  "runs": [
+    {
+      "id": "run_1",
+      "leaderboard_run": true,
+      "generated_at": "2026-08-01T14:08:18.902112+00:00",
+      "report_timestamp": "2026-08-01T14:08:23.493550+00:00",
+      "exact_record_recall": 0.9807425926551573,
+      "exact_record_precision": 0.9779012969513222,
+      "exact_record_f1": 0.9793198839484516,
+      "complete_documents": 5,
+      "field_micro_f1": 0.9954503299360521,
+      "field_macro_f1": 0.9878177660384466,
+      "predicted_records": 29685,
+      "execution_errors": 0,
+      "input_tokens": 55954915,
+      "cached_input_tokens": 52922112,
+      "uncached_input_tokens": 3032803,
+      "output_tokens": 582442,
+      "reasoning_output_tokens": 312587,
+      "chatgpt_credits": 59.098331,
+      "api_equivalent_usd": 11.819666199999999
+    },
+    {
+      "id": "run_2",
+      "leaderboard_run": false,
+      "generated_at": "2026-08-01T15:00:23.311870+00:00",
+      "report_timestamp": "2026-08-01T15:00:27.964579+00:00",
+      "exact_record_recall": 0.9378695226190074,
+      "exact_record_precision": 0.9351524338891696,
+      "exact_record_f1": 0.9365090074893732,
+      "complete_documents": 6,
+      "field_micro_f1": 0.9896331874120401,
+      "field_macro_f1": 0.9838132466133964,
+      "predicted_records": 29685,
+      "execution_errors": 0,
+      "input_tokens": 67810321,
+      "cached_input_tokens": 64591872,
+      "uncached_input_tokens": 3218449,
+      "output_tokens": 568985,
+      "reasoning_output_tokens": 321707,
+      "chatgpt_credits": 65.457731,
+      "api_equivalent_usd": 13.0915462
+    },
+    {
+      "id": "run_3",
+      "leaderboard_run": false,
+      "generated_at": "2026-08-01T15:47:52.045006+00:00",
+      "report_timestamp": "2026-08-01T15:47:56.629669+00:00",
+      "exact_record_recall": 0.9135781614243724,
+      "exact_record_precision": 0.9357394975430826,
+      "exact_record_f1": 0.9245260440706362,
+      "complete_documents": 4,
+      "field_micro_f1": 0.9748392459419929,
+      "field_macro_f1": 0.9264891621749021,
+      "predicted_records": 28898,
+      "execution_errors": 0,
+      "input_tokens": 54500082,
+      "cached_input_tokens": 51567360,
+      "uncached_input_tokens": 2932722,
+      "output_tokens": 535969,
+      "reasoning_output_tokens": 290565,
+      "chatgpt_credits": 56.52636,
+      "api_equivalent_usd": 11.305272
+    }
+  ],
+  "aggregate": {
+    "exact_record_recall": {
+      "median": 0.9378695226190074,
+      "mean": 0.9440634255661791,
+      "min": 0.9135781614243724,
+      "max": 0.9807425926551573,
+      "sample_standard_deviation": 0.03400791865033707
+    },
+    "exact_record_precision": {
+      "median": 0.9357394975430826,
+      "mean": 0.9495977427945248,
+      "min": 0.9351524338891696,
+      "max": 0.9779012969513222,
+      "sample_standard_deviation": 0.02451335440863836
+    },
+    "exact_record_f1": {
+      "median": 0.9365090074893732,
+      "mean": 0.9467849785028203,
+      "min": 0.9245260440706362,
+      "max": 0.9793198839484516,
+      "sample_standard_deviation": 0.028806039424759917
+    },
+    "complete_documents": {
+      "median": 5,
+      "mean": 5,
+      "min": 4,
+      "max": 6,
+      "sample_standard_deviation": 1.0
+    },
+    "field_micro_f1": {
+      "median": 0.9896331874120401,
+      "mean": 0.986640921096695,
+      "min": 0.9748392459419929,
+      "max": 0.9954503299360521,
+      "sample_standard_deviation": 0.010626355872499394
+    },
+    "field_macro_f1": {
+      "median": 0.9838132466133964,
+      "mean": 0.9660400582755817,
+      "min": 0.9264891621749021,
+      "max": 0.9878177660384466,
+      "sample_standard_deviation": 0.034310553489144816
+    },
+    "predicted_records": {
+      "median": 29685,
+      "mean": 29422.666666666668,
+      "min": 28898,
+      "max": 29685,
+      "sample_standard_deviation": 454.3746618522355
+    },
+    "input_tokens": {
+      "median": 55954915,
+      "mean": 59421772.666666664,
+      "min": 54500082,
+      "max": 67810321,
+      "sample_standard_deviation": 7301023.361144267
+    },
+    "cached_input_tokens": {
+      "median": 52922112,
+      "mean": 56360448,
+      "min": 51567360,
+      "max": 64591872,
+      "sample_standard_deviation": 7160732.786957491
+    },
+    "uncached_input_tokens": {
+      "median": 3032803,
+      "mean": 3061324.6666666665,
+      "min": 2932722,
+      "max": 3218449,
+      "sample_standard_deviation": 144983.08085543406
+    },
+    "output_tokens": {
+      "median": 568985,
+      "mean": 562465.3333333334,
+      "min": 535969,
+      "max": 582442,
+      "sample_standard_deviation": 23912.64252092046
+    },
+    "reasoning_output_tokens": {
+      "median": 312587,
+      "mean": 308286.3333333333,
+      "min": 290565,
+      "max": 321707,
+      "sample_standard_deviation": 16010.241763737777
+    },
+    "chatgpt_credits": {
+      "median": 59.098331,
+      "mean": 60.360807333333334,
+      "min": 56.52636,
+      "max": 65.457731,
+      "sample_standard_deviation": 4.597578912218943
+    },
+    "api_equivalent_usd": {
+      "median": 11.819666199999999,
+      "mean": 12.072161466666666,
+      "min": 11.305272,
+      "max": 13.0915462,
+      "sample_standard_deviation": 0.9195157824437888
+    }
+  }
+}

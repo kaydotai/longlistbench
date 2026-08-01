@@ -62,6 +62,21 @@ RUNS = (
         ),
     },
     {
+        "run_dir": "codex_gpt56_luna_full_current_ocr_v2",
+        "key": "codex_gpt56_luna",
+        "harness": "Codex CLI",
+        "model": "GPT-5.6-Luna",
+        "protocol": "Agentic CLI",
+        "cost_source": "codex_api_equivalent",
+        "cost_measurement_relation": "same_run",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
+        "cost_metadata_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_luna_20260801/usage_summary.json"
+        ),
+    },
+    {
         "run_dir": "claude_opus48_full_current_ocr_v2",
         "key": "claude_opus48",
         "harness": "Claude Code",

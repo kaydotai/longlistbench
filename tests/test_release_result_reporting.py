@@ -10,6 +10,8 @@ REPORT_PATHS = {
     / "benchmarks/results/codex_gpt56_sol_full_current_ocr_v2/evaluation_report.json",
     "codex_gpt56_terra": ROOT
     / "benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/evaluation_report.json",
+    "codex_gpt56_luna": ROOT
+    / "benchmarks/results/codex_gpt56_luna_full_current_ocr_v2/evaluation_report.json",
     "claude_fable5": ROOT
     / "benchmarks/results/claude_fable5_full_current_ocr_v2/evaluation_report.json",
     "codex_gpt55": ROOT
@@ -20,6 +22,7 @@ REPORT_PATHS = {
 RUN_EXPECTATIONS = {
     "codex_gpt56_sol": ("gpt-5.6-sol", "sample_statuses"),
     "codex_gpt56_terra": ("gpt-5.6-terra", "sample_statuses"),
+    "codex_gpt56_luna": ("gpt-5.6-luna", "sample_statuses"),
     "claude_fable5": ("claude-fable-5", "samples"),
     "codex_gpt55": ("gpt-5.5", "sample_statuses"),
     "claude_opus48": ("claude-opus-4-8", "samples"),
@@ -46,6 +49,7 @@ OVERALL_LABELS = {
 
 LEADERBOARD_ONLY_LABELS = {
     "codex_gpt56_terra": "Codex CLI `gpt-5.6-terra`, xhigh",
+    "codex_gpt56_luna": "Codex CLI `gpt-5.6-luna`, xhigh",
 }
 
 PROBLEM_LABELS = {

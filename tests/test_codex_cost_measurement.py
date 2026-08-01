@@ -11,6 +11,7 @@ MEASUREMENTS = {
     "gpt-5.5": MEASUREMENT_ROOT / "gpt55_20260729",
     "gpt-5.6-sol": MEASUREMENT_ROOT / "gpt56_sol_20260729",
     "gpt-5.6-terra": MEASUREMENT_ROOT / "gpt56_terra_20260731",
+    "gpt-5.6-luna": MEASUREMENT_ROOT / "gpt56_luna_20260801",
 }
 
 
@@ -33,7 +34,7 @@ def test_codex_cost_measurement_reconciles(
     )
 
     assert payload["model"] == model
-    if model == "gpt-5.6-terra":
+    if model in {"gpt-5.6-terra", "gpt-5.6-luna"}:
         assert payload["run_role"] == "leaderboard_and_cost_measurement"
         assert payload["canonical_result"] is True
     else:
@@ -63,7 +64,9 @@ def test_codex_cost_measurement_reconciles(
             usage[key] for usage in payload["per_document_usage"].values()
         ) == totals[key]
     assert totals["uncached_input_tokens"] == (
-        totals["input_tokens"] - totals["cached_input_tokens"]
+        totals["input_tokens"]
+        - totals["cached_input_tokens"]
+        - totals["cache_write_input_tokens"]
     )
 
     credit_rates = payload["pricing"]["chatgpt_credits_per_million_tokens"]
@@ -181,11 +184,14 @@ def test_terra_measurement_is_input_matched_and_uses_terra_rates() -> None:
         "gpt-5.5": (0.9823980539883104, 6, 0.9958204060246313),
         "gpt-5.6-sol": (0.989188823946755, 8, 0.9975621008668625),
         "gpt-5.6-terra": (0.944930571978783, 5, 0.990309003781141),
+        "gpt-5.6-luna": (0.9807425926551573, 5, 0.9954503299360521),
     }
     for model, expected in expected_diagnostics.items():
         exact_recall, complete_documents, field_f1 = expected
         diagnostic = payloads[model]["diagnostic_evaluation"]
-        assert diagnostic["canonical_result"] is (model == "gpt-5.6-terra")
+        assert diagnostic["canonical_result"] is (
+            model in {"gpt-5.6-terra", "gpt-5.6-luna"}
+        )
         assert diagnostic["exact_record_recall"] == pytest.approx(exact_recall)
         assert diagnostic["complete_documents"] == complete_documents
         assert diagnostic["field_micro_f1"] == pytest.approx(field_f1)
@@ -196,6 +202,57 @@ def test_terra_measurement_is_input_matched_and_uses_terra_rates() -> None:
             terra["measured_cost"]["chatgpt_credits"]
             < comparison["measured_cost"]["chatgpt_credits"]
         )
+
+
+def test_luna_measurement_is_input_matched_and_uses_luna_rates() -> None:
+    payloads = {
+        model: json.loads(
+            (measurement_dir / "usage_summary.json").read_text(encoding="utf-8")
+        )
+        for model, measurement_dir in MEASUREMENTS.items()
+    }
+    luna = payloads["gpt-5.6-luna"]
+    terra = payloads["gpt-5.6-terra"]
+
+    assert luna["per_document_input_hashes"] == terra["per_document_input_hashes"]
+    assert luna["pricing"]["effective_date"] == "2026-08-01"
+    assert luna["pricing"]["chatgpt_credits_per_million_tokens"] == {
+        "uncached_input": 5,
+        "cached_input": 0.5,
+        "output": 30,
+    }
+    assert luna["pricing"]["api_usd_per_million_tokens"] == {
+        "uncached_input": 1,
+        "cached_input": 0.1,
+        "cache_write_input": 1.25,
+        "output": 6,
+    }
+    assert luna["measured_cost"]["chatgpt_credits"] == pytest.approx(59.098331)
+    assert luna["measured_cost"]["api_equivalent_usd"] == pytest.approx(
+        11.8196662
+    )
+    assert luna["diagnostic_evaluation"] == {
+        "canonical_result": True,
+        "report_timestamp": "2026-08-01T14:08:23.493550+00:00",
+        "exact_record_recall": pytest.approx(0.9807425926551573),
+        "exact_record_precision": pytest.approx(0.9779012969513222),
+        "exact_record_f1": pytest.approx(0.9793198839484516),
+        "complete_documents": 5,
+        "field_micro_f1": pytest.approx(0.9954503299360521),
+        "field_macro_f1": pytest.approx(0.9878177660384466),
+        "predicted_records": 29685,
+        "execution_errors": 0,
+    }
+    assert luna["measured_usage"]["input_tokens"] > terra["measured_usage"][
+        "input_tokens"
+    ]
+    assert luna["measured_usage"]["output_tokens"] > terra["measured_usage"][
+        "output_tokens"
+    ]
+    assert (
+        luna["measured_cost"]["api_equivalent_usd"]
+        < terra["measured_cost"]["api_equivalent_usd"]
+    )
 
 
 def test_terra_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
@@ -256,6 +313,72 @@ def test_terra_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
         ).read_text(encoding="utf-8")
     )
     released = released_report["model_stats"]["codex_gpt56_terra"]
+    run_1 = runs[0]
+    assert run_1["exact_record_recall"] == pytest.approx(
+        released["exact_record_recall"]
+    )
+    assert run_1["complete_documents"] == released["complete_documents"]
+    assert run_1["field_micro_f1"] == pytest.approx(released["weighted_f1"])
+
+
+def test_luna_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
+    payload = json.loads(
+        (
+            MEASUREMENT_ROOT
+            / "gpt56_luna_replicates_20260801/summary.json"
+        ).read_text(encoding="utf-8")
+    )
+    runs = payload["runs"]
+
+    assert payload["run_count"] == len(runs) == 3
+    assert payload["selection_policy"] == {
+        "leaderboard_run": "run_1",
+        "selected_before_repeats": True,
+        "best_of_n_selection": False,
+    }
+    assert [run["leaderboard_run"] for run in runs] == [True, False, False]
+    assert payload["dataset"]["input_fingerprints_match_across_runs"] is True
+    assert all(run["execution_errors"] == 0 for run in runs)
+
+    aggregates = payload["aggregate"]
+    for key in (
+        "exact_record_recall",
+        "complete_documents",
+        "field_micro_f1",
+        "input_tokens",
+        "output_tokens",
+        "api_equivalent_usd",
+    ):
+        values = [run[key] for run in runs]
+        assert aggregates[key]["median"] == pytest.approx(median(values))
+        assert aggregates[key]["mean"] == pytest.approx(mean(values))
+        assert aggregates[key]["min"] == min(values)
+        assert aggregates[key]["max"] == max(values)
+        assert aggregates[key]["sample_standard_deviation"] == pytest.approx(
+            stdev(values)
+        )
+
+    for run in runs:
+        credits = (
+            run["uncached_input_tokens"] * 5
+            + run["cached_input_tokens"] * 0.5
+            + run["output_tokens"] * 30
+        ) / 1_000_000
+        api_equivalent = (
+            run["uncached_input_tokens"]
+            + run["cached_input_tokens"] * 0.1
+            + run["output_tokens"] * 6
+        ) / 1_000_000
+        assert run["chatgpt_credits"] == pytest.approx(credits)
+        assert run["api_equivalent_usd"] == pytest.approx(api_equivalent)
+
+    released_report = json.loads(
+        (
+            ROOT
+            / "benchmarks/results/codex_gpt56_luna_full_current_ocr_v2/evaluation_report.json"
+        ).read_text(encoding="utf-8")
+    )
+    released = released_report["model_stats"]["codex_gpt56_luna"]
     run_1 = runs[0]
     assert run_1["exact_record_recall"] == pytest.approx(
         released["exact_record_recall"]

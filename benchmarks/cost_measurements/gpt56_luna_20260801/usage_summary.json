@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "run_role": "leaderboard_and_cost_measurement",
+  "canonical_result": true,
+  "note": "Preselected full-corpus execution used for the released GPT-5.6-Luna leaderboard result and its measured usage and API-equivalent cost.",
+  "generated_at": "2026-08-01T14:08:18.902112+00:00",
+  "runner": "run_codex_cli_evaluation.py",
+  "runtime": "codex-cli 0.146.0",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "xhigh",
+  "input_condition": "ocr",
+  "execution_protocol": {
+    "worker_count": 4,
+    "thread_scope": "one_ephemeral_thread_per_document",
+    "repository_denied": true,
+    "ground_truth_available_to_agent": false
+  },
+  "dataset": {
+    "manifest_sha256": "ccf1881c256e9b5a2f575e73061d6fd40cfe763dc446bc873fc63cedd0019133",
+    "git_sha": "191bebdee10db5d477c0fa55ae40175379e2fd6e",
+    "git_dirty": false,
+    "documents": 32,
+    "target_records": 29599,
+    "pdf_pages": 1773
+  },
+  "context_pricing": {
+    "codex_context_window_tokens": 272000,
+    "api_long_context_threshold_input_tokens": 272000,
+    "pricing_tier": "short_context",
+    "rationale": "Codex caps the active context at 272K total tokens, so no individual request can exceed the API surcharge threshold of more than 272K input tokens."
+  },
+  "measured_usage": {
+    "measured_sample_count": 32,
+    "input_tokens": 55954915,
+    "cached_input_tokens": 52922112,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 582442,
+    "reasoning_output_tokens": 312587,
+    "uncached_input_tokens": 3032803
+  },
+  "pricing": {
+    "effective_date": "2026-08-01",
+    "chatgpt_credits_per_million_tokens": {
+      "uncached_input": 5,
+      "cached_input": 0.5,
+      "output": 30
+    },
+    "api_usd_per_million_tokens": {
+      "uncached_input": 1,
+      "cached_input": 0.1,
+      "cache_write_input": 1.25,
+      "output": 6
+    }
+  },
+  "measured_cost": {
+    "chatgpt_credits": 59.098331,
+    "api_equivalent_usd": 11.819666199999999,
+    "actual_subscription_charge_usd": null
+  },
+  "diagnostic_evaluation": {
+    "canonical_result": true,
+    "report_timestamp": "2026-08-01T14:08:23.493550+00:00",
+    "exact_record_recall": 0.9807425926551573,
+    "exact_record_precision": 0.9779012969513222,
+    "exact_record_f1": 0.9793198839484516,
+    "complete_documents": 5,
+    "field_micro_f1": 0.9954503299360521,
+    "field_macro_f1": 0.9878177660384466,
+    "predicted_records": 29685,
+    "execution_errors": 0
+  },
+  "per_document_usage": {
+    "driver_mvr_packet_001": {
+      "input_tokens": 399095,
+      "cached_input_tokens": 347392,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 10839,
+      "reasoning_output_tokens": 5774
+    },
+    "driver_mvr_packet_002": {
+      "input_tokens": 369095,
+      "cached_input_tokens": 327936,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 9299,
+      "reasoning_output_tokens": 4153
+    },
+    "driver_mvr_packet_003": {
+      "input_tokens": 458736,
+      "cached_input_tokens": 413440,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 12238,
+      "reasoning_output_tokens": 5763
+    },
+    "driver_schedule_sparse_001": {
+      "input_tokens": 284006,
+      "cached_input_tokens": 250368,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 5854,
+      "reasoning_output_tokens": 2977
+    },
+    "ifta_mileage_by_vehicle_001": {
+      "input_tokens": 818478,
+      "cached_input_tokens": 749056,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11891,
+      "reasoning_output_tokens": 6511
+    },
+    "ifta_mileage_by_vehicle_002": {
+      "input_tokens": 1590978,
+      "cached_input_tokens": 1491200,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 17285,
+      "reasoning_output_tokens": 8937
+    },
+    "ifta_mileage_by_vehicle_003": {
+      "input_tokens": 957167,
+      "cached_input_tokens": 895744,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 12983,
+      "reasoning_output_tokens": 7219
+    },
+    "ifta_mileage_by_vehicle_004": {
+      "input_tokens": 1096558,
+      "cached_input_tokens": 1027072,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 12109,
+      "reasoning_output_tokens": 6212
+    },
+    "ifta_mileage_by_vehicle_005": {
+      "input_tokens": 747676,
+      "cached_input_tokens": 684288,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 12058,
+      "reasoning_output_tokens": 6710
+    },
+    "ifta_mileage_by_vehicle_006": {
+      "input_tokens": 299675,
+      "cached_input_tokens": 252928,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8262,
+      "reasoning_output_tokens": 5182
+    },
+    "ifta_mileage_by_vehicle_007": {
+      "input_tokens": 615562,
+      "cached_input_tokens": 563968,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11930,
+      "reasoning_output_tokens": 6747
+    },
+    "ifta_mileage_by_vehicle_008": {
+      "input_tokens": 682624,
+      "cached_input_tokens": 626688,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11430,
+      "reasoning_output_tokens": 5864
+    },
+    "ifta_multisection_return_001": {
+      "input_tokens": 564561,
+      "cached_input_tokens": 505600,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11572,
+      "reasoning_output_tokens": 6080
+    },
+    "ifta_multisection_return_002": {
+      "input_tokens": 2184873,
+      "cached_input_tokens": 2085376,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 20681,
+      "reasoning_output_tokens": 12460
+    },
+    "ifta_return_schedule_001": {
+      "input_tokens": 454766,
+      "cached_input_tokens": 401152,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 8678,
+      "reasoning_output_tokens": 4628
+    },
+    "ifta_return_schedule_002": {
+      "input_tokens": 2404814,
+      "cached_input_tokens": 2281216,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 21380,
+      "reasoning_output_tokens": 11977
+    },
+    "ifta_return_schedule_005": {
+      "input_tokens": 1033484,
+      "cached_input_tokens": 948736,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 14185,
+      "reasoning_output_tokens": 8636
+    },
+    "ifta_tax_inquiry_001": {
+      "input_tokens": 494768,
+      "cached_input_tokens": 448256,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 11044,
+      "reasoning_output_tokens": 6893
+    },
+    "ifta_tax_inquiry_002": {
+      "input_tokens": 391502,
+      "cached_input_tokens": 341760,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6674,
+      "reasoning_output_tokens": 3471
+    },
+    "ifta_tax_summary_001": {
+      "input_tokens": 474802,
+      "cached_input_tokens": 424192,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 4417,
+      "reasoning_output_tokens": 1864
+    },
+    "ifta_tax_summary_002": {
+      "input_tokens": 1365678,
+      "cached_input_tokens": 1287680,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 18187,
+      "reasoning_output_tokens": 10057
+    },
+    "loss_run_external_001": {
+      "input_tokens": 6243292,
+      "cached_input_tokens": 6057472,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 43257,
+      "reasoning_output_tokens": 20934
+    },
+    "loss_run_external_002": {
+      "input_tokens": 2953113,
+      "cached_input_tokens": 2798080,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 28579,
+      "reasoning_output_tokens": 16482
+    },
+    "loss_run_external_003": {
+      "input_tokens": 6139780,
+      "cached_input_tokens": 5956352,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 35928,
+      "reasoning_output_tokens": 19202
+    },
+    "mixed_040_001_crosspage": {
+      "input_tokens": 1876068,
+      "cached_input_tokens": 1744128,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 33119,
+      "reasoning_output_tokens": 14524
+    },
+    "mixed_cgl_040_001": {
+      "input_tokens": 4475092,
+      "cached_input_tokens": 4289792,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 38968,
+      "reasoning_output_tokens": 21533
+    },
+    "multihop_012_001_crosspage": {
+      "input_tokens": 821840,
+      "cached_input_tokens": 727040,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 13538,
+      "reasoning_output_tokens": 5613
+    },
+    "multihop_025_001_crosspage": {
+      "input_tokens": 1919594,
+      "cached_input_tokens": 1678592,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 26035,
+      "reasoning_output_tokens": 10843
+    },
+    "multihop_bop_012_001": {
+      "input_tokens": 6075362,
+      "cached_input_tokens": 5882880,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 45041,
+      "reasoning_output_tokens": 26676
+    },
+    "multihop_wc_025_001": {
+      "input_tokens": 6649777,
+      "cached_input_tokens": 6444288,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 43584,
+      "reasoning_output_tokens": 25712
+    },
+    "vehicle_schedule_sparse_001": {
+      "input_tokens": 377781,
+      "cached_input_tokens": 336896,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 6960,
+      "reasoning_output_tokens": 3952
+    },
+    "vehicle_schedule_sparse_002": {
+      "input_tokens": 734318,
+      "cached_input_tokens": 652544,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 14437,
+      "reasoning_output_tokens": 9001
+    }
+  },
+  "per_document_input_hashes": {
+    "driver_mvr_packet_001": {
+      "transcript_sha256": "dcf4e931b0c1e6e12761a9377cb927da92293a8e4b58a1a5922e474f007438b9",
+      "field_contract_sha256": "17222001ee5fbe17b7e485cd2e5bf6bf34a96ef6098400f3c663f51d359dff26",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "driver_mvr_packet_002": {
+      "transcript_sha256": "f134313bb531a48dc79ddd820f53f4528beaef5c83c45e5a7060adcefc5da92a",
+      "field_contract_sha256": "17222001ee5fbe17b7e485cd2e5bf6bf34a96ef6098400f3c663f51d359dff26",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "driver_mvr_packet_003": {
+      "transcript_sha256": "486e5bb12e7a97f9efb7872ce36e70646b1a2d11694e410d4a21a56a4d368f0f",
+      "field_contract_sha256": "17222001ee5fbe17b7e485cd2e5bf6bf34a96ef6098400f3c663f51d359dff26",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "driver_schedule_sparse_001": {
+      "transcript_sha256": "ad00571521fcf09685d622d9149bd5c2e1158ac291986b915ec913fbba6c5a54",
+      "field_contract_sha256": "4f33cdfb3279367a5f36959a0e389899dd3aa821b3a1bd9fed4cc3b727876bc2",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_001": {
+      "transcript_sha256": "9cf1a9027a9967cf8c91b2a0ed57aea89678b5802b54531628d7812c53201d09",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_002": {
+      "transcript_sha256": "9f053424a87425e635478937007af189a0c7d1dcb660da744df1d7887c6ea261",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_003": {
+      "transcript_sha256": "4a83b97bebab411a2b4cf709da155fe2ca1738f9244781bbd0ba78a1867cf28e",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_004": {
+      "transcript_sha256": "0e56ce488af7a4ab82e735c928cf21493ab6359cfe3fa7dcdac19204dc1d3fd9",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_005": {
+      "transcript_sha256": "7b55adbe0ab95194934ffd5960f29823f3a5beec1ef198f41c84741161755927",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_006": {
+      "transcript_sha256": "a6c641b77fd181773f04d9d653d8a48ad0772bac109ce1fe28d8c66d7aca0514",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_007": {
+      "transcript_sha256": "f6340fdbbed67dabcef6d36f647b94aed898279f0b46fcd4ab57633e1bb9376d",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_mileage_by_vehicle_008": {
+      "transcript_sha256": "0da957a81f6c628060ae5156726b5d640fb90f31d0e41bd912b008577df067f1",
+      "field_contract_sha256": "d08b3df043b435cdac7ac1c302749185f13890bb37b55689c25352ccb3f8e013",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_multisection_return_001": {
+      "transcript_sha256": "0fe523c5a396df0d6f707d5361f80aea5a14fe6bd6846ef7b23a04b9d84af47d",
+      "field_contract_sha256": "e98a4bd4d638f9b1d8229414462195f724ca462e2cd5122dbd9010032e73a541",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_multisection_return_002": {
+      "transcript_sha256": "871048b6e5fe632666602920d86c8ace60481fd42d05dddd4d9d6c25c0ddfe2d",
+      "field_contract_sha256": "e98a4bd4d638f9b1d8229414462195f724ca462e2cd5122dbd9010032e73a541",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_return_schedule_001": {
+      "transcript_sha256": "a724758f1cdd02612cbef9791d057fab963a70f609c327d3c9574bb2f6000b0c",
+      "field_contract_sha256": "4497990d2c14e7bbc3a7237b51a65c45c4c4f335c8ce07b4da0d0eca28cee8fe",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_return_schedule_002": {
+      "transcript_sha256": "4e2553c0752dd7340425fdd1aa55d36e01316d4fd414894931097833775cefd1",
+      "field_contract_sha256": "4497990d2c14e7bbc3a7237b51a65c45c4c4f335c8ce07b4da0d0eca28cee8fe",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_return_schedule_005": {
+      "transcript_sha256": "744c2f169cb83a44264e5c5956fbd09f5509121e225a1325042f952f24cbd5ae",
+      "field_contract_sha256": "4497990d2c14e7bbc3a7237b51a65c45c4c4f335c8ce07b4da0d0eca28cee8fe",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_tax_inquiry_001": {
+      "transcript_sha256": "53cfb64fba554317370b0d062142da0b2e3d409f3021149a9a3f890905a41bdc",
+      "field_contract_sha256": "d9539f1b2b7fb73090b975aadad45fe1e9c7aed03480ab6ef7856a19a4bf9ae2",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_tax_inquiry_002": {
+      "transcript_sha256": "f87779c1ed50b23596cbf8a1a0b0cc06ad8691502d8a04aa41229db69eff81cb",
+      "field_contract_sha256": "d9539f1b2b7fb73090b975aadad45fe1e9c7aed03480ab6ef7856a19a4bf9ae2",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_tax_summary_001": {
+      "transcript_sha256": "e150d4ce1d652402321592ac6297e6912a695160576643e013b52f23ae42ddca",
+      "field_contract_sha256": "6faec490cd38883dcbc7c0f0c033ff34290a7fa231d1ed489e49f26ebb270ba1",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "ifta_tax_summary_002": {
+      "transcript_sha256": "841fb147f746ca9dfc98825e0545ae013a5b4df3219e3a40b090e08bc1d7fb16",
+      "field_contract_sha256": "6faec490cd38883dcbc7c0f0c033ff34290a7fa231d1ed489e49f26ebb270ba1",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "loss_run_external_001": {
+      "transcript_sha256": "73499f2647527be6f2c59fbf67f6a3b81e3aeca4c77b4d1aa39b0211c7dbf5ff",
+      "field_contract_sha256": "927bc932fc6eb81d3306c4ea534f67abddfe59a68899c50610ab3ad350ff2a87",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "loss_run_external_002": {
+      "transcript_sha256": "af70275d47abefdf1a633e357563ead8e457dc54501017876e05ddf2dcc3034b",
+      "field_contract_sha256": "927bc932fc6eb81d3306c4ea534f67abddfe59a68899c50610ab3ad350ff2a87",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "loss_run_external_003": {
+      "transcript_sha256": "29f6082dbcdd00b5e3a88de16909bc82c2dcca67af525e6607f1e28538ca4287",
+      "field_contract_sha256": "927bc932fc6eb81d3306c4ea534f67abddfe59a68899c50610ab3ad350ff2a87",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "mixed_040_001_crosspage": {
+      "transcript_sha256": "3fdb42f9bf7813e298fded96af594145293613766c983ea0e13cd281ccdcd10d",
+      "field_contract_sha256": "3d55879048e0bd49aa89a968f18514abdd47e57feb2719cd03e6f1510eb261de",
+      "prompt_sha256": "790dcf3975c7ea2dd4b93f7a5ec3500316cc8f65b877c0188874cf32b1a1be50"
+    },
+    "mixed_cgl_040_001": {
+      "transcript_sha256": "87946824c605948a342c79d2fcb108b6069c4b77a5da44eaac406a06ef0d0e1d",
+      "field_contract_sha256": "39a5e031c30ba7bb11ae9b1a4aadd4340bc7ef0a7a16773c87dace4a8ee7ff94",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "multihop_012_001_crosspage": {
+      "transcript_sha256": "ae80ef108686bdbdb62f2835b3b4d17ca5d267eb4cdc1670802b0e73810ef5ad",
+      "field_contract_sha256": "3d55879048e0bd49aa89a968f18514abdd47e57feb2719cd03e6f1510eb261de",
+      "prompt_sha256": "790dcf3975c7ea2dd4b93f7a5ec3500316cc8f65b877c0188874cf32b1a1be50"
+    },
+    "multihop_025_001_crosspage": {
+      "transcript_sha256": "fc64a2cfb21555e0e4472717d679bb76a6bceedff023f8763fc88c1fa6ec1159",
+      "field_contract_sha256": "3d55879048e0bd49aa89a968f18514abdd47e57feb2719cd03e6f1510eb261de",
+      "prompt_sha256": "790dcf3975c7ea2dd4b93f7a5ec3500316cc8f65b877c0188874cf32b1a1be50"
+    },
+    "multihop_bop_012_001": {
+      "transcript_sha256": "df253c05bab57c84e279045563f12dea9e3c2d2bda5955121bb406918ac1430b",
+      "field_contract_sha256": "47e141543e14b2ce0bdc6de452b760462bd6e96b153f39063045879d0ff548ed",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "multihop_wc_025_001": {
+      "transcript_sha256": "f7bdd7bd52f2c817ae4a454ed3e6448dfe76033df1d0e48278de6c2c5130c0e4",
+      "field_contract_sha256": "64ad571c8f5bee9ab4e6bdd6d6e03809af0962e4a260c29b99125ee5cfb54c1e",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "vehicle_schedule_sparse_001": {
+      "transcript_sha256": "d444bb745a82572ed1dd542a39cc2c532006ac01ec3b03f297f7c3ddbcdc5c59",
+      "field_contract_sha256": "fdeea54035b2bc5ac7acf78c46443013a3e464e0d991b49b31a464f5030d6885",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    },
+    "vehicle_schedule_sparse_002": {
+      "transcript_sha256": "9ee3761e56cd73c6438be1551b834d47c479695a9349bbf679ff30e5b2e4f0a7",
+      "field_contract_sha256": "fdeea54035b2bc5ac7acf78c46443013a3e464e0d991b49b31a464f5030d6885",
+      "prompt_sha256": "d4d6224503679aadb5100becd950ace26409e51d50215d88b128adeae9dd6fa5"
+    }
+  }
+}
