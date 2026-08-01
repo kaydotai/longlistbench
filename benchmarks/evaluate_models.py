@@ -255,6 +255,13 @@ MODELS = {
         setup_fn=_setup_offline_only_model,
         extract_fn=_extract_offline_only_model,
     ),
+    'codex_gpt56_luna': ModelConfig(
+        name='Codex GPT-5.6-Luna (CLI Agentic, xhigh)',
+        provider='OpenAI/Codex',
+        model_id='gpt-5.6-luna',
+        setup_fn=_setup_offline_only_model,
+        extract_fn=_extract_offline_only_model,
+    ),
     'bonsai_27b_page_pipeline': ModelConfig(
         name='Ternary Bonsai 27B (Page Map-Reduce, local)',
         provider='PrismML/PagePipeline',
