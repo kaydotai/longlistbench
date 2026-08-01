@@ -27,7 +27,7 @@ cards, so their cost changes combine different usage with lower prices.
 | Output tokens | 463,004 | 277,190 | 365,763 | 582,442 | +59.2% |
 | Reasoning output tokens | 223,331 | 127,310 | 186,644 | 312,587 | +67.5% |
 | ChatGPT credits | 1,087.300475 | 836.507475 | 363.598270 | 59.098331 | -83.7% |
-| Standard API equivalent | $43.492019 | $33.460299 | $14.543931 | $11.819666 | -18.7% |
+| Standard API equivalent | $43.492019 | $33.460299 | $14.543931 | $2.363933 | -83.7% |
 | Credits / 1K target records | 36.734365 | 28.261342 | 12.284140 | 1.996633 | -83.7% |
 | Credits / 100 PDF pages | 61.325464 | 47.180343 | 20.507517 | 3.333239 | -83.7% |
 | Exact-record recall (diagnostic) | 98.2% | 98.9% | 94.5% | 98.1% | +3.6 pp |
@@ -56,10 +56,10 @@ documents, and $15.17. The range demonstrates stochasticity; it is not used to
 replace the preselected leaderboard run.
 
 Two additional Luna runs reached 93.8% and 91.4% exact-record recall, 6/32 and
-4/32 complete documents, and API-equivalent costs of $13.09 and $11.31. Across
+4/32 complete documents, and API-equivalent costs of $2.62 and $2.26. Across
 all three Luna runs, the median was 93.8% exact recall, 5/32 complete documents,
-and $11.82. Run 1 consumed 77.7% more input and 59.2% more output tokens than
-Terra run 1, but Luna's lower rates reduced API-equivalent cost by 18.7%.
+and $2.36. Run 1 consumed 77.7% more input and 59.2% more output tokens than
+Terra run 1, but Luna's lower rates reduced API-equivalent cost by 83.7%.
 
 GPT-5.5 and Sol still have one independent execution each, and Terra and Luna
 used a newer CLI build. These results support representative cost-quality

@@ -38,8 +38,8 @@ def test_luna_leaderboard_entry_uses_preselected_run_and_same_run_cost() -> None
     assert luna["stats"]["exact_record_recall"] == 0.9807425926551573
     assert luna["stats"]["total_samples"] == 32
     assert luna["stats"]["complete_documents"] == 5
-    assert luna["full_run_cost_usd"] == pytest.approx(11.8196662)
+    assert luna["full_run_cost_usd"] == pytest.approx(2.36393324)
     assert luna["full_run_cost_source"] == "codex_api_equivalent"
     assert luna["full_run_cost_explanation"] == (
-        "$11.82 API-equivalent cost derived from the same saved full-corpus run."
+        "$2.36 API-equivalent cost derived from the same saved full-corpus run."
     )

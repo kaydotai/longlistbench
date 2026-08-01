@@ -20,13 +20,13 @@ and its measured usage. It was not chosen from the later repeats.
 | Output tokens | 582,442 |
 | Reasoning output tokens | 312,587 |
 | ChatGPT credits | 59.098331 |
-| Standard API equivalent | $11.819666 |
+| Standard API equivalent | $2.363933 |
 
-The API equivalent applies the GPT-5.6-Luna short-context rate card observed
-on August 1, 2026: $1.00 per million uncached input tokens, $0.10 per million
-cached input tokens, and $6.00 per million output tokens. The active Codex
+The API equivalent applies the GPT-5.6-Luna short-context Standard rate card
+effective July 30, 2026: $0.20 per million uncached input tokens, $0.02 per
+million cached input tokens, and $1.20 per million output tokens. The active Codex
 context is capped at 272K tokens, so the long-context surcharge does not apply.
-The run used a subscription; `$11.82` is a rate-card equivalent, not an invoice.
+The run used a subscription; `$2.36` is a rate-card equivalent, not an invoice.
 
 The corresponding extraction reached 98.1% exact-record recall, 5/32 complete
 documents, 99.5% field micro-F1, and 98.8% field macro-F1. Two matched repeats

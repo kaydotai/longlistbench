@@ -215,21 +215,21 @@ def test_luna_measurement_is_input_matched_and_uses_luna_rates() -> None:
     terra = payloads["gpt-5.6-terra"]
 
     assert luna["per_document_input_hashes"] == terra["per_document_input_hashes"]
-    assert luna["pricing"]["effective_date"] == "2026-08-01"
+    assert luna["pricing"]["effective_date"] == "2026-07-30"
     assert luna["pricing"]["chatgpt_credits_per_million_tokens"] == {
         "uncached_input": 5,
         "cached_input": 0.5,
         "output": 30,
     }
     assert luna["pricing"]["api_usd_per_million_tokens"] == {
-        "uncached_input": 1,
-        "cached_input": 0.1,
-        "cache_write_input": 1.25,
-        "output": 6,
+        "uncached_input": 0.2,
+        "cached_input": 0.02,
+        "cache_write_input": 0.25,
+        "output": 1.2,
     }
     assert luna["measured_cost"]["chatgpt_credits"] == pytest.approx(59.098331)
     assert luna["measured_cost"]["api_equivalent_usd"] == pytest.approx(
-        11.8196662
+        2.36393324
     )
     assert luna["diagnostic_evaluation"] == {
         "canonical_result": True,
@@ -365,9 +365,9 @@ def test_luna_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
             + run["output_tokens"] * 30
         ) / 1_000_000
         api_equivalent = (
-            run["uncached_input_tokens"]
-            + run["cached_input_tokens"] * 0.1
-            + run["output_tokens"] * 6
+            run["uncached_input_tokens"] * 0.2
+            + run["cached_input_tokens"] * 0.02
+            + run["output_tokens"] * 1.2
         ) / 1_000_000
         assert run["chatgpt_credits"] == pytest.approx(credits)
         assert run["api_equivalent_usd"] == pytest.approx(api_equivalent)

@@ -227,10 +227,10 @@ The current full-corpus results use the same repository-denied OCR protocol. GPT
 Matched GPT-5.5, GPT-5.6-Sol, GPT-5.6-Terra, and GPT-5.6-Luna full-corpus
 executions record Codex JSONL usage for representative cost analysis. Luna's
 preselected run used 77.7% more input and 59.2% more output tokens than Terra,
-but its lower rate card reduced API-equivalent cost by 18.7%, to $11.82.
+but its lower rate card reduced API-equivalent cost by 83.7%, to $2.36.
 Across three matched Luna runs, exact-record recall ranged from 91.4% to 98.1%,
 complete-document success ranged from 4/32 to 6/32, and API-equivalent cost
-ranged from $11.31 to $13.09. Terra ranged from 94.5% to 98.1%, 5/32 to 7/32,
+ranged from $2.26 to $2.62. Terra ranged from 94.5% to 98.1%, 5/32 to 7/32,
 and $14.54 to $15.32. Each model's preselected first run, not its best repeat,
 supplies its leaderboard result. All use short-context pricing because Codex
 CLI caps active context at 272K tokens. See `benchmarks/cost_measurements/`.

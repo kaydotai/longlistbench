@@ -11,10 +11,10 @@ The leaderboard therefore does not select the best or median repeat.
 
 | Run | Exact recall | Complete docs | Field micro-F1 | Input tokens | Output tokens | API equivalent |
 |---|---:|---:|---:|---:|---:|---:|
-| 1, leaderboard | 98.1% | 5/32 | 99.5% | 55,954,915 | 582,442 | $11.82 |
-| 2 | 93.8% | 6/32 | 99.0% | 67,810,321 | 568,985 | $13.09 |
-| 3 | 91.4% | 4/32 | 97.5% | 54,500,082 | 535,969 | $11.31 |
-| Median | 93.8% | 5/32 | 99.0% | 55,954,915 | 568,985 | $11.82 |
+| 1, leaderboard | 98.1% | 5/32 | 99.5% | 55,954,915 | 582,442 | $2.36 |
+| 2 | 93.8% | 6/32 | 99.0% | 67,810,321 | 568,985 | $2.62 |
+| 3 | 91.4% | 4/32 | 97.5% | 54,500,082 | 535,969 | $2.26 |
+| Median | 93.8% | 5/32 | 99.0% | 55,954,915 | 568,985 | $2.36 |
 
 The strict-recall spread has identifiable document-level causes. In run 3,
 two driver/MVR agents returned only 8 rows from 260- and 500-row targets even

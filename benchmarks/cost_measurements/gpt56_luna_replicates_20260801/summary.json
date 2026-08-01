@@ -25,18 +25,20 @@
     "all_document_jobs_first_attempt_success": true
   },
   "pricing": {
-    "effective_date": "2026-08-01",
+    "effective_date": "2026-07-30",
     "chatgpt_credits_per_million_tokens": {
       "uncached_input": 5,
       "cached_input": 0.5,
       "output": 30
     },
     "api_usd_per_million_tokens": {
-      "uncached_input": 1,
-      "cached_input": 0.1,
-      "cache_write_input": 1.25,
-      "output": 6
-    }
+      "uncached_input": 0.2,
+      "cached_input": 0.02,
+      "cache_write_input": 0.25,
+      "output": 1.2
+    },
+    "api_source": "https://developers.openai.com/api/docs/pricing",
+    "chatgpt_credit_source": "https://learn.chatgpt.com/docs/pricing#what-are-tokens-and-credits"
   },
   "runs": [
     {
@@ -58,7 +60,7 @@
       "output_tokens": 582442,
       "reasoning_output_tokens": 312587,
       "chatgpt_credits": 59.098331,
-      "api_equivalent_usd": 11.819666199999999
+      "api_equivalent_usd": 2.3639332399999997
     },
     {
       "id": "run_2",
@@ -79,7 +81,7 @@
       "output_tokens": 568985,
       "reasoning_output_tokens": 321707,
       "chatgpt_credits": 65.457731,
-      "api_equivalent_usd": 13.0915462
+      "api_equivalent_usd": 2.6183092400000003
     },
     {
       "id": "run_3",
@@ -100,7 +102,7 @@
       "output_tokens": 535969,
       "reasoning_output_tokens": 290565,
       "chatgpt_credits": 56.52636,
-      "api_equivalent_usd": 11.305272
+      "api_equivalent_usd": 2.2610544
     }
   ],
   "aggregate": {
@@ -196,11 +198,11 @@
       "sample_standard_deviation": 4.597578912218943
     },
     "api_equivalent_usd": {
-      "median": 11.819666199999999,
-      "mean": 12.072161466666666,
-      "min": 11.305272,
-      "max": 13.0915462,
-      "sample_standard_deviation": 0.9195157824437888
+      "median": 2.3639332399999997,
+      "mean": 2.4144322933333333,
+      "min": 2.2610544,
+      "max": 2.6183092400000003,
+      "sample_standard_deviation": 0.18390315648875805
     }
   }
 }
