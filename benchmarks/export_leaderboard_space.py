@@ -651,17 +651,6 @@ def format_full_run_cost(value: float | None) -> str:
     return f"${value:.2f}"
 
 
-def format_percent_with_variability(
-    value: float,
-    standard_deviation: float,
-    run_count: int,
-) -> str:
-    label = f"{pct(value)}%"
-    if run_count > 1:
-        label += f" ± {pct(standard_deviation)} pp"
-    return label
-
-
 def format_mean_count(value: float, run_count: int) -> str:
     return f"{value:.1f}" if run_count > 1 else str(int(value))
 
@@ -759,6 +748,30 @@ def render_document_rows(documents: list[dict]) -> str:
             if run_count > 1
             else "Complete" if complete_runs else "Incomplete"
         )
+        exact_label = f"{pct(document['exact_record_recall'])}%"
+        field_f1_label = f"{pct(document['field_f1'])}%"
+        exact_hint = render_variability_button(
+            title=f"Exact recall variability · {document['sample']}",
+            aria_label=(
+                f"Explain exact recall variability for {document['sample']}"
+            ),
+            definition=(
+                f"{run_count}-run arithmetic mean: {exact_label} ± "
+                f"{pct(document.get('exact_record_recall_standard_deviation', 0.0))} "
+                "pp sample SD."
+            ),
+            run_count=run_count,
+        )
+        field_f1_hint = render_variability_button(
+            title=f"Field F1 variability · {document['sample']}",
+            aria_label=f"Explain field F1 variability for {document['sample']}",
+            definition=(
+                f"{run_count}-run arithmetic mean: {field_f1_label} ± "
+                f"{pct(document.get('field_f1_standard_deviation', 0.0))} "
+                "pp sample SD."
+            ),
+            run_count=run_count,
+        )
         rows.append(
             "<tr>"
             f"<td class='document-name'>{document['sample']}</td>"
@@ -766,9 +779,11 @@ def render_document_rows(documents: list[dict]) -> str:
             "<td class='numeric'>"
             f"{format_mean_count(document['predicted_records'], run_count)}</td>"
             "<td class='numeric'>"
-            f"{format_percent_with_variability(document['exact_record_recall'], document.get('exact_record_recall_standard_deviation', 0.0), run_count)}"
+            "<span class='metric-cell'>"
+            f"<span class='metric-value'>{exact_label}</span>{exact_hint}</span>"
             "</td><td class='numeric'>"
-            f"{format_percent_with_variability(document['field_f1'], document.get('field_f1_standard_deviation', 0.0), run_count)}"
+            "<span class='metric-cell'>"
+            f"<span class='metric-value'>{field_f1_label}</span>{field_f1_hint}</span>"
             "</td><td class='document-complete'>"
             f"<span class='document-status {status_class}'>{complete_label}</span>"
             "</td></tr>"

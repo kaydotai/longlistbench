@@ -742,6 +742,33 @@ def test_aggregate_main_row_moves_variability_into_metric_hints() -> None:
         "3-run arithmetic mean: 6.0/32 ± 1.0 documents sample SD." in html
     )
     assert html.count("variability-definition-button") == 5
+
+
+def test_aggregate_document_rows_move_variability_into_hints() -> None:
+    html = export_leaderboard_space.render_document_rows(
+        [
+            {
+                "sample": "driver_mvr_packet_001",
+                "gold_records": 260,
+                "predicted_records": 178.6666666667,
+                "exact_record_recall": 2 / 3,
+                "exact_record_recall_standard_deviation": 0.5509181864,
+                "field_f1": 0.6848871624,
+                "field_f1_standard_deviation": 0.5295353851,
+                "complete_runs": 1,
+                "run_count": 3,
+            }
+        ]
+    )
+
+    assert ">66.7% ± 55.1 pp<" not in html
+    assert ">68.5% ± 53.0 pp<" not in html
+    assert "3-run arithmetic mean: 66.7% ± 55.1 pp sample SD." in html
+    assert "3-run arithmetic mean: 68.5% ± 53.0 pp sample SD." in html
+    assert "Explain exact recall variability for driver_mvr_packet_001" in html
+    assert "Explain field F1 variability for driver_mvr_packet_001" in html
+    assert html.count("variability-definition-button") == 2
+    assert "<span class='document-status partial'>1/3</span>" in html
     assert "tr.winner" not in html
     assert "point leader" not in html
 
