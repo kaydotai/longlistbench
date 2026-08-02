@@ -655,6 +655,12 @@ def format_mean_count(value: float, run_count: int) -> str:
     return f"{value:.1f}" if run_count > 1 else str(int(value))
 
 
+def format_complete_document_count(value: float, run_count: int) -> str:
+    if run_count <= 1 or float(value).is_integer():
+        return str(int(value))
+    return f"{value:.1f}"
+
+
 def render_variability_button(
     *,
     title: str,
@@ -871,7 +877,7 @@ def build_html(data: dict) -> str:
             )
 
         complete_label = (
-            f"{format_mean_count(result['complete_documents'], run_count)}"
+            f"{format_complete_document_count(result['complete_documents'], run_count)}"
             f"/{result['total_samples']}"
         )
         complete_button = render_variability_button(

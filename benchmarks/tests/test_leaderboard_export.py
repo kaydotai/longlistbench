@@ -734,14 +734,22 @@ def test_aggregate_main_row_moves_variability_into_metric_hints() -> None:
     assert "<span class='cost-value'>$15.01 ± $0.41</span>" not in html
     assert ">95.7% ± 2.0 pp</td>" not in html
     assert ">6.0/32 ± 1.0</td>" not in html
+    assert "<span class='metric-value'>6/32</span>" in html
+    assert "<span class='metric-value'>6.0/32</span>" not in html
     assert ">86.5% ± 7.3 pp</td>" not in html
     assert ">99.4% ± 0.1 pp</td>" not in html
     assert ">99.2% ± 0.3 pp</td>" not in html
     assert "3-run arithmetic mean: 95.7% ± 2.0 pp sample SD." in html
     assert (
-        "3-run arithmetic mean: 6.0/32 ± 1.0 documents sample SD." in html
+        "3-run arithmetic mean: 6/32 ± 1.0 documents sample SD." in html
     )
     assert html.count("variability-definition-button") == 5
+
+
+def test_complete_document_count_drops_only_trailing_decimal() -> None:
+    assert export_leaderboard_space.format_complete_document_count(6.0, 3) == "6"
+    assert export_leaderboard_space.format_complete_document_count(5.5, 3) == "5.5"
+    assert export_leaderboard_space.format_complete_document_count(6, 1) == "6"
 
 
 def test_aggregate_document_rows_move_variability_into_hints() -> None:
