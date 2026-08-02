@@ -183,7 +183,7 @@ python benchmarks/run_codex_cli_evaluation.py \
   --workers 4 \
   --timeout-seconds 3600
 
-# Reproduce the preselected GPT-5.6-Terra leaderboard run
+# Reproduce one GPT-5.6-Terra full-corpus run
 python benchmarks/run_codex_cli_evaluation.py \
   --output-dir benchmarks/results/scratch/codex_gpt56_terra_reproduction \
   --model-key codex_gpt56_terra \
@@ -192,7 +192,7 @@ python benchmarks/run_codex_cli_evaluation.py \
   --workers 4 \
   --timeout-seconds 1800
 
-# Reproduce the preselected GPT-5.6-Luna leaderboard run
+# Reproduce one GPT-5.6-Luna full-corpus run
 python benchmarks/run_codex_cli_evaluation.py \
   --output-dir benchmarks/results/scratch/codex_gpt56_luna_reproduction \
   --model-key codex_gpt56_luna \
@@ -220,20 +220,21 @@ Primary benchmark comparisons should use per-document extraction protocols: the 
 
 For generic records, the current runners derive sample-specific field names and record groups from ground-truth object structure before creating the model workspace. This is output-schema disclosure, not value access: target values, target counts, ground-truth files, and generator code are not placed in the sandbox.
 
-Saved reports under `benchmarks/results/` may refer to earlier corpus versions. The six coding-agent `*_full_current_ocr_v2` release directories are bound to the current manifest; do not cite other folders as current-layout baselines unless their report provenance records the same manifest hash.
+Saved reports under `benchmarks/results/` may refer to earlier corpus versions. The ten coding-agent current-OCR release directories are bound to the current manifest; do not cite other folders as current-layout baselines unless their report provenance records the same manifest hash.
 
-The current full-corpus results use the same repository-denied OCR protocol. GPT-5.6-Sol recovers 97.9% of target records exactly and completes 8/32 documents; Fable 5 recovers 95.1% exactly and completes 9/32. On the 19 structural-challenge documents, exact-record recall is 93.8% and 84.0%; on the 13 scale controls it is 99.5% for both. Field micro-F1 remains a partial-credit diagnostic at 99.4% and 96.8%. Both runs cover 29,599 targets with zero execution errors. GPT-5.5 reaches 94.5% exact recall and 4/32 complete documents; Opus 4.8 reaches 97.7% and 7/32. The additional preselected GPT-5.6-Terra and GPT-5.6-Luna leaderboard runs reach 94.5% and 98.1% exact recall, respectively; each completes 5/32 documents.
+The current full-corpus results use the same repository-denied OCR protocol. GPT-5.6-Sol recovers 97.9% of target records exactly and completes 8/32 documents; Fable 5 recovers 95.1% exactly and completes 9/32. On the 19 structural-challenge documents, exact-record recall is 93.8% and 84.0%; on the 13 scale controls it is 99.5% for both. Field micro-F1 remains a partial-credit diagnostic at 99.4% and 96.8%. Both runs cover 29,599 targets with zero execution errors. GPT-5.5 reaches 94.5% exact recall and 4/32 complete documents; Opus 4.8 reaches 97.7% and 7/32. Across three matched runs, GPT-5.6-Terra reaches 95.7% ± 2.0 pp exact recall and 6.0 ± 1.0 complete documents; GPT-5.6-Luna reaches 94.4% ± 3.4 pp and 5.0 ± 1.0. The other model rows are single-run results.
 
 Matched GPT-5.5, GPT-5.6-Sol, GPT-5.6-Terra, and GPT-5.6-Luna full-corpus
-executions record Codex JSONL usage for representative cost analysis. Luna's
-preselected run used 77.7% more input and 59.2% more output tokens than Terra,
-but its lower rate card reduced API-equivalent cost by 83.7%, to $2.36.
+executions record Codex JSONL usage for representative cost analysis. In the
+reference run pair, Luna used 77.7% more input and 59.2% more output tokens than
+Terra, but its lower rate card reduced API-equivalent cost by 83.7%, to $2.36.
 Across three matched Luna runs, exact-record recall ranged from 91.4% to 98.1%,
 complete-document success ranged from 4/32 to 6/32, and API-equivalent cost
 ranged from $2.26 to $2.62. Terra ranged from 94.5% to 98.1%, 5/32 to 7/32,
-and $14.54 to $15.32. Each model's preselected first run, not its best repeat,
-supplies its leaderboard result. All use short-context pricing because Codex
-CLI caps active context at 272K tokens. See `benchmarks/cost_measurements/`.
+and $14.54 to $15.32. Leaderboard values are three-run arithmetic means with
+sample standard deviations; no best-run selection is used. All use
+short-context pricing because Codex CLI caps active context at 272K tokens.
+See `benchmarks/cost_measurements/`.
 
 The strongest separation is on heterogeneous policy records. Sparse driver/MVR enrichment is near ceiling, but only Fable 5 joins all report details without emitting separate report-only rows. A tagged stressor therefore need not reduce every agent's accuracy. The scorer canonicalizes case, whitespace, dates, decimals, accounting negatives, documented domain-label equivalents, visible `Unit` prefixes in vehicle identifiers, and `Quarter Return`/`Quarterly Return` heading aliases. It preserves extra heading context as an error. Treat single-sample probe folders as older diagnostics unless rerun against the current manifest.
 

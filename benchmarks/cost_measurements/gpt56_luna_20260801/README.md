@@ -7,8 +7,9 @@
 - Reasoning effort: `xhigh`
 - Protocol: one repository-denied, ephemeral Codex thread per document
 
-This preselected execution supplies both the released Luna leaderboard result
-and its measured usage. It was not chosen from the later repeats.
+This preselected reference execution contributes to the three-run Luna
+leaderboard mean and supplies its own measured usage. It was not chosen from
+the later repeats.
 
 ## Measured Usage
 

@@ -1,13 +1,14 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "model": "gpt-5.6-terra",
   "reasoning_effort": "xhigh",
   "runtime": "codex-cli 0.146.0",
   "input_condition": "ocr",
   "run_count": 3,
   "selection_policy": {
-    "leaderboard_run": "run_1",
-    "selected_before_repeats": true,
+    "leaderboard_statistic": "arithmetic_mean",
+    "variability_statistic": "sample_standard_deviation",
+    "preselected_reference_run": "run_1",
     "best_of_n_selection": false
   },
   "dataset": {
@@ -41,7 +42,9 @@
   "runs": [
     {
       "id": "run_1",
-      "leaderboard_run": true,
+      "preselected_reference_run": true,
+      "result_dir": "codex_gpt56_terra_full_current_ocr_v2",
+      "report_sha256": "b05982d1e53dd7024ebae3a1e6763f16ef6255a507fccfa38a9e8119d6595436",
       "generated_at": "2026-07-31T20:41:10.670248+00:00",
       "report_timestamp": "2026-07-31T20:41:15.595652+00:00",
       "exact_record_recall": 0.944930571978783,
@@ -62,7 +65,9 @@
     },
     {
       "id": "run_2",
-      "leaderboard_run": false,
+      "preselected_reference_run": false,
+      "result_dir": "codex_gpt56_terra_run2_current_ocr_v2",
+      "report_sha256": "b803a3214073320e8fbd3310a732517d9629e1ca9588bc9c370dc79c958ca898",
       "generated_at": "2026-07-31T22:12:40.979065+00:00",
       "report_timestamp": "2026-07-31T22:12:45.569940+00:00",
       "exact_record_recall": 0.9454035609311126,
@@ -83,7 +88,9 @@
     },
     {
       "id": "run_3",
-      "leaderboard_run": false,
+      "preselected_reference_run": false,
+      "result_dir": "codex_gpt56_terra_run3_current_ocr_v2",
+      "report_sha256": "29a1f4dc852184e3c9cffc2f58336d4782b09a8b8f45b2b9a735d7f94dcd06d6",
       "generated_at": "2026-07-31T22:45:37.962827+00:00",
       "report_timestamp": "2026-07-31T22:45:42.415692+00:00",
       "exact_record_recall": 0.9806412378796581,

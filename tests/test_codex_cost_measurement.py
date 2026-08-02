@@ -35,7 +35,7 @@ def test_codex_cost_measurement_reconciles(
 
     assert payload["model"] == model
     if model in {"gpt-5.6-terra", "gpt-5.6-luna"}:
-        assert payload["run_role"] == "leaderboard_and_cost_measurement"
+        assert payload["run_role"] == "replicate_reference_and_cost_measurement"
         assert payload["canonical_result"] is True
     else:
         assert payload["run_role"] == "cost_measurement"
@@ -255,7 +255,7 @@ def test_luna_measurement_is_input_matched_and_uses_luna_rates() -> None:
     )
 
 
-def test_terra_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
+def test_terra_replicate_summary_reconciles_three_run_reporting() -> None:
     payload = json.loads(
         (
             MEASUREMENT_ROOT
@@ -266,11 +266,16 @@ def test_terra_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
 
     assert payload["run_count"] == len(runs) == 3
     assert payload["selection_policy"] == {
-        "leaderboard_run": "run_1",
-        "selected_before_repeats": True,
+        "leaderboard_statistic": "arithmetic_mean",
+        "variability_statistic": "sample_standard_deviation",
+        "preselected_reference_run": "run_1",
         "best_of_n_selection": False,
     }
-    assert [run["leaderboard_run"] for run in runs] == [True, False, False]
+    assert [run["preselected_reference_run"] for run in runs] == [
+        True,
+        False,
+        False,
+    ]
     assert payload["dataset"]["input_fingerprints_match_across_runs"] is True
     assert all(run["execution_errors"] == 0 for run in runs)
 
@@ -321,7 +326,7 @@ def test_terra_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
     assert run_1["field_micro_f1"] == pytest.approx(released["weighted_f1"])
 
 
-def test_luna_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
+def test_luna_replicate_summary_reconciles_three_run_reporting() -> None:
     payload = json.loads(
         (
             MEASUREMENT_ROOT
@@ -332,11 +337,16 @@ def test_luna_replicate_summary_reconciles_and_keeps_preselected_run() -> None:
 
     assert payload["run_count"] == len(runs) == 3
     assert payload["selection_policy"] == {
-        "leaderboard_run": "run_1",
-        "selected_before_repeats": True,
+        "leaderboard_statistic": "arithmetic_mean",
+        "variability_statistic": "sample_standard_deviation",
+        "preselected_reference_run": "run_1",
         "best_of_n_selection": False,
     }
-    assert [run["leaderboard_run"] for run in runs] == [True, False, False]
+    assert [run["preselected_reference_run"] for run in runs] == [
+        True,
+        False,
+        False,
+    ]
     assert payload["dataset"]["input_fingerprints_match_across_runs"] is True
     assert all(run["execution_errors"] == 0 for run in runs)
 

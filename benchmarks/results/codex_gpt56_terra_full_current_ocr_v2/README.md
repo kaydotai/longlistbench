@@ -1,7 +1,7 @@
 # Released GPT-5.6-Terra OCR Result
 
-This directory contains the preselected GPT-5.6-Terra predictions and the
-recomputable LongListBench leaderboard report.
+This directory contains the first of three matched GPT-5.6-Terra prediction
+sets and its recomputable LongListBench report.
 
 ## Protocol
 
@@ -23,10 +23,10 @@ Exact-record recall requires every normalized target field to match.
 Complete-document success requires an identical record multiset with no
 missing or extra records; source order is not scored.
 
-This run was selected before two additional stochasticity repeats were made.
-Across all three matched runs, exact-record recall ranged from 94.5% to 98.1%
-and complete-document success ranged from 5/32 to 7/32. The leaderboard does
-not select the best repeat. The aggregate is under
+This run is the preselected reference execution. Across all three matched
+runs, exact-record recall averaged 95.7% with 2.0 pp sample standard deviation,
+and complete-document success averaged 6.0/32 with 1.0 standard deviation. The
+leaderboard reports those three-run statistics. The aggregate is under
 `benchmarks/cost_measurements/gpt56_terra_replicates_20260801/`.
 
 ## Artifacts

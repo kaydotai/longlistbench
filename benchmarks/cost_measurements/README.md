@@ -2,18 +2,18 @@
 
 These artifacts compare GPT-5.5, GPT-5.6-Sol, GPT-5.6-Terra, and GPT-5.6-Luna
 on the same 32-document OCR corpus. The GPT-5.5 and Sol measurements each use
-one Codex CLI 0.145.0 run from July 29, 2026. Terra and Luna each use one
-preselected leaderboard run plus two stochasticity repeats on CLI 0.146.0. All
+one Codex CLI 0.145.0 run from July 29, 2026. Terra and Luna each use three
+matched full-corpus runs on CLI 0.146.0. All
 use `xhigh` reasoning, four workers, one repository-denied ephemeral thread per
 document, identical prompts, field contracts, transcripts, and the same 272K
 context cap. Per-document input hashes match across models and repeats.
 
 The GPT-5.5 and Sol artifacts are independent cost measurements with
-non-canonical quality diagnostics. Terra and Luna run 1 are their respective
-released leaderboard results and usage measurements; their full predictions
-and reports are retained under `benchmarks/results/`.
+non-canonical quality diagnostics. Terra and Luna report three-run means on
+the leaderboard. All six Terra/Luna prediction sets and reports are retained
+under `benchmarks/results/`.
 
-## Four-model result
+## Reference-run cost comparison
 
 GPT-5.5 and GPT-5.6-Sol have the same rate cards, so their cost difference
 comes directly from token usage. Terra and Luna use lower model-specific rate
@@ -49,20 +49,27 @@ It appended inherited fuel-band context to one 998-row schedule and paraphrased
 fields in the long-range claim packets. The secondary field score remains high,
 but the requested records are not exact.
 
-Two additional Terra runs reached 94.5% and 98.1% exact-record recall, 7/32 and
+The other two Terra runs reached 94.5% and 98.1% exact-record recall, 7/32 and
 6/32 complete documents, and API-equivalent costs of $15.32 and $15.17. Across
-all three Terra runs, the median was 94.5% exact recall, 6/32 complete
-documents, and $15.17. The range demonstrates stochasticity; it is not used to
-replace the preselected leaderboard run.
+all three Terra runs, the mean was 95.7% exact recall, 6.0/32 complete
+documents, and $15.01. The sample standard deviations were 2.0 pp, 1.0
+document, and $0.41.
 
-Two additional Luna runs reached 93.8% and 91.4% exact-record recall, 6/32 and
+The other two Luna runs reached 93.8% and 91.4% exact-record recall, 6/32 and
 4/32 complete documents, and API-equivalent costs of $2.62 and $2.26. Across
-all three Luna runs, the median was 93.8% exact recall, 5/32 complete documents,
-and $2.36. Run 1 consumed 77.7% more input and 59.2% more output tokens than
-Terra run 1, but Luna's lower rates reduced API-equivalent cost by 83.7%.
+all three Luna runs, the mean was 94.4% exact recall, 5.0/32 complete documents,
+and $2.41. The sample standard deviations were 3.4 pp, 1.0 document, and $0.18.
+In the reference run pair, Luna consumed 77.7% more input and 59.2% more output
+tokens than Terra, but its lower rates reduced API-equivalent cost by 83.7%.
 
 GPT-5.5 and Sol still have one independent execution each, and Terra and Luna
 used a newer CLI build. These results support representative cost-quality
 observations, not precise causal estimates of model-version effects. See the
 model-specific directories for per-document calculations and replicate
 summaries.
+
+Verify all six reports, predictions, fingerprints, and summary aggregates:
+
+```bash
+python benchmarks/check_replicate_summary.py
+```

@@ -7,14 +7,16 @@
 - Reasoning effort: `xhigh`
 - Protocol: one repository-denied, ephemeral Codex thread per document
 
-This preselected execution is the released GPT-5.6-Terra leaderboard run and
-its usage measurement. The repository retains its predictions and recomputable
-report under `benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/`.
+This preselected reference execution contributes to the three-run
+GPT-5.6-Terra leaderboard mean and supplies its own usage measurement. The
+repository retains its predictions and recomputable report under
+`benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/`.
 
 All 32 jobs completed on their first attempt. The checker independently
 recomputed the report from the saved predictions and ground truth before the
 aggregate was recorded. Two later full-corpus repeats measure stochasticity;
-they did not determine which run appears on the leaderboard.
+the leaderboard reports the mean and sample standard deviation across all
+three runs.
 
 ## Diagnostic quality
 

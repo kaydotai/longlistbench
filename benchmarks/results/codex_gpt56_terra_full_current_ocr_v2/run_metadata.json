@@ -7,6 +7,14 @@
   "transcript": "ocr",
   "cli_version_observed_at_metadata_write": "codex-cli 0.146.0",
   "authentication": "Codex subscription; credentials are not stored",
+  "replicate_id": "run_1",
+  "execution_protocol": {
+    "worker_count": 4,
+    "thread_scope": "one_ephemeral_thread_per_document",
+    "repository_denied": true,
+    "ground_truth_available_to_agent": false,
+    "all_document_jobs_first_attempt_success": true
+  },
   "additional_denied_paths": [
     "<repo-parent>",
     "<user-home>/Desktop"

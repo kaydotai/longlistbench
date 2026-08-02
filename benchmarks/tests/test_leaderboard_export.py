@@ -754,8 +754,11 @@ def test_summarize_document_results_keeps_only_comparable_metrics() -> None:
             "gold_records": 260,
             "predicted_records": 230,
             "exact_record_recall": 0.7153846154,
+            "exact_record_recall_standard_deviation": 0.0,
             "field_f1": 0.8687643899,
-            "complete_document": False,
+            "field_f1_standard_deviation": 0.0,
+            "complete_runs": 0,
+            "run_count": 1,
         }
     ]
 
