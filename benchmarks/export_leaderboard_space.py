@@ -1576,7 +1576,7 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   }}
 
   function showDefinition(button) {{
-    closeDetails();
+    if (!button.closest(".detail-row")) closeDetails();
     if (activeDefinitionButton === button && !popover.hidden) {{
       closeDefinition();
       return;
@@ -1675,18 +1675,20 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
     if (!popover.hidden && !popover.contains(event.target)) closeDefinition();
   }});
   document.addEventListener("keydown", (event) => {{
+    if (event.key !== "Escape") return;
+    if (!popover.hidden) {{
+      const button = activeDefinitionButton;
+      closeDefinition();
+      button.focus();
+      return;
+    }}
     const expandedDetails = detailButtons.find(
       (button) => button.getAttribute("aria-expanded") === "true"
     );
-    if (event.key === "Escape" && expandedDetails) {{
+    if (expandedDetails) {{
       closeDetails();
       expandedDetails.focus();
-      return;
     }}
-    if (event.key !== "Escape" || popover.hidden) return;
-    const button = activeDefinitionButton;
-    closeDefinition();
-    button.focus();
   }});
   window.addEventListener("resize", closeDefinition);
   window.addEventListener("scroll", closeDefinition, true);

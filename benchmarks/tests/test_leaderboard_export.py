@@ -1015,5 +1015,16 @@ def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
     assert 'id="metric-definition-popover"' in html
     assert 'aria-label="Explain full-run cost"' in html
     assert 'aria-label="Explain field F1"' in html
-    assert "function showDefinition(button) {\n    closeDetails();" in html
+    assert (
+        "function showDefinition(button) {\n"
+        '    if (!button.closest(".detail-row")) closeDetails();'
+    ) in html
+    assert "function showDefinition(button) {\n    closeDetails();" not in html
     assert "function toggleDetails(button) {\n    closeDefinition();" in html
+    assert (
+        'if (event.key !== "Escape") return;\n'
+        "    if (!popover.hidden) {"
+    ) in html
+    assert html.index("if (!popover.hidden) {") < html.index(
+        "if (expandedDetails) {"
+    )
