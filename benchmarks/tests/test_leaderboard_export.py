@@ -688,6 +688,60 @@ def test_table_highlights_metric_leaders_without_an_overall_leader() -> None:
     assert "linear-gradient" not in html
     assert ">Leader</span>" not in html
     assert "leader-badge" not in html
+
+
+def test_aggregate_main_row_moves_variability_into_metric_hints() -> None:
+    data = {
+        "results": [
+            {
+                "model": "GPT-5.6-Terra",
+                "harness": "Codex CLI",
+                "effort": "xhigh",
+                "run_date": "2026-07-31",
+                "run_count": 3,
+                "reporting_statistic": "arithmetic_mean",
+                "protocol": "Agentic CLI",
+                "full_run_cost_usd": 15.0115356,
+                "full_run_cost_standard_deviation_usd": 0.4111790587,
+                "full_run_cost_source": "codex_api_equivalent_mean",
+                "full_run_cost_explanation": (
+                    "Mean API-equivalent cost across 3 saved full-corpus runs: "
+                    "$15.01 ± $0.41 sample SD."
+                ),
+                "exact_record_recall": 0.9569917903,
+                "complete_documents": 6,
+                "total_samples": 32,
+                "structural_exact_recall": 0.8646699945,
+                "scale_control_exact_recall": 0.9936590355,
+                "weighted_f1": 0.9922641185,
+                "metric_standard_deviation": {
+                    "exact_record_recall": 0.0204823878,
+                    "complete_documents": 1.0,
+                    "structural_exact_recall": 0.0734174995,
+                    "scale_control_exact_recall": 0.0010356059,
+                    "weighted_f1": 0.0029052976,
+                },
+                "documents": [],
+            }
+        ]
+    }
+
+    html = export_leaderboard_space.build_html(data)
+
+    assert "n=3 · arithmetic mean" in html
+    assert "n=3 · mean ± SD" not in html
+    assert "<span class='cost-value'>$15.01</span>" in html
+    assert "<span class='cost-value'>$15.01 ± $0.41</span>" not in html
+    assert ">95.7% ± 2.0 pp</td>" not in html
+    assert ">6.0/32 ± 1.0</td>" not in html
+    assert ">86.5% ± 7.3 pp</td>" not in html
+    assert ">99.4% ± 0.1 pp</td>" not in html
+    assert ">99.2% ± 0.3 pp</td>" not in html
+    assert "3-run arithmetic mean: 95.7% ± 2.0 pp sample SD." in html
+    assert (
+        "3-run arithmetic mean: 6.0/32 ± 1.0 documents sample SD." in html
+    )
+    assert html.count("variability-definition-button") == 5
     assert "tr.winner" not in html
     assert "point leader" not in html
 

@@ -666,6 +666,26 @@ def format_mean_count(value: float, run_count: int) -> str:
     return f"{value:.1f}" if run_count > 1 else str(int(value))
 
 
+def render_variability_button(
+    *,
+    title: str,
+    aria_label: str,
+    definition: str,
+    run_count: int,
+) -> str:
+    if run_count <= 1:
+        return ""
+    return (
+        '<button class="definition-button variability-definition-button" '
+        'type="button" '
+        f'aria-label="{html_module.escape(aria_label, quote=True)}" '
+        'aria-expanded="false" '
+        f'data-metric-title="{html_module.escape(title, quote=True)}" '
+        f'data-metric-definition="{html_module.escape(definition, quote=True)}">'
+        "i</button>"
+    )
+
+
 DISPLAYED_METRICS = {
     "full_run_cost_usd": ("min", lambda value: round(value, 2)),
     "exact_record_recall": ("max", lambda value: round(value * 100, 1)),
@@ -772,11 +792,6 @@ def build_html(data: dict) -> str:
         }
         full_run_cost = result["full_run_cost_usd"]
         cost_label = format_full_run_cost(full_run_cost)
-        if run_count > 1 and full_run_cost is not None:
-            cost_label += (
-                " ± $"
-                f"{result['full_run_cost_standard_deviation_usd']:.2f}"
-            )
         cost_sort_value = "" if full_run_cost is None else full_run_cost
         cost_sort_missing = " data-sort-missing='true'" if full_run_cost is None else ""
         model_attribute = html_module.escape(result["model"], quote=True)
@@ -824,6 +839,43 @@ def build_html(data: dict) -> str:
         def best_class(metric: str) -> str:
             return " metric-best" if result_index in leaders[metric] else ""
 
+        def percent_metric_cell(metric: str, title: str) -> str:
+            label = f"{pct(result[metric])}%"
+            button = render_variability_button(
+                title=f"{title} variability · {result['model']}",
+                aria_label=f"Explain {title.casefold()} variability for {result['model']}",
+                definition=(
+                    f"{run_count}-run arithmetic mean: {label} ± "
+                    f"{pct(variability[metric])} pp sample SD."
+                ),
+                run_count=run_count,
+            )
+            return (
+                f"<span class='metric-cell'><span class='metric-value'>{label}</span>"
+                f"{button}</span>"
+            )
+
+        complete_label = (
+            f"{format_mean_count(result['complete_documents'], run_count)}"
+            f"/{result['total_samples']}"
+        )
+        complete_button = render_variability_button(
+            title=f"Complete documents variability · {result['model']}",
+            aria_label=(
+                f"Explain complete documents variability for {result['model']}"
+            ),
+            definition=(
+                f"{run_count}-run arithmetic mean: {complete_label} ± "
+                f"{variability['complete_documents']:.1f} documents sample SD."
+            ),
+            run_count=run_count,
+        )
+        complete_metric_cell = (
+            "<span class='metric-cell'>"
+            f"<span class='metric-value'>{complete_label}</span>"
+            f"{complete_button}</span>"
+        )
+
         documents = result.get("documents", [])
         prompt_templates_html = render_prompt_templates(result)
         has_details = bool(documents or prompt_templates_html)
@@ -857,7 +909,7 @@ def build_html(data: dict) -> str:
             f"data-sort-value='{result['model'].casefold()}'><div class='model-line'>"
             f"<strong>{result['model']}</strong></div>"
             f"<span>{result['harness']} · {result['effort']} · {result['run_date']} · "
-            f"n={run_count}{' · mean ± SD' if run_count > 1 else ''}</span>"
+            f"n={run_count}{' · arithmetic mean' if run_count > 1 else ''}</span>"
             f"<div class='configuration-actions'><span class='protocol'>{result['protocol']}</span>"
             f"{details_button}</div></td>"
             f"<td class='numeric price{best_class('full_run_cost_usd')}' "
@@ -868,25 +920,23 @@ def build_html(data: dict) -> str:
             f"<td class='numeric{best_class('exact_record_recall')}' "
             "data-column='exact_record_recall' "
             f"data-sort-value='{result['exact_record_recall']}'>"
-            f"{format_percent_with_variability(result['exact_record_recall'], variability['exact_record_recall'], run_count)}</td>"
+            f"{percent_metric_cell('exact_record_recall', 'Exact recall')}</td>"
             f"<td class='numeric{best_class('complete_documents')}' "
             "data-column='complete_documents' "
             f"data-sort-value='{result['complete_documents']}'>"
-            f"{format_mean_count(result['complete_documents'], run_count)}"
-            f"/{result['total_samples']}"
-            f"{' ± ' + format(variability['complete_documents'], '.1f') if run_count > 1 else ''}</td>"
+            f"{complete_metric_cell}</td>"
             f"<td class='numeric{best_class('structural_exact_recall')}' "
             "data-column='structural_exact_recall' "
             f"data-sort-value='{result['structural_exact_recall']}'>"
-            f"{format_percent_with_variability(result['structural_exact_recall'], variability['structural_exact_recall'], run_count)}</td>"
+            f"{percent_metric_cell('structural_exact_recall', 'Structural recall')}</td>"
             f"<td class='numeric{best_class('scale_control_exact_recall')}' "
             "data-column='scale_control_exact_recall' "
             f"data-sort-value='{result['scale_control_exact_recall']}'>"
-            f"{format_percent_with_variability(result['scale_control_exact_recall'], variability['scale_control_exact_recall'], run_count)}</td>"
+            f"{percent_metric_cell('scale_control_exact_recall', 'Scale-control recall')}</td>"
             f"<td class='numeric{best_class('weighted_f1')}' "
             "data-column='weighted_f1' "
             f"data-sort-value='{result['weighted_f1']}'>"
-            f"{format_percent_with_variability(result['weighted_f1'], variability['weighted_f1'], run_count)}</td>"
+            f"{percent_metric_cell('weighted_f1', 'Field F1')}</td>"
             "</tr>"
             + (
                 f"<tr class='detail-row' id='{details_id}' data-detail-for='{rank}' hidden>"
@@ -1211,6 +1261,12 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
+}}
+.metric-cell {{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
 }}
 .beta-badge {{
   padding: 2px 4px;
