@@ -2,12 +2,17 @@ import hashlib
 import json
 from collections import Counter
 from pathlib import Path
+from statistics import mean, stdev
 
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT_PATHS = {
     "codex_gpt56_sol": ROOT
     / "benchmarks/results/codex_gpt56_sol_full_current_ocr_v2/evaluation_report.json",
+    "codex_gpt56_terra": ROOT
+    / "benchmarks/results/codex_gpt56_terra_full_current_ocr_v2/evaluation_report.json",
+    "codex_gpt56_luna": ROOT
+    / "benchmarks/results/codex_gpt56_luna_full_current_ocr_v2/evaluation_report.json",
     "claude_fable5": ROOT
     / "benchmarks/results/claude_fable5_full_current_ocr_v2/evaluation_report.json",
     "codex_gpt55": ROOT
@@ -17,6 +22,8 @@ REPORT_PATHS = {
 }
 RUN_EXPECTATIONS = {
     "codex_gpt56_sol": ("gpt-5.6-sol", "sample_statuses"),
+    "codex_gpt56_terra": ("gpt-5.6-terra", "sample_statuses"),
+    "codex_gpt56_luna": ("gpt-5.6-luna", "sample_statuses"),
     "claude_fable5": ("claude-fable-5", "samples"),
     "codex_gpt55": ("gpt-5.5", "sample_statuses"),
     "claude_opus48": ("claude-opus-4-8", "samples"),
@@ -39,6 +46,21 @@ OVERALL_LABELS = {
         "Claude Code `claude-opus-4-8`, xhigh",
         "Claude Code, Opus 4.8 (xhigh)",
     ),
+}
+
+REPLICATED_LEADERBOARD_LABELS = {
+    "codex_gpt56_sol": "Codex CLI `gpt-5.6-sol`, xhigh",
+    "codex_gpt56_terra": "Codex CLI `gpt-5.6-terra`, xhigh",
+    "codex_gpt56_luna": "Codex CLI `gpt-5.6-luna`, xhigh",
+}
+
+REPLICATE_SUMMARIES = {
+    "codex_gpt56_sol": ROOT
+    / "benchmarks/cost_measurements/gpt56_sol_replicates_20260802/summary.json",
+    "codex_gpt56_terra": ROOT
+    / "benchmarks/cost_measurements/gpt56_terra_replicates_20260801/summary.json",
+    "codex_gpt56_luna": ROOT
+    / "benchmarks/cost_measurements/gpt56_luna_replicates_20260801/summary.json",
 }
 
 PROBLEM_LABELS = {
@@ -99,6 +121,10 @@ def _tex_int(value: int) -> str:
 
 def _tex_pct(value: float) -> str:
     return _pct(value).replace("%", r"\%")
+
+
+def _mean_sd_pct(values: list[float]) -> str:
+    return f"{mean(values):.1%} ± {100 * stdev(values):.1f} pp"
 
 
 def test_release_tables_match_saved_reports() -> None:
@@ -178,13 +204,14 @@ def test_release_tables_match_saved_reports() -> None:
     for key, (readme_label, tex_label) in OVERALL_LABELS.items():
         model_stats = stats[key]
         readme_row = (
-            f"| {readme_label} | {total_samples} | {total_rows:,} | 0 | "
+            f"| {readme_label} | 1 | {total_samples} | {total_rows:,} | 0 | "
             f"{_pct(model_stats['exact_record_recall'])} | "
             f"{model_stats['complete_documents']}/{total_samples} "
             f"({_pct(model_stats['complete_document_rate'])}) | "
             f"{_pct(model_stats['weighted_f1'])} |"
         )
-        assert readme_row in readme
+        if key not in REPLICATE_SUMMARIES:
+            assert readme_row in readme
         tex_row = (
             f"{tex_label} & {_tex_pct(model_stats['exact_record_recall'])} & "
             f"{model_stats['complete_documents']}/{total_samples} "
@@ -193,6 +220,23 @@ def test_release_tables_match_saved_reports() -> None:
             f"{_tex_pct(model_stats['avg_f1'])} \\\\"
         )
         assert tex_row in results_tex
+
+    for key, readme_label in REPLICATED_LEADERBOARD_LABELS.items():
+        summary = json.loads(REPLICATE_SUMMARIES[key].read_text(encoding="utf-8"))
+        runs = summary["runs"]
+        exact_values = [run["exact_record_recall"] for run in runs]
+        complete_values = [run["complete_documents"] for run in runs]
+        field_micro_values = [run["field_micro_f1"] for run in runs]
+        field_macro_values = [run["field_macro_f1"] for run in runs]
+        readme_row = (
+            f"| {readme_label} | 3 | {total_samples} | {total_rows:,} | 0 | "
+            f"{_mean_sd_pct(exact_values)} | "
+            f"{mean(complete_values):.1f} ± {stdev(complete_values):.1f} / "
+            f"{total_samples} | "
+            f"{_mean_sd_pct(field_micro_values)} | "
+            f"{_mean_sd_pct(field_macro_values)} |"
+        )
+        assert readme_row in readme
 
     sol = stats["codex_gpt56_sol"]
     fable = stats["claude_fable5"]

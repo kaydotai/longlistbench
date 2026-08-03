@@ -431,20 +431,25 @@ def test_marks_subscription_run_without_usage_as_unavailable() -> None:
     }
 
 
-def test_sol_row_uses_api_equivalent_cost_from_independent_measurement() -> None:
+def test_sol_row_uses_mean_api_equivalent_cost_from_replicates() -> None:
     models, dataset_meta = export_leaderboard_space.load_runs(
         export_leaderboard_space.RESULTS_DIR
     )
     sol = next(model for model in models if model["model"] == "GPT-5.6-Sol")
 
-    assert sol["full_run_cost_usd"] == pytest.approx(33.460299)
-    assert sol["full_run_cost_source"] == "codex_api_equivalent"
-    assert "independent cost measurement" in sol["full_run_cost_explanation"]
+    assert sol["full_run_cost_usd"] == pytest.approx(33.956977)
+    assert sol["full_run_cost_standard_deviation_usd"] == pytest.approx(
+        1.1999427401701293
+    )
+    assert sol["full_run_cost_source"] == "codex_api_equivalent_mean"
+    assert "across 3 saved full-corpus runs" in sol["full_run_cost_explanation"]
 
     html = export_leaderboard_space.build_html(
         export_leaderboard_space.build_data(models, dataset_meta)
     )
-    assert "<span class='cost-value'>$33.46</span>" in html
+    assert "<span class='cost-value'>$33.96</span>" in html
+    assert "Mean API-equivalent cost across 3 saved full-corpus runs: " in html
+    assert "$33.96 ± $1.20 sample SD." in html
 
 
 def test_gpt55_row_uses_api_equivalent_cost_from_independent_measurement() -> None:
@@ -523,6 +528,20 @@ def test_formats_full_run_cost_in_usd() -> None:
     assert export_leaderboard_space.format_full_run_cost(44.86076025) == "$44.86"
     assert export_leaderboard_space.format_full_run_cost(0.0) == "$0.00"
     assert export_leaderboard_space.format_full_run_cost(None) == "n/a"
+
+
+@pytest.mark.parametrize(
+    ("raw", "expected"),
+    [
+        ("codex-cli 0.146.0", "Codex CLI v0.146.0"),
+        ("2.1.216 (Claude Code)", "Claude Code v2.1.216"),
+        ("Reducto API", ""),
+        ("Together API", ""),
+        ("unknown", ""),
+    ],
+)
+def test_format_cli_version(raw: str, expected: str) -> None:
+    assert export_leaderboard_space.format_cli_version(raw) == expected
 
 
 def test_metric_leaders_include_all_ties_at_displayed_precision() -> None:
@@ -688,6 +707,95 @@ def test_table_highlights_metric_leaders_without_an_overall_leader() -> None:
     assert "linear-gradient" not in html
     assert ">Leader</span>" not in html
     assert "leader-badge" not in html
+
+
+def test_aggregate_main_row_moves_variability_into_metric_hints() -> None:
+    data = {
+        "results": [
+            {
+                "model": "GPT-5.6-Terra",
+                "harness": "Codex CLI",
+                "effort": "xhigh",
+                "run_date": "2026-07-31",
+                "run_count": 3,
+                "reporting_statistic": "arithmetic_mean",
+                "protocol": "Agentic CLI",
+                "full_run_cost_usd": 15.0115356,
+                "full_run_cost_standard_deviation_usd": 0.4111790587,
+                "full_run_cost_source": "codex_api_equivalent_mean",
+                "full_run_cost_explanation": (
+                    "Mean API-equivalent cost across 3 saved full-corpus runs: "
+                    "$15.01 ± $0.41 sample SD."
+                ),
+                "exact_record_recall": 0.9569917903,
+                "complete_documents": 6,
+                "total_samples": 32,
+                "structural_exact_recall": 0.8646699945,
+                "scale_control_exact_recall": 0.9936590355,
+                "weighted_f1": 0.9922641185,
+                "metric_standard_deviation": {
+                    "exact_record_recall": 0.0204823878,
+                    "complete_documents": 1.0,
+                    "structural_exact_recall": 0.0734174995,
+                    "scale_control_exact_recall": 0.0010356059,
+                    "weighted_f1": 0.0029052976,
+                },
+                "documents": [],
+            }
+        ]
+    }
+
+    html = export_leaderboard_space.build_html(data)
+
+    assert "n=3 · arithmetic mean" in html
+    assert "n=3 · mean ± SD" not in html
+    assert "<span class='cost-value'>$15.01</span>" in html
+    assert "<span class='cost-value'>$15.01 ± $0.41</span>" not in html
+    assert ">95.7% ± 2.0 pp</td>" not in html
+    assert ">6.0/32 ± 1.0</td>" not in html
+    assert "<span class='metric-value'>6/32</span>" in html
+    assert "<span class='metric-value'>6.0/32</span>" not in html
+    assert ">86.5% ± 7.3 pp</td>" not in html
+    assert ">99.4% ± 0.1 pp</td>" not in html
+    assert ">99.2% ± 0.3 pp</td>" not in html
+    assert "3-run arithmetic mean: 95.7% ± 2.0 pp sample SD." in html
+    assert (
+        "3-run arithmetic mean: 6/32 ± 1.0 documents sample SD." in html
+    )
+    assert html.count("variability-definition-button") == 5
+
+
+def test_complete_document_count_drops_only_trailing_decimal() -> None:
+    assert export_leaderboard_space.format_complete_document_count(6.0, 3) == "6"
+    assert export_leaderboard_space.format_complete_document_count(5.5, 3) == "5.5"
+    assert export_leaderboard_space.format_complete_document_count(6, 1) == "6"
+
+
+def test_aggregate_document_rows_move_variability_into_hints() -> None:
+    html = export_leaderboard_space.render_document_rows(
+        [
+            {
+                "sample": "driver_mvr_packet_001",
+                "gold_records": 260,
+                "predicted_records": 178.6666666667,
+                "exact_record_recall": 2 / 3,
+                "exact_record_recall_standard_deviation": 0.5509181864,
+                "field_f1": 0.6848871624,
+                "field_f1_standard_deviation": 0.5295353851,
+                "complete_runs": 1,
+                "run_count": 3,
+            }
+        ]
+    )
+
+    assert ">66.7% ± 55.1 pp<" not in html
+    assert ">68.5% ± 53.0 pp<" not in html
+    assert "3-run arithmetic mean: 66.7% ± 55.1 pp sample SD." in html
+    assert "3-run arithmetic mean: 68.5% ± 53.0 pp sample SD." in html
+    assert "Explain exact recall variability for driver_mvr_packet_001" in html
+    assert "Explain field F1 variability for driver_mvr_packet_001" in html
+    assert html.count("variability-definition-button") == 2
+    assert "<span class='document-status partial'>1/3</span>" in html
     assert "tr.winner" not in html
     assert "point leader" not in html
 
@@ -754,8 +862,11 @@ def test_summarize_document_results_keeps_only_comparable_metrics() -> None:
             "gold_records": 260,
             "predicted_records": 230,
             "exact_record_recall": 0.7153846154,
+            "exact_record_recall_standard_deviation": 0.0,
             "field_f1": 0.8687643899,
-            "complete_document": False,
+            "field_f1_standard_deviation": 0.0,
+            "complete_runs": 0,
+            "run_count": 1,
         }
     ]
 
@@ -809,6 +920,30 @@ def test_prompt_templates_render_below_document_table_and_are_escaped() -> None:
     ) in html
     assert "<script>alert(1)</script>" not in html
     assert "class='prompt-scroll'" in html
+
+
+def test_cli_versions_and_sol_paper_note_render_in_details() -> None:
+    models, dataset_meta = export_leaderboard_space.load_runs(
+        export_leaderboard_space.RESULTS_DIR
+    )
+    data = export_leaderboard_space.build_data(models, dataset_meta)
+    html = export_leaderboard_space.build_html(data)
+
+    assert html.count("Codex CLI v0.146.0 · xhigh") == 3
+    assert html.count("n=3 · Codex CLI v0.146.0") == 3
+    assert html.count("Codex CLI v0.144.6 · xhigh") == 1
+    assert html.count("n=1 · Codex CLI v0.144.6") == 1
+    assert html.count("Claude Code v2.1.216 · xhigh") == 2
+    assert html.count("n=1 · Claude Code v2.1.216") == 2
+    assert "Codex CLI · Codex CLI" not in html
+    assert "Claude Code · Claude Code" not in html
+    assert "Reducto API ·" not in html
+    assert "Together API ·" not in html
+    note_position = html.index("class='result-note'")
+    sol_table_position = html.index("class='document-table'", note_position)
+    assert note_position < sol_table_position
+    assert html.count("class='result-note'") == 1
+    assert "not a controlled model-improvement comparison" in html
 
 
 def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
@@ -931,5 +1066,16 @@ def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
     assert 'id="metric-definition-popover"' in html
     assert 'aria-label="Explain full-run cost"' in html
     assert 'aria-label="Explain field F1"' in html
-    assert "function showDefinition(button) {\n    closeDetails();" in html
+    assert (
+        "function showDefinition(button) {\n"
+        '    if (!button.closest(".detail-row")) closeDetails();'
+    ) in html
+    assert "function showDefinition(button) {\n    closeDetails();" not in html
     assert "function toggleDetails(button) {\n    closeDefinition();" in html
+    assert (
+        'if (event.key !== "Escape") return;\n'
+        "    if (!popover.hidden) {"
+    ) in html
+    assert html.index("if (!popover.hidden) {") < html.index(
+        "if (expandedDetails) {"
+    )

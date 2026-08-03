@@ -54,6 +54,18 @@
     "api_equivalent_usd": 43.492019,
     "actual_subscription_charge_usd": null
   },
+  "diagnostic_evaluation": {
+    "canonical_result": false,
+    "report_timestamp": "2026-07-29T18:43:18.231269+00:00",
+    "exact_record_recall": 0.9823980539883104,
+    "exact_record_precision": 0.9794859702900259,
+    "exact_record_f1": 0.9809398508922849,
+    "complete_documents": 6,
+    "field_micro_f1": 0.9958204060246313,
+    "field_macro_f1": 0.991037437164448,
+    "predicted_records": 29687,
+    "execution_errors": 0
+  },
   "per_document_usage": {
     "driver_mvr_packet_001": {
       "input_tokens": 270211,

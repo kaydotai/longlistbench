@@ -8,9 +8,9 @@
 - Protocol: one repository-denied, ephemeral Codex thread per document
 
 This was an independent execution retained only for representative usage and
-cost measurement. It is not the canonical accuracy run, is not exported to the
-leaderboard, and must not be combined with the released run's 97.9% score. The
-repository intentionally retains no second prediction set or evaluation
+cost measurement. It is not a canonical accuracy run, is not exported to the
+leaderboard, and must not be combined with the replicated leaderboard scores.
+The repository intentionally retains no prediction set or evaluation
 report.
 
 ## Measured usage

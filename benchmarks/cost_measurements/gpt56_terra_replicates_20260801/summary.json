@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "model": "gpt-5.6-terra",
+  "reasoning_effort": "xhigh",
+  "runtime": "codex-cli 0.146.0",
+  "input_condition": "ocr",
+  "run_count": 3,
+  "selection_policy": {
+    "leaderboard_statistic": "arithmetic_mean",
+    "variability_statistic": "sample_standard_deviation",
+    "preselected_reference_run": "run_1",
+    "best_of_n_selection": false
+  },
+  "dataset": {
+    "manifest_sha256": "ccf1881c256e9b5a2f575e73061d6fd40cfe763dc446bc873fc63cedd0019133",
+    "documents": 32,
+    "target_records": 29599,
+    "pdf_pages": 1773,
+    "input_fingerprints_match_across_runs": true
+  },
+  "execution_protocol": {
+    "worker_count": 4,
+    "thread_scope": "one_ephemeral_thread_per_document",
+    "repository_denied": true,
+    "ground_truth_available_to_agent": false,
+    "all_document_jobs_first_attempt_success": true
+  },
+  "pricing": {
+    "effective_date": "2026-07-30",
+    "chatgpt_credits_per_million_tokens": {
+      "uncached_input": 50,
+      "cached_input": 5,
+      "output": 300
+    },
+    "api_usd_per_million_tokens": {
+      "uncached_input": 2,
+      "cached_input": 0.2,
+      "cache_write_input": 2.5,
+      "output": 12
+    }
+  },
+  "runs": [
+    {
+      "id": "run_1",
+      "preselected_reference_run": true,
+      "result_dir": "codex_gpt56_terra_full_current_ocr_v2",
+      "report_sha256": "b05982d1e53dd7024ebae3a1e6763f16ef6255a507fccfa38a9e8119d6595436",
+      "generated_at": "2026-07-31T20:41:10.670248+00:00",
+      "report_timestamp": "2026-07-31T20:41:15.595652+00:00",
+      "exact_record_recall": 0.944930571978783,
+      "exact_record_precision": 0.9421295516556069,
+      "exact_record_f1": 0.9435279829976724,
+      "complete_documents": 5,
+      "field_micro_f1": 0.990309003781141,
+      "field_macro_f1": 0.9842492055152464,
+      "predicted_records": 29687,
+      "execution_errors": 0,
+      "input_tokens": 31497125,
+      "cached_input_tokens": 29355264,
+      "uncached_input_tokens": 2141861,
+      "output_tokens": 365763,
+      "reasoning_output_tokens": 186644,
+      "chatgpt_credits": 363.59827,
+      "api_equivalent_usd": 14.5439308
+    },
+    {
+      "id": "run_2",
+      "preselected_reference_run": false,
+      "result_dir": "codex_gpt56_terra_run2_current_ocr_v2",
+      "report_sha256": "b803a3214073320e8fbd3310a732517d9629e1ca9588bc9c370dc79c958ca898",
+      "generated_at": "2026-07-31T22:12:40.979065+00:00",
+      "report_timestamp": "2026-07-31T22:12:45.569940+00:00",
+      "exact_record_recall": 0.9454035609311126,
+      "exact_record_precision": 0.943395590317578,
+      "exact_record_f1": 0.9443985082938189,
+      "complete_documents": 7,
+      "field_micro_f1": 0.9908807650928803,
+      "field_macro_f1": 0.9877501080338753,
+      "predicted_records": 29662,
+      "execution_errors": 0,
+      "input_tokens": 34121637,
+      "cached_input_tokens": 32084224,
+      "uncached_input_tokens": 2037413,
+      "output_tokens": 402077,
+      "reasoning_output_tokens": 196791,
+      "chatgpt_credits": 382.91487,
+      "api_equivalent_usd": 15.3165948
+    },
+    {
+      "id": "run_3",
+      "preselected_reference_run": false,
+      "result_dir": "codex_gpt56_terra_run3_current_ocr_v2",
+      "report_sha256": "29a1f4dc852184e3c9cffc2f58336d4782b09a8b8f45b2b9a735d7f94dcd06d6",
+      "generated_at": "2026-07-31T22:45:37.962827+00:00",
+      "report_timestamp": "2026-07-31T22:45:42.415692+00:00",
+      "exact_record_recall": 0.9806412378796581,
+      "exact_record_precision": 0.9780308646135184,
+      "exact_record_f1": 0.9793343117904076,
+      "complete_documents": 6,
+      "field_micro_f1": 0.9956025864852988,
+      "field_macro_f1": 0.9899933097049552,
+      "predicted_records": 29678,
+      "execution_errors": 0,
+      "input_tokens": 34646953,
+      "cached_input_tokens": 32476416,
+      "uncached_input_tokens": 2170537,
+      "output_tokens": 361477,
+      "reasoning_output_tokens": 178018,
+      "chatgpt_credits": 379.35203,
+      "api_equivalent_usd": 15.1740812
+    }
+  ],
+  "aggregate": {
+    "exact_record_recall": {
+      "median": 0.9454035609311126,
+      "mean": 0.9569917902631846,
+      "min": 0.944930571978783,
+      "max": 0.9806412378796581,
+      "sample_standard_deviation": 0.02048238777731981
+    },
+    "complete_documents": {
+      "median": 6,
+      "mean": 6,
+      "min": 5,
+      "max": 7,
+      "sample_standard_deviation": 1.0
+    },
+    "field_micro_f1": {
+      "median": 0.9908807650928803,
+      "mean": 0.9922641184531067,
+      "min": 0.990309003781141,
+      "max": 0.9956025864852988,
+      "sample_standard_deviation": 0.0029052976355060287
+    },
+    "input_tokens": {
+      "median": 34121637,
+      "mean": 33421905,
+      "min": 31497125,
+      "max": 34646953,
+      "sample_standard_deviation": 1687475.2624154228
+    },
+    "output_tokens": {
+      "median": 365763,
+      "mean": 376439,
+      "min": 361477,
+      "max": 402077,
+      "sample_standard_deviation": 22306.3383817246
+    },
+    "api_equivalent_usd": {
+      "median": 15.1740812,
+      "mean": 15.0115356,
+      "min": 14.5439308,
+      "max": 15.3165948,
+      "sample_standard_deviation": 0.41117905866364374
+    }
+  }
+}

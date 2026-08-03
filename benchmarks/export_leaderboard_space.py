@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
 import html as html_module
 import json
 import shutil
 from pathlib import Path
+from statistics import mean, stdev
 
 DEFAULT_REPO_ID = "kaydotai/LongListBench-Leaderboard"
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -30,10 +32,19 @@ AGENTIC_PROMPT_NOTE = (
     "Generic operations and policy samples received a generated field contract; "
     "claim samples received the published incident JSON Schema."
 )
+SOL_PAPER_COMPARISON_NOTE = (
+    "The leaderboard averages three newer matched Sol runs made with Codex CLI "
+    "v0.146.0, while the paper reports an older single-run baseline of 97.9%. "
+    "Most of the difference comes from one large policy packet where the older "
+    "run was unusually weak. Released transcripts and scoring targets match; a "
+    "field-scope clarification affected three IFTA prompts but accounts for only "
+    "a small part of the change. The run date and runtime also differ, so this is "
+    "not a controlled model-improvement comparison."
+)
 
 RUNS = (
     {
-        "run_dir": "codex_gpt56_sol_full_current_ocr_v2",
+        "run_dir": "codex_gpt56_sol_run1_current_ocr_v2",
         "key": "codex_gpt56_sol",
         "harness": "Codex CLI",
         "model": "GPT-5.6-Sol",
@@ -41,9 +52,48 @@ RUNS = (
         "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
         "prompt_note": AGENTIC_PROMPT_NOTE,
+        "detail_note": SOL_PAPER_COMPARISON_NOTE,
+        "replicate_summary_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_sol_replicates_20260802/summary.json"
+        ),
+    },
+    {
+        "run_dir": "codex_gpt56_terra_full_current_ocr_v2",
+        "key": "codex_gpt56_terra",
+        "harness": "Codex CLI",
+        "model": "GPT-5.6-Terra",
+        "protocol": "Agentic CLI",
+        "cost_source": "codex_api_equivalent",
+        "cost_measurement_relation": "same_run",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
         "cost_metadata_path": (
             REPO_ROOT
-            / "benchmarks/cost_measurements/gpt56_sol_20260729/usage_summary.json"
+            / "benchmarks/cost_measurements/gpt56_terra_20260731/usage_summary.json"
+        ),
+        "replicate_summary_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_terra_replicates_20260801/summary.json"
+        ),
+    },
+    {
+        "run_dir": "codex_gpt56_luna_full_current_ocr_v2",
+        "key": "codex_gpt56_luna",
+        "harness": "Codex CLI",
+        "model": "GPT-5.6-Luna",
+        "protocol": "Agentic CLI",
+        "cost_source": "codex_api_equivalent",
+        "cost_measurement_relation": "same_run",
+        "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
+        "prompt_note": AGENTIC_PROMPT_NOTE,
+        "cost_metadata_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_luna_20260801/usage_summary.json"
+        ),
+        "replicate_summary_path": (
+            REPO_ROOT
+            / "benchmarks/cost_measurements/gpt56_luna_replicates_20260801/summary.json"
         ),
     },
     {
@@ -198,13 +248,20 @@ def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> di
                     "incomplete."
                 ),
             }
+        if run.get("cost_measurement_relation") == "same_run":
+            explanation = (
+                f"${api_equivalent:.2f} API-equivalent cost derived from the same saved "
+                "full-corpus run."
+            )
+        else:
+            explanation = (
+                f"${api_equivalent:.2f} API-equivalent cost from the independent cost "
+                "measurement; the leaderboard accuracy remains the released run."
+            )
         return {
             "full_run_cost_usd": float(api_equivalent),
             "full_run_cost_source": "codex_api_equivalent",
-            "full_run_cost_explanation": (
-                f"${api_equivalent:.2f} API-equivalent cost from the independent cost "
-                "measurement; the leaderboard accuracy remains the released run."
-            ),
+            "full_run_cost_explanation": explanation,
         }
     if source == "claude_api_equivalent":
         samples = metadata.get("samples")
@@ -297,6 +354,59 @@ def derive_full_run_cost(run: dict, metadata: dict, expected_samples: int) -> di
     raise ValueError(f"Unsupported cost source: {source}")
 
 
+def _mean_tree(values: list):
+    first = values[0]
+    if isinstance(first, dict):
+        keys = set(first)
+        if any(set(value) != keys for value in values[1:]):
+            raise ValueError("Replicate metric structures do not match")
+        return {
+            key: _mean_tree([value[key] for value in values])
+            for key in first
+        }
+    if isinstance(first, bool):
+        if any(value is not first for value in values[1:]):
+            raise ValueError("Boolean replicate metadata does not match")
+        return first
+    if isinstance(first, (int, float)):
+        if all(value == first for value in values[1:]):
+            return first
+        return mean(values)
+    if any(value != first for value in values[1:]):
+        raise ValueError("Replicate metadata does not match")
+    return deepcopy(first)
+
+
+def _standard_deviation_tree(values: list):
+    first = values[0]
+    if isinstance(first, dict):
+        return {
+            key: _standard_deviation_tree([value[key] for value in values])
+            for key in first
+        }
+    if isinstance(first, bool) or not isinstance(first, (int, float)):
+        return None
+    if len(values) == 1:
+        return 0.0
+    return stdev(values)
+
+
+def _replicate_cost(summary: dict) -> dict:
+    aggregate = summary["aggregate"]["api_equivalent_usd"]
+    run_count = summary["run_count"]
+    cost_mean = float(aggregate["mean"])
+    cost_sd = float(aggregate["sample_standard_deviation"])
+    return {
+        "full_run_cost_usd": cost_mean,
+        "full_run_cost_standard_deviation_usd": cost_sd,
+        "full_run_cost_source": "codex_api_equivalent_mean",
+        "full_run_cost_explanation": (
+            f"Mean API-equivalent cost across {run_count} saved full-corpus runs: "
+            f"${cost_mean:.2f} ± ${cost_sd:.2f} sample SD."
+        ),
+    }
+
+
 def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
     models = []
     dataset_meta: dict = {}
@@ -305,40 +415,74 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
     for run in RUNS:
         run_dir = run["run_dir"]
         key = run["key"]
-        report = json.loads((results_dir / run_dir / "evaluation_report.json").read_text(encoding="utf-8"))
-        meta = json.loads((results_dir / run_dir / "run_metadata.json").read_text(encoding="utf-8"))
-        stats = report["model_stats"][key]
-        try:
-            detailed_results = report["detailed_results"]
-        except KeyError:
-            raise ValueError(f"{run_dir} is missing detailed_results") from None
-        document_samples = {detail["sample"] for detail in detailed_results}
-        if (
-            len(detailed_results) != stats["total_samples"]
-            or len(document_samples) != stats["total_samples"]
-        ):
-            raise ValueError(
-                f"{run_dir} expected {stats['total_samples']} unique documents, "
-                f"found {len(detailed_results)} rows and {len(document_samples)} unique samples"
+        replicate_summary = None
+        result_dirs = [run_dir]
+        if replicate_summary_path := run.get("replicate_summary_path"):
+            replicate_summary = json.loads(
+                Path(replicate_summary_path).read_text(encoding="utf-8")
             )
-        manifest = report["dataset"]["manifest_sha256"]
-        shape = (stats["total_samples"], stats["total_rows"])
-        if expected_manifest is None:
-            expected_manifest = manifest
-            expected_shape = shape
-            dataset_meta = report["dataset"]
-        elif manifest != expected_manifest or shape != expected_shape:
-            raise ValueError(
-                f"{run_dir} targets a different dataset: "
-                f"manifest={manifest}, shape={shape}; "
-                f"expected manifest={expected_manifest}, shape={expected_shape}"
+            result_dirs = [entry["result_dir"] for entry in replicate_summary["runs"]]
+
+        reports = []
+        metadata = []
+        stats_per_run = []
+        details_per_run = []
+        for result_dir in result_dirs:
+            report = json.loads(
+                (results_dir / result_dir / "evaluation_report.json").read_text(
+                    encoding="utf-8"
+                )
             )
-        cost_metadata = meta
-        if cost_metadata_path := run.get("cost_metadata_path"):
-            cost_metadata = json.loads(
-                Path(cost_metadata_path).read_text(encoding="utf-8")
+            meta = json.loads(
+                (results_dir / result_dir / "run_metadata.json").read_text(
+                    encoding="utf-8"
+                )
             )
-        cost = derive_full_run_cost(run, cost_metadata, stats["total_samples"])
+            stats = report["model_stats"][key]
+            try:
+                detailed_results = report["detailed_results"]
+            except KeyError:
+                raise ValueError(f"{result_dir} is missing detailed_results") from None
+            document_samples = {detail["sample"] for detail in detailed_results}
+            if (
+                len(detailed_results) != stats["total_samples"]
+                or len(document_samples) != stats["total_samples"]
+            ):
+                raise ValueError(
+                    f"{result_dir} expected {stats['total_samples']} unique documents, "
+                    f"found {len(detailed_results)} rows and "
+                    f"{len(document_samples)} unique samples"
+                )
+            manifest = report["dataset"]["manifest_sha256"]
+            shape = (stats["total_samples"], stats["total_rows"])
+            if expected_manifest is None:
+                expected_manifest = manifest
+                expected_shape = shape
+                dataset_meta = report["dataset"]
+            elif manifest != expected_manifest or shape != expected_shape:
+                raise ValueError(
+                    f"{result_dir} targets a different dataset: "
+                    f"manifest={manifest}, shape={shape}; "
+                    f"expected manifest={expected_manifest}, shape={expected_shape}"
+                )
+            reports.append(report)
+            metadata.append(meta)
+            stats_per_run.append(stats)
+            details_per_run.append(detailed_results)
+
+        report = reports[0]
+        meta = metadata[0]
+        stats = _mean_tree(stats_per_run)
+        stats_standard_deviation = _standard_deviation_tree(stats_per_run)
+        if replicate_summary is not None:
+            cost = _replicate_cost(replicate_summary)
+        else:
+            cost_metadata = meta
+            if cost_metadata_path := run.get("cost_metadata_path"):
+                cost_metadata = json.loads(
+                    Path(cost_metadata_path).read_text(encoding="utf-8")
+                )
+            cost = derive_full_run_cost(run, cost_metadata, stats["total_samples"])
         models.append({
             "key": key,
             "harness": run["harness"],
@@ -346,8 +490,12 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
             "protocol": run["protocol"],
             "prompt_templates": load_prompt_templates(run),
             "prompt_note": run["prompt_note"],
+            "detail_note": run.get("detail_note"),
             **cost,
-            "requested_model": run.get("requested_model", meta.get("requested_model", meta.get("model_id"))),
+            "requested_model": run.get(
+                "requested_model",
+                meta.get("requested_model", meta.get("model_id")),
+            ),
             "effort": run.get("effort", meta.get("effort", "default")),
             "cli_version": run.get(
                 "cli_version",
@@ -355,7 +503,13 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
             ),
             "run_date": meta["generated_at"][:10],
             "stats": stats,
-            "detailed_results": detailed_results,
+            "stats_standard_deviation": stats_standard_deviation,
+            "run_count": len(result_dirs),
+            "reporting_statistic": (
+                "arithmetic_mean" if len(result_dirs) > 1 else "single_run"
+            ),
+            "result_dirs": result_dirs,
+            "detailed_results_runs": details_per_run,
         })
     return models, dataset_meta
 
@@ -364,18 +518,48 @@ def pct(value: float, digits: int = 1) -> str:
     return f"{100 * value:.{digits}f}"
 
 
-def summarize_document_results(details: list[dict]) -> list[dict]:
+def summarize_document_results(detail_runs: list[list[dict]]) -> list[dict]:
+    if detail_runs and isinstance(detail_runs[0], dict):
+        detail_runs = [detail_runs]
+    run_maps = [
+        {detail["sample"]: detail for detail in details}
+        for details in detail_runs
+    ]
+    expected_samples = set(run_maps[0])
+    if any(set(run_map) != expected_samples for run_map in run_maps[1:]):
+        raise ValueError("Replicate document sets do not match")
+
     documents = []
-    for detail in details:
-        metrics = detail["metrics"]
+    for sample in sorted(expected_samples):
+        details = [run_map[sample] for run_map in run_maps]
+        detail = details[0]
+        metrics = [item["metrics"] for item in details]
+        run_count = len(metrics)
         documents.append({
-            "sample": detail["sample"],
+            "sample": sample,
             "tier": detail["tier"],
-            "gold_records": metrics["ground_truth_count"],
-            "predicted_records": metrics["predicted_count"],
-            "exact_record_recall": metrics["exact_record_recall"],
-            "field_f1": metrics["f1"],
-            "complete_document": metrics["complete_document"],
+            "gold_records": metrics[0]["ground_truth_count"],
+            "predicted_records": mean(
+                item["predicted_count"] for item in metrics
+            ),
+            "exact_record_recall": mean(
+                item["exact_record_recall"] for item in metrics
+            ),
+            "exact_record_recall_standard_deviation": (
+                stdev(item["exact_record_recall"] for item in metrics)
+                if run_count > 1
+                else 0.0
+            ),
+            "field_f1": mean(item["f1"] for item in metrics),
+            "field_f1_standard_deviation": (
+                stdev(item["f1"] for item in metrics)
+                if run_count > 1
+                else 0.0
+            ),
+            "complete_runs": sum(
+                bool(item["complete_document"]) for item in metrics
+            ),
+            "run_count": run_count,
         })
     return documents
 
@@ -385,6 +569,13 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
     for m in models:
         s = m["stats"]
         roles = s["by_evaluation_role"]
+        run_count = m.get("run_count", 1)
+        stats_standard_deviation = m.get("stats_standard_deviation")
+        if stats_standard_deviation is None:
+            stats_standard_deviation = _standard_deviation_tree([s])
+        detailed_results_runs = m.get("detailed_results_runs")
+        if detailed_results_runs is None:
+            detailed_results_runs = [m.get("detailed_results", [])]
         rows.append({
             "config": f"{m['harness']}, {m['model']} ({m['effort']})",
             "harness": m["harness"],
@@ -393,12 +584,19 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "effort": m["effort"],
             "cli_version": m["cli_version"],
             "run_date": m["run_date"],
+            "run_count": run_count,
+            "reporting_statistic": m.get("reporting_statistic", "single_run"),
+            "result_dirs": m.get("result_dirs", []),
             "protocol": m["protocol"],
             "prompt_templates": m["prompt_templates"],
             "prompt_note": m["prompt_note"],
+            "detail_note": m.get("detail_note"),
             "full_run_cost_usd": m["full_run_cost_usd"],
             "full_run_cost_source": m["full_run_cost_source"],
             "full_run_cost_explanation": m["full_run_cost_explanation"],
+            "full_run_cost_standard_deviation_usd": m.get(
+                "full_run_cost_standard_deviation_usd", 0.0
+            ),
             "full_run_cost_beta": m.get("full_run_cost_beta", False),
             "full_run_cost_comparison": m.get("full_run_cost_comparison"),
             "exact_record_recall": s["exact_record_recall"],
@@ -409,15 +607,37 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "complete_document_rate": s["complete_document_rate"],
             "weighted_f1": s["weighted_f1"],
             "weighted_recall": s["weighted_recall"],
+            "metric_standard_deviation": {
+                "exact_record_recall": stats_standard_deviation[
+                    "exact_record_recall"
+                ],
+                "exact_record_precision": stats_standard_deviation[
+                    "exact_record_precision"
+                ],
+                "exact_record_f1": stats_standard_deviation["exact_record_f1"],
+                "complete_documents": stats_standard_deviation[
+                    "complete_documents"
+                ],
+                "weighted_f1": stats_standard_deviation["weighted_f1"],
+                "structural_exact_recall": stats_standard_deviation[
+                    "by_evaluation_role"
+                ]["structural_challenge"]["exact_record_recall"],
+                "scale_control_exact_recall": stats_standard_deviation[
+                    "by_evaluation_role"
+                ]["scale_control"]["exact_record_recall"],
+            },
             "structural_exact_recall": roles["structural_challenge"]["exact_record_recall"],
             "scale_control_exact_recall": roles["scale_control"]["exact_record_recall"],
             "gold_records": s["total_rows"],
             "exact_record_matches": s["total_exact_record_matches"],
             "errors": s["errors"],
             "by_tier": s["by_tier"],
+            "by_tier_standard_deviation": stats_standard_deviation["by_tier"],
             "by_family": s["by_complexity_regime"],
+            "by_family_standard_deviation": stats_standard_deviation["by_complexity_regime"],
             "by_stressor": s["by_stressor"],
-            "documents": summarize_document_results(m["detailed_results"]),
+            "by_stressor_standard_deviation": stats_standard_deviation["by_stressor"],
+            "documents": summarize_document_results(detailed_results_runs),
         })
     rows.sort(
         key=lambda r: (r["complete_documents"], r["exact_record_recall"]),
@@ -429,7 +649,9 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
         "dataset": dataset_meta,
         "protocol": (
             "All rows use the same dataset and scorer. Agentic CLI and Bonsai runs consume released "
-            "OCR transcripts; Reducto Deep Extract runs on raw PDFs. Protocols are labeled separately."
+            "OCR transcripts; Reducto Deep Extract runs on raw PDFs. Sol, Terra, and Luna report "
+            "means across three matched full-corpus runs; other rows are single runs. Protocols are "
+            "labeled separately."
         ),
         "results": rows,
     }
@@ -439,6 +661,45 @@ def format_full_run_cost(value: float | None) -> str:
     if value is None:
         return "n/a"
     return f"${value:.2f}"
+
+
+def format_cli_version(cli_version: str) -> str:
+    if cli_version.startswith("codex-cli "):
+        return f"Codex CLI v{cli_version.removeprefix('codex-cli ')}"
+    if cli_version.endswith(" (Claude Code)"):
+        version = cli_version.removesuffix(" (Claude Code)")
+        return f"Claude Code v{version}"
+    return ""
+
+
+def format_mean_count(value: float, run_count: int) -> str:
+    return f"{value:.1f}" if run_count > 1 else str(int(value))
+
+
+def format_complete_document_count(value: float, run_count: int) -> str:
+    if run_count <= 1 or float(value).is_integer():
+        return str(int(value))
+    return f"{value:.1f}"
+
+
+def render_variability_button(
+    *,
+    title: str,
+    aria_label: str,
+    definition: str,
+    run_count: int,
+) -> str:
+    if run_count <= 1:
+        return ""
+    return (
+        '<button class="definition-button variability-definition-button" '
+        'type="button" '
+        f'aria-label="{html_module.escape(aria_label, quote=True)}" '
+        'aria-expanded="false" '
+        f'data-metric-title="{html_module.escape(title, quote=True)}" '
+        f'data-metric-definition="{html_module.escape(definition, quote=True)}">'
+        "i</button>"
+    )
 
 
 DISPLAYED_METRICS = {
@@ -493,12 +754,89 @@ def render_prompt_templates(result: dict) -> str:
     )
 
 
+def render_document_rows(documents: list[dict]) -> str:
+    rows = []
+    for document in documents:
+        run_count = int(document.get("run_count", 1))
+        complete_runs = int(
+            document.get(
+                "complete_runs",
+                int(document.get("complete_document", False)),
+            )
+        )
+        if complete_runs == run_count:
+            status_class = "complete"
+        elif complete_runs:
+            status_class = "partial"
+        else:
+            status_class = "incomplete"
+        complete_label = (
+            f"{complete_runs}/{run_count}"
+            if run_count > 1
+            else "Complete" if complete_runs else "Incomplete"
+        )
+        exact_label = f"{pct(document['exact_record_recall'])}%"
+        field_f1_label = f"{pct(document['field_f1'])}%"
+        exact_hint = render_variability_button(
+            title=f"Exact recall variability · {document['sample']}",
+            aria_label=(
+                f"Explain exact recall variability for {document['sample']}"
+            ),
+            definition=(
+                f"{run_count}-run arithmetic mean: {exact_label} ± "
+                f"{pct(document.get('exact_record_recall_standard_deviation', 0.0))} "
+                "pp sample SD."
+            ),
+            run_count=run_count,
+        )
+        field_f1_hint = render_variability_button(
+            title=f"Field F1 variability · {document['sample']}",
+            aria_label=f"Explain field F1 variability for {document['sample']}",
+            definition=(
+                f"{run_count}-run arithmetic mean: {field_f1_label} ± "
+                f"{pct(document.get('field_f1_standard_deviation', 0.0))} "
+                "pp sample SD."
+            ),
+            run_count=run_count,
+        )
+        rows.append(
+            "<tr>"
+            f"<td class='document-name'>{document['sample']}</td>"
+            f"<td class='numeric'>{document['gold_records']}</td>"
+            "<td class='numeric'>"
+            f"{format_mean_count(document['predicted_records'], run_count)}</td>"
+            "<td class='numeric'>"
+            "<span class='metric-cell'>"
+            f"<span class='metric-value'>{exact_label}</span>{exact_hint}</span>"
+            "</td><td class='numeric'>"
+            "<span class='metric-cell'>"
+            f"<span class='metric-value'>{field_f1_label}</span>{field_f1_hint}</span>"
+            "</td><td class='document-complete'>"
+            f"<span class='document-status {status_class}'>{complete_label}</span>"
+            "</td></tr>"
+        )
+    return "".join(rows)
+
+
 def build_html(data: dict) -> str:
     results = data["results"]
     leaders = metric_leaders(results)
     rows_html = []
     for rank, result in enumerate(results, 1):
         result_index = rank - 1
+        run_count = result.get("run_count", 1)
+        cli_version_label = format_cli_version(result.get("cli_version", ""))
+        harness_label = cli_version_label or result["harness"]
+        cli_version_metadata = (
+            f" · {cli_version_label}" if cli_version_label else ""
+        )
+        variability = result.get("metric_standard_deviation") or {
+            "exact_record_recall": 0.0,
+            "complete_documents": 0.0,
+            "structural_exact_recall": 0.0,
+            "scale_control_exact_recall": 0.0,
+            "weighted_f1": 0.0,
+        }
         full_run_cost = result["full_run_cost_usd"]
         cost_label = format_full_run_cost(full_run_cost)
         cost_sort_value = "" if full_run_cost is None else full_run_cost
@@ -548,9 +886,52 @@ def build_html(data: dict) -> str:
         def best_class(metric: str) -> str:
             return " metric-best" if result_index in leaders[metric] else ""
 
+        def percent_metric_cell(metric: str, title: str) -> str:
+            label = f"{pct(result[metric])}%"
+            button = render_variability_button(
+                title=f"{title} variability · {result['model']}",
+                aria_label=f"Explain {title.casefold()} variability for {result['model']}",
+                definition=(
+                    f"{run_count}-run arithmetic mean: {label} ± "
+                    f"{pct(variability[metric])} pp sample SD."
+                ),
+                run_count=run_count,
+            )
+            return (
+                f"<span class='metric-cell'><span class='metric-value'>{label}</span>"
+                f"{button}</span>"
+            )
+
+        complete_label = (
+            f"{format_complete_document_count(result['complete_documents'], run_count)}"
+            f"/{result['total_samples']}"
+        )
+        complete_button = render_variability_button(
+            title=f"Complete documents variability · {result['model']}",
+            aria_label=(
+                f"Explain complete documents variability for {result['model']}"
+            ),
+            definition=(
+                f"{run_count}-run arithmetic mean: {complete_label} ± "
+                f"{variability['complete_documents']:.1f} documents sample SD."
+            ),
+            run_count=run_count,
+        )
+        complete_metric_cell = (
+            "<span class='metric-cell'>"
+            f"<span class='metric-value'>{complete_label}</span>"
+            f"{complete_button}</span>"
+        )
+
         documents = result.get("documents", [])
         prompt_templates_html = render_prompt_templates(result)
-        has_details = bool(documents or prompt_templates_html)
+        detail_note = result.get("detail_note")
+        detail_note_html = (
+            f"<aside class='result-note'>{html_module.escape(detail_note)}</aside>"
+            if detail_note
+            else ""
+        )
+        has_details = bool(documents or prompt_templates_html or detail_note_html)
         details_id = f"result-details-{rank}"
         details_button = (
             f'<button class="details-button" type="button" aria-expanded=\'false\' '
@@ -561,24 +942,16 @@ def build_html(data: dict) -> str:
             if has_details
             else ""
         )
-        document_rows = "".join(
-            "<tr>"
-            f"<td class='document-name'>{document['sample']}</td>"
-            f"<td class='numeric'>{document['gold_records']}</td>"
-            f"<td class='numeric'>{document['predicted_records']}</td>"
-            f"<td class='numeric'>{pct(document['exact_record_recall'])}%</td>"
-            f"<td class='numeric'>{pct(document['field_f1'])}%</td>"
-            "<td class='document-complete'>"
-            f"<span class='document-status {'complete' if document['complete_document'] else 'incomplete'}'>"
-            f"{'Complete' if document['complete_document'] else 'Incomplete'}</span></td>"
-            "</tr>"
-            for document in documents
-        )
+        document_rows = render_document_rows(documents)
+        predicted_header = "Predicted (mean)" if run_count > 1 else "Predicted"
+        complete_header = "Complete runs" if run_count > 1 else "Complete"
         document_table_html = (
             "<div class='document-scroll'><table class='document-table'>"
             "<thead><tr><th>Document</th><th class='numeric'>Gold records</th>"
-            "<th class='numeric'>Predicted</th><th class='numeric'>Exact recall</th>"
-            "<th class='numeric'>Field F1</th><th>Complete</th></tr></thead>"
+            f"<th class='numeric'>{predicted_header}</th>"
+            "<th class='numeric'>Exact recall</th>"
+            f"<th class='numeric'>Field F1</th><th>{complete_header}</th>"
+            "</tr></thead>"
             f"<tbody>{document_rows}</tbody></table></div>"
             if documents
             else ""
@@ -588,7 +961,9 @@ def build_html(data: dict) -> str:
             f"<td class='configuration' data-column='configuration' "
             f"data-sort-value='{result['model'].casefold()}'><div class='model-line'>"
             f"<strong>{result['model']}</strong></div>"
-            f"<span>{result['harness']} · {result['effort']} · {result['run_date']}</span>"
+            f"<span>{harness_label} · "
+            f"{result['effort']} · {result['run_date']} · "
+            f"n={run_count}{' · arithmetic mean' if run_count > 1 else ''}</span>"
             f"<div class='configuration-actions'><span class='protocol'>{result['protocol']}</span>"
             f"{details_button}</div></td>"
             f"<td class='numeric price{best_class('full_run_cost_usd')}' "
@@ -599,29 +974,31 @@ def build_html(data: dict) -> str:
             f"<td class='numeric{best_class('exact_record_recall')}' "
             "data-column='exact_record_recall' "
             f"data-sort-value='{result['exact_record_recall']}'>"
-            f"{pct(result['exact_record_recall'])}%</td>"
+            f"{percent_metric_cell('exact_record_recall', 'Exact recall')}</td>"
             f"<td class='numeric{best_class('complete_documents')}' "
             "data-column='complete_documents' "
             f"data-sort-value='{result['complete_documents']}'>"
-            f"{result['complete_documents']}/{result['total_samples']}</td>"
+            f"{complete_metric_cell}</td>"
             f"<td class='numeric{best_class('structural_exact_recall')}' "
             "data-column='structural_exact_recall' "
             f"data-sort-value='{result['structural_exact_recall']}'>"
-            f"{pct(result['structural_exact_recall'])}%</td>"
+            f"{percent_metric_cell('structural_exact_recall', 'Structural recall')}</td>"
             f"<td class='numeric{best_class('scale_control_exact_recall')}' "
             "data-column='scale_control_exact_recall' "
             f"data-sort-value='{result['scale_control_exact_recall']}'>"
-            f"{pct(result['scale_control_exact_recall'])}%</td>"
+            f"{percent_metric_cell('scale_control_exact_recall', 'Scale-control recall')}</td>"
             f"<td class='numeric{best_class('weighted_f1')}' "
             "data-column='weighted_f1' "
-            f"data-sort-value='{result['weighted_f1']}'>{pct(result['weighted_f1'])}%</td>"
+            f"data-sort-value='{result['weighted_f1']}'>"
+            f"{percent_metric_cell('weighted_f1', 'Field F1')}</td>"
             "</tr>"
             + (
                 f"<tr class='detail-row' id='{details_id}' data-detail-for='{rank}' hidden>"
                 "<td colspan='7'><div class='detail-panel'>"
                 "<div class='detail-panel-heading'>"
-                f"<strong>{result['model']}</strong><span>{len(documents)} documents</span></div>"
-                f"{document_table_html}{prompt_templates_html}</div></td></tr>"
+                f"<strong>{result['model']}</strong><span>{len(documents)} documents · "
+                f"n={run_count}{cli_version_metadata}</span></div>"
+                f"{detail_note_html}{document_table_html}{prompt_templates_html}</div></td></tr>"
                 if has_details
                 else ""
             )
@@ -846,6 +1223,16 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   letter-spacing: .04em;
   text-transform: uppercase;
 }}
+.result-note {{
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,255,255,.52);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}}
 .document-scroll {{
   max-height: 380px;
   overflow: auto;
@@ -939,6 +1326,12 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
+}}
+.metric-cell {{
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
 }}
 .beta-badge {{
   padding: 2px 4px;
@@ -1233,7 +1626,7 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   }}
 
   function showDefinition(button) {{
-    closeDetails();
+    if (!button.closest(".detail-row")) closeDetails();
     if (activeDefinitionButton === button && !popover.hidden) {{
       closeDefinition();
       return;
@@ -1332,18 +1725,20 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
     if (!popover.hidden && !popover.contains(event.target)) closeDefinition();
   }});
   document.addEventListener("keydown", (event) => {{
+    if (event.key !== "Escape") return;
+    if (!popover.hidden) {{
+      const button = activeDefinitionButton;
+      closeDefinition();
+      button.focus();
+      return;
+    }}
     const expandedDetails = detailButtons.find(
       (button) => button.getAttribute("aria-expanded") === "true"
     );
-    if (event.key === "Escape" && expandedDetails) {{
+    if (expandedDetails) {{
       closeDetails();
       expandedDetails.focus();
-      return;
     }}
-    if (event.key !== "Escape" || popover.hidden) return;
-    const button = activeDefinitionButton;
-    closeDefinition();
-    button.focus();
   }});
   window.addEventListener("resize", closeDefinition);
   window.addEventListener("scroll", closeDefinition, true);

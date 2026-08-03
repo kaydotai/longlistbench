@@ -53,6 +53,9 @@ jobs:
           --results-dir benchmarks/results/claude_fable5_full_current_ocr_v2
           --require-full-corpus
 
+      - name: Verify replicated GPT-5.6 packages
+        run: python benchmarks/check_replicate_summary.py
+
       - name: Verify OCR identifier coverage
         run: python benchmarks/validate_ocr_vs_golden.py --claims-dir data
 
