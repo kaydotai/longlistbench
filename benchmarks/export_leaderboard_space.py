@@ -117,7 +117,7 @@ RUNS = (
         "prompt_note": AGENTIC_PROMPT_NOTE,
     },
     {
-        "run_dir": "codex_full_current_ocr_v2",
+        "run_dir": "codex_gpt55_run1_current_ocr_v2",
         "key": "codex_gpt55",
         "harness": "Codex CLI",
         "model": "GPT-5.5",
@@ -125,9 +125,9 @@ RUNS = (
         "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
         "prompt_note": AGENTIC_PROMPT_NOTE,
-        "cost_metadata_path": (
+        "replicate_summary_path": (
             REPO_ROOT
-            / "benchmarks/cost_measurements/gpt55_20260729/usage_summary.json"
+            / "benchmarks/cost_measurements/gpt55_replicates_20260803/summary.json"
         ),
     },
     {

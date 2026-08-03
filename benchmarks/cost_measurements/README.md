@@ -1,19 +1,17 @@
 # Codex Full-Corpus Measurements
 
 These artifacts compare GPT-5.5, GPT-5.6-Sol, GPT-5.6-Terra, and GPT-5.6-Luna
-on the same 32-document OCR corpus. The reference cost table uses one GPT-5.5
-and one Sol run from Codex CLI 0.145.0. Sol, Terra, and Luna also have three
-matched full-corpus leaderboard runs on CLI 0.146.0. All
-use `xhigh` reasoning, four workers, one repository-denied ephemeral thread per
-document, and the same 272K context cap. The three-run Sol, Terra, and Luna
-packages have identical transcript, field-contract, and prompt hashes. The
-older GPT-5.5/Sol reference cost pair predates the corrected total-row
-instruction on three IFTA schedules and is used only for cost comparison.
+on the same 32-document OCR corpus. All four models have three matched
+full-corpus leaderboard runs on Codex CLI 0.146.0. They use `xhigh` reasoning,
+four workers, one repository-denied ephemeral thread per document, and the
+same 272K context cap. All twelve packages have identical transcript,
+field-contract, and prompt hashes.
 
-The GPT-5.5 and reference Sol artifacts are independent cost measurements with
-non-canonical quality diagnostics. Sol, Terra, and Luna report three-run means
-on the leaderboard. All nine prediction sets and reports are retained under
-`benchmarks/results/`.
+The reference cost table below is retained as a historical single-run comparison
+from an older CLI build; its GPT-5.5 and Sol accuracy diagnostics are not used
+by the leaderboard. The leaderboard reports three-run arithmetic means and
+sample standard deviations for all four Codex models. All twelve prediction
+sets and reports are retained under `benchmarks/results/`.
 
 ## Reference-run cost comparison
 
@@ -57,6 +55,12 @@ $33.13, $35.33, and $33.40. Their leaderboard means are 98.8% exact recall,
 8.0/32 complete documents, and $33.96; the sample standard deviations are
 0.2 pp, 1.0 document, and $1.20.
 
+The three fresh GPT-5.5 runs reached 97.3%, 97.6%, and 94.8% exact-record
+recall, completed 6/32, 6/32, and 7/32 documents, and had API-equivalent costs
+of $40.55, $46.94, and $42.07. Their leaderboard means are 96.6% exact recall,
+6.3/32 complete documents, and $43.19; the sample standard deviations are
+1.5 pp, 0.6 document, and $3.34.
+
 The other two Terra runs reached 94.5% and 98.1% exact-record recall, 7/32 and
 6/32 complete documents, and API-equivalent costs of $15.32 and $15.17. Across
 all three Terra runs, the mean was 95.7% exact recall, 6.0/32 complete
@@ -76,7 +80,7 @@ observations, not precise causal estimates of model-version effects. See the
 model-specific directories for per-document calculations and replicate
 summaries.
 
-Verify all nine reports, predictions, fingerprints, and summary aggregates:
+Verify all twelve reports, predictions, fingerprints, and summary aggregates:
 
 ```bash
 python benchmarks/check_replicate_summary.py

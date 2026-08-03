@@ -252,7 +252,7 @@ OCR support should be interpreted at the affected-record and field level, not on
 
 Saved reports under `benchmarks/results/` should be treated as local run artifacts unless their manifest hash matches the current `data/manifest.json`. After replacing layouts, rerun OCR and evaluation before citing current-layout or current-model baselines. The current released dataset includes OCR transcripts for every PDF.
 
-The repository includes six repository-denied coding-agent configurations under the same OCR input and field-contract protocol. Sol, Terra, and Luna each have three matched full-corpus leaderboard runs; the other configurations have one. Every result directory includes all 32 predictions, input and prediction fingerprints, and a report that can be checked offline. The July Sol package used by the paper is retained separately from the newer three-run leaderboard aggregate.
+The repository includes six repository-denied coding-agent configurations under the same OCR input and field-contract protocol. GPT-5.5, Sol, Terra, and Luna each have three matched full-corpus leaderboard runs; the two Claude configurations have one. Every result directory includes all 32 predictions, input and prediction fingerprints, and a report that can be checked offline. The July Sol package used by the paper is retained separately from the newer three-run leaderboard aggregate.
 
 | Agent | Runs | Documents | Target records | Errors | Exact-record recall | Complete documents | Field micro-F1 | Field macro-F1 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -260,10 +260,10 @@ The repository includes six repository-denied coding-agent configurations under 
 | Codex CLI `gpt-5.6-terra`, xhigh | 3 | 32 | 29,599 | 0 | 95.7% ± 2.0 pp | 6.0 ± 1.0 / 32 | 99.2% ± 0.3 pp | 98.7% ± 0.3 pp |
 | Codex CLI `gpt-5.6-luna`, xhigh | 3 | 32 | 29,599 | 0 | 94.4% ± 3.4 pp | 5.0 ± 1.0 / 32 | 98.7% ± 1.1 pp | 96.6% ± 3.4 pp |
 | Claude Code `claude-fable-5`, xhigh | 1 | 32 | 29,599 | 0 | 95.1% | 9/32 (28.1%) | 96.8% | 93.6% |
-| Codex CLI `gpt-5.5`, xhigh | 1 | 32 | 29,599 | 0 | 94.5% | 4/32 (12.5%) | 98.8% | 98.6% |
+| Codex CLI `gpt-5.5`, xhigh | 3 | 32 | 29,599 | 0 | 96.6% ± 1.5 pp | 6.3 ± 0.6 / 32 | 99.3% ± 0.3 pp | 98.0% ± 1.6 pp |
 | Claude Code `claude-opus-4-8`, xhigh | 1 | 32 | 29,599 | 0 | 97.7% | 7/32 (21.9%) | 99.4% | 99.3% |
 
-The latest saved results are under `benchmarks/results/`. Sol, Terra, and Luna leaderboard values are arithmetic means with sample standard deviations across three matched runs; their complete packages and aggregate summaries are linked from `benchmarks/cost_measurements/`. The other rows are explicitly single-run results, so small cross-model differences should not be treated as statistically resolved.
+The latest saved results are under `benchmarks/results/`. GPT-5.5, Sol, Terra, and Luna leaderboard values are arithmetic means with sample standard deviations across three matched runs; their complete packages and aggregate summaries are linked from `benchmarks/cost_measurements/`. The other rows are explicitly single-run results, so small cross-model differences should not be treated as statistically resolved.
 
 An exact record must match every normalized target field. Complete-document success requires the predicted and ground-truth record multisets to be identical, including duplicates and with no extra records. Record order is not scored. Field-pair F1 remains a secondary partial-credit diagnostic.
 
