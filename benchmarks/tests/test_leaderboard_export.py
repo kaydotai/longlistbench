@@ -922,6 +922,30 @@ def test_prompt_templates_render_below_document_table_and_are_escaped() -> None:
     assert "class='prompt-scroll'" in html
 
 
+def test_cli_versions_and_sol_paper_note_render_in_details() -> None:
+    models, dataset_meta = export_leaderboard_space.load_runs(
+        export_leaderboard_space.RESULTS_DIR
+    )
+    data = export_leaderboard_space.build_data(models, dataset_meta)
+    html = export_leaderboard_space.build_html(data)
+
+    assert html.count("Codex CLI v0.146.0 · xhigh") == 3
+    assert html.count("n=3 · Codex CLI v0.146.0") == 3
+    assert html.count("Codex CLI v0.144.6 · xhigh") == 1
+    assert html.count("n=1 · Codex CLI v0.144.6") == 1
+    assert html.count("Claude Code v2.1.216 · xhigh") == 2
+    assert html.count("n=1 · Claude Code v2.1.216") == 2
+    assert "Codex CLI · Codex CLI" not in html
+    assert "Claude Code · Claude Code" not in html
+    assert "Reducto API ·" not in html
+    assert "Together API ·" not in html
+    note_position = html.index("class='result-note'")
+    sol_table_position = html.index("class='document-table'", note_position)
+    assert note_position < sol_table_position
+    assert html.count("class='result-note'") == 1
+    assert "not a controlled model-improvement comparison" in html
+
+
 def test_build_html_starts_with_results_table_and_has_no_cost_chart() -> None:
     def result(
         model: str,

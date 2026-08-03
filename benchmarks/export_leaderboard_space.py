@@ -825,6 +825,11 @@ def build_html(data: dict) -> str:
     for rank, result in enumerate(results, 1):
         result_index = rank - 1
         run_count = result.get("run_count", 1)
+        cli_version_label = format_cli_version(result.get("cli_version", ""))
+        harness_label = cli_version_label or result["harness"]
+        cli_version_metadata = (
+            f" · {cli_version_label}" if cli_version_label else ""
+        )
         variability = result.get("metric_standard_deviation") or {
             "exact_record_recall": 0.0,
             "complete_documents": 0.0,
@@ -920,7 +925,13 @@ def build_html(data: dict) -> str:
 
         documents = result.get("documents", [])
         prompt_templates_html = render_prompt_templates(result)
-        has_details = bool(documents or prompt_templates_html)
+        detail_note = result.get("detail_note")
+        detail_note_html = (
+            f"<aside class='result-note'>{html_module.escape(detail_note)}</aside>"
+            if detail_note
+            else ""
+        )
+        has_details = bool(documents or prompt_templates_html or detail_note_html)
         details_id = f"result-details-{rank}"
         details_button = (
             f'<button class="details-button" type="button" aria-expanded=\'false\' '
@@ -950,7 +961,8 @@ def build_html(data: dict) -> str:
             f"<td class='configuration' data-column='configuration' "
             f"data-sort-value='{result['model'].casefold()}'><div class='model-line'>"
             f"<strong>{result['model']}</strong></div>"
-            f"<span>{result['harness']} · {result['effort']} · {result['run_date']} · "
+            f"<span>{harness_label} · "
+            f"{result['effort']} · {result['run_date']} · "
             f"n={run_count}{' · arithmetic mean' if run_count > 1 else ''}</span>"
             f"<div class='configuration-actions'><span class='protocol'>{result['protocol']}</span>"
             f"{details_button}</div></td>"
@@ -984,8 +996,9 @@ def build_html(data: dict) -> str:
                 f"<tr class='detail-row' id='{details_id}' data-detail-for='{rank}' hidden>"
                 "<td colspan='7'><div class='detail-panel'>"
                 "<div class='detail-panel-heading'>"
-                f"<strong>{result['model']}</strong><span>{len(documents)} documents · n={run_count}</span></div>"
-                f"{document_table_html}{prompt_templates_html}</div></td></tr>"
+                f"<strong>{result['model']}</strong><span>{len(documents)} documents · "
+                f"n={run_count}{cli_version_metadata}</span></div>"
+                f"{detail_note_html}{document_table_html}{prompt_templates_html}</div></td></tr>"
                 if has_details
                 else ""
             )
@@ -1209,6 +1222,16 @@ tbody > tr[data-result-row]:hover > td.metric-best {{
   font: 9px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .04em;
   text-transform: uppercase;
+}}
+.result-note {{
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,255,255,.52);
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
 }}
 .document-scroll {{
   max-height: 380px;
