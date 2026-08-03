@@ -222,7 +222,7 @@ For generic records, the current runners derive sample-specific field names and 
 
 Saved reports under `benchmarks/results/` may refer to earlier corpus versions. The current-OCR release directories are bound to the current manifest; do not cite other folders as current-layout baselines unless their report provenance records the same manifest hash.
 
-The current full-corpus results use the same repository-denied OCR protocol. Across three matched runs, GPT-5.6-Sol reaches 98.8% ± 0.2 pp exact recall and 8.0 ± 1.0 complete documents; Terra reaches 95.7% ± 2.0 pp and 6.0 ± 1.0; Luna reaches 94.4% ± 3.4 pp and 5.0 ± 1.0. The paper retains its earlier Sol baseline, which reaches 97.9% and 8/32, alongside single-run Fable 5, GPT-5.5, and Opus 4.8 results. Aggregate summaries link each replicated result to all saved predictions and reports.
+The current full-corpus results use the same repository-denied OCR protocol. Across three matched runs, GPT-5.6-Sol reaches 98.8% ± 0.2 pp exact recall and 8.0 ± 1.0 complete documents; Terra reaches 95.7% ± 2.0 pp and 6.0 ± 1.0; Luna reaches 94.4% ± 3.4 pp and 5.0 ± 1.0; GPT-5.5 reaches 96.6% ± 1.5 pp and 6.3 ± 0.6. The paper retains its earlier Sol baseline, which reaches 97.9% and 8/32, alongside the earlier single-run GPT-5.5, Fable 5, and Opus 4.8 results. Aggregate summaries link each replicated result to all saved predictions and reports.
 
 Matched GPT-5.5, GPT-5.6-Sol, GPT-5.6-Terra, and GPT-5.6-Luna full-corpus
 executions record Codex JSONL usage for representative cost analysis. In the

@@ -13,6 +13,12 @@ def test_replicate_packages_and_summaries_are_consistent() -> None:
         assert verify_summary(summary, replay_reports=False) == []
 
 
+def test_default_replicate_checks_include_gpt55() -> None:
+    summary_names = {summary.parent.name for summary in DEFAULT_SUMMARIES}
+
+    assert "gpt55_replicates_20260803" in summary_names
+
+
 def test_replicated_models_use_the_same_transcripts_contracts_and_prompts() -> None:
     fingerprints = []
     for summary_path in DEFAULT_SUMMARIES:

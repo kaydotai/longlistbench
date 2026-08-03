@@ -452,20 +452,37 @@ def test_sol_row_uses_mean_api_equivalent_cost_from_replicates() -> None:
     assert "$33.96 ± $1.20 sample SD." in html
 
 
-def test_gpt55_row_uses_api_equivalent_cost_from_independent_measurement() -> None:
+def test_gpt55_row_uses_mean_accuracy_and_cost_from_three_replicates() -> None:
     models, dataset_meta = export_leaderboard_space.load_runs(
         export_leaderboard_space.RESULTS_DIR
     )
     gpt55 = next(model for model in models if model["model"] == "GPT-5.5")
 
-    assert gpt55["full_run_cost_usd"] == pytest.approx(43.492019)
-    assert gpt55["full_run_cost_source"] == "codex_api_equivalent"
-    assert "independent cost measurement" in gpt55["full_run_cost_explanation"]
+    assert gpt55["run_count"] == 3
+    assert gpt55["reporting_statistic"] == "arithmetic_mean"
+    assert gpt55["stats"]["exact_record_recall"] == pytest.approx(
+        0.9656519927475028
+    )
+    assert gpt55["stats"]["complete_documents"] == pytest.approx(
+        6.333333333333333
+    )
+    assert gpt55["full_run_cost_usd"] == pytest.approx(43.18508766666667)
+    assert gpt55["full_run_cost_standard_deviation_usd"] == pytest.approx(
+        3.339329840925768
+    )
+    assert gpt55["full_run_cost_source"] == "codex_api_equivalent_mean"
+    assert "across 3 saved full-corpus runs" in gpt55["full_run_cost_explanation"]
 
     html = export_leaderboard_space.build_html(
         export_leaderboard_space.build_data(models, dataset_meta)
     )
-    assert "<span class='cost-value'>$43.49</span>" in html
+    assert "<span class='cost-value'>$43.19</span>" in html
+    assert "n=3 · arithmetic mean" in html
+    assert "<span class='metric-value'>6/32</span>" in html
+    assert "<span class='metric-value'>6.3/32</span>" not in html
+    assert (
+        "3-run arithmetic mean: 6.3/32 ± 0.6 documents sample SD." in html
+    )
 
 
 def test_build_data_sorts_complete_documents_then_exact_recall_descending() -> None:
@@ -765,9 +782,10 @@ def test_aggregate_main_row_moves_variability_into_metric_hints() -> None:
     assert html.count("variability-definition-button") == 5
 
 
-def test_complete_document_count_drops_only_trailing_decimal() -> None:
+def test_complete_document_count_is_always_a_whole_number() -> None:
     assert export_leaderboard_space.format_complete_document_count(6.0, 3) == "6"
-    assert export_leaderboard_space.format_complete_document_count(5.5, 3) == "5.5"
+    assert export_leaderboard_space.format_complete_document_count(5.5, 3) == "6"
+    assert export_leaderboard_space.format_complete_document_count(6.333, 3) == "6"
     assert export_leaderboard_space.format_complete_document_count(6, 1) == "6"
 
 
@@ -929,10 +947,10 @@ def test_cli_versions_and_sol_paper_note_render_in_details() -> None:
     data = export_leaderboard_space.build_data(models, dataset_meta)
     html = export_leaderboard_space.build_html(data)
 
-    assert html.count("Codex CLI v0.146.0 · xhigh") == 3
-    assert html.count("n=3 · Codex CLI v0.146.0") == 3
-    assert html.count("Codex CLI v0.144.6 · xhigh") == 1
-    assert html.count("n=1 · Codex CLI v0.144.6") == 1
+    assert html.count("Codex CLI v0.146.0 · xhigh") == 4
+    assert html.count("n=3 · Codex CLI v0.146.0") == 4
+    assert "Codex CLI v0.144.6 · xhigh" not in html
+    assert "n=1 · Codex CLI v0.144.6" not in html
     assert html.count("Claude Code v2.1.216 · xhigh") == 2
     assert html.count("n=1 · Claude Code v2.1.216") == 2
     assert "Codex CLI · Codex CLI" not in html

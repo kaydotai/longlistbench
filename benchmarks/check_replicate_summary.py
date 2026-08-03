@@ -17,6 +17,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 RESULTS_DIR = REPO_ROOT / "benchmarks" / "results"
 DEFAULT_SUMMARIES = (
     REPO_ROOT
+    / "benchmarks/cost_measurements/gpt55_replicates_20260803/summary.json",
+    REPO_ROOT
     / "benchmarks/cost_measurements/gpt56_sol_replicates_20260802/summary.json",
     REPO_ROOT
     / "benchmarks/cost_measurements/gpt56_terra_replicates_20260801/summary.json",

@@ -117,7 +117,7 @@ RUNS = (
         "prompt_note": AGENTIC_PROMPT_NOTE,
     },
     {
-        "run_dir": "codex_full_current_ocr_v2",
+        "run_dir": "codex_gpt55_run1_current_ocr_v2",
         "key": "codex_gpt55",
         "harness": "Codex CLI",
         "model": "GPT-5.5",
@@ -125,9 +125,9 @@ RUNS = (
         "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
         "prompt_note": AGENTIC_PROMPT_NOTE,
-        "cost_metadata_path": (
+        "replicate_summary_path": (
             REPO_ROOT
-            / "benchmarks/cost_measurements/gpt55_20260729/usage_summary.json"
+            / "benchmarks/cost_measurements/gpt55_replicates_20260803/summary.json"
         ),
     },
     {
@@ -677,9 +677,9 @@ def format_mean_count(value: float, run_count: int) -> str:
 
 
 def format_complete_document_count(value: float, run_count: int) -> str:
-    if run_count <= 1 or float(value).is_integer():
+    if run_count <= 1:
         return str(int(value))
-    return f"{value:.1f}"
+    return str(int(value + 0.5))
 
 
 def render_variability_button(
@@ -906,13 +906,19 @@ def build_html(data: dict) -> str:
             f"{format_complete_document_count(result['complete_documents'], run_count)}"
             f"/{result['total_samples']}"
         )
+        complete_mean_count = (
+            str(int(result["complete_documents"]))
+            if float(result["complete_documents"]).is_integer()
+            else f"{result['complete_documents']:.1f}"
+        )
+        complete_mean_label = f"{complete_mean_count}/{result['total_samples']}"
         complete_button = render_variability_button(
             title=f"Complete documents variability · {result['model']}",
             aria_label=(
                 f"Explain complete documents variability for {result['model']}"
             ),
             definition=(
-                f"{run_count}-run arithmetic mean: {complete_label} ± "
+                f"{run_count}-run arithmetic mean: {complete_mean_label} ± "
                 f"{variability['complete_documents']:.1f} documents sample SD."
             ),
             run_count=run_count,

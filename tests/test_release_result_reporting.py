@@ -52,6 +52,7 @@ REPLICATED_LEADERBOARD_LABELS = {
     "codex_gpt56_sol": "Codex CLI `gpt-5.6-sol`, xhigh",
     "codex_gpt56_terra": "Codex CLI `gpt-5.6-terra`, xhigh",
     "codex_gpt56_luna": "Codex CLI `gpt-5.6-luna`, xhigh",
+    "codex_gpt55": "Codex CLI `gpt-5.5`, xhigh",
 }
 
 REPLICATE_SUMMARIES = {
@@ -61,6 +62,8 @@ REPLICATE_SUMMARIES = {
     / "benchmarks/cost_measurements/gpt56_terra_replicates_20260801/summary.json",
     "codex_gpt56_luna": ROOT
     / "benchmarks/cost_measurements/gpt56_luna_replicates_20260801/summary.json",
+    "codex_gpt55": ROOT
+    / "benchmarks/cost_measurements/gpt55_replicates_20260803/summary.json",
 }
 
 PROBLEM_LABELS = {
