@@ -16,6 +16,13 @@ def test_sol_leaderboard_entry_uses_three_run_mean_and_variability() -> None:
     assert sol["effort"] == "xhigh"
     assert sol["run_count"] == 3
     assert sol["reporting_statistic"] == "arithmetic_mean"
+    assert sol["result_dirs"] == [
+        "codex_gpt56_sol_run1_current_ocr_v2",
+        "codex_gpt56_sol_run2_current_ocr_v2",
+        "codex_gpt56_sol_run3_current_ocr_v2",
+    ]
+    assert sol["cli_version"] == "codex-cli 0.146.0"
+    assert "older single-run baseline of 97.9%" in sol["detail_note"]
     assert sol["stats"]["exact_record_recall"] == pytest.approx(
         0.9878036420149329
     )
@@ -33,6 +40,13 @@ def test_sol_leaderboard_entry_uses_three_run_mean_and_variability() -> None:
         "Mean API-equivalent cost across 3 saved full-corpus runs: "
         "$33.96 ± $1.20 sample SD."
     )
+
+    data = export_leaderboard_space.build_data(models, dataset)
+    exported_sol = next(
+        result for result in data["results"] if result["model"] == "GPT-5.6-Sol"
+    )
+    assert exported_sol["result_dirs"] == sol["result_dirs"]
+    assert exported_sol["detail_note"] == sol["detail_note"]
 
 
 def test_terra_leaderboard_entry_uses_three_run_mean_and_variability() -> None:

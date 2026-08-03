@@ -530,6 +530,20 @@ def test_formats_full_run_cost_in_usd() -> None:
     assert export_leaderboard_space.format_full_run_cost(None) == "n/a"
 
 
+@pytest.mark.parametrize(
+    ("raw", "expected"),
+    [
+        ("codex-cli 0.146.0", "Codex CLI v0.146.0"),
+        ("2.1.216 (Claude Code)", "Claude Code v2.1.216"),
+        ("Reducto API", ""),
+        ("Together API", ""),
+        ("unknown", ""),
+    ],
+)
+def test_format_cli_version(raw: str, expected: str) -> None:
+    assert export_leaderboard_space.format_cli_version(raw) == expected
+
+
 def test_metric_leaders_include_all_ties_at_displayed_precision() -> None:
     results = [
         {

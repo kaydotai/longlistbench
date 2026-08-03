@@ -32,6 +32,15 @@ AGENTIC_PROMPT_NOTE = (
     "Generic operations and policy samples received a generated field contract; "
     "claim samples received the published incident JSON Schema."
 )
+SOL_PAPER_COMPARISON_NOTE = (
+    "The leaderboard averages three newer matched Sol runs made with Codex CLI "
+    "v0.146.0, while the paper reports an older single-run baseline of 97.9%. "
+    "Most of the difference comes from one large policy packet where the older "
+    "run was unusually weak. Released transcripts and scoring targets match; a "
+    "field-scope clarification affected three IFTA prompts but accounts for only "
+    "a small part of the change. The run date and runtime also differ, so this is "
+    "not a controlled model-improvement comparison."
+)
 
 RUNS = (
     {
@@ -43,6 +52,7 @@ RUNS = (
         "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
         "prompt_note": AGENTIC_PROMPT_NOTE,
+        "detail_note": SOL_PAPER_COMPARISON_NOTE,
         "replicate_summary_path": (
             REPO_ROOT
             / "benchmarks/cost_measurements/gpt56_sol_replicates_20260802/summary.json"
@@ -480,6 +490,7 @@ def load_runs(results_dir: Path) -> tuple[list[dict], dict]:
             "protocol": run["protocol"],
             "prompt_templates": load_prompt_templates(run),
             "prompt_note": run["prompt_note"],
+            "detail_note": run.get("detail_note"),
             **cost,
             "requested_model": run.get(
                 "requested_model",
@@ -579,6 +590,7 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
             "protocol": m["protocol"],
             "prompt_templates": m["prompt_templates"],
             "prompt_note": m["prompt_note"],
+            "detail_note": m.get("detail_note"),
             "full_run_cost_usd": m["full_run_cost_usd"],
             "full_run_cost_source": m["full_run_cost_source"],
             "full_run_cost_explanation": m["full_run_cost_explanation"],
@@ -649,6 +661,15 @@ def format_full_run_cost(value: float | None) -> str:
     if value is None:
         return "n/a"
     return f"${value:.2f}"
+
+
+def format_cli_version(cli_version: str) -> str:
+    if cli_version.startswith("codex-cli "):
+        return f"Codex CLI v{cli_version.removeprefix('codex-cli ')}"
+    if cli_version.endswith(" (Claude Code)"):
+        version = cli_version.removesuffix(" (Claude Code)")
+        return f"Claude Code v{version}"
+    return ""
 
 
 def format_mean_count(value: float, run_count: int) -> str:
