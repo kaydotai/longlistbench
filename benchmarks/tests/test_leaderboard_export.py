@@ -478,6 +478,11 @@ def test_gpt55_row_uses_mean_accuracy_and_cost_from_three_replicates() -> None:
     )
     assert "<span class='cost-value'>$43.19</span>" in html
     assert "n=3 · arithmetic mean" in html
+    assert "<span class='metric-value'>6/32</span>" in html
+    assert "<span class='metric-value'>6.3/32</span>" not in html
+    assert (
+        "3-run arithmetic mean: 6.3/32 ± 0.6 documents sample SD." in html
+    )
 
 
 def test_build_data_sorts_complete_documents_then_exact_recall_descending() -> None:
@@ -777,9 +782,10 @@ def test_aggregate_main_row_moves_variability_into_metric_hints() -> None:
     assert html.count("variability-definition-button") == 5
 
 
-def test_complete_document_count_drops_only_trailing_decimal() -> None:
+def test_complete_document_count_is_always_a_whole_number() -> None:
     assert export_leaderboard_space.format_complete_document_count(6.0, 3) == "6"
-    assert export_leaderboard_space.format_complete_document_count(5.5, 3) == "5.5"
+    assert export_leaderboard_space.format_complete_document_count(5.5, 3) == "6"
+    assert export_leaderboard_space.format_complete_document_count(6.333, 3) == "6"
     assert export_leaderboard_space.format_complete_document_count(6, 1) == "6"
 
 
