@@ -35,7 +35,7 @@ AGENTIC_PROMPT_NOTE = (
 
 RUNS = (
     {
-        "run_dir": "codex_gpt56_sol_full_current_ocr_v2",
+        "run_dir": "codex_gpt56_sol_run1_current_ocr_v2",
         "key": "codex_gpt56_sol",
         "harness": "Codex CLI",
         "model": "GPT-5.6-Sol",
@@ -43,9 +43,9 @@ RUNS = (
         "cost_source": "codex_api_equivalent",
         "prompt_templates": AGENTIC_PROMPT_TEMPLATES,
         "prompt_note": AGENTIC_PROMPT_NOTE,
-        "cost_metadata_path": (
+        "replicate_summary_path": (
             REPO_ROOT
-            / "benchmarks/cost_measurements/gpt56_sol_20260729/usage_summary.json"
+            / "benchmarks/cost_measurements/gpt56_sol_replicates_20260802/summary.json"
         ),
     },
     {
@@ -637,8 +637,8 @@ def build_data(models: list[dict], dataset_meta: dict) -> dict:
         "dataset": dataset_meta,
         "protocol": (
             "All rows use the same dataset and scorer. Agentic CLI and Bonsai runs consume released "
-            "OCR transcripts; Reducto Deep Extract runs on raw PDFs. Terra and Luna report means "
-            "across three matched full-corpus runs; other rows are single runs. Protocols are "
+            "OCR transcripts; Reducto Deep Extract runs on raw PDFs. Sol, Terra, and Luna report "
+            "means across three matched full-corpus runs; other rows are single runs. Protocols are "
             "labeled separately."
         ),
         "results": rows,

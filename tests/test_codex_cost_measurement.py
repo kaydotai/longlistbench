@@ -255,6 +255,77 @@ def test_luna_measurement_is_input_matched_and_uses_luna_rates() -> None:
     )
 
 
+def test_sol_replicate_summary_reconciles_three_run_reporting() -> None:
+    payload = json.loads(
+        (
+            MEASUREMENT_ROOT
+            / "gpt56_sol_replicates_20260802/summary.json"
+        ).read_text(encoding="utf-8")
+    )
+    runs = payload["runs"]
+
+    assert payload["run_count"] == len(runs) == 3
+    assert payload["selection_policy"] == {
+        "leaderboard_statistic": "arithmetic_mean",
+        "variability_statistic": "sample_standard_deviation",
+        "preselected_reference_run": "run_1",
+        "best_of_n_selection": False,
+    }
+    assert [run["preselected_reference_run"] for run in runs] == [
+        True,
+        False,
+        False,
+    ]
+    assert payload["dataset"]["input_fingerprints_match_across_runs"] is True
+    assert all(run["execution_errors"] == 0 for run in runs)
+
+    aggregates = payload["aggregate"]
+    for key in (
+        "exact_record_recall",
+        "complete_documents",
+        "field_micro_f1",
+        "input_tokens",
+        "output_tokens",
+        "api_equivalent_usd",
+    ):
+        values = [run[key] for run in runs]
+        assert aggregates[key]["median"] == pytest.approx(median(values))
+        assert aggregates[key]["mean"] == pytest.approx(mean(values))
+        assert aggregates[key]["min"] == min(values)
+        assert aggregates[key]["max"] == max(values)
+        assert aggregates[key]["sample_standard_deviation"] == pytest.approx(
+            stdev(values)
+        )
+
+    for run in runs:
+        credits = (
+            run["uncached_input_tokens"] * 125
+            + run["cached_input_tokens"] * 12.5
+            + run["output_tokens"] * 750
+        ) / 1_000_000
+        api_equivalent = (
+            run["uncached_input_tokens"] * 5
+            + run["cached_input_tokens"] * 0.5
+            + run["output_tokens"] * 30
+        ) / 1_000_000
+        assert run["chatgpt_credits"] == pytest.approx(credits)
+        assert run["api_equivalent_usd"] == pytest.approx(api_equivalent)
+
+    released_report = json.loads(
+        (
+            ROOT
+            / "benchmarks/results/codex_gpt56_sol_run1_current_ocr_v2/evaluation_report.json"
+        ).read_text(encoding="utf-8")
+    )
+    released = released_report["model_stats"]["codex_gpt56_sol"]
+    run_1 = runs[0]
+    assert run_1["exact_record_recall"] == pytest.approx(
+        released["exact_record_recall"]
+    )
+    assert run_1["complete_documents"] == released["complete_documents"]
+    assert run_1["field_micro_f1"] == pytest.approx(released["weighted_f1"])
+
+
 def test_terra_replicate_summary_reconciles_three_run_reporting() -> None:
     payload = json.loads(
         (

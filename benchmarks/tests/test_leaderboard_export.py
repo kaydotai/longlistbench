@@ -431,20 +431,23 @@ def test_marks_subscription_run_without_usage_as_unavailable() -> None:
     }
 
 
-def test_sol_row_uses_api_equivalent_cost_from_independent_measurement() -> None:
+def test_sol_row_uses_mean_api_equivalent_cost_from_replicates() -> None:
     models, dataset_meta = export_leaderboard_space.load_runs(
         export_leaderboard_space.RESULTS_DIR
     )
     sol = next(model for model in models if model["model"] == "GPT-5.6-Sol")
 
-    assert sol["full_run_cost_usd"] == pytest.approx(33.460299)
-    assert sol["full_run_cost_source"] == "codex_api_equivalent"
-    assert "independent cost measurement" in sol["full_run_cost_explanation"]
+    assert sol["full_run_cost_usd"] == pytest.approx(33.956977)
+    assert sol["full_run_cost_standard_deviation_usd"] == pytest.approx(
+        1.1999427401701293
+    )
+    assert sol["full_run_cost_source"] == "codex_api_equivalent_mean"
+    assert "across 3 saved full-corpus runs" in sol["full_run_cost_explanation"]
 
     html = export_leaderboard_space.build_html(
         export_leaderboard_space.build_data(models, dataset_meta)
     )
-    assert "<span class='cost-value'>$33.46</span>" in html
+    assert "<span class='cost-value'>$33.96 ± $1.20</span>" in html
 
 
 def test_gpt55_row_uses_api_equivalent_cost_from_independent_measurement() -> None:

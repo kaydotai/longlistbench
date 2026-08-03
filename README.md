@@ -252,29 +252,29 @@ OCR support should be interpreted at the affected-record and field level, not on
 
 Saved reports under `benchmarks/results/` should be treated as local run artifacts unless their manifest hash matches the current `data/manifest.json`. After replacing layouts, rerun OCR and evaluation before citing current-layout or current-model baselines. The current released dataset includes OCR transcripts for every PDF.
 
-The repository includes six repository-denied coding-agent configurations under the same OCR input and field-contract protocol. Terra and Luna each have three full-corpus runs; the other configurations have one, for ten saved executions total. Every result directory includes all 32 predictions, input and prediction fingerprints, and a report that can be checked offline. The paper compares GPT-5.6-Sol, Fable 5, GPT-5.5, and Opus 4.8; GPT-5.6-Terra and GPT-5.6-Luna are additional leaderboard results.
+The repository includes six repository-denied coding-agent configurations under the same OCR input and field-contract protocol. Sol, Terra, and Luna each have three matched full-corpus leaderboard runs; the other configurations have one. Every result directory includes all 32 predictions, input and prediction fingerprints, and a report that can be checked offline. The July Sol package used by the paper is retained separately from the newer three-run leaderboard aggregate.
 
 | Agent | Runs | Documents | Target records | Errors | Exact-record recall | Complete documents | Field micro-F1 | Field macro-F1 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Codex CLI `gpt-5.6-sol`, xhigh | 1 | 32 | 29,599 | 0 | 97.9% | 8/32 (25.0%) | 99.4% | 99.4% |
+| Codex CLI `gpt-5.6-sol`, xhigh | 3 | 32 | 29,599 | 0 | 98.8% ± 0.2 pp | 8.0 ± 1.0 / 32 | 99.7% ± 0.0 pp | 99.7% ± 0.1 pp |
 | Codex CLI `gpt-5.6-terra`, xhigh | 3 | 32 | 29,599 | 0 | 95.7% ± 2.0 pp | 6.0 ± 1.0 / 32 | 99.2% ± 0.3 pp | 98.7% ± 0.3 pp |
 | Codex CLI `gpt-5.6-luna`, xhigh | 3 | 32 | 29,599 | 0 | 94.4% ± 3.4 pp | 5.0 ± 1.0 / 32 | 98.7% ± 1.1 pp | 96.6% ± 3.4 pp |
 | Claude Code `claude-fable-5`, xhigh | 1 | 32 | 29,599 | 0 | 95.1% | 9/32 (28.1%) | 96.8% | 93.6% |
 | Codex CLI `gpt-5.5`, xhigh | 1 | 32 | 29,599 | 0 | 94.5% | 4/32 (12.5%) | 98.8% | 98.6% |
 | Claude Code `claude-opus-4-8`, xhigh | 1 | 32 | 29,599 | 0 | 97.7% | 7/32 (21.9%) | 99.4% | 99.3% |
 
-The latest saved results are under `benchmarks/results/`. Terra and Luna leaderboard values are arithmetic means with sample standard deviations across their three matched runs; their complete packages and aggregate summaries are linked from `benchmarks/cost_measurements/`. The other rows are explicitly single-run results, so small cross-model differences should not be treated as statistically resolved.
+The latest saved results are under `benchmarks/results/`. Sol, Terra, and Luna leaderboard values are arithmetic means with sample standard deviations across three matched runs; their complete packages and aggregate summaries are linked from `benchmarks/cost_measurements/`. The other rows are explicitly single-run results, so small cross-model differences should not be treated as statistically resolved.
 
 An exact record must match every normalized target field. Complete-document success requires the predicted and ground-truth record multisets to be identical, including duplicates and with no extra records. Record order is not scored. Field-pair F1 remains a secondary partial-credit diagnostic.
 
-The evaluator uses a fixed document-family mapping for scale-control and structural-challenge roles:
+The paper-baseline diagnostic tables below retain the July Sol and Fable runs cited in the manuscript; they are not derived from the newer Sol replicate mean. The evaluator uses a fixed document-family mapping for scale-control and structural-challenge roles:
 
 | Evaluation role | Documents | Target records | GPT-5.6-Sol exact | Fable 5 exact | GPT-5.6-Sol complete | Fable 5 complete |
 |---|---:|---:|---:|---:|---:|---:|
 | Structural challenges | 19 | 8,414 | 93.8% | 84.0% | 4/19 (21.1%) | 5/19 (26.3%) |
 | Scale controls | 13 | 21,185 | 99.5% | 99.5% | 4/13 (30.8%) | 4/13 (30.8%) |
 
-Strict exact-record recall for the latest models, labeled by the extraction problem each family emphasizes:
+Strict exact-record recall for those paper-baseline runs, labeled by the extraction problem each family emphasizes:
 
 | Extraction problem | Documents | Target records | GPT-5.6-Sol | Fable 5 |
 |---|---:|---:|---:|---:|

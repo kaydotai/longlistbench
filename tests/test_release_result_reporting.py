@@ -48,12 +48,15 @@ OVERALL_LABELS = {
     ),
 }
 
-LEADERBOARD_ONLY_LABELS = {
+REPLICATED_LEADERBOARD_LABELS = {
+    "codex_gpt56_sol": "Codex CLI `gpt-5.6-sol`, xhigh",
     "codex_gpt56_terra": "Codex CLI `gpt-5.6-terra`, xhigh",
     "codex_gpt56_luna": "Codex CLI `gpt-5.6-luna`, xhigh",
 }
 
 REPLICATE_SUMMARIES = {
+    "codex_gpt56_sol": ROOT
+    / "benchmarks/cost_measurements/gpt56_sol_replicates_20260802/summary.json",
     "codex_gpt56_terra": ROOT
     / "benchmarks/cost_measurements/gpt56_terra_replicates_20260801/summary.json",
     "codex_gpt56_luna": ROOT
@@ -207,7 +210,8 @@ def test_release_tables_match_saved_reports() -> None:
             f"({_pct(model_stats['complete_document_rate'])}) | "
             f"{_pct(model_stats['weighted_f1'])} |"
         )
-        assert readme_row in readme
+        if key not in REPLICATE_SUMMARIES:
+            assert readme_row in readme
         tex_row = (
             f"{tex_label} & {_tex_pct(model_stats['exact_record_recall'])} & "
             f"{model_stats['complete_documents']}/{total_samples} "
@@ -217,7 +221,7 @@ def test_release_tables_match_saved_reports() -> None:
         )
         assert tex_row in results_tex
 
-    for key, readme_label in LEADERBOARD_ONLY_LABELS.items():
+    for key, readme_label in REPLICATED_LEADERBOARD_LABELS.items():
         summary = json.loads(REPLICATE_SUMMARIES[key].read_text(encoding="utf-8"))
         runs = summary["runs"]
         exact_values = [run["exact_record_recall"] for run in runs]

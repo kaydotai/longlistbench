@@ -174,9 +174,9 @@ python benchmarks/evaluate_models.py --offline --output-dir benchmarks/results/s
 # Audit a saved report by recomputing strict and field metrics from predictions
 python benchmarks/check_evaluation_report.py --results-dir benchmarks/results/scratch
 
-# Reproduce the released GPT-5.6-Sol protocol (macOS sandbox-exec required)
+# Reproduce one GPT-5.6-Sol full-corpus run (macOS sandbox-exec required)
 python benchmarks/run_codex_cli_evaluation.py \
-  --output-dir benchmarks/results/codex_gpt56_sol_full_current_ocr_v2 \
+  --output-dir benchmarks/results/scratch/codex_gpt56_sol_reproduction \
   --model-key codex_gpt56_sol \
   --model gpt-5.6-sol \
   --effort xhigh \
@@ -220,19 +220,22 @@ Primary benchmark comparisons should use per-document extraction protocols: the 
 
 For generic records, the current runners derive sample-specific field names and record groups from ground-truth object structure before creating the model workspace. This is output-schema disclosure, not value access: target values, target counts, ground-truth files, and generator code are not placed in the sandbox.
 
-Saved reports under `benchmarks/results/` may refer to earlier corpus versions. The ten coding-agent current-OCR release directories are bound to the current manifest; do not cite other folders as current-layout baselines unless their report provenance records the same manifest hash.
+Saved reports under `benchmarks/results/` may refer to earlier corpus versions. The current-OCR release directories are bound to the current manifest; do not cite other folders as current-layout baselines unless their report provenance records the same manifest hash.
 
-The current full-corpus results use the same repository-denied OCR protocol. GPT-5.6-Sol recovers 97.9% of target records exactly and completes 8/32 documents; Fable 5 recovers 95.1% exactly and completes 9/32. On the 19 structural-challenge documents, exact-record recall is 93.8% and 84.0%; on the 13 scale controls it is 99.5% for both. Field micro-F1 remains a partial-credit diagnostic at 99.4% and 96.8%. Both runs cover 29,599 targets with zero execution errors. GPT-5.5 reaches 94.5% exact recall and 4/32 complete documents; Opus 4.8 reaches 97.7% and 7/32. Across three matched runs, GPT-5.6-Terra reaches 95.7% ± 2.0 pp exact recall and 6.0 ± 1.0 complete documents; GPT-5.6-Luna reaches 94.4% ± 3.4 pp and 5.0 ± 1.0. The other model rows are single-run results.
+The current full-corpus results use the same repository-denied OCR protocol. Across three matched runs, GPT-5.6-Sol reaches 98.8% ± 0.2 pp exact recall and 8.0 ± 1.0 complete documents; Terra reaches 95.7% ± 2.0 pp and 6.0 ± 1.0; Luna reaches 94.4% ± 3.4 pp and 5.0 ± 1.0. The paper retains its earlier Sol baseline, which reaches 97.9% and 8/32, alongside single-run Fable 5, GPT-5.5, and Opus 4.8 results. Aggregate summaries link each replicated result to all saved predictions and reports.
 
 Matched GPT-5.5, GPT-5.6-Sol, GPT-5.6-Terra, and GPT-5.6-Luna full-corpus
 executions record Codex JSONL usage for representative cost analysis. In the
 reference run pair, Luna used 77.7% more input and 59.2% more output tokens than
 Terra, but its lower rate card reduced API-equivalent cost by 83.7%, to $2.36.
-Across three matched Luna runs, exact-record recall ranged from 91.4% to 98.1%,
+Across three matched Sol runs, exact-record recall ranged from 98.6% to 98.9%,
+complete-document success ranged from 7/32 to 9/32, and API-equivalent cost
+ranged from $33.13 to $35.33. Across three matched Luna runs, exact-record
+recall ranged from 91.4% to 98.1%,
 complete-document success ranged from 4/32 to 6/32, and API-equivalent cost
 ranged from $2.26 to $2.62. Terra ranged from 94.5% to 98.1%, 5/32 to 7/32,
-and $14.54 to $15.32. Leaderboard values are three-run arithmetic means with
-sample standard deviations; no best-run selection is used. All use
+and $14.54 to $15.32. Replicated leaderboard values are three-run arithmetic
+means with sample standard deviations; no best-run selection is used. All use
 short-context pricing because Codex CLI caps active context at 272K tokens.
 See `benchmarks/cost_measurements/`.
 
@@ -263,7 +266,7 @@ The export writes:
 - `metadata/manifest.json` - source manifest copied from `data/`.
 - `evaluation/codex_full_current_ocr_v2/` - the released GPT-5.5 report and all 32 saved predictions.
 - `evaluation/claude_opus48_full_current_ocr_v2/` - the released Opus 4.8 report, metadata, and all 32 predictions.
-- `evaluation/codex_gpt56_sol_full_current_ocr_v2/` - the released GPT-5.6-Sol report, metadata, and all 32 predictions.
+- `evaluation/codex_gpt56_sol_full_current_ocr_v2/` - the paper-baseline GPT-5.6-Sol report, metadata, and all 32 predictions.
 - `evaluation/claude_fable5_full_current_ocr_v2/` - the released Fable 5 report, metadata, and all 32 predictions.
 
 Each Parquet row includes `document_id`, `complexity_regime`, `evaluation_role`, `num_pages`, `target_field`, `target_record_type`, `target_count`, `stressors`, embedded `pdf`, JSON-string `ground_truth`, JSON-string `metadata`, and `ocr_transcript`. Claim multi-hop rows use `target_field="incidents"`; operations, external loss-run, and policy rows use `target_field="records"`. The HF `stressors` column maps from `problems` in the source manifest; other manifest-only fields remain available inside the JSON-string `metadata` value.
