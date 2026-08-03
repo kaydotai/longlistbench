@@ -447,7 +447,9 @@ def test_sol_row_uses_mean_api_equivalent_cost_from_replicates() -> None:
     html = export_leaderboard_space.build_html(
         export_leaderboard_space.build_data(models, dataset_meta)
     )
-    assert "<span class='cost-value'>$33.96 ± $1.20</span>" in html
+    assert "<span class='cost-value'>$33.96</span>" in html
+    assert "Mean API-equivalent cost across 3 saved full-corpus runs: " in html
+    assert "$33.96 ± $1.20 sample SD." in html
 
 
 def test_gpt55_row_uses_api_equivalent_cost_from_independent_measurement() -> None:
